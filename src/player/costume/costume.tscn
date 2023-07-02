@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://brsavqoymiyc5"]
+
+[ext_resource type="Script" path="res://src/player/costume/costume.gd" id="1_4qo53"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_i6vx3"]
+properties/0/path = NodePath("AnimationPlayer:current_animation")
+properties/0/spawn = true
+properties/0/sync = true
+
+[node name="Costume" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_4qo53")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_i6vx3")

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bet5y1i5vddfq"]
+
+[ext_resource type="PackedScene" uid="uid://cdk2uf7ebeu5u" path="res://src/player/state_machine/state/timed_state/panic/panic.tscn" id="1_dk8et"]
+[ext_resource type="Script" path="res://src/player/state_machine/state/timed_state/panic/panic_reset/panic_reset.gd" id="2_rs4ds"]
+
+[node name="PanicReset" instance=ExtResource("1_dk8et")]
+script = ExtResource("2_rs4ds")
+state_time = 1.0

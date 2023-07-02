@@ -1,0 +1,223 @@
+[gd_scene load_steps=21 format=3 uid="uid://q4hv30obsxd1"]
+
+[ext_resource type="PackedScene" uid="uid://bavgk282m5ngb" path="res://src/player/player.tscn" id="1_d2bpu"]
+[ext_resource type="PackedScene" uid="uid://sl14guycomx6" path="res://src/player/state_machine/state/move/move.tscn" id="2_jq5ho"]
+[ext_resource type="PackedScene" uid="uid://860yylsw16sx" path="res://src/player/ability/animation_setter/animation_setter.tscn" id="2_klhys"]
+[ext_resource type="PackedScene" uid="uid://31u5yaj3y8wu" path="res://src/player/ability/direction_setter/direction_setter.tscn" id="3_mqmtm"]
+[ext_resource type="PackedScene" uid="uid://deglrps8484y8" path="res://src/player/state_machine/state/summon/summon.tscn" id="3_n6o1l"]
+[ext_resource type="PackedScene" uid="uid://cscnk1bc8v66d" path="res://src/drain_area/drain_area.tscn" id="4_eq15x"]
+[ext_resource type="PackedScene" uid="uid://8av8du0x0bt" path="res://src/player/damage_handler/standard/standard.tscn" id="5_0ir6s"]
+[ext_resource type="PackedScene" uid="uid://buivgkhedx08a" path="res://src/player/ability/action_pressed_stateful/action_pressed_stateful.tscn" id="5_bi4dw"]
+[ext_resource type="PackedScene" uid="uid://3r3cw1ju0dw3" path="res://src/player/state_machine/state/timed_state/timed_state.tscn" id="5_gv08g"]
+[ext_resource type="PackedScene" uid="uid://t3murfg5nmty" path="res://src/player/ability/aura/aura.tscn" id="5_ws256"]
+[ext_resource type="PackedScene" uid="uid://bxc7qjmcijuo5" path="res://src/player/ability/grab/grab.tscn" id="7_ao7e4"]
+[ext_resource type="PackedScene" uid="uid://dxofrnlm2yidj" path="res://src/player/ability/invisible/invisible.tscn" id="9_lesqt"]
+[ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="10_dq2x2"]
+[ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="12_iuly0"]
+[ext_resource type="PackedScene" path="res://src/player/damage_handler/standard/stunnable/stunnable.tscn" id="13_742x4"]
+[ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="15_vo03g"]
+[ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="16_k7qd8"]
+[ext_resource type="PackedScene" uid="uid://cdk2uf7ebeu5u" path="res://src/player/state_machine/state/timed_state/panic/panic.tscn" id="17_8tcsn"]
+[ext_resource type="PackedScene" uid="uid://bet5y1i5vddfq" path="res://src/player/state_machine/state/timed_state/panic/panic_reset/panic_reset.tscn" id="18_7jfgb"]
+[ext_resource type="PackedScene" uid="uid://ifwrxny1pnn5" path="res://src/player/costume/placeholder_costume.tscn" id="20_mg6na"]
+
+[node name="Ghost" node_paths=PackedStringArray("controller", "costume") groups=["ghosts"] instance=ExtResource("1_d2bpu")]
+collision_layer = 8
+collision_mask = 3
+controller = NodePath("Controllers/Synced")
+costume = NodePath("YSort/PlaceholderCostume")
+max_health = 600
+move_speed = 50
+
+[node name="Abilities" type="Node2D" parent="." index="4"]
+
+[node name="AnimationSetters" type="Node2D" parent="Abilities" index="0"]
+
+[node name="Dead" parent="Abilities/AnimationSetters" index="0" node_paths=PackedStringArray("player") instance=ExtResource("2_klhys")]
+animation_name = "dead"
+player = NodePath("../../..")
+_states = Array[NodePath]([NodePath("../../../StateMachine/Dead")])
+
+[node name="Idle" parent="Abilities/AnimationSetters" index="1" node_paths=PackedStringArray("player") instance=ExtResource("2_klhys")]
+animation_name = "idle"
+player = NodePath("../../..")
+_states = Array[NodePath]([NodePath("../../../StateMachine/Idle")])
+
+[node name="Move" parent="Abilities/AnimationSetters" index="2" node_paths=PackedStringArray("player") instance=ExtResource("2_klhys")]
+animation_name = "move"
+player = NodePath("../../..")
+_states = Array[NodePath]([NodePath("../../../StateMachine/Move")])
+
+[node name="Sprint" parent="Abilities/AnimationSetters" index="3" node_paths=PackedStringArray("player") instance=ExtResource("2_klhys")]
+animation_name = "sprint"
+player = NodePath("../../..")
+_states = Array[NodePath]([NodePath("../../../StateMachine/Sprint")])
+
+[node name="Summon" parent="Abilities/AnimationSetters" index="4" node_paths=PackedStringArray("player") instance=ExtResource("2_klhys")]
+animation_name = "summon"
+player = NodePath("../../..")
+_states = Array[NodePath]([NodePath("../../../StateMachine/Summon")])
+
+[node name="Stun" parent="Abilities/AnimationSetters" index="5" node_paths=PackedStringArray("player") instance=ExtResource("2_klhys")]
+animation_name = "stun"
+player = NodePath("../../..")
+_states = Array[NodePath]([NodePath("../../../StateMachine/Stun")])
+
+[node name="Panic" parent="Abilities/AnimationSetters" index="6" node_paths=PackedStringArray("player") instance=ExtResource("2_klhys")]
+position = Vector2(0, -1)
+animation_name = "panic"
+player = NodePath("../../..")
+_states = Array[NodePath]([NodePath("../../../StateMachine/Panic"), NodePath("../../../StateMachine/PanicReset")])
+
+[node name="Grab" parent="Abilities/AnimationSetters" index="7" node_paths=PackedStringArray("player") instance=ExtResource("2_klhys")]
+position = Vector2(0, -1)
+animation_name = "grab"
+player = NodePath("../../..")
+_states = Array[NodePath]([NodePath("../../../StateMachine/Grab")])
+
+[node name="AuraLarge" parent="Abilities" index="1" node_paths=PackedStringArray("player") instance=ExtResource("5_ws256")]
+radius = 72
+player = NodePath("../..")
+_states = Array[NodePath]([NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Sprint"), NodePath("../../StateMachine/Summon"), NodePath("../../StateMachine/Stun"), NodePath("../../StateMachine/Panic"), NodePath("../../StateMachine/PanicReset"), NodePath("../../StateMachine/Grab")])
+
+[node name="AuraSmall" parent="Abilities" index="2" node_paths=PackedStringArray("player") instance=ExtResource("5_ws256")]
+intensity = 3
+radius = 40
+player = NodePath("../..")
+_states = Array[NodePath]([NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Sprint"), NodePath("../../StateMachine/Summon"), NodePath("../../StateMachine/Stun"), NodePath("../../StateMachine/Panic"), NodePath("../../StateMachine/PanicReset"), NodePath("../../StateMachine/Grab")])
+
+[node name="DirectionSetter" parent="Abilities" index="3" node_paths=PackedStringArray("source_node", "player") instance=ExtResource("3_mqmtm")]
+source_node = NodePath("../../Controllers/Synced")
+source_variable = "move_vector"
+player = NodePath("../..")
+_states = Array[NodePath]([NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Sprint"), NodePath("../../StateMachine/Panic"), NodePath("../../StateMachine/PanicReset")])
+
+[node name="Grab" parent="Abilities" index="4" node_paths=PackedStringArray("grab_state", "raycast_parent", "player") instance=ExtResource("7_ao7e4")]
+grab_state = NodePath("../../StateMachine/Grab")
+raycast_parent = NodePath("../../RayCasts")
+player = NodePath("../..")
+_states = Array[NodePath]([NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Sprint")])
+
+[node name="Invisible" parent="Abilities" index="5" node_paths=PackedStringArray("player") instance=ExtResource("9_lesqt")]
+player = NodePath("../..")
+_states = Array[NodePath]([NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Panic")])
+
+[node name="Sprint" parent="Abilities" index="6" node_paths=PackedStringArray("enter_state", "exit_state", "player") instance=ExtResource("5_bi4dw")]
+action_name = "button_1"
+enter_state = NodePath("../../StateMachine/Sprint")
+exit_state = NodePath("../../StateMachine/Move")
+player = NodePath("../..")
+_states = Array[NodePath]([NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Sprint"), NodePath("../../StateMachine/Summon")])
+
+[node name="Summon" parent="Abilities" index="7" node_paths=PackedStringArray("enter_state", "exit_state", "player") instance=ExtResource("5_bi4dw")]
+action_name = "button_2"
+enter_state = NodePath("../../StateMachine/Summon")
+exit_state = NodePath("../../StateMachine/Idle")
+player = NodePath("../..")
+_states = Array[NodePath]([NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Sprint"), NodePath("../../StateMachine/Summon")])
+
+[node name="Controllers" type="Node2D" parent="." index="5"]
+
+[node name="Synced" parent="Controllers" index="0" node_paths=PackedStringArray("local_controller") instance=ExtResource("12_iuly0")]
+local_controller = NodePath("../Composite")
+
+[node name="Composite" parent="Controllers" index="1" node_paths=PackedStringArray("controller_1", "controller_2") instance=ExtResource("15_vo03g")]
+controller_1 = NodePath("../JoypadController")
+controller_2 = NodePath("../KeyboardAndMouse")
+
+[node name="JoypadController" parent="Controllers" index="2" instance=ExtResource("10_dq2x2")]
+
+[node name="KeyboardAndMouse" parent="Controllers" index="3" instance=ExtResource("16_k7qd8")]
+
+[node name="DamageHandlers" type="Node" parent="." index="6"]
+
+[node name="Standard" parent="DamageHandlers" index="0" node_paths=PackedStringArray("dead_state") instance=ExtResource("5_0ir6s")]
+dead_state = NodePath("../../StateMachine/Dead")
+weak_to = 1
+
+[node name="Stunnable" parent="DamageHandlers" index="1" node_paths=PackedStringArray("stun_state", "dead_state") instance=ExtResource("13_742x4")]
+stun_state = NodePath("../../StateMachine/Stun")
+dead_state = NodePath("../../StateMachine/Dead")
+weak_to = 1
+
+[node name="PanicReset" parent="DamageHandlers" index="2" node_paths=PackedStringArray("stun_state", "dead_state") instance=ExtResource("13_742x4")]
+stun_state = NodePath("../../StateMachine/PanicReset")
+dead_state = NodePath("../../StateMachine/Dead")
+weak_to = 1
+
+[node name="RayCasts" type="Node2D" parent="." index="7"]
+
+[node name="RayCast2D" type="RayCast2D" parent="RayCasts" index="0"]
+target_position = Vector2(16, 0)
+collision_mask = 5
+
+[node name="RayCast2D2" type="RayCast2D" parent="RayCasts" index="1"]
+rotation = 0.785398
+target_position = Vector2(16, 0)
+collision_mask = 5
+
+[node name="RayCast2D3" type="RayCast2D" parent="RayCasts" index="2"]
+rotation = 1.5708
+target_position = Vector2(16, 0)
+collision_mask = 5
+
+[node name="RayCast2D4" type="RayCast2D" parent="RayCasts" index="3"]
+rotation = 2.35619
+target_position = Vector2(16, 0)
+collision_mask = 5
+
+[node name="RayCast2D5" type="RayCast2D" parent="RayCasts" index="4"]
+rotation = 3.14159
+target_position = Vector2(16, 0)
+collision_mask = 5
+
+[node name="RayCast2D6" type="RayCast2D" parent="RayCasts" index="5"]
+rotation = 3.92699
+target_position = Vector2(16, 0)
+collision_mask = 5
+
+[node name="RayCast2D7" type="RayCast2D" parent="RayCasts" index="6"]
+rotation = 4.71239
+target_position = Vector2(16, 0)
+collision_mask = 5
+
+[node name="RayCast2D8" type="RayCast2D" parent="RayCasts" index="7"]
+rotation = 5.49779
+target_position = Vector2(16, 0)
+collision_mask = 5
+
+[node name="Idle" parent="StateMachine" index="1" node_paths=PackedStringArray("move_state", "damage_handler")]
+move_state = NodePath("../Move")
+damage_handler = NodePath("../../DamageHandlers/Stunnable")
+
+[node name="Move" parent="StateMachine" index="2" node_paths=PackedStringArray("idle_state", "damage_handler")]
+idle_state = NodePath("../Idle")
+damage_handler = NodePath("../../DamageHandlers/Stunnable")
+
+[node name="Sprint" parent="StateMachine" index="3" node_paths=PackedStringArray("idle_state", "damage_handler") instance=ExtResource("2_jq5ho")]
+idle_state = NodePath("../Idle")
+speed_multiplier = 2.0
+damage_handler = NodePath("../../DamageHandlers/Stunnable")
+
+[node name="Summon" parent="StateMachine" index="4" node_paths=PackedStringArray("exit_state", "damage_handler") instance=ExtResource("3_n6o1l")]
+exit_state = NodePath("../Idle")
+summon_scene = ExtResource("4_eq15x")
+damage_handler = NodePath("../../DamageHandlers/Stunnable")
+
+[node name="Stun" parent="StateMachine" index="5" node_paths=PackedStringArray("exit_state", "damage_handler") instance=ExtResource("5_gv08g")]
+exit_state = NodePath("../Panic")
+damage_handler = NodePath("../../DamageHandlers/Standard")
+
+[node name="Panic" parent="StateMachine" index="6" node_paths=PackedStringArray("exit_state", "damage_handler") instance=ExtResource("17_8tcsn")]
+exit_state = NodePath("../Idle")
+damage_handler = NodePath("../../DamageHandlers/PanicReset")
+
+[node name="PanicReset" parent="StateMachine" index="7" node_paths=PackedStringArray("exit_state", "damage_handler") instance=ExtResource("18_7jfgb")]
+exit_state = NodePath("../Panic")
+state_time = 0.5
+damage_handler = NodePath("../../DamageHandlers/Standard")
+
+[node name="Grab" parent="StateMachine" index="8" node_paths=PackedStringArray("exit_state") instance=ExtResource("5_gv08g")]
+exit_state = NodePath("../Panic")
+
+[node name="PlaceholderCostume" parent="YSort" index="0" instance=ExtResource("20_mg6na")]

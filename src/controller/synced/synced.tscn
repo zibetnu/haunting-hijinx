@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbv2ondm7xhnv"]
+
+[ext_resource type="Script" path="res://src/controller/synced/synced.gd" id="1_c5045"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_pbac4"]
+properties/0/path = NodePath(".:peer_id")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:move_vector")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath(".:look_vector")
+properties/2/spawn = true
+properties/2/sync = true
+properties/3/path = NodePath(".:button_1_pressed")
+properties/3/spawn = true
+properties/3/sync = true
+properties/4/path = NodePath(".:button_2_pressed")
+properties/4/spawn = true
+properties/4/sync = true
+
+[node name="Synced" type="Node2D"]
+script = ExtResource("1_c5045")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_pbac4")

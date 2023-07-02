@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://860yylsw16sx"]
+
+[ext_resource type="Script" path="res://src/player/ability/animation_setter/animation_setter.gd" id="1_bj4u5"]
+
+[node name="AnimationSetter" type="Node2D"]
+script = ExtResource("1_bj4u5")

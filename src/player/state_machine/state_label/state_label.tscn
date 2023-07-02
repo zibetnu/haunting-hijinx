@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfqrvpndkixey"]
+
+[ext_resource type="Script" path="res://src/player/state_machine/state_label/state_label.gd" id="1_apmiy"]
+
+[node name="StateLabel" type="Label"]
+offset_left = -84.0
+offset_top = -13.0
+offset_right = 84.0
+offset_bottom = 13.0
+text = "state name"
+horizontal_alignment = 1
+script = ExtResource("1_apmiy")

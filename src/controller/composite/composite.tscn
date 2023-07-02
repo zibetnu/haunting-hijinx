@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bee5jtcost270"]
+
+[ext_resource type="Script" path="res://src/controller/composite/composite.gd" id="1_3g65b"]
+
+[node name="Composite" type="Node2D"]
+script = ExtResource("1_3g65b")

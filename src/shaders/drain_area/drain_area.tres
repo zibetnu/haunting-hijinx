@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://bbhp34kya5qm8"]
+
+[ext_resource type="Shader" path="res://src/shaders/drain_area/drain_area.gdshader" id="1_yj0ap"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kl64r"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a450e"]
+noise = SubResource("FastNoiseLite_kl64r")
+
+[resource]
+shader = ExtResource("1_yj0ap")
+shader_parameter/amplitude = 2.0
+shader_parameter/frequency = 4.0
+shader_parameter/rippleRate = 6.0
+shader_parameter/waveAmplitude = 0.1
+shader_parameter/waveFrequency = 4.0
+shader_parameter/blendingAmount = 0.6
+shader_parameter/noise = SubResource("NoiseTexture2D_a450e")

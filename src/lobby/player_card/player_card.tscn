@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=3 uid="uid://bapt74v2o7kig"]
+
+[ext_resource type="Script" path="res://src/lobby/player_card/player_card.gd" id="1_aanr4"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wemvv"]
+properties/0/path = NodePath(".:peer_id")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath("VBoxContainer/HBoxContainer/IDLabel:text")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath("VBoxContainer/NameLabel:text")
+properties/2/spawn = true
+properties/2/sync = true
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_opv0w"]
+properties/0/path = NodePath(".:text")
+properties/0/spawn = true
+properties/0/sync = true
+
+[node name="PlayerCard" type="Panel"]
+custom_minimum_size = Vector2(180, 60)
+offset_right = 180.0
+offset_bottom = 60.0
+size_flags_horizontal = 3
+script = ExtResource("1_aanr4")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_wemvv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameLineEdit" type="LineEdit" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "player name"
+max_length = 20
+
+[node name="EditSynchronizer" type="MultiplayerSynchronizer" parent="VBoxContainer/NameLineEdit"]
+unique_name_in_owner = true
+replication_interval = 1.0
+replication_config = SubResource("SceneReplicationConfig_opv0w")
+
+[node name="NameLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "player name"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "ID:"
+
+[node name="IDLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1"
+
+[connection signal="text_changed" from="VBoxContainer/NameLineEdit" to="." method="_on_name_line_edit_text_changed"]
+[connection signal="synchronized" from="VBoxContainer/NameLineEdit/EditSynchronizer" to="." method="_on_edit_synchronizer_synchronized"]

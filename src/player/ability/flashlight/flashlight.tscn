@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://dyev6t6l5ykdp"]
+
+[ext_resource type="Script" path="res://src/player/ability/flashlight/flashlight.gd" id="1_s0dbb"]
+[ext_resource type="Texture2D" uid="uid://cmumlvwo16g81" path="res://assets/flashlight.png" id="2_f4nrq"]
+[ext_resource type="Material" uid="uid://djjpbdxuaaox7" path="res://src/shaders/fast_rotsprite/fast_rotsprite.tres" id="2_yi88m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b6far"]
+radius = 8.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wbqrx"]
+properties/0/path = NodePath(".:battery")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath("Beam:visible")
+properties/2/spawn = true
+properties/2/sync = true
+properties/3/path = NodePath("Beam:size")
+properties/3/spawn = true
+properties/3/sync = true
+
+[node name="Flashlight" type="Area2D" groups=["flashlights"]]
+y_sort_enabled = true
+position = Vector2(0, -8)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_s0dbb")
+action_name = "button_1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.38419e-07, -8.9407e-08)
+scale = Vector2(0.99, 0.99)
+shape = SubResource("CircleShape2D_b6far")
+
+[node name="Body" type="Sprite2D" parent="."]
+material = ExtResource("2_yi88m")
+position = Vector2(12, 0)
+texture = ExtResource("2_f4nrq")
+hframes = 2
+
+[node name="Beam" type="ColorRect" parent="."]
+offset_left = 16.0
+offset_top = -4.0
+offset_right = 40.0
+offset_bottom = 4.0
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_wbqrx")
+
+[node name="RayCasts" type="Node2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="RayCasts"]
+target_position = Vector2(16, 0)
+collision_mask = 9
+
+[node name="RayCast2D2" type="RayCast2D" parent="RayCasts"]
+rotation = -0.174533
+target_position = Vector2(16, 0)
+collision_mask = 9
+
+[node name="RayCast2D3" type="RayCast2D" parent="RayCasts"]
+rotation = 0.174533
+target_position = Vector2(16, 0)
+collision_mask = 9

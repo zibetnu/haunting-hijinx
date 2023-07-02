@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxc7qjmcijuo5"]
+
+[ext_resource type="Script" path="res://src/player/ability/grab/grab.gd" id="1_swvs5"]
+[ext_resource type="Script" path="res://src/player/damage_handler/damage_source.gd" id="2_4k6ec"]
+
+[sub_resource type="Resource" id="Resource_dpqri"]
+script = ExtResource("2_4k6ec")
+damage_amount = 0
+damage_type = 2
+
+[node name="Grab" type="Node2D"]
+script = ExtResource("1_swvs5")
+damage_source = SubResource("Resource_dpqri")

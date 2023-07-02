@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://2btutei2ijcx"]
+
+[ext_resource type="Script" path="res://src/player/ability/aura_sense/aura_sense.gd" id="1_k4xku"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cceax"]
+radius = 8.0
+
+[node name="AuraSense" type="Node2D"]
+script = ExtResource("1_k4xku")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -32.0
+offset_top = -63.0
+offset_right = 32.0
+offset_bottom = -37.0
+horizontal_alignment = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(0.99, 0.99)
+shape = SubResource("CircleShape2D_cceax")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://8av8du0x0bt"]
+
+[ext_resource type="Script" path="res://src/player/damage_handler/standard/standard.gd" id="1_lqywn"]
+
+[node name="Standard" type="Node"]
+script = ExtResource("1_lqywn")

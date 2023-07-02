@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3 uid="uid://civfmojof07gs"]
+
+[ext_resource type="Script" path="res://src/main_menu/main_menu.gd" id="1_mjvxa"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_mjvxa")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -72.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HostButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../JoinButton")
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../HostButton")
+focus_neighbor_bottom = NodePath("../IPText")
+text = "Join"
+
+[node name="IPText" type="TextEdit" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../JoinButton")
+focus_neighbor_bottom = NodePath("../PortText")
+focus_next = NodePath("../PortText")
+text = "localhost"
+placeholder_text = "IP address (only for joining)"
+scroll_fit_content_height = true
+
+[node name="PortText" type="TextEdit" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../IPText")
+focus_neighbor_bottom = NodePath("../HostButton")
+focus_previous = NodePath("../IPText")
+text = "9999"
+placeholder_text = "Port (for hosting and joining)"
+scroll_fit_content_height = true
+
+[connection signal="pressed" from="VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]

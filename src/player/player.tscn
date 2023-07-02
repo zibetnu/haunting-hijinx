@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://bavgk282m5ngb"]
+
+[ext_resource type="Script" path="res://src/player/player.gd" id="1_6v2a1"]
+[ext_resource type="PackedScene" uid="uid://dc4575e1liaov" path="res://src/player/peer_name_label/peer_name_label.tscn" id="2_0jtls"]
+[ext_resource type="PackedScene" uid="uid://cu76mf12xkeww" path="res://src/player/state_machine/state_machine.tscn" id="2_l2pty"]
+[ext_resource type="PackedScene" uid="uid://bs6cq3kw7xr4r" path="res://src/player/state_machine/state/dead/dead.tscn" id="5_3okmj"]
+[ext_resource type="PackedScene" uid="uid://begje6fek7jf4" path="res://src/player/state_machine/state/idle/idle.tscn" id="6_1tjkj"]
+[ext_resource type="PackedScene" uid="uid://sl14guycomx6" path="res://src/player/state_machine/state/move/move.tscn" id="6_o4bwf"]
+[ext_resource type="PackedScene" uid="uid://dfqrvpndkixey" path="res://src/player/state_machine/state_label/state_label.tscn" id="7_drloo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b6far"]
+radius = 8.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lgecs"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = false
+properties/1/path = NodePath(".:health")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath(".:move_speed")
+properties/2/spawn = true
+properties/2/sync = true
+properties/3/path = NodePath(".:peer_id")
+properties/3/spawn = true
+properties/3/sync = true
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine") groups=["players"]]
+collision_layer = 0
+collision_mask = 7
+motion_mode = 1
+script = ExtResource("1_6v2a1")
+state_machine = NodePath("StateMachine")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.38419e-07, -8.9407e-08)
+scale = Vector2(0.99, 0.99)
+shape = SubResource("CircleShape2D_b6far")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_lgecs")
+
+[node name="PeerNameLabel" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_0jtls")]
+modulate = Color(1, 1, 1, 0.501961)
+z_index = 1
+offset_top = -50.0
+offset_bottom = -24.0
+player = NodePath("..")
+
+[node name="StateLabel" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("7_drloo")]
+modulate = Color(1, 1, 1, 0.25098)
+z_index = 1
+offset_top = 8.0
+offset_bottom = 34.0
+state_machine = NodePath("../StateMachine")
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("player", "state") instance=ExtResource("2_l2pty")]
+player = NodePath("..")
+state = NodePath("Idle")
+
+[node name="Dead" parent="StateMachine" instance=ExtResource("5_3okmj")]
+
+[node name="Idle" parent="StateMachine" instance=ExtResource("6_1tjkj")]
+
+[node name="Move" parent="StateMachine" instance=ExtResource("6_o4bwf")]
+
+[node name="YSort" type="Node2D" parent="."]
+y_sort_enabled = true

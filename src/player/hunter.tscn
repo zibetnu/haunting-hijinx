@@ -1,0 +1,90 @@
+[gd_scene load_steps=13 format=3 uid="uid://dsl4rd03hiysv"]
+
+[ext_resource type="PackedScene" uid="uid://bavgk282m5ngb" path="res://src/player/player.tscn" id="1_to4j3"]
+[ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="2_ha5kb"]
+[ext_resource type="PackedScene" uid="uid://860yylsw16sx" path="res://src/player/ability/animation_setter/animation_setter.tscn" id="2_lwjsd"]
+[ext_resource type="PackedScene" uid="uid://dyev6t6l5ykdp" path="res://src/player/ability/flashlight/flashlight.tscn" id="3_5tbkl"]
+[ext_resource type="PackedScene" uid="uid://31u5yaj3y8wu" path="res://src/player/ability/direction_setter/direction_setter.tscn" id="3_phihg"]
+[ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="4_cfq33"]
+[ext_resource type="PackedScene" uid="uid://c76lyvhv5uic7" path="res://src/player/damage_handler/instant_death/instant_death.tscn" id="5_6ne1d"]
+[ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="6_b6ftt"]
+[ext_resource type="PackedScene" uid="uid://jmaiaf2ymd1p" path="res://src/player/damage_handler/revivable/revivable.tscn" id="6_q3r52"]
+[ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="7_178cm"]
+[ext_resource type="PackedScene" uid="uid://2btutei2ijcx" path="res://src/player/ability/aura_sense/aura_sense.tscn" id="10_y8xbh"]
+[ext_resource type="PackedScene" uid="uid://ifwrxny1pnn5" path="res://src/player/costume/placeholder_costume.tscn" id="12_iit4a"]
+
+[node name="Hunter" node_paths=PackedStringArray("controller", "costume") groups=["hunters"] instance=ExtResource("1_to4j3")]
+collision_layer = 4
+controller = NodePath("Controllers/Synced")
+costume = NodePath("YSort/PlaceholderCostume")
+move_speed = 30
+
+[node name="Abilities" type="Node2D" parent="." index="4"]
+
+[node name="AnimationSetters" type="Node2D" parent="Abilities" index="0"]
+
+[node name="Dead" parent="Abilities/AnimationSetters" index="0" node_paths=PackedStringArray("player") instance=ExtResource("2_lwjsd")]
+animation_name = "dead"
+player = NodePath("../../..")
+_states = Array[NodePath]([NodePath("../../../StateMachine/Dead")])
+
+[node name="Idle" parent="Abilities/AnimationSetters" index="1" node_paths=PackedStringArray("player") instance=ExtResource("2_lwjsd")]
+animation_name = "idle"
+player = NodePath("../../..")
+_states = Array[NodePath]([NodePath("../../../StateMachine/Idle")])
+
+[node name="Move" parent="Abilities/AnimationSetters" index="2" node_paths=PackedStringArray("player") instance=ExtResource("2_lwjsd")]
+animation_name = "move"
+player = NodePath("../../..")
+_states = Array[NodePath]([NodePath("../../../StateMachine/Move")])
+
+[node name="AuraSense" parent="Abilities" index="1" node_paths=PackedStringArray("player") instance=ExtResource("10_y8xbh")]
+player = NodePath("../..")
+_states = Array[NodePath]([NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move")])
+
+[node name="DirectionSetter" parent="Abilities" index="2" node_paths=PackedStringArray("source_node", "player") instance=ExtResource("3_phihg")]
+source_node = NodePath("../../Controllers/Synced")
+source_variable = "look_vector"
+player = NodePath("../..")
+_states = Array[NodePath]([NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move")])
+
+[node name="Controllers" type="Node2D" parent="." index="5"]
+
+[node name="Synced" parent="Controllers" index="0" node_paths=PackedStringArray("local_controller") instance=ExtResource("4_cfq33")]
+local_controller = NodePath("../Composite")
+
+[node name="Composite" parent="Controllers" index="1" node_paths=PackedStringArray("controller_1", "controller_2") instance=ExtResource("6_b6ftt")]
+controller_1 = NodePath("../JoypadController")
+controller_2 = NodePath("../KeyboardAndMouse")
+
+[node name="JoypadController" parent="Controllers" index="2" instance=ExtResource("2_ha5kb")]
+
+[node name="KeyboardAndMouse" parent="Controllers" index="3" instance=ExtResource("7_178cm")]
+
+[node name="DamageHandlers" type="Node" parent="." index="6"]
+
+[node name="InstantDeath" parent="DamageHandlers" index="0" node_paths=PackedStringArray("dead_state") instance=ExtResource("5_6ne1d")]
+dead_state = NodePath("../../StateMachine/Dead")
+weak_to = 2
+
+[node name="Revivable" parent="DamageHandlers" index="1" node_paths=PackedStringArray("player", "revived_state") instance=ExtResource("6_q3r52")]
+player = NodePath("../..")
+revived_state = NodePath("../../StateMachine/Idle")
+revives_with = 1
+
+[node name="Dead" parent="StateMachine" index="0" node_paths=PackedStringArray("damage_handler")]
+damage_handler = NodePath("../../DamageHandlers/Revivable")
+
+[node name="Idle" parent="StateMachine" index="1" node_paths=PackedStringArray("move_state", "damage_handler")]
+move_state = NodePath("../Move")
+damage_handler = NodePath("../../DamageHandlers/InstantDeath")
+
+[node name="Move" parent="StateMachine" index="2" node_paths=PackedStringArray("idle_state", "damage_handler")]
+idle_state = NodePath("../Idle")
+damage_handler = NodePath("../../DamageHandlers/InstantDeath")
+
+[node name="Flashlight" parent="YSort" index="0" node_paths=PackedStringArray("player") instance=ExtResource("3_5tbkl")]
+player = NodePath("../..")
+_states = Array[NodePath]([NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move")])
+
+[node name="PlaceholderCostume" parent="YSort" index="1" instance=ExtResource("12_iit4a")]
