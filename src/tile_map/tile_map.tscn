@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c6td5osxfww2c"]
+
+[node name="TileMap" type="TileMap"]
+y_sort_enabled = true
+format = 2
+layer_0/name = "Floor"
+layer_0/z_index = -1
+layer_1/name = "Walls"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = true
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array()
