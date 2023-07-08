@@ -27,6 +27,10 @@ window/size/viewport_width=640
 window/size/viewport_height=360
 window/stretch/mode="viewport"
 
+[global]
+
+settings_file_path="user://settings.cfg"
+
 [input]
 
 ui_accept={
