@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dsl4rd03hiysv"]
+[gd_scene load_steps=14 format=3 uid="uid://dsl4rd03hiysv"]
 
 [ext_resource type="PackedScene" uid="uid://bavgk282m5ngb" path="res://src/player/player.tscn" id="1_to4j3"]
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="2_ha5kb"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="7_178cm"]
 [ext_resource type="PackedScene" uid="uid://2btutei2ijcx" path="res://src/player/ability/aura_sense/aura_sense.tscn" id="10_y8xbh"]
 [ext_resource type="PackedScene" uid="uid://ifwrxny1pnn5" path="res://src/player/costume/placeholder_costume.tscn" id="12_iit4a"]
+[ext_resource type="PackedScene" uid="uid://myko8836tn6o" path="res://src/rotation_to_vector/rotation_to_vector.tscn" id="12_tg1e4"]
 
 [node name="Hunter" node_paths=PackedStringArray("controller", "costume") groups=["hunters"] instance=ExtResource("1_to4j3")]
 collision_layer = 4
@@ -43,8 +44,8 @@ player = NodePath("../..")
 _states = Array[NodePath]([NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move")])
 
 [node name="DirectionSetter" parent="Abilities" index="2" node_paths=PackedStringArray("source_node", "player") instance=ExtResource("3_phihg")]
-source_node = NodePath("../../Controllers/Synced")
-source_variable = "look_vector"
+source_node = NodePath("../../YSort/Flashlight/RotationToVector")
+source_variable = "vector"
 player = NodePath("../..")
 _states = Array[NodePath]([NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move")])
 
@@ -86,5 +87,8 @@ damage_handler = NodePath("../../DamageHandlers/InstantDeath")
 [node name="Flashlight" parent="YSort" index="0" node_paths=PackedStringArray("player") instance=ExtResource("3_5tbkl")]
 player = NodePath("../..")
 _states = Array[NodePath]([NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move")])
+
+[node name="RotationToVector" parent="YSort/Flashlight" index="5" node_paths=PackedStringArray("source_node") instance=ExtResource("12_tg1e4")]
+source_node = NodePath("..")
 
 [node name="PlaceholderCostume" parent="YSort" index="1" instance=ExtResource("12_iit4a")]
