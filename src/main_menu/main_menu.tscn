@@ -42,7 +42,6 @@ layout_mode = 2
 focus_neighbor_top = NodePath("../JoinButton")
 focus_neighbor_bottom = NodePath("../PortText")
 focus_next = NodePath("../PortText")
-text = "localhost"
 placeholder_text = "IP address (only for joining)"
 scroll_fit_content_height = true
 
@@ -52,7 +51,6 @@ layout_mode = 2
 focus_neighbor_top = NodePath("../IPText")
 focus_neighbor_bottom = NodePath("../HostButton")
 focus_previous = NodePath("../IPText")
-text = "9999"
 placeholder_text = "Port (for hosting and joining)"
 scroll_fit_content_height = true
 
