@@ -218,8 +218,9 @@ exit_state = NodePath("../Panic")
 state_time = 0.5
 damage_handler = NodePath("../../DamageHandlers/Standard")
 
-[node name="Grab" parent="StateMachine" index="8" node_paths=PackedStringArray("exit_state") instance=ExtResource("5_gv08g")]
+[node name="Grab" parent="StateMachine" index="8" node_paths=PackedStringArray("exit_state", "damage_handler") instance=ExtResource("5_gv08g")]
 exit_state = NodePath("../Panic")
 state_time = 2.0
+damage_handler = NodePath("../../DamageHandlers/Stunnable")
 
 [node name="PlaceholderCostume" parent="YSort" index="0" instance=ExtResource("20_mg6na")]
