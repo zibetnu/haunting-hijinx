@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://dyev6t6l5ykdp"]
 
 [ext_resource type="Script" path="res://src/player/ability/flashlight/flashlight.gd" id="1_s0dbb"]
-[ext_resource type="Texture2D" uid="uid://cmumlvwo16g81" path="res://assets/flashlight.png" id="2_f4nrq"]
-[ext_resource type="Material" uid="uid://djjpbdxuaaox7" path="res://src/shaders/fast_rotsprite/fast_rotsprite.tres" id="2_yi88m"]
+[ext_resource type="Material" uid="uid://8oo13typkhrt" path="res://src/shaders/multi_frame_wipe/multi_frame_wipe.tres" id="2_hyikt"]
+[ext_resource type="Texture2D" uid="uid://cwjmhpmygymjj" path="res://assets/flashlight/flashlight_upscaled.png" id="3_l7kel"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b6far"]
 radius = 8.0
@@ -14,12 +14,9 @@ properties/0/sync = true
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/sync = true
-properties/2/path = NodePath("Beam:visible")
+properties/2/path = NodePath("Sprite2D:frame")
 properties/2/spawn = true
 properties/2/sync = true
-properties/3/path = NodePath("Beam:size")
-properties/3/spawn = true
-properties/3/sync = true
 
 [node name="Flashlight" type="Area2D" groups=["flashlights"]]
 y_sort_enabled = true
@@ -34,17 +31,13 @@ position = Vector2(2.38419e-07, -8.9407e-08)
 scale = Vector2(0.99, 0.99)
 shape = SubResource("CircleShape2D_b6far")
 
-[node name="Body" type="Sprite2D" parent="."]
-material = ExtResource("2_yi88m")
-position = Vector2(12, 0)
-texture = ExtResource("2_f4nrq")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("2_hyikt")
+position = Vector2(24, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_l7kel")
 hframes = 2
-
-[node name="Beam" type="ColorRect" parent="."]
-offset_left = 16.0
-offset_top = -4.0
-offset_right = 40.0
-offset_bottom = 4.0
+frame = 1
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_wbqrx")
