@@ -196,7 +196,7 @@ damage_handler = NodePath("../../DamageHandlers/Stunnable")
 
 [node name="Sprint" parent="StateMachine" index="3" node_paths=PackedStringArray("idle_state", "damage_handler") instance=ExtResource("2_jq5ho")]
 idle_state = NodePath("../Idle")
-speed_multiplier = 2.0
+speed_multiplier = 1.8
 damage_handler = NodePath("../../DamageHandlers/Stunnable")
 
 [node name="Summon" parent="StateMachine" index="4" node_paths=PackedStringArray("exit_state", "damage_handler") instance=ExtResource("3_n6o1l")]
