@@ -215,7 +215,6 @@ damage_handler = NodePath("../../DamageHandlers/PanicReset")
 
 [node name="PanicReset" parent="StateMachine" index="7" node_paths=PackedStringArray("exit_state", "damage_handler") instance=ExtResource("18_7jfgb")]
 exit_state = NodePath("../Panic")
-state_time = 0.5
 damage_handler = NodePath("../../DamageHandlers/Standard")
 
 [node name="Grab" parent="StateMachine" index="8" node_paths=PackedStringArray("exit_state", "damage_handler") instance=ExtResource("5_gv08g")]
