@@ -5,5 +5,5 @@
 
 [node name="Panic" instance=ExtResource("1_iies4")]
 script = ExtResource("1_6mlou")
-speed_multiplier = 2
-state_time = 4.0
+speed_multiplier = 1.5
+state_time = 3.0

@@ -18,11 +18,7 @@ func physics_update(_delta: float) -> void:
 	if not multiplayer.is_server():
 		return
 
-	var hunters := get_tree().get_nodes_in_group("hunters").filter(
-			func(hunter): return hunter.health > 0
-	)
-
-	for hunter in hunters:
+	for hunter in get_tree().get_nodes_in_group("hunters"):
 		var instance := summon_scene.instantiate()
 		instance.global_position = hunter.global_position
 		owner.get_parent().add_child(instance, true)

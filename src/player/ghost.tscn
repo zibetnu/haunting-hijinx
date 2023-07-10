@@ -148,42 +148,42 @@ weak_to = 1
 [node name="RayCasts" type="Node2D" parent="." index="7"]
 
 [node name="RayCast2D" type="RayCast2D" parent="RayCasts" index="0"]
-target_position = Vector2(16, 0)
+target_position = Vector2(9, 0)
 collision_mask = 5
 
 [node name="RayCast2D2" type="RayCast2D" parent="RayCasts" index="1"]
 rotation = 0.785398
-target_position = Vector2(16, 0)
+target_position = Vector2(9, 0)
 collision_mask = 5
 
 [node name="RayCast2D3" type="RayCast2D" parent="RayCasts" index="2"]
 rotation = 1.5708
-target_position = Vector2(16, 0)
+target_position = Vector2(9, 0)
 collision_mask = 5
 
 [node name="RayCast2D4" type="RayCast2D" parent="RayCasts" index="3"]
 rotation = 2.35619
-target_position = Vector2(16, 0)
+target_position = Vector2(9, 0)
 collision_mask = 5
 
 [node name="RayCast2D5" type="RayCast2D" parent="RayCasts" index="4"]
 rotation = 3.14159
-target_position = Vector2(16, 0)
+target_position = Vector2(9, 0)
 collision_mask = 5
 
 [node name="RayCast2D6" type="RayCast2D" parent="RayCasts" index="5"]
 rotation = 3.92699
-target_position = Vector2(16, 0)
+target_position = Vector2(9, 0)
 collision_mask = 5
 
 [node name="RayCast2D7" type="RayCast2D" parent="RayCasts" index="6"]
 rotation = 4.71239
-target_position = Vector2(16, 0)
+target_position = Vector2(9, 0)
 collision_mask = 5
 
 [node name="RayCast2D8" type="RayCast2D" parent="RayCasts" index="7"]
 rotation = 5.49779
-target_position = Vector2(16, 0)
+target_position = Vector2(9, 0)
 collision_mask = 5
 
 [node name="Idle" parent="StateMachine" index="1" node_paths=PackedStringArray("move_state", "damage_handler")]
@@ -196,7 +196,7 @@ damage_handler = NodePath("../../DamageHandlers/Stunnable")
 
 [node name="Sprint" parent="StateMachine" index="3" node_paths=PackedStringArray("idle_state", "damage_handler") instance=ExtResource("2_jq5ho")]
 idle_state = NodePath("../Idle")
-speed_multiplier = 2.0
+speed_multiplier = 1.8
 damage_handler = NodePath("../../DamageHandlers/Stunnable")
 
 [node name="Summon" parent="StateMachine" index="4" node_paths=PackedStringArray("exit_state", "damage_handler") instance=ExtResource("3_n6o1l")]
@@ -206,6 +206,7 @@ damage_handler = NodePath("../../DamageHandlers/Stunnable")
 
 [node name="Stun" parent="StateMachine" index="5" node_paths=PackedStringArray("exit_state", "damage_handler") instance=ExtResource("5_gv08g")]
 exit_state = NodePath("../Panic")
+state_time = 1.5
 damage_handler = NodePath("../../DamageHandlers/Standard")
 
 [node name="Panic" parent="StateMachine" index="6" node_paths=PackedStringArray("exit_state", "damage_handler") instance=ExtResource("17_8tcsn")]
@@ -214,10 +215,11 @@ damage_handler = NodePath("../../DamageHandlers/PanicReset")
 
 [node name="PanicReset" parent="StateMachine" index="7" node_paths=PackedStringArray("exit_state", "damage_handler") instance=ExtResource("18_7jfgb")]
 exit_state = NodePath("../Panic")
-state_time = 0.5
 damage_handler = NodePath("../../DamageHandlers/Standard")
 
-[node name="Grab" parent="StateMachine" index="8" node_paths=PackedStringArray("exit_state") instance=ExtResource("5_gv08g")]
+[node name="Grab" parent="StateMachine" index="8" node_paths=PackedStringArray("exit_state", "damage_handler") instance=ExtResource("5_gv08g")]
 exit_state = NodePath("../Panic")
+state_time = 2.0
+damage_handler = NodePath("../../DamageHandlers/Stunnable")
 
 [node name="PlaceholderCostume" parent="YSort" index="0" instance=ExtResource("20_mg6na")]

@@ -2,7 +2,7 @@ class_name Panic
 extends TimedState
 
 
-@export var speed_multiplier := 2
+@export var speed_multiplier := 1.5
 
 
 func physics_update(_delta: float) -> void:
