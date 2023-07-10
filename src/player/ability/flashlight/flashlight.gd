@@ -3,21 +3,34 @@ extends Ability
 
 signal battery_low
 
+const MAX_CAST_LENGTH = 24
+const FLASHLIGHT_BODY_PERCENTAGE = 0.25
+
 @export var action_name: String
 @export var max_battery := 1200
-@export var rotation_speed := PI / 60
-@export var weak_to: DamageSource.Type
-@export var low_percentage := 0.33
 @export var battery := max_battery:
 	set(value):
 		battery = clamp(value, 0, max_battery)
+		$Sprite2D.material.set_shader_parameter(
+				"percentage",
+				FLASHLIGHT_BODY_PERCENTAGE + (1.0 - FLASHLIGHT_BODY_PERCENTAGE) * percentage
+		)
+		for raycast in $RayCasts.get_children():
+			raycast.target_position.x = _min_cast_length + MAX_CAST_LENGTH * percentage
+
+@export var low_percentage := 0.33
+@export var rotation_speed := PI / 60
+@export var weak_to: DamageSource.Type
 
 var is_battery_low: bool:
 	get:
-		return float(battery) / max_battery < low_percentage
+		return percentage < low_percentage
 
-@onready var _max_beam_length = $Beam.size.x
-@onready var _min_beam_cast_length = $RayCasts.get_children()[0].target_position.x
+var percentage: float:
+	get:
+		return float(battery) / max_battery
+
+@onready var _min_cast_length = $RayCasts.get_children()[0].target_position.x
 
 
 func _ready() -> void:
@@ -30,19 +43,17 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	update_direction()
 
-	if float(battery) / max_battery < low_percentage:
+	if percentage < low_percentage:
 		battery_low.emit()
 
-	$Beam.visible = player.controller.is_action_pressed(action_name) and battery > 0
-	$Body.frame = int($Beam.visible)
-	if not $Beam.visible:
+	var active := player.controller.is_action_pressed(action_name) and battery > 0
+	if multiplayer.is_server():
+		$Sprite2D.frame = int(active)
+
+	if not active:
 		return
 
 	battery -= 1
-	$Beam.size.x = _max_beam_length * battery / max_battery
-	for raycast in $RayCasts.get_children():
-		raycast.target_position.x = _min_beam_cast_length + $Beam.size.x
-
 	for raycast in $RayCasts.get_children():
 		if not raycast.is_colliding():
 			continue
@@ -76,6 +87,5 @@ func _on_player_revived() -> void:
 func _on_player_state_machine_transitioned(state_name: String) -> void:
 	var active := state_name in _state_names
 	set_physics_process(active)
-	if not active:
-		$Beam.visible = false
-		$Body.frame = 0
+	if multiplayer.is_server():
+		$Sprite2D.frame = int(active)
