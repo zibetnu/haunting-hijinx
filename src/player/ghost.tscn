@@ -206,6 +206,7 @@ damage_handler = NodePath("../../DamageHandlers/Stunnable")
 
 [node name="Stun" parent="StateMachine" index="5" node_paths=PackedStringArray("exit_state", "damage_handler") instance=ExtResource("5_gv08g")]
 exit_state = NodePath("../Panic")
+state_time = 1.5
 damage_handler = NodePath("../../DamageHandlers/Standard")
 
 [node name="Panic" parent="StateMachine" index="6" node_paths=PackedStringArray("exit_state", "damage_handler") instance=ExtResource("17_8tcsn")]
