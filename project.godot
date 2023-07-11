@@ -114,6 +114,7 @@ look_down={
 2d_physics/layer_2="interactables"
 2d_physics/layer_3="physical players"
 2d_physics/layer_4="spectral players"
+2d_physics/layer_5="invulnerable players"
 
 [rendering]
 
