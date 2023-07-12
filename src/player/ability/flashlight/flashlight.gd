@@ -54,16 +54,20 @@ func _physics_process(_delta: float) -> void:
 		return
 
 	battery -= 1
+	var colliders := []
 	for raycast in $RayCasts.get_children():
-		if not raycast.is_colliding():
+		colliders += _get_colliders(raycast)
+
+	var processed_colliders := []
+	for collider in colliders:
+		if collider in processed_colliders:
 			continue
 
-		var collider = raycast.get_collider()
+		processed_colliders.append(collider)
 		if not collider.has_method("take_damage"):
 			continue
 
 		collider.take_damage(DamageSource.from_light(1))
-		return
 
 
 func take_damage(source: DamageSource) -> void:
@@ -82,6 +86,24 @@ func update_direction() -> void:
 
 func _on_player_revived() -> void:
 	battery = max_battery
+
+
+func _get_colliders(raycast: RayCast2D) -> Array[Object]:
+	var colliders: Array[Object] = []
+	var exception_rids: Array[RID] = []
+	while raycast.is_colliding():
+		var collider = raycast.get_collider()
+		if collider.is_in_group("stop_flashlight"):
+			break  # Don't get any colliders past something that stops the raycast.
+
+		colliders.append(collider)
+		var collider_rid := raycast.get_collider_rid()
+		exception_rids.append(collider_rid)
+		raycast.add_exception_rid(collider_rid)
+		raycast.force_raycast_update()
+
+	exception_rids.map(raycast.remove_exception_rid)
+	return colliders
 
 
 func _on_player_state_machine_transitioned(state_name: String) -> void:
