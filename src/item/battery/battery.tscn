@@ -96,6 +96,7 @@ _data = {
 }
 
 [node name="Battery" instance=ExtResource("1_mpplq")]
+collision_mask = 30
 script = ExtResource("2_0rfgm")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]

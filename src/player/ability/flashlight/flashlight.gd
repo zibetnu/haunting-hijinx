@@ -7,7 +7,7 @@ const MAX_CAST_LENGTH = 24
 const FLASHLIGHT_BODY_PERCENTAGE = 0.25
 
 @export var action_name: String
-@export var max_battery := 1200
+@export var max_battery := 1800
 @export var battery := max_battery:
 	set(value):
 		battery = clamp(value, 0, max_battery)
