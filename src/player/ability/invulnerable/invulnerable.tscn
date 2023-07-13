@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c83xurnfijlnw"]
 
-[ext_resource type="Script" path="res://src/player/ability/exit_trigger/invulnerable/invulnerable.gd" id="1_xkvim"]
+[ext_resource type="Script" path="res://src/player/ability/invulnerable/invulnerable.gd" id="1_kkilf"]
 
 [sub_resource type="Animation" id="Animation_v5cqo"]
 length = 0.001
@@ -41,7 +41,7 @@ _data = {
 }
 
 [node name="Invulnerable" type="Node2D"]
-script = ExtResource("1_xkvim")
+script = ExtResource("1_kkilf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 speed_scale = 2.0
