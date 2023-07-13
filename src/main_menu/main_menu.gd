@@ -7,6 +7,8 @@ const PORT_KEY = "port"
 
 
 func _ready() -> void:
+	ConnectionManager.client_created.connect(start_lobby)
+	ConnectionManager.server_created.connect(start_lobby)
 	_load_address()
 	%HostButton.grab_focus()
 
@@ -35,12 +37,10 @@ func _load_address() -> void:
 
 func _on_host_button_pressed() -> void:
 	ConnectionManager.create_server(int(%PortText.text))
-	start_lobby()
 
 
 func _on_join_button_pressed() -> void:
 	ConnectionManager.create_client(%IPText.text, int(%PortText.text))
-	start_lobby()
 
 
 func _save_address() -> void:
