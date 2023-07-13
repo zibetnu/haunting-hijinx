@@ -8,11 +8,6 @@ extends Ability
 		%CollisionShape2D.shape.radius = value
 
 
-func _ready() -> void:
-	super()
-	%CollisionShape2D.shape.radius = radius
-
-
 func _on_entered(node: Node) -> void:
 	if not multiplayer.is_server():
 		return
