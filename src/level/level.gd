@@ -5,17 +5,13 @@ const Battery = preload("res://src/item/battery/battery.tscn")
 const Ghost = preload("res://src/player/ghost.tscn")
 const Hunter = preload("res://src/player/hunter.tscn")
 
-@export var _battery_spawn_points: Array[NodePath] = []
+@export var battery_spawn_points: Array[Node2D] = []
 @export var ghost_spawn_point: Node2D
-@export var _hunter_spawn_points: Array[NodePath] = []
+@export var hunter_spawn_points: Array[Node2D] = []
 
 var _batteries_spawned := 0
 var _ghosts_spawned := 0
 var _hunters_spawned := 0
-
-# https://github.com/godotengine/godot/issues/62916#issuecomment-1471750455
-@onready var battery_spawn_points := _battery_spawn_points.map(get_node)
-@onready var hunter_spawn_points := _hunter_spawn_points.map(get_node)
 
 
 func _ready():

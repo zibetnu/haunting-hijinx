@@ -60,6 +60,7 @@ func _update_label_text() -> void:
 
 
 func _on_dead_exit_trigger_triggered() -> void:
+	active = player.state_machine.state.name in _state_names
 	_update_label_text()
 
 

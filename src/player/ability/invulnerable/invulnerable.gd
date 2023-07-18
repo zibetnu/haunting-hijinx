@@ -10,7 +10,6 @@ extends Ability
 	set(value):
 		player.modulate.a = value
 
-var _can_trigger := false
 var _previous_collision_layer: int
 
 
@@ -20,7 +19,7 @@ func _ready() -> void:
 
 
 func _on_dead_exit_trigger_triggered() -> void:
-	if not _can_trigger:
+	if not player.state_machine.state.name in _state_names:
 		return
 
 	_previous_collision_layer = player.collision_layer
@@ -31,7 +30,3 @@ func _on_dead_exit_trigger_triggered() -> void:
 
 	player.collision_layer = _previous_collision_layer
 	$AnimationPlayer.play("RESET")
-
-
-func _on_player_state_machine_transitioned(state_name: String) -> void:
-	_can_trigger = state_name in _state_names
