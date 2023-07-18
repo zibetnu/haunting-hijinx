@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://c6td5osxfww2c" path="res://src/tile_map/tile_map.tscn" id="3_yxx54"]
 [ext_resource type="TileSet" uid="uid://26wcy33gmwrh" path="res://src/tile_map/tile_sets/main_floor.tres" id="4_dphu1"]
 
-[node name="MainFloor" node_paths=PackedStringArray("ghost_spawn_point") instance=ExtResource("1_sri5i")]
-_battery_spawn_points = Array[NodePath]([NodePath("GhostSpawnPoint"), NodePath("HunterSpawnPoint"), NodePath("HunterSpawnPoint2"), NodePath("HunterSpawnPoint3"), NodePath("HunterSpawnPoint4"), NodePath("BatterySpawnPoint"), NodePath("BatterySpawnPoint2"), NodePath("BatterySpawnPoint3"), NodePath("BatterySpawnPoint4"), NodePath("BatterySpawnPoint5"), NodePath("BatterySpawnPoint6")])
+[node name="MainFloor" node_paths=PackedStringArray("battery_spawn_points", "ghost_spawn_point", "hunter_spawn_points") instance=ExtResource("1_sri5i")]
+battery_spawn_points = [NodePath("GhostSpawnPoint"), NodePath("HunterSpawnPoint"), NodePath("HunterSpawnPoint2"), NodePath("HunterSpawnPoint3"), NodePath("HunterSpawnPoint4"), NodePath("BatterySpawnPoint"), NodePath("BatterySpawnPoint2"), NodePath("BatterySpawnPoint3"), NodePath("BatterySpawnPoint4"), NodePath("BatterySpawnPoint5"), NodePath("BatterySpawnPoint6")]
 ghost_spawn_point = NodePath("GhostSpawnPoint")
-_hunter_spawn_points = Array[NodePath]([NodePath("HunterSpawnPoint"), NodePath("HunterSpawnPoint2"), NodePath("HunterSpawnPoint3"), NodePath("HunterSpawnPoint4")])
+hunter_spawn_points = [NodePath("HunterSpawnPoint"), NodePath("HunterSpawnPoint2"), NodePath("HunterSpawnPoint3"), NodePath("HunterSpawnPoint4")]
 
 [node name="TileMap" parent="SpawnRoot" index="0" instance=ExtResource("3_yxx54")]
 tile_set = ExtResource("4_dphu1")

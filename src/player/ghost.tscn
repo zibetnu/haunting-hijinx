@@ -33,88 +33,86 @@ move_speed = 50
 
 [node name="AnimationSetters" type="Node2D" parent="Abilities" index="0"]
 
-[node name="Dead" parent="Abilities/AnimationSetters" index="0" node_paths=PackedStringArray("player") instance=ExtResource("2_klhys")]
+[node name="Dead" parent="Abilities/AnimationSetters" index="0" node_paths=PackedStringArray("player", "states") instance=ExtResource("2_klhys")]
 animation_name = "dead"
 player = NodePath("../../..")
-_states = Array[NodePath]([NodePath("../../../StateMachine/Dead")])
+states = [NodePath("../../../StateMachine/Dead")]
 
-[node name="Idle" parent="Abilities/AnimationSetters" index="1" node_paths=PackedStringArray("player") instance=ExtResource("2_klhys")]
+[node name="Idle" parent="Abilities/AnimationSetters" index="1" node_paths=PackedStringArray("player", "states") instance=ExtResource("2_klhys")]
 animation_name = "idle"
 player = NodePath("../../..")
-_states = Array[NodePath]([NodePath("../../../StateMachine/Idle")])
+states = [NodePath("../../../StateMachine/Idle")]
 
-[node name="Move" parent="Abilities/AnimationSetters" index="2" node_paths=PackedStringArray("player") instance=ExtResource("2_klhys")]
+[node name="Move" parent="Abilities/AnimationSetters" index="2" node_paths=PackedStringArray("player", "states") instance=ExtResource("2_klhys")]
 animation_name = "move"
 player = NodePath("../../..")
-_states = Array[NodePath]([NodePath("../../../StateMachine/Move")])
+states = [NodePath("../../../StateMachine/Move")]
 
-[node name="Sprint" parent="Abilities/AnimationSetters" index="3" node_paths=PackedStringArray("player") instance=ExtResource("2_klhys")]
+[node name="Sprint" parent="Abilities/AnimationSetters" index="3" node_paths=PackedStringArray("player", "states") instance=ExtResource("2_klhys")]
 animation_name = "sprint"
 player = NodePath("../../..")
-_states = Array[NodePath]([NodePath("../../../StateMachine/Sprint")])
+states = [NodePath("../../../StateMachine/Sprint")]
 
-[node name="Summon" parent="Abilities/AnimationSetters" index="4" node_paths=PackedStringArray("player") instance=ExtResource("2_klhys")]
+[node name="Summon" parent="Abilities/AnimationSetters" index="4" node_paths=PackedStringArray("player", "states") instance=ExtResource("2_klhys")]
 animation_name = "summon"
 player = NodePath("../../..")
-_states = Array[NodePath]([NodePath("../../../StateMachine/Summon")])
+states = [NodePath("../../../StateMachine/Summon")]
 
-[node name="Stun" parent="Abilities/AnimationSetters" index="5" node_paths=PackedStringArray("player") instance=ExtResource("2_klhys")]
+[node name="Stun" parent="Abilities/AnimationSetters" index="5" node_paths=PackedStringArray("player", "states") instance=ExtResource("2_klhys")]
 animation_name = "stun"
 player = NodePath("../../..")
-_states = Array[NodePath]([NodePath("../../../StateMachine/Stun")])
+states = [NodePath("../../../StateMachine/Stun")]
 
-[node name="Panic" parent="Abilities/AnimationSetters" index="6" node_paths=PackedStringArray("player") instance=ExtResource("2_klhys")]
-position = Vector2(0, -1)
+[node name="Panic" parent="Abilities/AnimationSetters" index="6" node_paths=PackedStringArray("player", "states") instance=ExtResource("2_klhys")]
 animation_name = "panic"
 player = NodePath("../../..")
-_states = Array[NodePath]([NodePath("../../../StateMachine/Panic"), NodePath("../../../StateMachine/PanicReset")])
+states = [NodePath("../../../StateMachine/Panic")]
 
-[node name="Grab" parent="Abilities/AnimationSetters" index="7" node_paths=PackedStringArray("player") instance=ExtResource("2_klhys")]
-position = Vector2(0, -1)
+[node name="Grab" parent="Abilities/AnimationSetters" index="7" node_paths=PackedStringArray("player", "states") instance=ExtResource("2_klhys")]
 animation_name = "grab"
 player = NodePath("../../..")
-_states = Array[NodePath]([NodePath("../../../StateMachine/Grab")])
+states = [NodePath("../../../StateMachine/Grab")]
 
-[node name="AuraLarge" parent="Abilities" index="1" node_paths=PackedStringArray("player") instance=ExtResource("5_ws256")]
+[node name="AuraLarge" parent="Abilities" index="1" node_paths=PackedStringArray("player", "states") instance=ExtResource("5_ws256")]
 radius = 72
 player = NodePath("../..")
-_states = Array[NodePath]([NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Sprint"), NodePath("../../StateMachine/Summon"), NodePath("../../StateMachine/Stun"), NodePath("../../StateMachine/Panic"), NodePath("../../StateMachine/PanicReset"), NodePath("../../StateMachine/Grab")])
+states = [NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Sprint"), NodePath("../../StateMachine/Summon"), NodePath("../../StateMachine/Stun"), NodePath("../../StateMachine/Panic"), NodePath("../../StateMachine/PanicReset"), NodePath("../../StateMachine/Grab")]
 
-[node name="AuraSmall" parent="Abilities" index="2" node_paths=PackedStringArray("player") instance=ExtResource("5_ws256")]
+[node name="AuraSmall" parent="Abilities" index="2" node_paths=PackedStringArray("player", "states") instance=ExtResource("5_ws256")]
 intensity = 3
 radius = 40
 player = NodePath("../..")
-_states = Array[NodePath]([NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Sprint"), NodePath("../../StateMachine/Summon"), NodePath("../../StateMachine/Stun"), NodePath("../../StateMachine/Panic"), NodePath("../../StateMachine/PanicReset"), NodePath("../../StateMachine/Grab")])
+states = [NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Sprint"), NodePath("../../StateMachine/Summon"), NodePath("../../StateMachine/Stun"), NodePath("../../StateMachine/Panic"), NodePath("../../StateMachine/PanicReset"), NodePath("../../StateMachine/Grab")]
 
-[node name="DirectionSetter" parent="Abilities" index="3" node_paths=PackedStringArray("source_node", "player") instance=ExtResource("3_mqmtm")]
+[node name="DirectionSetter" parent="Abilities" index="3" node_paths=PackedStringArray("source_node", "player", "states") instance=ExtResource("3_mqmtm")]
 source_node = NodePath("../../Controllers/Synced")
 source_variable = "move_vector"
 player = NodePath("../..")
-_states = Array[NodePath]([NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Sprint"), NodePath("../../StateMachine/Panic"), NodePath("../../StateMachine/PanicReset")])
+states = [NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Sprint"), NodePath("../../StateMachine/Panic"), NodePath("../../StateMachine/PanicReset")]
 
-[node name="Grab" parent="Abilities" index="4" node_paths=PackedStringArray("grab_state", "raycast_parent", "player") instance=ExtResource("7_ao7e4")]
+[node name="Grab" parent="Abilities" index="4" node_paths=PackedStringArray("grab_state", "raycast_parent", "player", "states") instance=ExtResource("7_ao7e4")]
 grab_state = NodePath("../../StateMachine/Grab")
 raycast_parent = NodePath("../../RayCasts")
 player = NodePath("../..")
-_states = Array[NodePath]([NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Sprint")])
+states = [NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Sprint")]
 
-[node name="Invisible" parent="Abilities" index="5" node_paths=PackedStringArray("player") instance=ExtResource("9_lesqt")]
+[node name="Invisible" parent="Abilities" index="5" node_paths=PackedStringArray("player", "states") instance=ExtResource("9_lesqt")]
 player = NodePath("../..")
-_states = Array[NodePath]([NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Panic")])
+states = [NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Panic")]
 
-[node name="Sprint" parent="Abilities" index="6" node_paths=PackedStringArray("enter_state", "exit_state", "player") instance=ExtResource("5_bi4dw")]
+[node name="Sprint" parent="Abilities" index="6" node_paths=PackedStringArray("enter_state", "exit_state", "player", "states") instance=ExtResource("5_bi4dw")]
 action_name = "button_1"
 enter_state = NodePath("../../StateMachine/Sprint")
 exit_state = NodePath("../../StateMachine/Move")
 player = NodePath("../..")
-_states = Array[NodePath]([NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Sprint"), NodePath("../../StateMachine/Summon")])
+states = [NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Sprint"), NodePath("../../StateMachine/Summon")]
 
-[node name="Summon" parent="Abilities" index="7" node_paths=PackedStringArray("enter_state", "exit_state", "player") instance=ExtResource("5_bi4dw")]
+[node name="Summon" parent="Abilities" index="7" node_paths=PackedStringArray("enter_state", "exit_state", "player", "states") instance=ExtResource("5_bi4dw")]
 action_name = "button_2"
 enter_state = NodePath("../../StateMachine/Summon")
 exit_state = NodePath("../../StateMachine/Idle")
 player = NodePath("../..")
-_states = Array[NodePath]([NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Sprint"), NodePath("../../StateMachine/Summon")])
+states = [NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Sprint"), NodePath("../../StateMachine/Summon")]
 
 [node name="Controllers" type="Node2D" parent="." index="5"]
 

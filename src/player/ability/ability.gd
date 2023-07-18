@@ -3,10 +3,7 @@ extends Node2D
 
 
 @export var player: Player = null
-@export var _states: Array[NodePath] = []
-
-# https://github.com/godotengine/godot/issues/62916#issuecomment-1471750455
-@onready var states := _states.map(get_node)
+@export var states: Array[State] = []
 
 # _state_names is used in classes that extend Ability.
 @warning_ignore("unused_private_class_variable")

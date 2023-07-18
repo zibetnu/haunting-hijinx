@@ -27,36 +27,36 @@ move_speed = 30
 
 [node name="AnimationSetters" type="Node2D" parent="Abilities" index="0"]
 
-[node name="Dead" parent="Abilities/AnimationSetters" index="0" node_paths=PackedStringArray("player") instance=ExtResource("2_lwjsd")]
+[node name="Dead" parent="Abilities/AnimationSetters" index="0" node_paths=PackedStringArray("player", "states") instance=ExtResource("2_lwjsd")]
 animation_name = "dead"
 player = NodePath("../../..")
-_states = Array[NodePath]([NodePath("../../../StateMachine/Dead")])
+states = [NodePath("../../../StateMachine/Dead")]
 
-[node name="Idle" parent="Abilities/AnimationSetters" index="1" node_paths=PackedStringArray("player") instance=ExtResource("2_lwjsd")]
+[node name="Idle" parent="Abilities/AnimationSetters" index="1" node_paths=PackedStringArray("player", "states") instance=ExtResource("2_lwjsd")]
 animation_name = "idle"
 player = NodePath("../../..")
-_states = Array[NodePath]([NodePath("../../../StateMachine/Idle")])
+states = [NodePath("../../../StateMachine/Idle")]
 
-[node name="Move" parent="Abilities/AnimationSetters" index="2" node_paths=PackedStringArray("player") instance=ExtResource("2_lwjsd")]
+[node name="Move" parent="Abilities/AnimationSetters" index="2" node_paths=PackedStringArray("player", "states") instance=ExtResource("2_lwjsd")]
 animation_name = "move"
 player = NodePath("../../..")
-_states = Array[NodePath]([NodePath("../../../StateMachine/Move")])
+states = [NodePath("../../../StateMachine/Move")]
 
-[node name="AuraSense" parent="Abilities" index="1" node_paths=PackedStringArray("dead_exit_trigger", "player") instance=ExtResource("10_y8xbh")]
+[node name="AuraSense" parent="Abilities" index="1" node_paths=PackedStringArray("dead_exit_trigger", "player", "states") instance=ExtResource("10_y8xbh")]
 dead_exit_trigger = NodePath("../../StateMachine/Dead/ExitTrigger")
 player = NodePath("../..")
-_states = Array[NodePath]([NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move")])
+states = [NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move")]
 
-[node name="DirectionSetter" parent="Abilities" index="2" node_paths=PackedStringArray("source_node", "player") instance=ExtResource("3_phihg")]
+[node name="DirectionSetter" parent="Abilities" index="2" node_paths=PackedStringArray("source_node", "player", "states") instance=ExtResource("3_phihg")]
 source_node = NodePath("../../YSort/Flashlight/RotationToVector")
 source_variable = "vector"
 player = NodePath("../..")
-_states = Array[NodePath]([NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move")])
+states = [NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move")]
 
-[node name="Invulnerable" parent="Abilities" index="3" node_paths=PackedStringArray("dead_exit_trigger", "player") instance=ExtResource("6_fd4p3")]
+[node name="Invulnerable" parent="Abilities" index="3" node_paths=PackedStringArray("dead_exit_trigger", "player", "states") instance=ExtResource("6_fd4p3")]
 dead_exit_trigger = NodePath("../../StateMachine/Dead/ExitTrigger")
 player = NodePath("../..")
-_states = Array[NodePath]([NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move")])
+states = [NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move")]
 
 [node name="Controllers" type="Node2D" parent="." index="5"]
 
@@ -97,9 +97,9 @@ damage_handler = NodePath("../../DamageHandlers/InstantDeath")
 idle_state = NodePath("../Idle")
 damage_handler = NodePath("../../DamageHandlers/InstantDeath")
 
-[node name="Flashlight" parent="YSort" index="0" node_paths=PackedStringArray("player") instance=ExtResource("3_5tbkl")]
+[node name="Flashlight" parent="YSort" index="0" node_paths=PackedStringArray("player", "states") instance=ExtResource("3_5tbkl")]
 player = NodePath("../..")
-_states = Array[NodePath]([NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move")])
+states = [NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move")]
 
 [node name="RotationToVector" parent="YSort/Flashlight" index="4" node_paths=PackedStringArray("source_node") instance=ExtResource("12_tg1e4")]
 source_node = NodePath("..")
