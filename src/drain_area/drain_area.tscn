@@ -17,6 +17,7 @@ radius = 36.0
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/sync = true
+properties/0/watch = false
 
 [node name="DrainArea" type="Area2D"]
 z_index = -1

@@ -6,6 +6,7 @@
 properties/0/path = NodePath(".:charge")
 properties/0/spawn = true
 properties/0/sync = true
+properties/0/watch = false
 
 [node name="Summon" type="Node"]
 script = ExtResource("1_ytne7")

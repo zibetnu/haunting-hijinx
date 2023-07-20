@@ -9,6 +9,7 @@ radius = 8.0
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/sync = false
+properties/0/watch = false
 
 [node name="Item" type="Area2D"]
 collision_layer = 2

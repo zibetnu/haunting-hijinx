@@ -6,17 +6,21 @@
 properties/0/path = NodePath(".:peer_id")
 properties/0/spawn = true
 properties/0/sync = true
+properties/0/watch = false
 properties/1/path = NodePath("VBoxContainer/HBoxContainer/IDLabel:text")
 properties/1/spawn = true
 properties/1/sync = true
+properties/1/watch = false
 properties/2/path = NodePath("VBoxContainer/NameLabel:text")
 properties/2/spawn = true
 properties/2/sync = true
+properties/2/watch = false
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_opv0w"]
 properties/0/path = NodePath(".:text")
 properties/0/spawn = true
 properties/0/sync = true
+properties/0/watch = false
 
 [node name="PlayerCard" type="Panel"]
 custom_minimum_size = Vector2(180, 60)

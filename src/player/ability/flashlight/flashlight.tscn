@@ -11,12 +11,15 @@ radius = 8.0
 properties/0/path = NodePath(".:battery")
 properties/0/spawn = true
 properties/0/sync = true
+properties/0/watch = false
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/sync = true
+properties/1/watch = false
 properties/2/path = NodePath("Sprite2D:frame")
 properties/2/spawn = true
 properties/2/sync = true
+properties/2/watch = false
 
 [node name="Flashlight" type="Area2D" groups=["flashlights"]]
 y_sort_enabled = true
