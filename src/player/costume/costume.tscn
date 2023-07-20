@@ -6,6 +6,7 @@
 properties/0/path = NodePath("AnimationPlayer:current_animation")
 properties/0/spawn = true
 properties/0/sync = true
+properties/0/watch = false
 
 [node name="Costume" type="Node2D"]
 y_sort_enabled = true
