@@ -28,6 +28,7 @@ func handle_damage(source: DamageSource, affected_player: Player) -> void:
 	if multiplayer.is_server():
 		affected_player.health = affected_player.max_health
 		affected_player.state_machine.transition_to.rpc(revived_state.name)
+		player.revived.emit()
 
 
 func _on_player_died() -> void:
