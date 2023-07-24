@@ -36,7 +36,7 @@ shape = SubResource("CircleShape2D_b6far")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = ExtResource("2_hyikt")
-position = Vector2(24, 0)
+position = Vector2(21, 0)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_l7kel")
 hframes = 2
@@ -48,15 +48,15 @@ replication_config = SubResource("SceneReplicationConfig_wbqrx")
 [node name="RayCasts" type="Node2D" parent="."]
 
 [node name="RayCast2D" type="RayCast2D" parent="RayCasts"]
-target_position = Vector2(16, 0)
+target_position = Vector2(13, 0)
 collision_mask = 9
 
 [node name="RayCast2D2" type="RayCast2D" parent="RayCasts"]
 rotation = -0.174533
-target_position = Vector2(16, 0)
+target_position = Vector2(13, 0)
 collision_mask = 9
 
 [node name="RayCast2D3" type="RayCast2D" parent="RayCasts"]
 rotation = 0.174533
-target_position = Vector2(16, 0)
+target_position = Vector2(13, 0)
 collision_mask = 9
