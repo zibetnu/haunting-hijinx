@@ -7,6 +7,10 @@ z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_el04s")
 
+[node name="BatterySpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
 [node name="EndLabel" type="Label" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -45,3 +49,5 @@ text = "Hunters:
 - Revive dead hunters with your light
 - \"!\" will appear above your head when the ghost is near"
 autowrap_mode = 2
+
+[connection signal="timeout" from="BatterySpawnTimer" to="." method="_on_battery_spawn_timer_timeout"]

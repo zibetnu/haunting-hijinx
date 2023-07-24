@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bw11rdhjv3j62"]
+[gd_scene load_steps=9 format=3 uid="uid://bw11rdhjv3j62"]
 
 [ext_resource type="PackedScene" uid="uid://kdllrfca8fvn" path="res://src/item/item.tscn" id="1_mpplq"]
 [ext_resource type="Script" path="res://src/item/battery/battery.gd" id="2_0rfgm"]
-[ext_resource type="Texture2D" uid="uid://b3ocf1ud7ioc7" path="res://assets/battery.png" id="3_s8r6i"]
+[ext_resource type="Texture2D" uid="uid://b3ocf1ud7ioc7" path="res://assets/battery/battery.png" id="3_bermm"]
+[ext_resource type="AudioStream" uid="uid://g5tcldah12p3" path="res://assets/battery/battery_spawn.wav" id="4_q0qy0"]
 
 [sub_resource type="Animation" id="Animation_yccv2"]
 length = 0.001
@@ -41,6 +42,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, -16)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_nfhv7"]
@@ -87,6 +100,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [0.0, 0.785398, -0.523599, 0.261799, 0.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xkrf1"]
 _data = {
@@ -107,4 +132,7 @@ libraries = {
 [node name="Sprite2D" type="Sprite2D" parent="." index="3"]
 position = Vector2(0, -16)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_s8r6i")
+texture = ExtResource("3_bermm")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="4"]
+stream = ExtResource("4_q0qy0")

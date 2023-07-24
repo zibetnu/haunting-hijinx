@@ -1,8 +1,6 @@
 extends Ability
 
 
-signal battery_low
-
 const MAX_CAST_LENGTH = 24
 const FLASHLIGHT_BODY_PERCENTAGE = 0.25
 
@@ -42,9 +40,6 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	update_direction()
-
-	if percentage < low_percentage:
-		battery_low.emit()
 
 	var active := player.controller.is_action_pressed(action_name) and battery > 0
 	if multiplayer.is_server():
