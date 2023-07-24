@@ -4,7 +4,7 @@ extends DamageHandler
 @export var player: Player
 @export var revived_state: State
 @export var revives_with: DamageSource.Type
-@export var max_progress := 600
+@export var max_progress := 720
 
 
 var _progress := 0:

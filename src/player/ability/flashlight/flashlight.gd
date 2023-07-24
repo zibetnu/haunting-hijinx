@@ -5,7 +5,7 @@ const MAX_CAST_LENGTH = 24
 const FLASHLIGHT_BODY_PERCENTAGE = 0.25
 
 @export var action_name: String
-@export var max_battery := 1800
+@export var max_battery := 2580
 @export var battery := max_battery:
 	set(value):
 		battery = clamp(value, 0, max_battery)
@@ -16,8 +16,10 @@ const FLASHLIGHT_BODY_PERCENTAGE = 0.25
 		for raycast in $RayCasts.get_children():
 			raycast.target_position.x = _min_cast_length + MAX_CAST_LENGTH * percentage
 
-@export var low_percentage := 0.33
-@export var rotation_speed := PI / 60
+@export var low_percentage := 0.5
+@export var rotation_speed: float = (
+		2 * PI / ProjectSettings.get_setting("physics/common/physics_ticks_per_second")
+)
 @export var weak_to: DamageSource.Type
 
 var is_battery_low: bool:
@@ -80,7 +82,7 @@ func update_direction() -> void:
 
 
 func _on_player_revived() -> void:
-	battery = max_battery
+	battery = max_battery * 0.75
 
 
 func _get_colliders(raycast: RayCast2D) -> Array[Object]:
