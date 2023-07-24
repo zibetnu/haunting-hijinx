@@ -15,6 +15,7 @@ func change_scene_to_file(path: String) -> void:
 		return
 
 	$SceneContainer.add_child(load(path).instantiate(), true)
+	get_tree().paused = false
 
 
 func change_scene_to_packed(packed_scene: PackedScene) -> void:
@@ -23,6 +24,7 @@ func change_scene_to_packed(packed_scene: PackedScene) -> void:
 		return
 
 	$SceneContainer.add_child(packed_scene.instantiate(), true)
+	get_tree().paused = false
 
 
 func remove_scene() -> void:
