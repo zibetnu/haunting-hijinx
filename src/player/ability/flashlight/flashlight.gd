@@ -82,6 +82,7 @@ func update_direction() -> void:
 
 
 func _on_player_revived() -> void:
+	@warning_ignore("narrowing_conversion")
 	battery = max_battery * 0.75
 
 
