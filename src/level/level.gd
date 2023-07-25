@@ -70,10 +70,10 @@ func remove_player(id: int) -> void:
 func _end_match(message: String) -> void:
 		%EndLabel.text = message
 		%EndLabel.visible = true
-		get_tree().paused = true
 		if not multiplayer.is_server():
 			return
 
+		PauseManager.set_pause.rpc(true)
 		await get_tree().create_timer(3).timeout
 		SceneChanger.change_scene_to_packed(SceneChanger.lobby)
 
