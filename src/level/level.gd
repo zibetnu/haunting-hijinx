@@ -21,7 +21,6 @@ func _ready():
 	if not multiplayer.is_server():
 		return
 
-	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
 
 	# Spawn active players.
@@ -64,6 +63,7 @@ func remove_player(id: int) -> void:
 			_hunters_spawned -= 1
 
 		player.queue_free()
+		_on_player_died()
 
 
 @rpc("call_local", "reliable")
@@ -151,7 +151,9 @@ func _on_player_died() -> void:
 	if not multiplayer.is_server():
 		return
 
-	var player_is_dead := func(player: Player): return player.health == 0
+	var player_is_dead := func(player: Player):
+			return player.health == 0 or player.is_queued_for_deletion()
+
 	if get_tree().get_nodes_in_group("ghosts").all(player_is_dead):
 		_end_match.rpc("Hunters win!")
 
