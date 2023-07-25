@@ -67,7 +67,7 @@ func remove_player(id: int) -> void:
 
 
 @rpc("call_local", "reliable")
-func _end_game(message: String) -> void:
+func _end_match(message: String) -> void:
 		%EndLabel.text = message
 		%EndLabel.visible = true
 		get_tree().paused = true
@@ -142,13 +142,18 @@ func _on_battery_tree_exited() -> void:
 	_batteries_spawned -= 1
 
 
+func _on_match_timer_timeout() -> void:
+	if multiplayer.is_server():
+		_end_match.rpc("Draw!")
+
+
 func _on_player_died() -> void:
 	if not multiplayer.is_server():
 		return
 
 	var player_is_dead := func(player: Player): return player.health == 0
 	if get_tree().get_nodes_in_group("ghosts").all(player_is_dead):
-		_end_game.rpc("Hunters win!")
+		_end_match.rpc("Hunters win!")
 
 	elif get_tree().get_nodes_in_group("hunters").all(player_is_dead):
-		_end_game.rpc("Ghost wins!")
+		_end_match.rpc("Ghost wins!")
