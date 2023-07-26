@@ -16,7 +16,7 @@ radius = 36.0
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0jot6"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
-properties/0/sync = true
+properties/0/sync = false
 properties/0/watch = false
 
 [node name="DrainArea" type="Area2D"]
@@ -32,17 +32,27 @@ shape = SubResource("CircleShape2D_hg12p")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_0jot6")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.498039)
+texture = ExtResource("3_s6cxc")
+
+[node name="Foreground" type="Sprite2D" parent="."]
 material = ExtResource("3_gl06h")
 texture = ExtResource("3_s6cxc")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="IdleTimer" type="Timer" parent="."]
 process_callback = 0
 wait_time = 2.2
+one_shot = true
 autostart = true
+
+[node name="ActiveTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="ActiveTimer" to="." method="_on_active_timer_timeout"]
