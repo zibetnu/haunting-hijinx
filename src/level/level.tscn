@@ -1,7 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://gxh15sde0me5"]
+[gd_scene load_steps=4 format=3 uid="uid://gxh15sde0me5"]
 
 [ext_resource type="Script" path="res://src/level/level.gd" id="1_el04s"]
 [ext_resource type="PackedScene" uid="uid://chog7qk0d8wy7" path="res://src/timer_label/timer_label.tscn" id="2_tx202"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_63iby"]
+properties/0/path = NodePath("EndLabel:text")
+properties/0/spawn = true
+properties/0/sync = false
+properties/0/watch = true
+properties/1/path = NodePath("EndLabel:visible")
+properties/1/spawn = true
+properties/1/sync = false
+properties/1/watch = true
 
 [node name="Level" type="Node2D"]
 z_index = 1
@@ -34,6 +44,9 @@ y_sort_enabled = true
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://src/player/ghost.tscn", "res://src/player/hunter.tscn", "res://src/drain_area/drain_area.tscn")
 spawn_path = NodePath("../SpawnRoot")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_63iby")
 
 [node name="GhostTutorial" type="Label" parent="."]
 offset_left = 479.0
