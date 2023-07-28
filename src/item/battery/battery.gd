@@ -8,12 +8,8 @@ func _ready() -> void:
 
 
 func _acquirer_allowed(acquirer: Variant) -> bool:
-	return (
-			"battery" in acquirer
-			and "max_battery" in acquirer
-			and acquirer.battery < acquirer.max_battery
-	)
+	return "percentage" in acquirer and acquirer.percentage < 0.9
 
 
 func _on_acquired(acquirer: Variant) -> void:
-	acquirer.battery = acquirer.max_battery
+	acquirer.percentage = 1

@@ -9,6 +9,7 @@ signal revived
 @export var controller: Controller
 @export var costume: Costume
 @export var max_health := 100
+@export var modifier_manager: ModifierManager
 @export var move_speed := 40
 @export var peer_id := 1:
 	set(value):

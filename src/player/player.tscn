@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bavgk282m5ngb"]
+[gd_scene load_steps=11 format=3 uid="uid://bavgk282m5ngb"]
 
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_6v2a1"]
 [ext_resource type="PackedScene" uid="uid://dc4575e1liaov" path="res://src/player/peer_name_label/peer_name_label.tscn" id="2_0jtls"]
 [ext_resource type="PackedScene" uid="uid://cu76mf12xkeww" path="res://src/player/state_machine/state_machine.tscn" id="2_l2pty"]
+[ext_resource type="PackedScene" uid="uid://dwdii6bjahb54" path="res://src/player/modifier_manager/modifier_manager.tscn" id="4_s5jpx"]
 [ext_resource type="PackedScene" uid="uid://bs6cq3kw7xr4r" path="res://src/player/state_machine/state/dead/dead.tscn" id="5_3okmj"]
 [ext_resource type="PackedScene" uid="uid://begje6fek7jf4" path="res://src/player/state_machine/state/idle/idle.tscn" id="6_1tjkj"]
 [ext_resource type="PackedScene" uid="uid://sl14guycomx6" path="res://src/player/state_machine/state/move/move.tscn" id="6_o4bwf"]
@@ -29,11 +30,12 @@ properties/3/spawn = true
 properties/3/sync = true
 properties/3/watch = false
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine") groups=["players"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("modifier_manager", "state_machine") groups=["players"]]
 collision_layer = 0
 collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_6v2a1")
+modifier_manager = NodePath("ModifierManager")
 state_machine = NodePath("StateMachine")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -57,6 +59,9 @@ z_index = 1
 offset_top = 8.0
 offset_bottom = 34.0
 state_machine = NodePath("../StateMachine")
+
+[node name="ModifierManager" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_s5jpx")]
+player = NodePath("..")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("player", "state") instance=ExtResource("2_l2pty")]
 player = NodePath("..")
