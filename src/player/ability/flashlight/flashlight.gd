@@ -50,7 +50,9 @@ func _physics_process(delta: float) -> void:
 	_update_direction(delta)
 
 	var active := player.controller.is_action_pressed(action_name) and battery > 0
-	$Sprite2D.frame = int(active)
+	if multiplayer.is_server():
+		$Sprite2D.frame = int(active)
+
 	if not active:
 		player.modifier_manager.remove_modifier(active_modifier)
 		return
