@@ -6,9 +6,16 @@ signal died
 signal peer_id_changed(id: int)
 signal revived
 
+
+const AXIS_BITS = 32  # The x and y axis get 32 bits each when serialized.
+# Multiplying the axis value by AXIS_MULTIPLIER preserves some of the decimal
+# places at the cost of having a lower max value.
+const AXIS_MULTIPLIER = (2.0**32 - 1) / 6400
+const AXIS_MASK = 0xff_ff_ff_ff
+
 @export var controller: Controller
 @export var costume: Costume
-@export var max_health := 100
+@export var health_time := 10
 @export var modifier_manager: ModifierManager
 @export var move_speed := 40
 @export var peer_id := 1:
@@ -21,18 +28,23 @@ signal revived
 
 @export var state_machine: StateMachine
 
-var position_public_visibility := true:
-	set(value):
-		position_public_visibility = value
-		if multiplayer.is_server() and value:
-			sync_position.rpc(position)
-
-@onready var health := max_health:
+var health := max_health:
 	set(value):
 		var old_health := health
 		health = clampi(value, 0, max_health)
 		if old_health > 0 and health == 0:
 			died.emit()
+
+var max_health: int:
+	get:
+		return (health_time
+				* ProjectSettings.get_setting("physics/common/physics_ticks_per_second"))
+
+var position_public_visibility := true:
+	set(value):
+		position_public_visibility = value
+		if multiplayer.is_server() and value:
+			sync_position.rpc(_serialize_position(position))
 
 
 func sync_move_and_slide() -> bool:
@@ -41,18 +53,32 @@ func sync_move_and_slide() -> bool:
 		return result
 
 	if position_public_visibility:
-		sync_position.rpc(position)
+		sync_position.rpc(_serialize_position(position))
 
 	elif peer_id != 1:
-		sync_position.rpc_id(controller.peer_id, position)
+		sync_position.rpc_id(controller.peer_id, _serialize_position(position))
 
 	return result
 
 
 @rpc("unreliable_ordered")
-func sync_position(value: Vector2) -> void:
-	position = value
+func sync_position(serialized_position: int) -> void:
+	position = _unserialize_position(serialized_position)
 
 
 func take_damage(source: DamageSource) -> void:
 	$StateMachine.handle_damage(source)
+
+
+func _serialize_position(unserialized_position: Vector2) -> int:
+	var serialized_position := 0
+	serialized_position |= roundi(unserialized_position.x * AXIS_MULTIPLIER)
+	serialized_position |= roundi(unserialized_position.y * AXIS_MULTIPLIER) << AXIS_BITS
+	return serialized_position
+
+
+func _unserialize_position(serialized_position: int) -> Vector2:
+	return Vector2(
+			float(serialized_position & AXIS_MASK) / AXIS_MULTIPLIER,
+			float((serialized_position & (AXIS_MASK << AXIS_BITS)) >> AXIS_BITS) / AXIS_MULTIPLIER
+	)

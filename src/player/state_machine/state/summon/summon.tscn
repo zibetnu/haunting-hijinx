@@ -1,15 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://deglrps8484y8"]
+[gd_scene load_steps=2 format=3 uid="uid://deglrps8484y8"]
 
 [ext_resource type="Script" path="res://src/player/state_machine/state/summon/summon.gd" id="1_ytne7"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_u8gig"]
-properties/0/path = NodePath(".:charge")
-properties/0/spawn = true
-properties/0/sync = true
-properties/0/watch = false
-
 [node name="Summon" type="Node"]
 script = ExtResource("1_ytne7")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_u8gig")

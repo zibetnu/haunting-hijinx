@@ -5,16 +5,16 @@
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wemvv"]
 properties/0/path = NodePath(".:peer_id")
 properties/0/spawn = true
-properties/0/sync = true
-properties/0/watch = false
+properties/0/sync = false
+properties/0/watch = true
 properties/1/path = NodePath("VBoxContainer/HBoxContainer/IDLabel:text")
 properties/1/spawn = true
-properties/1/sync = true
-properties/1/watch = false
+properties/1/sync = false
+properties/1/watch = true
 properties/2/path = NodePath("VBoxContainer/NameLabel:text")
 properties/2/spawn = true
-properties/2/sync = true
-properties/2/watch = false
+properties/2/sync = false
+properties/2/watch = true
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_opv0w"]
 properties/0/path = NodePath(".:text")
@@ -30,6 +30,7 @@ size_flags_horizontal = 3
 script = ExtResource("1_aanr4")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+delta_interval = 1.0
 replication_config = SubResource("SceneReplicationConfig_wemvv")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
