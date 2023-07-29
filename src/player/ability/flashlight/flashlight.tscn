@@ -11,16 +11,16 @@ radius = 8.0
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wbqrx"]
 properties/0/path = NodePath(".:battery")
 properties/0/spawn = true
-properties/0/sync = true
-properties/0/watch = false
+properties/0/sync = false
+properties/0/watch = true
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
-properties/1/sync = true
-properties/1/watch = false
+properties/1/sync = false
+properties/1/watch = true
 properties/2/path = NodePath("Sprite2D:frame")
 properties/2/spawn = true
-properties/2/sync = true
-properties/2/watch = false
+properties/2/sync = false
+properties/2/watch = true
 
 [node name="Flashlight" type="Area2D" node_paths=PackedStringArray("active_modifier") groups=["flashlights"]]
 y_sort_enabled = true

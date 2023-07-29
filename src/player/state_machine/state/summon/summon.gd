@@ -1,13 +1,18 @@
 extends State
 
 
+@export var charge_time := 4
 @export var exit_state: State
-@export var max_charge := 240
 @export var summon_scene: PackedScene
 
 var charge := 0:
 	set(new_charge):
 		charge = clampi(new_charge, 0, max_charge)
+
+var max_charge: int:
+	get:
+		return (charge_time
+				* ProjectSettings.get_setting("physics/common/physics_ticks_per_second"))
 
 
 func physics_update(_delta: float) -> void:

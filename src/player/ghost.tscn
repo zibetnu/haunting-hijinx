@@ -26,7 +26,6 @@ collision_layer = 8
 collision_mask = 3
 controller = NodePath("Controllers/Synced")
 costume = NodePath("YSort/PlaceholderCostume")
-max_health = 600
 move_speed = 46
 
 [node name="Abilities" type="Node2D" parent="." index="4"]
