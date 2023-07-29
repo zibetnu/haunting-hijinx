@@ -8,7 +8,9 @@ func _process(_delta: float) -> void:
 	move_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
 	if _mouse_active:
-		look_vector = Vector2.from_angle(global_position.angle_to_point(get_global_mouse_position()))
+		look_vector = Vector2.from_angle(
+				global_position.angle_to_point(get_global_mouse_position())
+		)
 
 	else:
 		look_vector = Vector2.ZERO
