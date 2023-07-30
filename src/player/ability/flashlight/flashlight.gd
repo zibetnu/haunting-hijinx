@@ -104,6 +104,7 @@ func _on_player_revived() -> void:
 
 func _on_player_state_machine_transitioned(state_name: String) -> void:
 	var active := state_name in _state_names
+	$CollisionShape2D.disabled = not active
 	set_physics_process(active)
 	if not active:
 		$Sprite2D.frame = 0
