@@ -21,6 +21,7 @@ func _ready():
 	if not multiplayer.is_server():
 		return
 
+	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(remove_player)
 
 	# Spawn active players.
@@ -154,3 +155,12 @@ func _on_player_died() -> void:
 
 	elif get_tree().get_nodes_in_group("hunters").all(player_is_dead):
 		_end_match("Ghost wins!")
+
+
+func _on_peer_connected(id: int) -> void:
+	_sync_timer.rpc_id(id, $MatchTimer.time_left)
+
+
+@rpc
+func _sync_timer(time_left: float) -> void:
+	$MatchTimer.start(time_left)
