@@ -21,7 +21,7 @@ func _ready():
 	if not multiplayer.is_server():
 		return
 
-	multiplayer.peer_connected.connect(add_player)
+	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(remove_player)
 
 	# Spawn active players.
@@ -64,15 +64,16 @@ func remove_player(id: int) -> void:
 			_hunters_spawned -= 1
 
 		player.queue_free()
+		_on_player_died()
 
 
-@rpc("call_local", "reliable")
-func _end_game(message: String) -> void:
+func _end_match(message: String) -> void:
 		%EndLabel.text = message
 		%EndLabel.visible = true
 		if not multiplayer.is_server():
 			return
 
+		PauseManager.set_pause.rpc(true)
 		await get_tree().create_timer(3).timeout
 		SceneChanger.change_scene_to_packed(SceneChanger.lobby)
 
@@ -141,13 +142,25 @@ func _on_battery_tree_exited() -> void:
 	_batteries_spawned -= 1
 
 
-func _on_player_died() -> void:
-	if not multiplayer.is_server():
-		return
+func _on_match_timer_timeout() -> void:
+	_end_match("Draw!")
 
-	var player_is_dead := func(player: Player): return player.health == 0
+
+func _on_player_died() -> void:
+	var player_is_dead := func(player: Player):
+			return player.health == 0 or player.is_queued_for_deletion()
+
 	if get_tree().get_nodes_in_group("ghosts").all(player_is_dead):
-		_end_game.rpc("Hunters win!")
+		_end_match("Hunters win!")
 
 	elif get_tree().get_nodes_in_group("hunters").all(player_is_dead):
-		_end_game.rpc("Ghost wins!")
+		_end_match("Ghost wins!")
+
+
+func _on_peer_connected(id: int) -> void:
+	_sync_timer.rpc_id(id, $MatchTimer.time_left)
+
+
+@rpc
+func _sync_timer(time_left: float) -> void:
+	$MatchTimer.start(time_left)

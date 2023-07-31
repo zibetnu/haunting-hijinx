@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dxofrnlm2yidj" path="res://src/player/ability/invisible/invisible.tscn" id="9_lesqt"]
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="10_dq2x2"]
 [ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="12_iuly0"]
-[ext_resource type="PackedScene" path="res://src/player/damage_handler/standard/stunnable/stunnable.tscn" id="13_742x4"]
+[ext_resource type="PackedScene" uid="uid://2hyqex1r6vhj" path="res://src/player/damage_handler/standard/stunnable/stunnable.tscn" id="13_742x4"]
 [ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="15_vo03g"]
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="16_k7qd8"]
 [ext_resource type="PackedScene" uid="uid://cdk2uf7ebeu5u" path="res://src/player/state_machine/state/timed_state/panic/panic.tscn" id="17_8tcsn"]
@@ -26,8 +26,7 @@ collision_layer = 8
 collision_mask = 3
 controller = NodePath("Controllers/Synced")
 costume = NodePath("YSort/PlaceholderCostume")
-max_health = 600
-move_speed = 50
+move_speed = 46
 
 [node name="Abilities" type="Node2D" parent="." index="4"]
 
@@ -194,7 +193,7 @@ damage_handler = NodePath("../../DamageHandlers/Stunnable")
 
 [node name="Sprint" parent="StateMachine" index="3" node_paths=PackedStringArray("idle_state", "damage_handler") instance=ExtResource("2_jq5ho")]
 idle_state = NodePath("../Idle")
-speed_multiplier = 1.8
+speed_multiplier = 1.33
 damage_handler = NodePath("../../DamageHandlers/Stunnable")
 
 [node name="Summon" parent="StateMachine" index="4" node_paths=PackedStringArray("exit_state", "damage_handler") instance=ExtResource("3_n6o1l")]
@@ -217,7 +216,6 @@ damage_handler = NodePath("../../DamageHandlers/Standard")
 
 [node name="Grab" parent="StateMachine" index="8" node_paths=PackedStringArray("exit_state", "damage_handler") instance=ExtResource("5_gv08g")]
 exit_state = NodePath("../Panic")
-state_time = 2.0
 damage_handler = NodePath("../../DamageHandlers/Stunnable")
 
 [node name="PlaceholderCostume" parent="YSort" index="0" instance=ExtResource("20_mg6na")]

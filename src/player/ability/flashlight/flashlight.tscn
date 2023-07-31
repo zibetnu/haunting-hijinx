@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dyev6t6l5ykdp"]
+[gd_scene load_steps=7 format=3 uid="uid://dyev6t6l5ykdp"]
 
 [ext_resource type="Script" path="res://src/player/ability/flashlight/flashlight.gd" id="1_s0dbb"]
+[ext_resource type="PackedScene" uid="uid://ckw6ix6uyke2j" path="res://src/player/modifier_manager/modifier/speed_multiplier/speed_multiplier.tscn" id="2_7te73"]
 [ext_resource type="Material" uid="uid://8oo13typkhrt" path="res://src/shaders/multi_frame_wipe/multi_frame_wipe.tres" id="2_hyikt"]
 [ext_resource type="Texture2D" uid="uid://cwjmhpmygymjj" path="res://assets/flashlight/flashlight_upscaled.png" id="3_l7kel"]
 
@@ -10,24 +11,25 @@ radius = 8.0
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wbqrx"]
 properties/0/path = NodePath(".:battery")
 properties/0/spawn = true
-properties/0/sync = true
-properties/0/watch = false
+properties/0/sync = false
+properties/0/watch = true
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
-properties/1/sync = true
-properties/1/watch = false
+properties/1/sync = false
+properties/1/watch = true
 properties/2/path = NodePath("Sprite2D:frame")
 properties/2/spawn = true
-properties/2/sync = true
-properties/2/watch = false
+properties/2/sync = false
+properties/2/watch = true
 
-[node name="Flashlight" type="Area2D" groups=["flashlights"]]
+[node name="Flashlight" type="Area2D" node_paths=PackedStringArray("active_modifier") groups=["flashlights"]]
 y_sort_enabled = true
 position = Vector2(0, -8)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_s0dbb")
 action_name = "button_1"
+active_modifier = NodePath("SpeedMultiplier")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.38419e-07, -8.9407e-08)
@@ -36,7 +38,7 @@ shape = SubResource("CircleShape2D_b6far")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = ExtResource("2_hyikt")
-position = Vector2(24, 0)
+position = Vector2(21, 0)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_l7kel")
 hframes = 2
@@ -48,15 +50,21 @@ replication_config = SubResource("SceneReplicationConfig_wbqrx")
 [node name="RayCasts" type="Node2D" parent="."]
 
 [node name="RayCast2D" type="RayCast2D" parent="RayCasts"]
-target_position = Vector2(16, 0)
+target_position = Vector2(13, 0)
 collision_mask = 9
+hit_from_inside = true
 
 [node name="RayCast2D2" type="RayCast2D" parent="RayCasts"]
 rotation = -0.174533
-target_position = Vector2(16, 0)
+target_position = Vector2(13, 0)
 collision_mask = 9
+hit_from_inside = true
 
 [node name="RayCast2D3" type="RayCast2D" parent="RayCasts"]
 rotation = 0.174533
-target_position = Vector2(16, 0)
+target_position = Vector2(13, 0)
 collision_mask = 9
+hit_from_inside = true
+
+[node name="SpeedMultiplier" parent="." instance=ExtResource("2_7te73")]
+multiplier = 0.43

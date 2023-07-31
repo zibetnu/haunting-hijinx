@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://gxh15sde0me5"]
+[gd_scene load_steps=4 format=3 uid="uid://gxh15sde0me5"]
 
 [ext_resource type="Script" path="res://src/level/level.gd" id="1_el04s"]
+[ext_resource type="PackedScene" uid="uid://chog7qk0d8wy7" path="res://src/timer_label/timer_label.tscn" id="2_tx202"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_63iby"]
+properties/0/path = NodePath("EndLabel:text")
+properties/0/spawn = true
+properties/0/sync = false
+properties/0/watch = true
+properties/1/path = NodePath("EndLabel:visible")
+properties/1/spawn = true
+properties/1/sync = false
+properties/1/watch = true
 
 [node name="Level" type="Node2D"]
 z_index = 1
@@ -9,6 +20,11 @@ script = ExtResource("1_el04s")
 
 [node name="BatterySpawnTimer" type="Timer" parent="."]
 wait_time = 5.0
+autostart = true
+
+[node name="MatchTimer" type="Timer" parent="."]
+wait_time = 300.0
+one_shot = true
 autostart = true
 
 [node name="EndLabel" type="Label" parent="."]
@@ -28,6 +44,9 @@ y_sort_enabled = true
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://src/player/ghost.tscn", "res://src/player/hunter.tscn", "res://src/drain_area/drain_area.tscn")
 spawn_path = NodePath("../SpawnRoot")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_63iby")
 
 [node name="GhostTutorial" type="Label" parent="."]
 offset_left = 479.0
@@ -50,4 +69,10 @@ text = "Hunters:
 - \"!\" will appear above your head when the ghost is near"
 autowrap_mode = 2
 
+[node name="TimerLabel" parent="." node_paths=PackedStringArray("timer") instance=ExtResource("2_tx202")]
+offset_right = 640.0
+horizontal_alignment = 1
+timer = NodePath("../MatchTimer")
+
 [connection signal="timeout" from="BatterySpawnTimer" to="." method="_on_battery_spawn_timer_timeout"]
+[connection signal="timeout" from="MatchTimer" to="." method="_on_match_timer_timeout"]

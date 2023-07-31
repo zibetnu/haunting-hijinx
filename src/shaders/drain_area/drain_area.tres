@@ -8,11 +8,11 @@
 noise = SubResource("FastNoiseLite_kl64r")
 
 [resource]
+resource_local_to_scene = true
 shader = ExtResource("1_yj0ap")
-shader_parameter/amplitude = 2.0
-shader_parameter/frequency = 4.0
-shader_parameter/rippleRate = 6.0
-shader_parameter/waveAmplitude = 0.1
-shader_parameter/waveFrequency = 4.0
-shader_parameter/blendingAmount = 0.6
+shader_parameter/amplitude = 1.0
+shader_parameter/frequency = -4.0
+shader_parameter/ripple_rate = 6.0
+shader_parameter/wave_amplitude = 0.1
+shader_parameter/wave_frequency = 4.0
 shader_parameter/noise = SubResource("NoiseTexture2D_a450e")
