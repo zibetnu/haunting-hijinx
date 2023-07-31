@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://buivgkhedx08a"]
+
+[ext_resource type="Script" path="res://src/player/ability/condition_transition/condition_transition.gd" id="1_gqwvv"]
+
+[node name="ConditionTransition" type="Node2D"]
+script = ExtResource("1_gqwvv")

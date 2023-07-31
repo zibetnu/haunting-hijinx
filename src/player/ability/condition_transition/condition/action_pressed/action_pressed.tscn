@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://btr8qn664xh5t"]
+
+[ext_resource type="Script" path="res://src/player/ability/condition_transition/condition/action_pressed/action_pressed.gd" id="1_d8tgo"]
+
+[node name="ActionPressed" type="Node"]
+script = ExtResource("1_d8tgo")
