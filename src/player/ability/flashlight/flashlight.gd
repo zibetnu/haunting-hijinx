@@ -14,9 +14,9 @@ const MAX_CAST_LENGTH = 24
 var battery := max_battery:
 	set(value):
 		battery = clamp(value, 0, max_battery)
-		$Sprite2D.material.set_shader_parameter("percentage",
+		_sprite.material.set_shader_parameter("percentage",
 				FLASHLIGHT_BODY_PERCENTAGE + (1.0 - FLASHLIGHT_BODY_PERCENTAGE) * percentage)
-		for raycast in $RayCasts.get_children():
+		for raycast in _raycast_parent.get_children():
 			raycast.target_position.x = _min_cast_length + MAX_CAST_LENGTH * percentage
 
 var is_battery_low: bool:
@@ -36,13 +36,16 @@ var percentage: float:
 		@warning_ignore("narrowing_conversion")
 		battery = max_battery * value
 
-@onready var _min_cast_length = $RayCasts.get_children()[0].target_position.x
+@onready var _min_cast_length = $RotationNode/RayCasts.get_children()[0].target_position.x
+@onready var _raycast_parent := $RotationNode/RayCasts
+@onready var _rotation_node := $RotationNode
+@onready var _sprite := $RotationNode/Sprite2D
 
 
 func _ready() -> void:
 	super()
 	player.revived.connect(_on_player_revived)
-	for raycast in $RayCasts.get_children():
+	for raycast in _raycast_parent.get_children():
 		raycast.add_exception(player)
 
 
@@ -51,7 +54,7 @@ func _physics_process(delta: float) -> void:
 
 	var active := player.controller.is_action_pressed(action_name) and battery > 0
 	if multiplayer.is_server():
-		$Sprite2D.frame = int(active)
+		_sprite.frame = int(active)
 
 	if not active:
 		player.modifier_manager.remove_modifier(active_modifier)
@@ -60,7 +63,7 @@ func _physics_process(delta: float) -> void:
 	player.modifier_manager.add_modifier(active_modifier)
 	battery -= 1
 	var colliders := []
-	for raycast in $RayCasts.get_children():
+	for raycast in _raycast_parent.get_children():
 		colliders += _get_colliders(raycast)
 
 	var processed_colliders := []
@@ -107,7 +110,7 @@ func _on_player_state_machine_transitioned(state_name: String) -> void:
 	$CollisionShape2D.disabled = not active
 	set_physics_process(active)
 	if not active:
-		$Sprite2D.frame = 0
+		_sprite.frame = 0
 
 
 func _update_direction(delta: float) -> void:
@@ -115,5 +118,5 @@ func _update_direction(delta: float) -> void:
 	if look_vector == Vector2.ZERO:
 		return
 
-	var angle_to := Vector2.from_angle(rotation).angle_to(look_vector)
-	rotation += clamp(angle_to, -turn_speed * delta, turn_speed * delta)
+	var angle_to := Vector2.from_angle(_rotation_node.rotation).angle_to(look_vector)
+	_rotation_node.rotation += clamp(angle_to, -turn_speed * delta, turn_speed * delta)
