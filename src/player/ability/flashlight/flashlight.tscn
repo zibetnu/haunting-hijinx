@@ -52,16 +52,19 @@ replication_config = SubResource("SceneReplicationConfig_wbqrx")
 [node name="RayCast2D" type="RayCast2D" parent="RayCasts"]
 target_position = Vector2(13, 0)
 collision_mask = 9
+hit_from_inside = true
 
 [node name="RayCast2D2" type="RayCast2D" parent="RayCasts"]
 rotation = -0.174533
 target_position = Vector2(13, 0)
 collision_mask = 9
+hit_from_inside = true
 
 [node name="RayCast2D3" type="RayCast2D" parent="RayCasts"]
 rotation = 0.174533
 target_position = Vector2(13, 0)
 collision_mask = 9
+hit_from_inside = true
 
 [node name="SpeedMultiplier" parent="." instance=ExtResource("2_7te73")]
 multiplier = 0.43
