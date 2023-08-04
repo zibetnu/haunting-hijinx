@@ -103,5 +103,6 @@ states = [NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move
 
 [node name="RotationToVector" parent="YSort/Flashlight" index="4" node_paths=PackedStringArray("source_node") instance=ExtResource("12_tg1e4")]
 source_node = NodePath("..")
+source_variable = "flashlight_rotation"
 
 [node name="PlaceholderCostume" parent="YSort" index="1" instance=ExtResource("12_iit4a")]

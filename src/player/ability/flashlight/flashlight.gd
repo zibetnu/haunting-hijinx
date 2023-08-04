@@ -19,6 +19,13 @@ var battery := max_battery:
 		for raycast in _raycast_parent.get_children():
 			raycast.target_position.x = _min_cast_length + MAX_CAST_LENGTH * percentage
 
+var flashlight_rotation: float:
+	get:
+		return $RotationNode.rotation
+
+	set(value):
+		$RotationNode.rotation = value
+
 var is_battery_low: bool:
 	get:
 		return percentage < low_percentage
@@ -38,7 +45,6 @@ var percentage: float:
 
 @onready var _min_cast_length = $RotationNode/RayCasts.get_children()[0].target_position.x
 @onready var _raycast_parent := $RotationNode/RayCasts
-@onready var _rotation_node := $RotationNode
 @onready var _sprite := $RotationNode/Sprite2D
 
 
@@ -118,5 +124,5 @@ func _update_direction(delta: float) -> void:
 	if look_vector == Vector2.ZERO:
 		return
 
-	var angle_to := Vector2.from_angle(_rotation_node.rotation).angle_to(look_vector)
-	_rotation_node.rotation += clamp(angle_to, -turn_speed * delta, turn_speed * delta)
+	var angle_to := Vector2.from_angle(flashlight_rotation).angle_to(look_vector)
+	flashlight_rotation += clamp(angle_to, -turn_speed * delta, turn_speed * delta)
