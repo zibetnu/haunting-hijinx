@@ -1,7 +1,7 @@
 extends Ability
 
 
-@export var duration := 5.0
+@export var duration := 4.0
 @export var dead_exit_trigger: ExitTrigger
 @export var player_alpha := 1.0:
 	get:
