@@ -21,6 +21,8 @@ var direction_vector := Vector2.DOWN:
 		direction_vector = value
 		_update_animation()
 
+@onready var _animation_player := $AnimationPlayer
+
 
 func _get_direction_name(direction: Vector2) -> String:
 	var distance := 2 * PI
@@ -38,16 +40,19 @@ func _update_animation() -> bool:
 			animation_name, _get_direction_name(direction_vector)
 	]
 
-	if directional_animation_name == $AnimationPlayer.current_animation:
-		return true
+	for library_name in _animation_player.get_animation_library_list():
+		var library: AnimationLibrary = _animation_player.get_animation_library(library_name)
+		var lib_directional_animation_name := "%s/%s" % [library_name, directional_animation_name]
+		if lib_directional_animation_name == _animation_player.current_animation:
+			return true
 
-	if $AnimationPlayer.has_animation(directional_animation_name):
-		$AnimationPlayer.play(directional_animation_name)
-		return true
+		if library.has_animation(directional_animation_name):
+			_animation_player.play(lib_directional_animation_name)
+			return true
 
-	if $AnimationPlayer.has_animation(animation_name):
-		$AnimationPlayer.play(animation_name)
-		return true
+		if library.has_animation(animation_name):
+			_animation_player.play("%s/%s" % [library_name, animation_name])
+			return true
 
 	return false
 

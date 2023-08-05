@@ -46,6 +46,7 @@ func add_player(id: int) -> void:
 		].position
 		_hunters_spawned += 1
 
+	instance.camera_limits = $LevelLimit.position
 	instance.peer_id = id
 	instance.name += str(id)
 	instance.died.connect(_on_player_died)
@@ -87,7 +88,7 @@ func _get_random_battery_position() -> Vector2:
 
 func _is_position_clear(check_position: Vector2) -> bool:
 	var shape_rid := PhysicsServer2D.circle_shape_create()
-	var radius := 8 * 0.99  # A slightly smaller check makes spawning in hallways easier.
+	var radius := 8
 	PhysicsServer2D.shape_set_data(shape_rid, radius)
 
 	var parameters := PhysicsShapeQueryParameters2D.new()

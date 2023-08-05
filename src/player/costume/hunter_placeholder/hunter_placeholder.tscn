@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ifwrxny1pnn5"]
+
+[ext_resource type="PackedScene" uid="uid://brsavqoymiyc5" path="res://src/player/costume/costume.tscn" id="1_wgowv"]
+[ext_resource type="Texture2D" uid="uid://bodheb38fir20" path="res://assets/placeholder_sprite.png" id="2_jq0yn"]
+
+[node name="HunterPlaceholder" instance=ExtResource("1_wgowv")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="2"]
+position = Vector2(0, -8)
+texture = ExtResource("2_jq0yn")
+hframes = 4
+vframes = 3
+frame = 7
