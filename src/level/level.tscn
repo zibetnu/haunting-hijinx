@@ -4,11 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://chog7qk0d8wy7" path="res://src/timer_label/timer_label.tscn" id="2_tx202"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_63iby"]
-properties/0/path = NodePath("EndLabel:text")
+properties/0/path = NodePath("CanvasLayer/EndLabel:text")
 properties/0/spawn = true
 properties/0/sync = false
 properties/0/watch = true
-properties/1/path = NodePath("EndLabel:visible")
+properties/1/path = NodePath("CanvasLayer/EndLabel:visible")
 properties/1/spawn = true
 properties/1/sync = false
 properties/1/watch = true
@@ -27,17 +27,6 @@ wait_time = 300.0
 one_shot = true
 autostart = true
 
-[node name="EndLabel" type="Label" parent="."]
-unique_name_in_owner = true
-visible = false
-z_index = 1
-offset_right = 640.0
-offset_bottom = 360.0
-theme_override_font_sizes/font_size = 32
-text = "end message"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="SpawnRoot" type="Node2D" parent="."]
 y_sort_enabled = true
 
@@ -48,31 +37,41 @@ spawn_path = NodePath("../SpawnRoot")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_63iby")
 
-[node name="GhostTutorial" type="Label" parent="."]
-offset_left = 479.0
-offset_right = 640.0
-offset_bottom = 260.0
-text = "Ghost:
-- Kill all the hunters
-- Avoid their flashlights
-- Use your invisibility to your advantage
-- Sprint to conspicuously get around
-- Summon a drain area to break up campers"
-autowrap_mode = 2
+[node name="LevelLimit" type="Marker2D" parent="."]
+position = Vector2(640, 360)
 
-[node name="HunterTutorial" type="Label" parent="."]
-offset_right = 161.0
-offset_bottom = 260.0
-text = "Hunters:
-- Hit the ghost with your light
-- Revive dead hunters with your light
-- \"!\" will appear above your head when the ghost is near"
-autowrap_mode = 2
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="TimerLabel" parent="." node_paths=PackedStringArray("timer") instance=ExtResource("2_tx202")]
-offset_right = 640.0
+[node name="EndLabel" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.0
+offset_top = -24.0
+offset_right = 101.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "end message"
 horizontal_alignment = 1
-timer = NodePath("../MatchTimer")
+vertical_alignment = 1
+
+[node name="TimerLabel" parent="CanvasLayer" node_paths=PackedStringArray("timer") instance=ExtResource("2_tx202")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -16.0
+offset_right = 16.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+horizontal_alignment = 1
+timer = NodePath("../../MatchTimer")
 
 [connection signal="timeout" from="BatterySpawnTimer" to="." method="_on_battery_spawn_timer_timeout"]
 [connection signal="timeout" from="MatchTimer" to="." method="_on_match_timer_timeout"]

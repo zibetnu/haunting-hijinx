@@ -3,7 +3,7 @@ shader_type canvas_item;
 // Supports wiping sprites that have multiple frames.
 // Taken from https://godotshaders.com/shader/multi-frame-wipe/.
 
-uniform float percentage: hint_range(0, 1, 0.01);
+uniform float percentage: hint_range(0, 1, 0.001);
 uniform float hidden_alpha: hint_range(0, 1, 0.01) = 0;
 
 uniform bool horizontal = false;

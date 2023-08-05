@@ -1,8 +1,8 @@
 extends Ability
 
 
-const FLASHLIGHT_BODY_PERCENTAGE = 0.25
-const MAX_CAST_LENGTH = 24
+const FLASHLIGHT_BODY_PERCENTAGE = 0.142
+const MAX_CAST_LENGTH = 48
 
 @export var action_name: String
 @export var active_modifier: Modifier
