@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://q4hv30obsxd1"]
+[gd_scene load_steps=27 format=3 uid="uid://q4hv30obsxd1"]
 
 [ext_resource type="PackedScene" uid="uid://bavgk282m5ngb" path="res://src/player/player.tscn" id="1_d2bpu"]
 [ext_resource type="PackedScene" uid="uid://sl14guycomx6" path="res://src/player/state_machine/state/move/move.tscn" id="2_jq5ho"]
@@ -10,7 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://buivgkhedx08a" path="res://src/player/ability/condition_transition/condition_transition.tscn" id="5_bi4dw"]
 [ext_resource type="PackedScene" uid="uid://3r3cw1ju0dw3" path="res://src/player/state_machine/state/timed_state/timed_state.tscn" id="5_gv08g"]
 [ext_resource type="PackedScene" uid="uid://t3murfg5nmty" path="res://src/player/ability/aura/aura.tscn" id="5_ws256"]
+[ext_resource type="PackedScene" uid="uid://b8vxr5dax1pm6" path="res://src/player/ability/transition_sound/transition_sound.tscn" id="6_0kwim"]
 [ext_resource type="PackedScene" uid="uid://bxc7qjmcijuo5" path="res://src/player/ability/grab/grab.tscn" id="7_ao7e4"]
+[ext_resource type="AudioStream" uid="uid://b450kuirfnnfq" path="res://assets/ghost_grab.wav" id="7_cdpc7"]
 [ext_resource type="PackedScene" uid="uid://btr8qn664xh5t" path="res://src/player/ability/condition_transition/condition/action_pressed/action_pressed.tscn" id="7_gox2v"]
 [ext_resource type="PackedScene" uid="uid://crwq6sbjhom1j" path="res://src/player/ability/condition_transition/condition/composite/composite.tscn" id="9_0tn6j"]
 [ext_resource type="PackedScene" uid="uid://dxofrnlm2yidj" path="res://src/player/ability/invisible/invisible.tscn" id="9_lesqt"]
@@ -108,11 +110,16 @@ raycast_parent = NodePath("../../RayCasts")
 player = NodePath("../..")
 states = [NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Sprint")]
 
-[node name="Invisible" parent="Abilities" index="5" node_paths=PackedStringArray("player", "states") instance=ExtResource("9_lesqt")]
+[node name="GrabSound" parent="Abilities" index="5" node_paths=PackedStringArray("player", "states") instance=ExtResource("6_0kwim")]
+stream = ExtResource("7_cdpc7")
+player = NodePath("../..")
+states = [NodePath("../../StateMachine/Grab")]
+
+[node name="Invisible" parent="Abilities" index="6" node_paths=PackedStringArray("player", "states") instance=ExtResource("9_lesqt")]
 player = NodePath("../..")
 states = [NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Panic")]
 
-[node name="Sprint" parent="Abilities" index="6" node_paths=PackedStringArray("condition", "enter_state", "exit_state", "player", "states") instance=ExtResource("5_bi4dw")]
+[node name="Sprint" parent="Abilities" index="7" node_paths=PackedStringArray("condition", "enter_state", "exit_state", "player", "states") instance=ExtResource("5_bi4dw")]
 condition = NodePath("ActionPressed")
 enter_state = NodePath("../../StateMachine/Sprint")
 exit_state = NodePath("../../StateMachine/Move")
@@ -123,7 +130,7 @@ states = [NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Spri
 action_name = "button_1"
 controller = NodePath("../../../Controllers/Synced")
 
-[node name="Summon" parent="Abilities" index="7" node_paths=PackedStringArray("condition", "enter_state", "exit_state", "player", "states") instance=ExtResource("5_bi4dw")]
+[node name="Summon" parent="Abilities" index="8" node_paths=PackedStringArray("condition", "enter_state", "exit_state", "player", "states") instance=ExtResource("5_bi4dw")]
 condition = NodePath("Composite")
 enter_state = NodePath("../../StateMachine/Summon")
 exit_state = NodePath("../../StateMachine/Idle")
