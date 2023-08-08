@@ -10,23 +10,33 @@ signal revived
 const AXIS_BITS = 32  # The x and y axis get 32 bits each when serialized.
 # Multiplying the axis value by AXIS_MULTIPLIER preserves some of the decimal
 # places at the cost of having a lower max value.
-const AXIS_MULTIPLIER = (2.0**32 - 1) / 6400
+const AXIS_MULTIPLIER = (2.0**32 - 1) / MAX_AXIS_VALUE
 const AXIS_MASK = 0xff_ff_ff_ff
+const MAX_AXIS_VALUE = 6400
 
 @export var controller: Controller
 @export var costume: Costume
 @export var health_time := 10
 @export var modifier_manager: ModifierManager
-@export var move_speed := 40
+@export var move_speed := 74
 @export var peer_id := 1:
 	set(value):
 		peer_id = value
+		if _is_ready:
+			$Camera2D.enabled = value == multiplayer.get_unique_id()
+
 		if "peer_id" in controller:
 			controller.peer_id = value
 
 		peer_id_changed.emit(value)
 
 @export var state_machine: StateMachine
+
+var camera_limits := Vector2(MAX_AXIS_VALUE, MAX_AXIS_VALUE):
+	set(value):
+		camera_limits = value
+		$Camera2D.limit_right = value.x
+		$Camera2D.limit_bottom = value.y
 
 var health := max_health:
 	set(value):
@@ -45,6 +55,13 @@ var position_public_visibility := true:
 		position_public_visibility = value
 		if multiplayer.is_server() and value:
 			sync_position.rpc(_serialize_position(position))
+
+var _is_ready := false
+
+
+func _ready():
+	$Camera2D.enabled = peer_id == multiplayer.get_unique_id()
+	_is_ready = true
 
 
 func sync_move_and_slide() -> bool:

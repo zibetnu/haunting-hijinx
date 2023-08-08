@@ -11,7 +11,7 @@ damage_amount = 0
 damage_type = 0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hg12p"]
-radius = 36.0
+radius = 72.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0jot6"]
 properties/0/path = NodePath(".:position")
@@ -19,7 +19,7 @@ properties/0/spawn = true
 properties/0/sync = false
 properties/0/watch = false
 
-[node name="DrainArea" type="Area2D"]
+[node name="DrainArea" type="Area2D" groups=["drain_areas"]]
 z_index = -1
 collision_layer = 2
 collision_mask = 6

@@ -13,18 +13,17 @@ properties/0/path = NodePath(".:battery")
 properties/0/spawn = true
 properties/0/sync = false
 properties/0/watch = true
-properties/1/path = NodePath(".:rotation")
+properties/1/path = NodePath("RotationNode:rotation")
 properties/1/spawn = true
 properties/1/sync = false
 properties/1/watch = true
-properties/2/path = NodePath("Sprite2D:frame")
+properties/2/path = NodePath("RotationNode/Sprite2D:frame")
 properties/2/spawn = true
 properties/2/sync = false
 properties/2/watch = true
 
 [node name="Flashlight" type="Area2D" node_paths=PackedStringArray("active_modifier") groups=["flashlights"]]
 y_sort_enabled = true
-position = Vector2(0, -8)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_s0dbb")
@@ -36,9 +35,35 @@ position = Vector2(2.38419e-07, -8.9407e-08)
 scale = Vector2(0.99, 0.99)
 shape = SubResource("CircleShape2D_b6far")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="RotationNode" type="Node2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -8)
+
+[node name="RayCasts" type="Node2D" parent="RotationNode"]
+position = Vector2(16, 0)
+
+[node name="RayCast2D" type="RayCast2D" parent="RotationNode/RayCasts"]
+target_position = Vector2(0, 0)
+collision_mask = 9
+hit_from_inside = true
+
+[node name="RayCast2D2" type="RayCast2D" parent="RotationNode/RayCasts"]
+position = Vector2(0, -2)
+rotation = -0.185005
+target_position = Vector2(0, 0)
+collision_mask = 9
+hit_from_inside = true
+
+[node name="RayCast2D3" type="RayCast2D" parent="RotationNode/RayCasts"]
+position = Vector2(0, 2)
+rotation = 0.185005
+target_position = Vector2(0, 0)
+collision_mask = 9
+hit_from_inside = true
+
+[node name="Sprite2D" type="Sprite2D" parent="RotationNode"]
 material = ExtResource("2_hyikt")
-position = Vector2(21, 0)
+position = Vector2(36, 0)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_l7kel")
 hframes = 2
@@ -47,24 +72,5 @@ frame = 1
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_wbqrx")
 
-[node name="RayCasts" type="Node2D" parent="."]
-
-[node name="RayCast2D" type="RayCast2D" parent="RayCasts"]
-target_position = Vector2(13, 0)
-collision_mask = 9
-hit_from_inside = true
-
-[node name="RayCast2D2" type="RayCast2D" parent="RayCasts"]
-rotation = -0.174533
-target_position = Vector2(13, 0)
-collision_mask = 9
-hit_from_inside = true
-
-[node name="RayCast2D3" type="RayCast2D" parent="RayCasts"]
-rotation = 0.174533
-target_position = Vector2(13, 0)
-collision_mask = 9
-hit_from_inside = true
-
 [node name="SpeedMultiplier" parent="." instance=ExtResource("2_7te73")]
-multiplier = 0.43
+multiplier = 0.4

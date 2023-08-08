@@ -51,7 +51,7 @@ func _update_label_text() -> void:
 	if _sensed_auras.size() > 0:
 		_sensed_auras.sort_custom(func(a, b): return a.intensity > b.intensity)
 		for _i in range(_sensed_auras[0].intensity):
-			$Label.text += "! "
+			$Label.text += "!"
 
 	if not player.peer_id in multiplayer.get_peers():
 		return

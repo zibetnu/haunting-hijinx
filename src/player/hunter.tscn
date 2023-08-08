@@ -13,15 +13,14 @@
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="7_178cm"]
 [ext_resource type="PackedScene" uid="uid://2btutei2ijcx" path="res://src/player/ability/aura_sense/aura_sense.tscn" id="10_y8xbh"]
 [ext_resource type="PackedScene" uid="uid://by4phnj1wlefr" path="res://src/player/state_machine/exit_trigger/exit_trigger.tscn" id="12_0llgs"]
-[ext_resource type="PackedScene" uid="uid://ifwrxny1pnn5" path="res://src/player/costume/placeholder_costume.tscn" id="12_iit4a"]
 [ext_resource type="PackedScene" uid="uid://myko8836tn6o" path="res://src/rotation_to_vector/rotation_to_vector.tscn" id="12_tg1e4"]
+[ext_resource type="PackedScene" uid="uid://ifwrxny1pnn5" path="res://src/player/costume/hunter_placeholder/hunter_placeholder.tscn" id="15_sxqk2"]
 
 [node name="Hunter" node_paths=PackedStringArray("controller", "costume") groups=["hunters"] instance=ExtResource("1_to4j3")]
 collision_layer = 4
 collision_mask = 23
 controller = NodePath("Controllers/Synced")
-costume = NodePath("YSort/PlaceholderCostume")
-move_speed = 35
+costume = NodePath("YSort/HunterPlaceholder")
 
 [node name="Abilities" type="Node2D" parent="." index="4"]
 
@@ -103,5 +102,6 @@ states = [NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move
 
 [node name="RotationToVector" parent="YSort/Flashlight" index="4" node_paths=PackedStringArray("source_node") instance=ExtResource("12_tg1e4")]
 source_node = NodePath("..")
+source_variable = "flashlight_rotation"
 
-[node name="PlaceholderCostume" parent="YSort" index="1" instance=ExtResource("12_iit4a")]
+[node name="HunterPlaceholder" parent="YSort" index="1" instance=ExtResource("15_sxqk2")]

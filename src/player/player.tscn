@@ -21,6 +21,10 @@ properties/1/path = NodePath(".:peer_id")
 properties/1/spawn = true
 properties/1/sync = false
 properties/1/watch = true
+properties/2/path = NodePath(".:camera_limits")
+properties/2/spawn = true
+properties/2/sync = false
+properties/2/watch = false
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("modifier_manager", "state_machine") groups=["players"]]
 collision_layer = 0
@@ -29,6 +33,13 @@ motion_mode = 1
 script = ExtResource("1_6v2a1")
 modifier_manager = NodePath("ModifierManager")
 state_machine = NodePath("StateMachine")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
+limit_left = 0
+limit_top = 0
+limit_right = 6400
+limit_bottom = 6400
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.38419e-07, -8.9407e-08)
