@@ -17,7 +17,7 @@ var battery := max_battery:
 		_sprite.material.set_shader_parameter("percentage",
 				FLASHLIGHT_BODY_PERCENTAGE + (1.0 - FLASHLIGHT_BODY_PERCENTAGE) * percentage)
 		for raycast in _raycast_parent.get_children():
-			raycast.target_position.x = _min_cast_length + MAX_CAST_LENGTH * percentage
+			raycast.target_position.x = MAX_CAST_LENGTH * percentage
 
 var flashlight_rotation: float:
 	get:
@@ -43,7 +43,6 @@ var percentage: float:
 		@warning_ignore("narrowing_conversion")
 		battery = max_battery * value
 
-@onready var _min_cast_length = $RotationNode/RayCasts.get_children()[0].target_position.x
 @onready var _raycast_parent := $RotationNode/RayCasts
 @onready var _sprite := $RotationNode/Sprite2D
 
