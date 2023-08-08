@@ -183,41 +183,49 @@ weak_to = 1
 [node name="RayCast2D" type="RayCast2D" parent="RayCasts" index="0"]
 target_position = Vector2(17, 0)
 collision_mask = 5
+hit_from_inside = true
 
 [node name="RayCast2D2" type="RayCast2D" parent="RayCasts" index="1"]
 rotation = 0.785398
 target_position = Vector2(17, 0)
 collision_mask = 5
+hit_from_inside = true
 
 [node name="RayCast2D3" type="RayCast2D" parent="RayCasts" index="2"]
 rotation = 1.5708
 target_position = Vector2(17, 0)
 collision_mask = 5
+hit_from_inside = true
 
 [node name="RayCast2D4" type="RayCast2D" parent="RayCasts" index="3"]
 rotation = 2.35619
 target_position = Vector2(17, 0)
 collision_mask = 5
+hit_from_inside = true
 
 [node name="RayCast2D5" type="RayCast2D" parent="RayCasts" index="4"]
 rotation = 3.14159
 target_position = Vector2(17, 0)
 collision_mask = 5
+hit_from_inside = true
 
 [node name="RayCast2D6" type="RayCast2D" parent="RayCasts" index="5"]
 rotation = 3.92699
 target_position = Vector2(17, 0)
 collision_mask = 5
+hit_from_inside = true
 
 [node name="RayCast2D7" type="RayCast2D" parent="RayCasts" index="6"]
 rotation = 4.71239
 target_position = Vector2(17, 0)
 collision_mask = 5
+hit_from_inside = true
 
 [node name="RayCast2D8" type="RayCast2D" parent="RayCasts" index="7"]
 rotation = 5.49779
 target_position = Vector2(17, 0)
 collision_mask = 5
+hit_from_inside = true
 
 [node name="StateLabel" parent="." index="8"]
 offset_top = 16.0
