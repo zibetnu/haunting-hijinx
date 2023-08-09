@@ -87,6 +87,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_bottom = NodePath("../../StartButton")
+text_overrun_behavior = 3
 
 [node name="StartButton" type="Button" parent="HostMenu"]
 layout_mode = 2
