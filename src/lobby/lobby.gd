@@ -66,9 +66,6 @@ func _on_peer_connected(id: int) -> void:
 	elif id in PeerData.spectators:
 		add_spectator(id)
 
-	else:
-		print("oh no")
-
 
 func _on_peer_disconnected(id: int) -> void:
 	for card in %ActiveCards.get_children() + %SpectateCards.get_children():
