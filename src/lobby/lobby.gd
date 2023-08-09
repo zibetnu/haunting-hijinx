@@ -23,7 +23,7 @@ func _ready():
 	for peer_id in PeerData.spectators:
 		add_spectator(peer_id)
 
-	get_ghost_peer()
+	_on_ghost_peer_changed(PeerData.ghost_peer)
 	%GhostSelector.grab_focus()
 
 
@@ -44,10 +44,6 @@ func add_spectator(id: int) -> void:
 	%SpectateCards.add_child(card, true)
 
 
-func get_ghost_peer() -> void:
-	%GhostSelector.select(%GhostSelector.get_item_index(PeerData.ghost_peer))
-
-
 func _instantiate_card(id: int) -> Node:
 	var card = player_card.instantiate()
 	card.name += str(id)
@@ -55,8 +51,8 @@ func _instantiate_card(id: int) -> Node:
 	return card
 
 
-func _on_ghost_peer_changed() -> void:
-	get_ghost_peer()
+func _on_ghost_peer_changed(id: int) -> void:
+	%GhostSelector.select(%GhostSelector.get_item_index(id))
 
 
 func _on_peer_connected(id: int) -> void:

@@ -3,13 +3,13 @@ extends Node
 
 const MAX_PARTICIPANTS = 5
 
-signal ghost_peer_changed
+signal ghost_peer_changed(id: int)
 signal peer_name_changed(id: int)
 
 @export var ghost_peer := 1:
 	set(value):
 		ghost_peer = value
-		ghost_peer_changed.emit()
+		ghost_peer_changed.emit(value)
 
 @export var participants: Array[int] = []
 @export var peer_names := {}
