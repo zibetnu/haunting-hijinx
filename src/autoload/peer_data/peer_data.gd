@@ -1,10 +1,12 @@
 extends Node
 
 
+const MIN_PARTICIPANTS = 1
 const MAX_PARTICIPANTS = 5
 
 signal ghost_peer_changed(id: int)
 signal peer_name_changed(id: int)
+signal peer_participation_changed(id: int)
 
 @export var ghost_peer := 1:
 	set(value):
@@ -40,6 +42,21 @@ func set_peer_name(id: int, peer_name: String) -> void:
 	peer_name_changed.emit(id)
 
 
+func toggle_participation(id: int) -> void:
+	if id in participants:
+		participants.erase(id)
+		spectators.append(id)
+
+	elif id in spectators and participants.size() < MAX_PARTICIPANTS:
+		spectators.erase(id)
+		participants.append(id)
+
+	else:
+		return
+
+	peer_participation_changed.emit(id)
+
+
 func _on_peer_disconnected(id: int) -> void:
 	if not multiplayer.is_server():
 		return
@@ -64,6 +81,8 @@ func _on_peer_connected(id: int) -> void:
 
 	else:
 		spectators.append(id)
+
+	peer_participation_changed.emit(id)
 
 
 func _on_server_created() -> void:

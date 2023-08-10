@@ -90,6 +90,7 @@ focus_neighbor_bottom = NodePath("../../StartButton")
 text_overrun_behavior = 3
 
 [node name="StartButton" type="Button" parent="HostMenu"]
+unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../HBoxContainer/GhostSelector")
 text = "Start Game"
