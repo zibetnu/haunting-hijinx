@@ -56,6 +56,8 @@ offset_right = 101.0
 offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 32
 text = "end message"
 horizontal_alignment = 1
@@ -70,6 +72,8 @@ offset_right = 16.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
 horizontal_alignment = 1
 timer = NodePath("../../MatchTimer")
 
