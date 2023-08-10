@@ -1,7 +1,6 @@
-extends DamageHandler
+extends Ability
 
 
-@export var player: Player
 @export var revived_state: State
 @export var revive_time := 12
 @export var revives_with: DamageSource.Type
@@ -18,6 +17,7 @@ var _progress := 0:
 
 
 func _ready() -> void:
+	super()
 	player.died.connect(_on_player_died)
 
 
@@ -25,7 +25,7 @@ func _physics_process(_delta: float) -> void:
 	_can_progress = true
 
 
-func handle_damage(source: DamageSource, affected_player: Player) -> void:
+func take_damage(source: DamageSource) -> void:
 	if not _can_progress:
 		return
 
@@ -39,10 +39,14 @@ func handle_damage(source: DamageSource, affected_player: Player) -> void:
 
 	_progress = 0
 	if multiplayer.is_server():
-		affected_player.health = affected_player.max_health
-		affected_player.state_machine.transition_to.rpc(revived_state.name)
+		player.health = player.max_health
+		player.state_machine.transition_to.rpc(revived_state.name)
 		player.revived.emit()
 
 
 func _on_player_died() -> void:
 	_progress = 0
+
+
+func _on_player_state_machine_transitioned(state_name: String) -> void:
+	set_physics_process(state_name in _state_names)

@@ -44,22 +44,25 @@ position = Vector2(16, 0)
 
 [node name="RayCast2D" type="RayCast2D" parent="RotationNode/RayCasts"]
 target_position = Vector2(0, 0)
-collision_mask = 9
+collision_mask = 15
 hit_from_inside = true
+collide_with_areas = true
 
 [node name="RayCast2D2" type="RayCast2D" parent="RotationNode/RayCasts"]
 position = Vector2(0, -2)
 rotation = -0.185005
 target_position = Vector2(0, 0)
-collision_mask = 9
+collision_mask = 15
 hit_from_inside = true
+collide_with_areas = true
 
 [node name="RayCast2D3" type="RayCast2D" parent="RotationNode/RayCasts"]
 position = Vector2(0, 2)
 rotation = 0.185005
 target_position = Vector2(0, 0)
-collision_mask = 9
+collision_mask = 15
 hit_from_inside = true
+collide_with_areas = true
 
 [node name="Sprite2D" type="Sprite2D" parent="RotationNode"]
 material = ExtResource("2_hyikt")

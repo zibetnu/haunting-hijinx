@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c76lyvhv5uic7" path="res://src/player/damage_handler/instant_death/instant_death.tscn" id="5_6ne1d"]
 [ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="6_b6ftt"]
 [ext_resource type="PackedScene" uid="uid://c83xurnfijlnw" path="res://src/player/ability/invulnerable/invulnerable.tscn" id="6_fd4p3"]
-[ext_resource type="PackedScene" uid="uid://jmaiaf2ymd1p" path="res://src/player/damage_handler/revivable/revivable.tscn" id="6_q3r52"]
+[ext_resource type="PackedScene" uid="uid://skggbcfxrt3w" path="res://src/player/ability/revivable/revivable.tscn" id="6_x7j0x"]
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="7_178cm"]
 [ext_resource type="PackedScene" uid="uid://2btutei2ijcx" path="res://src/player/ability/aura_sense/aura_sense.tscn" id="10_y8xbh"]
 [ext_resource type="PackedScene" uid="uid://by4phnj1wlefr" path="res://src/player/state_machine/exit_trigger/exit_trigger.tscn" id="12_0llgs"]
@@ -57,6 +57,12 @@ dead_exit_trigger = NodePath("../../StateMachine/Dead/ExitTrigger")
 player = NodePath("../..")
 states = [NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move")]
 
+[node name="Revivable" parent="Abilities" index="4" node_paths=PackedStringArray("revived_state", "player", "states") instance=ExtResource("6_x7j0x")]
+revived_state = NodePath("../../StateMachine/Idle")
+revives_with = 1
+player = NodePath("../..")
+states = [NodePath("../../StateMachine/Dead")]
+
 [node name="Controllers" type="Node2D" parent="." index="5"]
 
 [node name="Synced" parent="Controllers" index="0" node_paths=PackedStringArray("local_controller") instance=ExtResource("4_cfq33")]
@@ -75,14 +81,6 @@ controller_2 = NodePath("../KeyboardAndMouse")
 [node name="InstantDeath" parent="DamageHandlers" index="0" node_paths=PackedStringArray("dead_state") instance=ExtResource("5_6ne1d")]
 dead_state = NodePath("../../StateMachine/Dead")
 weak_to = 2
-
-[node name="Revivable" parent="DamageHandlers" index="1" node_paths=PackedStringArray("player", "revived_state") instance=ExtResource("6_q3r52")]
-player = NodePath("../..")
-revived_state = NodePath("../../StateMachine/Idle")
-revives_with = 1
-
-[node name="Dead" parent="StateMachine" index="0" node_paths=PackedStringArray("damage_handler")]
-damage_handler = NodePath("../../DamageHandlers/Revivable")
 
 [node name="ExitTrigger" parent="StateMachine/Dead" index="0" node_paths=PackedStringArray("trigger_on_exit", "state_machine") instance=ExtResource("12_0llgs")]
 trigger_on_exit = NodePath("..")
