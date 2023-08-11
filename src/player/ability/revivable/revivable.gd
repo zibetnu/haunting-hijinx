@@ -14,10 +14,7 @@ var _max_progress: int:
 var _progress := 0:
 	set(value):
 		_progress = clampi(value, 0, _max_progress)
-		$Sprite2D.material.set_shader_parameter(
-				"percentage",
-				1.0 - float(_progress) / _max_progress
-		)
+		$Sprite2D.material.set_shader_parameter("percentage", float(_progress) / _max_progress)
 
 
 func _ready() -> void:

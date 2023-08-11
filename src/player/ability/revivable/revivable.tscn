@@ -13,8 +13,8 @@ resource_local_to_scene = true
 shader = ExtResource("2_ngjbq")
 shader_parameter/percentage = 1.0
 shader_parameter/hidden_alpha = 0.25
+shader_parameter/flip = true
 shader_parameter/horizontal = false
-shader_parameter/invert = true
 shader_parameter/frames = 1
 
 [node name="Revivable" type="Area2D"]
