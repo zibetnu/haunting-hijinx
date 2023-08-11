@@ -1,12 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://skggbcfxrt3w"]
+[gd_scene load_steps=6 format=3 uid="uid://skggbcfxrt3w"]
 
 [ext_resource type="Script" path="res://src/player/ability/revivable/revivable.gd" id="1_pqbtw"]
+[ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="2_for8i"]
+[ext_resource type="Shader" path="res://src/shaders/multi_frame_wipe/multi_frame_wipe.gdshader" id="2_ngjbq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cjnus"]
 radius = 8.0
 height = 32.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u3nkd"]
+resource_local_to_scene = true
+shader = ExtResource("2_ngjbq")
+shader_parameter/percentage = 1.0
+shader_parameter/hidden_alpha = 0.25
+shader_parameter/horizontal = false
+shader_parameter/invert = true
+shader_parameter/frames = 1
+
 [node name="Revivable" type="Area2D"]
+y_sort_enabled = true
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_pqbtw")
@@ -14,3 +26,10 @@ script = ExtResource("1_pqbtw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_cjnus")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_u3nkd")
+position = Vector2(-4, -8)
+texture = ExtResource("2_for8i")

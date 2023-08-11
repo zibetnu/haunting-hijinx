@@ -14,6 +14,10 @@ var _max_progress: int:
 var _progress := 0:
 	set(value):
 		_progress = clampi(value, 0, _max_progress)
+		$Sprite2D.material.set_shader_parameter(
+				"percentage",
+				1.0 - float(_progress) / _max_progress
+		)
 
 
 func _ready() -> void:
@@ -49,4 +53,6 @@ func _on_player_died() -> void:
 
 
 func _on_player_state_machine_transitioned(state_name: String) -> void:
-	set_physics_process(state_name in _state_names)
+	var active := state_name in _state_names
+	set_physics_process(active)
+	$Sprite2D.visible = active

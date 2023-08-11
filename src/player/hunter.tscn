@@ -57,12 +57,6 @@ dead_exit_trigger = NodePath("../../StateMachine/Dead/ExitTrigger")
 player = NodePath("../..")
 states = [NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move")]
 
-[node name="Revivable" parent="Abilities" index="4" node_paths=PackedStringArray("revived_state", "player", "states") instance=ExtResource("6_x7j0x")]
-revived_state = NodePath("../../StateMachine/Idle")
-revives_with = 1
-player = NodePath("../..")
-states = [NodePath("../../StateMachine/Dead")]
-
 [node name="Controllers" type="Node2D" parent="." index="5"]
 
 [node name="Synced" parent="Controllers" index="0" node_paths=PackedStringArray("local_controller") instance=ExtResource("4_cfq33")]
@@ -103,3 +97,9 @@ source_node = NodePath("..")
 source_variable = "flashlight_rotation"
 
 [node name="HunterPlaceholder" parent="YSort" index="1" instance=ExtResource("15_sxqk2")]
+
+[node name="Revivable" parent="YSort" index="2" node_paths=PackedStringArray("revived_state", "player", "states") instance=ExtResource("6_x7j0x")]
+revived_state = NodePath("../../StateMachine/Idle")
+revives_with = 1
+player = NodePath("../..")
+states = [NodePath("../../StateMachine/Dead")]
