@@ -9,7 +9,7 @@
 radius = 8.0
 height = 32.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1v4dc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aaiav"]
 resource_local_to_scene = true
 shader = ExtResource("2_ngjbq")
 shader_parameter/percentage = 0.0
@@ -35,7 +35,7 @@ position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_cjnus")
 
 [node name="ProgressSprite2D" parent="." node_paths=PackedStringArray("source_node") instance=ExtResource("4_n6xxc")]
-material = SubResource("ShaderMaterial_1v4dc")
+material = SubResource("ShaderMaterial_aaiav")
 position = Vector2(-4, -8)
 texture = ExtResource("2_for8i")
 source_node = NodePath("..")

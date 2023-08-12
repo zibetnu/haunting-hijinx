@@ -32,7 +32,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_vl8u3"]
 radius = 16.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ptfta"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1dvhd"]
 resource_local_to_scene = true
 shader = ExtResource("27_b2b73")
 shader_parameter/percentage = 1.0
@@ -281,7 +281,7 @@ damage_handler = NodePath("../../DamageHandlers/Stunnable")
 [node name="GhostPlaceholder" parent="YSort" index="0" instance=ExtResource("23_06kgq")]
 
 [node name="ProgressSprite2D" parent="." index="12" node_paths=PackedStringArray("source_node") instance=ExtResource("26_j4fm2")]
-material = SubResource("ShaderMaterial_ptfta")
+material = SubResource("ShaderMaterial_1dvhd")
 position = Vector2(-6, 0)
 texture = ExtResource("28_40vgb")
 source_node = NodePath("..")
