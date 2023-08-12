@@ -5,16 +5,16 @@ extends Ability
 @export var revive_time := 12
 @export var revives_with: DamageSource.Type
 
-var _can_progress := true
-var _max_progress: int:
+var max_progress: int:
 	get:
 		return (revive_time
 				* ProjectSettings.get_setting("physics/common/physics_ticks_per_second"))
 
-var _progress := 0:
+var progress := 0:
 	set(value):
-		_progress = clampi(value, 0, _max_progress)
-		$Sprite2D.material.set_shader_parameter("percentage", float(_progress) / _max_progress)
+		progress = clampi(value, 0, max_progress)
+
+var _can_progress := true
 
 
 func _ready() -> void:
@@ -34,11 +34,11 @@ func take_damage(source: DamageSource) -> void:
 		return
 
 	_can_progress = false
-	_progress += source.damage_amount
-	if _progress < _max_progress:
+	progress += source.damage_amount
+	if progress < max_progress:
 		return
 
-	_progress = 0
+	progress = 0
 	if multiplayer.is_server():
 		player.health = player.max_health
 		player.state_machine.transition_to.rpc(revived_state.name)
@@ -46,10 +46,10 @@ func take_damage(source: DamageSource) -> void:
 
 
 func _on_player_died() -> void:
-	_progress = 0
+	progress = 0
 
 
 func _on_player_state_machine_transitioned(state_name: String) -> void:
 	var active := state_name in _state_names
 	set_physics_process(active)
-	$Sprite2D.visible = active
+	visible = active
