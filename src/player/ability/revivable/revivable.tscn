@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://skggbcfxrt3w"]
+[gd_scene load_steps=7 format=3 uid="uid://skggbcfxrt3w"]
 
 [ext_resource type="Script" path="res://src/player/ability/revivable/revivable.gd" id="1_pqbtw"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="2_for8i"]
@@ -11,11 +11,17 @@ height = 32.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u3nkd"]
 resource_local_to_scene = true
 shader = ExtResource("2_ngjbq")
-shader_parameter/percentage = 1.0
+shader_parameter/percentage = 0.0
 shader_parameter/hidden_alpha = 0.25
 shader_parameter/flip = true
 shader_parameter/horizontal = false
 shader_parameter/frames = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_sfn5r"]
+properties/0/path = NodePath(".:_progress")
+properties/0/spawn = false
+properties/0/sync = false
+properties/0/watch = true
 
 [node name="Revivable" type="Area2D"]
 y_sort_enabled = true
@@ -33,3 +39,7 @@ y_sort_enabled = true
 material = SubResource("ShaderMaterial_u3nkd")
 position = Vector2(-4, -8)
 texture = ExtResource("2_for8i")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+delta_interval = 0.5
+replication_config = SubResource("SceneReplicationConfig_sfn5r")
