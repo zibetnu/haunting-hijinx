@@ -25,6 +25,10 @@ properties/2/path = NodePath(".:camera_limits")
 properties/2/spawn = true
 properties/2/sync = false
 properties/2/watch = false
+properties/3/path = NodePath(".:health")
+properties/3/spawn = true
+properties/3/sync = false
+properties/3/watch = true
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("modifier_manager", "state_machine") groups=["players"]]
 collision_layer = 0
