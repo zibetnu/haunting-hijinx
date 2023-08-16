@@ -136,7 +136,7 @@ condition = NodePath("ActionPressed")
 enter_state = NodePath("../../StateMachine/Sprint")
 exit_state = NodePath("../../StateMachine/Move")
 player = NodePath("../..")
-states = [NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Sprint"), NodePath("../../StateMachine/Summon")]
+states = [NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Sprint")]
 
 [node name="ActionPressed" parent="Abilities/Sprint" index="0" node_paths=PackedStringArray("controller") instance=ExtResource("7_gox2v")]
 action_name = "button_1"
@@ -147,7 +147,7 @@ condition = NodePath("Composite")
 enter_state = NodePath("../../StateMachine/Summon")
 exit_state = NodePath("../../StateMachine/Idle")
 player = NodePath("../..")
-states = [NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Sprint"), NodePath("../../StateMachine/Summon")]
+states = [NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Summon")]
 
 [node name="Composite" parent="Abilities/Summon" index="0" node_paths=PackedStringArray("condition_1", "condition_2") instance=ExtResource("9_0tn6j")]
 condition_1 = NodePath("ActionPressed")
