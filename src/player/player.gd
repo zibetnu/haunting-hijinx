@@ -54,7 +54,7 @@ var position_public_visibility := true:
 	set(value):
 		position_public_visibility = value
 		if multiplayer.is_server() and value:
-			sync_position.rpc(_serialize_position(position))
+			sync_position_reliable.rpc(_serialize_position(position))
 
 var _is_ready := false
 
@@ -80,6 +80,11 @@ func sync_move_and_slide() -> bool:
 
 @rpc("unreliable_ordered")
 func sync_position(serialized_position: int) -> void:
+	position = _unserialize_position(serialized_position)
+
+
+@rpc("reliable")
+func sync_position_reliable(serialized_position: int) -> void:
 	position = _unserialize_position(serialized_position)
 
 
