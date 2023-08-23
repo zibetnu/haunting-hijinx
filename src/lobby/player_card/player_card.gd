@@ -1,4 +1,4 @@
-extends Panel
+extends PanelContainer
 
 
 @export var peer_id := 1:
@@ -10,8 +10,11 @@ extends Panel
 
 func _ready() -> void:
 	PeerData.peer_name_changed.connect(_on_peer_name_changed)
+	PeerData.peer_participation_changed.connect(_on_peer_participation_changed)
 	%NameLineEdit.visible = multiplayer.get_unique_id() == peer_id
 	%NameLabel.visible = not %NameLineEdit.visible
+	%ParticipationToggle.visible = multiplayer.is_server()
+	_on_peer_participation_changed(peer_id)
 	get_peer_name()
 
 
@@ -37,8 +40,22 @@ func _on_name_line_edit_text_changed(new_text: String) -> void:
 	set_peer_name(new_text)
 
 
+func _on_participation_toggle_pressed() -> void:
+	PeerData.toggle_participation(peer_id)
+
+
 func _on_peer_name_changed(id: int) -> void:
 	if id != peer_id:
 		return
 
 	get_peer_name()
+
+
+func _on_peer_participation_changed(_id: int) -> void:
+	if peer_id in PeerData.participants:
+		%ParticipationToggle.disabled = false
+		%ParticipationToggle.text = ">>"
+
+	else:
+		%ParticipationToggle.disabled = PeerData.participants.size() >= PeerData.MAX_PARTICIPANTS
+		%ParticipationToggle.text = "<<"

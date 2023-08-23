@@ -1,9 +1,49 @@
-[gd_scene load_steps=3 format=3 uid="uid://ifwrxny1pnn5"]
+[gd_scene load_steps=6 format=3 uid="uid://ifwrxny1pnn5"]
 
 [ext_resource type="PackedScene" uid="uid://brsavqoymiyc5" path="res://src/player/costume/costume.tscn" id="1_wgowv"]
 [ext_resource type="Texture2D" uid="uid://bodheb38fir20" path="res://assets/placeholder_sprite.png" id="2_jq0yn"]
+[ext_resource type="AnimationLibrary" uid="uid://shvg27dohcpa" path="res://src/player/costume/core.res" id="2_nkd3j"]
+
+[sub_resource type="Animation" id="Animation_ixjff"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(3, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v2y5x"]
+_data = {
+"RESET": SubResource("Animation_ixjff")
+}
 
 [node name="HunterPlaceholder" instance=ExtResource("1_wgowv")]
+
+[node name="AnimationPlayer" parent="." index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_v2y5x"),
+"core": ExtResource("2_nkd3j")
+}
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="2"]
 position = Vector2(0, -8)

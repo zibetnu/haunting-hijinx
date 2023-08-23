@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://skggbcfxrt3w"]
+
+[ext_resource type="Script" path="res://src/player/ability/revivable/revivable.gd" id="1_pqbtw"]
+[ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="2_for8i"]
+[ext_resource type="Shader" path="res://src/shaders/multi_frame_wipe/multi_frame_wipe.gdshader" id="2_ngjbq"]
+[ext_resource type="PackedScene" uid="uid://br1vpvd5tnr43" path="res://src/progress_sprite_2d/progress_sprite_2d.tscn" id="4_n6xxc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cjnus"]
+radius = 8.0
+height = 32.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aaiav"]
+resource_local_to_scene = true
+shader = ExtResource("2_ngjbq")
+shader_parameter/percentage = 0.0
+shader_parameter/hidden_alpha = 0.25
+shader_parameter/flip = true
+shader_parameter/horizontal = false
+shader_parameter/frames = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_sfn5r"]
+properties/0/path = NodePath(".:progress")
+properties/0/spawn = false
+properties/0/sync = false
+properties/0/watch = true
+
+[node name="Revivable" type="Area2D" groups=["drain_areas_ignore"]]
+y_sort_enabled = true
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_pqbtw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("CapsuleShape2D_cjnus")
+
+[node name="ProgressSprite2D" parent="." node_paths=PackedStringArray("source_node") instance=ExtResource("4_n6xxc")]
+material = SubResource("ShaderMaterial_aaiav")
+position = Vector2(-4, -8)
+texture = ExtResource("2_for8i")
+source_node = NodePath("..")
+progress_variable = "progress"
+total_variable = "max_progress"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+delta_interval = 0.5
+replication_config = SubResource("SceneReplicationConfig_sfn5r")

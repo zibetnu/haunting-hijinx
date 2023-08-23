@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://jmaiaf2ymd1p"]
-
-[ext_resource type="Script" path="res://src/player/damage_handler/revivable/revivable.gd" id="1_vkm2n"]
-
-[node name="Revivable" type="Node"]
-script = ExtResource("1_vkm2n")

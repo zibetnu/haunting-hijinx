@@ -12,6 +12,9 @@ func _damage_affected_collision_objects() -> void:
 		return
 
 	for collision_object in _affected_collision_objects:
+		if collision_object in get_tree().get_nodes_in_group("drain_areas_ignore"):
+			continue
+
 		if not collision_object.has_method("take_damage"):
 			continue
 
