@@ -7,6 +7,6 @@ resource_local_to_scene = true
 shader = ExtResource("1_uqie1")
 shader_parameter/percentage = 1.0
 shader_parameter/hidden_alpha = 0.0
+shader_parameter/flip = false
 shader_parameter/horizontal = true
-shader_parameter/invert = false
 shader_parameter/frames = 2
