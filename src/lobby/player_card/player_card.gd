@@ -53,6 +53,7 @@ func _on_peer_name_changed(id: int) -> void:
 
 func _on_peer_participation_changed(_id: int) -> void:
 	if peer_id in PeerData.participants:
+		%ParticipationToggle.disabled = false
 		%ParticipationToggle.text = ">>"
 
 	else:
