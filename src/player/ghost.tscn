@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://q4hv30obsxd1"]
+[gd_scene load_steps=34 format=3 uid="uid://q4hv30obsxd1"]
 
 [ext_resource type="PackedScene" uid="uid://bavgk282m5ngb" path="res://src/player/player.tscn" id="1_d2bpu"]
 [ext_resource type="PackedScene" uid="uid://sl14guycomx6" path="res://src/player/state_machine/state/move/move.tscn" id="2_jq5ho"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="10_dq2x2"]
 [ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="12_iuly0"]
 [ext_resource type="PackedScene" uid="uid://2hyqex1r6vhj" path="res://src/player/damage_handler/standard/stunnable/stunnable.tscn" id="13_742x4"]
+[ext_resource type="PackedScene" uid="uid://y2pbqh4gi67e" path="res://src/player/ability/visibility_setter/visibility_setter.tscn" id="13_dxdim"]
 [ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="15_vo03g"]
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="16_k7qd8"]
 [ext_resource type="PackedScene" uid="uid://cdk2uf7ebeu5u" path="res://src/player/state_machine/state/timed_state/panic/panic.tscn" id="17_8tcsn"]
@@ -28,17 +29,27 @@
 [ext_resource type="PackedScene" uid="uid://br1vpvd5tnr43" path="res://src/progress_sprite_2d/progress_sprite_2d.tscn" id="26_j4fm2"]
 [ext_resource type="Shader" path="res://src/shaders/multi_frame_wipe/multi_frame_wipe.gdshader" id="27_b2b73"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="28_40vgb"]
+[ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_sis1v"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vl8u3"]
 radius = 16.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1dvhd"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ysolb"]
 resource_local_to_scene = true
 shader = ExtResource("27_b2b73")
 shader_parameter/percentage = 1.0
 shader_parameter/hidden_alpha = 0.25
 shader_parameter/flip = true
 shader_parameter/horizontal = false
+shader_parameter/frames = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6fwxb"]
+resource_local_to_scene = true
+shader = ExtResource("27_b2b73")
+shader_parameter/percentage = 0.0
+shader_parameter/hidden_alpha = 0.25
+shader_parameter/flip = false
+shader_parameter/horizontal = true
 shader_parameter/frames = 1
 
 [node name="Ghost" node_paths=PackedStringArray("controller", "costume") groups=["ghosts"] instance=ExtResource("1_d2bpu")]
@@ -161,6 +172,11 @@ controller = NodePath("../../../../Controllers/Synced")
 group = "drain_areas"
 invert = true
 
+[node name="SummonVisibilitySetter" parent="Abilities" index="9" node_paths=PackedStringArray("target_node", "player", "states") instance=ExtResource("13_dxdim")]
+target_node = NodePath("../../SummonProgressSprite2D")
+player = NodePath("../..")
+states = [NodePath("../../StateMachine/Summon")]
+
 [node name="Controllers" type="Node2D" parent="." index="5"]
 
 [node name="Synced" parent="Controllers" index="0" node_paths=PackedStringArray("local_controller") instance=ExtResource("12_iuly0")]
@@ -280,10 +296,18 @@ damage_handler = NodePath("../../DamageHandlers/Stunnable")
 
 [node name="GhostPlaceholder" parent="YSort" index="0" instance=ExtResource("23_06kgq")]
 
-[node name="ProgressSprite2D" parent="." index="12" node_paths=PackedStringArray("source_node") instance=ExtResource("26_j4fm2")]
-material = SubResource("ShaderMaterial_1dvhd")
+[node name="HealthProgressSprite2D" parent="." index="12" node_paths=PackedStringArray("source_node") instance=ExtResource("26_j4fm2")]
+material = SubResource("ShaderMaterial_ysolb")
 position = Vector2(-6, 0)
 texture = ExtResource("28_40vgb")
 source_node = NodePath("..")
 progress_variable = "health"
 total_variable = "max_health"
+
+[node name="SummonProgressSprite2D" parent="." index="13" node_paths=PackedStringArray("source_node") instance=ExtResource("26_j4fm2")]
+material = SubResource("ShaderMaterial_6fwxb")
+position = Vector2(0, -20)
+texture = ExtResource("29_sis1v")
+source_node = NodePath("../StateMachine/Summon")
+progress_variable = "charge"
+total_variable = "max_charge"
