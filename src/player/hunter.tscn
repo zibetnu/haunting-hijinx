@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dsl4rd03hiysv"]
+[gd_scene load_steps=24 format=3 uid="uid://dsl4rd03hiysv"]
 
 [ext_resource type="PackedScene" uid="uid://bavgk282m5ngb" path="res://src/player/player.tscn" id="1_to4j3"]
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="2_ha5kb"]
@@ -20,6 +20,8 @@
 [ext_resource type="Shader" path="res://src/shaders/multi_frame_wipe/multi_frame_wipe.gdshader" id="18_gqkdo"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="19_1shfe"]
 [ext_resource type="PackedScene" uid="uid://ba88f53kn5057" path="res://src/player/notification/aura_alert/aura_alert.tscn" id="20_g7gks"]
+[ext_resource type="PackedScene" uid="uid://d12pvd5crkjdc" path="res://src/player/notification/battery_dead/battery_dead.tscn" id="21_85b84"]
+[ext_resource type="PackedScene" uid="uid://dk7au4to2006x" path="res://src/player/notification/battery_low/battery_low.tscn" id="22_g4cek"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ki66w"]
 resource_local_to_scene = true
@@ -137,3 +139,13 @@ total_variable = "max_progress"
 visible = false
 layout_mode = 2
 aura_sense = NodePath("../../Abilities/AuraSense")
+
+[node name="BatteryDead" parent="NotificationContainer" index="2" node_paths=PackedStringArray("flashlight") instance=ExtResource("21_85b84")]
+visible = false
+layout_mode = 2
+flashlight = NodePath("../../YSort/Flashlight")
+
+[node name="BatteryLow" parent="NotificationContainer" index="3" node_paths=PackedStringArray("flashlight") instance=ExtResource("22_g4cek")]
+visible = false
+layout_mode = 2
+flashlight = NodePath("../../YSort/Flashlight")

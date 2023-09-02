@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://dk7au4to2006x"]
+
+[ext_resource type="Script" path="res://src/player/notification/battery_low/battery_low.gd" id="2_vd78u"]
+[ext_resource type="Texture2D" uid="uid://bbdxx5dlm74uq" path="res://assets/battery_indicator.png" id="3_rb4un"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t068d"]
+atlas = ExtResource("3_rb4un")
+region = Rect2(16, 0, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrte"]
+atlas = ExtResource("3_rb4un")
+region = Rect2(0, 0, 16, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nej4b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t068d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrte")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="BatteryLow" type="Control"]
+custom_minimum_size = Vector2(16, 8)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 16.0
+offset_bottom = 8.0
+size_flags_vertical = 8
+script = ExtResource("2_vd78u")
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 3.0
+one_shot = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, 4)
+sprite_frames = SubResource("SpriteFrames_nej4b")
+autoplay = "default"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
