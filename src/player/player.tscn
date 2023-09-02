@@ -83,3 +83,12 @@ state = NodePath("Idle")
 
 [node name="YSort" type="Node2D" parent="."]
 y_sort_enabled = true
+
+[node name="NotificationContainer" type="HBoxContainer" parent="."]
+z_index = 1
+offset_left = -32.0
+offset_top = -42.0
+offset_right = 32.0
+offset_bottom = -26.0
+theme_override_constants/separation = 2
+alignment = 1

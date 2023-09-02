@@ -1,12 +1,21 @@
+class_name AuraSense
 extends Ability
 
+
+signal sensed_intensity_changed(intensity: int)
 
 @export var dead_exit_trigger: ExitTrigger
 
 var active := false:
 	set(value):
 		active = value
-		$Label.visible = active and player.peer_id == multiplayer.get_unique_id()
+		if not active:
+			sensed_intensity = 0
+
+var sensed_intensity: int:
+	set(value):
+		sensed_intensity = value
+		sensed_intensity_changed.emit(value)
 
 var _sensed_auras: Array[Node] = []
 
@@ -21,7 +30,7 @@ func remove_aura(source: Node) -> void:
 		return
 
 	_sensed_auras.erase(source)
-	_update_label_text()
+	_update_sensed_intensity()
 
 
 func add_aura(source: Node) -> void:
@@ -32,36 +41,37 @@ func add_aura(source: Node) -> void:
 		return
 
 	_sensed_auras.append(source)
-	_update_label_text()
+	_update_sensed_intensity()
 
 
 @rpc("unreliable_ordered")
-func _sync_label_text(value: String) -> void:
-	$Label.text = value
+func _sync_sensed_intensity(value: int) -> void:
+	sensed_intensity = value
 
 
-func _update_label_text() -> void:
+func _update_sensed_intensity() -> void:
 	if not multiplayer.is_server():
 		return
 
 	if not active:
 		return
 
-	$Label.text = ""
 	if _sensed_auras.size() > 0:
 		_sensed_auras.sort_custom(func(a, b): return a.intensity > b.intensity)
-		for _i in range(_sensed_auras[0].intensity):
-			$Label.text += "!"
+		sensed_intensity = _sensed_auras[0].intensity
+
+	else:
+		sensed_intensity = 0
 
 	if not player.peer_id in multiplayer.get_peers():
 		return
 
-	_sync_label_text.rpc_id(player.peer_id, $Label.text)
+	_sync_sensed_intensity.rpc_id(player.peer_id, sensed_intensity)
 
 
 func _on_dead_exit_trigger_triggered() -> void:
 	active = player.state_machine.state.name in _state_names
-	_update_label_text()
+	_update_sensed_intensity()
 
 
 func _on_player_state_machine_transitioned(state_name: String) -> void:
