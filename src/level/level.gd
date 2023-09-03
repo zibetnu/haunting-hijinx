@@ -4,6 +4,7 @@ extends Node2D
 const Battery = preload("res://src/item/battery/battery.tscn")
 const Ghost = preload("res://src/player/ghost.tscn")
 const Hunter = preload("res://src/player/hunter.tscn")
+const SpectatorMenu = preload("res://src/level/spectator_menu/spectator_menu.tscn")
 const MAX_BATTERY_SPAWN_ATTEMPTS = 100
 
 @export var battery_area_top_left: Node2D
@@ -17,6 +18,9 @@ var _hunters_spawned := 0
 
 
 func _ready():
+	if multiplayer.get_unique_id() in PeerData.spectators:
+		$CanvasLayer.add_child(SpectatorMenu.instantiate())
+
 	# Only the server needs to spawn the players.
 	if not multiplayer.is_server():
 		return
