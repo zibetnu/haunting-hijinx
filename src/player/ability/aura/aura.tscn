@@ -7,6 +7,7 @@ resource_local_to_scene = true
 radius = 32.0
 
 [node name="Aura" type="Node2D"]
+z_index = 1
 script = ExtResource("1_k6jv6")
 
 [node name="Area2D" type="Area2D" parent="." groups=["aura_areas"]]

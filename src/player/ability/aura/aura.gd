@@ -8,6 +8,14 @@ extends Ability
 		%CollisionShape2D.shape.radius = value
 
 
+func _ready() -> void:
+	visible = player.peer_id == multiplayer.get_unique_id()
+
+
+func _draw() -> void:
+	draw_arc(position, radius, 0, 2 * PI, 32, Color8(255, 255, 255, 63))
+
+
 func _on_entered(node: Node) -> void:
 	if not multiplayer.is_server():
 		return
