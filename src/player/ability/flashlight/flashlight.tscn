@@ -17,7 +17,7 @@ properties/1/path = NodePath("RotationNode:rotation")
 properties/1/spawn = true
 properties/1/sync = false
 properties/1/watch = true
-properties/2/path = NodePath("RotationNode/Sprite2D:frame")
+properties/2/path = NodePath("RotationNode2/Sprite2D:frame")
 properties/2/spawn = true
 properties/2/sync = false
 properties/2/watch = true
@@ -35,9 +35,10 @@ position = Vector2(2.38419e-07, -8.9407e-08)
 scale = Vector2(0.99, 0.99)
 shape = SubResource("CircleShape2D_b6far")
 
-[node name="RotationNode" type="Node2D" parent="."]
-y_sort_enabled = true
-position = Vector2(0, -8)
+[node name="RotationNode" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../RotationNode2")
+update_position = false
+update_scale = false
 
 [node name="RayCasts" type="Node2D" parent="RotationNode"]
 position = Vector2(16, 0)
@@ -64,7 +65,11 @@ collision_mask = 15
 hit_from_inside = true
 collide_with_areas = true
 
-[node name="Sprite2D" type="Sprite2D" parent="RotationNode"]
+[node name="RotationNode2" type="Node2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -8)
+
+[node name="Sprite2D" type="Sprite2D" parent="RotationNode2"]
 material = ExtResource("2_hyikt")
 position = Vector2(36, 0)
 scale = Vector2(0.5, 0.5)

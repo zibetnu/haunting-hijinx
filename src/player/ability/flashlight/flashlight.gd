@@ -45,7 +45,7 @@ var percentage: float:
 		battery = max_battery * value
 
 @onready var _raycast_parent := $RotationNode/RayCasts
-@onready var _sprite := $RotationNode/Sprite2D
+@onready var _sprite := $RotationNode2/Sprite2D
 
 
 func _ready() -> void:
