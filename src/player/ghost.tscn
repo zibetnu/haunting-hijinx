@@ -290,6 +290,7 @@ exit_state = NodePath("../Panic")
 damage_handler = NodePath("../../DamageHandlers/Stunnable")
 
 [node name="GhostPlaceholder" parent="YSort" index="0" instance=ExtResource("23_06kgq")]
+position = Vector2(0, -8)
 
 [node name="NotificationContainer" parent="." index="12"]
 offset_top = -25.0
