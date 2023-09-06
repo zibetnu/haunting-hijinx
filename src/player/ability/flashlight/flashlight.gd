@@ -68,12 +68,20 @@ func _physics_process(delta: float) -> void:
 
 	player.modifier_manager.add_modifier(active_modifier)
 	battery -= 1
-	var colliders := []
-	for raycast in _raycast_parent.get_children():
-		colliders += _get_colliders(raycast)
+	var all_colliders := []
+	for repeat_raycast in _raycast_parent.get_children():
+		var colliders: Array[Object] = repeat_raycast.get_colliders()
+
+		# Remove colliders that are past an object in the stop_flashlight group.
+		for collider in colliders:
+			if collider.is_in_group("stop_flashlight"):
+				colliders.resize(colliders.find(collider) + 1)
+				break
+
+		all_colliders += colliders
 
 	var processed_colliders := []
-	for collider in colliders:
+	for collider in all_colliders:
 		if collider in processed_colliders:
 			continue
 
@@ -87,24 +95,6 @@ func _physics_process(delta: float) -> void:
 func take_damage(source: DamageSource) -> void:
 	if source.damage_type == weak_to:
 		battery = 0
-
-
-func _get_colliders(raycast: RayCast2D) -> Array[Object]:
-	var colliders: Array[Object] = []
-	var exception_rids: Array[RID] = []
-	while raycast.is_colliding():
-		var collider = raycast.get_collider()
-		colliders.append(collider)
-		if collider.is_in_group("stop_flashlight"):
-			break  # Don't get any colliders past something that stops the raycast.
-
-		var collider_rid := raycast.get_collider_rid()
-		exception_rids.append(collider_rid)
-		raycast.add_exception_rid(collider_rid)
-		raycast.force_raycast_update()
-
-	exception_rids.map(raycast.remove_exception_rid)
-	return colliders
 
 
 func _on_player_revived() -> void:

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dyev6t6l5ykdp"]
+[gd_scene load_steps=8 format=3 uid="uid://dyev6t6l5ykdp"]
 
 [ext_resource type="Script" path="res://src/player/ability/flashlight/flashlight.gd" id="1_s0dbb"]
 [ext_resource type="PackedScene" uid="uid://ckw6ix6uyke2j" path="res://src/player/modifier_manager/modifier/speed_multiplier/speed_multiplier.tscn" id="2_7te73"]
+[ext_resource type="PackedScene" uid="uid://c3u6qxrt3jkm8" path="res://src/repeat_ray_cast_2d/repeat_ray_cast_2d.tscn" id="2_fqwr7"]
 [ext_resource type="Material" uid="uid://8oo13typkhrt" path="res://src/shaders/multi_frame_wipe/multi_frame_wipe.tres" id="2_hyikt"]
 [ext_resource type="Texture2D" uid="uid://cwjmhpmygymjj" path="res://assets/flashlight/flashlight_upscaled.png" id="3_l7kel"]
 
@@ -43,13 +44,13 @@ update_scale = false
 [node name="RayCasts" type="Node2D" parent="RotationNode"]
 position = Vector2(16, 0)
 
-[node name="RayCast2D" type="RayCast2D" parent="RotationNode/RayCasts"]
+[node name="RepeatRayCast2D" parent="RotationNode/RayCasts" instance=ExtResource("2_fqwr7")]
 target_position = Vector2(0, 0)
 collision_mask = 15
 hit_from_inside = true
 collide_with_areas = true
 
-[node name="RayCast2D2" type="RayCast2D" parent="RotationNode/RayCasts"]
+[node name="RepeatRayCast2D2" parent="RotationNode/RayCasts" instance=ExtResource("2_fqwr7")]
 position = Vector2(0, -2)
 rotation = -0.185005
 target_position = Vector2(0, 0)
@@ -57,7 +58,7 @@ collision_mask = 15
 hit_from_inside = true
 collide_with_areas = true
 
-[node name="RayCast2D3" type="RayCast2D" parent="RotationNode/RayCasts"]
+[node name="RepeatRayCast2D3" parent="RotationNode/RayCasts" instance=ExtResource("2_fqwr7")]
 position = Vector2(0, 2)
 rotation = 0.185005
 target_position = Vector2(0, 0)
