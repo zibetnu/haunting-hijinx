@@ -63,8 +63,8 @@ move_speed = 92
 shape = SubResource("CircleShape2D_vl8u3")
 
 [node name="PeerNameLabel" parent="." index="3"]
-offset_top = -42.0
-offset_bottom = -16.0
+offset_top = -52.0
+offset_bottom = -26.0
 
 [node name="Abilities" type="Node2D" parent="." index="4"]
 
@@ -293,8 +293,7 @@ damage_handler = NodePath("../../DamageHandlers/Stunnable")
 position = Vector2(0, -8)
 
 [node name="NotificationContainer" parent="." index="12"]
-offset_top = -25.0
-offset_bottom = -17.0
+offset_top = -34.0
 
 [node name="StateNotification" parent="NotificationContainer" index="0" node_paths=PackedStringArray("states", "state_machine") instance=ExtResource("26_w8yle")]
 visible = false
