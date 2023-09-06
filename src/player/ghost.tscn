@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://q4hv30obsxd1"]
+[gd_scene load_steps=35 format=3 uid="uid://q4hv30obsxd1"]
 
 [ext_resource type="PackedScene" uid="uid://bavgk282m5ngb" path="res://src/player/player.tscn" id="1_d2bpu"]
 [ext_resource type="PackedScene" uid="uid://sl14guycomx6" path="res://src/player/state_machine/state/move/move.tscn" id="2_jq5ho"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://cdk2uf7ebeu5u" path="res://src/player/state_machine/state/timed_state/panic/panic.tscn" id="17_8tcsn"]
 [ext_resource type="PackedScene" uid="uid://bet5y1i5vddfq" path="res://src/player/state_machine/state/timed_state/panic/panic_reset/panic_reset.tscn" id="18_7jfgb"]
 [ext_resource type="PackedScene" uid="uid://bgun5xps8jth7" path="res://src/player/costume/ghost_placeholder/ghost_placeholder.tscn" id="23_06kgq"]
+[ext_resource type="PackedScene" uid="uid://q1qfh845n0vj" path="res://src/shadow/shadow.tscn" id="25_vroaq"]
 [ext_resource type="PackedScene" uid="uid://br1vpvd5tnr43" path="res://src/progress_sprite_2d/progress_sprite_2d.tscn" id="26_j4fm2"]
 [ext_resource type="PackedScene" uid="uid://2f424rmfm3g4" path="res://src/player/notification/state_notification/state_notification.tscn" id="26_w8yle"]
 [ext_resource type="Shader" path="res://src/shaders/multi_frame_wipe/multi_frame_wipe.gdshader" id="27_b2b73"]
@@ -289,10 +290,13 @@ damage_handler = NodePath("../../DamageHandlers/Standard")
 exit_state = NodePath("../Panic")
 damage_handler = NodePath("../../DamageHandlers/Stunnable")
 
+[node name="Shadow" parent="." index="11" instance=ExtResource("25_vroaq")]
+radius = 16.0
+
 [node name="GhostPlaceholder" parent="YSort" index="0" instance=ExtResource("23_06kgq")]
 position = Vector2(0, -8)
 
-[node name="NotificationContainer" parent="." index="12"]
+[node name="NotificationContainer" parent="." index="13"]
 offset_top = -34.0
 
 [node name="StateNotification" parent="NotificationContainer" index="0" node_paths=PackedStringArray("states", "state_machine") instance=ExtResource("26_w8yle")]
