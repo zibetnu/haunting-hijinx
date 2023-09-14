@@ -4,11 +4,19 @@
 [ext_resource type="PackedScene" uid="uid://c6td5osxfww2c" path="res://src/tile_map/tile_map.tscn" id="3_yxx54"]
 [ext_resource type="TileSet" uid="uid://26wcy33gmwrh" path="res://src/tile_map/tile_sets/main_floor.tres" id="4_dphu1"]
 
-[node name="MainFloor" node_paths=PackedStringArray("battery_area_top_left", "battery_area_bottom_right", "ghost_spawn_point", "hunter_spawn_points") instance=ExtResource("1_sri5i")]
-battery_area_top_left = NodePath("SpawnPoints/BatteryAreaTopLeft")
-battery_area_bottom_right = NodePath("SpawnPoints/BatteryAreaBottomRight")
+[node name="MainFloor" node_paths=PackedStringArray("ghost_spawn_point", "hunter_spawn_points") instance=ExtResource("1_sri5i")]
 ghost_spawn_point = NodePath("SpawnPoints/GhostSpawnPoint")
 hunter_spawn_points = [NodePath("SpawnPoints/HunterSpawnPoint"), NodePath("SpawnPoints/HunterSpawnPoint2"), NodePath("SpawnPoints/HunterSpawnPoint3"), NodePath("SpawnPoints/HunterSpawnPoint4")]
+
+[node name="BatterySpawner" parent="." index="1" node_paths=PackedStringArray("spawn_area_top_left", "spawn_area_bottom_right")]
+spawn_area_top_left = NodePath("TopLeft")
+spawn_area_bottom_right = NodePath("BottomRight")
+
+[node name="TopLeft" type="Marker2D" parent="BatterySpawner" index="1"]
+position = Vector2(16, 32)
+
+[node name="BottomRight" type="Marker2D" parent="BatterySpawner" index="2"]
+position = Vector2(720, 432)
 
 [node name="TileMap" parent="SpawnRoot" index="0" instance=ExtResource("3_yxx54")]
 tile_set = ExtResource("4_dphu1")
@@ -20,25 +28,19 @@ layer_4/tile_data = PackedInt32Array(1310753, 1572864, 3, 1572897, 1572864, 3)
 
 [node name="SpawnPoints" type="Node2D" parent="." index="3"]
 
-[node name="BatteryAreaTopLeft" type="Marker2D" parent="SpawnPoints" index="0"]
-position = Vector2(16, 32)
-
-[node name="BatteryAreaBottomRight" type="Marker2D" parent="SpawnPoints" index="1"]
-position = Vector2(720, 432)
-
-[node name="GhostSpawnPoint" type="Marker2D" parent="SpawnPoints" index="2"]
+[node name="GhostSpawnPoint" type="Marker2D" parent="SpawnPoints" index="0"]
 position = Vector2(368, 248)
 
-[node name="HunterSpawnPoint" type="Marker2D" parent="SpawnPoints" index="3"]
+[node name="HunterSpawnPoint" type="Marker2D" parent="SpawnPoints" index="1"]
 position = Vector2(32, 48)
 
-[node name="HunterSpawnPoint2" type="Marker2D" parent="SpawnPoints" index="4"]
+[node name="HunterSpawnPoint2" type="Marker2D" parent="SpawnPoints" index="2"]
 position = Vector2(704, 416)
 
-[node name="HunterSpawnPoint3" type="Marker2D" parent="SpawnPoints" index="5"]
+[node name="HunterSpawnPoint3" type="Marker2D" parent="SpawnPoints" index="3"]
 position = Vector2(704, 48)
 
-[node name="HunterSpawnPoint4" type="Marker2D" parent="SpawnPoints" index="6"]
+[node name="HunterSpawnPoint4" type="Marker2D" parent="SpawnPoints" index="4"]
 position = Vector2(32, 416)
 
 [node name="MultiplayerSpawner" parent="." index="4"]

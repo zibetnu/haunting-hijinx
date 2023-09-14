@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://gxh15sde0me5"]
+[gd_scene load_steps=5 format=3 uid="uid://gxh15sde0me5"]
 
 [ext_resource type="Script" path="res://src/level/level.gd" id="1_el04s"]
+[ext_resource type="PackedScene" uid="uid://grxm3658ukjj" path="res://src/battery_spawner/battery_spawner.tscn" id="2_00csm"]
 [ext_resource type="PackedScene" uid="uid://chog7qk0d8wy7" path="res://src/timer_label/timer_label.tscn" id="2_tx202"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_63iby"]
@@ -18,14 +19,13 @@ z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_el04s")
 
-[node name="BatterySpawnTimer" type="Timer" parent="."]
-wait_time = 5.0
-autostart = true
-
 [node name="MatchTimer" type="Timer" parent="."]
 wait_time = 300.0
 one_shot = true
 autostart = true
+
+[node name="BatterySpawner" parent="." node_paths=PackedStringArray("spawn_root") instance=ExtResource("2_00csm")]
+spawn_root = NodePath("../SpawnRoot")
 
 [node name="SpawnRoot" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -77,5 +77,4 @@ theme_override_constants/outline_size = 3
 horizontal_alignment = 1
 timer = NodePath("../../MatchTimer")
 
-[connection signal="timeout" from="BatterySpawnTimer" to="." method="_on_battery_spawn_timer_timeout"]
 [connection signal="timeout" from="MatchTimer" to="." method="_on_match_timer_timeout"]
