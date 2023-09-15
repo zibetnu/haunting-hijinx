@@ -43,6 +43,7 @@ focus_neighbor_top = NodePath("../JoinButton")
 focus_neighbor_bottom = NodePath("../PortText")
 focus_next = NodePath("../PortText")
 placeholder_text = "IP address (only for joining)"
+context_menu_enabled = false
 scroll_fit_content_height = true
 
 [node name="PortText" type="TextEdit" parent="VBoxContainer"]
@@ -52,6 +53,7 @@ focus_neighbor_top = NodePath("../IPText")
 focus_neighbor_bottom = NodePath("../HostButton")
 focus_previous = NodePath("../IPText")
 placeholder_text = "Port (for hosting and joining)"
+context_menu_enabled = false
 scroll_fit_content_height = true
 
 [connection signal="pressed" from="VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]

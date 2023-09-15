@@ -40,6 +40,7 @@ custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 placeholder_text = "player name"
 max_length = 20
+context_menu_enabled = false
 
 [node name="EditSynchronizer" type="MultiplayerSynchronizer" parent="VBoxContainer/NameLineEdit"]
 unique_name_in_owner = true

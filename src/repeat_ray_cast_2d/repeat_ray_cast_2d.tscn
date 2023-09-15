@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3u6qxrt3jkm8"]
+
+[ext_resource type="Script" path="res://src/repeat_ray_cast_2d/repeat_ray_cast_2d.gd" id="1_ctlvj"]
+
+[node name="RepeatRayCast2D" type="RayCast2D"]
+script = ExtResource("1_ctlvj")

@@ -13,9 +13,14 @@ signal peer_participation_changed(id: int)
 		ghost_peer = value
 		ghost_peer_changed.emit(value)
 
-@export var participants: Array[int] = []
+# participants and spectators are not typed as Array[int] due to
+# a bug that prevents a MultiplayerSynchronizer from syncing them.
+# See https://github.com/godotengine/godot/issues/74391.
+@export var participants := []
 @export var peer_names := {}
-@export var spectators: Array[int] = []
+@export var spectators := []
+
+var match_in_progress := false
 
 
 func _ready() -> void:
@@ -76,7 +81,7 @@ func _on_peer_connected(id: int) -> void:
 
 	set_peer_name.rpc(id, peer_name)
 
-	if participants.size() < MAX_PARTICIPANTS:
+	if participants.size() < MAX_PARTICIPANTS and not match_in_progress:
 		participants.append(id)
 
 	else:
