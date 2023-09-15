@@ -20,6 +20,7 @@ func _ready():
 	if not multiplayer.is_server():
 		return
 
+	PeerData.match_in_progress = true
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(remove_player)
 
@@ -75,6 +76,7 @@ func _end_match(message: String) -> void:
 
 		PauseManager.set_pause.rpc(true)
 		await get_tree().create_timer(3).timeout
+		PeerData.match_in_progress = false
 		SceneChanger.change_scene_to_packed(SceneChanger.lobby)
 
 
