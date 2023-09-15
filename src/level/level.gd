@@ -13,9 +13,6 @@ var _hunters_spawned := 0
 
 
 func _ready():
-	if multiplayer.get_unique_id() in PeerData.spectators:
-		$CanvasLayer.add_child(SpectatorMenu.instantiate())
-
 	# Only the server needs to spawn the players.
 	if not multiplayer.is_server():
 		return
@@ -78,6 +75,11 @@ func _end_match(message: String) -> void:
 		await get_tree().create_timer(3).timeout
 		PeerData.match_in_progress = false
 		SceneChanger.change_scene_to_packed(SceneChanger.lobby)
+
+
+func _on_counting_spawner_all_scenes_spawned() -> void:
+	if multiplayer.get_unique_id() in PeerData.spectators:
+		$CanvasLayer.add_child(SpectatorMenu.instantiate())
 
 
 func _on_match_timer_timeout() -> void:

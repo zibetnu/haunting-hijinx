@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://gxh15sde0me5"]
+[gd_scene load_steps=6 format=3 uid="uid://gxh15sde0me5"]
 
 [ext_resource type="Script" path="res://src/level/level.gd" id="1_el04s"]
 [ext_resource type="PackedScene" uid="uid://grxm3658ukjj" path="res://src/battery_spawner/battery_spawner.tscn" id="2_00csm"]
 [ext_resource type="PackedScene" uid="uid://chog7qk0d8wy7" path="res://src/timer_label/timer_label.tscn" id="2_tx202"]
+[ext_resource type="PackedScene" uid="uid://7wne64wo1epb" path="res://src/counting_spawner/counting_spawner.tscn" id="3_xxci0"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_63iby"]
 properties/0/path = NodePath("CanvasLayer/EndLabel:text")
@@ -30,7 +31,7 @@ spawn_root = NodePath("../SpawnRoot")
 [node name="SpawnRoot" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+[node name="CountingSpawner" parent="." instance=ExtResource("3_xxci0")]
 _spawnable_scenes = PackedStringArray("res://src/player/ghost.tscn", "res://src/player/hunter.tscn", "res://src/drain_area/drain_area.tscn")
 spawn_path = NodePath("../SpawnRoot")
 
