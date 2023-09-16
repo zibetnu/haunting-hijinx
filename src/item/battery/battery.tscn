@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bw11rdhjv3j62"]
+[gd_scene load_steps=11 format=3 uid="uid://bw11rdhjv3j62"]
 
 [ext_resource type="PackedScene" uid="uid://kdllrfca8fvn" path="res://src/item/item.tscn" id="1_mpplq"]
 [ext_resource type="Script" path="res://src/item/battery/battery.gd" id="2_0rfgm"]
@@ -56,6 +56,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_nfhv7"]
 resource_name = "bob"
@@ -72,6 +84,46 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0, -16), Vector2(0, -13), Vector2(0, -16)]
+}
+
+[sub_resource type="Animation" id="Animation_0qiit"]
+resource_name = "destroy"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -16), Vector2(0, -18), Vector2(0, -5)]
 }
 
 [sub_resource type="Animation" id="Animation_ge5ei"]
@@ -118,12 +170,14 @@ tracks/2/keys = {
 _data = {
 "RESET": SubResource("Animation_yccv2"),
 "bob": SubResource("Animation_nfhv7"),
+"destroy": SubResource("Animation_0qiit"),
 "spawn": SubResource("Animation_ge5ei")
 }
 
 [node name="Battery" instance=ExtResource("1_mpplq")]
 collision_mask = 30
 script = ExtResource("2_0rfgm")
+weak_to = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
 libraries = {
