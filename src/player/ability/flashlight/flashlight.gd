@@ -4,6 +4,8 @@ extends Ability
 
 const FLASHLIGHT_BODY_PERCENTAGE = 0.142
 const MAX_CAST_LENGTH = 48
+const LOW_CAST_LENGTH = 8
+const MIN_CAST_LENGTH = 4
 
 @export var action_name: String
 @export var active_modifier: Modifier
@@ -15,10 +17,31 @@ const MAX_CAST_LENGTH = 48
 var battery := max_battery:
 	set(value):
 		battery = clamp(value, 0, max_battery)
+		var cast_length: float
+		if not is_battery_low:
+			cast_length = (
+					LOW_CAST_LENGTH
+					+ (MAX_CAST_LENGTH - LOW_CAST_LENGTH)
+					* ((percentage - low_percentage) / (1.0 - low_percentage))
+			)
+
+		else:
+			cast_length = (
+					MIN_CAST_LENGTH
+					+ (LOW_CAST_LENGTH - MIN_CAST_LENGTH)
+					* (percentage / low_percentage)
+			)
+
 		_sprite.material.set_shader_parameter("percentage",
-				FLASHLIGHT_BODY_PERCENTAGE + (1.0 - FLASHLIGHT_BODY_PERCENTAGE) * percentage)
+				(
+						FLASHLIGHT_BODY_PERCENTAGE
+						+ (1.0 - FLASHLIGHT_BODY_PERCENTAGE)
+						* (cast_length / MAX_CAST_LENGTH)
+				)
+		)
+
 		for raycast in _raycast_parent.get_children():
-			raycast.target_position.x = MAX_CAST_LENGTH * percentage
+			raycast.target_position.x = cast_length
 
 var flashlight_rotation: float:
 	get:
