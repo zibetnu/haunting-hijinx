@@ -32,7 +32,7 @@ spawn_root = NodePath("../SpawnRoot")
 y_sort_enabled = true
 
 [node name="CountingSpawner" parent="." instance=ExtResource("3_xxci0")]
-_spawnable_scenes = PackedStringArray("res://src/player/ghost.tscn", "res://src/player/hunter.tscn", "res://src/drain_area/drain_area.tscn")
+_spawnable_scenes = PackedStringArray("res://src/player/ghost.tscn", "res://src/player/hunter.tscn", "res://src/drain_area/drain_area.tscn", "res://src/item/battery/battery.tscn")
 spawn_path = NodePath("../SpawnRoot")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
