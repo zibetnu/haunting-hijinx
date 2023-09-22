@@ -50,6 +50,10 @@ func add_player(id: int) -> void:
 	$SpawnRoot.add_child(instance, true)
 
 
+func allow_set_pause() -> bool:
+	return not %EndLabel.visible or not get_tree().paused
+
+
 func remove_player(id: int) -> void:
 	for player in get_tree().get_nodes_in_group("players"):
 		if player.peer_id != id:

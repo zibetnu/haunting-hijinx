@@ -15,7 +15,7 @@ properties/1/spawn = true
 properties/1/sync = false
 properties/1/watch = true
 
-[node name="Level" type="Node2D"]
+[node name="Level" type="Node2D" groups=["pause_sync"]]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_el04s")
