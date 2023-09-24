@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://q4hv30obsxd1"]
+[gd_scene load_steps=37 format=3 uid="uid://q4hv30obsxd1"]
 
 [ext_resource type="PackedScene" uid="uid://bavgk282m5ngb" path="res://src/player/player.tscn" id="1_d2bpu"]
 [ext_resource type="PackedScene" uid="uid://sl14guycomx6" path="res://src/player/state_machine/state/move/move.tscn" id="2_jq5ho"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://btr8qn664xh5t" path="res://src/player/ability/condition_transition/condition/action_pressed/action_pressed.tscn" id="7_gox2v"]
 [ext_resource type="PackedScene" uid="uid://crwq6sbjhom1j" path="res://src/player/ability/condition_transition/condition/composite/composite.tscn" id="9_0tn6j"]
 [ext_resource type="PackedScene" uid="uid://dxofrnlm2yidj" path="res://src/player/ability/invisible/invisible.tscn" id="9_lesqt"]
+[ext_resource type="PackedScene" uid="uid://baeocccva688n" path="res://src/player/ability/player_touched/player_touched.tscn" id="9_v7j0p"]
 [ext_resource type="PackedScene" uid="uid://b53lkv5ig8ohp" path="res://src/player/ability/condition_transition/condition/nodes_in_group/nodes_in_group.tscn" id="10_djtg3"]
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="10_dq2x2"]
 [ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="12_iuly0"]
@@ -144,7 +145,12 @@ states = [NodePath("../../StateMachine/Grab")]
 player = NodePath("../..")
 states = [NodePath("../../StateMachine/Idle"), NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Panic")]
 
-[node name="Sprint" parent="Abilities" index="7" node_paths=PackedStringArray("condition", "enter_state", "exit_state", "player", "states") instance=ExtResource("5_bi4dw")]
+[node name="PlayerTouched" parent="Abilities" index="7" node_paths=PackedStringArray("touched_state", "player", "states") instance=ExtResource("9_v7j0p")]
+touched_state = NodePath("../../StateMachine/PanicReset")
+player = NodePath("../..")
+states = [NodePath("../../StateMachine/Panic")]
+
+[node name="Sprint" parent="Abilities" index="8" node_paths=PackedStringArray("condition", "enter_state", "exit_state", "player", "states") instance=ExtResource("5_bi4dw")]
 condition = NodePath("ActionPressed")
 enter_state = NodePath("../../StateMachine/Sprint")
 exit_state = NodePath("../../StateMachine/Move")
@@ -155,7 +161,7 @@ states = [NodePath("../../StateMachine/Move"), NodePath("../../StateMachine/Spri
 action_name = "button_1"
 controller = NodePath("../../../Controllers/Synced")
 
-[node name="Summon" parent="Abilities" index="8" node_paths=PackedStringArray("condition", "enter_state", "exit_state", "player", "states") instance=ExtResource("5_bi4dw")]
+[node name="Summon" parent="Abilities" index="9" node_paths=PackedStringArray("condition", "enter_state", "exit_state", "player", "states") instance=ExtResource("5_bi4dw")]
 condition = NodePath("Composite")
 enter_state = NodePath("../../StateMachine/Summon")
 exit_state = NodePath("../../StateMachine/Idle")

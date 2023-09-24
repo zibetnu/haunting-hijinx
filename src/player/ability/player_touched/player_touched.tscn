@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://baeocccva688n"]
+
+[ext_resource type="Script" path="res://src/player/ability/player_touched/player_touched.gd" id="1_w0h2t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sn5sg"]
+radius = 16.0
+
+[node name="PlayerTouched" type="Node2D"]
+script = ExtResource("1_w0h2t")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_sn5sg")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
