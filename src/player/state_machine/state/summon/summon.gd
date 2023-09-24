@@ -17,19 +17,17 @@ var max_charge: int:
 
 func physics_update(_delta: float) -> void:
 	charge += 1
-	if charge < max_charge:
-		return
 
-	if not multiplayer.is_server():
-		return
 
+func spawn_scenes() -> void:
 	for hunter in get_tree().get_nodes_in_group("hunters"):
 		var instance := summon_scene.instantiate()
 		instance.global_position = hunter.global_position
 		owner.get_parent().add_child(instance, true)
 
-	state_machine.transition_to.rpc(exit_state.name)
-
 
 func exit() -> void:
+	if charge == max_charge and multiplayer.is_server():
+		spawn_scenes()
+
 	charge = 0
