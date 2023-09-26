@@ -43,6 +43,8 @@ func add_participant(id: int) -> void:
 func add_spectator(id: int) -> void:
 	var card := _instantiate_card(id)
 	%SpectateCards.add_child(card, true)
+	%GhostSelector.add_item(PeerData.peer_names[card.peer_id], card.peer_id)
+	%GhostSelector.set_item_disabled(%GhostSelector.get_item_index(id), true)
 
 
 func _instantiate_card(id: int) -> Node:
