@@ -30,7 +30,7 @@ properties/3/spawn = true
 properties/3/sync = true
 properties/3/watch = true
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("modifier_manager", "state_machine") groups=["players"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("modifier_manager", "state_machine") groups=["cutscene_sync", "players"]]
 collision_layer = 0
 collision_mask = 7
 motion_mode = 1
@@ -39,6 +39,7 @@ modifier_manager = NodePath("ModifierManager")
 state_machine = NodePath("StateMachine")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_mode = 3
 enabled = false
 limit_left = 0
 limit_top = 0

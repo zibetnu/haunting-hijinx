@@ -92,6 +92,10 @@ func take_damage(source: DamageSource) -> void:
 	$StateMachine.handle_damage(source)
 
 
+func _on_cutscene_ended(_cutscene_name: String) -> void:
+	$Camera2D.enabled = peer_id == multiplayer.get_unique_id()
+
+
 func _serialize_position(unserialized_position: Vector2) -> int:
 	var serialized_position := 0
 	serialized_position |= roundi(unserialized_position.x * AXIS_MULTIPLIER)

@@ -2,11 +2,6 @@
 
 [ext_resource type="Script" path="res://src/player/state_machine/state/grab/grab.gd" id="1_cobrf"]
 
-[node name="Grab" type="Node"]
+[node name="Grab" type="Node" groups=["cutscene_sync"]]
 process_mode = 3
 script = ExtResource("1_cobrf")
-
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
