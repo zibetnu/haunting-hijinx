@@ -30,6 +30,11 @@ func _on_right_button_pressed() -> void:
 
 func _set_active_camera() -> void:
 	for player in get_tree().get_nodes_in_group("players"):
-		player.get_node("Camera2D").enabled = player.peer_id == PeerData.participants[spectating_index]
+		player.get_node("Camera2D").enabled = (
+				player.peer_id == PeerData.participants[spectating_index]
+		)
 
-	%SpectatingLabel.text = PeerData.peer_names.get(PeerData.participants[spectating_index], "username")
+	%SpectatingLabel.text = PeerData.peer_names.get(
+			PeerData.participants[spectating_index],
+			"username"
+	)
