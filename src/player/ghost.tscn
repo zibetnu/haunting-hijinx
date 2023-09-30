@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://q4hv30obsxd1"]
+[gd_scene load_steps=34 format=3 uid="uid://q4hv30obsxd1"]
 
 [ext_resource type="PackedScene" uid="uid://bavgk282m5ngb" path="res://src/player/player.tscn" id="1_d2bpu"]
 [ext_resource type="PackedScene" uid="uid://sl14guycomx6" path="res://src/player/state_machine/state/move/move.tscn" id="2_jq5ho"]
@@ -28,32 +28,13 @@
 [ext_resource type="PackedScene" uid="uid://bgun5xps8jth7" path="res://src/player/costume/ghost_placeholder/ghost_placeholder.tscn" id="23_06kgq"]
 [ext_resource type="PackedScene" uid="uid://bdng1f72aossh" path="res://src/player/state_machine/state/grab/grab.tscn" id="25_porwh"]
 [ext_resource type="PackedScene" uid="uid://q1qfh845n0vj" path="res://src/shadow/shadow.tscn" id="25_vroaq"]
-[ext_resource type="PackedScene" uid="uid://br1vpvd5tnr43" path="res://src/progress_sprite_2d/progress_sprite_2d.tscn" id="26_j4fm2"]
 [ext_resource type="PackedScene" uid="uid://2f424rmfm3g4" path="res://src/player/notification/state_notification/state_notification.tscn" id="26_w8yle"]
-[ext_resource type="Shader" path="res://src/shaders/multi_frame_wipe/multi_frame_wipe.gdshader" id="27_b2b73"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="28_40vgb"]
 [ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_sis1v"]
+[ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/auto_texture_progress_bar/auto_texture_progress_bar.tscn" id="30_jn0ro"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vl8u3"]
 radius = 16.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wsbwa"]
-resource_local_to_scene = true
-shader = ExtResource("27_b2b73")
-shader_parameter/percentage = 1.0
-shader_parameter/hidden_alpha = 0.25
-shader_parameter/flip = true
-shader_parameter/horizontal = false
-shader_parameter/frames = 1
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sy4ot"]
-resource_local_to_scene = true
-shader = ExtResource("27_b2b73")
-shader_parameter/percentage = 0.0
-shader_parameter/hidden_alpha = 0.25
-shader_parameter/flip = false
-shader_parameter/horizontal = true
-shader_parameter/frames = 1
 
 [node name="Ghost" node_paths=PackedStringArray("controller", "costume") groups=["ghosts"] instance=ExtResource("1_d2bpu")]
 collision_layer = 8
@@ -312,13 +293,15 @@ layout_mode = 2
 states = [NodePath("../../StateMachine/Stun"), NodePath("../../StateMachine/Panic"), NodePath("../../StateMachine/PanicReset")]
 state_machine = NodePath("../../StateMachine")
 
-[node name="ProgressSprite2D" parent="NotificationContainer/StateNotification" index="0" node_paths=PackedStringArray("source_node") instance=ExtResource("26_j4fm2")]
-material = SubResource("ShaderMaterial_wsbwa")
-position = Vector2(4, 4)
-texture = ExtResource("28_40vgb")
+[node name="AutoTextureProgressBar" parent="NotificationContainer/StateNotification" index="0" node_paths=PackedStringArray("source_node") instance=ExtResource("30_jn0ro")]
+layout_mode = 0
+fill_mode = 3
+texture_under = ExtResource("28_40vgb")
+texture_progress = ExtResource("28_40vgb")
+tint_under = Color(1, 1, 1, 0.247059)
 source_node = NodePath("../../..")
-progress_variable = "health"
-total_variable = "max_health"
+value_variable = "health"
+max_variable = "max_health"
 
 [node name="StateNotification2" parent="NotificationContainer" index="1" node_paths=PackedStringArray("states", "state_machine") instance=ExtResource("26_w8yle")]
 visible = false
@@ -327,10 +310,13 @@ layout_mode = 2
 states = [NodePath("../../StateMachine/Summon")]
 state_machine = NodePath("../../StateMachine")
 
-[node name="ProgressSprite2D" parent="NotificationContainer/StateNotification2" index="0" node_paths=PackedStringArray("source_node") instance=ExtResource("26_j4fm2")]
-material = SubResource("ShaderMaterial_sy4ot")
-position = Vector2(12, 4)
-texture = ExtResource("29_sis1v")
+[node name="AutoTextureProgressBar" parent="NotificationContainer/StateNotification2" index="0" node_paths=PackedStringArray("source_node") instance=ExtResource("30_jn0ro")]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+texture_under = ExtResource("29_sis1v")
+texture_progress = ExtResource("29_sis1v")
+tint_under = Color(1, 1, 1, 0.247059)
 source_node = NodePath("../../../StateMachine/Summon")
-progress_variable = "charge"
-total_variable = "max_charge"
+value_variable = "charge"
+max_variable = "max_charge"
