@@ -118,6 +118,7 @@ states = [NodePath("../../StateMachine/Dead")]
 state_machine = NodePath("../../StateMachine")
 
 [node name="AutoTextureProgressBar" parent="NotificationContainer/StateNotification" index="0" node_paths=PackedStringArray("source_node") instance=ExtResource("17_s4xae")]
+layout_mode = 0
 fill_mode = 3
 texture_under = ExtResource("19_1shfe")
 texture_progress = ExtResource("19_1shfe")
