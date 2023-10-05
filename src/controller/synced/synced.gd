@@ -33,13 +33,18 @@ const VECTOR_MASK = 0xff_ff_ff
 		peer_id = value
 		set_multiplayer_authority(value)
 		if _is_ready:
-			set_process(_should_process())
+			set_process(_is_authority())
 
 var _is_ready := false
 
 
 func _ready() -> void:
-	set_process(_should_process())
+	set_process(_is_authority())
+
+	# Get rid of the local controller if only remote input matters.
+	if not _is_authority():
+		local_controller.queue_free()
+
 	# Only the server needs to know about the server player's input.
 	if multiplayer.is_server():
 		$MultiplayerSynchronizer.public_visibility = false
@@ -76,7 +81,7 @@ func _serialize_vector(vector: Vector2) -> int:
 	return serialized_vector
 
 
-func _should_process() -> bool:
+func _is_authority() -> bool:
 	return get_multiplayer_authority() == multiplayer.get_unique_id()
 
 

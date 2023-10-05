@@ -72,15 +72,15 @@ states = [NodePath("../../StateMachine/Dead")]
 [node name="Controllers" type="Node2D" parent="." index="5"]
 
 [node name="Synced" parent="Controllers" index="0" node_paths=PackedStringArray("local_controller") instance=ExtResource("4_cfq33")]
-local_controller = NodePath("../Composite")
+local_controller = NodePath("Composite")
 
-[node name="Composite" parent="Controllers" index="1" node_paths=PackedStringArray("controller_1", "controller_2") instance=ExtResource("6_b6ftt")]
-controller_1 = NodePath("../JoypadController")
-controller_2 = NodePath("../KeyboardAndMouse")
+[node name="Composite" parent="Controllers/Synced" index="1" node_paths=PackedStringArray("controller_1", "controller_2") instance=ExtResource("6_b6ftt")]
+controller_1 = NodePath("JoypadController")
+controller_2 = NodePath("KeyboardAndMouse")
 
-[node name="JoypadController" parent="Controllers" index="2" instance=ExtResource("2_ha5kb")]
+[node name="JoypadController" parent="Controllers/Synced/Composite" index="0" instance=ExtResource("2_ha5kb")]
 
-[node name="KeyboardAndMouse" parent="Controllers" index="3" instance=ExtResource("7_178cm")]
+[node name="KeyboardAndMouse" parent="Controllers/Synced/Composite" index="1" instance=ExtResource("7_178cm")]
 
 [node name="DamageHandlers" type="Node" parent="." index="6"]
 
