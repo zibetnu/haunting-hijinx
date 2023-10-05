@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://q4hv30obsxd1"]
+[gd_scene load_steps=35 format=3 uid="uid://q4hv30obsxd1"]
 
 [ext_resource type="PackedScene" uid="uid://bavgk282m5ngb" path="res://src/player/player.tscn" id="1_d2bpu"]
 [ext_resource type="PackedScene" uid="uid://sl14guycomx6" path="res://src/player/state_machine/state/move/move.tscn" id="2_jq5ho"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="10_dq2x2"]
 [ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="12_iuly0"]
 [ext_resource type="PackedScene" uid="uid://2hyqex1r6vhj" path="res://src/player/damage_handler/standard/stunnable/stunnable.tscn" id="13_742x4"]
+[ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="15_r4ns7"]
 [ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="15_vo03g"]
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="16_k7qd8"]
 [ext_resource type="PackedScene" uid="uid://cdk2uf7ebeu5u" path="res://src/player/state_machine/state/timed_state/panic/panic.tscn" id="17_8tcsn"]
@@ -164,15 +165,18 @@ invert = true
 [node name="Controllers" type="Node2D" parent="." index="5"]
 
 [node name="Synced" parent="Controllers" index="0" node_paths=PackedStringArray("local_controller") instance=ExtResource("12_iuly0")]
-local_controller = NodePath("Composite")
+local_controller = NodePath("AntiButtonSpam")
 
-[node name="Composite" parent="Controllers/Synced" index="1" node_paths=PackedStringArray("controller_1", "controller_2") instance=ExtResource("15_vo03g")]
+[node name="AntiButtonSpam" parent="Controllers/Synced" index="1" node_paths=PackedStringArray("controller") instance=ExtResource("15_r4ns7")]
+controller = NodePath("Composite")
+
+[node name="Composite" parent="Controllers/Synced/AntiButtonSpam" index="2" node_paths=PackedStringArray("controller_1", "controller_2") instance=ExtResource("15_vo03g")]
 controller_1 = NodePath("JoypadController")
 controller_2 = NodePath("KeyboardAndMouse")
 
-[node name="JoypadController" parent="Controllers/Synced/Composite" index="0" instance=ExtResource("10_dq2x2")]
+[node name="JoypadController" parent="Controllers/Synced/AntiButtonSpam/Composite" index="0" instance=ExtResource("10_dq2x2")]
 
-[node name="KeyboardAndMouse" parent="Controllers/Synced/Composite" index="1" instance=ExtResource("16_k7qd8")]
+[node name="KeyboardAndMouse" parent="Controllers/Synced/AntiButtonSpam/Composite" index="1" instance=ExtResource("16_k7qd8")]
 
 [node name="DamageHandlers" type="Node" parent="." index="6"]
 

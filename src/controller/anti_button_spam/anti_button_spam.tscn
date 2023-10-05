@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://w68cagofxelw"]
+
+[ext_resource type="Script" path="res://src/controller/anti_button_spam/anti_button_spam.gd" id="1_44g47"]
+
+[node name="AntiButtonSpam" type="Node2D"]
+script = ExtResource("1_44g47")
+
+[node name="Button1ReleaseTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Button2ReleaseTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Button1ReleaseTimer" to="." method="_on_button_1_release_timer_timeout"]
+[connection signal="timeout" from="Button2ReleaseTimer" to="." method="_on_button_2_release_timer_timeout"]
