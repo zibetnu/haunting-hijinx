@@ -4,6 +4,7 @@
 
 [node name="AntiButtonSpam" type="Node2D"]
 script = ExtResource("1_44g47")
+button_release_time = 0.08
 
 [node name="Button1ReleaseTimer" type="Timer" parent="."]
 one_shot = true
