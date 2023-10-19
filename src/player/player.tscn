@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://bavgk282m5ngb"]
+[gd_scene load_steps=17 format=3 uid="uid://bavgk282m5ngb"]
 
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_6v2a1"]
 [ext_resource type="PackedScene" uid="uid://dc4575e1liaov" path="res://src/player/peer_name_label/peer_name_label.tscn" id="2_0jtls"]
 [ext_resource type="PackedScene" uid="uid://cu76mf12xkeww" path="res://src/player/state_machine/state_machine.tscn" id="2_l2pty"]
+[ext_resource type="PackedScene" uid="uid://gvf2peg6yuns" path="res://src/controller/clear_on_pause/clear_on_pause.tscn" id="3_26pv3"]
 [ext_resource type="PackedScene" uid="uid://dwdii6bjahb54" path="res://src/player/modifier_manager/modifier_manager.tscn" id="4_s5jpx"]
 [ext_resource type="PackedScene" uid="uid://bs6cq3kw7xr4r" path="res://src/player/state_machine/state/dead/dead.tscn" id="5_3okmj"]
 [ext_resource type="PackedScene" uid="uid://begje6fek7jf4" path="res://src/player/state_machine/state/idle/idle.tscn" id="6_1tjkj"]
@@ -60,18 +61,21 @@ shape = SubResource("CircleShape2D_b6far")
 [node name="Controllers" type="Node2D" parent="."]
 
 [node name="Synced" parent="Controllers" node_paths=PackedStringArray("local_controller") instance=ExtResource("9_f6unb")]
-local_controller = NodePath("AntiButtonSpam")
+local_controller = NodePath("ClearOnPause")
 
-[node name="AntiButtonSpam" parent="Controllers/Synced" node_paths=PackedStringArray("controller") instance=ExtResource("10_c0syx")]
+[node name="ClearOnPause" parent="Controllers/Synced" node_paths=PackedStringArray("controller") instance=ExtResource("3_26pv3")]
+controller = NodePath("AntiButtonSpam")
+
+[node name="AntiButtonSpam" parent="Controllers/Synced/ClearOnPause" node_paths=PackedStringArray("controller") instance=ExtResource("10_c0syx")]
 controller = NodePath("Composite")
 
-[node name="Composite" parent="Controllers/Synced/AntiButtonSpam" node_paths=PackedStringArray("controller_1", "controller_2") instance=ExtResource("11_f5gsk")]
+[node name="Composite" parent="Controllers/Synced/ClearOnPause/AntiButtonSpam" node_paths=PackedStringArray("controller_1", "controller_2") instance=ExtResource("11_f5gsk")]
 controller_1 = NodePath("JoypadController")
 controller_2 = NodePath("KeyboardAndMouse")
 
-[node name="JoypadController" parent="Controllers/Synced/AntiButtonSpam/Composite" instance=ExtResource("12_7w4qs")]
+[node name="JoypadController" parent="Controllers/Synced/ClearOnPause/AntiButtonSpam/Composite" instance=ExtResource("12_7w4qs")]
 
-[node name="KeyboardAndMouse" parent="Controllers/Synced/AntiButtonSpam/Composite" instance=ExtResource("13_prrkg")]
+[node name="KeyboardAndMouse" parent="Controllers/Synced/ClearOnPause/AntiButtonSpam/Composite" instance=ExtResource("13_prrkg")]
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_interval = 1.0
