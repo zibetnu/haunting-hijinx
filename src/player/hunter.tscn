@@ -1,17 +1,12 @@
-[gd_scene load_steps=23 format=3 uid="uid://dsl4rd03hiysv"]
+[gd_scene load_steps=18 format=3 uid="uid://dsl4rd03hiysv"]
 
 [ext_resource type="PackedScene" uid="uid://bavgk282m5ngb" path="res://src/player/player.tscn" id="1_to4j3"]
-[ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="2_ha5kb"]
 [ext_resource type="PackedScene" uid="uid://860yylsw16sx" path="res://src/player/ability/animation_setter/animation_setter.tscn" id="2_lwjsd"]
 [ext_resource type="PackedScene" uid="uid://dyev6t6l5ykdp" path="res://src/player/ability/flashlight/flashlight.tscn" id="3_5tbkl"]
 [ext_resource type="PackedScene" uid="uid://31u5yaj3y8wu" path="res://src/player/ability/direction_setter/direction_setter.tscn" id="3_phihg"]
-[ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="4_cfq33"]
 [ext_resource type="PackedScene" uid="uid://c76lyvhv5uic7" path="res://src/player/damage_handler/instant_death/instant_death.tscn" id="5_6ne1d"]
-[ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="6_b6ftt"]
 [ext_resource type="PackedScene" uid="uid://c83xurnfijlnw" path="res://src/player/ability/invulnerable/invulnerable.tscn" id="6_fd4p3"]
 [ext_resource type="PackedScene" uid="uid://skggbcfxrt3w" path="res://src/player/ability/revivable/revivable.tscn" id="6_x7j0x"]
-[ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="7_178cm"]
-[ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="8_680v8"]
 [ext_resource type="PackedScene" uid="uid://2btutei2ijcx" path="res://src/player/ability/aura_sense/aura_sense.tscn" id="10_y8xbh"]
 [ext_resource type="PackedScene" uid="uid://by4phnj1wlefr" path="res://src/player/state_machine/exit_trigger/exit_trigger.tscn" id="12_0llgs"]
 [ext_resource type="PackedScene" uid="uid://myko8836tn6o" path="res://src/rotation_to_vector/rotation_to_vector.tscn" id="12_tg1e4"]
@@ -23,10 +18,9 @@
 [ext_resource type="PackedScene" uid="uid://d12pvd5crkjdc" path="res://src/player/notification/battery_dead/battery_dead.tscn" id="21_85b84"]
 [ext_resource type="PackedScene" uid="uid://dk7au4to2006x" path="res://src/player/notification/battery_low/battery_low.tscn" id="22_g4cek"]
 
-[node name="Hunter" node_paths=PackedStringArray("controller", "costume") groups=["hunters"] instance=ExtResource("1_to4j3")]
+[node name="Hunter" node_paths=PackedStringArray("costume") groups=["hunters"] instance=ExtResource("1_to4j3")]
 collision_layer = 4
 collision_mask = 23
-controller = NodePath("Controllers/Synced")
 costume = NodePath("YSort/HunterPlaceholder")
 
 [node name="Abilities" type="Node2D" parent="." index="4"]
@@ -70,23 +64,7 @@ revives_with = 1
 player = NodePath("../..")
 states = [NodePath("../../StateMachine/Dead")]
 
-[node name="Controllers" type="Node2D" parent="." index="5"]
-
-[node name="Synced" parent="Controllers" index="0" node_paths=PackedStringArray("local_controller") instance=ExtResource("4_cfq33")]
-local_controller = NodePath("AntiButtonSpam")
-
-[node name="AntiButtonSpam" parent="Controllers/Synced" index="0" node_paths=PackedStringArray("controller") instance=ExtResource("8_680v8")]
-controller = NodePath("Composite")
-
-[node name="Composite" parent="Controllers/Synced/AntiButtonSpam" index="2" node_paths=PackedStringArray("controller_1", "controller_2") instance=ExtResource("6_b6ftt")]
-controller_1 = NodePath("JoypadController")
-controller_2 = NodePath("KeyboardAndMouse")
-
-[node name="JoypadController" parent="Controllers/Synced/AntiButtonSpam/Composite" index="0" instance=ExtResource("2_ha5kb")]
-
-[node name="KeyboardAndMouse" parent="Controllers/Synced/AntiButtonSpam/Composite" index="1" instance=ExtResource("7_178cm")]
-
-[node name="DamageHandlers" type="Node" parent="." index="6"]
+[node name="DamageHandlers" type="Node" parent="." index="5"]
 
 [node name="InstantDeath" parent="DamageHandlers" index="0" node_paths=PackedStringArray("dead_state") instance=ExtResource("5_6ne1d")]
 dead_state = NodePath("../../StateMachine/Dead")

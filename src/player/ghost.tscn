@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://q4hv30obsxd1"]
+[gd_scene load_steps=30 format=3 uid="uid://q4hv30obsxd1"]
 
 [ext_resource type="PackedScene" uid="uid://bavgk282m5ngb" path="res://src/player/player.tscn" id="1_d2bpu"]
 [ext_resource type="PackedScene" uid="uid://sl14guycomx6" path="res://src/player/state_machine/state/move/move.tscn" id="2_jq5ho"]
@@ -18,12 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dxofrnlm2yidj" path="res://src/player/ability/invisible/invisible.tscn" id="9_lesqt"]
 [ext_resource type="PackedScene" uid="uid://baeocccva688n" path="res://src/player/ability/player_touched/player_touched.tscn" id="9_v7j0p"]
 [ext_resource type="PackedScene" uid="uid://b53lkv5ig8ohp" path="res://src/player/ability/condition_transition/condition/nodes_in_group/nodes_in_group.tscn" id="10_djtg3"]
-[ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="10_dq2x2"]
-[ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="12_iuly0"]
 [ext_resource type="PackedScene" uid="uid://2hyqex1r6vhj" path="res://src/player/damage_handler/standard/stunnable/stunnable.tscn" id="13_742x4"]
-[ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="15_r4ns7"]
-[ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="15_vo03g"]
-[ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="16_k7qd8"]
 [ext_resource type="PackedScene" uid="uid://cdk2uf7ebeu5u" path="res://src/player/state_machine/state/timed_state/panic/panic.tscn" id="17_8tcsn"]
 [ext_resource type="PackedScene" uid="uid://bet5y1i5vddfq" path="res://src/player/state_machine/state/timed_state/panic/panic_reset/panic_reset.tscn" id="18_7jfgb"]
 [ext_resource type="PackedScene" uid="uid://bgun5xps8jth7" path="res://src/player/costume/ghost_placeholder/ghost_placeholder.tscn" id="23_06kgq"]
@@ -37,19 +32,14 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_vl8u3"]
 radius = 16.0
 
-[node name="Ghost" node_paths=PackedStringArray("controller", "costume") groups=["ghosts"] instance=ExtResource("1_d2bpu")]
+[node name="Ghost" node_paths=PackedStringArray("costume") groups=["ghosts"] instance=ExtResource("1_d2bpu")]
 collision_layer = 8
 collision_mask = 3
-controller = NodePath("Controllers/Synced")
 costume = NodePath("YSort/GhostPlaceholder")
 move_speed = 92
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("CircleShape2D_vl8u3")
-
-[node name="PeerNameLabel" parent="." index="3"]
-offset_top = -52.0
-offset_bottom = -26.0
 
 [node name="Abilities" type="Node2D" parent="." index="4"]
 
@@ -162,23 +152,7 @@ controller = NodePath("../../../../Controllers/Synced")
 group = "drain_areas"
 invert = true
 
-[node name="Controllers" type="Node2D" parent="." index="5"]
-
-[node name="Synced" parent="Controllers" index="0" node_paths=PackedStringArray("local_controller") instance=ExtResource("12_iuly0")]
-local_controller = NodePath("AntiButtonSpam")
-
-[node name="AntiButtonSpam" parent="Controllers/Synced" index="1" node_paths=PackedStringArray("controller") instance=ExtResource("15_r4ns7")]
-controller = NodePath("Composite")
-
-[node name="Composite" parent="Controllers/Synced/AntiButtonSpam" index="2" node_paths=PackedStringArray("controller_1", "controller_2") instance=ExtResource("15_vo03g")]
-controller_1 = NodePath("JoypadController")
-controller_2 = NodePath("KeyboardAndMouse")
-
-[node name="JoypadController" parent="Controllers/Synced/AntiButtonSpam/Composite" index="0" instance=ExtResource("10_dq2x2")]
-
-[node name="KeyboardAndMouse" parent="Controllers/Synced/AntiButtonSpam/Composite" index="1" instance=ExtResource("16_k7qd8")]
-
-[node name="DamageHandlers" type="Node" parent="." index="6"]
+[node name="DamageHandlers" type="Node" parent="." index="5"]
 
 [node name="Standard" parent="DamageHandlers" index="0" node_paths=PackedStringArray("dead_state") instance=ExtResource("5_0ir6s")]
 dead_state = NodePath("../../StateMachine/Dead")
@@ -194,7 +168,7 @@ stun_state = NodePath("../../StateMachine/PanicReset")
 dead_state = NodePath("../../StateMachine/Dead")
 weak_to = 1
 
-[node name="RayCasts" type="Node2D" parent="." index="7"]
+[node name="RayCasts" type="Node2D" parent="." index="6"]
 
 [node name="RayCast2D" type="RayCast2D" parent="RayCasts" index="0"]
 target_position = Vector2(17, 0)
@@ -243,9 +217,16 @@ target_position = Vector2(17, 0)
 collision_mask = 5
 hit_from_inside = true
 
+[node name="PeerNameLabel" parent="." index="7"]
+offset_top = -52.0
+offset_bottom = -26.0
+
 [node name="StateLabel" parent="." index="8"]
 offset_top = 16.0
 offset_bottom = 42.0
+
+[node name="Shadow" parent="." index="10" instance=ExtResource("25_vroaq")]
+radius = 16.0
 
 [node name="Idle" parent="StateMachine" index="1" node_paths=PackedStringArray("move_state", "damage_handler")]
 move_state = NodePath("../Move")
@@ -280,9 +261,6 @@ damage_handler = NodePath("../../DamageHandlers/Standard")
 
 [node name="Grab" parent="StateMachine" index="8" node_paths=PackedStringArray("exit_state") instance=ExtResource("25_porwh")]
 exit_state = NodePath("../Panic")
-
-[node name="Shadow" parent="." index="11" instance=ExtResource("25_vroaq")]
-radius = 16.0
 
 [node name="GhostPlaceholder" parent="YSort" index="0" instance=ExtResource("23_06kgq")]
 position = Vector2(0, -8)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bavgk282m5ngb"]
+[gd_scene load_steps=16 format=3 uid="uid://bavgk282m5ngb"]
 
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_6v2a1"]
 [ext_resource type="PackedScene" uid="uid://dc4575e1liaov" path="res://src/player/peer_name_label/peer_name_label.tscn" id="2_0jtls"]
@@ -8,6 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://begje6fek7jf4" path="res://src/player/state_machine/state/idle/idle.tscn" id="6_1tjkj"]
 [ext_resource type="PackedScene" uid="uid://sl14guycomx6" path="res://src/player/state_machine/state/move/move.tscn" id="6_o4bwf"]
 [ext_resource type="PackedScene" uid="uid://dfqrvpndkixey" path="res://src/player/state_machine/state_label/state_label.tscn" id="7_drloo"]
+[ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="9_f6unb"]
+[ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="10_c0syx"]
+[ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="11_f5gsk"]
+[ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="12_7w4qs"]
+[ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="13_prrkg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b6far"]
 radius = 8.0
@@ -30,11 +35,12 @@ properties/3/spawn = true
 properties/3/sync = false
 properties/3/watch = true
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("modifier_manager", "state_machine") groups=["cutscene_sync", "players"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("controller", "modifier_manager", "state_machine") groups=["cutscene_sync", "players"]]
 collision_layer = 0
 collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_6v2a1")
+controller = NodePath("Controllers/Synced")
 modifier_manager = NodePath("ModifierManager")
 state_machine = NodePath("StateMachine")
 
@@ -50,6 +56,22 @@ limit_bottom = 6400
 position = Vector2(2.38419e-07, -8.9407e-08)
 scale = Vector2(0.99, 0.99)
 shape = SubResource("CircleShape2D_b6far")
+
+[node name="Controllers" type="Node2D" parent="."]
+
+[node name="Synced" parent="Controllers" node_paths=PackedStringArray("local_controller") instance=ExtResource("9_f6unb")]
+local_controller = NodePath("AntiButtonSpam")
+
+[node name="AntiButtonSpam" parent="Controllers/Synced" node_paths=PackedStringArray("controller") instance=ExtResource("10_c0syx")]
+controller = NodePath("Composite")
+
+[node name="Composite" parent="Controllers/Synced/AntiButtonSpam" node_paths=PackedStringArray("controller_1", "controller_2") instance=ExtResource("11_f5gsk")]
+controller_1 = NodePath("JoypadController")
+controller_2 = NodePath("KeyboardAndMouse")
+
+[node name="JoypadController" parent="Controllers/Synced/AntiButtonSpam/Composite" instance=ExtResource("12_7w4qs")]
+
+[node name="KeyboardAndMouse" parent="Controllers/Synced/AntiButtonSpam/Composite" instance=ExtResource("13_prrkg")]
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_interval = 1.0
