@@ -14,6 +14,7 @@ func _on_controller_input_handled() -> void:
 	look_vector = controller.look_vector
 	_handle_button("button_1_pressed", $Button1ReleaseTimer)
 	_handle_button("button_2_pressed", $Button2ReleaseTimer)
+	input_handled.emit()
 
 
 func _handle_button(button_name: String, timer: Timer) -> void:
