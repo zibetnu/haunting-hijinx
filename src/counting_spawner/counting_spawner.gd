@@ -2,7 +2,7 @@ class_name CountingSpawner
 extends MultiplayerSpawner
 
 
-# Signal for when a client has spawned all of the scenes from the server. This
+# Signal for when all scenes from the server have been spawned. This
 # is useful for things that need to wait until those scenes are spawned.
 signal all_scenes_spawned
 
@@ -11,12 +11,13 @@ signal all_scenes_spawned
 var spawned_count_local := 0
 
 
-func _process(_delta: float) -> void:
+func _ready() -> void:
 	if not multiplayer.is_server():
-		set_process(false)
 		return
 
-	spawned_count_server = get_node(spawn_path).get_child_count()
+	var spawn_node := get_node(spawn_path)
+	spawn_node.child_entered_tree.connect(_on_spawn_node_child_entered_tree)
+	spawn_node.child_exiting_tree.connect(_on_spawn_node_child_exiting_tree)
 
 
 # TODO: add more robust checks that ensure the same scenes
@@ -40,3 +41,15 @@ func _on_multiplayer_synchronizer_synchronized() -> void:
 
 func _on_spawned(_node: Node) -> void:
 	spawned_count_local += 1
+
+
+func _on_spawn_node_child_entered_tree(_node: Node) -> void:
+	spawned_count_local += 1
+	spawned_count_server = spawned_count_local
+	_check_spawn_counts()
+
+
+func _on_spawn_node_child_exiting_tree(_node: Node) -> void:
+	spawned_count_local -= 1
+	spawned_count_server = spawned_count_local
+	_check_spawn_counts()

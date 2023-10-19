@@ -82,8 +82,15 @@ func _end_match(message: String) -> void:
 
 
 func _on_counting_spawner_all_scenes_spawned() -> void:
-	if multiplayer.get_unique_id() in PeerData.spectators:
-		$CanvasLayer.add_child(SpectatorMenu.instantiate())
+	if multiplayer.get_unique_id() not in PeerData.spectators:
+		return
+
+	if $CanvasLayer.get_children().any(
+			func(node): return node.name == "SpectatorMenu"
+	):
+		return
+
+	$CanvasLayer.add_child(SpectatorMenu.instantiate())
 
 
 func _on_match_timer_timeout() -> void:
