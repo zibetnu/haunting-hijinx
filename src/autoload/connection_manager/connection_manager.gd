@@ -3,7 +3,10 @@ extends Node
 
 signal client_created
 signal connection_closed
+signal ping_set(ping: int)
 signal server_created
+
+var ping := 0  # RTT in milliseconds.
 
 @export var dedicated_port := 9999
 
@@ -46,6 +49,21 @@ func create_server(port: int) -> void:
 
 	multiplayer.multiplayer_peer = peer
 	server_created.emit()
+
+
+@rpc("any_peer")
+func get_ping(ticks_usec: int) -> void:
+	if not multiplayer.is_server():
+		return
+
+	var id := multiplayer.get_remote_sender_id()
+	set_ping.rpc_id(id, ticks_usec)
+
+
+@rpc
+func set_ping(ticks_usec: int) -> void:
+	ping = round((Time.get_ticks_usec() - ticks_usec) / 1000.0)
+	ping_set.emit(ping)
 
 
 func _notify_user(message: String) -> void:
