@@ -1,9 +1,14 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://26wcy33gmwrh"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://26wcy33gmwrh"]
 
-[ext_resource type="Texture2D" uid="uid://bplx2fkaha3d1" path="res://assets/main_floor_tile_set.png" id="1_1fq85"]
+[ext_resource type="Texture2D" uid="uid://dk8xes2m52as5" path="res://assets/tile_sets/main_floor/diffuse.png" id="1_sq7tv"]
+[ext_resource type="Texture2D" uid="uid://e5tc842y66xv" path="res://assets/tile_sets/main_floor/normal.png" id="2_sjfxb"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_62uv1"]
+diffuse_texture = ExtResource("1_sq7tv")
+normal_texture = ExtResource("2_sjfxb")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5yopg"]
-texture = ExtResource("1_1fq85")
+texture = SubResource("CanvasTexture_62uv1")
 use_texture_padding = false
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
