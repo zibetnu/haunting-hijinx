@@ -1209,6 +1209,11 @@ texture = ExtResource("1_1fq85")
 24:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -24, 88, -24, 88, 8, -8, 8)
 
 [resource]
+occlusion_layer_0/light_mask = 1
+occlusion_layer_1/light_mask = 2
+occlusion_layer_2/light_mask = 4
+occlusion_layer_3/light_mask = 8
+occlusion_layer_4/light_mask = 16
 physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Carpet"
