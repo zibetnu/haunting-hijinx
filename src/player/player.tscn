@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bavgk282m5ngb"]
+[gd_scene load_steps=18 format=3 uid="uid://bavgk282m5ngb"]
 
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_6v2a1"]
 [ext_resource type="PackedScene" uid="uid://dc4575e1liaov" path="res://src/player/peer_name_label/peer_name_label.tscn" id="2_0jtls"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="11_f5gsk"]
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="12_7w4qs"]
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="13_prrkg"]
+[ext_resource type="PackedScene" uid="uid://huqpsgxdlemy" path="res://src/player/notification_layer/notification_layer.tscn" id="15_o6sh2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b6far"]
 radius = 8.0
@@ -112,7 +113,10 @@ state = NodePath("Idle")
 [node name="YSort" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="NotificationContainer" type="HBoxContainer" parent="."]
+[node name="NotificationLayer" parent="." node_paths=PackedStringArray("player") instance=ExtResource("15_o6sh2")]
+player = NodePath("..")
+
+[node name="NotificationContainer" type="HBoxContainer" parent="NotificationLayer"]
 z_index = 1
 offset_left = -32.0
 offset_top = -42.0

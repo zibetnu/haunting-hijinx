@@ -92,34 +92,34 @@ source_variable = "flashlight_rotation"
 
 [node name="HunterPlaceholder" parent="YSort" index="1" instance=ExtResource("15_sxqk2")]
 
-[node name="StateNotification" parent="NotificationContainer" index="0" node_paths=PackedStringArray("states", "state_machine") instance=ExtResource("16_abq7u")]
+[node name="StateNotification" parent="NotificationLayer/NotificationContainer" index="0" node_paths=PackedStringArray("states", "state_machine") instance=ExtResource("16_abq7u")]
 visible = false
 custom_minimum_size = Vector2(8, 8)
 layout_mode = 2
-states = [NodePath("../../StateMachine/Dead")]
-state_machine = NodePath("../../StateMachine")
+states = [NodePath("../../../StateMachine/Dead")]
+state_machine = NodePath("../../../StateMachine")
 
-[node name="AutoTextureProgressBar" parent="NotificationContainer/StateNotification" index="0" node_paths=PackedStringArray("source_node") instance=ExtResource("17_s4xae")]
+[node name="AutoTextureProgressBar" parent="NotificationLayer/NotificationContainer/StateNotification" index="0" node_paths=PackedStringArray("source_node") instance=ExtResource("17_s4xae")]
 layout_mode = 0
 fill_mode = 3
 texture_under = ExtResource("19_1shfe")
 texture_progress = ExtResource("19_1shfe")
 tint_under = Color(1, 1, 1, 0.247059)
-source_node = NodePath("../../../Abilities/Revivable")
+source_node = NodePath("../../../../Abilities/Revivable")
 value_variable = "progress"
 max_variable = "max_progress"
 
-[node name="AuraAlert" parent="NotificationContainer" index="1" node_paths=PackedStringArray("aura_sense") instance=ExtResource("20_g7gks")]
+[node name="AuraAlert" parent="NotificationLayer/NotificationContainer" index="1" node_paths=PackedStringArray("aura_sense") instance=ExtResource("20_g7gks")]
 visible = false
 layout_mode = 2
-aura_sense = NodePath("../../Abilities/AuraSense")
+aura_sense = NodePath("../../../Abilities/AuraSense")
 
-[node name="BatteryDead" parent="NotificationContainer" index="2" node_paths=PackedStringArray("flashlight") instance=ExtResource("21_85b84")]
+[node name="BatteryDead" parent="NotificationLayer/NotificationContainer" index="2" node_paths=PackedStringArray("flashlight") instance=ExtResource("21_85b84")]
 visible = false
 layout_mode = 2
-flashlight = NodePath("../../YSort/Flashlight")
+flashlight = NodePath("../../../YSort/Flashlight")
 
-[node name="BatteryLow" parent="NotificationContainer" index="3" node_paths=PackedStringArray("flashlight") instance=ExtResource("22_g4cek")]
+[node name="BatteryLow" parent="NotificationLayer/NotificationContainer" index="3" node_paths=PackedStringArray("flashlight") instance=ExtResource("22_g4cek")]
 visible = false
 layout_mode = 2
-flashlight = NodePath("../../YSort/Flashlight")
+flashlight = NodePath("../../../YSort/Flashlight")
