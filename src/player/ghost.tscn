@@ -217,11 +217,7 @@ target_position = Vector2(17, 0)
 collision_mask = 5
 hit_from_inside = true
 
-[node name="PeerNameLabel" parent="." index="7"]
-offset_top = -52.0
-offset_bottom = -26.0
-
-[node name="StateLabel" parent="." index="8"]
+[node name="StateLabel" parent="." index="7"]
 offset_top = 16.0
 offset_bottom = 42.0
 
