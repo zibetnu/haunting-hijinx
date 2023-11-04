@@ -71,6 +71,7 @@ y_sort_enabled = true
 position = Vector2(0, -8)
 
 [node name="Sprite2D" type="Sprite2D" parent="RotationNode2"]
+light_mask = 32
 material = ExtResource("2_hyikt")
 position = Vector2(36, 0)
 scale = Vector2(0.5, 0.5)
