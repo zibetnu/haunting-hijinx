@@ -118,6 +118,12 @@ toggle_fullscreen={
 
 [layer_names]
 
+2d_render/layer_1="Floor"
+2d_render/layer_2="Walls"
+2d_render/layer_3="Wall Tops"
+2d_render/layer_4="Wall Caps"
+2d_render/layer_5="Props"
+2d_render/layer_6="Players"
 2d_physics/layer_1="obstacles"
 2d_physics/layer_2="interactables"
 2d_physics/layer_3="physical players"
