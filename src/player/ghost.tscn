@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://q4hv30obsxd1"]
+[gd_scene load_steps=29 format=3 uid="uid://q4hv30obsxd1"]
 
 [ext_resource type="PackedScene" uid="uid://bavgk282m5ngb" path="res://src/player/player.tscn" id="1_d2bpu"]
 [ext_resource type="PackedScene" uid="uid://sl14guycomx6" path="res://src/player/state_machine/state/move/move.tscn" id="2_jq5ho"]
@@ -23,7 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://bet5y1i5vddfq" path="res://src/player/state_machine/state/timed_state/panic/panic_reset/panic_reset.tscn" id="18_7jfgb"]
 [ext_resource type="PackedScene" uid="uid://bgun5xps8jth7" path="res://src/player/costume/ghost_placeholder/ghost_placeholder.tscn" id="23_06kgq"]
 [ext_resource type="PackedScene" uid="uid://bdng1f72aossh" path="res://src/player/state_machine/state/grab/grab.tscn" id="25_porwh"]
-[ext_resource type="PackedScene" uid="uid://q1qfh845n0vj" path="res://src/shadow/shadow.tscn" id="25_vroaq"]
 [ext_resource type="PackedScene" uid="uid://2f424rmfm3g4" path="res://src/player/notification/state_notification/state_notification.tscn" id="26_w8yle"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="28_40vgb"]
 [ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_sis1v"]
@@ -220,9 +219,6 @@ hit_from_inside = true
 [node name="StateLabel" parent="." index="7"]
 offset_top = 16.0
 offset_bottom = 42.0
-
-[node name="Shadow" parent="." index="10" instance=ExtResource("25_vroaq")]
-radius = 16.0
 
 [node name="Idle" parent="StateMachine" index="1" node_paths=PackedStringArray("move_state", "damage_handler")]
 move_state = NodePath("../Move")
