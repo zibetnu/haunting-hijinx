@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bavgk282m5ngb"]
+[gd_scene load_steps=20 format=3 uid="uid://bavgk282m5ngb"]
 
 [ext_resource type="Script" path="res://src/player/player.gd" id="1_6v2a1"]
 [ext_resource type="PackedScene" uid="uid://dc4575e1liaov" path="res://src/player/peer_name_label/peer_name_label.tscn" id="2_0jtls"]
@@ -36,6 +36,15 @@ properties/3/path = NodePath(".:health")
 properties/3/spawn = true
 properties/3/sync = false
 properties/3/watch = true
+
+[sub_resource type="Gradient" id="Gradient_2xl7l"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3pli6"]
+gradient = SubResource("Gradient_2xl7l")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("controller", "modifier_manager", "state_machine") groups=["cutscene_sync", "players"]]
 collision_layer = 0
@@ -124,3 +133,9 @@ offset_right = 32.0
 offset_bottom = -26.0
 theme_override_constants/separation = 2
 alignment = 1
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+range_item_cull_mask = 33
+shadow_item_cull_mask = 18
+texture = SubResource("GradientTexture2D_3pli6")
+height = 16.0
