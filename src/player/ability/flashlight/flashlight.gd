@@ -2,10 +2,16 @@ class_name Flashlight
 extends Ability
 
 
-const FLASHLIGHT_BODY_PERCENTAGE = 0.142
-const MAX_CAST_LENGTH = 48
-const LOW_CAST_LENGTH = 8
-const MIN_CAST_LENGTH = 4
+const BEAM_FILE_PATH = "res://assets/flashlight/flashlight_beam_%s.png"
+const BEAM_TEXTURES: Array[CompressedTexture2D] = [
+	null,
+	preload(BEAM_FILE_PATH % 1), preload(BEAM_FILE_PATH % 2), preload(BEAM_FILE_PATH % 3),
+	preload(BEAM_FILE_PATH % 4), preload(BEAM_FILE_PATH % 5), preload(BEAM_FILE_PATH % 6),
+	preload(BEAM_FILE_PATH % 7), preload(BEAM_FILE_PATH % 8), preload(BEAM_FILE_PATH % 9),
+	preload(BEAM_FILE_PATH % 10), preload(BEAM_FILE_PATH % 11), preload(BEAM_FILE_PATH % 12),
+	preload(BEAM_FILE_PATH % 13), preload(BEAM_FILE_PATH % 14), preload(BEAM_FILE_PATH % 15),
+]
+const CAST_LENGTHS: Array[int] = [0, 4, 5, 6, 7, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48]
 
 @export var action_name: String
 @export var active_modifier: Modifier
@@ -16,32 +22,18 @@ const MIN_CAST_LENGTH = 4
 
 var battery := max_battery:
 	set(value):
-		battery = clamp(value, 0, max_battery)
-		var cast_length: float
+		battery = clampi(value, 0, max_battery)
 		if not is_battery_low:
-			cast_length = (
-					LOW_CAST_LENGTH
-					+ (MAX_CAST_LENGTH - LOW_CAST_LENGTH)
-					* ((percentage - low_percentage) / (1.0 - low_percentage))
+			_beam_frame = (
+					5
+					+ ceil((15 - 5) * ((percentage - low_percentage) / (1.0 - low_percentage)))
 			)
 
 		else:
-			cast_length = (
-					MIN_CAST_LENGTH
-					+ (LOW_CAST_LENGTH - MIN_CAST_LENGTH)
-					* (percentage / low_percentage)
-			)
-
-		_sprite.material.set_shader_parameter("percentage",
-				(
-						FLASHLIGHT_BODY_PERCENTAGE
-						+ (1.0 - FLASHLIGHT_BODY_PERCENTAGE)
-						* (cast_length / MAX_CAST_LENGTH)
-				)
-		)
+			_beam_frame = (ceil(4 * (percentage / low_percentage)))
 
 		for raycast in _raycast_parent.get_children():
-			raycast.target_position.x = cast_length
+			raycast.target_position.x = CAST_LENGTHS[_beam_frame]
 
 var flashlight_rotation: float:
 	get:
@@ -67,8 +59,21 @@ var percentage: float:
 		@warning_ignore("narrowing_conversion")
 		battery = max_battery * value
 
+var powered: bool:
+	set(value):
+		powered = value
+		_body.frame = int(value)
+		_light.visible = value
+
+var _beam_frame: int:
+	set(value):
+		_beam_frame = clampi(value, 0, BEAM_TEXTURES.size() - 1)
+		$RotationNode/Light/FloorLight.texture = BEAM_TEXTURES[_beam_frame]
+		$RotationNode/Light/WallLight.texture = BEAM_TEXTURES[_beam_frame]
+
 @onready var _raycast_parent := $RotationNode/RayCasts
-@onready var _sprite := $RotationNode2/Sprite2D
+@onready var _body := $RotationNode2/Body
+@onready var _light := $RotationNode/Light
 
 
 func _ready() -> void:
@@ -83,7 +88,7 @@ func _physics_process(delta: float) -> void:
 
 	var active := player.controller.is_action_pressed(action_name) and battery > 0
 	if multiplayer.is_server():
-		_sprite.frame = int(active)
+		powered = active
 
 	if not active:
 		player.modifier_manager.remove_modifier(active_modifier)
@@ -129,7 +134,7 @@ func _on_player_state_machine_transitioned(state_name: String) -> void:
 	$CollisionShape2D.disabled = not active
 	set_physics_process(active)
 	if not active:
-		_sprite.frame = 0
+		powered = false
 
 
 func _update_direction(delta: float) -> void:
