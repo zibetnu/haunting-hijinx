@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bw11rdhjv3j62"]
+[gd_scene load_steps=12 format=3 uid="uid://bw11rdhjv3j62"]
 
 [ext_resource type="PackedScene" uid="uid://kdllrfca8fvn" path="res://src/item/item.tscn" id="1_mpplq"]
 [ext_resource type="Script" path="res://src/item/battery/battery.gd" id="2_0rfgm"]
@@ -67,6 +67,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PointLight2D:height")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [16.0]
+}
 
 [sub_resource type="Animation" id="Animation_nfhv7"]
 resource_name = "bob"
@@ -83,6 +95,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0, -16), Vector2(0, -13), Vector2(0, -16)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D:height")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [16.0, 13.0, 16.0]
 }
 
 [sub_resource type="Animation" id="Animation_0qiit"]
@@ -173,6 +197,15 @@ _data = {
 "spawn": SubResource("Animation_ge5ei")
 }
 
+[sub_resource type="Gradient" id="Gradient_mfklc"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mnwpv"]
+gradient = SubResource("Gradient_mfklc")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
 [node name="Battery" instance=ExtResource("1_mpplq")]
 collision_mask = 30
 script = ExtResource("2_0rfgm")
@@ -190,3 +223,8 @@ texture = ExtResource("3_bermm")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="4"]
 stream = ExtResource("4_q0qy0")
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="5"]
+range_item_cull_mask = 27
+texture = SubResource("GradientTexture2D_mnwpv")
+height = 16.0
