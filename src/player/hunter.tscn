@@ -123,3 +123,6 @@ flashlight = NodePath("../../../YSort/Flashlight")
 visible = false
 layout_mode = 2
 flashlight = NodePath("../../../YSort/Flashlight")
+
+[node name="PointLight2D" parent="." index="11"]
+energy = 0.5

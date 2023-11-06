@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dyev6t6l5ykdp"]
+[gd_scene load_steps=9 format=3 uid="uid://dyev6t6l5ykdp"]
 
 [ext_resource type="Script" path="res://src/player/ability/flashlight/flashlight.gd" id="1_s0dbb"]
 [ext_resource type="PackedScene" uid="uid://ckw6ix6uyke2j" path="res://src/player/modifier_manager/modifier/speed_multiplier/speed_multiplier.tscn" id="2_7te73"]
@@ -7,6 +7,15 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b6far"]
 radius = 8.0
+
+[sub_resource type="Gradient" id="Gradient_2xl7l"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mw7bx"]
+gradient = SubResource("Gradient_2xl7l")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wbqrx"]
 properties/0/path = NodePath(".:battery")
@@ -82,6 +91,15 @@ shadow_item_cull_mask = 4
 offset = Vector2(48, 0)
 texture_scale = 0.5
 height = 32.0
+
+[node name="PlayerLight" type="PointLight2D" parent="RotationNode/Light"]
+position = Vector2(-32, 0)
+scale = Vector2(2, 2)
+energy = 0.5
+range_item_cull_mask = 33
+shadow_item_cull_mask = 18
+texture = SubResource("GradientTexture2D_mw7bx")
+height = 16.0
 
 [node name="RotationNode2" type="Node2D" parent="."]
 y_sort_enabled = true
