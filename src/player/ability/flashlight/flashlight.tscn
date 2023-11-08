@@ -87,6 +87,7 @@ height = 32.0
 
 [node name="WallLight" type="PointLight2D" parent="RotationNode/Light"]
 range_item_cull_mask = 26
+shadow_enabled = true
 shadow_item_cull_mask = 4
 offset = Vector2(48, 0)
 texture_scale = 0.5
