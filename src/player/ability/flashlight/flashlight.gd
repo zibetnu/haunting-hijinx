@@ -12,28 +12,24 @@ const BEAM_TEXTURES: Array[CompressedTexture2D] = [
 	preload(BEAM_FILE_PATH % 13), preload(BEAM_FILE_PATH % 14), preload(BEAM_FILE_PATH % 15),
 ]
 const CAST_LENGTHS: Array[int] = [0, 4, 5, 6, 7, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48]
+const CAST_LONG_MAX_INDEX = 15
+const CAST_LONG_MIN_INDEX = 5
+const CAST_SHORT_MAX_INDEX = 4
+
+@export_group("Battery")
+@export var time := 43
+@export var low_percentage := 0.5
+@export_group("", "")
 
 @export var action_name: String
 @export var active_modifier: Modifier
-@export var battery_time := 43
-@export var low_percentage := 0.5
 @export var turn_speed := 2 * PI
 @export var weak_to: DamageSource.Type
 
 var battery := max_battery:
 	set(value):
 		battery = clampi(value, 0, max_battery)
-		if not is_battery_low:
-			_beam_frame = (
-					5
-					+ ceil((15 - 5) * ((percentage - low_percentage) / (1.0 - low_percentage)))
-			)
-
-		else:
-			_beam_frame = (ceil(4 * (percentage / low_percentage)))
-
-		for raycast in _raycast_parent.get_children():
-			raycast.target_position.x = CAST_LENGTHS[_beam_frame]
+		_update_beam_frame()
 
 var flashlight_rotation: float:
 	get:
@@ -48,32 +44,38 @@ var is_battery_low: bool:
 
 var max_battery: int:
 	get:
-		return (battery_time
-				* ProjectSettings.get_setting("physics/common/physics_ticks_per_second"))
+		return time * ProjectSettings.get_setting("physics/common/physics_ticks_per_second")
 
 var percentage: float:
 	get:
 		return float(battery) / max_battery
 
 	set(value):
-		@warning_ignore("narrowing_conversion")
-		battery = max_battery * value
-
-var powered: bool:
-	set(value):
-		powered = value
-		_body.frame = int(value)
-		_light.visible = value
+		battery = roundi(max_battery * value)
 
 var _beam_frame: int:
 	set(value):
 		_beam_frame = clampi(value, 0, BEAM_TEXTURES.size() - 1)
+		for raycast in _raycast_parent.get_children():
+			raycast.target_position.x = CAST_LENGTHS[_beam_frame]
+
 		$RotationNode/Light/FloorLight.texture = BEAM_TEXTURES[_beam_frame]
 		$RotationNode/Light/WallLight.texture = BEAM_TEXTURES[_beam_frame]
 
-@onready var _raycast_parent := $RotationNode/RayCasts
+var _powered: bool:
+	set(value):
+		_powered = value
+		_body.frame = int(_powered)
+		_light.visible = _powered
+		if _powered:
+			player.modifier_manager.add_modifier(active_modifier)
+
+		else:
+			player.modifier_manager.remove_modifier(active_modifier)
+
 @onready var _body := $RotationNode2/Body
 @onready var _light := $RotationNode/Light
+@onready var _raycast_parent := $RotationNode/RayCasts
 
 
 func _ready() -> void:
@@ -85,16 +87,12 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	_update_direction(delta)
-
-	var active := player.controller.is_action_pressed(action_name) and battery > 0
 	if multiplayer.is_server():
-		powered = active
+		_powered = player.controller.is_action_pressed(action_name) and battery > 0
 
-	if not active:
-		player.modifier_manager.remove_modifier(active_modifier)
+	if not _powered:
 		return
 
-	player.modifier_manager.add_modifier(active_modifier)
 	battery -= 1
 	var all_colliders := []
 	for repeat_raycast in _raycast_parent.get_children():
@@ -134,7 +132,18 @@ func _on_player_state_machine_transitioned(state_name: String) -> void:
 	$CollisionShape2D.disabled = not active
 	set_physics_process(active)
 	if not active:
-		powered = false
+		_powered = false
+
+
+func _update_beam_frame() -> void:
+	if is_battery_low:
+		_beam_frame = (ceil(CAST_SHORT_MAX_INDEX * (percentage / low_percentage)))
+
+	else:
+		_beam_frame = (CAST_LONG_MIN_INDEX + ceil(
+				(CAST_LONG_MAX_INDEX - CAST_LONG_MIN_INDEX)
+				* ((percentage - low_percentage) / (1.0 - low_percentage))
+		))
 
 
 func _update_direction(delta: float) -> void:
