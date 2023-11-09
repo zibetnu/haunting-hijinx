@@ -43,11 +43,14 @@ func add_player(id: int) -> void:
 		].position
 		_hunters_spawned += 1
 
-	instance.camera_limits = $LevelLimit.position
 	instance.peer_id = id
 	instance.name += str(id)
 	instance.died.connect(_on_player_died)
 	$SpawnRoot.add_child(instance, true)
+	instance.camera.limit_left = $CameraLimits/TopLeft.position.x
+	instance.camera.limit_top = $CameraLimits/TopLeft.position.y
+	instance.camera.limit_right = $CameraLimits/BottomRight.position.x
+	instance.camera.limit_bottom = $CameraLimits/BottomRight.position.y
 
 
 func allow_set_pause() -> bool:

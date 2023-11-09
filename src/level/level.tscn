@@ -29,6 +29,13 @@ autostart = true
 [node name="BatterySpawner" parent="." node_paths=PackedStringArray("spawn_root") instance=ExtResource("2_00csm")]
 spawn_root = NodePath("../SpawnRoot")
 
+[node name="CameraLimits" type="Node2D" parent="."]
+
+[node name="TopLeft" type="Marker2D" parent="CameraLimits"]
+
+[node name="BottomRight" type="Marker2D" parent="CameraLimits"]
+position = Vector2(640, 360)
+
 [node name="SpawnRoot" type="Node2D" parent="."]
 y_sort_enabled = true
 
@@ -38,9 +45,6 @@ spawn_path = NodePath("../SpawnRoot")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_63iby")
-
-[node name="LevelLimit" type="Marker2D" parent="."]
-position = Vector2(640, 360)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

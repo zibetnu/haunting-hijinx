@@ -18,6 +18,12 @@ position = Vector2(16, 32)
 [node name="BottomRight" type="Marker2D" parent="BatterySpawner" index="2"]
 position = Vector2(720, 432)
 
+[node name="TopLeft" parent="CameraLimits" index="0"]
+position = Vector2(0, 4)
+
+[node name="BottomRight" parent="CameraLimits" index="1"]
+position = Vector2(736, 436)
+
 [node name="TileMaps" type="Node2D" parent="." index="3"]
 y_sort_enabled = true
 
@@ -101,9 +107,6 @@ position = Vector2(704, 48)
 
 [node name="HunterSpawnPoint4" type="Marker2D" parent="SpawnPoints" index="4"]
 position = Vector2(32, 416)
-
-[node name="LevelLimit" parent="." index="7"]
-position = Vector2(736, 436)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." index="10"]
 energy = 0.05

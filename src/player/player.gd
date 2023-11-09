@@ -23,7 +23,7 @@ const MAX_AXIS_VALUE = 6400
 	set(value):
 		peer_id = value
 		if _is_ready:
-			$Camera2D.enabled = value == multiplayer.get_unique_id()
+			camera.enabled = value == multiplayer.get_unique_id()
 
 		if "peer_id" in controller:
 			controller.peer_id = value
@@ -31,12 +31,6 @@ const MAX_AXIS_VALUE = 6400
 		peer_id_changed.emit(value)
 
 @export var state_machine: StateMachine
-
-var camera_limits := Vector2(MAX_AXIS_VALUE, MAX_AXIS_VALUE):
-	set(value):
-		camera_limits = value
-		$Camera2D.limit_right = value.x
-		$Camera2D.limit_bottom = value.y
 
 var health := max_health:
 	set(value):
@@ -58,9 +52,11 @@ var position_public_visibility := true:
 
 var _is_ready := false
 
+@onready var camera := $Camera2D
+
 
 func _ready():
-	$Camera2D.enabled = peer_id == multiplayer.get_unique_id()
+	camera.enabled = peer_id == multiplayer.get_unique_id()
 	_is_ready = true
 
 
