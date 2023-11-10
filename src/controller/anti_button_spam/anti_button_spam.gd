@@ -2,7 +2,10 @@ extends Controller
 
 
 @export var controller: Controller
-@export var button_release_time := 0.1
+@export var max_changes_per_second := 8
+
+var _button_1_changes := 0
+var _button_2_changes := 0
 
 
 func _ready() -> void:
@@ -12,31 +15,23 @@ func _ready() -> void:
 func _on_controller_input_handled() -> void:
 	move_vector = controller.move_vector
 	look_vector = controller.look_vector
-	_handle_button("button_1_pressed", $Button1ReleaseTimer)
-	_handle_button("button_2_pressed", $Button2ReleaseTimer)
+	if (
+			button_1_pressed != controller.button_1_pressed
+			and _button_1_changes < max_changes_per_second
+	):
+		button_1_pressed = controller.button_1_pressed
+		_button_1_changes += 1
+
+	if (
+			button_2_pressed != controller.button_2_pressed
+			and _button_2_changes < max_changes_per_second
+	):
+		button_2_pressed = controller.button_2_pressed
+		_button_2_changes += 1
+
 	input_handled.emit()
 
 
-func _handle_button(button_name: String, timer: Timer) -> void:
-	var button_states := [controller.get(button_name), get(button_name)]
-	match button_states:
-		[true, false]:
-			set(button_name, true)
-
-		[false, true]:
-			if timer.is_stopped():
-				timer.start(button_release_time)
-
-
-func _on_button_1_release_timer_timeout() -> void:
-	if controller.button_1_pressed:
-		return
-
-	button_1_pressed = false
-
-
-func _on_button_2_release_timer_timeout() -> void:
-	if controller.button_2_pressed:
-		return
-
-	button_2_pressed = false
+func _on_reset_timer_timeout() -> void:
+	_button_1_changes = 0
+	_button_2_changes = 0

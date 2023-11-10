@@ -4,13 +4,8 @@
 
 [node name="AntiButtonSpam" type="Node2D"]
 script = ExtResource("1_44g47")
-button_release_time = 0.08
 
-[node name="Button1ReleaseTimer" type="Timer" parent="."]
-one_shot = true
+[node name="ResetTimer" type="Timer" parent="."]
+autostart = true
 
-[node name="Button2ReleaseTimer" type="Timer" parent="."]
-one_shot = true
-
-[connection signal="timeout" from="Button1ReleaseTimer" to="." method="_on_button_1_release_timer_timeout"]
-[connection signal="timeout" from="Button2ReleaseTimer" to="." method="_on_button_2_release_timer_timeout"]
+[connection signal="timeout" from="ResetTimer" to="." method="_on_reset_timer_timeout"]
