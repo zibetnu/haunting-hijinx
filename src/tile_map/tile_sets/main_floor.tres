@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=34 format=3 uid="uid://26wcy33gmwrh"]
 
-[ext_resource type="Texture2D" uid="uid://e5tc842y66xv" path="res://assets/tile_sets/main_floor/normal.png" id="1_icevp"]
+[ext_resource type="Texture2D" uid="uid://e5tc842y66xv" path="res://assets/tile_sets/main_floor/normal.png" id="1_xaonm"]
 [ext_resource type="Texture2D" uid="uid://crtc6jy8n7thg" path="res://assets/tile_sets/main_floor/specular.png" id="3_nbdqv"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1bcvr"]
@@ -80,7 +80,7 @@ load_path = "res://.godot/imported/diffuse.png-24e115782f26d80b4c0fe3f0e010b7d0.
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_62uv1"]
 diffuse_texture = SubResource("CompressedTexture2D_nmb43")
-normal_texture = ExtResource("1_icevp")
+normal_texture = ExtResource("1_xaonm")
 specular_texture = ExtResource("3_nbdqv")
 specular_shininess = 0.5
 
