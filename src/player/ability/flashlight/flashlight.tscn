@@ -40,7 +40,6 @@ action_name = "button_1"
 active_modifier = NodePath("SpeedMultiplier")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2.38419e-07, -8.9407e-08)
 scale = Vector2(0.99, 0.99)
 shape = SubResource("CircleShape2D_b6far")
 

@@ -76,7 +76,6 @@ limit_right = 6400
 limit_bottom = 6400
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2.38419e-07, -8.9407e-08)
 scale = Vector2(0.99, 0.99)
 shape = SubResource("CircleShape2D_b6far")
 
