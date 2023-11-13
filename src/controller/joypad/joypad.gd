@@ -4,6 +4,10 @@ extends Controller
 @export var deadzone := 0.1
 
 
+func force_handle_input() -> void:
+	_unhandled_input(null)
+
+
 func _unhandled_input(_event: InputEvent) -> void:
 	var new_move_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if new_move_vector.length() > deadzone:

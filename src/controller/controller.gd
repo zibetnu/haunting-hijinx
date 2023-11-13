@@ -10,6 +10,10 @@ signal input_handled
 @export var button_2_pressed := false
 
 
+func force_handle_input() -> void:
+	pass
+
+
 func is_action_pressed(action: StringName) -> bool:
 	return {
 			"button_1": button_1_pressed,

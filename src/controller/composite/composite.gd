@@ -10,6 +10,11 @@ func _ready() -> void:
 	controller_2.input_handled.connect(_on_controller_input_handled)
 
 
+func force_handle_input() -> void:
+	controller_1.force_handle_input()
+	controller_2.force_handle_input()
+
+
 func _on_controller_input_handled() -> void:
 	if controller_1.move_vector:
 		move_vector = controller_1.move_vector

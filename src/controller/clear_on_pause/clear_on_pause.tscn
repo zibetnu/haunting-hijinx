@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://gvf2peg6yuns"]
-
-[ext_resource type="Script" path="res://src/controller/clear_on_pause/clear_on_pause.gd" id="1_lebtb"]
-
-[node name="ClearOnPause" type="Node2D" groups=["pause_sync"]]
-script = ExtResource("1_lebtb")

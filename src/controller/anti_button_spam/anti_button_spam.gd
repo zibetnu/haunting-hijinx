@@ -12,6 +12,10 @@ func _ready() -> void:
 	controller.input_handled.connect(_on_controller_input_handled)
 
 
+func force_handle_input() -> void:
+	controller.force_handle_input()
+
+
 func _on_controller_input_handled() -> void:
 	move_vector = controller.move_vector
 	look_vector = controller.look_vector

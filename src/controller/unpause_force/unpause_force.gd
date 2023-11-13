@@ -8,6 +8,10 @@ func _ready() -> void:
 	controller.input_handled.connect(_on_controller_input_handled)
 
 
+func force_handle_input() -> void:
+	controller.force_handle_input()
+
+
 func _on_controller_input_handled() -> void:
 	move_vector = controller.move_vector
 	look_vector = controller.look_vector
@@ -18,9 +22,4 @@ func _on_controller_input_handled() -> void:
 
 func _on_set_pause(value: bool) -> void:
 	if not value:
-		return
-
-	move_vector = Vector2.ZERO
-	look_vector = Vector2.ZERO
-	button_1_pressed = false
-	button_2_pressed = false
+		controller.force_handle_input()
