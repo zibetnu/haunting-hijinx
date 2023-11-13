@@ -5,7 +5,17 @@ extends Controller
 @export var controller_2: Controller
 
 
-func _process(_delta: float) -> void:
+func _ready() -> void:
+	controller_1.input_handled.connect(_on_controller_input_handled)
+	controller_2.input_handled.connect(_on_controller_input_handled)
+
+
+func force_handle_input() -> void:
+	controller_1.force_handle_input()
+	controller_2.force_handle_input()
+
+
+func _on_controller_input_handled() -> void:
 	if controller_1.move_vector:
 		move_vector = controller_1.move_vector
 
@@ -20,3 +30,4 @@ func _process(_delta: float) -> void:
 
 	button_1_pressed = controller_1.button_1_pressed or controller_2.button_1_pressed
 	button_2_pressed = controller_1.button_2_pressed or controller_2.button_2_pressed
+	input_handled.emit()

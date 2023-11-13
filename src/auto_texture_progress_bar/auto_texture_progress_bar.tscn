@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d15idq0ucnvek"]
+
+[ext_resource type="Script" path="res://src/auto_texture_progress_bar/auto_texture_progress_bar.gd" id="1_3yhpq"]
+
+[node name="AutoTextureProgressBar" type="TextureProgressBar"]
+script = ExtResource("1_3yhpq")

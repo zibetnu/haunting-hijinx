@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://gxh15sde0me5"]
+[gd_scene load_steps=7 format=3 uid="uid://gxh15sde0me5"]
 
 [ext_resource type="Script" path="res://src/level/level.gd" id="1_el04s"]
 [ext_resource type="PackedScene" uid="uid://grxm3658ukjj" path="res://src/battery_spawner/battery_spawner.tscn" id="2_00csm"]
 [ext_resource type="PackedScene" uid="uid://chog7qk0d8wy7" path="res://src/timer_label/timer_label.tscn" id="2_tx202"]
 [ext_resource type="PackedScene" uid="uid://7wne64wo1epb" path="res://src/counting_spawner/counting_spawner.tscn" id="3_xxci0"]
+[ext_resource type="PackedScene" uid="uid://ojjy8keargbf" path="res://src/ping_label/ping_label.tscn" id="5_ijd43"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_63iby"]
 properties/0/path = NodePath("CanvasLayer/EndLabel:text")
@@ -15,7 +16,7 @@ properties/1/spawn = true
 properties/1/sync = false
 properties/1/watch = true
 
-[node name="Level" type="Node2D"]
+[node name="Level" type="Node2D" groups=["pause_sync"]]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_el04s")
@@ -28,18 +29,22 @@ autostart = true
 [node name="BatterySpawner" parent="." node_paths=PackedStringArray("spawn_root") instance=ExtResource("2_00csm")]
 spawn_root = NodePath("../SpawnRoot")
 
+[node name="CameraLimits" type="Node2D" parent="."]
+
+[node name="TopLeft" type="Marker2D" parent="CameraLimits"]
+
+[node name="BottomRight" type="Marker2D" parent="CameraLimits"]
+position = Vector2(640, 360)
+
 [node name="SpawnRoot" type="Node2D" parent="."]
 y_sort_enabled = true
 
 [node name="CountingSpawner" parent="." instance=ExtResource("3_xxci0")]
-_spawnable_scenes = PackedStringArray("res://src/player/ghost.tscn", "res://src/player/hunter.tscn", "res://src/drain_area/drain_area.tscn")
+_spawnable_scenes = PackedStringArray("res://src/player/ghost.tscn", "res://src/player/hunter.tscn", "res://src/drain_area/drain_area.tscn", "res://src/item/battery/battery.tscn")
 spawn_path = NodePath("../SpawnRoot")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_63iby")
-
-[node name="LevelLimit" type="Marker2D" parent="."]
-position = Vector2(640, 360)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -77,5 +82,17 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 horizontal_alignment = 1
 timer = NodePath("../../MatchTimer")
+
+[node name="PingLabel" parent="CanvasLayer" instance=ExtResource("5_ijd43")]
+offset_left = 5.0
+offset_top = 336.0
+offset_right = 42.0
+offset_bottom = 362.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+text = "0 ms"
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.0588235, 0.0588235, 0.0588235, 1)
 
 [connection signal="timeout" from="MatchTimer" to="." method="_on_match_timer_timeout"]

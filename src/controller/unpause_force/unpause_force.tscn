@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://gvf2peg6yuns"]
+
+[ext_resource type="Script" path="res://src/controller/unpause_force/unpause_force.gd" id="1_fgmpa"]
+
+[node name="UnpauseForce" type="Node2D" groups=["pause_sync"]]
+script = ExtResource("1_fgmpa")

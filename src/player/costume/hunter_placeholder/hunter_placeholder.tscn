@@ -46,6 +46,7 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="2"]
+light_mask = 32
 position = Vector2(0, -8)
 texture = ExtResource("2_jq0yn")
 hframes = 4

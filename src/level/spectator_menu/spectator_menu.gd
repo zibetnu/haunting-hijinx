@@ -28,8 +28,24 @@ func _on_right_button_pressed() -> void:
 	spectating_index += 1
 
 
+func _on_cutscene_ended(_cutscene_name: String) -> void:
+	%LeftButton.disabled = false
+	%RightButton.disabled = false
+	_set_active_camera()
+
+
+func _on_cutscene_started(_cutscene_name: String) -> void:
+	%LeftButton.disabled = true
+	%RightButton.disabled = true
+
+
 func _set_active_camera() -> void:
 	for player in get_tree().get_nodes_in_group("players"):
-		player.get_node("Camera2D").enabled = player.peer_id == PeerData.participants[spectating_index]
+		player.get_node("Camera2D").enabled = (
+				player.peer_id == PeerData.participants[spectating_index]
+		)
 
-	%SpectatingLabel.text = PeerData.peer_names.get(PeerData.participants[spectating_index], "username")
+	%SpectatingLabel.text = PeerData.peer_names.get(
+			PeerData.participants[spectating_index],
+			"username"
+	)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cscnk1bc8v66d"]
+[gd_scene load_steps=10 format=3 uid="uid://cscnk1bc8v66d"]
 
 [ext_resource type="Script" path="res://src/drain_area/drain_area.gd" id="1_trn6j"]
 [ext_resource type="Script" path="res://src/player/damage_handler/damage_source.gd" id="2_sfbjo"]
@@ -19,6 +19,17 @@ properties/0/spawn = true
 properties/0/sync = false
 properties/0/watch = false
 
+[sub_resource type="Gradient" id="Gradient_sjlgh"]
+colors = PackedColorArray(0.545174, 0.219333, 0.560815, 1, 0.576471, 0.219608, 0.560784, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pg77a"]
+gradient = SubResource("Gradient_sjlgh")
+width = 160
+height = 160
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
 [node name="DrainArea" type="Area2D" groups=["drain_areas"]]
 z_index = -1
 collision_layer = 2
@@ -31,10 +42,6 @@ shape = SubResource("CircleShape2D_hg12p")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_0jot6")
-
-[node name="Background" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.498039)
-texture = ExtResource("3_s6cxc")
 
 [node name="Foreground" type="Sprite2D" parent="."]
 material = ExtResource("3_gl06h")
@@ -49,6 +56,12 @@ autostart = true
 [node name="ActiveTimer" type="Timer" parent="."]
 wait_time = 4.0
 one_shot = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 3.0
+range_item_cull_mask = 51
+texture = SubResource("GradientTexture2D_pg77a")
+height = 16.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]

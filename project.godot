@@ -22,6 +22,7 @@ PeerData="*res://src/autoload/peer_data/peer_data.tscn"
 SceneChanger="*res://src/autoload/scene_changer/scene_changer.tscn"
 PauseManager="*res://src/autoload/pause_manager.gd"
 FullscreenToggle="*res://src/autoload/fullscreen_toggle.gd"
+CutsceneManager="*res://src/autoload/cutscene_manager.gd"
 
 [display]
 
@@ -117,6 +118,12 @@ toggle_fullscreen={
 
 [layer_names]
 
+2d_render/layer_1="Floor"
+2d_render/layer_2="Walls"
+2d_render/layer_3="Wall Tops"
+2d_render/layer_4="Wall Caps"
+2d_render/layer_5="Props"
+2d_render/layer_6="Players"
 2d_physics/layer_1="obstacles"
 2d_physics/layer_2="interactables"
 2d_physics/layer_3="physical players"
@@ -128,3 +135,4 @@ toggle_fullscreen={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+2d/snap/snap_2d_transforms_to_pixel=true

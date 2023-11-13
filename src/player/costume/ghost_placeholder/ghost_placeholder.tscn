@@ -47,6 +47,7 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="2"]
+light_mask = 32
 texture = ExtResource("2_iyts8")
 hframes = 4
 vframes = 3

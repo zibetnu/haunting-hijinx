@@ -1,13 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://dyev6t6l5ykdp"]
+[gd_scene load_steps=9 format=3 uid="uid://dyev6t6l5ykdp"]
 
 [ext_resource type="Script" path="res://src/player/ability/flashlight/flashlight.gd" id="1_s0dbb"]
 [ext_resource type="PackedScene" uid="uid://ckw6ix6uyke2j" path="res://src/player/modifier_manager/modifier/speed_multiplier/speed_multiplier.tscn" id="2_7te73"]
 [ext_resource type="PackedScene" uid="uid://c3u6qxrt3jkm8" path="res://src/repeat_ray_cast_2d/repeat_ray_cast_2d.tscn" id="2_fqwr7"]
-[ext_resource type="Material" uid="uid://8oo13typkhrt" path="res://src/shaders/multi_frame_wipe/multi_frame_wipe.tres" id="2_hyikt"]
-[ext_resource type="Texture2D" uid="uid://cwjmhpmygymjj" path="res://assets/flashlight/flashlight_upscaled.png" id="3_l7kel"]
+[ext_resource type="Texture2D" uid="uid://do78peki3jtm" path="res://assets/flashlight/flashlight_body.png" id="3_txx2g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b6far"]
 radius = 8.0
+
+[sub_resource type="Gradient" id="Gradient_2xl7l"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mw7bx"]
+gradient = SubResource("Gradient_2xl7l")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wbqrx"]
 properties/0/path = NodePath(".:battery")
@@ -18,7 +26,7 @@ properties/1/path = NodePath("RotationNode:rotation")
 properties/1/spawn = true
 properties/1/sync = false
 properties/1/watch = true
-properties/2/path = NodePath("RotationNode2/Sprite2D:frame")
+properties/2/path = NodePath(".:_powered")
 properties/2/spawn = true
 properties/2/sync = false
 properties/2/watch = true
@@ -32,7 +40,6 @@ action_name = "button_1"
 active_modifier = NodePath("SpeedMultiplier")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2.38419e-07, -8.9407e-08)
 scale = Vector2(0.99, 0.99)
 shape = SubResource("CircleShape2D_b6far")
 
@@ -66,17 +73,43 @@ collision_mask = 15
 hit_from_inside = true
 collide_with_areas = true
 
+[node name="Light" type="Node2D" parent="RotationNode"]
+position = Vector2(16, 0)
+scale = Vector2(0.5, 0.5)
+
+[node name="FloorLight" type="PointLight2D" parent="RotationNode/Light"]
+shadow_enabled = true
+shadow_item_cull_mask = 18
+offset = Vector2(48, 0)
+texture_scale = 0.5
+height = 32.0
+
+[node name="WallLight" type="PointLight2D" parent="RotationNode/Light"]
+range_item_cull_mask = 26
+shadow_enabled = true
+shadow_item_cull_mask = 4
+offset = Vector2(48, 0)
+texture_scale = 0.5
+height = 32.0
+
+[node name="PlayerLight" type="PointLight2D" parent="RotationNode/Light"]
+position = Vector2(-32, 0)
+scale = Vector2(2, 2)
+energy = 0.5
+range_item_cull_mask = 33
+shadow_item_cull_mask = 18
+texture = SubResource("GradientTexture2D_mw7bx")
+height = 16.0
+
 [node name="RotationNode2" type="Node2D" parent="."]
 y_sort_enabled = true
 position = Vector2(0, -8)
 
-[node name="Sprite2D" type="Sprite2D" parent="RotationNode2"]
-material = ExtResource("2_hyikt")
-position = Vector2(36, 0)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_l7kel")
+[node name="Body" type="Sprite2D" parent="RotationNode2"]
+light_mask = 32
+position = Vector2(12, 0)
+texture = ExtResource("3_txx2g")
 hframes = 2
-frame = 1
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_wbqrx")

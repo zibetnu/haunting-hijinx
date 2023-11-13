@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://t2ftd18i5gvf"]
+
+[ext_resource type="Script" path="res://src/player/ability/aura/aura_outline/aura_outline.gd" id="1_inip1"]
+
+[node name="AuraOutline" type="Node2D"]
+script = ExtResource("1_inip1")

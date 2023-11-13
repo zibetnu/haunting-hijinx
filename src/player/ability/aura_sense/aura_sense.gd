@@ -44,7 +44,7 @@ func add_aura(source: Node) -> void:
 	_update_sensed_intensity()
 
 
-@rpc("unreliable_ordered")
+@rpc("reliable")
 func _sync_sensed_intensity(value: int) -> void:
 	sensed_intensity = value
 

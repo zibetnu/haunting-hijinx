@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/level/spectator_menu/spectator_menu.gd" id="1_yqk1i"]
 
-[node name="SpectatorMenu" type="Control"]
+[node name="SpectatorMenu" type="Control" groups=["cutscene_sync"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
