@@ -109,7 +109,8 @@ position = Vector2(704, 48)
 position = Vector2(32, 416)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." index="10"]
-energy = 0.05
-height = 0.1
+rotation = 0.785398
+energy = 0.07
+height = 0.5
 
 [connection signal="all_scenes_spawned" from="CountingSpawner" to="." method="_on_counting_spawner_all_scenes_spawned"]
