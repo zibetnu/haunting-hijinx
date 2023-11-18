@@ -9,7 +9,11 @@ func _ready() -> void:
 
 
 func _on_sensed_intensity_changed(intensity: int) -> void:
-	visible = aura_sense.player.peer_id == multiplayer.get_unique_id() and intensity > 0
+	var valid_player := (
+			aura_sense.player.peer_id == multiplayer.get_unique_id()
+			or PeerData.ghost_peer == multiplayer.get_unique_id()
+	)
+	visible = valid_player and intensity > 0
 	if intensity <= 0:
 		$AnimationPlayer.play("RESET")
 
