@@ -82,13 +82,11 @@ collide_with_areas = true
 
 [node name="Light" type="Node2D" parent="RotationNode"]
 position = Vector2(16, 0)
-scale = Vector2(0.5, 0.5)
 
 [node name="FloorLight" type="PointLight2D" parent="RotationNode/Light"]
 shadow_enabled = true
 shadow_item_cull_mask = 18
 offset = Vector2(48, 0)
-texture_scale = 0.5
 height = 32.0
 
 [node name="WallLight" type="PointLight2D" parent="RotationNode/Light"]
@@ -96,12 +94,10 @@ range_item_cull_mask = 26
 shadow_enabled = true
 shadow_item_cull_mask = 4
 offset = Vector2(48, 0)
-texture_scale = 0.5
 height = 32.0
 
 [node name="PlayerLight" type="PointLight2D" parent="RotationNode/Light"]
-position = Vector2(-32, 0)
-scale = Vector2(2, 2)
+position = Vector2(-16, 0)
 energy = 0.5
 range_item_cull_mask = 33
 shadow_item_cull_mask = 18
