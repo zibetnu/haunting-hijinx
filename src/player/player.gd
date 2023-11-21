@@ -48,7 +48,7 @@ var position_public_visibility := true:
 	set(value):
 		position_public_visibility = value
 		if multiplayer.is_server() and value:
-			sync_position_reliable.rpc(_serialize_position(position))
+			sync_position_reliable.rpc(serialize_position(position))
 
 var _is_ready := false
 
@@ -66,10 +66,10 @@ func sync_move_and_slide() -> bool:
 		return result
 
 	if position_public_visibility:
-		sync_position.rpc(_serialize_position(position))
+		sync_position.rpc(serialize_position(position))
 
 	elif peer_id != 1:
-		sync_position.rpc_id(controller.peer_id, _serialize_position(position))
+		sync_position.rpc_id(controller.peer_id, serialize_position(position))
 
 	return result
 
@@ -92,7 +92,7 @@ func _on_cutscene_ended(_cutscene_name: String) -> void:
 	$Camera2D.enabled = peer_id == multiplayer.get_unique_id()
 
 
-func _serialize_position(unserialized_position: Vector2) -> int:
+func serialize_position(unserialized_position: Vector2) -> int:
 	var serialized_position := 0
 	serialized_position |= roundi(unserialized_position.x * AXIS_MULTIPLIER)
 	serialized_position |= roundi(unserialized_position.y * AXIS_MULTIPLIER) << AXIS_BITS
