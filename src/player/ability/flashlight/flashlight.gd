@@ -29,7 +29,7 @@ const CAST_SHORT_MAX_INDEX = 4
 var battery := max_battery:
 	set(value):
 		battery = clampi(value, 0, max_battery)
-		_update_beam_frame()
+		_update_frame()
 
 var flashlight_rotation: float:
 	get:
@@ -53,18 +53,19 @@ var percentage: float:
 	set(value):
 		battery = roundi(max_battery * value)
 
-var _beam_frame: int:
+var _frame: int:
 	set(value):
-		_beam_frame = clampi(value, 0, BEAM_TEXTURES.size() - 1)
+		_frame = clampi(value, 0, BEAM_TEXTURES.size() - 1)
 		for raycast in _raycast_parent.get_children():
-			raycast.target_position.x = CAST_LENGTHS[_beam_frame]
+			raycast.target_position.x = CAST_LENGTHS[_frame]
 
-		$RotationNode/Light/FloorLight.texture = BEAM_TEXTURES[_beam_frame]
-		$RotationNode/Light/WallLight.texture = BEAM_TEXTURES[_beam_frame]
+		$RotationNode/Light/FloorLight.texture = BEAM_TEXTURES[_frame]
+		$RotationNode/Light/WallLight.texture = BEAM_TEXTURES[_frame]
 
 var _powered: bool:
 	set(value):
 		_powered = value
+		_beam.visible = _powered
 		_body.frame = int(_powered)
 		_light.visible = _powered
 		if _powered:
@@ -73,6 +74,7 @@ var _powered: bool:
 		else:
 			player.modifier_manager.remove_modifier(active_modifier)
 
+@onready var _beam := $RotationNode2/Beam
 @onready var _body := $RotationNode2/Body
 @onready var _light := $RotationNode/Light
 @onready var _raycast_parent := $RotationNode/RayCasts
@@ -95,16 +97,23 @@ func _physics_process(delta: float) -> void:
 
 	battery -= 1
 	var all_colliders := []
-	for repeat_raycast in _raycast_parent.get_children():
-		var colliders: Array[Object] = repeat_raycast.get_colliders()
+	var all_colliders_and_points: Array[Dictionary] = []
+	var all_repeat_raycasts := _raycast_parent.get_children()
+	for repeat_raycast in all_repeat_raycasts:
+		var colliders_and_points = repeat_raycast.get_colliders_and_points()
 
 		# Remove colliders that are past an object in the stop_flashlight group.
-		for collider in colliders:
+		for collider in colliders_and_points.colliders:
 			if collider.is_in_group("stop_flashlight"):
-				colliders.resize(colliders.find(collider) + 1)
+				var resize_index: int = colliders_and_points.colliders.find(collider) + 1
+				colliders_and_points.colliders.resize(resize_index)
+				colliders_and_points.collision_points.resize(resize_index)
 				break
 
-		all_colliders += colliders
+		all_colliders += colliders_and_points.colliders
+		all_colliders_and_points.append(colliders_and_points)
+
+	_beam.update_shape(all_colliders_and_points, all_repeat_raycasts)
 
 	var processed_colliders := []
 	for collider in all_colliders:
@@ -135,12 +144,12 @@ func _on_player_state_machine_transitioned(state_name: String) -> void:
 		_powered = false
 
 
-func _update_beam_frame() -> void:
+func _update_frame() -> void:
 	if is_battery_low:
-		_beam_frame = (ceil(CAST_SHORT_MAX_INDEX * (percentage / low_percentage)))
+		_frame = (ceil(CAST_SHORT_MAX_INDEX * (percentage / low_percentage)))
 
 	else:
-		_beam_frame = (CAST_LONG_MIN_INDEX + ceil(
+		_frame = (CAST_LONG_MIN_INDEX + ceil(
 				(CAST_LONG_MAX_INDEX - CAST_LONG_MIN_INDEX)
 				* ((percentage - low_percentage) / (1.0 - low_percentage))
 		))

@@ -28,6 +28,7 @@ CutsceneManager="*res://src/autoload/cutscene_manager.gd"
 
 window/size/viewport_width=640
 window/size/viewport_height=360
+window/size/mode=4
 window/stretch/mode="viewport"
 
 [global]
@@ -124,6 +125,7 @@ toggle_fullscreen={
 2d_render/layer_4="Wall Caps"
 2d_render/layer_5="Props"
 2d_render/layer_6="Players"
+2d_render/layer_7="Beam Light"
 2d_physics/layer_1="obstacles"
 2d_physics/layer_2="interactables"
 2d_physics/layer_3="physical players"

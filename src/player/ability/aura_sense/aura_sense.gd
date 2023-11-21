@@ -63,10 +63,11 @@ func _update_sensed_intensity() -> void:
 	else:
 		sensed_intensity = 0
 
-	if not player.peer_id in multiplayer.get_peers():
-		return
+	if player.peer_id in multiplayer.get_peers():
+		_sync_sensed_intensity.rpc_id(player.peer_id, sensed_intensity)
 
-	_sync_sensed_intensity.rpc_id(player.peer_id, sensed_intensity)
+	if PeerData.ghost_peer in multiplayer.get_peers():
+		_sync_sensed_intensity.rpc_id(PeerData.ghost_peer, sensed_intensity)
 
 
 func _on_dead_exit_trigger_triggered() -> void:
