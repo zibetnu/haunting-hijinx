@@ -69,6 +69,7 @@ func _on_peer_disconnected(id: int) -> void:
 	participants.erase(id)
 	peer_names.erase(id)
 	spectators.erase(id)
+	peer_participation_changed.emit(id)
 
 
 func _on_peer_connected(id: int) -> void:
