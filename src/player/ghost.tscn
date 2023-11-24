@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://b53lkv5ig8ohp" path="res://src/player/ability/condition_transition/condition/nodes_in_group/nodes_in_group.tscn" id="10_djtg3"]
 [ext_resource type="PackedScene" uid="uid://2hyqex1r6vhj" path="res://src/player/damage_handler/standard/stunnable/stunnable.tscn" id="13_742x4"]
 [ext_resource type="PackedScene" uid="uid://cdk2uf7ebeu5u" path="res://src/player/state_machine/state/timed_state/panic/panic.tscn" id="17_8tcsn"]
-[ext_resource type="PackedScene" uid="uid://bet5y1i5vddfq" path="res://src/player/state_machine/state/timed_state/panic/panic_reset/panic_reset.tscn" id="18_7jfgb"]
+[ext_resource type="PackedScene" uid="uid://5s8lkqxmywqp" path="res://src/player/state_machine/state/panic_reset/panic_reset.tscn" id="21_a42l5"]
 [ext_resource type="PackedScene" uid="uid://bgun5xps8jth7" path="res://src/player/costume/ghost_placeholder/ghost_placeholder.tscn" id="23_06kgq"]
 [ext_resource type="PackedScene" uid="uid://t2ftd18i5gvf" path="res://src/player/ability/aura/aura_outline/aura_outline.tscn" id="24_xmre4"]
 [ext_resource type="PackedScene" uid="uid://bdng1f72aossh" path="res://src/player/state_machine/state/grab/grab.tscn" id="25_porwh"]
@@ -248,8 +248,9 @@ damage_handler = NodePath("../../DamageHandlers/Standard")
 exit_state = NodePath("../Idle")
 damage_handler = NodePath("../../DamageHandlers/PanicReset")
 
-[node name="PanicReset" parent="StateMachine" index="7" node_paths=PackedStringArray("exit_state", "damage_handler") instance=ExtResource("18_7jfgb")]
+[node name="PanicReset" parent="StateMachine" index="7" node_paths=PackedStringArray("exit_state", "player_touched", "damage_handler") instance=ExtResource("21_a42l5")]
 exit_state = NodePath("../Panic")
+player_touched = NodePath("../../Abilities/PlayerTouched")
 damage_handler = NodePath("../../DamageHandlers/Standard")
 
 [node name="Grab" parent="StateMachine" index="8" node_paths=PackedStringArray("exit_state") instance=ExtResource("25_porwh")]
