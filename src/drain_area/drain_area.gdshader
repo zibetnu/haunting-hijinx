@@ -28,7 +28,7 @@ void fragment() {
 	float ripple = sin(dist * -frequency * pi + ripple_rate * TIME) * amplitude / (dist + 1.0);
 
 	vec4 color = vec4(1.0, 1.0, 1.0, 2.0 * ripple);
-	float alpha_scalar = (1.0 - min(dist, 1.0)) * ns.x * 2.5; 
+	float alpha_scalar = (1.0 - min(dist, 1.0)) * ns.x * 2.5;
 
 	color.a *= 1.0 * alpha_scalar * (ripple + ns.x * ns.y);
 	color.a = max(color.a - (ns.y * 0.45), 0.0);
