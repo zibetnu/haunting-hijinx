@@ -9,12 +9,10 @@
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_63iby"]
 properties/0/path = NodePath("CanvasLayer/EndLabel:text")
 properties/0/spawn = true
-properties/0/sync = false
-properties/0/watch = true
+properties/0/replication_mode = 2
 properties/1/path = NodePath("CanvasLayer/EndLabel:visible")
 properties/1/spawn = true
-properties/1/sync = false
-properties/1/watch = true
+properties/1/replication_mode = 2
 
 [node name="Level" type="Node2D" groups=["pause_sync"]]
 z_index = 1

@@ -44,7 +44,7 @@ _data = {
 script = ExtResource("1_kkilf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-speed_scale = 2.0
 libraries = {
 "": SubResource("AnimationLibrary_1i1lb")
 }
+speed_scale = 2.0

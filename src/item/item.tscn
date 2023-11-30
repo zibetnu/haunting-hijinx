@@ -8,8 +8,7 @@ radius = 8.0
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_m1mro"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
-properties/0/sync = false
-properties/0/watch = false
+properties/0/replication_mode = 0
 
 [node name="Item" type="Area2D"]
 collision_layer = 2

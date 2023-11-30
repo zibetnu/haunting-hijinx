@@ -16,8 +16,7 @@ radius = 72.0
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0jot6"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
-properties/0/sync = false
-properties/0/watch = false
+properties/0/replication_mode = 0
 
 [sub_resource type="Gradient" id="Gradient_sjlgh"]
 colors = PackedColorArray(0.545174, 0.219333, 0.560815, 1, 0.576471, 0.219608, 0.560784, 0)

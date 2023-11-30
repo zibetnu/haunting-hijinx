@@ -6,8 +6,7 @@
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_i6vx3"]
 properties/0/path = NodePath("AnimationPlayer:current_animation")
 properties/0/spawn = true
-properties/0/sync = false
-properties/0/watch = true
+properties/0/replication_mode = 2
 
 [node name="Costume" type="Node2D"]
 y_sort_enabled = true

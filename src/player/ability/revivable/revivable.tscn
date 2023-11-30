@@ -9,8 +9,7 @@ height = 32.0
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_sfn5r"]
 properties/0/path = NodePath(".:progress")
 properties/0/spawn = false
-properties/0/sync = false
-properties/0/watch = true
+properties/0/replication_mode = 2
 
 [node name="Revivable" type="Area2D" groups=["drain_areas_ignore"]]
 collision_layer = 2
