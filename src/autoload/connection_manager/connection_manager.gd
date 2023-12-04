@@ -8,17 +8,12 @@ signal server_created
 
 var ping := 0  # RTT in milliseconds.
 
-@export var dedicated_port := 9999
-
 
 func _ready() -> void:
 	# Disable server relay to ensure that data is only shared between clients when necessary.
 	multiplayer.server_relay = false
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
-	if DisplayServer.get_name() == "headless":
-		print("Starting dedicated server")
-		create_server(dedicated_port)
 
 
 func close_connection() -> void:
