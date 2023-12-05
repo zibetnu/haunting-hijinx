@@ -12,6 +12,7 @@ var ping := 0  # RTT in milliseconds.
 func _ready() -> void:
 	# Disable server relay to ensure that data is only shared between clients when necessary.
 	multiplayer.server_relay = false
+	multiplayer.connected_to_server.connect($ConnectingDialog.hide)
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
@@ -33,6 +34,7 @@ func create_client(address: String, port: int) -> void:
 
 	multiplayer.multiplayer_peer = peer
 	client_created.emit()
+	$ConnectingDialog.popup_centered()
 
 
 func create_server(port: int) -> void:
@@ -62,12 +64,18 @@ func set_ping(ticks_usec: int) -> void:
 
 
 func _notify_user(message: String) -> void:
-	$AcceptDialog.dialog_text = message
-	$AcceptDialog.popup_centered()
+	$ConnectingDialog.hide()
+	$NotifyDialog.dialog_text = message
+	$NotifyDialog.popup_centered()
 	print(message)
 
 
+func _on_connecting_dialog_closed() -> void:
+	close_connection()
+
+
 func _on_connection_failed() -> void:
+	close_connection()
 	_notify_user("Failed to connect")
 
 

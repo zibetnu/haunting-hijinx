@@ -5,6 +5,17 @@
 [node name="ConnectionManager" type="Node"]
 script = ExtResource("1_1xybw")
 
-[node name="AcceptDialog" type="AcceptDialog" parent="."]
+[node name="NotifyDialog" type="AcceptDialog" parent="."]
+title = ""
 size = Vector2i(216, 100)
 dialog_text = "Disconnected from server"
+
+[node name="ConnectingDialog" type="AcceptDialog" parent="."]
+title = ""
+size = Vector2i(203, 100)
+ok_button_text = "Cancel"
+dialog_text = "Attempting to connect..."
+
+[connection signal="canceled" from="ConnectingDialog" to="." method="_on_connecting_dialog_closed"]
+[connection signal="close_requested" from="ConnectingDialog" to="." method="_on_connecting_dialog_closed"]
+[connection signal="confirmed" from="ConnectingDialog" to="." method="_on_connecting_dialog_closed"]

@@ -6,7 +6,7 @@ extends Node
 
 
 func _ready() -> void:
-	multiplayer.server_disconnected.connect(_on_server_disconnected)
+	ConnectionManager.connection_closed.connect(func(): change_scene_to_packed(main_menu))
 
 
 func change_scene_to_file(path: String) -> void:
@@ -31,7 +31,3 @@ func remove_scene() -> void:
 	for child in $SceneContainer.get_children():
 		$SceneContainer.remove_child(child)
 		child.queue_free()
-
-
-func _on_server_disconnected() -> void:
-	change_scene_to_packed(main_menu)
