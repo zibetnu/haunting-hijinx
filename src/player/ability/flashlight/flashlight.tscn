@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dyev6t6l5ykdp"]
+[gd_scene load_steps=10 format=3 uid="uid://dyev6t6l5ykdp"]
 
 [ext_resource type="Script" path="res://src/player/ability/flashlight/flashlight.gd" id="1_s0dbb"]
 [ext_resource type="PackedScene" uid="uid://ckw6ix6uyke2j" path="res://src/player/modifier_manager/modifier/speed_multiplier/speed_multiplier.tscn" id="2_7te73"]
@@ -17,12 +17,6 @@ gradient = SubResource("Gradient_2xl7l")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
-
-[sub_resource type="Gradient" id="Gradient_5qtqt"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_0wc8k"]
-gradient = SubResource("Gradient_5qtqt")
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wbqrx"]
 properties/0/path = NodePath(".:battery")
@@ -101,9 +95,11 @@ shadow_item_cull_mask = 18
 texture = SubResource("GradientTexture2D_mw7bx")
 height = 16.0
 
-[node name="RotationNode2" type="Node2D" parent="."]
+[node name="RotationNode2" type="RemoteTransform2D" parent="."]
 y_sort_enabled = true
 position = Vector2(0, -8)
+remote_path = NodePath("../IgnoreCanvasModulate/RotationNode3")
+update_scale = false
 
 [node name="Body" type="Sprite2D" parent="RotationNode2"]
 light_mask = 32
@@ -111,18 +107,16 @@ position = Vector2(12, 0)
 texture = ExtResource("3_txx2g")
 hframes = 2
 
-[node name="Beam" type="Node2D" parent="RotationNode2"]
-light_mask = 64
+[node name="IgnoreCanvasModulate" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="RotationNode3" type="Node2D" parent="IgnoreCanvasModulate"]
+position = Vector2(0, -8)
+
+[node name="Beam" type="Node2D" parent="IgnoreCanvasModulate/RotationNode3"]
 z_index = 1
 position = Vector2(16, 0)
 script = ExtResource("4_ctsoc")
-
-[node name="BeamLight" type="PointLight2D" parent="RotationNode2"]
-editor_description = "Prevent Beam from being darkened."
-position = Vector2(8, 0)
-range_item_cull_mask = 64
-texture = SubResource("GradientTexture2D_0wc8k")
-offset = Vector2(32, 0)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_wbqrx")

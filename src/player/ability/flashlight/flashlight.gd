@@ -74,7 +74,7 @@ var _powered: bool:
 		else:
 			player.modifier_manager.remove_modifier(active_modifier)
 
-@onready var _beam := $RotationNode2/Beam
+@onready var _beam := $IgnoreCanvasModulate/RotationNode3/Beam
 @onready var _body := $RotationNode2/Body
 @onready var _light := $RotationNode/Light
 @onready var _raycast_parent := $RotationNode/RayCasts
