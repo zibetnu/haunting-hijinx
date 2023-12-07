@@ -86,7 +86,6 @@ specular_shininess = 0.5
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5yopg"]
 texture = SubResource("CanvasTexture_62uv1")
-use_texture_padding = false
 0:0/0 = 0
 0:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_1bcvr")
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
