@@ -35,16 +35,16 @@ func _load_address() -> void:
 			%PortText.text = str(port)
 
 
+func _save_address() -> void:
+	var config := ConfigFile.new()
+	config.set_value(SECTION, IP_KEY, %IPText.text)
+	config.set_value(SECTION, PORT_KEY, int(%PortText.text))
+	config.save(ProjectSettings.get_setting("global/settings_file_path"))
+
+
 func _on_host_button_pressed() -> void:
 	ConnectionManager.create_server(int(%PortText.text))
 
 
 func _on_join_button_pressed() -> void:
 	ConnectionManager.create_client(%IPText.text, int(%PortText.text))
-
-
-func _save_address() -> void:
-	var config := ConfigFile.new()
-	config.set_value(SECTION, IP_KEY, %IPText.text)
-	config.set_value(SECTION, PORT_KEY, int(%PortText.text))
-	config.save(ProjectSettings.get_setting("global/settings_file_path"))
