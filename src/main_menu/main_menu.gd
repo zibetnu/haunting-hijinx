@@ -10,7 +10,7 @@ func _ready() -> void:
 	ConnectionManager.client_created.connect(start_lobby)
 	ConnectionManager.server_created.connect(start_lobby)
 	_load_address()
-	%HostButton.grab_focus()
+	%JoinButton.grab_focus()
 
 
 func start_lobby() -> void:

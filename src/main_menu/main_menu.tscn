@@ -49,6 +49,7 @@ focus_neighbor_bottom = NodePath("../JoinButton")
 text = "Host"
 
 [node name="JoinButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../HostButton")
 focus_neighbor_bottom = NodePath("../IPText")
