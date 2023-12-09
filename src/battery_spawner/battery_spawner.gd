@@ -9,6 +9,26 @@ const MAX_BATTERY_SPAWN_ATTEMPTS = 100
 @export var spawn_root : Node2D
 
 var _batteries_spawned := 0
+var _exception_count := 0
+
+@onready var _position_checker := $PositionChecker
+
+
+func _ready() -> void:
+	_add_exceptions()
+
+
+func _add_exceptions() -> void:
+	if _exception_count >= get_tree().get_nodes_in_group("aura_areas").size():
+		return
+
+	_exception_count = 0
+	_position_checker.clear_exceptions()
+	get_tree().get_nodes_in_group("aura_areas").map(
+			func(aura_area):
+					_position_checker.add_exception(aura_area)
+					_exception_count += 1
+	)
 
 
 func _get_random_battery_position() -> Vector2:
@@ -19,21 +39,10 @@ func _get_random_battery_position() -> Vector2:
 
 
 func _is_position_clear(check_position: Vector2) -> bool:
-	var shape_rid := PhysicsServer2D.circle_shape_create()
-	var radius := 8
-	PhysicsServer2D.shape_set_data(shape_rid, radius)
-
-	var parameters := PhysicsShapeQueryParameters2D.new()
-	parameters.collide_with_areas = true
-	parameters.exclude += get_tree().get_nodes_in_group("aura_areas").map(
-			func(aura_area): return aura_area.get_rid()
-	)
-	parameters.shape_rid = shape_rid
-	parameters.transform = Transform2D(0, check_position)
-
-	var intersections := get_world_2d().direct_space_state.intersect_shape(parameters)
-	PhysicsServer2D.free_rid(shape_rid)
-	return intersections.size() == 0
+	_add_exceptions()
+	_position_checker.position = check_position
+	_position_checker.force_shapecast_update()
+	return not _position_checker.is_colliding()
 
 
 func _on_timer_timeout() -> void:

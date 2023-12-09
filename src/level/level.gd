@@ -13,6 +13,9 @@ var _hunters_spawned := 0
 
 
 func _ready():
+	get_tree().root.size_changed.connect(center_play_area)
+	center_play_area()
+
 	# Only the server needs to spawn the players.
 	if not multiplayer.is_server():
 		return
@@ -55,6 +58,27 @@ func add_player(id: int) -> void:
 
 func allow_set_pause() -> bool:
 	return not %EndLabel.visible or not get_tree().paused
+
+
+func center_play_area() -> void:
+	var visible_rect_size := get_tree().root.get_visible_rect().size
+	var bottom_right_camera_limit: Vector2 = $CameraLimits/BottomRight.position
+	if visible_rect_size.x > bottom_right_camera_limit.x:
+		position.x = (bottom_right_camera_limit.x - visible_rect_size.x) / 2
+
+	else:
+		position.x = 0
+
+	if visible_rect_size.y > bottom_right_camera_limit.y:
+		position.y = (visible_rect_size.y - bottom_right_camera_limit.y) / 2
+
+	else:
+		position.y = 0
+
+	# Tile map light occluders will not match the new position of the tile maps
+	# unless visibility is toggled. This may be a bug in Godot.
+	visible = false
+	visible = true
 
 
 func remove_player(id: int) -> void:

@@ -22,7 +22,7 @@ func physics_update(_delta: float) -> void:
 func spawn_scenes() -> void:
 	for hunter in get_tree().get_nodes_in_group("hunters"):
 		var instance := summon_scene.instantiate()
-		instance.global_position = hunter.global_position
+		instance.position = hunter.position
 		owner.get_parent().add_child(instance, true)
 
 
