@@ -48,3 +48,7 @@ func _on_host_button_pressed() -> void:
 
 func _on_join_button_pressed() -> void:
 	ConnectionManager.create_client(%IPText.text, int(%PortText.text))
+
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()

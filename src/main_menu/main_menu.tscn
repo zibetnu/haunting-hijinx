@@ -55,5 +55,10 @@ focus_neighbor_top = NodePath("../HostButton")
 focus_neighbor_bottom = NodePath("../IPText")
 text = "Join"
 
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
 [connection signal="pressed" from="VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
