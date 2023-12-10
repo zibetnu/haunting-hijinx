@@ -1,9 +1,16 @@
 extends Control
 
 
-@export var flashlight: Flashlight
+@export var flashlight: Flashlight:
+	set(value):
+		flashlight = value
+		set_physics_process(flashlight != null)
 
 var _was_battery_low := false
+
+
+func _ready() -> void:
+	set_physics_process(flashlight != null)
 
 
 func  _physics_process(_delta: float) -> void:
