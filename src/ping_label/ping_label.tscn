@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/ping_label/ping_label.gd" id="1_w831e"]
 
 [node name="PingLabel" type="Label"]
-text = "0"
+text = "Last: 0 ± 0; Mean: 0 ± 0"
 script = ExtResource("1_w831e")
 
 [node name="Timer" type="Timer" parent="."]

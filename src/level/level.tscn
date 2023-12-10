@@ -91,7 +91,6 @@ offset_right = 37.0
 grow_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
-text = "0 ms"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.0588235, 0.0588235, 0.0588235, 1)
