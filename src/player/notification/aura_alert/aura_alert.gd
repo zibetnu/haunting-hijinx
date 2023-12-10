@@ -1,11 +1,25 @@
 extends Control
 
 
-@export var aura_sense: AuraSense
+@export var aura_sense: AuraSense:
+	set(value):
+		_disconnect_signal()
+		aura_sense = value
+		_connect_signal()
 
 
 func _ready() -> void:
-	aura_sense.sensed_intensity_changed.connect(_on_sensed_intensity_changed)
+	_connect_signal()
+
+
+func _connect_signal() -> void:
+	if aura_sense:
+		aura_sense.sensed_intensity_changed.connect(_on_sensed_intensity_changed)
+
+
+func _disconnect_signal() -> void:
+	if aura_sense:
+		aura_sense.sensed_intensity_changed.disconnect(_on_sensed_intensity_changed)
 
 
 func _on_sensed_intensity_changed(intensity: int) -> void:
