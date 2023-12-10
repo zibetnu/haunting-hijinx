@@ -9,10 +9,6 @@ extends Control
 var _was_battery_low := false
 
 
-func _ready() -> void:
-	set_physics_process(flashlight != null)
-
-
 func  _physics_process(_delta: float) -> void:
 	var is_battery_low := flashlight.is_battery_low and flashlight.battery > 0
 	if not is_battery_low:

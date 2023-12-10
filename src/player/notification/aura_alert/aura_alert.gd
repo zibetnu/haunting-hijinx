@@ -8,10 +8,6 @@ extends Control
 		_connect_signal()
 
 
-func _ready() -> void:
-	_connect_signal()
-
-
 func _connect_signal() -> void:
 	if aura_sense:
 		aura_sense.sensed_intensity_changed.connect(_on_sensed_intensity_changed)

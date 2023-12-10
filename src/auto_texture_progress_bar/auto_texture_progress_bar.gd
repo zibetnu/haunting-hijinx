@@ -17,10 +17,6 @@ extends TextureProgressBar
 		_check_variables()
 
 
-func _ready() -> void:
-	_check_variables()
-
-
 func _check_variables() -> void:
 	var all_valid := (
 			source_node != null
