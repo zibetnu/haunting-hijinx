@@ -73,8 +73,8 @@ shape = SubResource("CircleShape2D_b6far")
 
 [node name="Controllers" type="Node2D" parent="."]
 
-[node name="Synced" parent="Controllers" node_paths=PackedStringArray("local_controller") instance=ExtResource("9_f6unb")]
-local_controller = NodePath("ClearOnPause")
+[node name="Synced" parent="Controllers" node_paths=PackedStringArray("controller") instance=ExtResource("9_f6unb")]
+controller = NodePath("ClearOnPause")
 
 [node name="ClearOnPause" parent="Controllers/Synced" node_paths=PackedStringArray("controller") instance=ExtResource("3_26pv3")]
 controller = NodePath("AntiButtonSpam")
