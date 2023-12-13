@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://cscnk1bc8v66d"]
 
 [ext_resource type="Script" path="res://src/drain_area/drain_area.gd" id="1_trn6j"]
-[ext_resource type="Script" path="res://src/player/damage_handler/damage_source.gd" id="2_sfbjo"]
+[ext_resource type="Script" path="res://src/damage_source.gd" id="2_sfbjo"]
 [ext_resource type="Material" uid="uid://bbhp34kya5qm8" path="res://src/drain_area/drain_area.tres" id="3_gl06h"]
 [ext_resource type="Texture2D" uid="uid://bs4bk3rh2y8ld" path="res://assets/drain_area.png" id="3_s6cxc"]
 
