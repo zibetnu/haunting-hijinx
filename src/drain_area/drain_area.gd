@@ -19,8 +19,8 @@ func _damage_affected_collision_objects() -> void:
 			continue
 
 		collision_object.take_damage(damage_source)
-		if not collision_object is Player:
-			return
+		#if not collision_object is Player:
+			#return
 
 		if multiplayer.is_server():
 			queue_free()

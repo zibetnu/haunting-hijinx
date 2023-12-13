@@ -1,8 +1,8 @@
 extends Node2D
 
 
-const Ghost = preload("res://src/player/ghost.tscn")
-const Hunter = preload("res://src/player/hunter.tscn")
+#const Ghost = preload("res://src/player/ghost.tscn")
+#const Hunter = preload("res://src/player/hunter.tscn")
 const SpectatorMenu = preload("res://src/level/spectator_menu/spectator_menu.tscn")
 
 @export var ghost_spawn_point: Node2D
@@ -33,27 +33,29 @@ func add_player(id: int) -> void:
 	if _ghosts_spawned + _hunters_spawned >= PeerData.MAX_PARTICIPANTS:
 		return
 
-	var instance: Player = null
+	#var instance: Player = null
 	if id == PeerData.ghost_peer:
-		instance = Ghost.instantiate()
-		instance.position = ghost_spawn_point.position
-		_ghosts_spawned += 1
+		print("spawn ghost")
+		#instance = Ghost.instantiate()
+		#instance.position = ghost_spawn_point.position
+		#_ghosts_spawned += 1
 
 	else:
-		instance = Hunter.instantiate()
-		instance.position = hunter_spawn_points[
-				_hunters_spawned % hunter_spawn_points.size()
-		].position
-		_hunters_spawned += 1
+		print("spawn hunter")
+		#instance = Hunter.instantiate()
+		#instance.position = hunter_spawn_points[
+				#_hunters_spawned % hunter_spawn_points.size()
+		#].position
+		#_hunters_spawned += 1
 
-	instance.peer_id = id
-	instance.name += str(id)
-	instance.died.connect(_on_player_died)
-	$SpawnRoot.add_child(instance, true)
-	instance.camera.limit_left = $CameraLimits/TopLeft.position.x
-	instance.camera.limit_top = $CameraLimits/TopLeft.position.y
-	instance.camera.limit_right = $CameraLimits/BottomRight.position.x
-	instance.camera.limit_bottom = $CameraLimits/BottomRight.position.y
+	#instance.peer_id = id
+	#instance.name += str(id)
+	#instance.died.connect(_on_player_died)
+	#$SpawnRoot.add_child(instance, true)
+	#instance.camera.limit_left = $CameraLimits/TopLeft.position.x
+	#instance.camera.limit_top = $CameraLimits/TopLeft.position.y
+	#instance.camera.limit_right = $CameraLimits/BottomRight.position.x
+	#instance.camera.limit_bottom = $CameraLimits/BottomRight.position.y
 
 
 func allow_set_pause() -> bool:
@@ -93,7 +95,7 @@ func remove_player(id: int) -> void:
 			_hunters_spawned -= 1
 
 		player.queue_free()
-		_on_player_died()
+		#_on_player_died()
 
 
 func _end_match(message: String) -> void:
@@ -124,15 +126,15 @@ func _on_match_timer_timeout() -> void:
 	_end_match("Draw!")
 
 
-func _on_player_died() -> void:
-	var player_is_dead := func(player: Player):
-			return player.health == 0 or player.is_queued_for_deletion()
-
-	if get_tree().get_nodes_in_group("ghosts").all(player_is_dead):
-		_end_match("Hunters win!")
-
-	elif get_tree().get_nodes_in_group("hunters").all(player_is_dead):
-		_end_match("Ghost wins!")
+#func _on_player_died() -> void:
+	#var player_is_dead := func(player: Player):
+			#return player.health == 0 or player.is_queued_for_deletion()
+#
+	#if get_tree().get_nodes_in_group("ghosts").all(player_is_dead):
+		#_end_match("Hunters win!")
+#
+	#elif get_tree().get_nodes_in_group("hunters").all(player_is_dead):
+		#_end_match("Ghost wins!")
 
 
 func _on_peer_connected(id: int) -> void:

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://by4phnj1wlefr"]
-
-[ext_resource type="Script" path="res://src/player/state_machine/exit_trigger/exit_trigger.gd" id="1_hnobf"]
-
-[node name="ExitTrigger" type="Node"]
-script = ExtResource("1_hnobf")

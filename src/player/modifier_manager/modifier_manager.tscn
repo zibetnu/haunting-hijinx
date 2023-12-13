@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dwdii6bjahb54"]
-
-[ext_resource type="Script" path="res://src/player/modifier_manager/modifier_manager.gd" id="1_0kkem"]
-
-[node name="ModifierManager" type="Node"]
-script = ExtResource("1_0kkem")

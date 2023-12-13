@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxofrnlm2yidj"]
-
-[ext_resource type="Script" path="res://src/player/ability/invisible/invisible.gd" id="1_ff2gb"]
-
-[node name="Invisible" type="Node2D"]
-script = ExtResource("1_ff2gb")

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckw6ix6uyke2j"]
-
-[ext_resource type="Script" path="res://src/player/modifier_manager/modifier/speed_multiplier/speed_multiplier.gd" id="1_3yy4e"]
-
-[node name="SpeedMultiplier" type="Node"]
-script = ExtResource("1_3yy4e")

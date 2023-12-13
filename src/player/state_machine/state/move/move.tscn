@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://sl14guycomx6"]
-
-[ext_resource type="Script" path="res://src/player/state_machine/state/move/move.gd" id="1_0sedw"]
-
-[node name="Move" type="Node"]
-script = ExtResource("1_0sedw")

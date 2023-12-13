@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cdk2uf7ebeu5u"]
-
-[ext_resource type="Script" path="res://src/player/state_machine/state/timed_state/panic/panic.gd" id="1_6mlou"]
-[ext_resource type="PackedScene" uid="uid://3r3cw1ju0dw3" path="res://src/player/state_machine/state/timed_state/timed_state.tscn" id="1_iies4"]
-
-[node name="Panic" instance=ExtResource("1_iies4")]
-script = ExtResource("1_6mlou")
-speed_multiplier = 1.66
-state_time = 3.0

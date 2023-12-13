@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b53lkv5ig8ohp"]
-
-[ext_resource type="Script" path="res://src/player/ability/condition_transition/condition/nodes_in_group/nodes_in_group.gd" id="1_rn8qy"]
-
-[node name="NodesInGroup" type="Node"]
-script = ExtResource("1_rn8qy")
