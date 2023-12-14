@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dl08q80e3hy8r"]
+
+[ext_resource type="Script" path="res://src/controller/state_chart_events/state_chart_events.gd" id="1_bxfx6"]
+
+[node name="StateChartEvents" type="Node2D"]
+script = ExtResource("1_bxfx6")
