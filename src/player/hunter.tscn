@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://2btutei2ijcx" path="res://src/player/ability/aura_sense/aura_sense.tscn" id="10_y8xbh"]
 [ext_resource type="PackedScene" uid="uid://by4phnj1wlefr" path="res://src/player/state_machine/exit_trigger/exit_trigger.tscn" id="12_0llgs"]
 [ext_resource type="PackedScene" uid="uid://myko8836tn6o" path="res://src/rotation_to_vector/rotation_to_vector.tscn" id="12_tg1e4"]
-[ext_resource type="PackedScene" uid="uid://ifwrxny1pnn5" path="res://src/player/costume/hunter_placeholder/hunter_placeholder.tscn" id="15_sxqk2"]
+[ext_resource type="PackedScene" uid="uid://ifwrxny1pnn5" path="res://src/costume/hunter_placeholder/hunter_placeholder.tscn" id="15_sxqk2"]
 [ext_resource type="PackedScene" uid="uid://2f424rmfm3g4" path="res://src/player/notification/state_notification/state_notification.tscn" id="16_abq7u"]
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/auto_texture_progress_bar/auto_texture_progress_bar.tscn" id="17_s4xae"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="19_1shfe"]

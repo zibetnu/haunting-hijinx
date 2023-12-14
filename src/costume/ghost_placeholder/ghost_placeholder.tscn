@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://bgun5xps8jth7"]
 
-[ext_resource type="PackedScene" uid="uid://brsavqoymiyc5" path="res://src/player/costume/costume.tscn" id="1_gqb0n"]
-[ext_resource type="AnimationLibrary" uid="uid://shvg27dohcpa" path="res://src/player/costume/core.res" id="2_ikofp"]
+[ext_resource type="PackedScene" uid="uid://brsavqoymiyc5" path="res://src/costume/costume.tscn" id="1_gqb0n"]
+[ext_resource type="AnimationLibrary" uid="uid://shvg27dohcpa" path="res://src/costume/core.res" id="2_ikofp"]
 [ext_resource type="Texture2D" uid="uid://e5vc2m7amjg2" path="res://assets/placeholder_sprite_wide.png" id="2_iyts8"]
-[ext_resource type="AnimationLibrary" uid="uid://danfci2b33wd5" path="res://src/player/costume/ghost_placeholder/ghost_placeholder.tres" id="3_5jmwu"]
+[ext_resource type="AnimationLibrary" uid="uid://danfci2b33wd5" path="res://src/costume/ghost_placeholder/ghost_placeholder.tres" id="3_5jmwu"]
 
 [sub_resource type="Animation" id="Animation_erx8g"]
 length = 0.001
