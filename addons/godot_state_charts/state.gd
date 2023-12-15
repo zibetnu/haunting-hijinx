@@ -39,7 +39,6 @@ var _state_active = false
 var active:bool:
 	get: return _state_active
 	
-
 ## The currently active pending transition.
 var _pending_transition:Transition = null
 
@@ -49,9 +48,16 @@ var _pending_transition_time:float = 0
 ## The transitions of this state.
 var _transitions:Array[Transition] = []
 
-
 ## The state chart that owns this state.
-@onready var _chart = _find_chart(get_parent())
+var _chart:StateChart
+
+func _ready():
+	# don't run in the editor
+	if Engine.is_editor_hint():
+		return
+		
+	_chart = _find_chart(get_parent())
+		
 
 ## Finds the owning state chart by moving upwards.
 func _find_chart(parent:Node):
@@ -199,7 +205,7 @@ func _state_restore(saved_state:SavedState, child_levels:int = -1):
 func _process(delta:float):
 	if Engine.is_editor_hint():
 		return
-		
+
 	# emit the processing signal
 	state_processing.emit(delta)
 	# check if there is a pending transition

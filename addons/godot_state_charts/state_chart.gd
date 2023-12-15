@@ -5,12 +5,8 @@
 class_name StateChart 
 extends Node
 
-## Emitted when a transition is about to happen. Note that this
-## signal is only intended for the state chart debugger. It is
-## not recommended to use this in your game code, which should 
-## be unaware of transitions (see also the tips and tricks in the
-## manual).
-signal _before_transition(transition:Transition, source:State)
+## The the remote debugger
+const DebuggerRemote = preload("utilities/editor_debugger/editor_debugger_remote.gd")
 
 ## Emitted when the state chart receives an event. This will be 
 ## emitted no matter which state is currently active and can be 
@@ -23,6 +19,10 @@ signal _before_transition(transition:Transition, source:State)
 ## fully before processing the next. If an event is received
 ## while another is still processing, it will be enqueued.
 signal event_received(event:StringName)
+
+## Flag indicating if this state chart should be tracked by the 
+## state chart debugger in the editor.
+@export var track_in_editor:bool = false
 
 ## The root state of the state chart.
 var _state:State = null
@@ -44,6 +44,8 @@ var _event_processing_active:bool = false
 var _queued_transitions:Array[Dictionary] = []
 var _transitions_processing_active:bool = false
 
+
+var _debugger_remote:DebuggerRemote = null
 
 
 func _ready() -> void:
@@ -67,6 +69,12 @@ func _ready() -> void:
 
 	# enter the state
 	_state._state_enter.call_deferred()
+
+	# if we are in an editor build and this chart should be tracked 
+	# by the debugger, create a debugger remote
+	if track_in_editor and OS.has_feature("editor"):
+		_debugger_remote = DebuggerRemote.new(self)
+
 
 ## Sends an event to this state chart. The event will be passed to the innermost active state first and
 ## is then moving up in the tree until it is consumed. Events will trigger transitions and actions via emitted
@@ -124,8 +132,6 @@ func _run_transition(transition:Transition, source:State):
 ## Runs the transition. Used internally by the state chart, do not call this directly.	
 func _do_run_transition(transition:Transition, source:State):
 	if source.active:
-		# run the transition	
-		_before_transition.emit(transition, source)
 		# Notify interested parties that the transition is about to be taken
 		transition.taken.emit()
 		source._handle_transition(transition, source)
@@ -141,6 +147,7 @@ func _warn_not_active(transition:Transition, source:State):
 ## an expression guard.
 func set_expression_property(name:StringName, value) -> void:
 	_expression_properties[name] = value
+
 
 ## Calls the `step` function in all active states. Used for situations where `state_processing` and 
 ## `state_physics_processing` don't make sense (e.g. turn-based games, or games with a fixed timestep).
