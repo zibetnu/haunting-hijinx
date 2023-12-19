@@ -11,7 +11,7 @@ const BEAM_TEXTURES: Array[CompressedTexture2D] = [
 	preload(BEAM_FILE_PATH % 13), preload(BEAM_FILE_PATH % 14), preload(BEAM_FILE_PATH % 15),
 ]
 
-@export var data: Resource:
+@export var data: FlashlightData:
 	set(value):
 		if data and data.changed.is_connected(_on_data_changed):
 			data.changed.disconnect(_on_data_changed)
@@ -39,7 +39,7 @@ var body_frame: int:
 		return _body.frame
 
 	set(value):
-		_body.frame = value
+		_body.frame = clampi(value, 0, _body.hframes * _body.vframes - 1)
 
 var flashlight_rotation: float:
 	get:
@@ -67,20 +67,9 @@ var light_visible: bool:
 
 
 func _on_data_changed() -> void:
-	if data.get("beam_points") is Array[Vector2]:
-		beam_points = data.get("beam_points")
-
-	if data.get("beam_visible") is bool:
-		beam_visible = data.get("beam_visible")
-
-	if data.get("body_frame") is int:
-		body_frame = data.get("body_frame")
-
-	if data.get("flashlight_rotation") is float:
-		flashlight_rotation = data.get("flashlight_rotation")
-
-	if data.get("light_frame") is int:
-		light_frame = data.get("light_frame")
-
-	if data.get("light_visible") is bool:
-		light_visible = data.get("light_visible")
+	beam_points = data.beam_points
+	beam_visible = data.beam_visible
+	body_frame = data.body_frame
+	flashlight_rotation = data.flashlight_rotation
+	light_frame = data.light_frame
+	light_visible = data.light_visible
