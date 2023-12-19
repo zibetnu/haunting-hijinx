@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7qmrgohocqfx"]
+
+[ext_resource type="Script" path="res://src/flashlight/display/display.gd" id="1_rfbrn"]
+[ext_resource type="Texture2D" uid="uid://do78peki3jtm" path="res://assets/flashlight/flashlight_body.png" id="2_tm0ty"]
+[ext_resource type="Script" path="res://src/flashlight/display/beam.gd" id="3_rmag1"]
+
+[sub_resource type="Gradient" id="Gradient_2xl7l"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mw7bx"]
+gradient = SubResource("Gradient_2xl7l")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="Display" type="Node2D" groups=["flashlights"]]
+y_sort_enabled = true
+script = ExtResource("1_rfbrn")
+
+[node name="RotationNode" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../RotationNode2")
+update_position = false
+update_scale = false
+
+[node name="Light" type="Node2D" parent="RotationNode"]
+position = Vector2(16, 0)
+
+[node name="FloorLight" type="PointLight2D" parent="RotationNode/Light"]
+shadow_enabled = true
+shadow_item_cull_mask = 18
+offset = Vector2(48, 0)
+height = 32.0
+
+[node name="WallLight" type="PointLight2D" parent="RotationNode/Light"]
+range_item_cull_mask = 26
+shadow_enabled = true
+shadow_item_cull_mask = 4
+offset = Vector2(48, 0)
+height = 32.0
+
+[node name="PlayerLight" type="PointLight2D" parent="RotationNode/Light"]
+position = Vector2(-16, 0)
+energy = 0.5
+range_item_cull_mask = 33
+shadow_item_cull_mask = 18
+texture = SubResource("GradientTexture2D_mw7bx")
+height = 16.0
+
+[node name="RotationNode2" type="RemoteTransform2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -8)
+remote_path = NodePath("../IgnoreCanvasModulate/RotationNode3")
+update_scale = false
+
+[node name="Body" type="Sprite2D" parent="RotationNode2"]
+light_mask = 32
+position = Vector2(12, 0)
+texture = ExtResource("2_tm0ty")
+hframes = 2
+
+[node name="IgnoreCanvasModulate" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="RotationNode3" type="Node2D" parent="IgnoreCanvasModulate"]
+position = Vector2(0, -8)
+
+[node name="Beam" type="Node2D" parent="IgnoreCanvasModulate/RotationNode3"]
+z_index = 1
+position = Vector2(16, 0)
+script = ExtResource("3_rmag1")
