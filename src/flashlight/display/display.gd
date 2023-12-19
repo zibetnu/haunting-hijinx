@@ -61,8 +61,8 @@ var light_visible: bool:
 	set(value):
 		_light.visible = value
 
-@onready var _beam := $IgnoreCanvasModulate/RotationNode3/_beam
-@onready var _body := $RotationNode2/_body
+@onready var _beam := $IgnoreCanvasModulate/RotationNode3/Beam
+@onready var _body := $RotationNode2/Body
 @onready var _light := $RotationNode/Light
 
 
