@@ -1,8 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7qmrgohocqfx"]
+[gd_scene load_steps=7 format=3 uid="uid://c7qmrgohocqfx"]
 
 [ext_resource type="Script" path="res://src/flashlight/display/display.gd" id="1_rfbrn"]
-[ext_resource type="Texture2D" uid="uid://do78peki3jtm" path="res://assets/flashlight/flashlight_body.png" id="2_tm0ty"]
+[ext_resource type="Texture2D" uid="uid://do78peki3jtm" path="res://assets/flashlight/body.png" id="2_lt2gs"]
 [ext_resource type="Script" path="res://src/flashlight/display/beam.gd" id="3_rmag1"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jmwf3"]
+properties/0/path = NodePath(".:beam_points")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:flashlight_powered")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:flashlight_rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:light_texture_index")
+properties/3/spawn = true
+properties/3/replication_mode = 2
 
 [sub_resource type="Gradient" id="Gradient_2xl7l"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -16,6 +30,9 @@ fill_to = Vector2(0.5, 0)
 [node name="Display" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_rfbrn")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_jmwf3")
 
 [node name="RotationNode" type="RemoteTransform2D" parent="."]
 remote_path = NodePath("../RotationNode2")
@@ -55,8 +72,19 @@ update_scale = false
 [node name="Body" type="Sprite2D" parent="RotationNode2"]
 light_mask = 32
 position = Vector2(12, 0)
-texture = ExtResource("2_tm0ty")
+texture = ExtResource("2_lt2gs")
 hframes = 2
+
+[node name="BeamStarts" type="Node2D" parent="RotationNode2"]
+position = Vector2(16, 0)
+
+[node name="BeamStartTop" type="Marker2D" parent="RotationNode2/BeamStarts"]
+unique_name_in_owner = true
+position = Vector2(0, -2)
+
+[node name="BeamStartBottom" type="Marker2D" parent="RotationNode2/BeamStarts"]
+unique_name_in_owner = true
+position = Vector2(0, 2)
 
 [node name="IgnoreCanvasModulate" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true

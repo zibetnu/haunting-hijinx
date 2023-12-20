@@ -1,14 +1,23 @@
 extends Node2D
 
 
-var points: Array[Vector2] = []
+# Not typed as Array[Vector2] due to a MultiplayerSynchronizer bug.
+# See https://github.com/godotengine/godot/issues/74391.
+var points: Array = []
 
 
 func _draw() -> void:
-	if points.size() >= 3:
-		draw_colored_polygon(points, Color8(255, 255 , 255))
+	if points.size() < 3:
+		return
+
+	if Geometry2D.is_polygon_clockwise(points):
+		return
+
+	draw_colored_polygon(points, Color8(255, 255 , 255))
 
 
-func set_points(value: Array[Vector2]) -> void:
+# value is not typed as Array[Vector2] due to a MultiplayerSynchronizer bug.
+# See https://github.com/godotengine/godot/issues/74391.
+func set_points(value: Array) -> void:
 	points = value
 	queue_redraw()

@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyev6t6l5ykdp"]
+
+[ext_resource type="PackedScene" uid="uid://c3u6qxrt3jkm8" path="res://src/repeat_ray_cast_2d/repeat_ray_cast_2d.tscn" id="1_mmhtb"]
+[ext_resource type="Script" path="res://src/flashlight/behavior/behavior.gd" id="1_n0bsl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uikcq"]
+radius = 8.0
+
+[node name="Behavior" type="Area2D"]
+y_sort_enabled = true
+script = ExtResource("1_n0bsl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.99, 0.99)
+shape = SubResource("CircleShape2D_uikcq")
+
+[node name="RayCasts" type="Node2D" parent="."]
+position = Vector2(16, 0)
+
+[node name="RepeatRayCast2D" parent="RayCasts" instance=ExtResource("1_mmhtb")]
+position = Vector2(0, -2)
+rotation = -0.185005
+target_position = Vector2(0, 0)
+collision_mask = 15
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RepeatRayCast2D2" parent="RayCasts" instance=ExtResource("1_mmhtb")]
+target_position = Vector2(0, 0)
+collision_mask = 15
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RepeatRayCast2D3" parent="RayCasts" instance=ExtResource("1_mmhtb")]
+position = Vector2(0, 2)
+rotation = 0.185005
+target_position = Vector2(0, 0)
+collision_mask = 15
+hit_from_inside = true
+collide_with_areas = true

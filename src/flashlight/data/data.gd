@@ -4,54 +4,90 @@ extends Node
 
 signal changed()
 
-const CAST_LENGTHS: Array[int] = [0, 4, 5, 6, 7, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48]
-const CAST_LONG_MAX_INDEX = 15
-const CAST_LONG_MIN_INDEX = 5
-const CAST_SHORT_MAX_INDEX = 4
-
 @export_group("Flashlight", "flashlight")
+@export var flashlight_powered: bool:
+	set(value):
+		if flashlight_powered == value:
+			return
+
+		flashlight_powered = value
+		changed.emit()
+
 @export var flashlight_rotation := 0.0:
 	set(value):
+		if flashlight_rotation == value:
+			return
+
 		flashlight_rotation = value
 		changed.emit()
 
-@export var flashlight_turn_speed := 2 * PI
+@export var flashlight_turn_speed := 2 * PI:
+	set(value):
+		if flashlight_turn_speed == value:
+			return
+
+		flashlight_turn_speed = value
+		changed.emit()
 
 @export_group("Battery", "battery")
-@export var battery_time := 43
-@export var battery_low_percentage := 0.5
-
-@export_group("Beam", "beam")
-@export var beam_points: Array[Vector2] = []
-@export var beam_visible := false:
+@export var battery_low_percentage := 0.5:
 	set(value):
-		beam_visible = value
+		if battery_low_percentage == value:
+			return
+
+		battery_low_percentage = value
 		changed.emit()
 
-@export_group("Body", "body")
-@export var body_frame := 0:
+@export var battery_time := 43:
 	set(value):
-		body_frame = value
+		if battery_time == value:
+			return
+
+		battery_time = value
 		changed.emit()
 
-@export_group("Light", "light")
-@export var light_frame := 0:
+@export_group("Collision", "collision")
+@export var collision_cast_length := 0.0:
 	set(value):
-		light_frame = value
+		if collision_cast_length == value:
+			return
+
+		collision_cast_length = value
 		changed.emit()
 
-@export var light_visible := false:
-	set(value):
-		light_visible = value
-		changed.emit()
+@export var collision_points: Array[Vector2] = []
 
 @export_group("Damage", "damage")
-@export var damage_deals: DamageSource
-@export var damage_weak_to: DamageSource.Type
+@export var damage_deals: DamageSource:
+	set(value):
+		if damage_deals == value:
+			return
+
+		damage_deals = value
+		changed.emit()
+
+@export var damage_weak_to: DamageSource.Type:
+	set(value):
+		if damage_weak_to == value:
+			return
+
+		damage_weak_to = value
+		changed.emit()
 
 var battery := max_battery:
 	set(value):
+		if battery == value:
+			return
+
 		battery = clampi(value, 0, max_battery)
+		changed.emit()
+
+var battery_percentage: float:
+	get:
+		return float(battery) / max_battery
+
+	set(value):
+		battery = roundi(max_battery * clampf(value, 0, 1))
 
 var max_battery: int:
 	get:
@@ -59,14 +95,10 @@ var max_battery: int:
 				"physics/common/physics_ticks_per_second"
 		)
 
-var percentage: float:
-	get:
-		return float(battery) / max_battery
 
-	set(value):
-		battery = roundi(max_battery * clampf(value, 0, 1))
+func set_collision_points(points: Array[Vector2]) -> void:
+	if collision_points == points:
+		return
 
-
-func set_beam_points(points: Array[Vector2]) -> void:
-	beam_points = points
+	collision_points = points
 	changed.emit()
