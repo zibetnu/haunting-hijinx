@@ -1,8 +1,6 @@
-class_name ControllerStateChartEvents
 extends Node
 
 
-@export var server_only := true
 @export var controller: Controller:
 	set(value):
 		if controller and controller.input_handled.is_connected(_on_controller_input_handled):
@@ -32,9 +30,6 @@ func _send_event(event: StringName) -> void:
 
 
 func _on_controller_input_handled() -> void:
-	if server_only and not multiplayer.is_server():
-		return
-
 	var move_vector_state: Array[bool] = [
 		_previous_move_vector.is_equal_approx(controller.move_vector),
 		_previous_move_vector.is_zero_approx(),
