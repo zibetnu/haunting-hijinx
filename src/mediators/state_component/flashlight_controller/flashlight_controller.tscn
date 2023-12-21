@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfah2vi4kgnu7"]
+
+[ext_resource type="Script" path="res://src/mediators/state_component/flashlight_controller/flashlight_controller.gd" id="1_hcqnt"]
+
+[node name="FlashlightController" type="Node"]
+script = ExtResource("1_hcqnt")
