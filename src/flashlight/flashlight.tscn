@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c7qmrgohocqfx" path="res://src/flashlight/display/display.tscn" id="3_olr6v"]
 
 [node name="Flashlight" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Data" parent="." instance=ExtResource("1_e1ycg")]
 
