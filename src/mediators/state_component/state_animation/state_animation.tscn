@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b55ojigpr88dd"]
+
+[ext_resource type="Script" path="res://src/mediators/state_component/state_animation/state_animation.gd" id="1_4ul0c"]
+
+[node name="StateAnimation" type="Node"]
+script = ExtResource("1_4ul0c")
