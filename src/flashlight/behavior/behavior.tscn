@@ -7,7 +7,6 @@
 radius = 8.0
 
 [node name="Behavior" type="Area2D"]
-y_sort_enabled = true
 script = ExtResource("1_n0bsl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
