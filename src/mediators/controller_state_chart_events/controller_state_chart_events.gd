@@ -18,29 +18,23 @@ var _previous_button_1_pressed := false
 var _previous_button_2_pressed := false
 
 
-@rpc("reliable")
 func _send_event(event: StringName) -> void:
-		if not state_chart:
-			return
-
-		if multiplayer.is_server():
-			_send_event.rpc(event)
-
-		state_chart.send_event(event)
+		if state_chart:
+			state_chart.send_event(event)
 
 
 func _on_controller_input_handled() -> void:
 	var move_vector_state: Array[bool] = [
 		_previous_move_vector.is_equal_approx(controller.move_vector),
 		_previous_move_vector.is_zero_approx(),
-		controller.move_vector.is_zero_approx()
+		controller.move_vector.is_zero_approx(),
 	]
 	match move_vector_state:
 		[false, false, true]:
-			_send_event("idle")
+			_send_event("move_stopped")
 
 		[false, true, false]:
-			_send_event("move")
+			_send_event("move_started")
 
 	_previous_move_vector = controller.move_vector
 	_previous_look_vector = controller.look_vector
