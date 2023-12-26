@@ -103,7 +103,7 @@ script = ExtResource("3_ocdoo")
 
 [node name="StateAnimation" parent="StateChart/CompoundState/Dead" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("11_t3eqe")]
 animation_name = "dead"
-costume_behavior = NodePath("../../../../HunterPlaceholder/Behavior")
+costume_behavior = NodePath("../../../../YSort/HunterPlaceholder/Behavior")
 active_state = NodePath("..")
 
 [node name="Alive" type="Node" parent="StateChart/CompoundState"]
@@ -130,7 +130,7 @@ event = &"move_started"
 
 [node name="StateAnimation" parent="StateChart/CompoundState/Alive/Idle" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("11_t3eqe")]
 animation_name = "idle"
-costume_behavior = NodePath("../../../../../HunterPlaceholder/Behavior")
+costume_behavior = NodePath("../../../../../YSort/HunterPlaceholder/Behavior")
 active_state = NodePath("..")
 
 [node name="Move" type="Node" parent="StateChart/CompoundState/Alive"]
@@ -144,7 +144,7 @@ event = &"move_stopped"
 
 [node name="StateAnimation" parent="StateChart/CompoundState/Alive/Move" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("11_t3eqe")]
 animation_name = "move"
-costume_behavior = NodePath("../../../../../HunterPlaceholder/Behavior")
+costume_behavior = NodePath("../../../../../YSort/HunterPlaceholder/Behavior")
 active_state = NodePath("..")
 
 [node name="MoveNormal" type="Node" parent="StateChart/CompoundState/Alive/Move"]
@@ -188,7 +188,7 @@ state_chart = NodePath("../../../StateChart")
 script = ExtResource("18_mpyxa")
 source_node = NodePath("../RotationToVector")
 source_property = "vector"
-destination_node = NodePath("../../../HunterPlaceholder/Behavior")
+destination_node = NodePath("../../HunterPlaceholder/Behavior")
 destination_property = "direction_vector"
 process_callback = 2
 
@@ -196,7 +196,7 @@ process_callback = 2
 source_node = NodePath("../Data")
 source_variable = "flashlight_rotation"
 
-[node name="HunterPlaceholder" parent="." instance=ExtResource("19_fj04q")]
+[node name="HunterPlaceholder" parent="YSort" instance=ExtResource("19_fj04q")]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.5
