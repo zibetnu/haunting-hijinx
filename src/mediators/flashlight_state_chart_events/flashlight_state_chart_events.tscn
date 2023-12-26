@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://co1edbkdtjj35"]
+
+[ext_resource type="Script" path="res://src/mediators/flashlight_state_chart_events/flashlight_state_chart_events.gd" id="1_0qmg7"]
+
+[node name="FlashlightStateChartEvents" type="Node"]
+script = ExtResource("1_0qmg7")
