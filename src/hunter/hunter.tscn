@@ -200,5 +200,6 @@ source_variable = "flashlight_rotation"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.5
+range_item_cull_mask = 33
 texture = SubResource("GradientTexture2D_xocc6")
 height = 16.0
