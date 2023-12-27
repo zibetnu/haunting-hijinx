@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=42 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="2_yqkoe"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="7_lf1vk"]
 [ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="8_dmlm5"]
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="9_muve1"]
+[ext_resource type="PackedScene" uid="uid://dt21mg06hrnci" path="res://src/mediators/aura_sense_alert/aura_sense_alert.tscn" id="9_vdw7c"]
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="10_3bo02"]
 [ext_resource type="PackedScene" uid="uid://b55ojigpr88dd" path="res://src/mediators/state_component/costume_animation/costume_animation.tscn" id="11_ww6av"]
 [ext_resource type="PackedScene" uid="uid://dfah2vi4kgnu7" path="res://src/mediators/state_component/flashlight_controller/flashlight_controller.tscn" id="12_j1s0g"]
@@ -26,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://cssdkhs4cty5c" path="res://src/costume/hunter_placeholder/hunter_placeholder.tscn" id="19_fj04q"]
 [ext_resource type="PackedScene" uid="uid://biaax3nsf56bg" path="res://src/mediators/state_component/animation/animation.tscn" id="20_wx57d"]
 [ext_resource type="PackedScene" uid="uid://r1i8jof331aw" path="res://src/mediators/flashlight_state_chart_properties/flashlight_state_chart_properties.tscn" id="22_lt6pn"]
+[ext_resource type="PackedScene" uid="uid://djs1c1w30m8gp" path="res://src/alert/alert.tscn" id="28_bjj70"]
 [ext_resource type="PackedScene" uid="uid://y03qjvt68tjj" path="res://src/aura_sense/aura_sense.tscn" id="28_dd2t8"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hflh2"]
@@ -114,6 +116,8 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
 [node name="Hunter" type="CharacterBody2D" groups=["hunters"]]
+collision_layer = 4
+collision_mask = 5
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_hflh2")
@@ -156,6 +160,10 @@ state_chart = NodePath("../../StateChart")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AuraSense"]
 shape = SubResource("CircleShape2D_6qlss")
+
+[node name="AuraSenseAlert" parent="AuraSense" node_paths=PackedStringArray("alert", "aura_sense") instance=ExtResource("9_vdw7c")]
+alert = NodePath("../../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert")
+aura_sense = NodePath("..")
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("1_0xkip")
@@ -320,6 +328,24 @@ energy = 0.5
 range_item_cull_mask = 33
 texture = SubResource("GradientTexture2D_xocc6")
 height = 16.0
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../IgnoreCanvasModulate/FollowPlayer")
+
+[node name="IgnoreCanvasModulate" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="FollowPlayer" type="Node2D" parent="IgnoreCanvasModulate"]
+
+[node name="NotificationContainer" type="HBoxContainer" parent="IgnoreCanvasModulate/FollowPlayer"]
+offset_left = -32.0
+offset_top = -42.0
+offset_right = 32.0
+offset_bottom = -26.0
+alignment = 1
+
+[node name="Alert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("28_bjj70")]
+layout_mode = 2
 
 [editable path="YSort/Flashlight"]
 [editable path="YSort/HunterPlaceholder"]

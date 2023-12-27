@@ -3,4 +3,6 @@
 [ext_resource type="Script" path="res://src/aura_sense/aura_sense.gd" id="1_tlqi7"]
 
 [node name="AuraSense" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_tlqi7")
