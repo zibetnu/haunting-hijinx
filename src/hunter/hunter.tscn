@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=40 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="2_yqkoe"]
@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://cssdkhs4cty5c" path="res://src/costume/hunter_placeholder/hunter_placeholder.tscn" id="19_fj04q"]
 [ext_resource type="PackedScene" uid="uid://biaax3nsf56bg" path="res://src/mediators/state_component/animation/animation.tscn" id="20_wx57d"]
 [ext_resource type="PackedScene" uid="uid://r1i8jof331aw" path="res://src/mediators/flashlight_state_chart_properties/flashlight_state_chart_properties.tscn" id="22_lt6pn"]
+[ext_resource type="PackedScene" uid="uid://y03qjvt68tjj" path="res://src/aura_sense/aura_sense.tscn" id="28_dd2t8"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hflh2"]
 properties/0/path = NodePath(".:position")
@@ -47,6 +48,9 @@ properties/3/spawn = true
 properties/3/replication_mode = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vawb0"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6qlss"]
 radius = 8.0
 
 [sub_resource type="Resource" id="Resource_pc1mk"]
@@ -147,6 +151,11 @@ controller_2 = NodePath("KeyboardAndMouse")
 [node name="ControllerStateChartEvents" parent="Synced" node_paths=PackedStringArray("controller", "state_chart") instance=ExtResource("7_1ehsk")]
 controller = NodePath("..")
 state_chart = NodePath("../../StateChart")
+
+[node name="AuraSense" parent="." instance=ExtResource("28_dd2t8")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AuraSense"]
+shape = SubResource("CircleShape2D_6qlss")
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("1_0xkip")
