@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://djba3xyguo0kb"]
-
-[ext_resource type="Script" path="res://src/mediators/state_component/state_remote_property/state_remote_property.gd" id="1_qy1m2"]
-
-[node name="StateRemoteProperty" type="Node"]
-script = ExtResource("1_qy1m2")
