@@ -11,21 +11,11 @@ extends StateComponent
 		if controller and not controller.input_handled.is_connected(_on_controller_input_handled):
 			controller.input_handled.connect(_on_controller_input_handled)
 
-var _active := false
-
 
 func _on_controller_input_handled() -> void:
-	if not _active:
+	if not active_state.active:
 		return
 
 	flashlight_behavior.set("powered", controller.button_1_pressed)
 	if not controller.look_vector.is_zero_approx():
 		flashlight_behavior.set("target_rotation", controller.look_vector.angle())
-
-
-func _on_state_entered() -> void:
-	_active = true
-
-
-func _on_state_exited() -> void:
-	_active = false
