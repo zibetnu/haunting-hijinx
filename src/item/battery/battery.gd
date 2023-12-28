@@ -28,7 +28,6 @@ func take_damage(source: DamageSource) -> void:
 
 
 func _acquirer_allowed(acquirer: Variant) -> bool:
-	print(acquirer)
 	if not "data" in acquirer:
 		return false
 
