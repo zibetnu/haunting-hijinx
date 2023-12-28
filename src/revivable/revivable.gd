@@ -1,6 +1,8 @@
 extends Area2D
 
 
+signal revived
+
 @export var active := true:
 	set(value):
 		active = value
@@ -40,3 +42,4 @@ func take_damage(source: DamageSource) -> void:
 		return
 
 	progress = 0
+	revived.emit()

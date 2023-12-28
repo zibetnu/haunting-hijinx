@@ -92,13 +92,13 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:modulate")
-tracks/0/interp = 2
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.701961)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_id0td"]
@@ -122,8 +122,6 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
 [node name="Hunter" type="CharacterBody2D" groups=["hunters"]]
-collision_layer = 4
-collision_mask = 5
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_hflh2")
@@ -349,6 +347,7 @@ source_variable = "flashlight_rotation"
 libraries = {
 "": SubResource("AnimationLibrary_id0td")
 }
+speed_scale = 2.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer"]
 replication_config = SubResource("SceneReplicationConfig_fjbw1")
@@ -378,6 +377,7 @@ alignment = 1
 visible = false
 layout_mode = 2
 size_flags_vertical = 8
+fill_mode = 3
 texture_under = ExtResource("33_a7fw2")
 texture_progress = ExtResource("33_a7fw2")
 tint_under = Color(1, 1, 1, 0.247059)
