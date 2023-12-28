@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5py3q2r2ukvm"]
+
+[ext_resource type="Script" path="res://src/mediators/signal_state_chart_event/signal_state_chart_event.gd" id="1_5bjx7"]
+
+[node name="SignalStateChartEvent" type="Node"]
+script = ExtResource("1_5bjx7")

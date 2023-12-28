@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=49 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="2_yqkoe"]
@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://r1i8jof331aw" path="res://src/mediators/flashlight_state_chart_properties/flashlight_state_chart_properties.tscn" id="22_lt6pn"]
 [ext_resource type="PackedScene" uid="uid://b4i2arqquha56" path="res://src/revivable/revivable.tscn" id="23_d234k"]
 [ext_resource type="PackedScene" uid="uid://biqy1culinvqm" path="res://src/mediators/flashlight_event_battery_alert/flashlight_event_battery_alert.tscn" id="24_1dwup"]
+[ext_resource type="PackedScene" uid="uid://b5py3q2r2ukvm" path="res://src/mediators/signal_state_chart_event/signal_state_chart_event.tscn" id="24_g2w5e"]
 [ext_resource type="PackedScene" uid="uid://djs1c1w30m8gp" path="res://src/alert/alert.tscn" id="28_bjj70"]
 [ext_resource type="PackedScene" uid="uid://y03qjvt68tjj" path="res://src/aura_sense/aura_sense.tscn" id="28_dd2t8"]
 [ext_resource type="PackedScene" uid="uid://gh0mk0t85f13" path="res://src/battery_alert/battery_alert.tscn" id="31_vp1ot"]
@@ -135,6 +136,11 @@ initial_state = NodePath("Alive")
 
 [node name="Dead" type="Node" parent="StateChart/CompoundState"]
 script = ExtResource("3_ocdoo")
+
+[node name="Revived" type="Node" parent="StateChart/CompoundState/Dead"]
+script = ExtResource("4_x2w3t")
+to = NodePath("../../Alive")
+event = &"revived"
 
 [node name="CostumeAnimation" parent="StateChart/CompoundState/Dead" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("11_ww6av")]
 animation_name = "dead"
@@ -308,12 +314,18 @@ revives_with = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Revivable"]
 shape = SubResource("CircleShape2D_6qlss")
 
+[node name="SignalStateChartEvent" parent="Revivable" node_paths=PackedStringArray("signal_source", "state_chart") instance=ExtResource("24_g2w5e")]
+signal_name = &"revived"
+signal_source = NodePath("..")
+state_chart = NodePath("../../StateChart")
+
 [node name="YSort" type="Node2D" parent="."]
 y_sort_enabled = true
 
 [node name="Flashlight" parent="YSort" instance=ExtResource("15_hljm8")]
 
 [node name="FlashlightController" parent="YSort/Flashlight/Behavior" index="0" node_paths=PackedStringArray("flashlight_behavior", "controller") instance=ExtResource("7_ew1lp")]
+active = false
 flashlight_behavior = NodePath("..")
 controller = NodePath("../../../../Synced")
 
@@ -354,7 +366,7 @@ replication_config = SubResource("SceneReplicationConfig_fjbw1")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.5
-range_item_cull_mask = 33
+range_item_cull_mask = 51
 texture = SubResource("GradientTexture2D_xocc6")
 height = 16.0
 
