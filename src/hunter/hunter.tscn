@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=44 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="2_yqkoe"]
@@ -27,8 +27,10 @@
 [ext_resource type="PackedScene" uid="uid://cssdkhs4cty5c" path="res://src/costume/hunter_placeholder/hunter_placeholder.tscn" id="19_fj04q"]
 [ext_resource type="PackedScene" uid="uid://biaax3nsf56bg" path="res://src/mediators/state_component/animation/animation.tscn" id="20_wx57d"]
 [ext_resource type="PackedScene" uid="uid://r1i8jof331aw" path="res://src/mediators/flashlight_state_chart_properties/flashlight_state_chart_properties.tscn" id="22_lt6pn"]
+[ext_resource type="PackedScene" uid="uid://biqy1culinvqm" path="res://src/mediators/flashlight_event_battery_alert/flashlight_event_battery_alert.tscn" id="24_1dwup"]
 [ext_resource type="PackedScene" uid="uid://djs1c1w30m8gp" path="res://src/alert/alert.tscn" id="28_bjj70"]
 [ext_resource type="PackedScene" uid="uid://y03qjvt68tjj" path="res://src/aura_sense/aura_sense.tscn" id="28_dd2t8"]
+[ext_resource type="PackedScene" uid="uid://gh0mk0t85f13" path="res://src/battery_alert/battery_alert.tscn" id="31_vp1ot"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hflh2"]
 properties/0/path = NodePath(".:position")
@@ -293,15 +295,19 @@ y_sort_enabled = true
 
 [node name="Flashlight" parent="YSort" instance=ExtResource("15_hljm8")]
 
-[node name="FlashlightStateChartEvents" parent="YSort/Flashlight/Behavior" index="2" node_paths=PackedStringArray("flashlight_data", "state_chart") instance=ExtResource("16_c1vhd")]
+[node name="FlashlightEventBatteryAlert" parent="YSort/Flashlight/Behavior" index="2" node_paths=PackedStringArray("battery_alert", "state_chart") instance=ExtResource("24_1dwup")]
+battery_alert = NodePath("../../../../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert")
+state_chart = NodePath("../../../../StateChart")
+
+[node name="FlashlightStateChartEvents" parent="YSort/Flashlight/Behavior" index="3" node_paths=PackedStringArray("flashlight_data", "state_chart") instance=ExtResource("16_c1vhd")]
 flashlight_data = NodePath("../../Data")
 state_chart = NodePath("../../../../StateChart")
 
-[node name="FlashlightStateChartProperties" parent="YSort/Flashlight/Behavior" index="3" node_paths=PackedStringArray("flashlight_data", "state_chart") instance=ExtResource("22_lt6pn")]
+[node name="FlashlightStateChartProperties" parent="YSort/Flashlight/Behavior" index="4" node_paths=PackedStringArray("flashlight_data", "state_chart") instance=ExtResource("22_lt6pn")]
 flashlight_data = NodePath("../../Data")
 state_chart = NodePath("../../../../StateChart")
 
-[node name="RemoteProperty" type="Node" parent="YSort/Flashlight/Behavior" index="4" node_paths=PackedStringArray("source_node", "destination_node")]
+[node name="RemoteProperty" type="Node" parent="YSort/Flashlight/Behavior" index="5" node_paths=PackedStringArray("source_node", "destination_node")]
 script = ExtResource("18_mpyxa")
 source_node = NodePath("../RotationToVector")
 source_property = "vector"
@@ -309,7 +315,7 @@ destination_node = NodePath("../../../HunterPlaceholder/Behavior")
 destination_property = "direction_vector"
 process_callback = 2
 
-[node name="RotationToVector" parent="YSort/Flashlight/Behavior" index="5" node_paths=PackedStringArray("source_node") instance=ExtResource("16_se1mq")]
+[node name="RotationToVector" parent="YSort/Flashlight/Behavior" index="6" node_paths=PackedStringArray("source_node") instance=ExtResource("16_se1mq")]
 source_node = NodePath("../../Data")
 source_variable = "flashlight_rotation"
 
@@ -345,6 +351,9 @@ offset_bottom = -26.0
 alignment = 1
 
 [node name="Alert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("28_bjj70")]
+layout_mode = 2
+
+[node name="BatteryAlert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("31_vp1ot")]
 layout_mode = 2
 
 [editable path="YSort/Flashlight"]

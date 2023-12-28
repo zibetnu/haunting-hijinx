@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://biqy1culinvqm"]
+
+[ext_resource type="Script" path="res://src/mediators/flashlight_event_battery_alert/flashlight_event_battery_alert.gd" id="1_0kmho"]
+
+[node name="FlashlightEventBatteryAlert" type="Node"]
+script = ExtResource("1_0kmho")
