@@ -1,6 +1,7 @@
-extends StateComponent
+extends Node
 
 
+@export var active := true
 @export var flashlight_behavior: Node
 @export var controller: Controller:
 	set(value):
@@ -13,7 +14,7 @@ extends StateComponent
 
 
 func _on_controller_input_handled() -> void:
-	if not active_state.active:
+	if not active:
 		return
 
 	flashlight_behavior.set("powered", controller.button_1_pressed)

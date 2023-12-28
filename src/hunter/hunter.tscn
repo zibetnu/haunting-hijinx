@@ -8,13 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="5_uqurr"]
 [ext_resource type="PackedScene" uid="uid://gvf2peg6yuns" path="res://src/controller/unpause_force/unpause_force.tscn" id="6_ujhjn"]
 [ext_resource type="PackedScene" uid="uid://c18war56not2c" path="res://src/mediators/controller_state_chart_events/controller_state_chart_events.tscn" id="7_1ehsk"]
+[ext_resource type="PackedScene" uid="uid://dfah2vi4kgnu7" path="res://src/mediators/flashlight_controller/flashlight_controller.tscn" id="7_ew1lp"]
 [ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="7_lf1vk"]
 [ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="8_dmlm5"]
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="9_muve1"]
 [ext_resource type="PackedScene" uid="uid://dt21mg06hrnci" path="res://src/mediators/aura_sense_alert/aura_sense_alert.tscn" id="9_vdw7c"]
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="10_3bo02"]
 [ext_resource type="PackedScene" uid="uid://b55ojigpr88dd" path="res://src/mediators/state_component/costume_animation/costume_animation.tscn" id="11_ww6av"]
-[ext_resource type="PackedScene" uid="uid://dfah2vi4kgnu7" path="res://src/mediators/state_component/flashlight_controller/flashlight_controller.tscn" id="12_j1s0g"]
 [ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/mediators/state_component/move/move.tscn" id="12_r3uq0"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="12_y0078"]
 [ext_resource type="PackedScene" uid="uid://dji2viacu4vc" path="res://src/mediators/state_component/flashlight_battery_low/flashlight_battery_low.tscn" id="13_mj4y5"]
@@ -148,11 +148,6 @@ active_state = NodePath("..")
 [node name="Alive" type="Node" parent="StateChart/CompoundState"]
 script = ExtResource("12_y0078")
 
-[node name="FlashlightController" parent="StateChart/CompoundState/Alive" node_paths=PackedStringArray("flashlight_behavior", "controller", "active_state") instance=ExtResource("12_j1s0g")]
-flashlight_behavior = NodePath("../../../../YSort/Flashlight/Behavior")
-controller = NodePath("../../../../Synced")
-active_state = NodePath("..")
-
 [node name="FlashlightBatteryLow" parent="StateChart/CompoundState/Alive" node_paths=PackedStringArray("flashlight_data", "active_state") instance=ExtResource("13_mj4y5")]
 flashlight_data = NodePath("../../../../YSort/Flashlight/Data")
 active_state = NodePath("..")
@@ -160,6 +155,10 @@ active_state = NodePath("..")
 [node name="EnableRemoteProperty" parent="StateChart/CompoundState/Alive" node_paths=PackedStringArray("remote_property", "active_state") instance=ExtResource("15_ktlcm")]
 remote_property = NodePath("../../../../YSort/Flashlight/Behavior/RemoteProperty")
 process_callback = 0
+active_state = NodePath("..")
+
+[node name="SetActive" parent="StateChart/CompoundState/Alive" node_paths=PackedStringArray("target", "active_state") instance=ExtResource("5_ep78c")]
+target = NodePath("../../../../YSort/Flashlight/Behavior/FlashlightController")
 active_state = NodePath("..")
 
 [node name="Movement" type="Node" parent="StateChart/CompoundState/Alive"]
@@ -308,19 +307,23 @@ y_sort_enabled = true
 
 [node name="Flashlight" parent="YSort" instance=ExtResource("15_hljm8")]
 
-[node name="FlashlightEventBatteryAlert" parent="YSort/Flashlight/Behavior" index="2" node_paths=PackedStringArray("battery_alert", "state_chart") instance=ExtResource("24_1dwup")]
+[node name="FlashlightController" parent="YSort/Flashlight/Behavior" index="0" node_paths=PackedStringArray("flashlight_behavior", "controller") instance=ExtResource("7_ew1lp")]
+flashlight_behavior = NodePath("..")
+controller = NodePath("../../../../Synced")
+
+[node name="FlashlightEventBatteryAlert" parent="YSort/Flashlight/Behavior" index="3" node_paths=PackedStringArray("battery_alert", "state_chart") instance=ExtResource("24_1dwup")]
 battery_alert = NodePath("../../../../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert")
 state_chart = NodePath("../../../../StateChart")
 
-[node name="FlashlightStateChartEvents" parent="YSort/Flashlight/Behavior" index="3" node_paths=PackedStringArray("flashlight_data", "state_chart") instance=ExtResource("16_c1vhd")]
+[node name="FlashlightStateChartEvents" parent="YSort/Flashlight/Behavior" index="4" node_paths=PackedStringArray("flashlight_data", "state_chart") instance=ExtResource("16_c1vhd")]
 flashlight_data = NodePath("../../Data")
 state_chart = NodePath("../../../../StateChart")
 
-[node name="FlashlightStateChartProperties" parent="YSort/Flashlight/Behavior" index="4" node_paths=PackedStringArray("flashlight_data", "state_chart") instance=ExtResource("22_lt6pn")]
+[node name="FlashlightStateChartProperties" parent="YSort/Flashlight/Behavior" index="5" node_paths=PackedStringArray("flashlight_data", "state_chart") instance=ExtResource("22_lt6pn")]
 flashlight_data = NodePath("../../Data")
 state_chart = NodePath("../../../../StateChart")
 
-[node name="RemoteProperty" type="Node" parent="YSort/Flashlight/Behavior" index="5" node_paths=PackedStringArray("source_node", "destination_node")]
+[node name="RemoteProperty" type="Node" parent="YSort/Flashlight/Behavior" index="6" node_paths=PackedStringArray("source_node", "destination_node")]
 script = ExtResource("18_mpyxa")
 source_node = NodePath("../RotationToVector")
 source_property = "vector"
@@ -328,7 +331,7 @@ destination_node = NodePath("../../../HunterPlaceholder/Behavior")
 destination_property = "direction_vector"
 process_callback = 2
 
-[node name="RotationToVector" parent="YSort/Flashlight/Behavior" index="6" node_paths=PackedStringArray("source_node") instance=ExtResource("16_se1mq")]
+[node name="RotationToVector" parent="YSort/Flashlight/Behavior" index="7" node_paths=PackedStringArray("source_node") instance=ExtResource("16_se1mq")]
 source_node = NodePath("../../Data")
 source_variable = "flashlight_rotation"
 
