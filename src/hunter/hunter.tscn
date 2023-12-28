@@ -1,11 +1,11 @@
-[gd_scene load_steps=46 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=48 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="2_yqkoe"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="3_ocdoo"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="4_x2w3t"]
-[ext_resource type="PackedScene" uid="uid://cmrvakm1sd7b7" path="res://src/mediators/state_component/set_active/set_active.tscn" id="5_ep78c"]
 [ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="5_uqurr"]
+[ext_resource type="PackedScene" uid="uid://cmrvakm1sd7b7" path="res://src/mediators/state_component/set_bool/set_bool.tscn" id="5_xl87u"]
 [ext_resource type="PackedScene" uid="uid://gvf2peg6yuns" path="res://src/controller/unpause_force/unpause_force.tscn" id="6_ujhjn"]
 [ext_resource type="PackedScene" uid="uid://c18war56not2c" path="res://src/mediators/controller_state_chart_events/controller_state_chart_events.tscn" id="7_1ehsk"]
 [ext_resource type="PackedScene" uid="uid://dfah2vi4kgnu7" path="res://src/mediators/flashlight_controller/flashlight_controller.tscn" id="7_ew1lp"]
@@ -33,6 +33,8 @@
 [ext_resource type="PackedScene" uid="uid://djs1c1w30m8gp" path="res://src/alert/alert.tscn" id="28_bjj70"]
 [ext_resource type="PackedScene" uid="uid://y03qjvt68tjj" path="res://src/aura_sense/aura_sense.tscn" id="28_dd2t8"]
 [ext_resource type="PackedScene" uid="uid://gh0mk0t85f13" path="res://src/battery_alert/battery_alert.tscn" id="31_vp1ot"]
+[ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/auto_texture_progress_bar/auto_texture_progress_bar.tscn" id="32_vdk32"]
+[ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="33_a7fw2"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hflh2"]
 properties/0/path = NodePath(".:position")
@@ -141,8 +143,13 @@ animation_name = "dead"
 costume_behavior = NodePath("../../../../YSort/HunterPlaceholder/Behavior")
 active_state = NodePath("..")
 
-[node name="SetActive" parent="StateChart/CompoundState/Dead" node_paths=PackedStringArray("target", "active_state") instance=ExtResource("5_ep78c")]
-target = NodePath("../../../../Revivable")
+[node name="SetBool" parent="StateChart/CompoundState/Dead" node_paths=PackedStringArray("target_node") instance=ExtResource("5_xl87u")]
+target_node = NodePath("../../../../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/AutoTextureProgressBar")
+property_name = &"visible"
+
+[node name="SetBool2" parent="StateChart/CompoundState/Dead" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
+target_node = NodePath("../../../../Revivable")
+property_name = &"active"
 active_state = NodePath("..")
 
 [node name="Alive" type="Node" parent="StateChart/CompoundState"]
@@ -157,8 +164,9 @@ remote_property = NodePath("../../../../YSort/Flashlight/Behavior/RemoteProperty
 process_callback = 0
 active_state = NodePath("..")
 
-[node name="SetActive" parent="StateChart/CompoundState/Alive" node_paths=PackedStringArray("target", "active_state") instance=ExtResource("5_ep78c")]
-target = NodePath("../../../../YSort/Flashlight/Behavior/FlashlightController")
+[node name="SetBool" parent="StateChart/CompoundState/Alive" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
+target_node = NodePath("../../../../YSort/Flashlight/Behavior/FlashlightController")
+property_name = &"active"
 active_state = NodePath("..")
 
 [node name="Movement" type="Node" parent="StateChart/CompoundState/Alive"]
@@ -365,6 +373,17 @@ offset_top = -42.0
 offset_right = 32.0
 offset_bottom = -26.0
 alignment = 1
+
+[node name="AutoTextureProgressBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" node_paths=PackedStringArray("source_node") instance=ExtResource("32_vdk32")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+texture_under = ExtResource("33_a7fw2")
+texture_progress = ExtResource("33_a7fw2")
+tint_under = Color(1, 1, 1, 0.247059)
+source_node = NodePath("../../../../Revivable")
+value_variable = "progress"
+max_variable = "max_progress"
 
 [node name="Alert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("28_bjj70")]
 layout_mode = 2

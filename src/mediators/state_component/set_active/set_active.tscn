@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmrvakm1sd7b7"]
-
-[ext_resource type="Script" path="res://src/mediators/state_component/set_active/set_active.gd" id="1_jp3ge"]
-
-[node name="SetActive" type="Node"]
-script = ExtResource("1_jp3ge")
