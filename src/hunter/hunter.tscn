@@ -147,9 +147,10 @@ animation_name = "dead"
 costume_behavior = NodePath("../../../../YSort/HunterPlaceholder/Behavior")
 active_state = NodePath("..")
 
-[node name="SetBool" parent="StateChart/CompoundState/Dead" node_paths=PackedStringArray("target_node") instance=ExtResource("5_xl87u")]
+[node name="SetBool" parent="StateChart/CompoundState/Dead" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
 target_node = NodePath("../../../../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/AutoTextureProgressBar")
 property_name = &"visible"
+active_state = NodePath("..")
 
 [node name="SetBool2" parent="StateChart/CompoundState/Dead" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
 target_node = NodePath("../../../../Revivable")
