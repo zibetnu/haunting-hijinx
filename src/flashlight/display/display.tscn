@@ -40,6 +40,7 @@ update_position = false
 update_scale = false
 
 [node name="Light" type="Node2D" parent="RotationNode"]
+visible = false
 position = Vector2(16, 0)
 
 [node name="FloorLight" type="PointLight2D" parent="RotationNode/Light"]
