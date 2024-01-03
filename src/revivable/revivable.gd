@@ -21,6 +21,9 @@ var max_progress: int:
 var progress := 0:
 	set(value):
 		progress = clampi(value, 0, max_progress)
+		if progress >= max_progress:
+			progress = 0
+			revived.emit()
 
 var _can_progress := true
 
@@ -38,8 +41,3 @@ func take_damage(source: DamageSource) -> void:
 
 	_can_progress = false
 	progress += source.damage_amount
-	if progress < max_progress:
-		return
-
-	progress = 0
-	revived.emit()
