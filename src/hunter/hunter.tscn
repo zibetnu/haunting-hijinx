@@ -279,7 +279,7 @@ limit_bottom = 6400
 replication_config = SubResource("SceneReplicationConfig_2bhal")
 
 [node name="Synced" parent="." node_paths=PackedStringArray("controller") instance=ExtResource("5_uqurr")]
-controller = NodePath("UnpauseForce/AntiButtonSpam")
+controller = NodePath("UnpauseForce")
 
 [node name="UnpauseForce" parent="Synced" node_paths=PackedStringArray("controller") instance=ExtResource("6_ujhjn")]
 controller = NodePath("AntiButtonSpam")
