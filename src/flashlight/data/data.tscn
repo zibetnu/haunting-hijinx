@@ -6,7 +6,7 @@
 [sub_resource type="Resource" id="Resource_1fnq7"]
 script = ExtResource("2_v36ap")
 damage_amount = 1
-damage_type = 0
+damage_type = 1
 
 [node name="Data" type="Node"]
 script = ExtResource("1_ero2n")
