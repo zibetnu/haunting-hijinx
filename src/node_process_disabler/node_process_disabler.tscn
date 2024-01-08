@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjnncoyhqt6xi"]
-
-[ext_resource type="Script" path="res://src/node_process_disabler/node_process_disabler.gd" id="1_qknpu"]
-
-[node name="NodeProcessDisabler" type="Node"]
-script = ExtResource("1_qknpu")
