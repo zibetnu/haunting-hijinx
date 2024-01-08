@@ -21,4 +21,5 @@ func _ready() -> void:
 
 func _on_peer_id_changed(id: int) -> void:
 	for synchronizer in synchronizers:
-		synchronizer.set_visibility_for(id, true)
+		for connected_peer_id in multiplayer.get_peers():
+			synchronizer.set_visibility_for(connected_peer_id, id == connected_peer_id)
