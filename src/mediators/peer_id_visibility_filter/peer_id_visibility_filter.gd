@@ -11,15 +11,13 @@ extends Node
 			peer_id.changed.connect(_on_peer_id_changed)
 
 
-@export var synchronizers: Array[MultiplayerSynchronizer]
+@export var synchronizer: MultiplayerSynchronizer
 
 
 func _ready() -> void:
-	for synchronizer in synchronizers:
-		synchronizer.public_visibility = false
+	synchronizer.public_visibility = false
 
 
 func _on_peer_id_changed(id: int) -> void:
-	for synchronizer in synchronizers:
-		for connected_peer_id in multiplayer.get_peers():
-			synchronizer.set_visibility_for(connected_peer_id, id == connected_peer_id)
+	for connected_peer_id in multiplayer.get_peers():
+		synchronizer.set_visibility_for(connected_peer_id, id == connected_peer_id)
