@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://vlsmfwjc67ow"]
-
-[ext_resource type="Script" path="res://src/mediators/peer_id_visibility_filter_plus_ghost/peer_id_visibility_filter_plus_ghost.gd" id="1_m7meh"]
-
-[node name="PeerIDVisibilityFilterPlusGhost" type="Node"]
-script = ExtResource("1_m7meh")

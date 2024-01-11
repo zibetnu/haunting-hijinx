@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=55 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://cmrvakm1sd7b7" path="res://src/mediators/state_component/set_bool/set_bool.tscn" id="5_xl87u"]
 [ext_resource type="PackedScene" uid="uid://gvf2peg6yuns" path="res://src/controller/unpause_force/unpause_force.tscn" id="6_ujhjn"]
 [ext_resource type="PackedScene" uid="uid://c18war56not2c" path="res://src/mediators/controller_state_chart_events/controller_state_chart_events.tscn" id="7_1ehsk"]
-[ext_resource type="PackedScene" uid="uid://vlsmfwjc67ow" path="res://src/mediators/peer_id_visibility_filter_plus_ghost/peer_id_visibility_filter_plus_ghost.tscn" id="7_6kddo"]
 [ext_resource type="PackedScene" uid="uid://dfah2vi4kgnu7" path="res://src/mediators/flashlight_controller/flashlight_controller.tscn" id="7_ew1lp"]
 [ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="7_lf1vk"]
 [ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="8_dmlm5"]
@@ -43,7 +42,6 @@
 [ext_resource type="PackedScene" uid="uid://gh0mk0t85f13" path="res://src/battery_alert/battery_alert.tscn" id="31_vp1ot"]
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/auto_texture_progress_bar/auto_texture_progress_bar.tscn" id="32_vdk32"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="33_a7fw2"]
-[ext_resource type="PackedScene" uid="uid://bocnc1nnitnfj" path="res://src/mediators/peer_id_process_mode_plus_ghost/peer_id_process_mode_plus_ghost.tscn" id="41_kr24q"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hflh2"]
 properties/0/path = NodePath(".:position")
@@ -426,13 +424,15 @@ max_variable = "max_progress"
 [node name="Alert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("28_bjj70")]
 layout_mode = 2
 
-[node name="PeerIDVisibilityFilterPlusGhost" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer" index="0" node_paths=PackedStringArray("peer_id", "synchronizer") instance=ExtResource("7_6kddo")]
+[node name="PeerIDVisibilityFilter" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer" index="0" node_paths=PackedStringArray("peer_id", "synchronizer") instance=ExtResource("5_2xtya")]
 peer_id = NodePath("../../../../../../PeerID")
 synchronizer = NodePath("..")
+include_ghost_peer = true
 
-[node name="PeerIDProcessModePlusGhost" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" node_paths=PackedStringArray("peer_id", "nodes") instance=ExtResource("41_kr24q")]
+[node name="PeerIDProcessMode" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" node_paths=PackedStringArray("peer_id", "nodes") instance=ExtResource("5_qee3q")]
 peer_id = NodePath("../../../../../PeerID")
 nodes = [NodePath("..")]
+include_ghost_peer = true
 
 [node name="BatteryAlert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("31_vp1ot")]
 layout_mode = 2

@@ -12,6 +12,7 @@ extends Node
 
 
 @export var synchronizer: MultiplayerSynchronizer
+@export var include_ghost_peer := false
 
 
 func _ready() -> void:
@@ -20,4 +21,7 @@ func _ready() -> void:
 
 func _on_peer_id_changed(id: int) -> void:
 	for connected_peer_id in multiplayer.get_peers():
-		synchronizer.set_visibility_for(connected_peer_id, id == connected_peer_id)
+		synchronizer.set_visibility_for(connected_peer_id,
+				connected_peer_id == id
+				or (include_ghost_peer and connected_peer_id == PeerData.ghost_peer)
+		)
