@@ -75,8 +75,9 @@ properties/3/path = NodePath(".:limit_bottom")
 properties/3/spawn = true
 properties/3/replication_mode = 2
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6qlss"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7fnee"]
 radius = 8.0
+height = 32.0
 
 [sub_resource type="Animation" id="Animation_bwnbh"]
 length = 0.001
@@ -325,7 +326,7 @@ synced_controller = NodePath("..")
 [node name="AuraSense" parent="." instance=ExtResource("28_dd2t8")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AuraSense"]
-shape = SubResource("CircleShape2D_6qlss")
+shape = SubResource("CircleShape2D_vawb0")
 
 [node name="AuraSenseAlert" parent="AuraSense" node_paths=PackedStringArray("alert", "aura_sense") instance=ExtResource("9_vdw7c")]
 alert = NodePath("../../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert")
@@ -336,7 +337,8 @@ active = false
 revives_with = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Revivable"]
-shape = SubResource("CircleShape2D_6qlss")
+position = Vector2(0, -8)
+shape = SubResource("CapsuleShape2D_7fnee")
 
 [node name="SignalStateChartEvent" parent="Revivable" node_paths=PackedStringArray("signal_source", "state_chart") instance=ExtResource("24_g2w5e")]
 signal_name = &"revived"
