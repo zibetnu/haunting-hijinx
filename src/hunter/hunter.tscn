@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=59 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -37,8 +37,10 @@
 [ext_resource type="PackedScene" uid="uid://b4i2arqquha56" path="res://src/revivable/revivable.tscn" id="23_d234k"]
 [ext_resource type="PackedScene" uid="uid://biqy1culinvqm" path="res://src/mediators/flashlight_event_battery_alert/flashlight_event_battery_alert.tscn" id="24_1dwup"]
 [ext_resource type="PackedScene" uid="uid://b5py3q2r2ukvm" path="res://src/mediators/signal_state_chart_event/signal_state_chart_event.tscn" id="24_g2w5e"]
+[ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="27_qehgg"]
 [ext_resource type="PackedScene" uid="uid://djs1c1w30m8gp" path="res://src/alert/alert.tscn" id="28_bjj70"]
 [ext_resource type="PackedScene" uid="uid://y03qjvt68tjj" path="res://src/aura_sense/aura_sense.tscn" id="28_dd2t8"]
+[ext_resource type="PackedScene" uid="uid://b6et2ypj2js4m" path="res://src/mediators/instant_death_event/instant_death_event.tscn" id="28_waga4"]
 [ext_resource type="PackedScene" uid="uid://gh0mk0t85f13" path="res://src/battery_alert/battery_alert.tscn" id="31_vp1ot"]
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/auto_texture_progress_bar/auto_texture_progress_bar.tscn" id="32_vdk32"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="33_a7fw2"]
@@ -274,6 +276,11 @@ active_state = NodePath("..")
 [node name="Vulnerable" type="Node" parent="StateChart/CompoundState/Alive/Vulnerability"]
 script = ExtResource("3_ocdoo")
 
+[node name="Died" type="Node" parent="StateChart/CompoundState/Alive/Vulnerability/Vulnerable"]
+script = ExtResource("4_x2w3t")
+to = NodePath("../../../../Dead")
+event = &"died"
+
 [node name="Animation" parent="StateChart/CompoundState/Alive/Vulnerability/Vulnerable" node_paths=PackedStringArray("animation_player", "active_state") instance=ExtResource("20_wx57d")]
 animation_player = NodePath("../../../../../../YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer")
 animation_name = &"RESET"
@@ -331,6 +338,17 @@ shape = SubResource("CircleShape2D_vawb0")
 [node name="AuraSenseAlert" parent="AuraSense" node_paths=PackedStringArray("alert", "aura_sense") instance=ExtResource("9_vdw7c")]
 alert = NodePath("../../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert")
 aura_sense = NodePath("..")
+
+[node name="DamageSignals" parent="." instance=ExtResource("27_qehgg")]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageSignals"]
+shape = SubResource("CircleShape2D_vawb0")
+
+[node name="InstantDeathEvent" parent="DamageSignals" node_paths=PackedStringArray("damage_signals", "state_chart") instance=ExtResource("28_waga4")]
+damage_signals = NodePath("..")
+state_chart = NodePath("../../StateChart")
+weak_to = 2
 
 [node name="Revivable" parent="." instance=ExtResource("23_d234k")]
 active = false
