@@ -18,6 +18,9 @@ var animation_name := "idle":
 
 var direction_vector := Vector2.DOWN:
 	set(value):
+		if value.is_zero_approx():
+			return
+
 		direction_vector = value
 		_update_animation()
 
