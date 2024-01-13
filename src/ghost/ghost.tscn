@@ -1,0 +1,253 @@
+[gd_scene load_steps=32 format=3 uid="uid://8qaswvkeb8qd"]
+
+[ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
+[ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="2_bh3m0"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_wp1tu"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_5qodq"]
+[ext_resource type="PackedScene" uid="uid://bxn13bi5j05gc" path="res://src/mediators/peer_id_enabled/peer_id_enabled.tscn" id="4_xlp01"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_liri1"]
+[ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="5_xwsa3"]
+[ext_resource type="PackedScene" uid="uid://gvf2peg6yuns" path="res://src/controller/unpause_force/unpause_force.tscn" id="6_wi10c"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="7_7up3p"]
+[ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="7_ijrj0"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="7_n2w0d"]
+[ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/mediators/state_component/move/move.tscn" id="8_i3hxv"]
+[ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="8_mynla"]
+[ext_resource type="PackedScene" uid="uid://b55ojigpr88dd" path="res://src/mediators/state_component/costume_animation/costume_animation.tscn" id="8_wj612"]
+[ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="9_x08fo"]
+[ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="10_el6fq"]
+[ext_resource type="PackedScene" uid="uid://c18war56not2c" path="res://src/mediators/controller_state_chart_events/controller_state_chart_events.tscn" id="11_2r614"]
+[ext_resource type="PackedScene" uid="uid://bg6e2s53ki76i" path="res://src/mediators/peer_id_input_authority/peer_id_input_authority.tscn" id="12_llovw"]
+[ext_resource type="PackedScene" uid="uid://nj5bu4130gy3" path="res://src/costume/ghost_placeholder/ghost_placeholder.tscn" id="13_arjsn"]
+[ext_resource type="PackedScene" uid="uid://ctcjena4x8kr0" path="res://src/aura/aura.tscn" id="13_e27lr"]
+[ext_resource type="PackedScene" uid="uid://bcyyx2srd4gwe" path="res://src/mediators/peer_id_name_label/peer_id_name_label.tscn" id="13_leves"]
+[ext_resource type="PackedScene" uid="uid://y5w40m6pqbvt" path="res://src/mediators/peer_id_visibility/peer_id_visibility.tscn" id="14_f0hrm"]
+[ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/auto_texture_progress_bar/auto_texture_progress_bar.tscn" id="15_nnx8e"]
+[ext_resource type="Script" path="res://src/remote_property.gd" id="19_c6cbw"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hsnve"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xn3hr"]
+radius = 16.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bqubs"]
+properties/0/path = NodePath(".:limit_left")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:limit_top")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:limit_right")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:limit_bottom")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_51u44"]
+radius = 160.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m31g4"]
+radius = 96.0
+
+[sub_resource type="Gradient" id="Gradient_a05sb"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u72sc"]
+gradient = SubResource("Gradient_a05sb")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="Ghost" type="CharacterBody2D"]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_hsnve")
+
+[node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
+nodes = [NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../Synced/RemoteProperty"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../GhostPlaceholder/Behavior")]
+
+[node name="PeerID" parent="." instance=ExtResource("2_bh3m0")]
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("3_wp1tu")
+
+[node name="Base" type="Node" parent="StateChart"]
+script = ExtResource("4_5qodq")
+initial_state = NodePath("Alive")
+
+[node name="Dead" type="Node" parent="StateChart/Base"]
+script = ExtResource("5_liri1")
+
+[node name="Alive" type="Node" parent="StateChart/Base"]
+script = ExtResource("7_7up3p")
+
+[node name="Movement" type="Node" parent="StateChart/Base/Alive"]
+script = ExtResource("4_5qodq")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/Base/Alive/Movement"]
+script = ExtResource("5_liri1")
+
+[node name="MoveStarted" type="Node" parent="StateChart/Base/Alive/Movement/Idle"]
+script = ExtResource("7_n2w0d")
+to = NodePath("../../Move")
+event = &"move_started"
+
+[node name="CostumeAnimation" parent="StateChart/Base/Alive/Movement/Idle" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("8_wj612")]
+animation_name = "idle"
+costume_behavior = NodePath("../../../../../../GhostPlaceholder/Behavior")
+active_state = NodePath("..")
+
+[node name="Move" type="Node" parent="StateChart/Base/Alive/Movement"]
+script = ExtResource("5_liri1")
+
+[node name="MoveStopped" type="Node" parent="StateChart/Base/Alive/Movement/Move"]
+script = ExtResource("7_n2w0d")
+to = NodePath("../../Idle")
+event = &"move_stopped"
+
+[node name="CostumeAnimation" parent="StateChart/Base/Alive/Movement/Move" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("8_wj612")]
+animation_name = "move"
+costume_behavior = NodePath("../../../../../../GhostPlaceholder/Behavior")
+active_state = NodePath("..")
+
+[node name="Move" parent="StateChart/Base/Alive/Movement/Move" node_paths=PackedStringArray("controller", "character", "active_state") instance=ExtResource("8_i3hxv")]
+controller = NodePath("../../../../../../Synced")
+character = NodePath("../../../../../..")
+speed = 92.0
+active_state = NodePath("..")
+
+[node name="Sprint" type="Node" parent="StateChart/Base/Alive/Movement"]
+script = ExtResource("5_liri1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.99, 0.99)
+shape = SubResource("CircleShape2D_xn3hr")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
+limit_left = 0
+limit_top = 0
+limit_right = 6400
+limit_bottom = 6400
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Camera2D"]
+replication_config = SubResource("SceneReplicationConfig_bqubs")
+
+[node name="PeerIDEnabled" parent="Camera2D" node_paths=PackedStringArray("peer_id", "target") instance=ExtResource("4_xlp01")]
+peer_id = NodePath("../../PeerID")
+target = NodePath("..")
+
+[node name="Synced" parent="." node_paths=PackedStringArray("controller") instance=ExtResource("5_xwsa3")]
+process_mode = 1
+controller = NodePath("UnpauseForce")
+
+[node name="UnpauseForce" parent="Synced" node_paths=PackedStringArray("controller") instance=ExtResource("6_wi10c")]
+controller = NodePath("AntiButtonSpam")
+
+[node name="AntiButtonSpam" parent="Synced/UnpauseForce" node_paths=PackedStringArray("controller") instance=ExtResource("7_ijrj0")]
+controller = NodePath("Composite")
+
+[node name="Composite" parent="Synced/UnpauseForce/AntiButtonSpam" node_paths=PackedStringArray("controller_1", "controller_2") instance=ExtResource("8_mynla")]
+controller_1 = NodePath("Joypad")
+controller_2 = NodePath("KeyboardAndMouse")
+
+[node name="Joypad" parent="Synced/UnpauseForce/AntiButtonSpam/Composite" instance=ExtResource("9_x08fo")]
+
+[node name="KeyboardAndMouse" parent="Synced/UnpauseForce/AntiButtonSpam/Composite" instance=ExtResource("10_el6fq")]
+
+[node name="ControllerStateChartEvents" parent="Synced" node_paths=PackedStringArray("controller", "state_chart") instance=ExtResource("11_2r614")]
+controller = NodePath("..")
+state_chart = NodePath("../../StateChart")
+
+[node name="PeerIDInputAuthority" parent="Synced" node_paths=PackedStringArray("peer_id", "synced_controller") instance=ExtResource("12_llovw")]
+peer_id = NodePath("../../PeerID")
+synced_controller = NodePath("..")
+
+[node name="RemoteProperty" type="Node" parent="Synced" node_paths=PackedStringArray("source_node", "destination_node")]
+script = ExtResource("19_c6cbw")
+source_node = NodePath("..")
+source_property = "move_vector"
+destination_node = NodePath("../../GhostPlaceholder/Behavior")
+destination_property = "direction_vector"
+
+[node name="AuraLarge" parent="." instance=ExtResource("13_e27lr")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AuraLarge"]
+shape = SubResource("CircleShape2D_51u44")
+
+[node name="AuraSmall" parent="." instance=ExtResource("13_e27lr")]
+intensity = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AuraSmall"]
+shape = SubResource("CircleShape2D_m31g4")
+
+[node name="GhostPlaceholder" parent="." instance=ExtResource("13_arjsn")]
+position = Vector2(0, -8)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+range_item_cull_mask = 33
+texture = SubResource("GradientTexture2D_u72sc")
+height = 16.0
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../IgnoreCanvasModulate/FollowPlayer")
+
+[node name="IgnoreCanvasModulate" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="FollowPlayer" type="Node2D" parent="IgnoreCanvasModulate"]
+
+[node name="NameLabel" type="Label" parent="IgnoreCanvasModulate/FollowPlayer"]
+modulate = Color(1, 1, 1, 0.501961)
+z_index = 1
+offset_left = -84.0
+offset_top = -50.0
+offset_right = 84.0
+offset_bottom = -24.0
+text = "peer name"
+horizontal_alignment = 1
+
+[node name="PeerIdNameLabel" parent="IgnoreCanvasModulate/FollowPlayer/NameLabel" node_paths=PackedStringArray("peer_id", "label") instance=ExtResource("13_leves")]
+peer_id = NodePath("../../../../PeerID")
+label = NodePath("..")
+
+[node name="PeerIDVisibility" parent="IgnoreCanvasModulate/FollowPlayer/NameLabel" node_paths=PackedStringArray("peer_id", "canvas_item") instance=ExtResource("14_f0hrm")]
+peer_id = NodePath("../../../../PeerID")
+canvas_item = NodePath("..")
+invert = true
+
+[node name="NotificationContainer" type="HBoxContainer" parent="IgnoreCanvasModulate/FollowPlayer"]
+offset_left = -32.0
+offset_top = -42.0
+offset_right = 32.0
+offset_bottom = -26.0
+alignment = 1
+
+[node name="AutoTextureProgressBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("15_nnx8e")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+tint_under = Color(1, 1, 1, 0.247059)
+
+[node name="Behavior" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/AutoTextureProgressBar" index="1"]
+value_variable = "progress"
+max_variable = "max_progress"
+
+[node name="AutoTextureProgressBar2" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("15_nnx8e")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+tint_under = Color(1, 1, 1, 0.247059)
+
+[node name="Behavior" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/AutoTextureProgressBar2" index="1"]
+value_variable = "progress"
+max_variable = "max_progress"
+
+[editable path="GhostPlaceholder"]
+[editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/AutoTextureProgressBar"]
+[editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/AutoTextureProgressBar2"]
