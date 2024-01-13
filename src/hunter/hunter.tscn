@@ -124,11 +124,11 @@ properties/0/path = NodePath(".:current_animation")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[sub_resource type="Gradient" id="Gradient_a05sb"]
+[sub_resource type="Gradient" id="Gradient_tkh6d"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_xocc6"]
-gradient = SubResource("Gradient_a05sb")
+gradient = SubResource("Gradient_tkh6d")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
@@ -146,142 +146,142 @@ nodes = [NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEven
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("1_0xkip")
 
-[node name="CompoundState" type="Node" parent="StateChart"]
+[node name="Base" type="Node" parent="StateChart"]
 script = ExtResource("2_yqkoe")
 initial_state = NodePath("Alive")
 
-[node name="Dead" type="Node" parent="StateChart/CompoundState"]
+[node name="Dead" type="Node" parent="StateChart/Base"]
 script = ExtResource("3_ocdoo")
 
-[node name="Revived" type="Node" parent="StateChart/CompoundState/Dead"]
+[node name="Revived" type="Node" parent="StateChart/Base/Dead"]
 script = ExtResource("4_x2w3t")
 to = NodePath("../../Alive")
 event = &"revived"
 
-[node name="CostumeAnimation" parent="StateChart/CompoundState/Dead" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("11_ww6av")]
+[node name="CostumeAnimation" parent="StateChart/Base/Dead" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("11_ww6av")]
 animation_name = "dead"
 costume_behavior = NodePath("../../../../YSort/HunterPlaceholder/Behavior")
 active_state = NodePath("..")
 
-[node name="SetBool" parent="StateChart/CompoundState/Dead" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
+[node name="SetBool" parent="StateChart/Base/Dead" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
 target_node = NodePath("../../../../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/AutoTextureProgressBar")
 property_name = &"visible"
 active_state = NodePath("..")
 
-[node name="SetBool2" parent="StateChart/CompoundState/Dead" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
+[node name="SetBool2" parent="StateChart/Base/Dead" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
 target_node = NodePath("../../../../Revivable")
 property_name = &"active"
 active_state = NodePath("..")
 
-[node name="Alive" type="Node" parent="StateChart/CompoundState"]
+[node name="Alive" type="Node" parent="StateChart/Base"]
 script = ExtResource("12_y0078")
 
-[node name="FlashlightBatteryLow" parent="StateChart/CompoundState/Alive" node_paths=PackedStringArray("flashlight_data", "active_state") instance=ExtResource("13_mj4y5")]
+[node name="FlashlightBatteryLow" parent="StateChart/Base/Alive" node_paths=PackedStringArray("flashlight_data", "active_state") instance=ExtResource("13_mj4y5")]
 flashlight_data = NodePath("../../../../YSort/Flashlight/Data")
 active_state = NodePath("..")
 
-[node name="EnableRemoteProperty" parent="StateChart/CompoundState/Alive" node_paths=PackedStringArray("remote_property", "active_state") instance=ExtResource("15_ktlcm")]
+[node name="EnableRemoteProperty" parent="StateChart/Base/Alive" node_paths=PackedStringArray("remote_property", "active_state") instance=ExtResource("15_ktlcm")]
 remote_property = NodePath("../../../../YSort/Flashlight/Behavior/RemoteProperty")
 process_callback = 0
 active_state = NodePath("..")
 
-[node name="SetBool" parent="StateChart/CompoundState/Alive" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
+[node name="SetBool" parent="StateChart/Base/Alive" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
 target_node = NodePath("../../../../YSort/Flashlight/Behavior/FlashlightController")
 property_name = &"active"
 active_state = NodePath("..")
 
-[node name="Movement" type="Node" parent="StateChart/CompoundState/Alive"]
+[node name="Movement" type="Node" parent="StateChart/Base/Alive"]
 script = ExtResource("2_yqkoe")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateChart/CompoundState/Alive/Movement"]
+[node name="Idle" type="Node" parent="StateChart/Base/Alive/Movement"]
 script = ExtResource("3_ocdoo")
 
-[node name="MoveFlashlightPowered" type="Node" parent="StateChart/CompoundState/Alive/Movement/Idle"]
+[node name="MoveFlashlightPowered" type="Node" parent="StateChart/Base/Alive/Movement/Idle"]
 script = ExtResource("4_x2w3t")
 to = NodePath("../../Move/MoveNormal")
 event = &"move_started"
 guard = SubResource("Resource_7lfvn")
 
-[node name="MoveFlashlightUnpowered" type="Node" parent="StateChart/CompoundState/Alive/Movement/Idle"]
+[node name="MoveFlashlightUnpowered" type="Node" parent="StateChart/Base/Alive/Movement/Idle"]
 script = ExtResource("4_x2w3t")
 to = NodePath("../../Move/MoveSlow")
 event = &"move_started"
 guard = SubResource("Resource_pc1mk")
 
-[node name="CostumeAnimation" parent="StateChart/CompoundState/Alive/Movement/Idle" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("11_ww6av")]
+[node name="CostumeAnimation" parent="StateChart/Base/Alive/Movement/Idle" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("11_ww6av")]
 animation_name = "idle"
 costume_behavior = NodePath("../../../../../../YSort/HunterPlaceholder/Behavior")
 active_state = NodePath("..")
 
-[node name="Move" type="Node" parent="StateChart/CompoundState/Alive/Movement"]
+[node name="Move" type="Node" parent="StateChart/Base/Alive/Movement"]
 script = ExtResource("2_yqkoe")
 initial_state = NodePath("MoveNormal")
 
-[node name="MoveStopped" type="Node" parent="StateChart/CompoundState/Alive/Movement/Move"]
+[node name="MoveStopped" type="Node" parent="StateChart/Base/Alive/Movement/Move"]
 script = ExtResource("4_x2w3t")
 to = NodePath("../../Idle")
 event = &"move_stopped"
 
-[node name="CostumeAnimation" parent="StateChart/CompoundState/Alive/Movement/Move" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("11_ww6av")]
+[node name="CostumeAnimation" parent="StateChart/Base/Alive/Movement/Move" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("11_ww6av")]
 animation_name = "move"
 costume_behavior = NodePath("../../../../../../YSort/HunterPlaceholder/Behavior")
 active_state = NodePath("..")
 
-[node name="MoveNormal" type="Node" parent="StateChart/CompoundState/Alive/Movement/Move"]
+[node name="MoveNormal" type="Node" parent="StateChart/Base/Alive/Movement/Move"]
 script = ExtResource("3_ocdoo")
 
-[node name="FlashlightPowered" type="Node" parent="StateChart/CompoundState/Alive/Movement/Move/MoveNormal"]
+[node name="FlashlightPowered" type="Node" parent="StateChart/Base/Alive/Movement/Move/MoveNormal"]
 script = ExtResource("4_x2w3t")
 to = NodePath("../../MoveSlow")
 event = &"flashlight_powered"
 
-[node name="Move" parent="StateChart/CompoundState/Alive/Movement/Move/MoveNormal" node_paths=PackedStringArray("controller", "character", "active_state") instance=ExtResource("12_r3uq0")]
+[node name="Move" parent="StateChart/Base/Alive/Movement/Move/MoveNormal" node_paths=PackedStringArray("controller", "character", "active_state") instance=ExtResource("12_r3uq0")]
 controller = NodePath("../../../../../../../Synced")
 character = NodePath("../../../../../../..")
 speed = 74.0
 active_state = NodePath("..")
 
-[node name="MoveSlow" type="Node" parent="StateChart/CompoundState/Alive/Movement/Move"]
+[node name="MoveSlow" type="Node" parent="StateChart/Base/Alive/Movement/Move"]
 script = ExtResource("3_ocdoo")
 
-[node name="FlashlightPowered" type="Node" parent="StateChart/CompoundState/Alive/Movement/Move/MoveSlow"]
+[node name="FlashlightPowered" type="Node" parent="StateChart/Base/Alive/Movement/Move/MoveSlow"]
 script = ExtResource("4_x2w3t")
 to = NodePath("../../MoveNormal")
 event = &"flashlight_unpowered"
 
-[node name="Move" parent="StateChart/CompoundState/Alive/Movement/Move/MoveSlow" node_paths=PackedStringArray("controller", "character", "active_state") instance=ExtResource("12_r3uq0")]
+[node name="Move" parent="StateChart/Base/Alive/Movement/Move/MoveSlow" node_paths=PackedStringArray("controller", "character", "active_state") instance=ExtResource("12_r3uq0")]
 controller = NodePath("../../../../../../../Synced")
 character = NodePath("../../../../../../..")
 speed = 29.6
 active_state = NodePath("..")
 
-[node name="Vulnerability" type="Node" parent="StateChart/CompoundState/Alive"]
+[node name="Vulnerability" type="Node" parent="StateChart/Base/Alive"]
 script = ExtResource("2_yqkoe")
 initial_state = NodePath("Invulnerable")
 
-[node name="Invulnerable" type="Node" parent="StateChart/CompoundState/Alive/Vulnerability"]
+[node name="Invulnerable" type="Node" parent="StateChart/Base/Alive/Vulnerability"]
 script = ExtResource("3_ocdoo")
 
-[node name="TimedOut" type="Node" parent="StateChart/CompoundState/Alive/Vulnerability/Invulnerable"]
+[node name="TimedOut" type="Node" parent="StateChart/Base/Alive/Vulnerability/Invulnerable"]
 script = ExtResource("4_x2w3t")
 to = NodePath("../../Vulnerable")
 delay_seconds = 4.0
 
-[node name="Animation" parent="StateChart/CompoundState/Alive/Vulnerability/Invulnerable" node_paths=PackedStringArray("animation_player", "active_state") instance=ExtResource("20_wx57d")]
+[node name="Animation" parent="StateChart/Base/Alive/Vulnerability/Invulnerable" node_paths=PackedStringArray("animation_player", "active_state") instance=ExtResource("20_wx57d")]
 animation_player = NodePath("../../../../../../YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer")
 animation_name = &"invulnerable"
 active_state = NodePath("..")
 
-[node name="Vulnerable" type="Node" parent="StateChart/CompoundState/Alive/Vulnerability"]
+[node name="Vulnerable" type="Node" parent="StateChart/Base/Alive/Vulnerability"]
 script = ExtResource("3_ocdoo")
 
-[node name="Died" type="Node" parent="StateChart/CompoundState/Alive/Vulnerability/Vulnerable"]
+[node name="Died" type="Node" parent="StateChart/Base/Alive/Vulnerability/Vulnerable"]
 script = ExtResource("4_x2w3t")
 to = NodePath("../../../../Dead")
 event = &"died"
 
-[node name="Animation" parent="StateChart/CompoundState/Alive/Vulnerability/Vulnerable" node_paths=PackedStringArray("animation_player", "active_state") instance=ExtResource("20_wx57d")]
+[node name="Animation" parent="StateChart/Base/Alive/Vulnerability/Vulnerable" node_paths=PackedStringArray("animation_player", "active_state") instance=ExtResource("20_wx57d")]
 animation_player = NodePath("../../../../../../YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer")
 animation_name = &"RESET"
 active_state = NodePath("..")
@@ -410,7 +410,7 @@ replication_config = SubResource("SceneReplicationConfig_fjbw1")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.5
-range_item_cull_mask = 51
+range_item_cull_mask = 33
 texture = SubResource("GradientTexture2D_xocc6")
 height = 16.0
 
