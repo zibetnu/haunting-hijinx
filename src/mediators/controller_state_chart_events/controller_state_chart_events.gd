@@ -36,6 +36,28 @@ func _on_controller_input_handled() -> void:
 		[false, true, false]:
 			_send_event("move_started")
 
+	var button_1_state: Array[bool] = [
+		_previous_button_1_pressed == controller.button_1_pressed,
+		controller.button_1_pressed
+	]
+	match button_1_state:
+		[false, false]:
+			_send_event("button_1_released")
+
+		[false, true]:
+			_send_event("button_1_pressed")
+
+	var button_2_state: Array[bool] = [
+		_previous_button_2_pressed == controller.button_2_pressed,
+		controller.button_2_pressed
+	]
+	match button_2_state:
+		[false, false]:
+			_send_event("button_2_released")
+
+		[false, true]:
+			_send_event("button_2_pressed")
+
 	_previous_move_vector = controller.move_vector
 	_previous_look_vector = controller.look_vector
 	_previous_button_1_pressed = controller.button_1_pressed

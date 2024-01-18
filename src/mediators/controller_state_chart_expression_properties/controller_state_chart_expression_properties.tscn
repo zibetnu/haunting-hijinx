@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b30o6hj6qsvu2"]
+
+[ext_resource type="Script" path="res://src/mediators/controller_state_chart_expression_properties/controller_state_chart_expression_properties.gd" id="1_y2ogb"]
+
+[node name="ControllerStateChartExpressionProperties" type="Node"]
+script = ExtResource("1_y2ogb")
