@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://umudi6rradfm"]
+
+[ext_resource type="Script" path="res://src/mediators/state_component/start_summon/start_summon.gd" id="1_csdvx"]
+
+[node name="StartSummon" type="Node"]
+script = ExtResource("1_csdvx")

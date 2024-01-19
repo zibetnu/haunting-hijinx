@@ -1,7 +1,8 @@
-[gd_scene load_steps=35 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=40 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="2_bh3m0"]
+[ext_resource type="PackedScene" uid="uid://bxooivyeej01k" path="res://src/summon/summon.tscn" id="3_26ncu"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_wp1tu"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_74yim"]
 [ext_resource type="PackedScene" uid="uid://bxn13bi5j05gc" path="res://src/mediators/peer_id_enabled/peer_id_enabled.tscn" id="4_xlp01"]
@@ -18,7 +19,9 @@
 [ext_resource type="PackedScene" uid="uid://dioiotebenk87" path="res://src/mediators/state_component/timeout_event/timeout_event.tscn" id="10_0oqyy"]
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="10_el6fq"]
 [ext_resource type="PackedScene" uid="uid://c18war56not2c" path="res://src/mediators/controller_state_chart_events/controller_state_chart_events.tscn" id="11_2r614"]
+[ext_resource type="PackedScene" uid="uid://b5py3q2r2ukvm" path="res://src/mediators/signal_state_chart_event/signal_state_chart_event.tscn" id="12_53vqb"]
 [ext_resource type="PackedScene" uid="uid://bg6e2s53ki76i" path="res://src/mediators/peer_id_input_authority/peer_id_input_authority.tscn" id="12_llovw"]
+[ext_resource type="PackedScene" uid="uid://umudi6rradfm" path="res://src/mediators/state_component/start_summon/start_summon.tscn" id="12_ogv56"]
 [ext_resource type="PackedScene" uid="uid://nj5bu4130gy3" path="res://src/costume/ghost_placeholder/ghost_placeholder.tscn" id="13_arjsn"]
 [ext_resource type="PackedScene" uid="uid://ctcjena4x8kr0" path="res://src/aura/aura.tscn" id="13_e27lr"]
 [ext_resource type="PackedScene" uid="uid://bcyyx2srd4gwe" path="res://src/mediators/peer_id_name_label/peer_id_name_label.tscn" id="13_leves"]
@@ -26,7 +29,9 @@
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/auto_texture_progress_bar/auto_texture_progress_bar.tscn" id="15_nnx8e"]
 [ext_resource type="PackedScene" uid="uid://b30o6hj6qsvu2" path="res://src/mediators/controller_state_chart_expression_properties/controller_state_chart_expression_properties.tscn" id="18_o8e6t"]
 [ext_resource type="Script" path="res://src/remote_property.gd" id="19_c6cbw"]
-[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="23_xmbgv"]
+[ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_i4s33"]
+[ext_resource type="PackedScene" uid="uid://d03j155281y4p" path="res://src/mediators/state_component/visible/visible.tscn" id="30_syx0q"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="32_luctv"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hsnve"]
 properties/0/path = NodePath(".:position")
@@ -71,9 +76,16 @@ fill_to = Vector2(0.5, 0)
 replication_config = SubResource("SceneReplicationConfig_hsnve")
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
-nodes = [NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../Synced/ControllerStateChartExpressionProperties"), NodePath("../Synced/RemoteProperty"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../GhostPlaceholder/Behavior")]
+nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../Synced/ControllerStateChartExpressionProperties"), NodePath("../Synced/RemoteProperty"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Visible")]
 
 [node name="PeerID" parent="." instance=ExtResource("2_bh3m0")]
+
+[node name="Summon" parent="." instance=ExtResource("3_26ncu")]
+
+[node name="SignalStateChartEvent" parent="Summon" node_paths=PackedStringArray("signal_source", "state_chart") instance=ExtResource("12_53vqb")]
+signal_name = &"summoned"
+signal_source = NodePath("..")
+state_chart = NodePath("../../StateChart")
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("3_wp1tu")
@@ -186,6 +198,15 @@ to = NodePath("../../../Visibility/Visibile")
 [node name="SetAnimation" type="Node" parent="StateChart/Base/Alive/Behavior/Summon"]
 script = ExtResource("6_il0ju")
 to = NodePath("../../../Animation/Summon")
+
+[node name="Summoned" type="Node" parent="StateChart/Base/Alive/Behavior/Summon"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Normal")
+event = &"summoned"
+
+[node name="StartSummon" parent="StateChart/Base/Alive/Behavior/Summon" node_paths=PackedStringArray("summon", "active_state") instance=ExtResource("12_ogv56")]
+summon = NodePath("../../../../../../Summon")
+active_state = NodePath("..")
 
 [node name="Stun" type="Node" parent="StateChart/Base/Alive/Behavior"]
 script = ExtResource("5_6yps6")
@@ -392,34 +413,41 @@ offset_right = 32.0
 offset_bottom = -26.0
 alignment = 1
 
-[node name="AutoTextureProgressBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("15_nnx8e")]
+[node name="HealthBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("15_nnx8e")]
 visible = false
 layout_mode = 2
 size_flags_vertical = 8
 tint_under = Color(1, 1, 1, 0.247059)
 
-[node name="Behavior" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/AutoTextureProgressBar" index="1"]
+[node name="Behavior" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" index="1"]
 value_variable = "progress"
 max_variable = "max_progress"
 
-[node name="AutoTextureProgressBar2" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("15_nnx8e")]
+[node name="SummonBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("15_nnx8e")]
 visible = false
 layout_mode = 2
 size_flags_vertical = 8
+texture_under = ExtResource("29_i4s33")
+texture_progress = ExtResource("29_i4s33")
 tint_under = Color(1, 1, 1, 0.247059)
 
-[node name="Behavior" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/AutoTextureProgressBar2" index="1"]
-value_variable = "progress"
-max_variable = "max_progress"
+[node name="Behavior" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" index="1" node_paths=PackedStringArray("source_node")]
+source_node = NodePath("../../../../../Summon")
+value_variable = "charge"
+max_variable = "max_charge"
 
-[node name="StateChartDebugger" parent="." instance=ExtResource("23_xmbgv")]
+[node name="Visible" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" node_paths=PackedStringArray("canvas_item", "active_state") instance=ExtResource("30_syx0q")]
+canvas_item = NodePath("..")
+active_state = NodePath("../../../../../StateChart/Base/Alive/Behavior/Summon")
+
+[node name="StateChartDebugger" parent="." instance=ExtResource("32_luctv")]
 top_level = true
-offset_left = 210.0
-offset_top = 6.0
-offset_right = 631.0
-offset_bottom = 286.0
+offset_left = 248.0
+offset_top = 13.0
+offset_right = -2.0
+offset_bottom = -10.0
 initial_node_to_watch = NodePath("../StateChart")
 
 [editable path="GhostPlaceholder"]
-[editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/AutoTextureProgressBar"]
-[editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/AutoTextureProgressBar2"]
+[editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar"]
+[editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar"]
