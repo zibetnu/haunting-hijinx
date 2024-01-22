@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhavwobkg4v8o"]
+
+[ext_resource type="Script" path="res://src/mediators/state_chart_counter/state_chart_counter.gd" id="1_38fp2"]
+
+[node name="StateChartCounter" type="Node"]
+script = ExtResource("1_38fp2")

@@ -14,13 +14,13 @@ const DrainArea := preload("res://src/summon/drain_area/drain_area.tscn")
 
 @export var target_group: StringName
 
+var areas_summoned := 0
 var charge := 0:
 	set(value):
 		charge = clampi(value, 0, max_charge)
 		if charge == max_charge:
 			charge = 0
 			spawn_scenes()
-			summoned.emit()
 
 var max_charge: int:
 	get:
@@ -36,7 +36,11 @@ func spawn_scenes() -> void:
 	for node in get_tree().get_nodes_in_group(target_group):
 		var instance := DrainArea.instantiate()
 		instance.position = node.position
+		instance.tree_entered.connect(func(): areas_summoned += 1)
+		instance.tree_exited.connect(func(): areas_summoned -= 1)
 		owner.add_sibling(instance, true)
+
+	summoned.emit()
 
 
 func _physics_process(_delta: float) -> void:

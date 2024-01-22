@@ -10,11 +10,11 @@ enum ProcessCallback {
 
 @export_group("Source", "source")
 @export var source_node: Node
-@export var source_property: String
+@export var source_property: StringName
 
 @export_group("Destination", "destination")
 @export var destination_node: Node
-@export var destination_property: String
+@export var destination_property: StringName
 
 @export var process_callback := ProcessCallback.IDLE:
 	set(value):
@@ -26,6 +26,10 @@ enum ProcessCallback {
 func _ready() -> void:
 	set_physics_process(process_callback == ProcessCallback.PHYSICS)
 	set_process(process_callback == ProcessCallback.IDLE)
+
+
+func manual_process() -> void:
+	_set_property()
 
 
 func _physics_process(_delta: float) -> void:
