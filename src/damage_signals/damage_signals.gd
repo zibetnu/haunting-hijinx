@@ -1,4 +1,3 @@
-class_name DamageSignals
 extends Area2D
 
 

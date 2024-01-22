@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=58 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -77,10 +77,6 @@ properties/3/path = NodePath(".:limit_bottom")
 properties/3/spawn = true
 properties/3/replication_mode = 2
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7fnee"]
-radius = 8.0
-height = 32.0
-
 [sub_resource type="Animation" id="Animation_bwnbh"]
 length = 0.001
 tracks/0/type = "value"
@@ -139,7 +135,7 @@ fill_to = Vector2(0.5, 0)
 replication_config = SubResource("SceneReplicationConfig_hflh2")
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_uvtrm")]
-nodes = [NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../AuraSense"), NodePath("../DamageSignals"), NodePath("../Revivable"), NodePath("../YSort/Flashlight/Behavior"), NodePath("../YSort/HunterPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/AutoTextureProgressBar/Behavior")]
+nodes = [NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../AuraSense"), NodePath("../DamageSignals"), NodePath("../YSort/Flashlight/Behavior"), NodePath("../YSort/HunterPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/AutoTextureProgressBar/Behavior")]
 
 [node name="PeerID" parent="." instance=ExtResource("1_fx0g1")]
 
@@ -169,7 +165,7 @@ property_name = &"visible"
 active_state = NodePath("..")
 
 [node name="SetBool2" parent="StateChart/Base/Dead" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
-target_node = NodePath("../../../../Revivable")
+target_node = NodePath("../../../../DamageSignals/Revivable")
 property_name = &"active"
 active_state = NodePath("..")
 
@@ -345,23 +341,18 @@ collision_layer = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageSignals"]
 shape = SubResource("CircleShape2D_vawb0")
 
-[node name="InstantDeathEvent" parent="DamageSignals" node_paths=PackedStringArray("damage_signals", "state_chart") instance=ExtResource("28_waga4")]
-damage_signals = NodePath("..")
+[node name="InstantDeathEvent" parent="DamageSignals" node_paths=PackedStringArray("state_chart") instance=ExtResource("28_waga4")]
 state_chart = NodePath("../../StateChart")
 weak_to = 2
 
-[node name="Revivable" parent="." instance=ExtResource("23_d234k")]
+[node name="Revivable" parent="DamageSignals" instance=ExtResource("23_d234k")]
 active = false
 revives_with = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Revivable"]
-position = Vector2(0, -8)
-shape = SubResource("CapsuleShape2D_7fnee")
-
-[node name="SignalStateChartEvent" parent="Revivable" node_paths=PackedStringArray("signal_source", "state_chart") instance=ExtResource("24_g2w5e")]
+[node name="SignalStateChartEvent" parent="DamageSignals/Revivable" node_paths=PackedStringArray("signal_source", "state_chart") instance=ExtResource("24_g2w5e")]
 signal_name = &"revived"
 signal_source = NodePath("..")
-state_chart = NodePath("../../StateChart")
+state_chart = NodePath("../../../StateChart")
 
 [node name="YSort" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -458,7 +449,7 @@ texture_progress = ExtResource("33_a7fw2")
 tint_under = Color(1, 1, 1, 0.247059)
 
 [node name="Behavior" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/AutoTextureProgressBar" index="1" node_paths=PackedStringArray("source_node")]
-source_node = NodePath("../../../../../Revivable")
+source_node = NodePath("../../../../../DamageSignals/Revivable")
 value_variable = "progress"
 max_variable = "max_progress"
 
@@ -485,6 +476,9 @@ synchronizer = NodePath("..")
 [node name="PeerIDProcessMode" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" node_paths=PackedStringArray("peer_id", "nodes") instance=ExtResource("5_qee3q")]
 peer_id = NodePath("../../../../../PeerID")
 nodes = [NodePath("..")]
+
+[connection signal="damaged_by" from="DamageSignals" to="DamageSignals/InstantDeathEvent" method="take_damage"]
+[connection signal="damaged_by" from="DamageSignals" to="DamageSignals/Revivable" method="take_damage"]
 
 [editable path="YSort/Flashlight"]
 [editable path="YSort/HunterPlaceholder"]
