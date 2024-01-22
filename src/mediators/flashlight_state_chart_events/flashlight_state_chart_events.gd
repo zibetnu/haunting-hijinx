@@ -31,13 +31,14 @@ func _on_data_changed() -> void:
 			_send_event("flashlight_battery_undied")
 
 	match [
+			flashlight_data.battery == 0,
 			flashlight_data.battery_percentage < flashlight_data.battery_low_percentage,
 			_was_battery_low
 	]:
-		[true, false]:
+		[false, true, false]:
 			_send_event("flashlight_battery_lowed")
 
-		[false, true]:
+		[false, false, true]:
 			_send_event("flashlight_battery_unlowed")
 
 	match [flashlight_data.flashlight_powered, _was_flashlight_powered]:
