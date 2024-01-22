@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dji2viacu4vc"]
+
+[ext_resource type="Script" path="res://src/mediators/state_component/flashlight_battery_low/flashlight_battery_low.gd" id="1_wbp61"]
+
+[node name="FlashlightBatteryLow" type="Node" groups=["flashlight_battery_lows"]]
+script = ExtResource("1_wbp61")

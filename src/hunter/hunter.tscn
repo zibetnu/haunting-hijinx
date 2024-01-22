@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=59 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://b55ojigpr88dd" path="res://src/mediators/state_component/costume_animation/costume_animation.tscn" id="11_ww6av"]
 [ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/mediators/state_component/move/move.tscn" id="12_r3uq0"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="12_y0078"]
+[ext_resource type="PackedScene" uid="uid://dji2viacu4vc" path="res://src/mediators/state_component/flashlight_battery_low/flashlight_battery_low.tscn" id="13_mj4y5"]
 [ext_resource type="PackedScene" uid="uid://cy4qrm44icmyy" path="res://src/flashlight/flashlight.tscn" id="15_hljm8"]
 [ext_resource type="PackedScene" uid="uid://djba3xyguo0kb" path="res://src/mediators/state_component/enable_remote_property.tscn/enable_remote_property.tscn" id="15_ktlcm"]
 [ext_resource type="PackedScene" uid="uid://co1edbkdtjj35" path="res://src/mediators/flashlight_state_chart_events/flashlight_state_chart_events.tscn" id="16_c1vhd"]
@@ -174,6 +175,10 @@ active_state = NodePath("..")
 
 [node name="Alive" type="Node" parent="StateChart/Base"]
 script = ExtResource("12_y0078")
+
+[node name="FlashlightBatteryLow" parent="StateChart/Base/Alive" node_paths=PackedStringArray("flashlight_data", "active_state") instance=ExtResource("13_mj4y5")]
+flashlight_data = NodePath("../../../../YSort/Flashlight/Data")
+active_state = NodePath("..")
 
 [node name="EnableRemoteProperty" parent="StateChart/Base/Alive" node_paths=PackedStringArray("remote_property", "active_state") instance=ExtResource("15_ktlcm")]
 remote_property = NodePath("../../../../YSort/Flashlight/Behavior/RemoteProperty")
