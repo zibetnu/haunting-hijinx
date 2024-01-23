@@ -3,6 +3,4 @@
 [ext_resource type="Script" path="res://src/damage_signals/damage_signals.gd" id="1_g4kv5"]
 
 [node name="DamageSignals" type="Area2D"]
-collision_layer = 2
-collision_mask = 0
 script = ExtResource("1_g4kv5")

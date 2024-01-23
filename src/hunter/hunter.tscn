@@ -40,7 +40,7 @@
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="27_qehgg"]
 [ext_resource type="PackedScene" uid="uid://djs1c1w30m8gp" path="res://src/alert/alert.tscn" id="28_bjj70"]
 [ext_resource type="PackedScene" uid="uid://y03qjvt68tjj" path="res://src/aura_sense/aura_sense.tscn" id="28_dd2t8"]
-[ext_resource type="PackedScene" uid="uid://b6et2ypj2js4m" path="res://src/mediators/instant_death_event/instant_death_event.tscn" id="28_waga4"]
+[ext_resource type="PackedScene" uid="uid://b6et2ypj2js4m" path="res://src/mediators/damage_event/damage_event.tscn" id="30_c0fe6"]
 [ext_resource type="PackedScene" uid="uid://gh0mk0t85f13" path="res://src/battery_alert/battery_alert.tscn" id="31_vp1ot"]
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/auto_texture_progress_bar/auto_texture_progress_bar.tscn" id="32_vdk32"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="33_a7fw2"]
@@ -135,7 +135,7 @@ fill_to = Vector2(0.5, 0)
 replication_config = SubResource("SceneReplicationConfig_hflh2")
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_uvtrm")]
-nodes = [NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../AuraSense"), NodePath("../DamageSignals"), NodePath("../YSort/Flashlight/Behavior"), NodePath("../YSort/HunterPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/AutoTextureProgressBar/Behavior")]
+nodes = [NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../AuraSense"), NodePath("../DamageSignals"), NodePath("../YSort/Flashlight/Behavior"), NodePath("../YSort/HunterPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar/Behavior")]
 
 [node name="PeerID" parent="." instance=ExtResource("1_fx0g1")]
 
@@ -159,12 +159,12 @@ animation_name = "dead"
 costume_behavior = NodePath("../../../../YSort/HunterPlaceholder/Behavior")
 active_state = NodePath("..")
 
-[node name="SetBool" parent="StateChart/Base/Dead" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
-target_node = NodePath("../../../../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/AutoTextureProgressBar")
+[node name="ReviveBarVisible" parent="StateChart/Base/Dead" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
+target_node = NodePath("../../../../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar")
 property_name = &"visible"
 active_state = NodePath("..")
 
-[node name="SetBool2" parent="StateChart/Base/Dead" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
+[node name="RevivableActive" parent="StateChart/Base/Dead" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
 target_node = NodePath("../../../../DamageSignals/Revivable")
 property_name = &"active"
 active_state = NodePath("..")
@@ -181,7 +181,7 @@ remote_property = NodePath("../../../../YSort/Flashlight/Behavior/RemoteProperty
 process_callback = 0
 active_state = NodePath("..")
 
-[node name="SetBool" parent="StateChart/Base/Alive" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
+[node name="FlashlightControllerActive" parent="StateChart/Base/Alive" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
 target_node = NodePath("../../../../YSort/Flashlight/Behavior/FlashlightController")
 property_name = &"active"
 active_state = NodePath("..")
@@ -282,6 +282,11 @@ animation_player = NodePath("../../../../../../YSort/HunterPlaceholder/Display/I
 animation_name = &"RESET"
 active_state = NodePath("..")
 
+[node name="DamageSignalActive" parent="StateChart/Base/Alive/Vulnerability/Vulnerable" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
+target_node = NodePath("../../../../../../DamageSignals/DamageEvent")
+property_name = &"active"
+active_state = NodePath("..")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.99, 0.99)
 shape = SubResource("CircleShape2D_vawb0")
@@ -341,10 +346,6 @@ collision_layer = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageSignals"]
 shape = SubResource("CircleShape2D_vawb0")
 
-[node name="InstantDeathEvent" parent="DamageSignals" node_paths=PackedStringArray("state_chart") instance=ExtResource("28_waga4")]
-state_chart = NodePath("../../StateChart")
-weak_to = 2
-
 [node name="Revivable" parent="DamageSignals" instance=ExtResource("23_d234k")]
 active = false
 revives_with = 1
@@ -353,6 +354,11 @@ revives_with = 1
 signal_name = &"revived"
 signal_source = NodePath("..")
 state_chart = NodePath("../../../StateChart")
+
+[node name="DamageEvent" parent="DamageSignals" node_paths=PackedStringArray("state_chart") instance=ExtResource("30_c0fe6")]
+event = &"died"
+state_chart = NodePath("../../StateChart")
+weak_to = 2
 
 [node name="YSort" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -439,7 +445,7 @@ offset_right = 32.0
 offset_bottom = -26.0
 alignment = 1
 
-[node name="AutoTextureProgressBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("32_vdk32")]
+[node name="ReviveBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("32_vdk32")]
 visible = false
 layout_mode = 2
 size_flags_vertical = 8
@@ -448,7 +454,7 @@ texture_under = ExtResource("33_a7fw2")
 texture_progress = ExtResource("33_a7fw2")
 tint_under = Color(1, 1, 1, 0.247059)
 
-[node name="Behavior" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/AutoTextureProgressBar" index="1" node_paths=PackedStringArray("source_node")]
+[node name="Behavior" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" index="1" node_paths=PackedStringArray("source_node")]
 source_node = NodePath("../../../../../DamageSignals/Revivable")
 value_variable = "progress"
 max_variable = "max_progress"
@@ -477,11 +483,11 @@ synchronizer = NodePath("..")
 peer_id = NodePath("../../../../../PeerID")
 nodes = [NodePath("..")]
 
-[connection signal="damaged_by" from="DamageSignals" to="DamageSignals/InstantDeathEvent" method="take_damage"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/Revivable" method="take_damage"]
+[connection signal="damaged_by" from="DamageSignals" to="DamageSignals/DamageEvent" method="take_damage"]
 
 [editable path="YSort/Flashlight"]
 [editable path="YSort/HunterPlaceholder"]
-[editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/AutoTextureProgressBar"]
+[editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar"]
 [editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert"]
 [editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert"]
