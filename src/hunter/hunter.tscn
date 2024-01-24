@@ -130,6 +130,8 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
 [node name="Hunter" type="CharacterBody2D" groups=["hunters"]]
+collision_layer = 4
+collision_mask = 5
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_hflh2")
@@ -282,7 +284,7 @@ animation_player = NodePath("../../../../../../YSort/HunterPlaceholder/Display/I
 animation_name = &"RESET"
 active_state = NodePath("..")
 
-[node name="DamageSignalActive" parent="StateChart/Base/Alive/Vulnerability/Vulnerable" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
+[node name="DamageEventActive" parent="StateChart/Base/Alive/Vulnerability/Vulnerable" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
 target_node = NodePath("../../../../../../DamageSignals/DamageEvent")
 property_name = &"active"
 active_state = NodePath("..")
@@ -342,6 +344,7 @@ aura_sense = NodePath("..")
 
 [node name="DamageSignals" parent="." instance=ExtResource("27_qehgg")]
 collision_layer = 4
+collision_mask = 23
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageSignals"]
 shape = SubResource("CircleShape2D_vawb0")

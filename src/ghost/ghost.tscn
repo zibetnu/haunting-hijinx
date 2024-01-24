@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=49 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="2_bh3m0"]
@@ -33,7 +33,10 @@
 [ext_resource type="PackedScene" uid="uid://b55ojigpr88dd" path="res://src/mediators/state_component/costume_animation/costume_animation.tscn" id="18_bcsx6"]
 [ext_resource type="PackedScene" uid="uid://b30o6hj6qsvu2" path="res://src/mediators/controller_state_chart_expression_properties/controller_state_chart_expression_properties.tscn" id="18_o8e6t"]
 [ext_resource type="Script" path="res://src/remote_property.gd" id="19_c6cbw"]
+[ext_resource type="PackedScene" uid="uid://cmrvakm1sd7b7" path="res://src/mediators/state_component/set_bool/set_bool.tscn" id="19_qtpd3"]
+[ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="29_1sq8w"]
 [ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_i4s33"]
+[ext_resource type="PackedScene" uid="uid://b6et2ypj2js4m" path="res://src/mediators/damage_event/damage_event.tscn" id="30_jrfk5"]
 [ext_resource type="PackedScene" uid="uid://d03j155281y4p" path="res://src/mediators/state_component/visible/visible.tscn" id="30_syx0q"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="32_luctv"]
 
@@ -83,6 +86,7 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
 [node name="Ghost" type="CharacterBody2D"]
+collision_layer = 8
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_hsnve")
@@ -150,6 +154,11 @@ to = NodePath("../../Summon")
 event = &"button_2_pressed"
 guard = SubResource("Resource_knfa0")
 
+[node name="Damaged" type="Node" parent="StateChart/Base/Behavior/Alive/Normal"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Stun")
+event = &"damaged"
+
 [node name="MakeInvisible" type="Node" parent="StateChart/Base/Behavior/Alive/Normal"]
 script = ExtResource("6_il0ju")
 to = NodePath("../../../../Visibility/Invisibile")
@@ -188,6 +197,11 @@ script = ExtResource("6_il0ju")
 to = NodePath("../../Summon")
 event = &"button_2_pressed"
 guard = SubResource("Resource_0r4f3")
+
+[node name="Damaged" type="Node" parent="StateChart/Base/Behavior/Alive/Sprint"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Stun")
+event = &"damaged"
 
 [node name="MakeVisible" type="Node" parent="StateChart/Base/Behavior/Alive/Sprint"]
 script = ExtResource("6_il0ju")
@@ -228,6 +242,11 @@ script = ExtResource("6_il0ju")
 to = NodePath("../../Normal")
 event = &"button_2_released"
 
+[node name="Damaged" type="Node" parent="StateChart/Base/Behavior/Alive/Summon"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Stun")
+event = &"damaged"
+
 [node name="MakeVisible" type="Node" parent="StateChart/Base/Behavior/Alive/Summon"]
 script = ExtResource("6_il0ju")
 to = NodePath("../../../../Visibility/Visibile")
@@ -265,7 +284,7 @@ delay_seconds = 1.5
 
 [node name="SetAnimation" type="Node" parent="StateChart/Base/Behavior/Alive/Stun"]
 script = ExtResource("6_il0ju")
-to = NodePath("../../../../Animation/Grab")
+to = NodePath("../../../../Animation/Stun")
 
 [node name="Panic" type="Node" parent="StateChart/Base/Behavior/Alive"]
 script = ExtResource("6_3dmdv")
@@ -279,11 +298,6 @@ event = &"panic_ended"
 script = ExtResource("6_il0ju")
 to = NodePath("../../../../Animation/Panic")
 
-[node name="Move" parent="StateChart/Base/Behavior/Alive/Panic" node_paths=PackedStringArray("controller", "character") instance=ExtResource("7_1d45a")]
-controller = NodePath("../../../../../../Synced")
-character = NodePath("../../../../../..")
-speed = 154.0
-
 [node name="EndEvent" parent="StateChart/Base/Behavior/Alive/Panic" node_paths=PackedStringArray("state_chart", "active_state") instance=ExtResource("10_0oqyy")]
 event = &"panic_ended"
 state_chart = NodePath("../../../../..")
@@ -293,7 +307,13 @@ active_state = NodePath("..")
 [node name="InvisibleEvent" parent="StateChart/Base/Behavior/Alive/Panic" node_paths=PackedStringArray("state_chart", "active_state") instance=ExtResource("10_0oqyy")]
 event = &"invisibility_started"
 state_chart = NodePath("../../../../..")
-wait_time = 3.0
+wait_time = 1.33
+active_state = NodePath("..")
+
+[node name="Move" parent="StateChart/Base/Behavior/Alive/Panic" node_paths=PackedStringArray("controller", "character", "active_state") instance=ExtResource("7_1d45a")]
+controller = NodePath("../../../../../../Synced")
+character = NodePath("../../../../../..")
+speed = 154.0
 active_state = NodePath("..")
 
 [node name="Grab" type="Node" parent="StateChart/Base/Behavior/Alive"]
@@ -391,6 +411,26 @@ script = ExtResource("6_il0ju")
 to = NodePath("../../Invisibile")
 event = &"invisibility_started"
 
+[node name="Vulnerability" type="Node" parent="StateChart/Base"]
+script = ExtResource("4_74yim")
+initial_state = NodePath("Vulnerable")
+
+[node name="Invulnerable" type="Node" parent="StateChart/Base/Vulnerability"]
+script = ExtResource("5_6yps6")
+
+[node name="Vulnerable" type="Node" parent="StateChart/Base/Vulnerability"]
+script = ExtResource("5_6yps6")
+
+[node name="Damaged" type="Node" parent="StateChart/Base/Vulnerability/Vulnerable"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../../Animation/Stun")
+event = &"damaged"
+
+[node name="DamageEventActive" parent="StateChart/Base/Vulnerability/Vulnerable" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("19_qtpd3")]
+target_node = NodePath("../../../../../DamageSignals/DamageEvent")
+property_name = &"active"
+active_state = NodePath("..")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.99, 0.99)
 shape = SubResource("CircleShape2D_xn3hr")
@@ -456,6 +496,18 @@ intensity = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AuraSmall"]
 shape = SubResource("CircleShape2D_m31g4")
+
+[node name="DamageSignals" parent="." instance=ExtResource("29_1sq8w")]
+collision_layer = 8
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageSignals"]
+shape = SubResource("CircleShape2D_xn3hr")
+
+[node name="DamageEvent" parent="DamageSignals" node_paths=PackedStringArray("state_chart") instance=ExtResource("30_jrfk5")]
+event = &"damaged"
+state_chart = NodePath("../../StateChart")
+weak_to = 1
 
 [node name="GhostPlaceholder" parent="." instance=ExtResource("13_arjsn")]
 position = Vector2(0, -8)
@@ -534,6 +586,7 @@ canvas_item = NodePath("..")
 active_state = NodePath("../../../../../StateChart/Base/Behavior/Alive/Summon")
 
 [connection signal="taken" from="StateChart/Base/Behavior/Alive/Summon/Summoned" to="Summon/RemoteProperty" method="manual_process"]
+[connection signal="damaged_by" from="DamageSignals" to="DamageSignals/DamageEvent" method="take_damage"]
 
 [editable path="GhostPlaceholder"]
 [editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar"]
