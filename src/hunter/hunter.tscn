@@ -45,7 +45,7 @@
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/auto_texture_progress_bar/auto_texture_progress_bar.tscn" id="32_vdk32"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="33_a7fw2"]
 [ext_resource type="PackedScene" uid="uid://bcyyx2srd4gwe" path="res://src/mediators/peer_id_name_label/peer_id_name_label.tscn" id="37_h6u7o"]
-[ext_resource type="PackedScene" uid="uid://y5w40m6pqbvt" path="res://src/mediators/peer_id_visibility/peer_id_visibility.tscn" id="38_t1vyn"]
+[ext_resource type="PackedScene" uid="uid://y5w40m6pqbvt" path="res://src/mediators/peer_id_set_bool/peer_id_set_bool.tscn" id="40_oj2kf"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hflh2"]
 properties/0/path = NodePath(".:position")
@@ -436,10 +436,11 @@ horizontal_alignment = 1
 peer_id = NodePath("../../../../PeerID")
 label = NodePath("..")
 
-[node name="PeerIDVisibility" parent="IgnoreCanvasModulate/FollowPlayer/NameLabel" node_paths=PackedStringArray("peer_id", "canvas_item") instance=ExtResource("38_t1vyn")]
+[node name="PeerIDSetBool" parent="IgnoreCanvasModulate/FollowPlayer/NameLabel" node_paths=PackedStringArray("peer_id", "node") instance=ExtResource("40_oj2kf")]
 peer_id = NodePath("../../../../PeerID")
-canvas_item = NodePath("..")
-invert = true
+false_for = 0
+node = NodePath("..")
+property_name = &"visible"
 
 [node name="NotificationContainer" type="HBoxContainer" parent="IgnoreCanvasModulate/FollowPlayer"]
 offset_left = -32.0

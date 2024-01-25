@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="2_bh3m0"]
+[ext_resource type="PackedScene" uid="uid://y5w40m6pqbvt" path="res://src/mediators/peer_id_set_bool/peer_id_set_bool.tscn" id="3_3ievd"]
 [ext_resource type="PackedScene" uid="uid://bxooivyeej01k" path="res://src/summon/summon.tscn" id="3_26ncu"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_wp1tu"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_74yim"]
@@ -28,7 +29,6 @@
 [ext_resource type="PackedScene" uid="uid://nj5bu4130gy3" path="res://src/costume/ghost_placeholder/ghost_placeholder.tscn" id="13_arjsn"]
 [ext_resource type="PackedScene" uid="uid://ctcjena4x8kr0" path="res://src/aura/aura.tscn" id="13_e27lr"]
 [ext_resource type="PackedScene" uid="uid://bcyyx2srd4gwe" path="res://src/mediators/peer_id_name_label/peer_id_name_label.tscn" id="13_leves"]
-[ext_resource type="PackedScene" uid="uid://y5w40m6pqbvt" path="res://src/mediators/peer_id_visibility/peer_id_visibility.tscn" id="14_f0hrm"]
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/auto_texture_progress_bar/auto_texture_progress_bar.tscn" id="15_nnx8e"]
 [ext_resource type="PackedScene" uid="uid://b55ojigpr88dd" path="res://src/mediators/state_component/costume_animation/costume_animation.tscn" id="18_bcsx6"]
 [ext_resource type="PackedScene" uid="uid://b30o6hj6qsvu2" path="res://src/mediators/controller_state_chart_expression_properties/controller_state_chart_expression_properties.tscn" id="18_o8e6t"]
@@ -92,9 +92,14 @@ collision_layer = 8
 replication_config = SubResource("SceneReplicationConfig_hsnve")
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
-nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../Synced/ControllerStateChartExpressionProperties"), NodePath("../Synced/RemoteProperty"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Visible")]
+nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../Synced/ControllerStateChartExpressionProperties"), NodePath("../Synced/RemoteProperty"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Visible")]
 
 [node name="PeerID" parent="." instance=ExtResource("2_bh3m0")]
+
+[node name="PeerIDSetBool" parent="." node_paths=PackedStringArray("peer_id", "node") instance=ExtResource("3_3ievd")]
+peer_id = NodePath("../PeerID")
+node = NodePath("..")
+property_name = &"visible"
 
 [node name="Summon" parent="." instance=ExtResource("3_26ncu")]
 target_group = &"hunters"
@@ -523,6 +528,11 @@ remote_path = NodePath("../IgnoreCanvasModulate/FollowPlayer")
 [node name="IgnoreCanvasModulate" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 
+[node name="PeerIDSetBool" parent="IgnoreCanvasModulate" node_paths=PackedStringArray("peer_id", "node") instance=ExtResource("3_3ievd")]
+peer_id = NodePath("../../PeerID")
+node = NodePath("..")
+property_name = &"visible"
+
 [node name="StateChartDebugger" parent="IgnoreCanvasModulate" instance=ExtResource("32_luctv")]
 offset_left = 361.0
 offset_top = 13.0
@@ -546,10 +556,11 @@ horizontal_alignment = 1
 peer_id = NodePath("../../../../PeerID")
 label = NodePath("..")
 
-[node name="PeerIDVisibility" parent="IgnoreCanvasModulate/FollowPlayer/NameLabel" node_paths=PackedStringArray("peer_id", "canvas_item") instance=ExtResource("14_f0hrm")]
+[node name="PeerIDSetBool" parent="IgnoreCanvasModulate/FollowPlayer/NameLabel" node_paths=PackedStringArray("peer_id", "node") instance=ExtResource("3_3ievd")]
 peer_id = NodePath("../../../../PeerID")
-canvas_item = NodePath("..")
-invert = true
+false_for = 0
+node = NodePath("..")
+property_name = &"visible"
 
 [node name="NotificationContainer" type="HBoxContainer" parent="IgnoreCanvasModulate/FollowPlayer"]
 offset_left = -32.0
@@ -586,6 +597,10 @@ canvas_item = NodePath("..")
 active_state = NodePath("../../../../../StateChart/Base/Behavior/Alive/Summon")
 
 [connection signal="taken" from="StateChart/Base/Behavior/Alive/Summon/Summoned" to="Summon/RemoteProperty" method="manual_process"]
+[connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="PeerIDSetBool" method="set_value_false"]
+[connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="IgnoreCanvasModulate/PeerIDSetBool" method="set_value_false"]
+[connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="PeerIDSetBool" method="set_value_true"]
+[connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="IgnoreCanvasModulate/PeerIDSetBool" method="set_value_true"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/DamageEvent" method="take_damage"]
 
 [editable path="GhostPlaceholder"]
