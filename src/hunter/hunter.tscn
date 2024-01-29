@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=59 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -46,6 +46,7 @@
 [ext_resource type="PackedScene" uid="uid://y5w40m6pqbvt" path="res://src/mediators/peer_id_set_bool/peer_id_set_bool.tscn" id="40_oj2kf"]
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_id_visibility_filter/peer_id_visibility_filter.tscn" id="44_mvfu7"]
 [ext_resource type="PackedScene" uid="uid://dsccl51pqvbue" path="res://src/mediators/peer_id_process_mode/peer_id_process_mode.tscn" id="44_oo3l6"]
+[ext_resource type="PackedScene" uid="uid://dsfctswtuferv" path="res://src/clear_sprite_texture/clear_sprite_texture.tscn" id="47_d25eg"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hflh2"]
 properties/0/path = NodePath(".:position")
@@ -466,29 +467,31 @@ max_variable = "max_progress"
 [node name="Alert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("28_bjj70")]
 layout_mode = 2
 
-[node name="PeerIDProcessMode" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" node_paths=PackedStringArray("peer_id", "nodes") instance=ExtResource("44_oo3l6")]
-peer_id = NodePath("../../../../../PeerID")
-nodes = [NodePath("..")]
-include_ghost_peer = true
-
 [node name="PeerIDVisibilityFilter" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer" index="0" node_paths=PackedStringArray("peer_id", "synchronizer") instance=ExtResource("44_mvfu7")]
 peer_id = NodePath("../../../../../../PeerID")
 synchronizer = NodePath("..")
 include_ghost_peer = true
 
-[node name="BatteryAlert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("31_vp1ot")]
-layout_mode = 2
-
-[node name="PeerIDProcessMode" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" node_paths=PackedStringArray("peer_id", "nodes") instance=ExtResource("44_oo3l6")]
+[node name="PeerIDProcessMode" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" node_paths=PackedStringArray("peer_id", "nodes") instance=ExtResource("44_oo3l6")]
 peer_id = NodePath("../../../../../PeerID")
 nodes = [NodePath("..")]
+include_ghost_peer = true
+
+[node name="BatteryAlert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("31_vp1ot")]
+layout_mode = 2
 
 [node name="PeerIDVisibilityFilter" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer" index="0" node_paths=PackedStringArray("peer_id", "synchronizer") instance=ExtResource("44_mvfu7")]
 peer_id = NodePath("../../../../../../PeerID")
 synchronizer = NodePath("..")
 
+[node name="ClearSpriteTexture" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D" index="0" node_paths=PackedStringArray("sprite") instance=ExtResource("47_d25eg")]
+sprite = NodePath("..")
+
+[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D/ClearSpriteTexture" method="restore_texture"]
+[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D/ClearSpriteTexture" method="clear_texture"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/Revivable" method="take_damage"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/DamageEvent" method="take_damage"]
+[connection signal="powering_failed" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead"]
 
 [editable path="YSort/Flashlight"]
 [editable path="YSort/HunterPlaceholder"]

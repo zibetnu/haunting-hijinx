@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsfctswtuferv"]
+
+[ext_resource type="Script" path="res://src/clear_sprite_texture/clear_sprite_texture.gd" id="1_4aqtu"]
+
+[node name="ClearSpriteTexture" type="Node"]
+script = ExtResource("1_4aqtu")

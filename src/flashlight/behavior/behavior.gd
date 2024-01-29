@@ -1,6 +1,8 @@
 extends Area2D
 
 
+signal powering_failed
+
 const CAST_LENGTHS: Array[int] = [0, 4, 5, 6, 7, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48]
 const CAST_LONG_MAX_INDEX = 15
 const CAST_LONG_MIN_INDEX = 5
@@ -21,6 +23,8 @@ const CAST_SHORT_MAX_INDEX = 4
 
 	set(value):
 		data.flashlight_powered = value and data.battery > 0
+		if value and data.battery == 0:
+			powering_failed.emit()
 
 @export var target_rotation: float:
 	set(value):
