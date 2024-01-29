@@ -8,8 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://bxn13bi5j05gc" path="res://src/mediators/peer_id_enabled/peer_id_enabled.tscn" id="3_u2owf"]
 [ext_resource type="PackedScene" uid="uid://bg6e2s53ki76i" path="res://src/mediators/peer_id_input_authority/peer_id_input_authority.tscn" id="4_ci3ki"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="4_x2w3t"]
-[ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_id_visibility_filter/peer_id_visibility_filter.tscn" id="5_2xtya"]
-[ext_resource type="PackedScene" uid="uid://dsccl51pqvbue" path="res://src/mediators/peer_id_process_mode/peer_id_process_mode.tscn" id="5_qee3q"]
 [ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="5_uqurr"]
 [ext_resource type="PackedScene" uid="uid://cmrvakm1sd7b7" path="res://src/mediators/state_component/set_bool/set_bool.tscn" id="5_xl87u"]
 [ext_resource type="PackedScene" uid="uid://gvf2peg6yuns" path="res://src/controller/unpause_force/unpause_force.tscn" id="6_ujhjn"]
@@ -46,6 +44,8 @@
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="33_a7fw2"]
 [ext_resource type="PackedScene" uid="uid://bcyyx2srd4gwe" path="res://src/mediators/peer_id_name_label/peer_id_name_label.tscn" id="37_h6u7o"]
 [ext_resource type="PackedScene" uid="uid://y5w40m6pqbvt" path="res://src/mediators/peer_id_set_bool/peer_id_set_bool.tscn" id="40_oj2kf"]
+[ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_id_visibility_filter/peer_id_visibility_filter.tscn" id="44_mvfu7"]
+[ext_resource type="PackedScene" uid="uid://dsccl51pqvbue" path="res://src/mediators/peer_id_process_mode/peer_id_process_mode.tscn" id="44_oo3l6"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hflh2"]
 properties/0/path = NodePath(".:position")
@@ -466,26 +466,26 @@ max_variable = "max_progress"
 [node name="Alert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("28_bjj70")]
 layout_mode = 2
 
-[node name="PeerIDVisibilityFilter" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer" index="0" node_paths=PackedStringArray("peer_id", "synchronizer") instance=ExtResource("5_2xtya")]
-peer_id = NodePath("../../../../../../PeerID")
-synchronizer = NodePath("..")
-include_ghost_peer = true
-
-[node name="PeerIDProcessMode" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" node_paths=PackedStringArray("peer_id", "nodes") instance=ExtResource("5_qee3q")]
+[node name="PeerIDProcessMode" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" node_paths=PackedStringArray("peer_id", "nodes") instance=ExtResource("44_oo3l6")]
 peer_id = NodePath("../../../../../PeerID")
 nodes = [NodePath("..")]
+include_ghost_peer = true
+
+[node name="PeerIDVisibilityFilter" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer" index="0" node_paths=PackedStringArray("peer_id", "synchronizer") instance=ExtResource("44_mvfu7")]
+peer_id = NodePath("../../../../../../PeerID")
+synchronizer = NodePath("..")
 include_ghost_peer = true
 
 [node name="BatteryAlert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("31_vp1ot")]
 layout_mode = 2
 
-[node name="PeerIDVisibilityFilter" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer" index="0" node_paths=PackedStringArray("peer_id", "synchronizer") instance=ExtResource("5_2xtya")]
-peer_id = NodePath("../../../../../../PeerID")
-synchronizer = NodePath("..")
-
-[node name="PeerIDProcessMode" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" node_paths=PackedStringArray("peer_id", "nodes") instance=ExtResource("5_qee3q")]
+[node name="PeerIDProcessMode" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" node_paths=PackedStringArray("peer_id", "nodes") instance=ExtResource("44_oo3l6")]
 peer_id = NodePath("../../../../../PeerID")
 nodes = [NodePath("..")]
+
+[node name="PeerIDVisibilityFilter" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer" index="0" node_paths=PackedStringArray("peer_id", "synchronizer") instance=ExtResource("44_mvfu7")]
+peer_id = NodePath("../../../../../../PeerID")
+synchronizer = NodePath("..")
 
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/Revivable" method="take_damage"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/DamageEvent" method="take_damage"]

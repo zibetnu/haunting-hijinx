@@ -1,27 +1,26 @@
 extends Node
 
 
-@export var peer_id: PeerID:
-	set(value):
-		if peer_id:
-			peer_id.changed.disconnect(_on_peer_id_changed)
-
-		peer_id = value
-		if peer_id:
-			peer_id.changed.connect(_on_peer_id_changed)
-
-
+@export var peer_id: PeerID
 @export var synchronizer: MultiplayerSynchronizer
+@export var enable_filter := true
 @export var include_ghost_peer := false
+
+var _filter = func(id):
+		return (
+				not enable_filter
+				or id == peer_id.id
+				or (include_ghost_peer and id == PeerData.ghost_peer)
+		)
 
 
 func _ready() -> void:
-	synchronizer.public_visibility = false
+	synchronizer.add_visibility_filter(_filter)
 
 
-func _on_peer_id_changed(id: int) -> void:
-	for connected_peer_id in multiplayer.get_peers():
-		synchronizer.set_visibility_for(connected_peer_id,
-				connected_peer_id == id
-				or (include_ghost_peer and connected_peer_id == PeerData.ghost_peer)
-		)
+func disable() -> void:
+	enable_filter = false
+
+
+func enable() -> void:
+	enable_filter = true

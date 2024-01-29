@@ -1,5 +1,6 @@
-[gd_scene load_steps=49 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=51 format=3 uid="uid://8qaswvkeb8qd"]
 
+[ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_id_visibility_filter/peer_id_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="2_bh3m0"]
 [ext_resource type="PackedScene" uid="uid://y5w40m6pqbvt" path="res://src/mediators/peer_id_set_bool/peer_id_set_bool.tscn" id="3_3ievd"]
@@ -39,6 +40,11 @@
 [ext_resource type="PackedScene" uid="uid://b6et2ypj2js4m" path="res://src/mediators/damage_event/damage_event.tscn" id="30_jrfk5"]
 [ext_resource type="PackedScene" uid="uid://d03j155281y4p" path="res://src/mediators/state_component/visible/visible.tscn" id="30_syx0q"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="32_luctv"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hiprh"]
+properties/0/path = NodePath("Dummy Synchronizer:editor_description")
+properties/0/spawn = false
+properties/0/replication_mode = 0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hsnve"]
 properties/0/path = NodePath(".:position")
@@ -88,8 +94,17 @@ fill_to = Vector2(0.5, 0)
 [node name="Ghost" type="CharacterBody2D"]
 collision_layer = 8
 
+[node name="Dummy Synchronizer" type="MultiplayerSynchronizer" parent="."]
+editor_description = "https://github.com/godotengine/godot/issues/68508"
+replication_config = SubResource("SceneReplicationConfig_hiprh")
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_hsnve")
+
+[node name="PeerIDVisibilityFilter" parent="MultiplayerSynchronizer" node_paths=PackedStringArray("peer_id", "synchronizer") instance=ExtResource("1_0yuv7")]
+peer_id = NodePath("../../PeerID")
+synchronizer = NodePath("..")
+include_ghost_peer = true
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
 nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../Synced/ControllerStateChartExpressionProperties"), NodePath("../Synced/RemoteProperty"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Visible")]
@@ -599,8 +614,10 @@ active_state = NodePath("../../../../../StateChart/Base/Behavior/Alive/Summon")
 [connection signal="taken" from="StateChart/Base/Behavior/Alive/Summon/Summoned" to="Summon/RemoteProperty" method="manual_process"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="PeerIDSetBool" method="set_value_false"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="IgnoreCanvasModulate/PeerIDSetBool" method="set_value_false"]
+[connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="MultiplayerSynchronizer/PeerIDVisibilityFilter" method="enable"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="PeerIDSetBool" method="set_value_true"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="IgnoreCanvasModulate/PeerIDSetBool" method="set_value_true"]
+[connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="MultiplayerSynchronizer/PeerIDVisibilityFilter" method="disable"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/DamageEvent" method="take_damage"]
 
 [editable path="GhostPlaceholder"]

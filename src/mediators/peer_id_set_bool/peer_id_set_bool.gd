@@ -23,14 +23,14 @@ enum Mode {
 @export var property_value := false:
 	set(value):
 		property_value = value
-		_update_visibility()
+		_update_bool()
 
 var _is_ready := false
 
 
 func _ready() -> void:
 	_is_ready = true
-	_update_visibility()
+	_update_bool()
 
 
 func set_value_false() -> void:
@@ -42,10 +42,10 @@ func set_value_true() -> void:
 
 
 func _on_peer_id_changed(_id: int) -> void:
-	_update_visibility()
+	_update_bool()
 
 
-func _update_visibility() -> void:
+func _update_bool() -> void:
 	if not _is_ready:
 		return
 
