@@ -1,14 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://y5w40m6pqbvt"]
+[gd_scene load_steps=2 format=3 uid="uid://y5w40m6pqbvt"]
 
 [ext_resource type="Script" path="res://src/mediators/peer_id_set_bool/peer_id_set_bool.gd" id="1_hesj4"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_rxmor"]
-properties/0/path = NodePath(".:property_value")
-properties/0/spawn = true
-properties/0/replication_mode = 2
-
 [node name="PeerIDSetBool" type="Node"]
 script = ExtResource("1_hesj4")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_rxmor")
