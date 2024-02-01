@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=55 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_id_visibility_filter/peer_id_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
@@ -39,8 +39,11 @@
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="29_1sq8w"]
 [ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_i4s33"]
 [ext_resource type="PackedScene" uid="uid://b6et2ypj2js4m" path="res://src/mediators/damage_event/damage_event.tscn" id="30_jrfk5"]
-[ext_resource type="PackedScene" uid="uid://d03j155281y4p" path="res://src/mediators/state_component/visible/visible.tscn" id="30_syx0q"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="32_luctv"]
+[ext_resource type="PackedScene" uid="uid://cpvs73t8l3h88" path="res://src/weak_to/weak_to.tscn" id="35_u2g7w"]
+[ext_resource type="PackedScene" uid="uid://d4gb1ksm22wvh" path="res://src/damage_value/damage_value.tscn" id="37_850w6"]
+[ext_resource type="PackedScene" uid="uid://dpwfunjqyfike" path="res://src/health/health.tscn" id="38_arcfj"]
+[ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="40_1b387"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hiprh"]
 properties/0/path = NodePath("Dummy Synchronizer:editor_description")
@@ -107,8 +110,10 @@ peer_id = NodePath("../../PeerID")
 synchronizer = NodePath("..")
 include_ghost_peer = true
 
+[node name="CallHolder" parent="MultiplayerSynchronizer/PeerIDVisibilityFilter" instance=ExtResource("5_s7auc")]
+
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
-nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../Synced/ControllerStateChartExpressionProperties"), NodePath("../Synced/RemoteProperty"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Visible")]
+nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../Synced/ControllerStateChartExpressionProperties"), NodePath("../Synced/RemoteProperty"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior")]
 
 [node name="PeerID" parent="." instance=ExtResource("2_bh3m0")]
 
@@ -116,8 +121,6 @@ nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../Synced/C
 peer_id = NodePath("../PeerID")
 node = NodePath("..")
 property_name = &"visible"
-
-[node name="CallHolder" parent="PeerIDSetBool" instance=ExtResource("5_s7auc")]
 
 [node name="Summon" parent="." instance=ExtResource("3_26ncu")]
 target_group = &"hunters"
@@ -155,9 +158,22 @@ script = ExtResource("5_6yps6")
 script = ExtResource("6_il0ju")
 to = NodePath("../../../Visibility/Visibile")
 
+[node name="SetAnimation" type="Node" parent="StateChart/Base/Behavior/Dead"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../../Animation/Dead")
+
+[node name="SetVulnerability" type="Node" parent="StateChart/Base/Behavior/Dead"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../../Vulnerability/Invulnerable")
+
 [node name="Alive" type="Node" parent="StateChart/Base/Behavior"]
 script = ExtResource("4_74yim")
 initial_state = NodePath("Normal")
+
+[node name="HealthZeroed" type="Node" parent="StateChart/Base/Behavior/Alive"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Dead")
+event = &"health_zeroed"
 
 [node name="EnableRemoteProperty" parent="StateChart/Base/Behavior/Alive" node_paths=PackedStringArray("remote_property", "active_state") instance=ExtResource("7_jcrlr")]
 remote_property = NodePath("../../../../../Synced/RemoteProperty")
@@ -450,7 +466,7 @@ to = NodePath("../../../Animation/Stun")
 event = &"damaged"
 
 [node name="DamageEventActive" parent="StateChart/Base/Vulnerability/Vulnerable" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("19_qtpd3")]
-target_node = NodePath("../../../../../DamageSignals/DamageEvent")
+target_node = NodePath("../../../../../DamageSignals/WeakTo/DamageEvent")
 property_name = &"active"
 active_state = NodePath("..")
 
@@ -527,10 +543,21 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageSignals"]
 shape = SubResource("CircleShape2D_xn3hr")
 
-[node name="DamageEvent" parent="DamageSignals" node_paths=PackedStringArray("state_chart") instance=ExtResource("30_jrfk5")]
-event = &"damaged"
-state_chart = NodePath("../../StateChart")
+[node name="WeakTo" parent="DamageSignals" instance=ExtResource("35_u2g7w")]
 weak_to = 1
+
+[node name="DamageEvent" parent="DamageSignals/WeakTo" node_paths=PackedStringArray("state_chart") instance=ExtResource("30_jrfk5")]
+event = &"damaged"
+state_chart = NodePath("../../../StateChart")
+
+[node name="DamageValue" parent="DamageSignals/WeakTo" instance=ExtResource("37_850w6")]
+
+[node name="Health" parent="DamageSignals/WeakTo/DamageValue" instance=ExtResource("38_arcfj")]
+
+[node name="SignalStateChartEvent" parent="DamageSignals/WeakTo/DamageValue/Health" node_paths=PackedStringArray("signal_source", "state_chart") instance=ExtResource("12_53vqb")]
+signal_name = &"health_zeroed"
+signal_source = NodePath("..")
+state_chart = NodePath("../../../../../StateChart")
 
 [node name="GhostPlaceholder" parent="." instance=ExtResource("13_arjsn")]
 position = Vector2(0, -8)
@@ -591,11 +618,15 @@ alignment = 1
 visible = false
 layout_mode = 2
 size_flags_vertical = 8
+fill_mode = 3
+texture_under = ExtResource("40_1b387")
+texture_progress = ExtResource("40_1b387")
 tint_under = Color(1, 1, 1, 0.247059)
 
-[node name="Behavior" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" index="1"]
-value_variable = "progress"
-max_variable = "max_progress"
+[node name="Behavior" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" index="1" node_paths=PackedStringArray("source_node")]
+source_node = NodePath("../../../../../DamageSignals/WeakTo/DamageValue/Health")
+value_variable = "health"
+max_variable = "max_health"
 
 [node name="SummonBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("15_nnx8e")]
 visible = false
@@ -610,18 +641,25 @@ source_node = NodePath("../../../../../Summon")
 value_variable = "charge"
 max_variable = "max_charge"
 
-[node name="Visible" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" node_paths=PackedStringArray("canvas_item", "active_state") instance=ExtResource("30_syx0q")]
-canvas_item = NodePath("..")
-active_state = NodePath("../../../../../StateChart/Base/Behavior/Alive/Summon")
-
-[connection signal="synchronized" from="MultiplayerSynchronizer" to="PeerIDSetBool/CallHolder" method="release"]
-[connection signal="filter_disabled" from="MultiplayerSynchronizer/PeerIDVisibilityFilter" to="PeerIDSetBool/CallHolder" method="hold"]
+[connection signal="synchronized" from="MultiplayerSynchronizer" to="MultiplayerSynchronizer/PeerIDVisibilityFilter/CallHolder" method="release"]
+[connection signal="filter_disabled" from="MultiplayerSynchronizer/PeerIDVisibilityFilter" to="MultiplayerSynchronizer/PeerIDVisibilityFilter/CallHolder" method="hold"]
 [connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerIDVisibilityFilter" to="PeerIDSetBool" method="set_value_false"]
-[connection signal="call_released" from="PeerIDSetBool/CallHolder" to="PeerIDSetBool" method="set_value_true"]
+[connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerIDVisibilityFilter" to="IgnoreCanvasModulate/PeerIDSetBool" method="set_value_false"]
+[connection signal="call_released" from="MultiplayerSynchronizer/PeerIDVisibilityFilter/CallHolder" to="PeerIDSetBool" method="set_value_true"]
+[connection signal="call_released" from="MultiplayerSynchronizer/PeerIDVisibilityFilter/CallHolder" to="IgnoreCanvasModulate/PeerIDSetBool" method="set_value_true"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="show"]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="hide"]
 [connection signal="taken" from="StateChart/Base/Behavior/Alive/Summon/Summoned" to="Summon/RemoteProperty" method="manual_process"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Stun" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="show"]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Stun" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="hide"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="show"]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="hide"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="MultiplayerSynchronizer/PeerIDVisibilityFilter" method="enable"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="MultiplayerSynchronizer/PeerIDVisibilityFilter" method="disable"]
-[connection signal="damaged_by" from="DamageSignals" to="DamageSignals/DamageEvent" method="take_damage"]
+[connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
+[connection signal="damage_taken" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageEvent" method="damage_taken"]
+[connection signal="damaged_by" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageValue" method="take_damage"]
+[connection signal="damaged_by_amount" from="DamageSignals/WeakTo/DamageValue" to="DamageSignals/WeakTo/DamageValue/Health" method="subtract_health"]
 
 [editable path="GhostPlaceholder"]
 [editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar"]
