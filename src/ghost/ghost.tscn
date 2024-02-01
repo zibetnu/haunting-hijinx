@@ -657,7 +657,7 @@ max_variable = "max_charge"
 [connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="MultiplayerSynchronizer/PeerIDVisibilityFilter" method="enable"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="MultiplayerSynchronizer/PeerIDVisibilityFilter" method="disable"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
-[connection signal="damage_taken" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageEvent" method="damage_taken"]
+[connection signal="damage_taken" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageEvent" method="_on_damage_taken"]
 [connection signal="damaged_by" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageValue" method="take_damage"]
 [connection signal="damaged_by_amount" from="DamageSignals/WeakTo/DamageValue" to="DamageSignals/WeakTo/DamageValue/Health" method="subtract_health"]
 

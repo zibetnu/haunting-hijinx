@@ -6,7 +6,7 @@ extends Node
 @export var state_chart: StateChart
 
 
-func damage_taken() -> void:
+func _on_damage_taken() -> void:
 	if not active:
 		return
 
