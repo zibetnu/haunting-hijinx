@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=59 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -16,7 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="7_lf1vk"]
 [ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="8_dmlm5"]
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="9_muve1"]
-[ext_resource type="PackedScene" uid="uid://dt21mg06hrnci" path="res://src/mediators/aura_sense_alert/aura_sense_alert.tscn" id="9_vdw7c"]
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="10_3bo02"]
 [ext_resource type="PackedScene" uid="uid://b55ojigpr88dd" path="res://src/mediators/state_component/costume_animation/costume_animation.tscn" id="11_ww6av"]
 [ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/mediators/state_component/move/move.tscn" id="12_r3uq0"]
@@ -340,10 +339,6 @@ synced_controller = NodePath("..")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AuraSense"]
 shape = SubResource("CircleShape2D_vawb0")
 
-[node name="AuraSenseAlert" parent="AuraSense" node_paths=PackedStringArray("alert", "aura_sense") instance=ExtResource("9_vdw7c")]
-alert = NodePath("../../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert")
-aura_sense = NodePath("..")
-
 [node name="DamageSignals" parent="." instance=ExtResource("27_qehgg")]
 collision_layer = 4
 collision_mask = 23
@@ -492,6 +487,7 @@ sprite = NodePath("..")
 
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D/ClearSpriteTexture" method="restore_texture"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D/ClearSpriteTexture" method="clear_texture"]
+[connection signal="sensed_intensity_changed" from="AuraSense" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_alert_level_from_int"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/Revivable" method="take_damage"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
 [connection signal="damage_taken" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageEvent" method="_on_damage_taken"]

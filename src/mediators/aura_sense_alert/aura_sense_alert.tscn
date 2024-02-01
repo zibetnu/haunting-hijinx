@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dt21mg06hrnci"]
-
-[ext_resource type="Script" path="res://src/mediators/aura_sense_alert/aura_sense_alert.gd" id="1_47dis"]
-
-[node name="AuraSenseAlert" type="Node"]
-script = ExtResource("1_47dis")
