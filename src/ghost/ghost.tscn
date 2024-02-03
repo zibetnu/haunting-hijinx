@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=55 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_id_visibility_filter/peer_id_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
@@ -25,7 +25,6 @@
 [ext_resource type="PackedScene" uid="uid://c18war56not2c" path="res://src/mediators/controller_state_chart_events/controller_state_chart_events.tscn" id="11_2r614"]
 [ext_resource type="PackedScene" uid="uid://bm0ar7asqubxm" path="res://src/mediators/state_component/controller_state_chart_enter_events/controller_state_chart_enter_events.tscn" id="11_fqc8g"]
 [ext_resource type="PackedScene" uid="uid://bg6e2s53ki76i" path="res://src/mediators/peer_id_input_authority/peer_id_input_authority.tscn" id="12_llovw"]
-[ext_resource type="PackedScene" uid="uid://umudi6rradfm" path="res://src/mediators/state_component/start_summon/start_summon.tscn" id="12_ogv56"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="13_56q65"]
 [ext_resource type="PackedScene" uid="uid://nj5bu4130gy3" path="res://src/costume/ghost_placeholder/ghost_placeholder.tscn" id="13_arjsn"]
 [ext_resource type="PackedScene" uid="uid://ctcjena4x8kr0" path="res://src/aura/aura.tscn" id="13_e27lr"]
@@ -302,10 +301,6 @@ event = &"summoned"
 controller = NodePath("../../../../../../Synced")
 state_chart = NodePath("../../../../..")
 ignore_button_1 = true
-active_state = NodePath("..")
-
-[node name="StartSummon" parent="StateChart/Base/Behavior/Alive/Summon" node_paths=PackedStringArray("summon", "active_state") instance=ExtResource("12_ogv56")]
-summon = NodePath("../../../../../../Summon")
 active_state = NodePath("..")
 
 [node name="Stun" type="Node" parent="StateChart/Base/Behavior/Alive"]
@@ -646,7 +641,10 @@ max_variable = "max_charge"
 [connection signal="call_released" from="MultiplayerSynchronizer/PeerIDVisibilityFilter/CallHolder" to="IgnoreCanvasModulate/PeerIDSetBool" method="set_value_true"]
 [connection signal="summoned" from="Summon" to="Summon/SignalToEvent" method="receive_signal"]
 [connection signal="signal_received" from="Summon/SignalToEvent" to="StateChart" method="send_event"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="start_charging"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="show"]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="clear_charge"]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="stop_charging"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="hide"]
 [connection signal="taken" from="StateChart/Base/Behavior/Alive/Summon/Summoned" to="Summon/RemoteProperty" method="manual_process"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Stun" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="show"]

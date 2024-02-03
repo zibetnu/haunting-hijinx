@@ -32,6 +32,14 @@ func _ready() -> void:
 	set_physics_process(charging)
 
 
+func clear_charge() -> void:
+	charge = 0
+
+
+func set_charging(value: bool) -> void:
+	charging = value
+
+
 func spawn_scenes() -> void:
 	for node in get_tree().get_nodes_in_group(target_group):
 		var instance := DrainArea.instantiate()
@@ -41,6 +49,14 @@ func spawn_scenes() -> void:
 		owner.add_sibling(instance, true)
 
 	summoned.emit()
+
+
+func start_charging() -> void:
+	charging = true
+
+
+func stop_charging() -> void:
+	charging = false
 
 
 func _physics_process(_delta: float) -> void:
