@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=59 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dfah2vi4kgnu7" path="res://src/mediators/flashlight_controller/flashlight_controller.tscn" id="7_ew1lp"]
 [ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="7_lf1vk"]
 [ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="8_dmlm5"]
+[ext_resource type="PackedScene" uid="uid://dwfdqhbgq4vvr" path="res://src/mediators/set_bool/set_bool.tscn" id="9_bnpp0"]
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="9_muve1"]
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="10_3bo02"]
 [ext_resource type="PackedScene" uid="uid://b55ojigpr88dd" path="res://src/mediators/state_component/costume_animation/costume_animation.tscn" id="11_ww6av"]
@@ -170,6 +171,10 @@ active_state = NodePath("..")
 target_node = NodePath("../../../../DamageSignals/Revivable")
 property_name = &"active"
 active_state = NodePath("..")
+
+[node name="SetBool" parent="StateChart/Base/Dead" node_paths=PackedStringArray("target_node") instance=ExtResource("9_bnpp0")]
+target_node = NodePath("../../../../CollisionShape2D")
+bool_name = &"disabled"
 
 [node name="Alive" type="Node" parent="StateChart/Base"]
 script = ExtResource("12_y0078")
@@ -479,6 +484,8 @@ sprite = NodePath("..")
 
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D/ClearSpriteTexture" method="restore_texture"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D/ClearSpriteTexture" method="clear_texture"]
+[connection signal="state_entered" from="StateChart/Base/Dead" to="StateChart/Base/Dead/SetBool" method="set_true"]
+[connection signal="state_exited" from="StateChart/Base/Dead" to="StateChart/Base/Dead/SetBool" method="set_false"]
 [connection signal="state_entered" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/RemoteProperty" method="use_physics_callback"]
 [connection signal="state_exited" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/RemoteProperty" method="use_manual_callback_only"]
 [connection signal="sensed_intensity_changed" from="AuraSense" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_alert_level_from_int"]
