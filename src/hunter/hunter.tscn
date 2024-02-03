@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=58 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -22,7 +22,6 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="12_y0078"]
 [ext_resource type="PackedScene" uid="uid://dji2viacu4vc" path="res://src/mediators/state_component/flashlight_battery_low/flashlight_battery_low.tscn" id="13_mj4y5"]
 [ext_resource type="PackedScene" uid="uid://cy4qrm44icmyy" path="res://src/flashlight/flashlight.tscn" id="15_hljm8"]
-[ext_resource type="PackedScene" uid="uid://djba3xyguo0kb" path="res://src/mediators/state_component/enable_remote_property.tscn/enable_remote_property.tscn" id="15_ktlcm"]
 [ext_resource type="PackedScene" uid="uid://co1edbkdtjj35" path="res://src/mediators/flashlight_state_chart_events/flashlight_state_chart_events.tscn" id="16_c1vhd"]
 [ext_resource type="PackedScene" uid="uid://myko8836tn6o" path="res://src/rotation_to_vector/rotation_to_vector.tscn" id="16_se1mq"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/not_guard.gd" id="17_gyo55"]
@@ -177,11 +176,6 @@ script = ExtResource("12_y0078")
 
 [node name="FlashlightBatteryLow" parent="StateChart/Base/Alive" node_paths=PackedStringArray("flashlight_data", "active_state") instance=ExtResource("13_mj4y5")]
 flashlight_data = NodePath("../../../../YSort/Flashlight/Data")
-active_state = NodePath("..")
-
-[node name="EnableRemoteProperty" parent="StateChart/Base/Alive" node_paths=PackedStringArray("remote_property", "active_state") instance=ExtResource("15_ktlcm")]
-remote_property = NodePath("../../../../YSort/Flashlight/Behavior/RemoteProperty")
-process_callback = 0
 active_state = NodePath("..")
 
 [node name="FlashlightControllerActive" parent="StateChart/Base/Alive" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
@@ -384,11 +378,11 @@ state_chart = NodePath("../../../../StateChart")
 
 [node name="RemoteProperty" type="Node" parent="YSort/Flashlight/Behavior" index="6" node_paths=PackedStringArray("source_node", "destination_node")]
 script = ExtResource("18_mpyxa")
+process_callback = 2
 source_node = NodePath("../RotationToVector")
 source_property = "vector"
 destination_node = NodePath("../../../HunterPlaceholder/Behavior")
 destination_property = "direction_vector"
-process_callback = 2
 
 [node name="RotationToVector" parent="YSort/Flashlight/Behavior" index="7" node_paths=PackedStringArray("source_node") instance=ExtResource("16_se1mq")]
 source_node = NodePath("../../Data")
@@ -485,6 +479,8 @@ sprite = NodePath("..")
 
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D/ClearSpriteTexture" method="restore_texture"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D/ClearSpriteTexture" method="clear_texture"]
+[connection signal="state_entered" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/RemoteProperty" method="use_physics_callback"]
+[connection signal="state_exited" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/RemoteProperty" method="use_manual_callback_only"]
 [connection signal="sensed_intensity_changed" from="AuraSense" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_alert_level_from_int"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/Revivable" method="take_damage"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=54 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_id_visibility_filter/peer_id_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
@@ -17,7 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://gvf2peg6yuns" path="res://src/controller/unpause_force/unpause_force.tscn" id="6_wi10c"]
 [ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/mediators/state_component/move/move.tscn" id="7_1d45a"]
 [ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="7_ijrj0"]
-[ext_resource type="PackedScene" uid="uid://djba3xyguo0kb" path="res://src/mediators/state_component/enable_remote_property.tscn/enable_remote_property.tscn" id="7_jcrlr"]
 [ext_resource type="PackedScene" uid="uid://dterwqqmikxc1" path="res://src/mediators/signal_to_event/signal_to_event.tscn" id="8_kd7ea"]
 [ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="8_mynla"]
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="9_x08fo"]
@@ -172,10 +171,6 @@ initial_state = NodePath("Normal")
 script = ExtResource("6_il0ju")
 to = NodePath("../../Dead")
 event = &"health_zeroed"
-
-[node name="EnableRemoteProperty" parent="StateChart/Base/Behavior/Alive" node_paths=PackedStringArray("remote_property", "active_state") instance=ExtResource("7_jcrlr")]
-remote_property = NodePath("../../../../../Synced/RemoteProperty")
-active_state = NodePath("..")
 
 [node name="Normal" type="Node" parent="StateChart/Base/Behavior/Alive"]
 script = ExtResource("5_6yps6")
@@ -641,6 +636,8 @@ max_variable = "max_charge"
 [connection signal="call_released" from="MultiplayerSynchronizer/PeerIDVisibilityFilter/CallHolder" to="IgnoreCanvasModulate/PeerIDSetBool" method="set_value_true"]
 [connection signal="summoned" from="Summon" to="Summon/SignalToEvent" method="receive_signal"]
 [connection signal="signal_received" from="Summon/SignalToEvent" to="StateChart" method="send_event"]
+[connection signal="child_state_entered" from="StateChart/Base/Behavior/Alive" to="Synced/RemoteProperty" method="use_idle_callback"]
+[connection signal="child_state_exited" from="StateChart/Base/Behavior/Alive" to="Synced/RemoteProperty" method="use_manual_callback_only"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="start_charging"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="show"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="clear_charge"]
