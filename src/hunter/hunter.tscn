@@ -33,10 +33,10 @@
 [ext_resource type="PackedScene" uid="uid://r1i8jof331aw" path="res://src/mediators/flashlight_state_chart_properties/flashlight_state_chart_properties.tscn" id="22_lt6pn"]
 [ext_resource type="PackedScene" uid="uid://b4i2arqquha56" path="res://src/revivable/revivable.tscn" id="23_d234k"]
 [ext_resource type="PackedScene" uid="uid://biqy1culinvqm" path="res://src/mediators/flashlight_event_battery_alert/flashlight_event_battery_alert.tscn" id="24_1dwup"]
-[ext_resource type="PackedScene" uid="uid://b5py3q2r2ukvm" path="res://src/mediators/signal_state_chart_event/signal_state_chart_event.tscn" id="24_g2w5e"]
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="27_qehgg"]
 [ext_resource type="PackedScene" uid="uid://djs1c1w30m8gp" path="res://src/alert/alert.tscn" id="28_bjj70"]
 [ext_resource type="PackedScene" uid="uid://y03qjvt68tjj" path="res://src/aura_sense/aura_sense.tscn" id="28_dd2t8"]
+[ext_resource type="PackedScene" uid="uid://dterwqqmikxc1" path="res://src/mediators/signal_to_event/signal_to_event.tscn" id="28_m0gko"]
 [ext_resource type="PackedScene" uid="uid://b6et2ypj2js4m" path="res://src/mediators/damage_event/damage_event.tscn" id="30_c0fe6"]
 [ext_resource type="PackedScene" uid="uid://cpvs73t8l3h88" path="res://src/weak_to/weak_to.tscn" id="30_dc3ty"]
 [ext_resource type="PackedScene" uid="uid://gh0mk0t85f13" path="res://src/battery_alert/battery_alert.tscn" id="31_vp1ot"]
@@ -350,10 +350,8 @@ shape = SubResource("CircleShape2D_vawb0")
 active = false
 revives_with = 1
 
-[node name="SignalStateChartEvent" parent="DamageSignals/Revivable" node_paths=PackedStringArray("signal_source", "state_chart") instance=ExtResource("24_g2w5e")]
-signal_name = &"revived"
-signal_source = NodePath("..")
-state_chart = NodePath("../../../StateChart")
+[node name="SignalToEvent" parent="DamageSignals/Revivable" instance=ExtResource("28_m0gko")]
+emit_event = &"revived"
 
 [node name="WeakTo" parent="DamageSignals" instance=ExtResource("30_dc3ty")]
 weak_to = 2
@@ -490,6 +488,8 @@ sprite = NodePath("..")
 [connection signal="sensed_intensity_changed" from="AuraSense" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_alert_level_from_int"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/Revivable" method="take_damage"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
+[connection signal="revived" from="DamageSignals/Revivable" to="DamageSignals/Revivable/SignalToEvent" method="receive_signal"]
+[connection signal="signal_received" from="DamageSignals/Revivable/SignalToEvent" to="StateChart" method="send_event"]
 [connection signal="damage_taken" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageEvent" method="_on_damage_taken"]
 [connection signal="powering_failed" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead"]
 
