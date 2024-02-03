@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=56 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_id_visibility_filter/peer_id_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
@@ -18,13 +18,12 @@
 [ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/mediators/state_component/move/move.tscn" id="7_1d45a"]
 [ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="7_ijrj0"]
 [ext_resource type="PackedScene" uid="uid://djba3xyguo0kb" path="res://src/mediators/state_component/enable_remote_property.tscn/enable_remote_property.tscn" id="7_jcrlr"]
+[ext_resource type="PackedScene" uid="uid://dterwqqmikxc1" path="res://src/mediators/signal_to_event/signal_to_event.tscn" id="8_kd7ea"]
 [ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="8_mynla"]
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="9_x08fo"]
-[ext_resource type="PackedScene" uid="uid://dioiotebenk87" path="res://src/mediators/state_component/timeout_event/timeout_event.tscn" id="10_0oqyy"]
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="10_el6fq"]
 [ext_resource type="PackedScene" uid="uid://c18war56not2c" path="res://src/mediators/controller_state_chart_events/controller_state_chart_events.tscn" id="11_2r614"]
 [ext_resource type="PackedScene" uid="uid://bm0ar7asqubxm" path="res://src/mediators/state_component/controller_state_chart_enter_events/controller_state_chart_enter_events.tscn" id="11_fqc8g"]
-[ext_resource type="PackedScene" uid="uid://b5py3q2r2ukvm" path="res://src/mediators/signal_state_chart_event/signal_state_chart_event.tscn" id="12_53vqb"]
 [ext_resource type="PackedScene" uid="uid://bg6e2s53ki76i" path="res://src/mediators/peer_id_input_authority/peer_id_input_authority.tscn" id="12_llovw"]
 [ext_resource type="PackedScene" uid="uid://umudi6rradfm" path="res://src/mediators/state_component/start_summon/start_summon.tscn" id="12_ogv56"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="13_56q65"]
@@ -36,6 +35,8 @@
 [ext_resource type="PackedScene" uid="uid://b30o6hj6qsvu2" path="res://src/mediators/controller_state_chart_expression_properties/controller_state_chart_expression_properties.tscn" id="18_o8e6t"]
 [ext_resource type="Script" path="res://src/remote_property.gd" id="19_c6cbw"]
 [ext_resource type="PackedScene" uid="uid://cmrvakm1sd7b7" path="res://src/mediators/state_component/set_bool/set_bool.tscn" id="19_qtpd3"]
+[ext_resource type="PackedScene" uid="uid://bfhqyxu3iuptm" path="res://src/mediators/event_to_signal/event_to_signal.tscn" id="20_j823j"]
+[ext_resource type="PackedScene" uid="uid://dwfdqhbgq4vvr" path="res://src/mediators/set_bool/set_bool.tscn" id="20_tfmeu"]
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="29_1sq8w"]
 [ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_i4s33"]
 [ext_resource type="PackedScene" uid="uid://b6et2ypj2js4m" path="res://src/mediators/damage_event/damage_event.tscn" id="30_jrfk5"]
@@ -125,10 +126,8 @@ property_name = &"visible"
 [node name="Summon" parent="." instance=ExtResource("3_26ncu")]
 target_group = &"hunters"
 
-[node name="SignalStateChartEvent" parent="Summon" node_paths=PackedStringArray("signal_source", "state_chart") instance=ExtResource("12_53vqb")]
-signal_name = &"summoned"
-signal_source = NodePath("..")
-state_chart = NodePath("../../StateChart")
+[node name="SignalToEvent" parent="Summon" instance=ExtResource("8_kd7ea")]
+emit_event = &"summoned"
 
 [node name="StateChartCounter" parent="Summon" node_paths=PackedStringArray("state_chart") instance=ExtResource("5_c6vhq")]
 counter_name = &"drain_areas"
@@ -312,10 +311,6 @@ active_state = NodePath("..")
 [node name="Stun" type="Node" parent="StateChart/Base/Behavior/Alive"]
 script = ExtResource("5_6yps6")
 
-[node name="MakeVisible" type="Node" parent="StateChart/Base/Behavior/Alive/Stun"]
-script = ExtResource("6_il0ju")
-to = NodePath("../../../../Visibility/Visibile")
-
 [node name="PanicTimeout" type="Node" parent="StateChart/Base/Behavior/Alive/Stun"]
 script = ExtResource("6_il0ju")
 to = NodePath("../../Panic")
@@ -337,23 +332,27 @@ event = &"panic_ended"
 script = ExtResource("6_il0ju")
 to = NodePath("../../../../Animation/Panic")
 
-[node name="EndEvent" parent="StateChart/Base/Behavior/Alive/Panic" node_paths=PackedStringArray("state_chart", "active_state") instance=ExtResource("10_0oqyy")]
-event = &"panic_ended"
-state_chart = NodePath("../../../../..")
-wait_time = 3.0
-active_state = NodePath("..")
-
-[node name="InvisibleEvent" parent="StateChart/Base/Behavior/Alive/Panic" node_paths=PackedStringArray("state_chart", "active_state") instance=ExtResource("10_0oqyy")]
-event = &"invisibility_started"
-state_chart = NodePath("../../../../..")
-wait_time = 1.33
-active_state = NodePath("..")
-
 [node name="Move" parent="StateChart/Base/Behavior/Alive/Panic" node_paths=PackedStringArray("controller", "character", "active_state") instance=ExtResource("7_1d45a")]
 controller = NodePath("../../../../../../Synced")
 character = NodePath("../../../../../..")
 speed = 154.0
 active_state = NodePath("..")
+
+[node name="VisibleTimer" type="Timer" parent="StateChart/Base/Behavior/Alive/Panic"]
+editor_description = "Timer for how long ghost should stay visible."
+one_shot = true
+
+[node name="EventToSignal" parent="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" instance=ExtResource("20_j823j")]
+editor_description = "Restarts visible timer when ghost is damaged."
+listen_for_event = &"damaged"
+
+[node name="SetPaused" parent="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" node_paths=PackedStringArray("target_node") instance=ExtResource("20_tfmeu")]
+target_node = NodePath("..")
+bool_name = &"paused"
+
+[node name="SignalToEvent" parent="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" instance=ExtResource("8_kd7ea")]
+editor_description = "Sends event to make ghost invisible after VisibleTimer times out."
+emit_event = &"invisibility_started"
 
 [node name="Grab" type="Node" parent="StateChart/Base/Behavior/Alive"]
 script = ExtResource("5_6yps6")
@@ -442,6 +441,11 @@ script = ExtResource("6_il0ju")
 to = NodePath("../../Visibile")
 event = &"invisibility_ended"
 
+[node name="Damaged" type="Node" parent="StateChart/Base/Visibility/Invisibile"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Visibile")
+event = &"damaged"
+
 [node name="Visibile" type="Node" parent="StateChart/Base/Visibility"]
 script = ExtResource("5_6yps6")
 
@@ -459,11 +463,6 @@ script = ExtResource("5_6yps6")
 
 [node name="Vulnerable" type="Node" parent="StateChart/Base/Vulnerability"]
 script = ExtResource("5_6yps6")
-
-[node name="Damaged" type="Node" parent="StateChart/Base/Vulnerability/Vulnerable"]
-script = ExtResource("6_il0ju")
-to = NodePath("../../../Animation/Stun")
-event = &"damaged"
 
 [node name="DamageEventActive" parent="StateChart/Base/Vulnerability/Vulnerable" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("19_qtpd3")]
 target_node = NodePath("../../../../../DamageSignals/WeakTo/DamageEvent")
@@ -554,10 +553,8 @@ state_chart = NodePath("../../../StateChart")
 
 [node name="Health" parent="DamageSignals/WeakTo/DamageValue" instance=ExtResource("38_arcfj")]
 
-[node name="SignalStateChartEvent" parent="DamageSignals/WeakTo/DamageValue/Health" node_paths=PackedStringArray("signal_source", "state_chart") instance=ExtResource("12_53vqb")]
-signal_name = &"health_zeroed"
-signal_source = NodePath("..")
-state_chart = NodePath("../../../../../StateChart")
+[node name="SignalToEvent" parent="DamageSignals/WeakTo/DamageValue/Health" instance=ExtResource("8_kd7ea")]
+emit_event = &"health_zeroed"
 
 [node name="GhostPlaceholder" parent="." instance=ExtResource("13_arjsn")]
 position = Vector2(0, -8)
@@ -647,19 +644,29 @@ max_variable = "max_charge"
 [connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerIDVisibilityFilter" to="IgnoreCanvasModulate/PeerIDSetBool" method="set_value_false"]
 [connection signal="call_released" from="MultiplayerSynchronizer/PeerIDVisibilityFilter/CallHolder" to="PeerIDSetBool" method="set_value_true"]
 [connection signal="call_released" from="MultiplayerSynchronizer/PeerIDVisibilityFilter/CallHolder" to="IgnoreCanvasModulate/PeerIDSetBool" method="set_value_true"]
+[connection signal="summoned" from="Summon" to="Summon/SignalToEvent" method="receive_signal"]
+[connection signal="signal_received" from="Summon/SignalToEvent" to="StateChart" method="send_event"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="show"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="hide"]
 [connection signal="taken" from="StateChart/Base/Behavior/Alive/Summon/Summoned" to="Summon/RemoteProperty" method="manual_process"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Stun" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="show"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Stun" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="hide"]
+[connection signal="event_received" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/EventToSignal" method="receive_event"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="start"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="show"]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="stop"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="hide"]
+[connection signal="timeout" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/SignalToEvent" method="receive_signal"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/EventToSignal" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="start"]
+[connection signal="signal_received" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/SignalToEvent" to="StateChart" method="send_event"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="MultiplayerSynchronizer/PeerIDVisibilityFilter" method="enable"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="MultiplayerSynchronizer/PeerIDVisibilityFilter" method="disable"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
 [connection signal="damage_taken" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageEvent" method="_on_damage_taken"]
 [connection signal="damaged_by" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageValue" method="take_damage"]
 [connection signal="damaged_by_amount" from="DamageSignals/WeakTo/DamageValue" to="DamageSignals/WeakTo/DamageValue/Health" method="subtract_health"]
+[connection signal="health_zeroed" from="DamageSignals/WeakTo/DamageValue/Health" to="DamageSignals/WeakTo/DamageValue/Health/SignalToEvent" method="receive_signal"]
+[connection signal="signal_received" from="DamageSignals/WeakTo/DamageValue/Health/SignalToEvent" to="StateChart" method="send_event"]
 
 [editable path="GhostPlaceholder"]
 [editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar"]

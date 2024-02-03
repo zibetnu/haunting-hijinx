@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfhqyxu3iuptm"]
+
+[ext_resource type="Script" path="res://src/mediators/event_to_signal/event_to_signal.gd" id="1_h6ues"]
+
+[node name="EventToSignal" type="Node"]
+script = ExtResource("1_h6ues")
