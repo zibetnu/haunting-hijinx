@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6et2ypj2js4m"]
-
-[ext_resource type="Script" path="res://src/mediators/damage_event/damage_event.gd" id="1_edm4a"]
-
-[node name="DamageEvent" type="Node"]
-script = ExtResource("1_edm4a")

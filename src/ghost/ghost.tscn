@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=52 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_id_visibility_filter/peer_id_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
@@ -32,12 +32,10 @@
 [ext_resource type="PackedScene" uid="uid://b55ojigpr88dd" path="res://src/mediators/state_component/costume_animation/costume_animation.tscn" id="18_bcsx6"]
 [ext_resource type="PackedScene" uid="uid://b30o6hj6qsvu2" path="res://src/mediators/controller_state_chart_expression_properties/controller_state_chart_expression_properties.tscn" id="18_o8e6t"]
 [ext_resource type="Script" path="res://src/remote_property.gd" id="19_c6cbw"]
-[ext_resource type="PackedScene" uid="uid://cmrvakm1sd7b7" path="res://src/mediators/state_component/set_bool/set_bool.tscn" id="19_qtpd3"]
 [ext_resource type="PackedScene" uid="uid://bfhqyxu3iuptm" path="res://src/mediators/event_to_signal/event_to_signal.tscn" id="20_j823j"]
 [ext_resource type="PackedScene" uid="uid://dwfdqhbgq4vvr" path="res://src/mediators/set_bool/set_bool.tscn" id="20_tfmeu"]
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="29_1sq8w"]
 [ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_i4s33"]
-[ext_resource type="PackedScene" uid="uid://b6et2ypj2js4m" path="res://src/mediators/damage_event/damage_event.tscn" id="30_jrfk5"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="32_luctv"]
 [ext_resource type="PackedScene" uid="uid://cpvs73t8l3h88" path="res://src/weak_to/weak_to.tscn" id="35_u2g7w"]
 [ext_resource type="PackedScene" uid="uid://d4gb1ksm22wvh" path="res://src/damage_value/damage_value.tscn" id="37_850w6"]
@@ -451,13 +449,13 @@ initial_state = NodePath("Vulnerable")
 [node name="Invulnerable" type="Node" parent="StateChart/Base/Vulnerability"]
 script = ExtResource("5_6yps6")
 
+[node name="SetBool" parent="StateChart/Base/Vulnerability/Invulnerable" node_paths=PackedStringArray("target_node") instance=ExtResource("20_tfmeu")]
+editor_description = "Makes damage area unmonitorable when ghost is invulnerable."
+target_node = NodePath("../../../../../DamageSignals")
+bool_name = &"monitorable"
+
 [node name="Vulnerable" type="Node" parent="StateChart/Base/Vulnerability"]
 script = ExtResource("5_6yps6")
-
-[node name="DamageEventActive" parent="StateChart/Base/Vulnerability/Vulnerable" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("19_qtpd3")]
-target_node = NodePath("../../../../../DamageSignals/WeakTo/DamageEvent")
-property_name = &"active"
-active_state = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.99, 0.99)
@@ -535,16 +533,15 @@ shape = SubResource("CircleShape2D_xn3hr")
 [node name="WeakTo" parent="DamageSignals" instance=ExtResource("35_u2g7w")]
 weak_to = 1
 
-[node name="DamageEvent" parent="DamageSignals/WeakTo" node_paths=PackedStringArray("state_chart") instance=ExtResource("30_jrfk5")]
-event = &"damaged"
-state_chart = NodePath("../../../StateChart")
-
 [node name="DamageValue" parent="DamageSignals/WeakTo" instance=ExtResource("37_850w6")]
 
 [node name="Health" parent="DamageSignals/WeakTo/DamageValue" instance=ExtResource("38_arcfj")]
 
 [node name="SignalToEvent" parent="DamageSignals/WeakTo/DamageValue/Health" instance=ExtResource("8_kd7ea")]
 emit_event = &"health_zeroed"
+
+[node name="SignalToEvent" parent="DamageSignals/WeakTo" instance=ExtResource("8_kd7ea")]
+emit_event = &"damaged"
 
 [node name="GhostPlaceholder" parent="." instance=ExtResource("13_arjsn")]
 position = Vector2(0, -8)
@@ -656,12 +653,15 @@ max_variable = "max_charge"
 [connection signal="signal_received" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/SignalToEvent" to="StateChart" method="send_event"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="MultiplayerSynchronizer/PeerIDVisibilityFilter" method="enable"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="MultiplayerSynchronizer/PeerIDVisibilityFilter" method="disable"]
+[connection signal="state_entered" from="StateChart/Base/Vulnerability/Invulnerable" to="StateChart/Base/Vulnerability/Invulnerable/SetBool" method="set_false"]
+[connection signal="state_exited" from="StateChart/Base/Vulnerability/Invulnerable" to="StateChart/Base/Vulnerability/Invulnerable/SetBool" method="set_true"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
-[connection signal="damage_taken" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageEvent" method="_on_damage_taken"]
+[connection signal="damage_taken" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/SignalToEvent" method="receive_signal"]
 [connection signal="damaged_by" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageValue" method="take_damage"]
 [connection signal="damaged_by_amount" from="DamageSignals/WeakTo/DamageValue" to="DamageSignals/WeakTo/DamageValue/Health" method="subtract_health"]
 [connection signal="health_zeroed" from="DamageSignals/WeakTo/DamageValue/Health" to="DamageSignals/WeakTo/DamageValue/Health/SignalToEvent" method="receive_signal"]
 [connection signal="signal_received" from="DamageSignals/WeakTo/DamageValue/Health/SignalToEvent" to="StateChart" method="send_event"]
+[connection signal="signal_received" from="DamageSignals/WeakTo/SignalToEvent" to="StateChart" method="send_event"]
 
 [editable path="GhostPlaceholder"]
 [editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar"]

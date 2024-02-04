@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=58 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -37,7 +37,6 @@
 [ext_resource type="PackedScene" uid="uid://djs1c1w30m8gp" path="res://src/alert/alert.tscn" id="28_bjj70"]
 [ext_resource type="PackedScene" uid="uid://y03qjvt68tjj" path="res://src/aura_sense/aura_sense.tscn" id="28_dd2t8"]
 [ext_resource type="PackedScene" uid="uid://dterwqqmikxc1" path="res://src/mediators/signal_to_event/signal_to_event.tscn" id="28_m0gko"]
-[ext_resource type="PackedScene" uid="uid://b6et2ypj2js4m" path="res://src/mediators/damage_event/damage_event.tscn" id="30_c0fe6"]
 [ext_resource type="PackedScene" uid="uid://cpvs73t8l3h88" path="res://src/weak_to/weak_to.tscn" id="30_dc3ty"]
 [ext_resource type="PackedScene" uid="uid://gh0mk0t85f13" path="res://src/battery_alert/battery_alert.tscn" id="31_vp1ot"]
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/auto_texture_progress_bar/auto_texture_progress_bar.tscn" id="32_vdk32"]
@@ -271,6 +270,11 @@ animation_player = NodePath("../../../../../../YSort/HunterPlaceholder/Display/I
 animation_name = &"invulnerable"
 active_state = NodePath("..")
 
+[node name="SetBool" parent="StateChart/Base/Alive/Vulnerability/Invulnerable" node_paths=PackedStringArray("target_node") instance=ExtResource("9_bnpp0")]
+editor_description = "Makes damage area unmonitorable when hunter is invulnerable."
+target_node = NodePath("../../../../../../DamageSignals")
+bool_name = &"monitorable"
+
 [node name="Vulnerable" type="Node" parent="StateChart/Base/Alive/Vulnerability"]
 script = ExtResource("3_ocdoo")
 
@@ -282,11 +286,6 @@ event = &"died"
 [node name="Animation" parent="StateChart/Base/Alive/Vulnerability/Vulnerable" node_paths=PackedStringArray("animation_player", "active_state") instance=ExtResource("20_wx57d")]
 animation_player = NodePath("../../../../../../YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer")
 animation_name = &"RESET"
-active_state = NodePath("..")
-
-[node name="DamageEventActive" parent="StateChart/Base/Alive/Vulnerability/Vulnerable" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
-target_node = NodePath("../../../../../../DamageSignals/WeakTo/DamageEvent")
-property_name = &"active"
 active_state = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -355,9 +354,8 @@ emit_event = &"revived"
 [node name="WeakTo" parent="DamageSignals" instance=ExtResource("30_dc3ty")]
 weak_to = 2
 
-[node name="DamageEvent" parent="DamageSignals/WeakTo" node_paths=PackedStringArray("state_chart") instance=ExtResource("30_c0fe6")]
-event = &"died"
-state_chart = NodePath("../../../StateChart")
+[node name="SignalToEvent" parent="DamageSignals/WeakTo" instance=ExtResource("28_m0gko")]
+emit_event = &"died"
 
 [node name="YSort" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -488,12 +486,15 @@ sprite = NodePath("..")
 [connection signal="state_exited" from="StateChart/Base/Dead" to="StateChart/Base/Dead/SetBool" method="set_false"]
 [connection signal="state_entered" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/RemoteProperty" method="use_physics_callback"]
 [connection signal="state_exited" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/RemoteProperty" method="use_manual_callback_only"]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="StateChart/Base/Alive/Vulnerability/Invulnerable/SetBool" method="set_false"]
+[connection signal="state_exited" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="StateChart/Base/Alive/Vulnerability/Invulnerable/SetBool" method="set_true"]
 [connection signal="sensed_intensity_changed" from="AuraSense" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_alert_level_from_int"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/Revivable" method="take_damage"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
 [connection signal="revived" from="DamageSignals/Revivable" to="DamageSignals/Revivable/SignalToEvent" method="receive_signal"]
 [connection signal="signal_received" from="DamageSignals/Revivable/SignalToEvent" to="StateChart" method="send_event"]
-[connection signal="damage_taken" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageEvent" method="_on_damage_taken"]
+[connection signal="damage_taken" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/SignalToEvent" method="receive_signal"]
+[connection signal="signal_received" from="DamageSignals/WeakTo/SignalToEvent" to="StateChart" method="send_event"]
 [connection signal="powering_failed" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead"]
 
 [editable path="YSort/Flashlight"]
