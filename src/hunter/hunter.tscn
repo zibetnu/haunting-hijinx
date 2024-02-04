@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=57 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://bg6e2s53ki76i" path="res://src/mediators/peer_id_input_authority/peer_id_input_authority.tscn" id="4_ci3ki"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="4_x2w3t"]
 [ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="5_uqurr"]
-[ext_resource type="PackedScene" uid="uid://cmrvakm1sd7b7" path="res://src/mediators/state_component/set_bool/set_bool.tscn" id="5_xl87u"]
 [ext_resource type="PackedScene" uid="uid://gvf2peg6yuns" path="res://src/controller/unpause_force/unpause_force.tscn" id="6_ujhjn"]
 [ext_resource type="PackedScene" uid="uid://c18war56not2c" path="res://src/mediators/controller_state_chart_events/controller_state_chart_events.tscn" id="7_1ehsk"]
 [ext_resource type="PackedScene" uid="uid://dfah2vi4kgnu7" path="res://src/mediators/flashlight_controller/flashlight_controller.tscn" id="7_ew1lp"]
@@ -161,16 +160,6 @@ animation_name = "dead"
 costume_behavior = NodePath("../../../../YSort/HunterPlaceholder/Behavior")
 active_state = NodePath("..")
 
-[node name="ReviveBarVisible" parent="StateChart/Base/Dead" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
-target_node = NodePath("../../../../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar")
-property_name = &"visible"
-active_state = NodePath("..")
-
-[node name="RevivableActive" parent="StateChart/Base/Dead" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
-target_node = NodePath("../../../../DamageSignals/Revivable")
-property_name = &"active"
-active_state = NodePath("..")
-
 [node name="DisableCollision" parent="StateChart/Base/Dead" node_paths=PackedStringArray("target_node") instance=ExtResource("9_bnpp0")]
 editor_description = "Disables collision when hunter is dead, allowing other hunters to move through this hunter."
 target_node = NodePath("../../../../CollisionShape2D")
@@ -181,11 +170,6 @@ script = ExtResource("12_y0078")
 
 [node name="FlashlightBatteryLow" parent="StateChart/Base/Alive" node_paths=PackedStringArray("flashlight_data", "active_state") instance=ExtResource("13_mj4y5")]
 flashlight_data = NodePath("../../../../YSort/Flashlight/Data")
-active_state = NodePath("..")
-
-[node name="FlashlightControllerActive" parent="StateChart/Base/Alive" node_paths=PackedStringArray("target_node", "active_state") instance=ExtResource("5_xl87u")]
-target_node = NodePath("../../../../YSort/Flashlight/Behavior/FlashlightController")
-property_name = &"active"
 active_state = NodePath("..")
 
 [node name="Movement" type="Node" parent="StateChart/Base/Alive"]
@@ -346,7 +330,7 @@ collision_mask = 23
 shape = SubResource("CircleShape2D_vawb0")
 
 [node name="Revivable" parent="DamageSignals" instance=ExtResource("23_d234k")]
-active = false
+enabled = false
 revives_with = 1
 
 [node name="SignalToEvent" parent="DamageSignals/Revivable" instance=ExtResource("28_m0gko")]
@@ -364,7 +348,7 @@ y_sort_enabled = true
 [node name="Flashlight" parent="YSort" instance=ExtResource("15_hljm8")]
 
 [node name="FlashlightController" parent="YSort/Flashlight/Behavior" index="0" node_paths=PackedStringArray("flashlight_behavior", "controller") instance=ExtResource("7_ew1lp")]
-active = false
+enabled = false
 flashlight_behavior = NodePath("..")
 controller = NodePath("../../../../Synced")
 
@@ -484,8 +468,14 @@ sprite = NodePath("..")
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D/ClearSpriteTexture" method="restore_texture"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D/ClearSpriteTexture" method="clear_texture"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="StateChart/Base/Dead/DisableCollision" method="set_true"]
+[connection signal="state_entered" from="StateChart/Base/Dead" to="DamageSignals/Revivable" method="enable"]
+[connection signal="state_entered" from="StateChart/Base/Dead" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" method="show"]
 [connection signal="state_exited" from="StateChart/Base/Dead" to="StateChart/Base/Dead/DisableCollision" method="set_false"]
+[connection signal="state_exited" from="StateChart/Base/Dead" to="DamageSignals/Revivable" method="disable"]
+[connection signal="state_exited" from="StateChart/Base/Dead" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" method="hide"]
+[connection signal="state_entered" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/FlashlightController" method="enable"]
 [connection signal="state_entered" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/RemoteProperty" method="use_physics_callback"]
+[connection signal="state_exited" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/FlashlightController" method="disable"]
 [connection signal="state_exited" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/RemoteProperty" method="use_manual_callback_only"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="StateChart/Base/Alive/Vulnerability/Invulnerable/SetBool" method="set_false"]
 [connection signal="state_exited" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="StateChart/Base/Alive/Vulnerability/Invulnerable/SetBool" method="set_true"]

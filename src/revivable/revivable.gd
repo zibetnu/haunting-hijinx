@@ -3,11 +3,12 @@ extends Node
 
 signal revived
 
-@export var active := true:
+@export var enabled := true:
 	set(value):
-		active = value
-		set_physics_process(active)
-		if not active:
+		enabled = value
+		set_physics_process(enabled)
+		if not enabled:
+			_can_progress = false
 			progress = 0
 
 @export var revive_time := 12
@@ -30,6 +31,14 @@ var _can_progress := true
 
 func _physics_process(_delta: float) -> void:
 	_can_progress = true
+
+
+func disable() -> void:
+	enabled = false
+
+
+func enable() -> void:
+	enabled = true
 
 
 func take_damage(source: DamageSource) -> void:

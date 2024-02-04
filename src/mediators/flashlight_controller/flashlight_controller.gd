@@ -1,7 +1,7 @@
 extends Node
 
 
-@export var active := true
+@export var enabled := true
 @export var flashlight_behavior: Node
 @export var controller: Controller:
 	set(value):
@@ -13,8 +13,16 @@ extends Node
 			controller.input_handled.connect(_on_controller_input_handled)
 
 
+func disable() -> void:
+	enabled = false
+
+
+func enable() -> void:
+	enabled = true
+
+
 func _on_controller_input_handled() -> void:
-	if not active:
+	if not enabled:
 		return
 
 	flashlight_behavior.set("powered", controller.button_1_pressed)
