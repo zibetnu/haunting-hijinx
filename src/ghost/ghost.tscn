@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=51 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_id_visibility_filter/peer_id_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://bxooivyeej01k" path="res://src/summon/summon.tscn" id="3_26ncu"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_wp1tu"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_74yim"]
-[ext_resource type="PackedScene" uid="uid://bxn13bi5j05gc" path="res://src/mediators/peer_id_enabled/peer_id_enabled.tscn" id="4_xlp01"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_6yps6"]
 [ext_resource type="PackedScene" uid="uid://dhavwobkg4v8o" path="res://src/mediators/state_chart_counter/state_chart_counter.tscn" id="5_c6vhq"]
 [ext_resource type="PackedScene" uid="uid://beosdquy62xr4" path="res://src/call_holder/call_holder.tscn" id="5_s7auc"]
@@ -471,9 +470,9 @@ limit_bottom = 6400
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Camera2D"]
 replication_config = SubResource("SceneReplicationConfig_bqubs")
 
-[node name="PeerIDEnabled" parent="Camera2D" node_paths=PackedStringArray("peer_id", "target") instance=ExtResource("4_xlp01")]
-peer_id = NodePath("../../PeerID")
-target = NodePath("..")
+[node name="CameraEnabled" parent="Camera2D" node_paths=PackedStringArray("target_node") instance=ExtResource("20_tfmeu")]
+target_node = NodePath("..")
+bool_name = &"enabled"
 
 [node name="Synced" parent="." node_paths=PackedStringArray("controller") instance=ExtResource("5_xwsa3")]
 process_mode = 1
@@ -585,12 +584,6 @@ horizontal_alignment = 1
 peer_id = NodePath("../../../../PeerID")
 label = NodePath("..")
 
-[node name="PeerIDSetBool" parent="IgnoreCanvasModulate/FollowPlayer/NameLabel" node_paths=PackedStringArray("peer_id", "node") instance=ExtResource("3_3ievd")]
-peer_id = NodePath("../../../../PeerID")
-false_for = 0
-node = NodePath("..")
-property_name = &"visible"
-
 [node name="NotificationContainer" type="HBoxContainer" parent="IgnoreCanvasModulate/FollowPlayer"]
 offset_left = -32.0
 offset_top = -42.0
@@ -631,6 +624,10 @@ max_variable = "max_charge"
 [connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerIDVisibilityFilter" to="IgnoreCanvasModulate/PeerIDSetBool" method="set_value_false"]
 [connection signal="call_released" from="MultiplayerSynchronizer/PeerIDVisibilityFilter/CallHolder" to="PeerIDSetBool" method="set_value_true"]
 [connection signal="call_released" from="MultiplayerSynchronizer/PeerIDVisibilityFilter/CallHolder" to="IgnoreCanvasModulate/PeerIDSetBool" method="set_value_true"]
+[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="hide"]
+[connection signal="changed_to_local" from="PeerID" to="Camera2D/CameraEnabled" method="set_true"]
+[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="show"]
+[connection signal="changed_to_remote" from="PeerID" to="Camera2D/CameraEnabled" method="set_false"]
 [connection signal="summoned" from="Summon" to="Summon/SignalToEvent" method="receive_signal"]
 [connection signal="signal_received" from="Summon/SignalToEvent" to="StateChart" method="send_event"]
 [connection signal="child_state_entered" from="StateChart/Base/Behavior/Alive" to="Synced/RemoteProperty" method="use_idle_callback"]

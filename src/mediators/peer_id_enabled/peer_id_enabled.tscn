@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bxn13bi5j05gc"]
-
-[ext_resource type="Script" path="res://src/mediators/peer_id_enabled/peer_id_enabled.gd" id="1_rnhcg"]
-
-[node name="PeerIDEnabled" type="Node"]
-script = ExtResource("1_rnhcg")
