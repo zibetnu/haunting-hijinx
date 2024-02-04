@@ -171,7 +171,8 @@ target_node = NodePath("../../../../DamageSignals/Revivable")
 property_name = &"active"
 active_state = NodePath("..")
 
-[node name="SetBool" parent="StateChart/Base/Dead" node_paths=PackedStringArray("target_node") instance=ExtResource("9_bnpp0")]
+[node name="DisableCollision" parent="StateChart/Base/Dead" node_paths=PackedStringArray("target_node") instance=ExtResource("9_bnpp0")]
+editor_description = "Disables collision when hunter is dead, allowing other hunters to move through this hunter."
 target_node = NodePath("../../../../CollisionShape2D")
 bool_name = &"disabled"
 
@@ -482,8 +483,8 @@ sprite = NodePath("..")
 
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D/ClearSpriteTexture" method="restore_texture"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D/ClearSpriteTexture" method="clear_texture"]
-[connection signal="state_entered" from="StateChart/Base/Dead" to="StateChart/Base/Dead/SetBool" method="set_true"]
-[connection signal="state_exited" from="StateChart/Base/Dead" to="StateChart/Base/Dead/SetBool" method="set_false"]
+[connection signal="state_entered" from="StateChart/Base/Dead" to="StateChart/Base/Dead/DisableCollision" method="set_true"]
+[connection signal="state_exited" from="StateChart/Base/Dead" to="StateChart/Base/Dead/DisableCollision" method="set_false"]
 [connection signal="state_entered" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/RemoteProperty" method="use_physics_callback"]
 [connection signal="state_exited" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/RemoteProperty" method="use_manual_callback_only"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="StateChart/Base/Alive/Vulnerability/Invulnerable/SetBool" method="set_false"]
