@@ -37,8 +37,8 @@
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="29_1sq8w"]
 [ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_i4s33"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="32_luctv"]
+[ext_resource type="PackedScene" uid="uid://d4gb1ksm22wvh" path="res://src/damage_value_signal/damage_value_signal.tscn" id="34_617dy"]
 [ext_resource type="PackedScene" uid="uid://cpvs73t8l3h88" path="res://src/weak_to/weak_to.tscn" id="35_u2g7w"]
-[ext_resource type="PackedScene" uid="uid://d4gb1ksm22wvh" path="res://src/damage_value/damage_value.tscn" id="37_850w6"]
 [ext_resource type="PackedScene" uid="uid://dpwfunjqyfike" path="res://src/health/health.tscn" id="38_arcfj"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="40_1b387"]
 
@@ -533,11 +533,11 @@ shape = SubResource("CircleShape2D_xn3hr")
 [node name="WeakTo" parent="DamageSignals" instance=ExtResource("35_u2g7w")]
 weak_to = 1
 
-[node name="DamageValue" parent="DamageSignals/WeakTo" instance=ExtResource("37_850w6")]
+[node name="DamageValueSignal" parent="DamageSignals/WeakTo" instance=ExtResource("34_617dy")]
 
-[node name="Health" parent="DamageSignals/WeakTo/DamageValue" instance=ExtResource("38_arcfj")]
+[node name="Health" parent="DamageSignals/WeakTo/DamageValueSignal" instance=ExtResource("38_arcfj")]
 
-[node name="SignalToEvent" parent="DamageSignals/WeakTo/DamageValue/Health" instance=ExtResource("8_kd7ea")]
+[node name="SignalToEvent" parent="DamageSignals/WeakTo/DamageValueSignal/Health" instance=ExtResource("8_kd7ea")]
 emit_event = &"health_zeroed"
 
 [node name="SignalToEvent" parent="DamageSignals/WeakTo" instance=ExtResource("8_kd7ea")]
@@ -608,7 +608,7 @@ texture_progress = ExtResource("40_1b387")
 tint_under = Color(1, 1, 1, 0.247059)
 
 [node name="Behavior" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" index="1" node_paths=PackedStringArray("source_node")]
-source_node = NodePath("../../../../../DamageSignals/WeakTo/DamageValue/Health")
+source_node = NodePath("../../../../../DamageSignals/WeakTo/DamageValueSignal/Health")
 value_variable = "health"
 max_variable = "max_health"
 
@@ -657,10 +657,10 @@ max_variable = "max_charge"
 [connection signal="state_exited" from="StateChart/Base/Vulnerability/Invulnerable" to="StateChart/Base/Vulnerability/Invulnerable/SetBool" method="set_true"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
 [connection signal="damage_taken" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/SignalToEvent" method="receive_signal"]
-[connection signal="damaged_by" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageValue" method="take_damage"]
-[connection signal="damaged_by_amount" from="DamageSignals/WeakTo/DamageValue" to="DamageSignals/WeakTo/DamageValue/Health" method="subtract_health"]
-[connection signal="health_zeroed" from="DamageSignals/WeakTo/DamageValue/Health" to="DamageSignals/WeakTo/DamageValue/Health/SignalToEvent" method="receive_signal"]
-[connection signal="signal_received" from="DamageSignals/WeakTo/DamageValue/Health/SignalToEvent" to="StateChart" method="send_event"]
+[connection signal="damaged_by" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageValueSignal" method="take_damage"]
+[connection signal="damaged_by_amount" from="DamageSignals/WeakTo/DamageValueSignal" to="DamageSignals/WeakTo/DamageValueSignal/Health" method="subtract_health"]
+[connection signal="health_zeroed" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="DamageSignals/WeakTo/DamageValueSignal/Health/SignalToEvent" method="receive_signal"]
+[connection signal="signal_received" from="DamageSignals/WeakTo/DamageValueSignal/Health/SignalToEvent" to="StateChart" method="send_event"]
 [connection signal="signal_received" from="DamageSignals/WeakTo/SignalToEvent" to="StateChart" method="send_event"]
 
 [editable path="GhostPlaceholder"]
