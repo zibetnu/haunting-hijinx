@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=52 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_id_visibility_filter/peer_id_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
@@ -38,6 +38,7 @@
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="32_luctv"]
 [ext_resource type="PackedScene" uid="uid://d4gb1ksm22wvh" path="res://src/damage_value_signal/damage_value_signal.tscn" id="34_617dy"]
 [ext_resource type="PackedScene" uid="uid://cpvs73t8l3h88" path="res://src/weak_to/weak_to.tscn" id="35_u2g7w"]
+[ext_resource type="PackedScene" uid="uid://dq7ts6lhskwyn" path="res://src/nodes_touched/nodes_touched.tscn" id="35_yndqj"]
 [ext_resource type="PackedScene" uid="uid://dpwfunjqyfike" path="res://src/health/health.tscn" id="38_arcfj"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="40_1b387"]
 
@@ -109,7 +110,7 @@ include_ghost_peer = true
 [node name="CallHolder" parent="MultiplayerSynchronizer/PeerIDVisibilityFilter" instance=ExtResource("5_s7auc")]
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
-nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../Synced/ControllerStateChartExpressionProperties"), NodePath("../Synced/RemoteProperty"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior")]
+nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../Synced/ControllerStateChartExpressionProperties"), NodePath("../Synced/RemoteProperty"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../HuntersTouched"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior")]
 
 [node name="PeerID" parent="." instance=ExtResource("2_bh3m0")]
 
@@ -325,21 +326,40 @@ character = NodePath("../../../../../..")
 speed = 154.0
 active_state = NodePath("..")
 
+[node name="MonitorHunters" parent="StateChart/Base/Behavior/Alive/Panic" node_paths=PackedStringArray("target_node") instance=ExtResource("20_tfmeu")]
+editor_description = "Sets whether the number of hunters touched should be tracked."
+target_node = NodePath("../../../../../../HuntersTouched")
+bool_name = &"monitoring"
+
 [node name="VisibleTimer" type="Timer" parent="StateChart/Base/Behavior/Alive/Panic"]
-editor_description = "Timer for how long ghost should stay visible."
+editor_description = "Times how long the ghost should stay visible after something made it visible."
+wait_time = 0.5
 one_shot = true
 
-[node name="EventToSignal" parent="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" instance=ExtResource("20_j823j")]
-editor_description = "Restarts visible timer when ghost is damaged."
+[node name="Damaged" parent="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" instance=ExtResource("20_j823j")]
+editor_description = "Restarts VisibleTimer when ghost is damaged."
 listen_for_event = &"damaged"
 
 [node name="SetPaused" parent="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" node_paths=PackedStringArray("target_node") instance=ExtResource("20_tfmeu")]
+editor_description = "Pauses VisibleTimer."
 target_node = NodePath("..")
 bool_name = &"paused"
 
-[node name="SignalToEvent" parent="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" instance=ExtResource("8_kd7ea")]
-editor_description = "Sends event to make ghost invisible after VisibleTimer times out."
+[node name="MakeInvisible" parent="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" instance=ExtResource("8_kd7ea")]
+editor_description = "Sends event to make ghost invisible."
 emit_event = &"invisibility_started"
+
+[node name="HuntersTouched" parent="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" instance=ExtResource("20_j823j")]
+editor_description = "Pauses VisibleTimer when a hunter is touched."
+listen_for_event = &"hunters_touched"
+
+[node name="EndInvisibility" parent="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/HuntersTouched" instance=ExtResource("8_kd7ea")]
+editor_description = "Makes ghost visible when hunter is touched."
+emit_event = &"invisibility_ended"
+
+[node name="NoHuntersTouched" parent="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" instance=ExtResource("20_j823j")]
+editor_description = "Unpauses and restarts VisibleTimer when no hunters are touched."
+listen_for_event = &"no_hunters_touched"
 
 [node name="Grab" type="Node" parent="StateChart/Base/Behavior/Alive"]
 script = ExtResource("5_6yps6")
@@ -448,7 +468,7 @@ initial_state = NodePath("Vulnerable")
 [node name="Invulnerable" type="Node" parent="StateChart/Base/Vulnerability"]
 script = ExtResource("5_6yps6")
 
-[node name="SetBool" parent="StateChart/Base/Vulnerability/Invulnerable" node_paths=PackedStringArray("target_node") instance=ExtResource("20_tfmeu")]
+[node name="MonitorDamage" parent="StateChart/Base/Vulnerability/Invulnerable" node_paths=PackedStringArray("target_node") instance=ExtResource("20_tfmeu")]
 editor_description = "Makes damage area unmonitorable when ghost is invulnerable."
 target_node = NodePath("../../../../../DamageSignals")
 bool_name = &"monitorable"
@@ -541,6 +561,21 @@ emit_event = &"health_zeroed"
 
 [node name="SignalToEvent" parent="DamageSignals/WeakTo" instance=ExtResource("8_kd7ea")]
 emit_event = &"damaged"
+
+[node name="HuntersTouched" parent="." instance=ExtResource("35_yndqj")]
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+count_group = &"hunters"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HuntersTouched"]
+shape = SubResource("CircleShape2D_xn3hr")
+
+[node name="EnteredEvent" parent="HuntersTouched" instance=ExtResource("8_kd7ea")]
+emit_event = &"hunters_touched"
+
+[node name="ExitedEvent" parent="HuntersTouched" instance=ExtResource("8_kd7ea")]
+emit_event = &"no_hunters_touched"
 
 [node name="GhostPlaceholder" parent="." instance=ExtResource("13_arjsn")]
 position = Vector2(0, -8)
@@ -640,18 +675,27 @@ max_variable = "max_charge"
 [connection signal="taken" from="StateChart/Base/Behavior/Alive/Summon/Summoned" to="Summon/RemoteProperty" method="manual_process"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Stun" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="show"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Stun" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="hide"]
-[connection signal="event_received" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/EventToSignal" method="receive_event"]
+[connection signal="event_received" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/Damaged" method="receive_event"]
+[connection signal="event_received" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/HuntersTouched" method="receive_event"]
+[connection signal="event_received" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/NoHuntersTouched" method="receive_event"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="start"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="show"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/MonitorHunters" method="set_true"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="stop"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="hide"]
-[connection signal="timeout" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/SignalToEvent" method="receive_signal"]
-[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/EventToSignal" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="start"]
-[connection signal="signal_received" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/SignalToEvent" to="StateChart" method="send_event"]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/MonitorHunters" method="set_false"]
+[connection signal="timeout" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/MakeInvisible" method="receive_signal"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/Damaged" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="start"]
+[connection signal="signal_received" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/MakeInvisible" to="StateChart" method="send_event"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/HuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/SetPaused" method="set_true"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/HuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/HuntersTouched/EndInvisibility" method="receive_signal"]
+[connection signal="signal_received" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/HuntersTouched/EndInvisibility" to="StateChart" method="send_event"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/NoHuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="start"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/NoHuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/SetPaused" method="set_false"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="MultiplayerSynchronizer/PeerIDVisibilityFilter" method="enable"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="MultiplayerSynchronizer/PeerIDVisibilityFilter" method="disable"]
-[connection signal="state_entered" from="StateChart/Base/Vulnerability/Invulnerable" to="StateChart/Base/Vulnerability/Invulnerable/SetBool" method="set_false"]
-[connection signal="state_exited" from="StateChart/Base/Vulnerability/Invulnerable" to="StateChart/Base/Vulnerability/Invulnerable/SetBool" method="set_true"]
+[connection signal="state_entered" from="StateChart/Base/Vulnerability/Invulnerable" to="StateChart/Base/Vulnerability/Invulnerable/MonitorDamage" method="set_false"]
+[connection signal="state_exited" from="StateChart/Base/Vulnerability/Invulnerable" to="StateChart/Base/Vulnerability/Invulnerable/MonitorDamage" method="set_true"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
 [connection signal="damage_taken" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/SignalToEvent" method="receive_signal"]
 [connection signal="damaged_by" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageValueSignal" method="take_damage"]
@@ -659,6 +703,10 @@ max_variable = "max_charge"
 [connection signal="health_zeroed" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="DamageSignals/WeakTo/DamageValueSignal/Health/SignalToEvent" method="receive_signal"]
 [connection signal="signal_received" from="DamageSignals/WeakTo/DamageValueSignal/Health/SignalToEvent" to="StateChart" method="send_event"]
 [connection signal="signal_received" from="DamageSignals/WeakTo/SignalToEvent" to="StateChart" method="send_event"]
+[connection signal="first_node_entered" from="HuntersTouched" to="HuntersTouched/EnteredEvent" method="receive_signal"]
+[connection signal="last_node_exited" from="HuntersTouched" to="HuntersTouched/ExitedEvent" method="receive_signal"]
+[connection signal="signal_received" from="HuntersTouched/EnteredEvent" to="StateChart" method="send_event"]
+[connection signal="signal_received" from="HuntersTouched/ExitedEvent" to="StateChart" method="send_event"]
 
 [editable path="GhostPlaceholder"]
 [editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar"]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dq7ts6lhskwyn"]
+
+[ext_resource type="Script" path="res://src/nodes_touched/nodes_touched.gd" id="1_wrlga"]
+
+[node name="NodesTouched" type="Area2D"]
+script = ExtResource("1_wrlga")
+
+[connection signal="area_entered" from="." to="." method="_on_entered"]
+[connection signal="area_exited" from="." to="." method="_on_exited"]
+[connection signal="body_entered" from="." to="." method="_on_entered"]
+[connection signal="body_exited" from="." to="." method="_on_exited"]
