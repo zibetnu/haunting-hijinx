@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=53 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_id_visibility_filter/peer_id_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
@@ -32,6 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://b30o6hj6qsvu2" path="res://src/mediators/controller_state_chart_expression_properties/controller_state_chart_expression_properties.tscn" id="18_o8e6t"]
 [ext_resource type="Script" path="res://src/remote_property.gd" id="19_c6cbw"]
 [ext_resource type="PackedScene" uid="uid://bfhqyxu3iuptm" path="res://src/mediators/event_to_signal/event_to_signal.tscn" id="20_j823j"]
+[ext_resource type="PackedScene" uid="uid://cecfpltx40gs5" path="res://src/greater_timer/greater_timer.tscn" id="20_l54rd"]
 [ext_resource type="PackedScene" uid="uid://dwfdqhbgq4vvr" path="res://src/mediators/set_bool/set_bool.tscn" id="20_tfmeu"]
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="29_1sq8w"]
 [ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_i4s33"]
@@ -327,18 +328,30 @@ speed = 154.0
 active_state = NodePath("..")
 
 [node name="MonitorHunters" parent="StateChart/Base/Behavior/Alive/Panic" node_paths=PackedStringArray("target_node") instance=ExtResource("20_tfmeu")]
-editor_description = "Sets whether the number of hunters touched should be tracked."
+editor_description = "Sets whether the number of hunters touched should be monitored."
 target_node = NodePath("../../../../../../HuntersTouched")
 bool_name = &"monitoring"
+
+[node name="Damaged" parent="StateChart/Base/Behavior/Alive/Panic" instance=ExtResource("20_j823j")]
+editor_description = "Restarts timers when ghost is damaged."
+listen_for_event = &"damaged"
+
+[node name="HuntersTouched" parent="StateChart/Base/Behavior/Alive/Panic" instance=ExtResource("20_j823j")]
+editor_description = "Pauses timers when a hunter is touched."
+listen_for_event = &"hunters_touched"
+
+[node name="EndInvisibility" parent="StateChart/Base/Behavior/Alive/Panic/HuntersTouched" instance=ExtResource("8_kd7ea")]
+editor_description = "Makes ghost visible when hunter is touched."
+emit_event = &"invisibility_ended"
+
+[node name="NoHuntersTouched" parent="StateChart/Base/Behavior/Alive/Panic" instance=ExtResource("20_j823j")]
+editor_description = "Unpauses and restarts timers when no hunters are touched."
+listen_for_event = &"no_hunters_touched"
 
 [node name="VisibleTimer" type="Timer" parent="StateChart/Base/Behavior/Alive/Panic"]
 editor_description = "Times how long the ghost should stay visible after something made it visible."
 wait_time = 0.5
 one_shot = true
-
-[node name="Damaged" parent="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" instance=ExtResource("20_j823j")]
-editor_description = "Restarts VisibleTimer when ghost is damaged."
-listen_for_event = &"damaged"
 
 [node name="SetPaused" parent="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" node_paths=PackedStringArray("target_node") instance=ExtResource("20_tfmeu")]
 editor_description = "Pauses VisibleTimer."
@@ -346,20 +359,21 @@ target_node = NodePath("..")
 bool_name = &"paused"
 
 [node name="MakeInvisible" parent="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" instance=ExtResource("8_kd7ea")]
-editor_description = "Sends event to make ghost invisible."
+editor_description = "Makes ghost invisible when VisibleTimer times out."
 emit_event = &"invisibility_started"
 
-[node name="HuntersTouched" parent="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" instance=ExtResource("20_j823j")]
-editor_description = "Pauses VisibleTimer when a hunter is touched."
-listen_for_event = &"hunters_touched"
+[node name="EndTimer" parent="StateChart/Base/Behavior/Alive/Panic" instance=ExtResource("20_l54rd")]
+editor_description = "Times how long the ghost should stay in panic."
+greater_default_time = 1.33
 
-[node name="EndInvisibility" parent="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/HuntersTouched" instance=ExtResource("8_kd7ea")]
-editor_description = "Makes ghost visible when hunter is touched."
-emit_event = &"invisibility_ended"
+[node name="EndPanic" parent="StateChart/Base/Behavior/Alive/Panic/EndTimer" instance=ExtResource("8_kd7ea")]
+editor_description = "Makes ghost end panic when EndTimer times out."
+emit_event = &"panic_ended"
 
-[node name="NoHuntersTouched" parent="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" instance=ExtResource("20_j823j")]
-editor_description = "Unpauses and restarts VisibleTimer when no hunters are touched."
-listen_for_event = &"no_hunters_touched"
+[node name="SetPaused" parent="StateChart/Base/Behavior/Alive/Panic/EndTimer" node_paths=PackedStringArray("target_node") instance=ExtResource("20_tfmeu")]
+editor_description = "Pauses EndTimer."
+target_node = NodePath("..")
+bool_name = &"paused"
 
 [node name="Grab" type="Node" parent="StateChart/Base/Behavior/Alive"]
 script = ExtResource("5_6yps6")
@@ -675,24 +689,33 @@ max_variable = "max_charge"
 [connection signal="taken" from="StateChart/Base/Behavior/Alive/Summon/Summoned" to="Summon/RemoteProperty" method="manual_process"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Stun" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="show"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Stun" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="hide"]
-[connection signal="event_received" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/Damaged" method="receive_event"]
-[connection signal="event_received" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/HuntersTouched" method="receive_event"]
-[connection signal="event_received" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/NoHuntersTouched" method="receive_event"]
+[connection signal="event_received" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/Damaged" method="receive_event"]
+[connection signal="event_received" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/HuntersTouched" method="receive_event"]
+[connection signal="event_received" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/NoHuntersTouched" method="receive_event"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/MonitorHunters" method="set_true"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="start"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/SetPaused" method="set_false"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/EndTimer" method="start"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/EndTimer/SetPaused" method="set_false"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="show"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/MonitorHunters" method="set_false"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="stop"]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/EndTimer" method="stop"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="hide"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/Damaged" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="start"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/Damaged" to="StateChart/Base/Behavior/Alive/Panic/EndTimer" method="start_use_greater"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/HuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/SetPaused" method="set_true"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/HuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/HuntersTouched/EndInvisibility" method="receive_signal"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/HuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/EndTimer/SetPaused" method="set_true"]
+[connection signal="signal_received" from="StateChart/Base/Behavior/Alive/Panic/HuntersTouched/EndInvisibility" to="StateChart" method="send_event"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/NoHuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="start"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/NoHuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/SetPaused" method="set_false"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/NoHuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/EndTimer" method="start_use_greater"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/NoHuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/EndTimer/SetPaused" method="set_false"]
 [connection signal="timeout" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/MakeInvisible" method="receive_signal"]
-[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/Damaged" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="start"]
 [connection signal="signal_received" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/MakeInvisible" to="StateChart" method="send_event"]
-[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/HuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/SetPaused" method="set_true"]
-[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/HuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/HuntersTouched/EndInvisibility" method="receive_signal"]
-[connection signal="signal_received" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/HuntersTouched/EndInvisibility" to="StateChart" method="send_event"]
-[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/NoHuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="start"]
-[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/NoHuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/SetPaused" method="set_false"]
+[connection signal="timeout" from="StateChart/Base/Behavior/Alive/Panic/EndTimer" to="StateChart/Base/Behavior/Alive/Panic/EndTimer/EndPanic" method="receive_signal"]
+[connection signal="signal_received" from="StateChart/Base/Behavior/Alive/Panic/EndTimer/EndPanic" to="StateChart" method="send_event"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="MultiplayerSynchronizer/PeerIDVisibilityFilter" method="enable"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="MultiplayerSynchronizer/PeerIDVisibilityFilter" method="disable"]
 [connection signal="state_entered" from="StateChart/Base/Vulnerability/Invulnerable" to="StateChart/Base/Vulnerability/Invulnerable/MonitorDamage" method="set_false"]
