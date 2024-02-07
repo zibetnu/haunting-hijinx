@@ -115,7 +115,7 @@ nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../Synced/C
 
 [node name="PeerID" parent="." instance=ExtResource("2_bh3m0")]
 
-[node name="PeerIDSetBool" parent="." node_paths=PackedStringArray("peer_id", "node") instance=ExtResource("3_3ievd")]
+[node name="GhostVisible" parent="." node_paths=PackedStringArray("peer_id", "node") instance=ExtResource("3_3ievd")]
 peer_id = NodePath("../PeerID")
 node = NodePath("..")
 property_name = &"visible"
@@ -671,9 +671,9 @@ max_variable = "max_charge"
 
 [connection signal="synchronized" from="MultiplayerSynchronizer" to="MultiplayerSynchronizer/PeerIDVisibilityFilter/CallHolder" method="release"]
 [connection signal="filter_disabled" from="MultiplayerSynchronizer/PeerIDVisibilityFilter" to="MultiplayerSynchronizer/PeerIDVisibilityFilter/CallHolder" method="hold"]
-[connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerIDVisibilityFilter" to="PeerIDSetBool" method="set_value_false"]
+[connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerIDVisibilityFilter" to="GhostVisible" method="set_value_false"]
 [connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerIDVisibilityFilter" to="IgnoreCanvasModulate/PeerIDSetBool" method="set_value_false"]
-[connection signal="call_released" from="MultiplayerSynchronizer/PeerIDVisibilityFilter/CallHolder" to="PeerIDSetBool" method="set_value_true"]
+[connection signal="call_released" from="MultiplayerSynchronizer/PeerIDVisibilityFilter/CallHolder" to="GhostVisible" method="set_value_true"]
 [connection signal="call_released" from="MultiplayerSynchronizer/PeerIDVisibilityFilter/CallHolder" to="IgnoreCanvasModulate/PeerIDSetBool" method="set_value_true"]
 [connection signal="changed_to_local" from="PeerID" to="Camera2D/CameraEnabled" method="set_true"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="hide"]
