@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=56 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="27_qehgg"]
 [ext_resource type="PackedScene" uid="uid://djs1c1w30m8gp" path="res://src/alert/alert.tscn" id="28_bjj70"]
 [ext_resource type="PackedScene" uid="uid://y03qjvt68tjj" path="res://src/aura_sense/aura_sense.tscn" id="28_dd2t8"]
+[ext_resource type="PackedScene" uid="uid://j7t8go4if5di" path="res://src/grabbable/grabbable.tscn" id="28_gvlgf"]
 [ext_resource type="PackedScene" uid="uid://dterwqqmikxc1" path="res://src/mediators/signal_to_event/signal_to_event.tscn" id="28_m0gko"]
 [ext_resource type="PackedScene" uid="uid://cpvs73t8l3h88" path="res://src/weak_to/weak_to.tscn" id="30_dc3ty"]
 [ext_resource type="PackedScene" uid="uid://gh0mk0t85f13" path="res://src/battery_alert/battery_alert.tscn" id="31_vp1ot"]
@@ -134,7 +135,7 @@ collision_mask = 5
 replication_config = SubResource("SceneReplicationConfig_hflh2")
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_uvtrm")]
-nodes = [NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../AuraSense"), NodePath("../DamageSignals"), NodePath("../YSort/Flashlight/Behavior"), NodePath("../YSort/HunterPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar/Behavior")]
+nodes = [NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../AuraSense"), NodePath("../DamageSignals"), NodePath("../Grabbable"), NodePath("../YSort/Flashlight/Behavior"), NodePath("../YSort/HunterPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar/Behavior")]
 
 [node name="PeerID" parent="." instance=ExtResource("1_fx0g1")]
 
@@ -342,6 +343,19 @@ weak_to = 2
 [node name="Died" parent="DamageSignals/WeakTo" instance=ExtResource("28_m0gko")]
 emit_event = &"died"
 
+[node name="Grabbable" parent="." instance=ExtResource("28_gvlgf")]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grabbable"]
+shape = SubResource("CircleShape2D_vawb0")
+
+[node name="Died" parent="Grabbable" instance=ExtResource("28_m0gko")]
+emit_event = &"died"
+
+[node name="EnableGrabbable" parent="Grabbable" node_paths=PackedStringArray("target_node") instance=ExtResource("9_bnpp0")]
+target_node = NodePath("..")
+bool_name = &"monitorable"
+
 [node name="YSort" type="Node2D" parent="."]
 y_sort_enabled = true
 
@@ -465,14 +479,16 @@ sprite = NodePath("..")
 [connection signal="changed_to_remote" from="PeerID" to="Camera2D/CameraEnabled" method="set_false"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="show"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D/ClearSpriteTexture" method="clear_texture"]
-[connection signal="state_entered" from="StateChart/Base/Dead" to="StateChart/Base/Dead/DisableCollision" method="set_true"]
+[connection signal="state_entered" from="StateChart/Base/Dead" to="StateChart/Base/Dead/DisableCollision" method="set_true_deferred"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="DamageSignals/Revivable" method="enable"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" method="show"]
-[connection signal="state_exited" from="StateChart/Base/Dead" to="StateChart/Base/Dead/DisableCollision" method="set_false"]
+[connection signal="state_exited" from="StateChart/Base/Dead" to="StateChart/Base/Dead/DisableCollision" method="set_false_deferred"]
 [connection signal="state_exited" from="StateChart/Base/Dead" to="DamageSignals/Revivable" method="disable"]
 [connection signal="state_exited" from="StateChart/Base/Dead" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" method="hide"]
+[connection signal="state_entered" from="StateChart/Base/Alive" to="Grabbable/EnableGrabbable" method="set_true_deferred"]
 [connection signal="state_entered" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/FlashlightController" method="enable"]
 [connection signal="state_entered" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/RemoteProperty" method="use_physics_callback"]
+[connection signal="state_exited" from="StateChart/Base/Alive" to="Grabbable/EnableGrabbable" method="set_false_deferred"]
 [connection signal="state_exited" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/FlashlightController" method="disable"]
 [connection signal="state_exited" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/RemoteProperty" method="use_manual_callback_only"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="StateChart/Base/Alive/Vulnerability/Invulnerable/SetBool" method="set_false"]
@@ -484,6 +500,8 @@ sprite = NodePath("..")
 [connection signal="signal_received" from="DamageSignals/Revivable/Revived" to="StateChart" method="send_event"]
 [connection signal="damage_taken" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/Died" method="receive_signal"]
 [connection signal="signal_received" from="DamageSignals/WeakTo/Died" to="StateChart" method="send_event"]
+[connection signal="grabbed" from="Grabbable" to="Grabbable/Died" method="receive_signal"]
+[connection signal="signal_received" from="Grabbable/Died" to="StateChart" method="send_event"]
 [connection signal="powering_failed" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead"]
 
 [editable path="YSort/Flashlight"]
