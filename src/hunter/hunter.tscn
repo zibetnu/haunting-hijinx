@@ -333,13 +333,13 @@ shape = SubResource("CircleShape2D_vawb0")
 enabled = false
 revives_with = 1
 
-[node name="SignalToEvent" parent="DamageSignals/Revivable" instance=ExtResource("28_m0gko")]
+[node name="Revived" parent="DamageSignals/Revivable" instance=ExtResource("28_m0gko")]
 emit_event = &"revived"
 
 [node name="WeakTo" parent="DamageSignals" instance=ExtResource("30_dc3ty")]
 weak_to = 2
 
-[node name="SignalToEvent" parent="DamageSignals/WeakTo" instance=ExtResource("28_m0gko")]
+[node name="Died" parent="DamageSignals/WeakTo" instance=ExtResource("28_m0gko")]
 emit_event = &"died"
 
 [node name="YSort" type="Node2D" parent="."]
@@ -480,10 +480,10 @@ sprite = NodePath("..")
 [connection signal="sensed_intensity_changed" from="AuraSense" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_alert_level_from_int"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/Revivable" method="take_damage"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
-[connection signal="revived" from="DamageSignals/Revivable" to="DamageSignals/Revivable/SignalToEvent" method="receive_signal"]
-[connection signal="signal_received" from="DamageSignals/Revivable/SignalToEvent" to="StateChart" method="send_event"]
-[connection signal="damage_taken" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/SignalToEvent" method="receive_signal"]
-[connection signal="signal_received" from="DamageSignals/WeakTo/SignalToEvent" to="StateChart" method="send_event"]
+[connection signal="revived" from="DamageSignals/Revivable" to="DamageSignals/Revivable/Revived" method="receive_signal"]
+[connection signal="signal_received" from="DamageSignals/Revivable/Revived" to="StateChart" method="send_event"]
+[connection signal="damage_taken" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/Died" method="receive_signal"]
+[connection signal="signal_received" from="DamageSignals/WeakTo/Died" to="StateChart" method="send_event"]
 [connection signal="powering_failed" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead"]
 
 [editable path="YSort/Flashlight"]
