@@ -126,7 +126,7 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
-[node name="Hunter" type="CharacterBody2D" groups=["hunters"]]
+[node name="Hunter" type="CharacterBody2D" groups=["hunters", "players"]]
 collision_layer = 4
 collision_mask = 5
 
