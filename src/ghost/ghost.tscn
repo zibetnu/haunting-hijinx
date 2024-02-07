@@ -364,6 +364,7 @@ emit_event = &"invisibility_started"
 
 [node name="EndTimer" parent="StateChart/Base/Behavior/Alive/Panic" instance=ExtResource("20_l54rd")]
 editor_description = "Times how long the ghost should stay in panic."
+wait_time = 3.0
 greater_default_time = 1.33
 
 [node name="EndPanic" parent="StateChart/Base/Behavior/Alive/Panic/EndTimer" instance=ExtResource("8_kd7ea")]
