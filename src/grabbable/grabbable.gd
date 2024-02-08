@@ -6,4 +6,3 @@ signal grabbed
 
 func grab() -> void:
 	grabbed.emit()
-	print("wow!")
