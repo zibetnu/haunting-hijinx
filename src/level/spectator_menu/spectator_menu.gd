@@ -42,7 +42,7 @@ func _on_cutscene_started(_cutscene_name: String) -> void:
 func _set_active_camera() -> void:
 	for player in get_tree().get_nodes_in_group("players"):
 		player.get_node("Camera2D").enabled = (
-				player.peer_id == PeerData.participants[spectating_index]
+				player.get_node("PeerID").id == PeerData.participants[spectating_index]
 		)
 
 	%SpectatingLabel.text = PeerData.peer_names.get(
