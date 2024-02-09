@@ -258,7 +258,7 @@ animation_player = NodePath("../../../../../../YSort/HunterPlaceholder/Display/I
 animation_name = &"invulnerable"
 active_state = NodePath("..")
 
-[node name="SetBool" parent="StateChart/Base/Alive/Vulnerability/Invulnerable" node_paths=PackedStringArray("target_node") instance=ExtResource("9_bnpp0")]
+[node name="EnableDamage" parent="StateChart/Base/Alive/Vulnerability/Invulnerable" node_paths=PackedStringArray("target_node") instance=ExtResource("9_bnpp0")]
 editor_description = "Makes damage area unmonitorable when hunter is invulnerable."
 target_node = NodePath("../../../../../../DamageSignals")
 bool_name = &"monitorable"
@@ -486,19 +486,20 @@ sprite = NodePath("..")
 [connection signal="state_entered" from="StateChart/Base/Dead" to="StateChart/Base/Dead/DisableCollision" method="set_true_deferred"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="StateChart/Base/Dead/IsDead" method="set_true"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="DamageSignals/Revivable" method="enable"]
+[connection signal="state_entered" from="StateChart/Base/Dead" to="Grabbable/EnableGrabbable" method="set_false_deferred"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" method="show"]
 [connection signal="state_exited" from="StateChart/Base/Dead" to="StateChart/Base/Dead/DisableCollision" method="set_false_deferred"]
 [connection signal="state_exited" from="StateChart/Base/Dead" to="StateChart/Base/Dead/IsDead" method="set_false"]
 [connection signal="state_exited" from="StateChart/Base/Dead" to="DamageSignals/Revivable" method="disable"]
 [connection signal="state_exited" from="StateChart/Base/Dead" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" method="hide"]
-[connection signal="state_entered" from="StateChart/Base/Alive" to="Grabbable/EnableGrabbable" method="set_true_deferred"]
 [connection signal="state_entered" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/FlashlightController" method="enable"]
 [connection signal="state_entered" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/RemoteProperty" method="use_physics_callback"]
-[connection signal="state_exited" from="StateChart/Base/Alive" to="Grabbable/EnableGrabbable" method="set_false_deferred"]
 [connection signal="state_exited" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/FlashlightController" method="disable"]
 [connection signal="state_exited" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/RemoteProperty" method="use_manual_callback_only"]
-[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="StateChart/Base/Alive/Vulnerability/Invulnerable/SetBool" method="set_false"]
-[connection signal="state_exited" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="StateChart/Base/Alive/Vulnerability/Invulnerable/SetBool" method="set_true"]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="StateChart/Base/Alive/Vulnerability/Invulnerable/EnableDamage" method="set_false_deferred"]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="Grabbable/EnableGrabbable" method="set_false_deferred"]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="StateChart/Base/Alive/Vulnerability/Invulnerable/EnableDamage" method="set_true_deferred"]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="Grabbable/EnableGrabbable" method="set_true_deferred"]
 [connection signal="sensed_intensity_changed" from="AuraSense" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_alert_level_from_int"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/Revivable" method="take_damage"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
