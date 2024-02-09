@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=58 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_id_visibility_filter/peer_id_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_il0ju"]
 [ext_resource type="PackedScene" uid="uid://gvf2peg6yuns" path="res://src/controller/unpause_force/unpause_force.tscn" id="6_wi10c"]
 [ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/mediators/state_component/move/move.tscn" id="7_1d45a"]
+[ext_resource type="PackedScene" uid="uid://ca2ymkyj3cv7e" path="res://src/translucent/translucent.tscn" id="7_bmx85"]
 [ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="7_ijrj0"]
 [ext_resource type="PackedScene" uid="uid://dterwqqmikxc1" path="res://src/mediators/signal_to_event/signal_to_event.tscn" id="8_kd7ea"]
 [ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="8_mynla"]
@@ -117,7 +118,7 @@ include_ghost_peer = true
 [node name="CallHolder" parent="MultiplayerSynchronizer/PeerIDVisibilityFilter" instance=ExtResource("5_s7auc")]
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
-nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../Synced/ControllerStateChartExpressionProperties"), NodePath("../Synced/RemoteProperty"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/AuraLarge"), NodePath("../IgnoreCanvasModulate/FollowPlayer/AuraSmall"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior")]
+nodes = [NodePath("../GhostTranslucent"), NodePath("../Summon"), NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../Synced/ControllerStateChartExpressionProperties"), NodePath("../Synced/RemoteProperty"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/AuraLarge"), NodePath("../IgnoreCanvasModulate/FollowPlayer/AuraSmall"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior")]
 
 [node name="GrabCutscene" parent="." instance=ExtResource("4_qoosa")]
 
@@ -125,6 +126,9 @@ nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../Synced/C
 emit_event = &"panic_started"
 
 [node name="PeerID" parent="." instance=ExtResource("2_bh3m0")]
+
+[node name="GhostTranslucent" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_bmx85")]
+target = NodePath("..")
 
 [node name="GhostVisible" parent="." node_paths=PackedStringArray("peer_id", "node") instance=ExtResource("3_3ievd")]
 peer_id = NodePath("../PeerID")
@@ -714,6 +718,8 @@ max_variable = "max_charge"
 
 [connection signal="synchronized" from="MultiplayerSynchronizer" to="MultiplayerSynchronizer/PeerIDVisibilityFilter/CallHolder" method="release"]
 [connection signal="filter_disabled" from="MultiplayerSynchronizer/PeerIDVisibilityFilter" to="MultiplayerSynchronizer/PeerIDVisibilityFilter/CallHolder" method="hold"]
+[connection signal="filter_disabled" from="MultiplayerSynchronizer/PeerIDVisibilityFilter" to="GhostTranslucent" method="disable_translucency"]
+[connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerIDVisibilityFilter" to="GhostTranslucent" method="enable_translucency"]
 [connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerIDVisibilityFilter" to="GhostVisible" method="set_value_false"]
 [connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerIDVisibilityFilter" to="IgnoreCanvasModulate/PeerIDSetBool" method="set_value_false"]
 [connection signal="call_released" from="MultiplayerSynchronizer/PeerIDVisibilityFilter/CallHolder" to="GhostVisible" method="set_value_true"]
@@ -740,8 +746,8 @@ max_variable = "max_charge"
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Sprint" to="Grabber/EnableGrabber" method="set_false_deferred"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="start_charging"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="show"]
-[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="clear_charge"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="stop_charging"]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="clear_charge"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="hide"]
 [connection signal="taken" from="StateChart/Base/Behavior/Alive/Summon/Summoned" to="Summon/RemoteProperty" method="manual_process"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Stun" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="show"]
