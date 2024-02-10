@@ -74,6 +74,33 @@ func _physics_process(delta: float) -> void:
 	data.set_collision_points(_get_collision_points(all_colliders_and_points, all_repeat_raycasts))
 
 
+func disable() -> void:
+	set_deferred("monitorable", false)
+	set_physics_process(false)
+	powered = false
+
+
+func enable() -> void:
+	set_deferred("monitorable", true)
+	set_physics_process(true)
+
+
+func power_off() -> void:
+	powered = false
+
+
+func power_on() -> void:
+	powered = true
+
+
+func set_powered(value: bool) -> void:
+	powered = value
+
+
+func set_target_rotation(value: float) -> void:
+	target_rotation = value
+
+
 func take_damage(source: DamageSource) -> void:
 	if source.damage_type == data.damage_weak_to:
 		data.battery = 0
