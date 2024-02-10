@@ -2,6 +2,7 @@ class_name Summon
 extends Node
 
 
+signal summon_charged
 signal summoned
 
 const DrainArea := preload("res://src/summon/drain_area/drain_area.tscn")
@@ -19,8 +20,7 @@ var charge := 0:
 	set(value):
 		charge = clampi(value, 0, max_charge)
 		if charge == max_charge:
-			charge = 0
-			spawn_scenes()
+			summon_charged.emit()
 
 var max_charge: int:
 	get:
@@ -49,6 +49,13 @@ func spawn_scenes() -> void:
 		owner.add_sibling(instance, true)
 
 	summoned.emit()
+
+
+func release_charge() -> void:
+	if charge == max_charge:
+		spawn_scenes()
+
+	charge = 0
 
 
 func start_charging() -> void:
