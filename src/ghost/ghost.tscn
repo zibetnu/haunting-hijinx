@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=59 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_id_visibility_filter/peer_id_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
@@ -46,6 +46,7 @@
 [ext_resource type="PackedScene" uid="uid://dpwfunjqyfike" path="res://src/health/health.tscn" id="38_arcfj"]
 [ext_resource type="PackedScene" uid="uid://oe321ygxttbo" path="res://src/grabber/grabber.tscn" id="38_ydesf"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="40_1b387"]
+[ext_resource type="PackedScene" uid="uid://bfe2ycxqwnpxi" path="res://src/draw_circle/draw_circle.tscn" id="43_lxwi0"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hiprh"]
 properties/0/path = NodePath("Dummy Synchronizer:editor_description")
@@ -668,6 +669,12 @@ property_name = &"visible"
 
 [node name="FollowPlayer" type="Node2D" parent="IgnoreCanvasModulate"]
 
+[node name="AuraLargeCircle" parent="IgnoreCanvasModulate/FollowPlayer" instance=ExtResource("43_lxwi0")]
+radius = 160
+
+[node name="AuraSmallCircle" parent="IgnoreCanvasModulate/FollowPlayer" instance=ExtResource("43_lxwi0")]
+radius = 96
+
 [node name="NameLabel" type="Label" parent="IgnoreCanvasModulate/FollowPlayer"]
 modulate = Color(1, 1, 1, 0.501961)
 z_index = 1
@@ -728,8 +735,12 @@ max_variable = "max_charge"
 [connection signal="signal_received" from="GrabCutscene/SignalToEvent" to="StateChart" method="send_event"]
 [connection signal="changed_to_local" from="PeerID" to="Camera2D/CameraEnabled" method="set_true"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="hide"]
+[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraSmallCircle" method="show"]
+[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraLargeCircle" method="show"]
 [connection signal="changed_to_remote" from="PeerID" to="Camera2D/CameraEnabled" method="set_false"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="show"]
+[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraSmallCircle" method="hide"]
+[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraLargeCircle" method="hide"]
 [connection signal="summoned" from="Summon" to="Summon/SignalToEvent" method="receive_signal"]
 [connection signal="signal_received" from="Summon/SignalToEvent" to="StateChart" method="send_event"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="StateChart/Base/Behavior/Dead/IsDead" method="set_true"]
