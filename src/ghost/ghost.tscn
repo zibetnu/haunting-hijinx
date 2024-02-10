@@ -82,6 +82,12 @@ properties/3/path = NodePath(".:limit_bottom")
 properties/3/spawn = true
 properties/3/replication_mode = 2
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_51u44"]
+radius = 160.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m31g4"]
+radius = 96.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_o7ptf"]
 radius = 17.0
 
@@ -93,12 +99,6 @@ gradient = SubResource("Gradient_a05sb")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_51u44"]
-radius = 160.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_m31g4"]
-radius = 96.0
 
 [node name="Ghost" type="CharacterBody2D" groups=["ghosts", "players"]]
 collision_layer = 8
@@ -118,7 +118,7 @@ include_ghost_peer = true
 [node name="CallHolder" parent="MultiplayerSynchronizer/PeerIDVisibilityFilter" instance=ExtResource("5_s7auc")]
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
-nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../Synced/ControllerStateChartExpressionProperties"), NodePath("../Synced/RemoteProperty"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/AuraLarge"), NodePath("../IgnoreCanvasModulate/FollowPlayer/AuraSmall"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior")]
+nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../Synced/ControllerStateChartExpressionProperties"), NodePath("../Synced/RemoteProperty"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior")]
 
 [node name="GrabCutscene" parent="." instance=ExtResource("4_qoosa")]
 
@@ -588,6 +588,17 @@ source_property = &"move_vector"
 destination_node = NodePath("../../GhostPlaceholder/Behavior")
 destination_property = &"direction_vector"
 
+[node name="AuraLarge" parent="." instance=ExtResource("13_e27lr")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AuraLarge"]
+shape = SubResource("CircleShape2D_51u44")
+
+[node name="AuraSmall" parent="." instance=ExtResource("13_e27lr")]
+intensity = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AuraSmall"]
+shape = SubResource("CircleShape2D_m31g4")
+
 [node name="DamageSignals" parent="." instance=ExtResource("29_1sq8w")]
 collision_layer = 8
 collision_mask = 0
@@ -657,17 +668,6 @@ property_name = &"visible"
 
 [node name="FollowPlayer" type="Node2D" parent="IgnoreCanvasModulate"]
 
-[node name="AuraLarge" parent="IgnoreCanvasModulate/FollowPlayer" instance=ExtResource("13_e27lr")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="IgnoreCanvasModulate/FollowPlayer/AuraLarge"]
-shape = SubResource("CircleShape2D_51u44")
-
-[node name="AuraSmall" parent="IgnoreCanvasModulate/FollowPlayer" instance=ExtResource("13_e27lr")]
-intensity = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="IgnoreCanvasModulate/FollowPlayer/AuraSmall"]
-shape = SubResource("CircleShape2D_m31g4")
-
 [node name="NameLabel" type="Label" parent="IgnoreCanvasModulate/FollowPlayer"]
 modulate = Color(1, 1, 1, 0.501961)
 z_index = 1
@@ -727,12 +727,8 @@ max_variable = "max_charge"
 [connection signal="cutscene_ended" from="GrabCutscene" to="GrabCutscene/SignalToEvent" method="receive_signal"]
 [connection signal="signal_received" from="GrabCutscene/SignalToEvent" to="StateChart" method="send_event"]
 [connection signal="changed_to_local" from="PeerID" to="Camera2D/CameraEnabled" method="set_true"]
-[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraLarge" method="show_outline"]
-[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraSmall" method="show_outline"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="hide"]
 [connection signal="changed_to_remote" from="PeerID" to="Camera2D/CameraEnabled" method="set_false"]
-[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraLarge" method="hide_outline"]
-[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraSmall" method="hide_outline"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="show"]
 [connection signal="summoned" from="Summon" to="Summon/SignalToEvent" method="receive_signal"]
 [connection signal="signal_received" from="Summon/SignalToEvent" to="StateChart" method="send_event"]
