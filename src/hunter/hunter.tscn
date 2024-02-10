@@ -376,6 +376,9 @@ y_sort_enabled = true
 
 [node name="Flashlight" parent="YSort" instance=ExtResource("15_hljm8")]
 
+[node name="Behavior" parent="YSort/Flashlight" index="1"]
+default_set_battery_percentage = 0.75
+
 [node name="FlashlightController" parent="YSort/Flashlight/Behavior" index="0" node_paths=PackedStringArray("flashlight_behavior", "controller") instance=ExtResource("7_ew1lp")]
 enabled = false
 flashlight_behavior = NodePath("..")
@@ -517,6 +520,7 @@ sprite = NodePath("..")
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/Revivable" method="take_damage"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
 [connection signal="revived" from="DamageSignals/Revivable" to="DamageSignals/Revivable/Revived" method="receive_signal"]
+[connection signal="revived" from="DamageSignals/Revivable" to="YSort/Flashlight/Behavior" method="set_battery_percentage"]
 [connection signal="signal_received" from="DamageSignals/Revivable/Revived" to="StateChart" method="send_event"]
 [connection signal="damage_taken" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/Died" method="receive_signal"]
 [connection signal="signal_received" from="DamageSignals/WeakTo/Died" to="StateChart" method="send_event"]

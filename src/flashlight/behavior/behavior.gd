@@ -17,6 +17,7 @@ const CAST_SHORT_MAX_INDEX = 4
 		if data and not data.changed.is_connected(_on_data_changed):
 			data.changed.connect(_on_data_changed)
 
+@export_range(0, 1) var default_set_battery_percentage = 1.0
 @export var powered: bool:
 	get:
 		return data.flashlight_powered
@@ -91,6 +92,10 @@ func power_off() -> void:
 
 func power_on() -> void:
 	powered = true
+
+
+func set_battery_percentage(value: float = default_set_battery_percentage) -> void:
+	data.battery_percentage = value
 
 
 func set_powered(value: bool) -> void:
