@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=58 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/mediators/state_component/move/move.tscn" id="12_r3uq0"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="12_y0078"]
 [ext_resource type="PackedScene" uid="uid://dji2viacu4vc" path="res://src/mediators/state_component/flashlight_battery_low/flashlight_battery_low.tscn" id="13_mj4y5"]
+[ext_resource type="PackedScene" uid="uid://bm0ar7asqubxm" path="res://src/mediators/state_component/controller_state_chart_enter_events/controller_state_chart_enter_events.tscn" id="14_25vcg"]
 [ext_resource type="PackedScene" uid="uid://cy4qrm44icmyy" path="res://src/flashlight/flashlight.tscn" id="15_hljm8"]
 [ext_resource type="PackedScene" uid="uid://co1edbkdtjj35" path="res://src/mediators/flashlight_state_chart_events/flashlight_state_chart_events.tscn" id="16_c1vhd"]
 [ext_resource type="PackedScene" uid="uid://myko8836tn6o" path="res://src/rotation_to_vector/rotation_to_vector.tscn" id="16_se1mq"]
@@ -199,6 +200,11 @@ animation_name = "idle"
 costume_behavior = NodePath("../../../../../../YSort/HunterPlaceholder/Behavior")
 active_state = NodePath("..")
 
+[node name="ControllerStateChartEnterEvents" parent="StateChart/Base/Alive/Movement/Idle" node_paths=PackedStringArray("controller", "state_chart", "active_state") instance=ExtResource("14_25vcg")]
+controller = NodePath("../../../../../../Synced")
+state_chart = NodePath("../../../../..")
+active_state = NodePath("..")
+
 [node name="Move" type="Node" parent="StateChart/Base/Alive/Movement"]
 script = ExtResource("2_yqkoe")
 initial_state = NodePath("MoveNormal")
@@ -211,6 +217,11 @@ event = &"move_stopped"
 [node name="CostumeAnimation" parent="StateChart/Base/Alive/Movement/Move" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("11_ww6av")]
 animation_name = "move"
 costume_behavior = NodePath("../../../../../../YSort/HunterPlaceholder/Behavior")
+active_state = NodePath("..")
+
+[node name="ControllerStateChartEnterEvents" parent="StateChart/Base/Alive/Movement/Move" node_paths=PackedStringArray("controller", "state_chart", "active_state") instance=ExtResource("14_25vcg")]
+controller = NodePath("../../../../../../Synced")
+state_chart = NodePath("../../../../..")
 active_state = NodePath("..")
 
 [node name="MoveNormal" type="Node" parent="StateChart/Base/Alive/Movement/Move"]

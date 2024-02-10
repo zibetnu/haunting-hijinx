@@ -19,6 +19,7 @@ func disable() -> void:
 
 func enable() -> void:
 	enabled = true
+	_on_controller_input_handled()
 
 
 func _on_controller_input_handled() -> void:
