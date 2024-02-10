@@ -30,6 +30,7 @@ func _on_cutscene_started(cutscene_name: String) -> void:
 		return
 
 	_focus_cameras_ghost()
+	$GrabSound.play()
 	if not multiplayer.is_server():
 		return
 
