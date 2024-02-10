@@ -6,10 +6,7 @@ signal revived
 @export var enabled := true:
 	set(value):
 		enabled = value
-		set_physics_process(enabled)
-		if not enabled:
-			_can_progress = false
-			progress = 0
+		_apply_enabled()
 
 @export var revive_time := 12
 @export var revives_with: DamageSource.Type
@@ -29,6 +26,10 @@ var progress := 0:
 var _can_progress := true
 
 
+func _ready() -> void:
+	_apply_enabled()
+
+
 func _physics_process(_delta: float) -> void:
 	_can_progress = true
 
@@ -42,6 +43,9 @@ func enable() -> void:
 
 
 func take_damage(source: DamageSource) -> void:
+	if not enabled:
+		return
+
 	if not _can_progress:
 		return
 
@@ -50,3 +54,10 @@ func take_damage(source: DamageSource) -> void:
 
 	_can_progress = false
 	progress += source.damage_amount
+
+
+func _apply_enabled() -> void:
+		set_physics_process(enabled)
+		if not enabled:
+			_can_progress = false
+			progress = 0
