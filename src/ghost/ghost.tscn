@@ -635,7 +635,7 @@ monitoring = false
 count_group = &"hunters"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HuntersTouched"]
-shape = SubResource("CircleShape2D_xn3hr")
+shape = SubResource("CircleShape2D_o7ptf")
 
 [node name="EnteredEvent" parent="HuntersTouched" instance=ExtResource("8_kd7ea")]
 emit_event = &"hunters_touched"
