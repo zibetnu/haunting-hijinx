@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://yi6ydbok31ql"]
 
-[ext_resource type="Script" path="res://src/mediators/peer_id_visibility_filter/peer_id_visibility_filter.gd" id="1_0ot46"]
+[ext_resource type="Script" path="res://src/mediators/peer_visibility_filter/peer_visibility_filter.gd" id="1_0ot46"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_p3eyy"]
 properties/0/path = NodePath(".:enable_filter")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[node name="PeerIDVisibilityFilter" type="Node"]
+[node name="PeerVisibilityFilter" type="Node" groups=["peer_visibility_filters"]]
 script = ExtResource("1_0ot46")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

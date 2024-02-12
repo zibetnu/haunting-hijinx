@@ -1,6 +1,6 @@
 [gd_scene load_steps=58 format=3 uid="uid://8qaswvkeb8qd"]
 
-[ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_id_visibility_filter/peer_id_visibility_filter.tscn" id="1_0yuv7"]
+[ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_visibility_filter/peer_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="2_bh3m0"]
 [ext_resource type="PackedScene" uid="uid://y5w40m6pqbvt" path="res://src/mediators/peer_id_set_bool/peer_id_set_bool.tscn" id="3_3ievd"]
@@ -110,12 +110,9 @@ replication_config = SubResource("SceneReplicationConfig_hiprh")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_hsnve")
 
-[node name="PeerIDVisibilityFilter" parent="MultiplayerSynchronizer" node_paths=PackedStringArray("peer_id", "synchronizer") instance=ExtResource("1_0yuv7")]
-peer_id = NodePath("../../PeerID")
-synchronizer = NodePath("..")
-include_ghost_peer = true
+[node name="PeerVisibilityFilter" parent="MultiplayerSynchronizer" instance=ExtResource("1_0yuv7")]
 
-[node name="CallHolder" parent="MultiplayerSynchronizer/PeerIDVisibilityFilter" instance=ExtResource("5_s7auc")]
+[node name="CallHolder" parent="MultiplayerSynchronizer/PeerVisibilityFilter" instance=ExtResource("5_s7auc")]
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
 nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../Synced/ControllerStateChartExpressionProperties"), NodePath("../Synced/RemoteProperty"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior")]
@@ -718,16 +715,18 @@ source_node = NodePath("../../../../../Summon")
 value_variable = "charge"
 max_variable = "max_charge"
 
-[connection signal="synchronized" from="MultiplayerSynchronizer" to="MultiplayerSynchronizer/PeerIDVisibilityFilter/CallHolder" method="release"]
-[connection signal="filter_disabled" from="MultiplayerSynchronizer/PeerIDVisibilityFilter" to="MultiplayerSynchronizer/PeerIDVisibilityFilter/CallHolder" method="hold"]
-[connection signal="filter_disabled" from="MultiplayerSynchronizer/PeerIDVisibilityFilter" to="GhostTranslucent" method="disable_translucency"]
-[connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerIDVisibilityFilter" to="GhostTranslucent" method="enable_translucency"]
-[connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerIDVisibilityFilter" to="GhostVisible" method="set_value_false"]
-[connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerIDVisibilityFilter" to="IgnoreCanvasModulate/PeerIDSetBool" method="set_value_false"]
-[connection signal="call_released" from="MultiplayerSynchronizer/PeerIDVisibilityFilter/CallHolder" to="GhostVisible" method="set_value_true"]
-[connection signal="call_released" from="MultiplayerSynchronizer/PeerIDVisibilityFilter/CallHolder" to="IgnoreCanvasModulate/PeerIDSetBool" method="set_value_true"]
+[connection signal="synchronized" from="MultiplayerSynchronizer" to="MultiplayerSynchronizer/PeerVisibilityFilter/CallHolder" method="release"]
+[connection signal="filter_disabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="MultiplayerSynchronizer/PeerVisibilityFilter/CallHolder" method="hold"]
+[connection signal="filter_disabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="GhostTranslucent" method="disable_translucency"]
+[connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="GhostTranslucent" method="enable_translucency"]
+[connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="GhostVisible" method="set_value_false"]
+[connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="IgnoreCanvasModulate/PeerIDSetBool" method="set_value_false"]
+[connection signal="filter_ready" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="MultiplayerSynchronizer" method="add_visibility_filter"]
+[connection signal="call_released" from="MultiplayerSynchronizer/PeerVisibilityFilter/CallHolder" to="GhostVisible" method="set_value_true"]
+[connection signal="call_released" from="MultiplayerSynchronizer/PeerVisibilityFilter/CallHolder" to="IgnoreCanvasModulate/PeerIDSetBool" method="set_value_true"]
 [connection signal="cutscene_ended" from="GrabCutscene" to="GrabCutscene/SignalToEvent" method="receive_signal"]
 [connection signal="signal_received" from="GrabCutscene/SignalToEvent" to="StateChart" method="send_event"]
+[connection signal="changed" from="PeerID" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="set_primary_peer_id"]
 [connection signal="changed_to_local" from="PeerID" to="Camera2D/CameraEnabled" method="set_true"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraLargeCircle" method="show"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraSmallCircle" method="show"]
@@ -782,8 +781,8 @@ max_variable = "max_charge"
 [connection signal="timeout" from="StateChart/Base/Behavior/Alive/Panic/EndTimer" to="StateChart/Base/Behavior/Alive/Panic/EndTimer/EndPanic" method="receive_signal"]
 [connection signal="signal_received" from="StateChart/Base/Behavior/Alive/Panic/EndTimer/EndPanic" to="StateChart" method="send_event"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Grab" to="GrabCutscene" method="start_cutscene"]
-[connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="MultiplayerSynchronizer/PeerIDVisibilityFilter" method="enable"]
-[connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="MultiplayerSynchronizer/PeerIDVisibilityFilter" method="disable"]
+[connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="enable"]
+[connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="disable"]
 [connection signal="state_entered" from="StateChart/Base/Vulnerability/Invulnerable" to="StateChart/Base/Vulnerability/Invulnerable/MonitorDamage" method="set_false"]
 [connection signal="state_exited" from="StateChart/Base/Vulnerability/Invulnerable" to="StateChart/Base/Vulnerability/Invulnerable/MonitorDamage" method="set_true"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
