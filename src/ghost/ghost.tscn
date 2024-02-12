@@ -103,7 +103,7 @@ fill_to = Vector2(0.5, 0)
 [node name="Ghost" type="CharacterBody2D" groups=["ghosts", "players"]]
 collision_layer = 8
 
-[node name="Dummy Synchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="DummySynchronizer" type="MultiplayerSynchronizer" parent="."]
 editor_description = "https://github.com/godotengine/godot/issues/68508"
 replication_config = SubResource("SceneReplicationConfig_hiprh")
 
