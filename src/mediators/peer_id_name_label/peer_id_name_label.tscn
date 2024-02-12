@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcyyx2srd4gwe"]
-
-[ext_resource type="Script" path="res://src/mediators/peer_id_name_label/peer_id_name_label.gd" id="1_07tn2"]
-
-[node name="PeerIdNameLabel" type="Node"]
-script = ExtResource("1_07tn2")
