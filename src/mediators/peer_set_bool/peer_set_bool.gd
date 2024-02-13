@@ -2,19 +2,11 @@ extends Node
 
 
 enum Mode {
-	THIS_PEER_ONLY,
+	LOCAL_PEER_ONLY,
 	OTHER_PEERS_ONLY,
 }
 
-@export var peer_id: PeerID:
-	set(value):
-		if peer_id:
-			peer_id.changed.disconnect(_on_peer_id_changed)
-
-		peer_id = value
-		if peer_id:
-			peer_id.changed.connect(_on_peer_id_changed)
-
+@export var is_local_peer := true
 @export var false_for := Mode.OTHER_PEERS_ONLY
 @export var node: Node
 
@@ -33,6 +25,18 @@ func _ready() -> void:
 	_update_bool()
 
 
+func set_is_local_peer(value: bool) -> void:
+	is_local_peer = value
+
+
+func set_is_local_peer_false() -> void:
+	is_local_peer = false
+
+
+func set_is_local_peer_true() -> void:
+	is_local_peer = true
+
+
 func set_value_false() -> void:
 	property_value = false
 
@@ -49,8 +53,8 @@ func _update_bool() -> void:
 	if not _is_ready:
 		return
 
-	if false_for == Mode.THIS_PEER_ONLY:
-		node.set(property_name, property_value or peer_id.id != multiplayer.get_unique_id())
+	if false_for == Mode.LOCAL_PEER_ONLY:
+		node.set(property_name, property_value or not is_local_peer)
 
 	else:
-		node.set(property_name, property_value or peer_id.id == multiplayer.get_unique_id())
+		node.set(property_name, property_value or is_local_peer)

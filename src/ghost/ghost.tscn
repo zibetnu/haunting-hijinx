@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_visibility_filter/peer_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="2_bh3m0"]
-[ext_resource type="PackedScene" uid="uid://y5w40m6pqbvt" path="res://src/mediators/peer_id_set_bool/peer_id_set_bool.tscn" id="3_3ievd"]
 [ext_resource type="PackedScene" uid="uid://bxooivyeej01k" path="res://src/summon/summon.tscn" id="3_26ncu"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_wp1tu"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_74yim"]
@@ -20,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="7_ijrj0"]
 [ext_resource type="PackedScene" uid="uid://dterwqqmikxc1" path="res://src/mediators/signal_to_event/signal_to_event.tscn" id="8_kd7ea"]
 [ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="8_mynla"]
+[ext_resource type="PackedScene" uid="uid://y5w40m6pqbvt" path="res://src/mediators/peer_set_bool/peer_set_bool.tscn" id="8_yrkp2"]
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="9_x08fo"]
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="10_el6fq"]
 [ext_resource type="PackedScene" uid="uid://c18war56not2c" path="res://src/mediators/controller_state_chart_events/controller_state_chart_events.tscn" id="11_2r614"]
@@ -126,8 +126,7 @@ emit_event = &"panic_started"
 [node name="GhostTranslucent" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_bmx85")]
 target = NodePath("..")
 
-[node name="GhostVisible" parent="." node_paths=PackedStringArray("peer_id", "node") instance=ExtResource("3_3ievd")]
-peer_id = NodePath("../PeerID")
+[node name="GhostVisible" parent="." node_paths=PackedStringArray("node") instance=ExtResource("8_yrkp2")]
 node = NodePath("..")
 property_name = &"visible"
 
@@ -649,8 +648,7 @@ remote_path = NodePath("../IgnoreCanvasModulate/FollowPlayer")
 [node name="IgnoreCanvasModulate" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 
-[node name="PeerIDSetBool" parent="IgnoreCanvasModulate" node_paths=PackedStringArray("peer_id", "node") instance=ExtResource("3_3ievd")]
-peer_id = NodePath("../../PeerID")
+[node name="PeerSetBool" parent="IgnoreCanvasModulate" node_paths=PackedStringArray("node") instance=ExtResource("8_yrkp2")]
 node = NodePath("..")
 property_name = &"visible"
 
@@ -711,20 +709,24 @@ max_variable = "max_charge"
 [connection signal="filter_disabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="GhostTranslucent" method="disable_translucency"]
 [connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="GhostTranslucent" method="enable_translucency"]
 [connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="GhostVisible" method="set_value_false"]
-[connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="IgnoreCanvasModulate/PeerIDSetBool" method="set_value_false"]
+[connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="IgnoreCanvasModulate/PeerSetBool" method="set_value_false"]
 [connection signal="filter_ready" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="MultiplayerSynchronizer" method="add_visibility_filter"]
 [connection signal="call_released" from="MultiplayerSynchronizer/PeerVisibilityFilter/CallHolder" to="GhostVisible" method="set_value_true"]
-[connection signal="call_released" from="MultiplayerSynchronizer/PeerVisibilityFilter/CallHolder" to="IgnoreCanvasModulate/PeerIDSetBool" method="set_value_true"]
+[connection signal="call_released" from="MultiplayerSynchronizer/PeerVisibilityFilter/CallHolder" to="IgnoreCanvasModulate/PeerSetBool" method="set_value_true"]
 [connection signal="cutscene_ended" from="GrabCutscene" to="GrabCutscene/SignalToEvent" method="receive_signal"]
 [connection signal="signal_received" from="GrabCutscene/SignalToEvent" to="StateChart" method="send_event"]
 [connection signal="changed" from="PeerID" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="set_primary_peer_id"]
 [connection signal="changed" from="PeerID" to="Synced" method="set_input_authority"]
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/PeerNameLabel" method="set_peer_id"]
+[connection signal="changed_to_local" from="PeerID" to="GhostVisible" method="set_is_local_peer_true"]
 [connection signal="changed_to_local" from="PeerID" to="Camera2D/CameraEnabled" method="set_true"]
+[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/PeerSetBool" method="set_is_local_peer_true"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraLargeCircle" method="show"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraSmallCircle" method="show"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/PeerNameLabel" method="hide"]
+[connection signal="changed_to_remote" from="PeerID" to="GhostVisible" method="set_is_local_peer_false"]
 [connection signal="changed_to_remote" from="PeerID" to="Camera2D/CameraEnabled" method="set_false"]
+[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/PeerSetBool" method="set_is_local_peer_false"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraLargeCircle" method="hide"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraSmallCircle" method="hide"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/PeerNameLabel" method="show"]
