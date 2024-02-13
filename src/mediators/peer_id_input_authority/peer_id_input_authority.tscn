@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bg6e2s53ki76i"]
-
-[ext_resource type="Script" path="res://src/mediators/peer_id_input_authority/peer_id_input_authority.gd" id="1_jufp1"]
-
-[node name="PeerIDInputAuthority" type="Node"]
-script = ExtResource("1_jufp1")

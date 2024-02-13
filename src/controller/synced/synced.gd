@@ -48,6 +48,10 @@ func force_handle_input() -> void:
 		controller.force_handle_input()
 
 
+func set_input_authority(id: int) -> void:
+	input_authority = id
+
+
 func _serialize_vector(vector: Vector2) -> int:
 	var serialized_angle = rad_to_deg(vector.angle())
 	if serialized_angle < 0:

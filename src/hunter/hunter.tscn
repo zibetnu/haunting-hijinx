@@ -1,11 +1,10 @@
-[gd_scene load_steps=58 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=57 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_uvtrm"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="2_yqkoe"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="3_ocdoo"]
-[ext_resource type="PackedScene" uid="uid://bg6e2s53ki76i" path="res://src/mediators/peer_id_input_authority/peer_id_input_authority.tscn" id="4_ci3ki"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="4_x2w3t"]
 [ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="5_uqurr"]
 [ext_resource type="PackedScene" uid="uid://gvf2peg6yuns" path="res://src/controller/unpause_force/unpause_force.tscn" id="6_ujhjn"]
@@ -328,10 +327,6 @@ controller_2 = NodePath("KeyboardAndMouse")
 controller = NodePath("..")
 state_chart = NodePath("../../StateChart")
 
-[node name="PeerIDInputAuthority" parent="Synced" node_paths=PackedStringArray("peer_id", "synced_controller") instance=ExtResource("4_ci3ki")]
-peer_id = NodePath("../../PeerID")
-synced_controller = NodePath("..")
-
 [node name="AuraSense" parent="." instance=ExtResource("28_dd2t8")]
 collision_mask = 0
 
@@ -483,6 +478,7 @@ layout_mode = 2
 [node name="ClearSpriteTexture" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D" index="0" node_paths=PackedStringArray("sprite") instance=ExtResource("47_d25eg")]
 sprite = NodePath("..")
 
+[connection signal="changed" from="PeerID" to="Synced" method="set_input_authority"]
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/PeerNameLabel" method="set_peer_id"]
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer/PeerVisibilityFilter" method="set_primary_peer_id"]
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer/PeerVisibilityFilter" method="set_primary_peer_id"]
