@@ -15,3 +15,7 @@ signal changed_to_remote()
 
 		else:
 			changed_to_remote.emit()
+
+
+func set_id(value: int) -> void:
+	id = value

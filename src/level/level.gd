@@ -50,7 +50,7 @@ func add_player(id: int) -> void:
 	instance.name += str(id)
 	$SpawnRoot.add_child(instance, true)
 	instance.get_node("PeerID").id = id
-	get_tree().call_group("peer_visibility_filters", "set_secondary_peer_id", PeerData.ghost_peer)
+	get_tree().call_group("ghost_peer_ids", "set_id", PeerData.ghost_peer)
 
 
 func allow_set_pause() -> bool:

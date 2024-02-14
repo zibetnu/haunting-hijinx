@@ -121,7 +121,7 @@ nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../Synced/C
 [node name="SignalToEvent" parent="GrabCutscene" instance=ExtResource("8_kd7ea")]
 emit_event = &"panic_started"
 
-[node name="PeerID" parent="." instance=ExtResource("2_bh3m0")]
+[node name="PeerID" parent="." groups=["ghost_peer_ids"] instance=ExtResource("2_bh3m0")]
 
 [node name="GhostTranslucent" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_bmx85")]
 target = NodePath("..")

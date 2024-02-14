@@ -42,8 +42,8 @@
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/auto_texture_progress_bar/auto_texture_progress_bar.tscn" id="32_vdk32"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="33_a7fw2"]
 [ext_resource type="PackedScene" uid="uid://bmqokcab4errr" path="res://src/peer_name_label/peer_name_label.tscn" id="39_gpntb"]
+[ext_resource type="PackedScene" uid="uid://dsccl51pqvbue" path="res://src/mediators/peer_process_mode/peer_process_mode.tscn" id="43_rsnb5"]
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_visibility_filter/peer_visibility_filter.tscn" id="44_mvfu7"]
-[ext_resource type="PackedScene" uid="uid://dsccl51pqvbue" path="res://src/mediators/peer_id_process_mode/peer_id_process_mode.tscn" id="44_oo3l6"]
 [ext_resource type="PackedScene" uid="uid://dsfctswtuferv" path="res://src/clear_sprite_texture/clear_sprite_texture.tscn" id="47_d25eg"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hflh2"]
@@ -137,6 +137,8 @@ replication_config = SubResource("SceneReplicationConfig_hflh2")
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_uvtrm")]
 nodes = [NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../AuraSense"), NodePath("../DamageSignals"), NodePath("../Grabbable"), NodePath("../YSort/Flashlight/Behavior"), NodePath("../YSort/HunterPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar/Behavior")]
+
+[node name="GhostPeerID" parent="." groups=["ghost_peer_ids"] instance=ExtResource("1_fx0g1")]
 
 [node name="PeerID" parent="." instance=ExtResource("1_fx0g1")]
 
@@ -465,10 +467,8 @@ layout_mode = 2
 [node name="PeerVisibilityFilter" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer" index="0" instance=ExtResource("44_mvfu7")]
 secondary_allow_in_filter = true
 
-[node name="PeerIDProcessMode" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" node_paths=PackedStringArray("peer_id", "nodes") instance=ExtResource("44_oo3l6")]
-peer_id = NodePath("../../../../../PeerID")
-nodes = [NodePath("..")]
-include_ghost_peer = true
+[node name="PeerProcessMode" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" instance=ExtResource("43_rsnb5")]
+secondary_include = true
 
 [node name="BatteryAlert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("31_vp1ot")]
 layout_mode = 2
@@ -478,9 +478,12 @@ layout_mode = 2
 [node name="ClearSpriteTexture" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D" index="0" node_paths=PackedStringArray("sprite") instance=ExtResource("47_d25eg")]
 sprite = NodePath("..")
 
+[connection signal="changed" from="GhostPeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer/PeerVisibilityFilter" method="set_secondary_peer_id"]
+[connection signal="changed" from="GhostPeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/PeerProcessMode" method="set_secondary_peer_id"]
 [connection signal="changed" from="PeerID" to="Synced" method="set_input_authority"]
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/PeerNameLabel" method="set_peer_id"]
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer/PeerVisibilityFilter" method="set_primary_peer_id"]
+[connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/PeerProcessMode" method="set_primary_peer_id"]
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer/PeerVisibilityFilter" method="set_primary_peer_id"]
 [connection signal="changed_to_local" from="PeerID" to="Camera2D/CameraEnabled" method="set_true"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/PeerNameLabel" method="hide"]
@@ -519,6 +522,7 @@ sprite = NodePath("..")
 [connection signal="signal_received" from="Grabbable/Died" to="StateChart" method="send_event"]
 [connection signal="powering_failed" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead"]
 [connection signal="filter_ready" from="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer/PeerVisibilityFilter" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer" method="add_visibility_filter"]
+[connection signal="process_mode_updated" from="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/PeerProcessMode" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_process_mode"]
 [connection signal="filter_ready" from="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer/PeerVisibilityFilter" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer" method="add_visibility_filter"]
 
 [editable path="YSort/Flashlight"]
