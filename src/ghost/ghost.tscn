@@ -127,6 +127,7 @@ emit_event = &"panic_started"
 target = NodePath("..")
 
 [node name="GhostVisible" parent="." node_paths=PackedStringArray("node") instance=ExtResource("8_yrkp2")]
+is_local_peer = false
 node = NodePath("..")
 property_name = &"visible"
 
@@ -649,6 +650,7 @@ remote_path = NodePath("../IgnoreCanvasModulate/FollowPlayer")
 follow_viewport_enabled = true
 
 [node name="PeerSetBool" parent="IgnoreCanvasModulate" node_paths=PackedStringArray("node") instance=ExtResource("8_yrkp2")]
+is_local_peer = false
 node = NodePath("..")
 property_name = &"visible"
 

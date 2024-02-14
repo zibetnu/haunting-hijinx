@@ -6,7 +6,11 @@ enum Mode {
 	OTHER_PEERS_ONLY,
 }
 
-@export var is_local_peer := true
+@export var is_local_peer := true:
+	set(value):
+		is_local_peer = value
+		_update_bool()
+
 @export var false_for := Mode.OTHER_PEERS_ONLY
 @export var node: Node
 
@@ -43,10 +47,6 @@ func set_value_false() -> void:
 
 func set_value_true() -> void:
 	property_value = true
-
-
-func _on_peer_id_changed(_id: int) -> void:
-	_update_bool()
 
 
 func _update_bool() -> void:
