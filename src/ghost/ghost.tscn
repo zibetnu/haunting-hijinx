@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_74yim"]
 [ext_resource type="PackedScene" uid="uid://bsgx1owl3cxou" path="res://src/grab_cutscene/grab_cutscene.tscn" id="4_qoosa"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_6yps6"]
-[ext_resource type="PackedScene" uid="uid://dhavwobkg4v8o" path="res://src/mediators/state_chart_counter/state_chart_counter.tscn" id="5_c6vhq"]
 [ext_resource type="PackedScene" uid="uid://beosdquy62xr4" path="res://src/call_holder/call_holder.tscn" id="5_s7auc"]
 [ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="5_xwsa3"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="6_3dmdv"]
@@ -22,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://y5w40m6pqbvt" path="res://src/mediators/peer_set_bool/peer_set_bool.tscn" id="8_yrkp2"]
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="9_x08fo"]
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="10_el6fq"]
+[ext_resource type="PackedScene" uid="uid://dhavwobkg4v8o" path="res://src/mediators/named_property_signals/named_property_signals.tscn" id="10_fwp7a"]
 [ext_resource type="PackedScene" uid="uid://c18war56not2c" path="res://src/mediators/controller_state_chart_events/controller_state_chart_events.tscn" id="11_2r614"]
 [ext_resource type="PackedScene" uid="uid://bm0ar7asqubxm" path="res://src/mediators/state_component/controller_state_chart_enter_events/controller_state_chart_enter_events.tscn" id="11_fqc8g"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="13_56q65"]
@@ -137,16 +137,15 @@ target_group = &"hunters"
 [node name="SignalToEvent" parent="Summon" instance=ExtResource("8_kd7ea")]
 emit_event = &"summoned"
 
-[node name="StateChartCounter" parent="Summon" node_paths=PackedStringArray("state_chart") instance=ExtResource("5_c6vhq")]
-counter_name = &"drain_areas"
-state_chart = NodePath("../../StateChart")
+[node name="NamedPropertySignals" parent="Summon" instance=ExtResource("10_fwp7a")]
+property_name = &"drain_areas"
 
 [node name="RemoteProperty" type="Node" parent="Summon" node_paths=PackedStringArray("source_node", "destination_node")]
 script = ExtResource("19_c6cbw")
 source_node = NodePath("..")
 source_property = &"areas_summoned"
-destination_node = NodePath("../StateChartCounter")
-destination_property = &"counter"
+destination_node = NodePath("../NamedPropertySignals")
+destination_property = &"property_value"
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("3_wp1tu")
@@ -736,6 +735,7 @@ max_variable = "max_charge"
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/PeerNameLabel" method="show"]
 [connection signal="summoned" from="Summon" to="Summon/SignalToEvent" method="receive_signal"]
 [connection signal="signal_received" from="Summon/SignalToEvent" to="StateChart" method="send_event"]
+[connection signal="property_changed" from="Summon/NamedPropertySignals" to="StateChart" method="set_expression_property"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="StateChart/Base/Behavior/Dead/IsDead" method="set_true"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Dead" to="StateChart/Base/Behavior/Dead/IsDead" method="set_false"]
 [connection signal="child_state_entered" from="StateChart/Base/Behavior/Alive" to="Synced/RemoteProperty" method="use_idle_callback"]
