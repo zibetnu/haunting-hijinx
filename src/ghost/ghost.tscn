@@ -114,7 +114,7 @@ replication_config = SubResource("SceneReplicationConfig_hsnve")
 [node name="CallHolder" parent="MultiplayerSynchronizer/PeerVisibilityFilter" instance=ExtResource("5_s7auc")]
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
-nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../Synced/ControllerStateChartExpressionProperties"), NodePath("../Synced/RemoteProperty"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior")]
+nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../Synced/ControllerStateChartExpressionProperties"), NodePath("../Synced/RemoteProperty"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior")]
 
 [node name="GrabCutscene" parent="." instance=ExtResource("4_qoosa")]
 

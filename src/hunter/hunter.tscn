@@ -136,7 +136,7 @@ collision_mask = 5
 replication_config = SubResource("SceneReplicationConfig_hflh2")
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_uvtrm")]
-nodes = [NodePath("../StateChart"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../AuraSense"), NodePath("../DamageSignals"), NodePath("../Grabbable"), NodePath("../YSort/Flashlight/Behavior"), NodePath("../YSort/HunterPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar/Behavior")]
+nodes = [NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../AuraSense"), NodePath("../DamageSignals"), NodePath("../Grabbable"), NodePath("../YSort/Flashlight/Behavior"), NodePath("../YSort/HunterPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar/Behavior")]
 
 [node name="GhostPeerID" parent="." groups=["ghost_peer_ids"] instance=ExtResource("1_fx0g1")]
 
