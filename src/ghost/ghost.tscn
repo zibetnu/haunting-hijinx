@@ -227,11 +227,10 @@ controller = NodePath("../../../../../../Synced")
 state_chart = NodePath("../../../../..")
 active_state = NodePath("..")
 
-[node name="Move" parent="StateChart/Base/Behavior/Alive/Normal" node_paths=PackedStringArray("controller", "character", "active_state") instance=ExtResource("7_1d45a")]
-controller = NodePath("../../../../../../Synced")
+[node name="Move" parent="StateChart/Base/Behavior/Alive/Normal" node_paths=PackedStringArray("character") instance=ExtResource("7_1d45a")]
 character = NodePath("../../../../../..")
 speed = 92.0
-active_state = NodePath("..")
+manual_process = true
 
 [node name="Sprint" type="Node" parent="StateChart/Base/Behavior/Alive"]
 script = ExtResource("5_6yps6")
@@ -277,11 +276,10 @@ state_chart = NodePath("../../../../..")
 ignore_button_2 = true
 active_state = NodePath("..")
 
-[node name="Move" parent="StateChart/Base/Behavior/Alive/Sprint" node_paths=PackedStringArray("controller", "character", "active_state") instance=ExtResource("7_1d45a")]
-controller = NodePath("../../../../../../Synced")
+[node name="Move" parent="StateChart/Base/Behavior/Alive/Sprint" node_paths=PackedStringArray("character") instance=ExtResource("7_1d45a")]
 character = NodePath("../../../../../..")
 speed = 123.0
-active_state = NodePath("..")
+manual_process = true
 
 [node name="Summon" type="Node" parent="StateChart/Base/Behavior/Alive"]
 script = ExtResource("5_6yps6")
@@ -344,11 +342,10 @@ event = &"panic_ended"
 script = ExtResource("6_il0ju")
 to = NodePath("../../../../Animation/Panic")
 
-[node name="Move" parent="StateChart/Base/Behavior/Alive/Panic" node_paths=PackedStringArray("controller", "character", "active_state") instance=ExtResource("7_1d45a")]
-controller = NodePath("../../../../../../Synced")
+[node name="Move" parent="StateChart/Base/Behavior/Alive/Panic" node_paths=PackedStringArray("character") instance=ExtResource("7_1d45a")]
 character = NodePath("../../../../../..")
 speed = 154.0
-active_state = NodePath("..")
+manual_process = true
 
 [node name="MonitorHunters" parent="StateChart/Base/Behavior/Alive/Panic" node_paths=PackedStringArray("target_node") instance=ExtResource("20_tfmeu")]
 editor_description = "Sets whether the number of hunters touched should be monitored."
@@ -742,8 +739,10 @@ max_variable = "max_charge"
 [connection signal="child_state_exited" from="StateChart/Base/Behavior/Alive" to="Synced/RemoteProperty" method="use_manual_callback_only"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Grabber/EnableGrabber" method="set_true_deferred"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Normal" to="Grabber/EnableGrabber" method="set_false_deferred"]
+[connection signal="state_physics_processing" from="StateChart/Base/Behavior/Alive/Normal" to="StateChart/Base/Behavior/Alive/Normal/Move" method="manual_physics_process"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Sprint" to="Grabber/EnableGrabber" method="set_true_deferred"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Sprint" to="Grabber/EnableGrabber" method="set_false_deferred"]
+[connection signal="state_physics_processing" from="StateChart/Base/Behavior/Alive/Sprint" to="StateChart/Base/Behavior/Alive/Sprint/Move" method="manual_physics_process"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="start_charging"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="show"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="release_charge"]
@@ -765,6 +764,7 @@ max_variable = "max_charge"
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="stop"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/EndTimer" method="stop"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="hide"]
+[connection signal="state_physics_processing" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/Move" method="manual_physics_process"]
 [connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/Damaged" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="start"]
 [connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/Damaged" to="StateChart/Base/Behavior/Alive/Panic/EndTimer" method="start_use_greater"]
 [connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/HuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/HuntersTouched/EndInvisibility" method="receive_signal"]
@@ -784,6 +784,9 @@ max_variable = "max_charge"
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="disable"]
 [connection signal="state_entered" from="StateChart/Base/Vulnerability/Invulnerable" to="StateChart/Base/Vulnerability/Invulnerable/MonitorDamage" method="set_false"]
 [connection signal="state_exited" from="StateChart/Base/Vulnerability/Invulnerable" to="StateChart/Base/Vulnerability/Invulnerable/MonitorDamage" method="set_true"]
+[connection signal="move_vector_changed_normalized" from="Synced" to="StateChart/Base/Behavior/Alive/Normal/Move" method="set_move_vector"]
+[connection signal="move_vector_changed_normalized" from="Synced" to="StateChart/Base/Behavior/Alive/Sprint/Move" method="set_move_vector"]
+[connection signal="move_vector_changed_normalized" from="Synced" to="StateChart/Base/Behavior/Alive/Panic/Move" method="set_move_vector"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
 [connection signal="damage_taken" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/SignalToEvent" method="receive_signal"]
 [connection signal="damaged_by" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageValueSignal" method="take_damage"]
