@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=56 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -28,7 +28,6 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="18_e766a"]
 [ext_resource type="Script" path="res://src/remote_property.gd" id="18_mpyxa"]
 [ext_resource type="PackedScene" uid="uid://cssdkhs4cty5c" path="res://src/costume/hunter_placeholder/hunter_placeholder.tscn" id="19_fj04q"]
-[ext_resource type="PackedScene" uid="uid://biaax3nsf56bg" path="res://src/mediators/state_component/animation/animation.tscn" id="20_wx57d"]
 [ext_resource type="PackedScene" uid="uid://r1i8jof331aw" path="res://src/mediators/flashlight_state_chart_properties/flashlight_state_chart_properties.tscn" id="22_lt6pn"]
 [ext_resource type="PackedScene" uid="uid://b4i2arqquha56" path="res://src/revivable/revivable.tscn" id="23_d234k"]
 [ext_resource type="PackedScene" uid="uid://biqy1culinvqm" path="res://src/mediators/flashlight_event_battery_alert/flashlight_event_battery_alert.tscn" id="24_1dwup"]
@@ -265,10 +264,8 @@ script = ExtResource("4_x2w3t")
 to = NodePath("../../Vulnerable")
 delay_seconds = 4.0
 
-[node name="Animation" parent="StateChart/Base/Alive/Vulnerability/Invulnerable" node_paths=PackedStringArray("animation_player", "active_state") instance=ExtResource("20_wx57d")]
-animation_player = NodePath("../../../../../../YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer")
-animation_name = &"invulnerable"
-active_state = NodePath("..")
+[node name="AnimationEvent" parent="StateChart/Base/Alive/Vulnerability/Invulnerable" instance=ExtResource("28_m0gko")]
+emit_event = &"invulnerable"
 
 [node name="EnableDamage" parent="StateChart/Base/Alive/Vulnerability/Invulnerable" node_paths=PackedStringArray("target_node") instance=ExtResource("9_bnpp0")]
 editor_description = "Makes damage area unmonitorable when hunter is invulnerable."
@@ -283,10 +280,8 @@ script = ExtResource("4_x2w3t")
 to = NodePath("../../../../Dead")
 event = &"died"
 
-[node name="Animation" parent="StateChart/Base/Alive/Vulnerability/Vulnerable" node_paths=PackedStringArray("animation_player", "active_state") instance=ExtResource("20_wx57d")]
-animation_player = NodePath("../../../../../../YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer")
-animation_name = &"RESET"
-active_state = NodePath("..")
+[node name="AnimationEvent" parent="StateChart/Base/Alive/Vulnerability/Vulnerable" instance=ExtResource("28_m0gko")]
+emit_event = &"RESET"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.99, 0.99)
@@ -508,8 +503,12 @@ sprite = NodePath("..")
 [connection signal="state_exited" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/RemoteProperty" method="use_manual_callback_only"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="StateChart/Base/Alive/Vulnerability/Invulnerable/EnableDamage" method="set_false_deferred"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="Grabbable/EnableGrabbable" method="set_false_deferred"]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="StateChart/Base/Alive/Vulnerability/Invulnerable/AnimationEvent" method="receive_signal"]
+[connection signal="signal_received" from="StateChart/Base/Alive/Vulnerability/Invulnerable/AnimationEvent" to="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer" method="play"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="StateChart/Base/Alive/Vulnerability/Invulnerable/EnableDamage" method="set_true_deferred"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="Grabbable/EnableGrabbable" method="set_true_deferred"]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="StateChart/Base/Alive/Vulnerability/Vulnerable/AnimationEvent" method="receive_signal"]
+[connection signal="signal_received" from="StateChart/Base/Alive/Vulnerability/Vulnerable/AnimationEvent" to="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer" method="play"]
 [connection signal="sensed_intensity_changed" from="AuraSense" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_alert_level_from_int"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/Revivable" method="take_damage"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]

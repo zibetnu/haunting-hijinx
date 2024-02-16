@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://biaax3nsf56bg"]
-
-[ext_resource type="Script" path="res://src/mediators/state_component/animation/animation.gd" id="1_ithn7"]
-
-[node name="Animation" type="Node"]
-script = ExtResource("1_ithn7")
