@@ -2,6 +2,7 @@ class_name Summon
 extends Node
 
 
+signal area_count_changed(area_count: int)
 signal summon_charged
 signal summoned
 
@@ -15,7 +16,11 @@ const DrainArea := preload("res://src/summon/drain_area/drain_area.tscn")
 
 @export var target_group: StringName
 
-var areas_summoned := 0
+var area_count := 0:
+	set(value):
+		area_count = value
+		area_count_changed.emit(area_count)
+
 var charge := 0:
 	set(value):
 		charge = clampi(value, 0, max_charge)
@@ -44,8 +49,8 @@ func spawn_scenes() -> void:
 	for node in get_tree().get_nodes_in_group(target_group):
 		var instance := DrainArea.instantiate()
 		instance.position = node.position
-		instance.tree_entered.connect(func(): areas_summoned += 1)
-		instance.tree_exited.connect(func(): areas_summoned -= 1)
+		instance.tree_entered.connect(func(): area_count += 1)
+		instance.tree_exited.connect(func(): area_count -= 1)
 		owner.add_sibling(instance, true)
 
 	summoned.emit()
