@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=56 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_visibility_filter/peer_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
@@ -31,7 +31,6 @@
 [ext_resource type="PackedScene" uid="uid://dc3f3sy1vso5f" path="res://src/mediators/group_bool/group_bool.tscn" id="16_q6wqq"]
 [ext_resource type="PackedScene" uid="uid://b55ojigpr88dd" path="res://src/mediators/state_component/costume_animation/costume_animation.tscn" id="18_bcsx6"]
 [ext_resource type="PackedScene" uid="uid://b30o6hj6qsvu2" path="res://src/mediators/controller_state_chart_expression_properties/controller_state_chart_expression_properties.tscn" id="18_o8e6t"]
-[ext_resource type="Script" path="res://src/remote_property.gd" id="19_c6cbw"]
 [ext_resource type="PackedScene" uid="uid://bfhqyxu3iuptm" path="res://src/mediators/event_to_signal/event_to_signal.tscn" id="20_j823j"]
 [ext_resource type="PackedScene" uid="uid://cecfpltx40gs5" path="res://src/greater_timer/greater_timer.tscn" id="20_l54rd"]
 [ext_resource type="PackedScene" uid="uid://dwfdqhbgq4vvr" path="res://src/mediators/set_bool/set_bool.tscn" id="20_tfmeu"]
@@ -114,7 +113,7 @@ replication_config = SubResource("SceneReplicationConfig_hsnve")
 [node name="CallHolder" parent="MultiplayerSynchronizer/PeerVisibilityFilter" instance=ExtResource("5_s7auc")]
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
-nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../Synced/ControllerStateChartExpressionProperties"), NodePath("../Synced/RemoteProperty"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior")]
+nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../Synced/ControllerStateChartExpressionProperties"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior")]
 
 [node name="GrabCutscene" parent="." instance=ExtResource("4_qoosa")]
 
@@ -560,13 +559,6 @@ state_chart = NodePath("../../StateChart")
 controller = NodePath("..")
 state_chart = NodePath("../../StateChart")
 
-[node name="RemoteProperty" type="Node" parent="Synced" node_paths=PackedStringArray("source_node", "destination_node")]
-script = ExtResource("19_c6cbw")
-source_node = NodePath("..")
-source_property = &"move_vector"
-destination_node = NodePath("../../GhostPlaceholder/Behavior")
-destination_property = &"direction_vector"
-
 [node name="AuraLarge" parent="." instance=ExtResource("13_e27lr")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AuraLarge"]
@@ -731,8 +723,6 @@ max_variable = "max_charge"
 [connection signal="property_changed" from="Summon/NamedPropertySignals" to="StateChart" method="set_expression_property"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="StateChart/Base/Behavior/Dead/IsDead" method="set_true"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Dead" to="StateChart/Base/Behavior/Dead/IsDead" method="set_false"]
-[connection signal="child_state_entered" from="StateChart/Base/Behavior/Alive" to="Synced/RemoteProperty" method="use_idle_callback"]
-[connection signal="child_state_exited" from="StateChart/Base/Behavior/Alive" to="Synced/RemoteProperty" method="use_manual_callback_only"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Grabber/EnableGrabber" method="set_true_deferred"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Normal" to="Grabber/EnableGrabber" method="set_false_deferred"]
 [connection signal="state_physics_processing" from="StateChart/Base/Behavior/Alive/Normal" to="StateChart/Base/Behavior/Alive/Normal/Move" method="manual_physics_process"]
@@ -782,6 +772,7 @@ max_variable = "max_charge"
 [connection signal="move_vector_changed_normalized" from="Synced" to="StateChart/Base/Behavior/Alive/Normal/Move" method="set_move_vector"]
 [connection signal="move_vector_changed_normalized" from="Synced" to="StateChart/Base/Behavior/Alive/Sprint/Move" method="set_move_vector"]
 [connection signal="move_vector_changed_normalized" from="Synced" to="StateChart/Base/Behavior/Alive/Panic/Move" method="set_move_vector"]
+[connection signal="move_vector_changed_normalized" from="Synced" to="GhostPlaceholder/Behavior" method="set_direction_vector"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
 [connection signal="damage_taken" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/SignalToEvent" method="receive_signal"]
 [connection signal="damaged_by" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageValueSignal" method="take_damage"]
