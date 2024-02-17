@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=55 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -16,7 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="9_muve1"]
 [ext_resource type="PackedScene" uid="uid://dc3f3sy1vso5f" path="res://src/mediators/group_bool/group_bool.tscn" id="9_n4b8t"]
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="10_3bo02"]
-[ext_resource type="PackedScene" uid="uid://b55ojigpr88dd" path="res://src/mediators/state_component/costume_animation/costume_animation.tscn" id="11_ww6av"]
 [ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/mediators/state_component/move/move.tscn" id="12_r3uq0"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="12_y0078"]
 [ext_resource type="PackedScene" uid="uid://dji2viacu4vc" path="res://src/mediators/state_component/flashlight_battery_low/flashlight_battery_low.tscn" id="13_mj4y5"]
@@ -156,10 +155,8 @@ script = ExtResource("4_x2w3t")
 to = NodePath("../../Alive")
 event = &"revived"
 
-[node name="CostumeAnimation" parent="StateChart/Base/Dead" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("11_ww6av")]
-animation_name = "dead"
-costume_behavior = NodePath("../../../../YSort/HunterPlaceholder/Behavior")
-active_state = NodePath("..")
+[node name="AnimationEvent" parent="StateChart/Base/Dead" instance=ExtResource("28_m0gko")]
+emit_event = &"dead"
 
 [node name="DisableCollision" parent="StateChart/Base/Dead" node_paths=PackedStringArray("target_node") instance=ExtResource("9_bnpp0")]
 editor_description = "Disables collision when hunter is dead, allowing other hunters to move through this hunter."
@@ -195,10 +192,8 @@ to = NodePath("../../Move/MoveSlow")
 event = &"move_started"
 guard = SubResource("Resource_pc1mk")
 
-[node name="CostumeAnimation" parent="StateChart/Base/Alive/Movement/Idle" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("11_ww6av")]
-animation_name = "idle"
-costume_behavior = NodePath("../../../../../../YSort/HunterPlaceholder/Behavior")
-active_state = NodePath("..")
+[node name="AnimationEvent" parent="StateChart/Base/Alive/Movement/Idle" instance=ExtResource("28_m0gko")]
+emit_event = &"idle"
 
 [node name="ControllerStateChartEnterEvents" parent="StateChart/Base/Alive/Movement/Idle" node_paths=PackedStringArray("controller", "state_chart", "active_state") instance=ExtResource("14_25vcg")]
 controller = NodePath("../../../../../../Synced")
@@ -214,10 +209,8 @@ script = ExtResource("4_x2w3t")
 to = NodePath("../../Idle")
 event = &"move_stopped"
 
-[node name="CostumeAnimation" parent="StateChart/Base/Alive/Movement/Move" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("11_ww6av")]
-animation_name = "move"
-costume_behavior = NodePath("../../../../../../YSort/HunterPlaceholder/Behavior")
-active_state = NodePath("..")
+[node name="AnimationEvent" parent="StateChart/Base/Alive/Movement/Move" instance=ExtResource("28_m0gko")]
+emit_event = &"move"
 
 [node name="ControllerStateChartEnterEvents" parent="StateChart/Base/Alive/Movement/Move" node_paths=PackedStringArray("controller", "state_chart", "active_state") instance=ExtResource("14_25vcg")]
 controller = NodePath("../../../../../../Synced")
@@ -484,6 +477,7 @@ sprite = NodePath("..")
 [connection signal="changed_to_remote" from="PeerID" to="Camera2D/CameraEnabled" method="set_false"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/PeerNameLabel" method="show"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D/ClearSpriteTexture" method="clear_texture"]
+[connection signal="state_entered" from="StateChart/Base/Dead" to="StateChart/Base/Dead/AnimationEvent" method="receive_signal"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="StateChart/Base/Dead/DisableCollision" method="set_true_deferred"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="StateChart/Base/Dead/IsDead" method="set_true"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="DamageSignals/Revivable" method="enable"]
@@ -494,11 +488,16 @@ sprite = NodePath("..")
 [connection signal="state_exited" from="StateChart/Base/Dead" to="StateChart/Base/Dead/IsDead" method="set_false"]
 [connection signal="state_exited" from="StateChart/Base/Dead" to="DamageSignals/Revivable" method="disable"]
 [connection signal="state_exited" from="StateChart/Base/Dead" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" method="hide"]
+[connection signal="signal_received" from="StateChart/Base/Dead/AnimationEvent" to="YSort/HunterPlaceholder/Behavior" method="set_animation_name"]
 [connection signal="state_entered" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior" method="enable"]
 [connection signal="state_entered" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/FlashlightController" method="enable"]
 [connection signal="state_entered" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/RemoteProperty" method="use_physics_callback"]
 [connection signal="state_exited" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/FlashlightController" method="disable"]
 [connection signal="state_exited" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/RemoteProperty" method="use_manual_callback_only"]
+[connection signal="state_entered" from="StateChart/Base/Alive/Movement/Idle" to="StateChart/Base/Alive/Movement/Idle/AnimationEvent" method="receive_signal"]
+[connection signal="signal_received" from="StateChart/Base/Alive/Movement/Idle/AnimationEvent" to="YSort/HunterPlaceholder/Behavior" method="set_animation_name"]
+[connection signal="state_entered" from="StateChart/Base/Alive/Movement/Move" to="StateChart/Base/Alive/Movement/Move/AnimationEvent" method="receive_signal"]
+[connection signal="signal_received" from="StateChart/Base/Alive/Movement/Move/AnimationEvent" to="YSort/HunterPlaceholder/Behavior" method="set_animation_name"]
 [connection signal="state_physics_processing" from="StateChart/Base/Alive/Movement/Move/MoveNormal" to="StateChart/Base/Alive/Movement/Move/MoveNormal/Move" method="manual_physics_process"]
 [connection signal="state_physics_processing" from="StateChart/Base/Alive/Movement/Move/MoveSlow" to="StateChart/Base/Alive/Movement/Move/MoveSlow/Move" method="manual_physics_process"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="StateChart/Base/Alive/Vulnerability/Invulnerable/AnimationEvent" method="receive_signal"]

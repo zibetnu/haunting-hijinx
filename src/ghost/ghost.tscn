@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=55 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_visibility_filter/peer_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
@@ -29,7 +29,6 @@
 [ext_resource type="PackedScene" uid="uid://ctcjena4x8kr0" path="res://src/aura/aura.tscn" id="13_e27lr"]
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/auto_texture_progress_bar/auto_texture_progress_bar.tscn" id="15_nnx8e"]
 [ext_resource type="PackedScene" uid="uid://dc3f3sy1vso5f" path="res://src/mediators/group_bool/group_bool.tscn" id="16_q6wqq"]
-[ext_resource type="PackedScene" uid="uid://b55ojigpr88dd" path="res://src/mediators/state_component/costume_animation/costume_animation.tscn" id="18_bcsx6"]
 [ext_resource type="PackedScene" uid="uid://b30o6hj6qsvu2" path="res://src/mediators/controller_state_chart_expression_properties/controller_state_chart_expression_properties.tscn" id="18_o8e6t"]
 [ext_resource type="PackedScene" uid="uid://bfhqyxu3iuptm" path="res://src/mediators/event_to_signal/event_to_signal.tscn" id="20_j823j"]
 [ext_resource type="PackedScene" uid="uid://cecfpltx40gs5" path="res://src/greater_timer/greater_timer.tscn" id="20_l54rd"]
@@ -413,66 +412,50 @@ initial_state = NodePath("Idle")
 [node name="Dead" type="Node" parent="StateChart/Base/Animation"]
 script = ExtResource("5_6yps6")
 
-[node name="CostumeAnimation" parent="StateChart/Base/Animation/Dead" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("18_bcsx6")]
-animation_name = "dead"
-costume_behavior = NodePath("../../../../../GhostPlaceholder/Behavior")
-active_state = NodePath("..")
+[node name="AnimationEvent" parent="StateChart/Base/Animation/Dead" instance=ExtResource("8_kd7ea")]
+emit_event = &"dead"
 
 [node name="Idle" type="Node" parent="StateChart/Base/Animation"]
 script = ExtResource("5_6yps6")
 
-[node name="CostumeAnimation" parent="StateChart/Base/Animation/Idle" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("18_bcsx6")]
-animation_name = "idle"
-costume_behavior = NodePath("../../../../../GhostPlaceholder/Behavior")
-active_state = NodePath("..")
+[node name="AnimationEvent" parent="StateChart/Base/Animation/Idle" instance=ExtResource("8_kd7ea")]
+emit_event = &"idle"
 
 [node name="Move" type="Node" parent="StateChart/Base/Animation"]
 script = ExtResource("5_6yps6")
 
-[node name="CostumeAnimation" parent="StateChart/Base/Animation/Move" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("18_bcsx6")]
-animation_name = "move"
-costume_behavior = NodePath("../../../../../GhostPlaceholder/Behavior")
-active_state = NodePath("..")
+[node name="AnimationEvent" parent="StateChart/Base/Animation/Move" instance=ExtResource("8_kd7ea")]
+emit_event = &"move"
 
 [node name="Sprint" type="Node" parent="StateChart/Base/Animation"]
 script = ExtResource("5_6yps6")
 
-[node name="CostumeAnimation" parent="StateChart/Base/Animation/Sprint" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("18_bcsx6")]
-animation_name = "move"
-costume_behavior = NodePath("../../../../../GhostPlaceholder/Behavior")
-active_state = NodePath("..")
+[node name="AnimationEvent" parent="StateChart/Base/Animation/Sprint" instance=ExtResource("8_kd7ea")]
+emit_event = &"move"
 
 [node name="Summon" type="Node" parent="StateChart/Base/Animation"]
 script = ExtResource("5_6yps6")
 
-[node name="CostumeAnimation" parent="StateChart/Base/Animation/Summon" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("18_bcsx6")]
-animation_name = "idle"
-costume_behavior = NodePath("../../../../../GhostPlaceholder/Behavior")
-active_state = NodePath("..")
+[node name="AnimationEvent" parent="StateChart/Base/Animation/Summon" instance=ExtResource("8_kd7ea")]
+emit_event = &"idle"
 
 [node name="Stun" type="Node" parent="StateChart/Base/Animation"]
 script = ExtResource("5_6yps6")
 
-[node name="CostumeAnimation" parent="StateChart/Base/Animation/Stun" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("18_bcsx6")]
-animation_name = "stun"
-costume_behavior = NodePath("../../../../../GhostPlaceholder/Behavior")
-active_state = NodePath("..")
+[node name="AnimationEvent" parent="StateChart/Base/Animation/Stun" instance=ExtResource("8_kd7ea")]
+emit_event = &"stun"
 
 [node name="Panic" type="Node" parent="StateChart/Base/Animation"]
 script = ExtResource("5_6yps6")
 
-[node name="CostumeAnimation" parent="StateChart/Base/Animation/Panic" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("18_bcsx6")]
-animation_name = "panic"
-costume_behavior = NodePath("../../../../../GhostPlaceholder/Behavior")
-active_state = NodePath("..")
+[node name="AnimationEvent" parent="StateChart/Base/Animation/Panic" instance=ExtResource("8_kd7ea")]
+emit_event = &"panic"
 
 [node name="Grab" type="Node" parent="StateChart/Base/Animation"]
 script = ExtResource("5_6yps6")
 
-[node name="CostumeAnimation" parent="StateChart/Base/Animation/Grab" node_paths=PackedStringArray("costume_behavior", "active_state") instance=ExtResource("18_bcsx6")]
-animation_name = "move"
-costume_behavior = NodePath("../../../../../GhostPlaceholder/Behavior")
-active_state = NodePath("..")
+[node name="AnimationEvent" parent="StateChart/Base/Animation/Grab" instance=ExtResource("8_kd7ea")]
+emit_event = &"move"
 
 [node name="Visibility" type="Node" parent="StateChart/Base"]
 script = ExtResource("4_74yim")
@@ -765,6 +748,22 @@ max_variable = "max_charge"
 [connection signal="timeout" from="StateChart/Base/Behavior/Alive/Panic/EndTimer" to="StateChart/Base/Behavior/Alive/Panic/EndTimer/EndPanic" method="receive_signal"]
 [connection signal="signal_received" from="StateChart/Base/Behavior/Alive/Panic/EndTimer/EndPanic" to="StateChart" method="send_event"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Grab" to="GrabCutscene" method="start_cutscene"]
+[connection signal="state_entered" from="StateChart/Base/Animation/Dead" to="StateChart/Base/Animation/Dead/AnimationEvent" method="receive_signal"]
+[connection signal="signal_received" from="StateChart/Base/Animation/Dead/AnimationEvent" to="GhostPlaceholder/Behavior" method="set_animation_name"]
+[connection signal="state_entered" from="StateChart/Base/Animation/Idle" to="StateChart/Base/Animation/Idle/AnimationEvent" method="receive_signal"]
+[connection signal="signal_received" from="StateChart/Base/Animation/Idle/AnimationEvent" to="GhostPlaceholder/Behavior" method="set_animation_name"]
+[connection signal="state_entered" from="StateChart/Base/Animation/Move" to="StateChart/Base/Animation/Move/AnimationEvent" method="receive_signal"]
+[connection signal="signal_received" from="StateChart/Base/Animation/Move/AnimationEvent" to="GhostPlaceholder/Behavior" method="set_animation_name"]
+[connection signal="state_entered" from="StateChart/Base/Animation/Sprint" to="StateChart/Base/Animation/Sprint/AnimationEvent" method="receive_signal"]
+[connection signal="signal_received" from="StateChart/Base/Animation/Sprint/AnimationEvent" to="GhostPlaceholder/Behavior" method="set_animation_name"]
+[connection signal="state_entered" from="StateChart/Base/Animation/Summon" to="StateChart/Base/Animation/Summon/AnimationEvent" method="receive_signal"]
+[connection signal="signal_received" from="StateChart/Base/Animation/Summon/AnimationEvent" to="GhostPlaceholder/Behavior" method="set_animation_name"]
+[connection signal="state_entered" from="StateChart/Base/Animation/Stun" to="StateChart/Base/Animation/Stun/AnimationEvent" method="receive_signal"]
+[connection signal="signal_received" from="StateChart/Base/Animation/Stun/AnimationEvent" to="GhostPlaceholder/Behavior" method="set_animation_name"]
+[connection signal="state_entered" from="StateChart/Base/Animation/Panic" to="StateChart/Base/Animation/Panic/AnimationEvent" method="receive_signal"]
+[connection signal="signal_received" from="StateChart/Base/Animation/Panic/AnimationEvent" to="GhostPlaceholder/Behavior" method="set_animation_name"]
+[connection signal="state_entered" from="StateChart/Base/Animation/Grab" to="StateChart/Base/Animation/Grab/AnimationEvent" method="receive_signal"]
+[connection signal="signal_received" from="StateChart/Base/Animation/Grab/AnimationEvent" to="GhostPlaceholder/Behavior" method="set_animation_name"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="enable"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="disable"]
 [connection signal="state_entered" from="StateChart/Base/Vulnerability/Invulnerable" to="StateChart/Base/Vulnerability/Invulnerable/MonitorDamage" method="set_false"]
