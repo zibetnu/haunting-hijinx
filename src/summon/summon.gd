@@ -4,6 +4,7 @@ extends Node
 
 signal area_count_changed(area_count: int)
 signal summon_charged
+signal summon_charging
 signal summoned
 
 const DrainArea := preload("res://src/summon/drain_area/drain_area.tscn")
@@ -12,7 +13,9 @@ const DrainArea := preload("res://src/summon/drain_area/drain_area.tscn")
 @export var charging := false:
 	set(value):
 		charging = value
-		set_physics_process(value)
+		set_physics_process(charging)
+		if charging:
+			summon_charging.emit()
 
 @export var target_group: StringName
 

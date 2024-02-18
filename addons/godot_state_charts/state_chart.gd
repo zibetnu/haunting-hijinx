@@ -46,6 +46,7 @@ var _transitions_processing_active:bool = false
 
 
 var _debugger_remote:DebuggerRemote = null
+var _is_ready:bool = false
 
 
 func _ready() -> void:
@@ -75,6 +76,8 @@ func _ready() -> void:
 	if track_in_editor and OS.has_feature("editor"):
 		_debugger_remote = DebuggerRemote.new(self)
 
+	_is_ready = true
+
 
 ## Sends an event to this state chart. The event will be passed to the innermost active state first and
 ## is then moving up in the tree until it is consumed. Events will trigger transitions and actions via emitted
@@ -97,14 +100,14 @@ func send_event(event:StringName) -> void:
 	
 	# first process this event.
 	event_received.emit(event)
-	_state._state_event(event)
+	_state._process_transitions(event, false)
 	
 	# if other events have accumulated while the event was processing
 	# process them in order now
 	while _queued_events.size() > 0:
 		var next_event = _queued_events.pop_front()
 		event_received.emit(next_event)
-		_state._state_event(next_event)
+		_state._process_transitions(next_event, false)
 		
 	_event_processing_active = false
 
@@ -147,6 +150,11 @@ func _warn_not_active(transition:Transition, source:State):
 ## an expression guard.
 func set_expression_property(name:StringName, value) -> void:
 	_expression_properties[name] = value
+	# run a property change event through the state chart to run automatic transitions
+	if not _is_ready:
+		await ready
+
+	_state._process_transitions(&"", true)
 
 
 ## Calls the `step` function in all active states. Used for situations where `state_processing` and 
