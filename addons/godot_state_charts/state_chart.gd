@@ -46,7 +46,7 @@ var _transitions_processing_active:bool = false
 
 
 var _debugger_remote:DebuggerRemote = null
-var _is_ready:bool = false
+var _first_process_frame_started := false
 
 
 func _ready() -> void:
@@ -76,7 +76,10 @@ func _ready() -> void:
 	if track_in_editor and OS.has_feature("editor"):
 		_debugger_remote = DebuggerRemote.new(self)
 
-	_is_ready = true
+	get_tree().process_frame.connect(
+			func(): _first_process_frame_started = true,
+			CONNECT_ONE_SHOT
+	)
 
 
 ## Sends an event to this state chart. The event will be passed to the innermost active state first and
@@ -85,8 +88,7 @@ func _ready() -> void:
 ## will process the event as soon as possible but there is no guarantee that the 
 ## event will be fully processed when this method returns.
 func send_event(event:StringName) -> void:
-	if not is_instance_valid(_state):
-		push_error("StateMachine is not initialized")
+	if not await _all_ready_and_state_valid():
 		return
 		
 	if _event_processing_active:
@@ -149,17 +151,20 @@ func _warn_not_active(transition:Transition, source:State):
 ## with the same name. E.g. if you set the property "foo" to 42, you can use the expression "foo == 42" in
 ## an expression guard.
 func set_expression_property(name:StringName, value) -> void:
+	if not await _all_ready_and_state_valid():
+		return
+
 	_expression_properties[name] = value
 	# run a property change event through the state chart to run automatic transitions
-	if not _is_ready:
-		await ready
-
 	_state._process_transitions(&"", true)
 
 
 ## Calls the `step` function in all active states. Used for situations where `state_processing` and 
 ## `state_physics_processing` don't make sense (e.g. turn-based games, or games with a fixed timestep).
 func step():
+	if not await _all_ready_and_state_valid():
+		return
+
 	_state._state_step()
 
 func _get_configuration_warnings() -> PackedStringArray:
@@ -171,3 +176,14 @@ func _get_configuration_warnings() -> PackedStringArray:
 		if not child is State:
 			warnings.append("StateChart's child must be a State")
 	return warnings
+
+
+func _all_ready_and_state_valid() -> bool:
+	if not _first_process_frame_started:
+		await get_tree().process_frame
+
+	if not is_instance_valid(_state):
+		push_error("Child State is invalid.")
+		return false
+
+	return true
