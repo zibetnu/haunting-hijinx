@@ -18,6 +18,14 @@ const CAST_SHORT_MAX_INDEX = 4
 			data.changed.connect(_on_data_changed)
 
 @export_range(0, 1) var default_set_battery_percentage = 1.0
+@export var enabled := true:
+	set(value):
+		enabled = value
+		set_deferred("monitorable", enabled)
+		set_physics_process(enabled)
+		if not enabled:
+			powered = false
+
 @export var powered: bool:
 	get:
 		return data.flashlight_powered
@@ -30,6 +38,10 @@ const CAST_SHORT_MAX_INDEX = 4
 @export var target_rotation: float:
 	set(value):
 		target_rotation = value
+
+var is_battery_low: bool:
+	get:
+		return data.battery_percentage < data.battery_low_percentage
 
 
 func _physics_process(delta: float) -> void:
@@ -76,14 +88,11 @@ func _physics_process(delta: float) -> void:
 
 
 func disable() -> void:
-	set_deferred("monitorable", false)
-	set_physics_process(false)
-	powered = false
+	enabled = false
 
 
 func enable() -> void:
-	set_deferred("monitorable", true)
-	set_physics_process(true)
+	enabled = true
 
 
 func power_off() -> void:

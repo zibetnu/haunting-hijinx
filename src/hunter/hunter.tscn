@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=54 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -18,7 +18,6 @@
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="10_3bo02"]
 [ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/mediators/state_component/move/move.tscn" id="12_r3uq0"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="12_y0078"]
-[ext_resource type="PackedScene" uid="uid://dji2viacu4vc" path="res://src/mediators/state_component/flashlight_battery_low/flashlight_battery_low.tscn" id="13_mj4y5"]
 [ext_resource type="PackedScene" uid="uid://bm0ar7asqubxm" path="res://src/mediators/state_component/controller_state_chart_enter_events/controller_state_chart_enter_events.tscn" id="14_25vcg"]
 [ext_resource type="PackedScene" uid="uid://cy4qrm44icmyy" path="res://src/flashlight/flashlight.tscn" id="15_hljm8"]
 [ext_resource type="PackedScene" uid="uid://co1edbkdtjj35" path="res://src/mediators/flashlight_state_chart_events/flashlight_state_chart_events.tscn" id="16_c1vhd"]
@@ -168,10 +167,6 @@ group = &"levels"
 
 [node name="Alive" type="Node" parent="StateChart/Base"]
 script = ExtResource("12_y0078")
-
-[node name="FlashlightBatteryLow" parent="StateChart/Base/Alive" node_paths=PackedStringArray("flashlight_data", "active_state") instance=ExtResource("13_mj4y5")]
-flashlight_data = NodePath("../../../../YSort/Flashlight/Data")
-active_state = NodePath("..")
 
 [node name="Movement" type="Node" parent="StateChart/Base/Alive"]
 script = ExtResource("2_yqkoe")
