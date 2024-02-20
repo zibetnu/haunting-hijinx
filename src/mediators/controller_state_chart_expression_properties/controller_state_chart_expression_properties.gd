@@ -19,5 +19,5 @@ func _on_controller_input_handled() -> void:
 
 	state_chart.set_expression_property("move_vector", controller.move_vector)
 	state_chart.set_expression_property("look_vector", controller.look_vector)
-	state_chart.set_expression_property("button_1_pressed", controller.button_1_pressed)
-	state_chart.set_expression_property("button_2_pressed", controller.button_2_pressed)
+	state_chart.set_expression_property("button_1_pressed", controller.button_1)
+	state_chart.set_expression_property("button_2_pressed", controller.button_2)

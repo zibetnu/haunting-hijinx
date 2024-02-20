@@ -31,13 +31,19 @@ const CAST_SHORT_MAX_INDEX = 4
 		return data.flashlight_powered
 
 	set(value):
-		data.flashlight_powered = value and data.battery > 0
+		data.flashlight_powered = data.battery > 0 and enabled and value
 		if value and data.battery == 0:
 			powering_failed.emit()
 
-@export var target_rotation: float:
+@export var target_rotation: float
+@export var target_vector: Vector2:
+	get:
+		return Vector2.from_angle(target_rotation)
+
 	set(value):
-		target_rotation = value
+		if not value.is_zero_approx():
+			target_rotation = value.angle()
+
 
 var is_battery_low: bool:
 	get:
@@ -51,7 +57,10 @@ func _physics_process(delta: float) -> void:
 			data.flashlight_turn_speed * delta
 	)
 
-	powered = powered and data.battery > 0
+	if data.battery <= 0:
+		powered = false
+		return
+
 	if not powered:
 		return
 
@@ -113,6 +122,10 @@ func set_powered(value: bool) -> void:
 
 func set_target_rotation(value: float) -> void:
 	target_rotation = value
+
+
+func set_target_vector(value: Vector2) -> void:
+	target_vector = value
 
 
 func take_damage(source: DamageSource) -> void:

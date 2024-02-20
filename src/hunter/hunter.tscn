@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=53 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="5_uqurr"]
 [ext_resource type="PackedScene" uid="uid://gvf2peg6yuns" path="res://src/controller/unpause_force/unpause_force.tscn" id="6_ujhjn"]
 [ext_resource type="PackedScene" uid="uid://c18war56not2c" path="res://src/mediators/controller_state_chart_events/controller_state_chart_events.tscn" id="7_1ehsk"]
-[ext_resource type="PackedScene" uid="uid://dfah2vi4kgnu7" path="res://src/mediators/flashlight_controller/flashlight_controller.tscn" id="7_ew1lp"]
 [ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="7_lf1vk"]
 [ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="8_dmlm5"]
 [ext_resource type="PackedScene" uid="uid://dwfdqhbgq4vvr" path="res://src/mediators/set_bool/set_bool.tscn" id="9_bnpp0"]
@@ -357,24 +356,19 @@ y_sort_enabled = true
 [node name="Behavior" parent="YSort/Flashlight" index="1"]
 default_set_battery_percentage = 0.75
 
-[node name="FlashlightController" parent="YSort/Flashlight/Behavior" index="0" node_paths=PackedStringArray("flashlight_behavior", "controller") instance=ExtResource("7_ew1lp")]
-enabled = false
-flashlight_behavior = NodePath("..")
-controller = NodePath("../../../../Synced")
-
-[node name="FlashlightEventBatteryAlert" parent="YSort/Flashlight/Behavior" index="3" node_paths=PackedStringArray("battery_alert", "state_chart") instance=ExtResource("24_1dwup")]
+[node name="FlashlightEventBatteryAlert" parent="YSort/Flashlight/Behavior" index="2" node_paths=PackedStringArray("battery_alert", "state_chart") instance=ExtResource("24_1dwup")]
 battery_alert = NodePath("../../../../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert")
 state_chart = NodePath("../../../../StateChart")
 
-[node name="FlashlightStateChartEvents" parent="YSort/Flashlight/Behavior" index="4" node_paths=PackedStringArray("flashlight_data", "state_chart") instance=ExtResource("16_c1vhd")]
+[node name="FlashlightStateChartEvents" parent="YSort/Flashlight/Behavior" index="3" node_paths=PackedStringArray("flashlight_data", "state_chart") instance=ExtResource("16_c1vhd")]
 flashlight_data = NodePath("../../Data")
 state_chart = NodePath("../../../../StateChart")
 
-[node name="FlashlightStateChartProperties" parent="YSort/Flashlight/Behavior" index="5" node_paths=PackedStringArray("flashlight_data", "state_chart") instance=ExtResource("22_lt6pn")]
+[node name="FlashlightStateChartProperties" parent="YSort/Flashlight/Behavior" index="4" node_paths=PackedStringArray("flashlight_data", "state_chart") instance=ExtResource("22_lt6pn")]
 flashlight_data = NodePath("../../Data")
 state_chart = NodePath("../../../../StateChart")
 
-[node name="RemoteProperty" type="Node" parent="YSort/Flashlight/Behavior" index="6" node_paths=PackedStringArray("source_node", "destination_node")]
+[node name="RemoteProperty" type="Node" parent="YSort/Flashlight/Behavior" index="5" node_paths=PackedStringArray("source_node", "destination_node")]
 script = ExtResource("18_mpyxa")
 process_callback = 2
 source_node = NodePath("../RotationToVector")
@@ -382,7 +376,7 @@ source_property = "vector"
 destination_node = NodePath("../../../HunterPlaceholder/Behavior")
 destination_property = "direction_vector"
 
-[node name="RotationToVector" parent="YSort/Flashlight/Behavior" index="7" node_paths=PackedStringArray("source_node") instance=ExtResource("16_se1mq")]
+[node name="RotationToVector" parent="YSort/Flashlight/Behavior" index="6" node_paths=PackedStringArray("source_node") instance=ExtResource("16_se1mq")]
 source_node = NodePath("../../Data")
 source_variable = "flashlight_rotation"
 
@@ -485,9 +479,8 @@ sprite = NodePath("..")
 [connection signal="state_exited" from="StateChart/Base/Dead" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" method="hide"]
 [connection signal="signal_received" from="StateChart/Base/Dead/AnimationEvent" to="YSort/HunterPlaceholder/Behavior" method="set_animation_name"]
 [connection signal="state_entered" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior" method="enable"]
-[connection signal="state_entered" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/FlashlightController" method="enable"]
 [connection signal="state_entered" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/RemoteProperty" method="use_physics_callback"]
-[connection signal="state_exited" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/FlashlightController" method="disable"]
+[connection signal="state_exited" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior" method="disable"]
 [connection signal="state_exited" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/RemoteProperty" method="use_manual_callback_only"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Movement/Idle" to="StateChart/Base/Alive/Movement/Idle/AnimationEvent" method="receive_signal"]
 [connection signal="signal_received" from="StateChart/Base/Alive/Movement/Idle/AnimationEvent" to="YSort/HunterPlaceholder/Behavior" method="set_animation_name"]
@@ -503,6 +496,8 @@ sprite = NodePath("..")
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="StateChart/Base/Alive/Vulnerability/Vulnerable/AnimationEvent" method="receive_signal"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="Grabbable/EnableGrabbable" method="set_true_deferred"]
 [connection signal="signal_received" from="StateChart/Base/Alive/Vulnerability/Vulnerable/AnimationEvent" to="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer" method="play"]
+[connection signal="button_1_changed" from="Synced" to="YSort/Flashlight/Behavior" method="set_powered"]
+[connection signal="look_vector_changed_normalized" from="Synced" to="YSort/Flashlight/Behavior" method="set_target_vector"]
 [connection signal="move_vector_changed_normalized" from="Synced" to="StateChart/Base/Alive/Movement/Move/MoveNormal/Move" method="set_move_vector"]
 [connection signal="move_vector_changed_normalized" from="Synced" to="StateChart/Base/Alive/Movement/Move/MoveSlow/Move" method="set_move_vector"]
 [connection signal="sensed_intensity_changed" from="AuraSense" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_alert_level_from_int"]

@@ -21,7 +21,7 @@ func _send_move_vector_event() -> void:
 
 
 func _send_button_1_event() -> void:
-	if controller.button_1_pressed:
+	if controller.button_1:
 		state_chart.send_event("button_1_pressed")
 
 	else:
@@ -29,7 +29,7 @@ func _send_button_1_event() -> void:
 
 
 func _send_button_2_event() -> void:
-	if controller.button_2_pressed:
+	if controller.button_2:
 		state_chart.send_event("button_2_pressed")
 
 	else:

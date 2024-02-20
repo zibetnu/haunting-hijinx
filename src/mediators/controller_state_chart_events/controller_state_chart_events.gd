@@ -14,8 +14,8 @@ extends Node
 
 var _previous_move_vector := Vector2.ZERO
 var _previous_look_vector := Vector2.ZERO
-var _previous_button_1_pressed := false
-var _previous_button_2_pressed := false
+var _previous_button_1 := false
+var _previous_button_2 := false
 
 
 func _send_event(event: StringName) -> void:
@@ -37,8 +37,8 @@ func _on_controller_input_handled() -> void:
 			_send_event("move_started")
 
 	var button_1_state: Array[bool] = [
-		_previous_button_1_pressed == controller.button_1_pressed,
-		controller.button_1_pressed
+		_previous_button_1 == controller.button_1,
+		controller.button_1
 	]
 	match button_1_state:
 		[false, false]:
@@ -48,8 +48,8 @@ func _on_controller_input_handled() -> void:
 			_send_event("button_1_pressed")
 
 	var button_2_state: Array[bool] = [
-		_previous_button_2_pressed == controller.button_2_pressed,
-		controller.button_2_pressed
+		_previous_button_2 == controller.button_2,
+		controller.button_2
 	]
 	match button_2_state:
 		[false, false]:
@@ -60,5 +60,5 @@ func _on_controller_input_handled() -> void:
 
 	_previous_move_vector = controller.move_vector
 	_previous_look_vector = controller.look_vector
-	_previous_button_1_pressed = controller.button_1_pressed
-	_previous_button_2_pressed = controller.button_2_pressed
+	_previous_button_1 = controller.button_1
+	_previous_button_2 = controller.button_2
