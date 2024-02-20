@@ -11,17 +11,9 @@ enum AlertLevel {
 @export var alert_level: AlertLevel:
 	set(value):
 		alert_level = value
-		if _is_ready:
-			_update_animation()
-
-var _is_ready := false
+		_update_animation()
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-
-
-func _ready() -> void:
-	_update_animation()
-	_is_ready = true
 
 
 func set_alert_level(value: AlertLevel) -> void:
@@ -40,6 +32,9 @@ func set_alert_level_from_int(value: int) -> void:
 
 
 func _update_animation() -> void:
+	if not is_node_ready():
+		await ready
+
 	match alert_level:
 		AlertLevel.NONE:
 			animation_player.play("RESET")

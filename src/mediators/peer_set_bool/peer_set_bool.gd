@@ -21,11 +21,8 @@ enum Mode {
 		property_value = value
 		_update_bool()
 
-var _is_ready := false
-
 
 func _ready() -> void:
-	_is_ready = true
 	_update_bool()
 
 
@@ -50,8 +47,8 @@ func set_value_true() -> void:
 
 
 func _update_bool() -> void:
-	if not _is_ready:
-		return
+	if not is_node_ready():
+		await ready
 
 	if false_for == Mode.LOCAL_PEER_ONLY:
 		node.set(property_name, property_value or not is_local_peer)
