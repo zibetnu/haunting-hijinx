@@ -1,8 +1,8 @@
 extends Node
 
 
-signal health_zeroed
-signal health_maxed
+signal health_emptied
+signal health_filled
 
 
 @export var health_time := 10
@@ -10,10 +10,10 @@ signal health_maxed
 var health := max_health:
 	set(value):
 		if health > 0 and value == 0:
-			health_zeroed.emit()
+			health_emptied.emit()
 
 		if health < max_health and value >= max_health:
-			health_maxed.emit()
+			health_filled.emit()
 
 		health = clampi(value, 0, max_health)
 

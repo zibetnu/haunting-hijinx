@@ -171,10 +171,10 @@ bool_name = &"monitorable"
 script = ExtResource("4_74yim")
 initial_state = NodePath("Normal")
 
-[node name="HealthZeroed" type="Node" parent="StateChart/Base/Behavior/Alive"]
+[node name="Died" type="Node" parent="StateChart/Base/Behavior/Alive"]
 script = ExtResource("6_il0ju")
 to = NodePath("../../Dead")
-event = &"health_zeroed"
+event = &"died"
 
 [node name="PanicStarted" type="Node" parent="StateChart/Base/Behavior/Alive"]
 script = ExtResource("6_il0ju")
@@ -406,7 +406,7 @@ event = &"grabbed"
 [node name="HealthZeroed" type="Node" parent="StateChart/Base/Animation"]
 script = ExtResource("6_il0ju")
 to = NodePath("../Dead")
-event = &"health_zeroed"
+event = &"died"
 
 [node name="PanicStarted" type="Node" parent="StateChart/Base/Animation"]
 script = ExtResource("6_il0ju")
@@ -566,8 +566,8 @@ weak_to = 1
 
 [node name="Health" parent="DamageSignals/WeakTo/DamageValueSignal" instance=ExtResource("38_arcfj")]
 
-[node name="SignalToEvent" parent="DamageSignals/WeakTo/DamageValueSignal/Health" instance=ExtResource("8_kd7ea")]
-emit_event = &"health_zeroed"
+[node name="DiedEvent" parent="DamageSignals/WeakTo/DamageValueSignal/Health" instance=ExtResource("8_kd7ea")]
+emit_event = &"died"
 
 [node name="SignalToEvent" parent="DamageSignals/WeakTo" instance=ExtResource("8_kd7ea")]
 emit_event = &"damaged"
@@ -800,8 +800,8 @@ max_variable = "max_charge"
 [connection signal="damage_taken" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/SignalToEvent" method="receive_signal"]
 [connection signal="damaged_by" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageValueSignal" method="take_damage"]
 [connection signal="damaged_by_amount" from="DamageSignals/WeakTo/DamageValueSignal" to="DamageSignals/WeakTo/DamageValueSignal/Health" method="subtract_health"]
-[connection signal="health_zeroed" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="DamageSignals/WeakTo/DamageValueSignal/Health/SignalToEvent" method="receive_signal"]
-[connection signal="signal_received" from="DamageSignals/WeakTo/DamageValueSignal/Health/SignalToEvent" to="StateChart" method="send_event"]
+[connection signal="health_emptied" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="DamageSignals/WeakTo/DamageValueSignal/Health/DiedEvent" method="receive_signal"]
+[connection signal="signal_received" from="DamageSignals/WeakTo/DamageValueSignal/Health/DiedEvent" to="StateChart" method="send_event"]
 [connection signal="signal_received" from="DamageSignals/WeakTo/SignalToEvent" to="StateChart" method="send_event"]
 [connection signal="grabbable_grabbed" from="Grabber" to="Grabber/Grabbed" method="receive_signal"]
 [connection signal="signal_received" from="Grabber/Grabbed" to="StateChart" method="send_event"]
