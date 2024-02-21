@@ -35,6 +35,10 @@ func set_direction_vector(value: Vector2) -> void:
 	direction_vector = value
 
 
+func set_direction_vector_from_angle(angle: float) -> void:
+	direction_vector = Vector2.from_angle(angle)
+
+
 func _get_direction_name(direction: Vector2) -> String:
 	var distance := 2 * PI
 	var snapped_vector := Vector2.DOWN

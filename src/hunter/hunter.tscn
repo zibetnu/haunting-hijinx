@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=51 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -20,10 +20,8 @@
 [ext_resource type="PackedScene" uid="uid://bm0ar7asqubxm" path="res://src/mediators/state_component/controller_state_chart_enter_events/controller_state_chart_enter_events.tscn" id="14_25vcg"]
 [ext_resource type="PackedScene" uid="uid://cy4qrm44icmyy" path="res://src/flashlight/flashlight.tscn" id="15_hljm8"]
 [ext_resource type="PackedScene" uid="uid://co1edbkdtjj35" path="res://src/mediators/flashlight_state_chart_events/flashlight_state_chart_events.tscn" id="16_c1vhd"]
-[ext_resource type="PackedScene" uid="uid://myko8836tn6o" path="res://src/rotation_to_vector/rotation_to_vector.tscn" id="16_se1mq"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/not_guard.gd" id="17_gyo55"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="18_e766a"]
-[ext_resource type="Script" path="res://src/remote_property.gd" id="18_mpyxa"]
 [ext_resource type="PackedScene" uid="uid://cssdkhs4cty5c" path="res://src/costume/hunter_placeholder/hunter_placeholder.tscn" id="19_fj04q"]
 [ext_resource type="PackedScene" uid="uid://r1i8jof331aw" path="res://src/mediators/flashlight_state_chart_properties/flashlight_state_chart_properties.tscn" id="22_lt6pn"]
 [ext_resource type="PackedScene" uid="uid://b4i2arqquha56" path="res://src/revivable/revivable.tscn" id="23_d234k"]
@@ -368,18 +366,6 @@ state_chart = NodePath("../../../../StateChart")
 flashlight_data = NodePath("../../Data")
 state_chart = NodePath("../../../../StateChart")
 
-[node name="RemoteProperty" type="Node" parent="YSort/Flashlight/Behavior" index="5" node_paths=PackedStringArray("source_node", "destination_node")]
-script = ExtResource("18_mpyxa")
-process_callback = 2
-source_node = NodePath("../RotationToVector")
-source_property = "vector"
-destination_node = NodePath("../../../HunterPlaceholder/Behavior")
-destination_property = "direction_vector"
-
-[node name="RotationToVector" parent="YSort/Flashlight/Behavior" index="6" node_paths=PackedStringArray("source_node") instance=ExtResource("16_se1mq")]
-source_node = NodePath("../../Data")
-source_variable = "flashlight_rotation"
-
 [node name="HunterPlaceholder" parent="YSort" instance=ExtResource("19_fj04q")]
 
 [node name="InvulnerableAnimationPlayer" type="AnimationPlayer" parent="YSort/HunterPlaceholder/Display" index="2"]
@@ -479,9 +465,7 @@ sprite = NodePath("..")
 [connection signal="state_exited" from="StateChart/Base/Dead" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" method="hide"]
 [connection signal="signal_received" from="StateChart/Base/Dead/AnimationEvent" to="YSort/HunterPlaceholder/Behavior" method="set_animation_name"]
 [connection signal="state_entered" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior" method="enable"]
-[connection signal="state_entered" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/RemoteProperty" method="use_physics_callback"]
 [connection signal="state_exited" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior" method="disable"]
-[connection signal="state_exited" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior/RemoteProperty" method="use_manual_callback_only"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Movement/Idle" to="StateChart/Base/Alive/Movement/Idle/AnimationEvent" method="receive_signal"]
 [connection signal="signal_received" from="StateChart/Base/Alive/Movement/Idle/AnimationEvent" to="YSort/HunterPlaceholder/Behavior" method="set_animation_name"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Movement/Move" to="StateChart/Base/Alive/Movement/Move/AnimationEvent" method="receive_signal"]
@@ -510,6 +494,7 @@ sprite = NodePath("..")
 [connection signal="signal_received" from="DamageSignals/WeakTo/Died" to="StateChart" method="send_event"]
 [connection signal="grabbed" from="Grabbable" to="Grabbable/Died" method="receive_signal"]
 [connection signal="signal_received" from="Grabbable/Died" to="StateChart" method="send_event"]
+[connection signal="flashlight_rotation_changed" from="YSort/Flashlight/Data" to="YSort/HunterPlaceholder/Behavior" method="set_direction_vector_from_angle"]
 [connection signal="powering_failed" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead"]
 [connection signal="filter_ready" from="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer/PeerVisibilityFilter" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer" method="add_visibility_filter"]
 [connection signal="process_mode_updated" from="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/PeerProcessMode" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_process_mode"]

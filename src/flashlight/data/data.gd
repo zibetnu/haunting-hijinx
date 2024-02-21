@@ -3,6 +3,7 @@ extends Node
 
 
 signal changed()
+signal flashlight_rotation_changed(flashlight_rotation: float)
 
 @export_group("Flashlight", "flashlight")
 @export var flashlight_powered: bool:
@@ -20,6 +21,7 @@ signal changed()
 
 		flashlight_rotation = value
 		changed.emit()
+		flashlight_rotation_changed.emit(flashlight_rotation)
 
 @export var flashlight_turn_speed := 2 * PI:
 	set(value):
