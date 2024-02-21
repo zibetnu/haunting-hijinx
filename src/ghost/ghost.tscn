@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=54 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_visibility_filter/peer_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
@@ -16,7 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/mediators/state_component/move/move.tscn" id="7_1d45a"]
 [ext_resource type="PackedScene" uid="uid://ca2ymkyj3cv7e" path="res://src/translucent/translucent.tscn" id="7_bmx85"]
 [ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="7_ijrj0"]
-[ext_resource type="PackedScene" uid="uid://dterwqqmikxc1" path="res://src/mediators/signal_to_event/signal_to_event.tscn" id="8_kd7ea"]
 [ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="8_mynla"]
 [ext_resource type="PackedScene" uid="uid://y5w40m6pqbvt" path="res://src/mediators/peer_set_bool/peer_set_bool.tscn" id="8_yrkp2"]
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="9_x08fo"]
@@ -116,9 +115,6 @@ nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../Collisio
 
 [node name="GrabCutscene" parent="." instance=ExtResource("4_qoosa")]
 
-[node name="SignalToEvent" parent="GrabCutscene" instance=ExtResource("8_kd7ea")]
-emit_event = &"panic_started"
-
 [node name="PeerID" parent="." groups=["ghost_peer_ids"] instance=ExtResource("2_bh3m0")]
 
 [node name="GhostTranslucent" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_bmx85")]
@@ -131,12 +127,6 @@ property_name = &"visible"
 
 [node name="Summon" parent="." instance=ExtResource("3_26ncu")]
 target_group = &"hunters"
-
-[node name="ChargingEvent" parent="Summon" instance=ExtResource("8_kd7ea")]
-emit_event = &"summon_charging"
-
-[node name="SignalToEvent" parent="Summon" instance=ExtResource("8_kd7ea")]
-emit_event = &"summoned"
 
 [node name="NamedPropertySignals" parent="Summon" instance=ExtResource("10_fwp7a")]
 emit_on_ready = true
@@ -155,9 +145,6 @@ initial_state = NodePath("Alive")
 
 [node name="Dead" type="Node" parent="StateChart/Base/Behavior"]
 script = ExtResource("5_6yps6")
-
-[node name="EndInvisibility" parent="StateChart/Base/Behavior/Dead" instance=ExtResource("8_kd7ea")]
-emit_event = &"invisibility_ended"
 
 [node name="IsDead" parent="StateChart/Base/Behavior/Dead" groups=["ghost_is_deads"] instance=ExtResource("16_q6wqq")]
 group = &"levels"
@@ -223,12 +210,6 @@ active_state = NodePath("..")
 [node name="Damaged" parent="StateChart/Base/Behavior/Alive/Normal" instance=ExtResource("20_j823j")]
 listen_for_event = &"damaged"
 
-[node name="Stun" parent="StateChart/Base/Behavior/Alive/Normal/Damaged" instance=ExtResource("8_kd7ea")]
-emit_event = &"stunned"
-
-[node name="StartInvisibility" parent="StateChart/Base/Behavior/Alive/Normal" instance=ExtResource("8_kd7ea")]
-emit_event = &"invisibility_started"
-
 [node name="Move" parent="StateChart/Base/Behavior/Alive/Normal" node_paths=PackedStringArray("character") instance=ExtResource("7_1d45a")]
 character = NodePath("../../../../../..")
 speed = 92.0
@@ -272,12 +253,6 @@ active_state = NodePath("..")
 [node name="Damaged" parent="StateChart/Base/Behavior/Alive/Sprint" instance=ExtResource("20_j823j")]
 listen_for_event = &"damaged"
 
-[node name="Stun" parent="StateChart/Base/Behavior/Alive/Sprint/Damaged" instance=ExtResource("8_kd7ea")]
-emit_event = &"stunned"
-
-[node name="EndInvisibility" parent="StateChart/Base/Behavior/Alive/Sprint" instance=ExtResource("8_kd7ea")]
-emit_event = &"invisibility_ended"
-
 [node name="Move" parent="StateChart/Base/Behavior/Alive/Sprint" node_paths=PackedStringArray("character") instance=ExtResource("7_1d45a")]
 character = NodePath("../../../../../..")
 speed = 123.0
@@ -310,21 +285,12 @@ active_state = NodePath("..")
 [node name="Damaged" parent="StateChart/Base/Behavior/Alive/Summon" instance=ExtResource("20_j823j")]
 listen_for_event = &"damaged"
 
-[node name="Stun" parent="StateChart/Base/Behavior/Alive/Summon/Damaged" instance=ExtResource("8_kd7ea")]
-emit_event = &"stunned"
-
-[node name="EndInvisibility" parent="StateChart/Base/Behavior/Alive/Summon" instance=ExtResource("8_kd7ea")]
-emit_event = &"invisibility_ended"
-
 [node name="Stun" type="Node" parent="StateChart/Base/Behavior/Alive"]
 script = ExtResource("5_6yps6")
 
 [node name="PanicTimeout" type="Timer" parent="StateChart/Base/Behavior/Alive/Stun"]
 wait_time = 1.5
 one_shot = true
-
-[node name="StartPanic" parent="StateChart/Base/Behavior/Alive/Stun/PanicTimeout" instance=ExtResource("8_kd7ea")]
-emit_event = &"panic_started"
 
 [node name="Panic" type="Node" parent="StateChart/Base/Behavior/Alive"]
 script = ExtResource("6_3dmdv")
@@ -349,19 +315,15 @@ editor_description = "Restarts timers when ghost is damaged."
 listen_for_event = &"damaged"
 
 [node name="HuntersTouched" parent="StateChart/Base/Behavior/Alive/Panic" instance=ExtResource("20_j823j")]
-editor_description = "Pauses timers when a hunter is touched."
+editor_description = "Pauses timers and makes ghost visible when a hunter is touched."
 listen_for_event = &"hunters_touched"
-
-[node name="EndInvisibility" parent="StateChart/Base/Behavior/Alive/Panic/HuntersTouched" instance=ExtResource("8_kd7ea")]
-editor_description = "Makes ghost visible when hunter is touched."
-emit_event = &"invisibility_ended"
 
 [node name="NoHuntersTouched" parent="StateChart/Base/Behavior/Alive/Panic" instance=ExtResource("20_j823j")]
 editor_description = "Unpauses and restarts timers when no hunters are touched."
 listen_for_event = &"no_hunters_touched"
 
 [node name="VisibleTimer" type="Timer" parent="StateChart/Base/Behavior/Alive/Panic"]
-editor_description = "Times how long the ghost should stay visible after something made it visible."
+editor_description = "Times how long the ghost should stay visible after something made it visible. Makes ghost invisible on timeout."
 wait_time = 0.5
 one_shot = true
 
@@ -370,18 +332,10 @@ editor_description = "Pauses VisibleTimer."
 target_node = NodePath("..")
 bool_name = &"paused"
 
-[node name="MakeInvisible" parent="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" instance=ExtResource("8_kd7ea")]
-editor_description = "Makes ghost invisible when VisibleTimer times out."
-emit_event = &"invisibility_started"
-
 [node name="EndTimer" parent="StateChart/Base/Behavior/Alive/Panic" instance=ExtResource("20_l54rd")]
-editor_description = "Times how long the ghost should stay in panic."
+editor_description = "Times how long the ghost should stay in panic. Makes ghost end panic on timeout."
 wait_time = 3.0
 greater_default_time = 1.33
-
-[node name="EndPanic" parent="StateChart/Base/Behavior/Alive/Panic/EndTimer" instance=ExtResource("8_kd7ea")]
-editor_description = "Makes ghost end panic when EndTimer times out."
-emit_event = &"panic_ended"
 
 [node name="SetPaused" parent="StateChart/Base/Behavior/Alive/Panic/EndTimer" node_paths=PackedStringArray("target_node") instance=ExtResource("20_tfmeu")]
 editor_description = "Pauses EndTimer."
@@ -390,9 +344,6 @@ bool_name = &"paused"
 
 [node name="Grab" type="Node" parent="StateChart/Base/Behavior/Alive"]
 script = ExtResource("5_6yps6")
-
-[node name="EndInvisibility" parent="StateChart/Base/Behavior/Alive/Grab" instance=ExtResource("8_kd7ea")]
-emit_event = &"invisibility_ended"
 
 [node name="Animation" type="Node" parent="StateChart/Base"]
 script = ExtResource("4_74yim")
@@ -426,50 +377,26 @@ event = &"summon_charging"
 [node name="Dead" type="Node" parent="StateChart/Base/Animation"]
 script = ExtResource("5_6yps6")
 
-[node name="AnimationEvent" parent="StateChart/Base/Animation/Dead" instance=ExtResource("8_kd7ea")]
-emit_event = &"dead"
-
 [node name="Idle" type="Node" parent="StateChart/Base/Animation"]
 script = ExtResource("5_6yps6")
-
-[node name="AnimationEvent" parent="StateChart/Base/Animation/Idle" instance=ExtResource("8_kd7ea")]
-emit_event = &"idle"
 
 [node name="Move" type="Node" parent="StateChart/Base/Animation"]
 script = ExtResource("5_6yps6")
 
-[node name="AnimationEvent" parent="StateChart/Base/Animation/Move" instance=ExtResource("8_kd7ea")]
-emit_event = &"move"
-
 [node name="Sprint" type="Node" parent="StateChart/Base/Animation"]
 script = ExtResource("5_6yps6")
-
-[node name="AnimationEvent" parent="StateChart/Base/Animation/Sprint" instance=ExtResource("8_kd7ea")]
-emit_event = &"move"
 
 [node name="Summon" type="Node" parent="StateChart/Base/Animation"]
 script = ExtResource("5_6yps6")
 
-[node name="AnimationEvent" parent="StateChart/Base/Animation/Summon" instance=ExtResource("8_kd7ea")]
-emit_event = &"idle"
-
 [node name="Stun" type="Node" parent="StateChart/Base/Animation"]
 script = ExtResource("5_6yps6")
-
-[node name="AnimationEvent" parent="StateChart/Base/Animation/Stun" instance=ExtResource("8_kd7ea")]
-emit_event = &"stun"
 
 [node name="Panic" type="Node" parent="StateChart/Base/Animation"]
 script = ExtResource("5_6yps6")
 
-[node name="AnimationEvent" parent="StateChart/Base/Animation/Panic" instance=ExtResource("8_kd7ea")]
-emit_event = &"panic"
-
 [node name="Grab" type="Node" parent="StateChart/Base/Animation"]
 script = ExtResource("5_6yps6")
-
-[node name="AnimationEvent" parent="StateChart/Base/Animation/Grab" instance=ExtResource("8_kd7ea")]
-emit_event = &"move"
 
 [node name="Visibility" type="Node" parent="StateChart/Base"]
 script = ExtResource("4_74yim")
@@ -566,12 +493,6 @@ weak_to = 1
 
 [node name="Health" parent="DamageSignals/WeakTo/DamageValueSignal" instance=ExtResource("38_arcfj")]
 
-[node name="DiedEvent" parent="DamageSignals/WeakTo/DamageValueSignal/Health" instance=ExtResource("8_kd7ea")]
-emit_event = &"died"
-
-[node name="SignalToEvent" parent="DamageSignals/WeakTo" instance=ExtResource("8_kd7ea")]
-emit_event = &"damaged"
-
 [node name="Grabber" parent="." instance=ExtResource("38_ydesf")]
 monitoring = false
 
@@ -582,9 +503,6 @@ shape = SubResource("CircleShape2D_o7ptf")
 target_node = NodePath("..")
 bool_name = &"monitoring"
 
-[node name="Grabbed" parent="Grabber" instance=ExtResource("8_kd7ea")]
-emit_event = &"grabbed"
-
 [node name="HuntersTouched" parent="." instance=ExtResource("35_yndqj")]
 collision_layer = 0
 collision_mask = 4
@@ -593,12 +511,6 @@ count_group = &"hunters"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HuntersTouched"]
 shape = SubResource("CircleShape2D_o7ptf")
-
-[node name="EnteredEvent" parent="HuntersTouched" instance=ExtResource("8_kd7ea")]
-emit_event = &"hunters_touched"
-
-[node name="ExitedEvent" parent="HuntersTouched" instance=ExtResource("8_kd7ea")]
-emit_event = &"no_hunters_touched"
 
 [node name="GhostPlaceholder" parent="." instance=ExtResource("13_arjsn")]
 position = Vector2(0, -8)
@@ -682,8 +594,7 @@ max_variable = "max_charge"
 [connection signal="filter_ready" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="MultiplayerSynchronizer" method="add_visibility_filter"]
 [connection signal="call_released" from="MultiplayerSynchronizer/PeerVisibilityFilter/CallHolder" to="GhostVisible" method="set_value_true"]
 [connection signal="call_released" from="MultiplayerSynchronizer/PeerVisibilityFilter/CallHolder" to="IgnoreCanvasModulate/PeerSetBool" method="set_value_true"]
-[connection signal="cutscene_ended" from="GrabCutscene" to="GrabCutscene/SignalToEvent" method="receive_signal"]
-[connection signal="signal_received" from="GrabCutscene/SignalToEvent" to="StateChart" method="send_event"]
+[connection signal="cutscene_ended" from="GrabCutscene" to="StateChart" method="send_event" binds= [&"panic_started"]]
 [connection signal="changed" from="PeerID" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="set_primary_peer_id"]
 [connection signal="changed" from="PeerID" to="Synced" method="set_input_authority"]
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/PeerNameLabel" method="set_peer_id"]
@@ -700,49 +611,39 @@ max_variable = "max_charge"
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraSmallCircle" method="hide"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/PeerNameLabel" method="show"]
 [connection signal="area_count_changed" from="Summon" to="Summon/NamedPropertySignals" method="set_property_value"]
-[connection signal="summon_charging" from="Summon" to="Summon/ChargingEvent" method="receive_signal"]
-[connection signal="summoned" from="Summon" to="Summon/SignalToEvent" method="receive_signal"]
-[connection signal="signal_received" from="Summon/ChargingEvent" to="StateChart" method="send_event"]
-[connection signal="signal_received" from="Summon/SignalToEvent" to="StateChart" method="send_event"]
+[connection signal="summon_charging" from="Summon" to="StateChart" method="send_event" binds= [&"summon_charging"]]
+[connection signal="summoned" from="Summon" to="StateChart" method="send_event" binds= [&"summoned"]]
 [connection signal="property_changed" from="Summon/NamedPropertySignals" to="StateChart" method="set_expression_property"]
-[connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="StateChart/Base/Behavior/Dead/EndInvisibility" method="receive_signal"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="StateChart/Base/Behavior/Dead/IsDead" method="set_true"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="StateChart/Base/Behavior/Dead/MonitorDamage" method="set_false_deferred"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Dead" to="StateChart/Base/Behavior/Dead/IsDead" method="set_false"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Dead" to="StateChart/Base/Behavior/Dead/MonitorDamage" method="set_true_deferred"]
-[connection signal="signal_received" from="StateChart/Base/Behavior/Dead/EndInvisibility" to="StateChart" method="send_event"]
 [connection signal="event_received" from="StateChart/Base/Behavior/Alive/Normal" to="StateChart/Base/Behavior/Alive/Normal/Damaged" method="receive_event"]
-[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="StateChart/Base/Behavior/Alive/Normal/StartInvisibility" method="receive_signal"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Grabber/EnableGrabber" method="set_true_deferred"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="StateChart" method="send_event" binds= [&"invisibility_started"]]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Normal" to="Grabber/EnableGrabber" method="set_false_deferred"]
 [connection signal="state_physics_processing" from="StateChart/Base/Behavior/Alive/Normal" to="StateChart/Base/Behavior/Alive/Normal/Move" method="manual_physics_process"]
-[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Normal/Damaged" to="StateChart/Base/Behavior/Alive/Normal/Damaged/Stun" method="receive_signal"]
-[connection signal="signal_received" from="StateChart/Base/Behavior/Alive/Normal/Damaged/Stun" to="StateChart" method="send_event"]
-[connection signal="signal_received" from="StateChart/Base/Behavior/Alive/Normal/StartInvisibility" to="StateChart" method="send_event"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Normal/Damaged" to="StateChart" method="send_event" binds= [&"stunned"]]
 [connection signal="event_received" from="StateChart/Base/Behavior/Alive/Sprint" to="StateChart/Base/Behavior/Alive/Sprint/Damaged" method="receive_event"]
-[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Sprint" to="StateChart/Base/Behavior/Alive/Sprint/EndInvisibility" method="receive_signal"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Sprint" to="Grabber/EnableGrabber" method="set_true_deferred"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Sprint" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Sprint" to="Grabber/EnableGrabber" method="set_false_deferred"]
 [connection signal="state_physics_processing" from="StateChart/Base/Behavior/Alive/Sprint" to="StateChart/Base/Behavior/Alive/Sprint/Move" method="manual_physics_process"]
-[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Sprint/Damaged" to="StateChart/Base/Behavior/Alive/Sprint/Damaged/Stun" method="receive_signal"]
-[connection signal="signal_received" from="StateChart/Base/Behavior/Alive/Sprint/Damaged/Stun" to="StateChart" method="send_event"]
-[connection signal="signal_received" from="StateChart/Base/Behavior/Alive/Sprint/EndInvisibility" to="StateChart" method="send_event"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Sprint/Damaged" to="StateChart" method="send_event" binds= [&"stunned"]]
 [connection signal="event_received" from="StateChart/Base/Behavior/Alive/Summon" to="StateChart/Base/Behavior/Alive/Summon/Damaged" method="receive_event"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="start_charging"]
-[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="StateChart/Base/Behavior/Alive/Summon/EndInvisibility" method="receive_signal"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="show"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="stop_charging"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="release_charge"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="hide"]
-[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Summon/Damaged" to="StateChart/Base/Behavior/Alive/Summon/Damaged/Stun" method="receive_signal"]
-[connection signal="signal_received" from="StateChart/Base/Behavior/Alive/Summon/Damaged/Stun" to="StateChart" method="send_event"]
-[connection signal="signal_received" from="StateChart/Base/Behavior/Alive/Summon/EndInvisibility" to="StateChart" method="send_event"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Summon/Damaged" to="StateChart" method="send_event" binds= [&"stunned"]]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Stun" to="StateChart/Base/Behavior/Alive/Stun/PanicTimeout" method="start"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Stun" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="show"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Stun" to="StateChart/Base/Behavior/Alive/Stun/PanicTimeout" method="stop"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Stun" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="hide"]
-[connection signal="timeout" from="StateChart/Base/Behavior/Alive/Stun/PanicTimeout" to="StateChart/Base/Behavior/Alive/Stun/PanicTimeout/StartPanic" method="receive_signal"]
-[connection signal="signal_received" from="StateChart/Base/Behavior/Alive/Stun/PanicTimeout/StartPanic" to="StateChart" method="send_event"]
+[connection signal="timeout" from="StateChart/Base/Behavior/Alive/Stun/PanicTimeout" to="StateChart" method="send_event" binds= [&"panic_started"]]
 [connection signal="event_received" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/Damaged" method="receive_event"]
 [connection signal="event_received" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/HuntersTouched" method="receive_event"]
 [connection signal="event_received" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/NoHuntersTouched" method="receive_event"]
@@ -759,37 +660,25 @@ max_variable = "max_charge"
 [connection signal="state_physics_processing" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/Move" method="manual_physics_process"]
 [connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/Damaged" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="start"]
 [connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/Damaged" to="StateChart/Base/Behavior/Alive/Panic/EndTimer" method="start_use_greater"]
-[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/HuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/HuntersTouched/EndInvisibility" method="receive_signal"]
 [connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/HuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/SetPaused" method="set_true"]
 [connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/HuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/EndTimer/SetPaused" method="set_true"]
-[connection signal="signal_received" from="StateChart/Base/Behavior/Alive/Panic/HuntersTouched/EndInvisibility" to="StateChart" method="send_event"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/HuntersTouched" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
 [connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/NoHuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="start"]
 [connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/NoHuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/SetPaused" method="set_false"]
 [connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/NoHuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/EndTimer" method="start_use_greater"]
 [connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/NoHuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/EndTimer/SetPaused" method="set_false"]
-[connection signal="timeout" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/MakeInvisible" method="receive_signal"]
-[connection signal="signal_received" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer/MakeInvisible" to="StateChart" method="send_event"]
-[connection signal="timeout" from="StateChart/Base/Behavior/Alive/Panic/EndTimer" to="StateChart/Base/Behavior/Alive/Panic/EndTimer/EndPanic" method="receive_signal"]
-[connection signal="signal_received" from="StateChart/Base/Behavior/Alive/Panic/EndTimer/EndPanic" to="StateChart" method="send_event"]
+[connection signal="timeout" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" to="StateChart" method="send_event" binds= [&"invisibility_started"]]
+[connection signal="timeout" from="StateChart/Base/Behavior/Alive/Panic/EndTimer" to="StateChart" method="send_event" binds= [&"panic_ended"]]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Grab" to="GrabCutscene" method="start_cutscene"]
-[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Grab" to="StateChart/Base/Behavior/Alive/Grab/EndInvisibility" method="receive_signal"]
-[connection signal="signal_received" from="StateChart/Base/Behavior/Alive/Grab/EndInvisibility" to="StateChart" method="send_event"]
-[connection signal="state_entered" from="StateChart/Base/Animation/Dead" to="StateChart/Base/Animation/Dead/AnimationEvent" method="receive_signal"]
-[connection signal="signal_received" from="StateChart/Base/Animation/Dead/AnimationEvent" to="GhostPlaceholder/Behavior" method="set_animation_name"]
-[connection signal="state_entered" from="StateChart/Base/Animation/Idle" to="StateChart/Base/Animation/Idle/AnimationEvent" method="receive_signal"]
-[connection signal="signal_received" from="StateChart/Base/Animation/Idle/AnimationEvent" to="GhostPlaceholder/Behavior" method="set_animation_name"]
-[connection signal="state_entered" from="StateChart/Base/Animation/Move" to="StateChart/Base/Animation/Move/AnimationEvent" method="receive_signal"]
-[connection signal="signal_received" from="StateChart/Base/Animation/Move/AnimationEvent" to="GhostPlaceholder/Behavior" method="set_animation_name"]
-[connection signal="state_entered" from="StateChart/Base/Animation/Sprint" to="StateChart/Base/Animation/Sprint/AnimationEvent" method="receive_signal"]
-[connection signal="signal_received" from="StateChart/Base/Animation/Sprint/AnimationEvent" to="GhostPlaceholder/Behavior" method="set_animation_name"]
-[connection signal="state_entered" from="StateChart/Base/Animation/Summon" to="StateChart/Base/Animation/Summon/AnimationEvent" method="receive_signal"]
-[connection signal="signal_received" from="StateChart/Base/Animation/Summon/AnimationEvent" to="GhostPlaceholder/Behavior" method="set_animation_name"]
-[connection signal="state_entered" from="StateChart/Base/Animation/Stun" to="StateChart/Base/Animation/Stun/AnimationEvent" method="receive_signal"]
-[connection signal="signal_received" from="StateChart/Base/Animation/Stun/AnimationEvent" to="GhostPlaceholder/Behavior" method="set_animation_name"]
-[connection signal="state_entered" from="StateChart/Base/Animation/Panic" to="StateChart/Base/Animation/Panic/AnimationEvent" method="receive_signal"]
-[connection signal="signal_received" from="StateChart/Base/Animation/Panic/AnimationEvent" to="GhostPlaceholder/Behavior" method="set_animation_name"]
-[connection signal="state_entered" from="StateChart/Base/Animation/Grab" to="StateChart/Base/Animation/Grab/AnimationEvent" method="receive_signal"]
-[connection signal="signal_received" from="StateChart/Base/Animation/Grab/AnimationEvent" to="GhostPlaceholder/Behavior" method="set_animation_name"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Grab" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Dead" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["dead"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Idle" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["idle"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Move" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["move"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Sprint" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["move"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Summon" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["idle"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Stun" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["stun"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Panic" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["panic"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Grab" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["move"]]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="enable"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="disable"]
 [connection signal="move_vector_changed_normalized" from="Synced" to="StateChart/Base/Behavior/Alive/Normal/Move" method="set_move_vector"]
@@ -797,18 +686,13 @@ max_variable = "max_charge"
 [connection signal="move_vector_changed_normalized" from="Synced" to="StateChart/Base/Behavior/Alive/Panic/Move" method="set_move_vector"]
 [connection signal="move_vector_changed_normalized" from="Synced" to="GhostPlaceholder/Behavior" method="set_direction_vector"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
-[connection signal="damage_taken" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/SignalToEvent" method="receive_signal"]
+[connection signal="damage_taken" from="DamageSignals/WeakTo" to="StateChart" method="send_event" binds= [&"damaged"]]
 [connection signal="damaged_by" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageValueSignal" method="take_damage"]
 [connection signal="damaged_by_amount" from="DamageSignals/WeakTo/DamageValueSignal" to="DamageSignals/WeakTo/DamageValueSignal/Health" method="subtract_health"]
-[connection signal="health_emptied" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="DamageSignals/WeakTo/DamageValueSignal/Health/DiedEvent" method="receive_signal"]
-[connection signal="signal_received" from="DamageSignals/WeakTo/DamageValueSignal/Health/DiedEvent" to="StateChart" method="send_event"]
-[connection signal="signal_received" from="DamageSignals/WeakTo/SignalToEvent" to="StateChart" method="send_event"]
-[connection signal="grabbable_grabbed" from="Grabber" to="Grabber/Grabbed" method="receive_signal"]
-[connection signal="signal_received" from="Grabber/Grabbed" to="StateChart" method="send_event"]
-[connection signal="first_node_entered" from="HuntersTouched" to="HuntersTouched/EnteredEvent" method="receive_signal"]
-[connection signal="last_node_exited" from="HuntersTouched" to="HuntersTouched/ExitedEvent" method="receive_signal"]
-[connection signal="signal_received" from="HuntersTouched/EnteredEvent" to="StateChart" method="send_event"]
-[connection signal="signal_received" from="HuntersTouched/ExitedEvent" to="StateChart" method="send_event"]
+[connection signal="health_emptied" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="StateChart" method="send_event" binds= [&"died"]]
+[connection signal="grabbable_grabbed" from="Grabber" to="StateChart" method="send_event" binds= [&"grabbed"]]
+[connection signal="first_node_entered" from="HuntersTouched" to="StateChart" method="send_event" binds= [&"hunters_touched"]]
+[connection signal="last_node_exited" from="HuntersTouched" to="StateChart" method="send_event" binds= [&"no_hunters_touched"]]
 
 [editable path="GhostPlaceholder"]
 [editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar"]

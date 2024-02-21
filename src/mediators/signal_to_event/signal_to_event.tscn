@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dterwqqmikxc1"]
-
-[ext_resource type="Script" path="res://src/mediators/signal_to_event/signal_to_event.gd" id="1_c5tqq"]
-
-[node name="SignalToEvent" type="Node"]
-script = ExtResource("1_c5tqq")
