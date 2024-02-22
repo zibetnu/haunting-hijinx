@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dwfdqhbgq4vvr"]
-
-[ext_resource type="Script" path="res://src/mediators/set_bool/set_bool.gd" id="1_q610o"]
-
-[node name="SetBool" type="Node"]
-script = ExtResource("1_q610o")

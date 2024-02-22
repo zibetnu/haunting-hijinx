@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=49 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://c18war56not2c" path="res://src/mediators/controller_state_chart_events/controller_state_chart_events.tscn" id="7_1ehsk"]
 [ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="7_lf1vk"]
 [ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="8_dmlm5"]
-[ext_resource type="PackedScene" uid="uid://dwfdqhbgq4vvr" path="res://src/mediators/set_bool/set_bool.tscn" id="9_bnpp0"]
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="9_muve1"]
 [ext_resource type="PackedScene" uid="uid://dc3f3sy1vso5f" path="res://src/mediators/group_bool/group_bool.tscn" id="9_n4b8t"]
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="10_3bo02"]
@@ -150,11 +149,6 @@ script = ExtResource("4_x2w3t")
 to = NodePath("../../Alive")
 event = &"revived"
 
-[node name="DisableCollision" parent="StateChart/Base/Dead" node_paths=PackedStringArray("target_node") instance=ExtResource("9_bnpp0")]
-editor_description = "Disables collision when hunter is dead, allowing other hunters to move through this hunter."
-target_node = NodePath("../../../../CollisionShape2D")
-bool_name = &"disabled"
-
 [node name="IsDead" parent="StateChart/Base/Dead" groups=["hunter_is_deads"] instance=ExtResource("9_n4b8t")]
 group = &"levels"
 
@@ -237,11 +231,6 @@ script = ExtResource("4_x2w3t")
 to = NodePath("../../Vulnerable")
 delay_seconds = 4.0
 
-[node name="EnableDamage" parent="StateChart/Base/Alive/Vulnerability/Invulnerable" node_paths=PackedStringArray("target_node") instance=ExtResource("9_bnpp0")]
-editor_description = "Makes damage area unmonitorable when hunter is invulnerable."
-target_node = NodePath("../../../../../../DamageSignals")
-bool_name = &"monitorable"
-
 [node name="Vulnerable" type="Node" parent="StateChart/Base/Alive/Vulnerability"]
 script = ExtResource("3_ocdoo")
 
@@ -264,10 +253,6 @@ limit_bottom = 6400
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Camera2D"]
 replication_config = SubResource("SceneReplicationConfig_2bhal")
-
-[node name="CameraEnabled" parent="Camera2D" node_paths=PackedStringArray("target_node") instance=ExtResource("9_bnpp0")]
-target_node = NodePath("..")
-bool_name = &"enabled"
 
 [node name="Synced" parent="." node_paths=PackedStringArray("controller") instance=ExtResource("5_uqurr")]
 process_mode = 1
@@ -316,10 +301,6 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Grabbable"]
 shape = SubResource("CircleShape2D_vawb0")
-
-[node name="EnableGrabbable" parent="Grabbable" node_paths=PackedStringArray("target_node") instance=ExtResource("9_bnpp0")]
-target_node = NodePath("..")
-bool_name = &"monitorable"
 
 [node name="YSort" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -421,34 +402,34 @@ sprite = NodePath("..")
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer/PeerVisibilityFilter" method="set_primary_peer_id"]
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/PeerProcessMode" method="set_primary_peer_id"]
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer/PeerVisibilityFilter" method="set_primary_peer_id"]
-[connection signal="changed_to_local" from="PeerID" to="Camera2D/CameraEnabled" method="set_true"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/PeerNameLabel" method="hide"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D/ClearSpriteTexture" method="restore_texture"]
-[connection signal="changed_to_remote" from="PeerID" to="Camera2D/CameraEnabled" method="set_false"]
+[connection signal="changed_to_local" from="PeerID" to="Camera2D" method="set_enabled" binds= [true]]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/PeerNameLabel" method="show"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D/ClearSpriteTexture" method="clear_texture"]
-[connection signal="state_entered" from="StateChart/Base/Dead" to="StateChart/Base/Dead/DisableCollision" method="set_true_deferred"]
+[connection signal="changed_to_remote" from="PeerID" to="Camera2D" method="set_enabled" binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="StateChart/Base/Dead/IsDead" method="set_true"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="DamageSignals/Revivable" method="enable"]
-[connection signal="state_entered" from="StateChart/Base/Dead" to="Grabbable/EnableGrabbable" method="set_false_deferred"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="YSort/Flashlight/Behavior" method="disable"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" method="show"]
+[connection signal="state_entered" from="StateChart/Base/Dead" to="CollisionShape2D" method="set_disabled" flags=3 binds= [true]]
+[connection signal="state_entered" from="StateChart/Base/Dead" to="Grabbable" method="set_monitorable" flags=3 binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="YSort/HunterPlaceholder/Behavior" method="set_animation_name" binds= ["dead"]]
-[connection signal="state_exited" from="StateChart/Base/Dead" to="StateChart/Base/Dead/DisableCollision" method="set_false_deferred"]
 [connection signal="state_exited" from="StateChart/Base/Dead" to="StateChart/Base/Dead/IsDead" method="set_false"]
 [connection signal="state_exited" from="StateChart/Base/Dead" to="DamageSignals/Revivable" method="disable"]
 [connection signal="state_exited" from="StateChart/Base/Dead" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" method="hide"]
+[connection signal="state_exited" from="StateChart/Base/Dead" to="CollisionShape2D" method="set_disabled" flags=3 binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior" method="enable"]
 [connection signal="state_exited" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior" method="disable"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Movement/Idle" to="YSort/HunterPlaceholder/Behavior" method="set_animation_name" binds= ["idle"]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Movement/Move" to="YSort/HunterPlaceholder/Behavior" method="set_animation_name" binds= ["move"]]
 [connection signal="state_physics_processing" from="StateChart/Base/Alive/Movement/Move/MoveNormal" to="StateChart/Base/Alive/Movement/Move/MoveNormal/Move" method="manual_physics_process"]
 [connection signal="state_physics_processing" from="StateChart/Base/Alive/Movement/Move/MoveSlow" to="StateChart/Base/Alive/Movement/Move/MoveSlow/Move" method="manual_physics_process"]
-[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="StateChart/Base/Alive/Vulnerability/Invulnerable/EnableDamage" method="set_false_deferred"]
-[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="Grabbable/EnableGrabbable" method="set_false_deferred"]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="DamageSignals" method="set_monitorable" flags=3 binds= [false]]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="Grabbable" method="set_monitorable" flags=3 binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer" method="play" binds= [&"invulnerable"]]
-[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="StateChart/Base/Alive/Vulnerability/Invulnerable/EnableDamage" method="set_true_deferred"]
-[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="Grabbable/EnableGrabbable" method="set_true_deferred"]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="DamageSignals" method="set_monitorable" flags=3 binds= [true]]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="Grabbable" method="set_monitorable" flags=3 binds= [true]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer" method="play" binds= [&"RESET"]]
 [connection signal="button_1_changed" from="Synced" to="YSort/Flashlight/Behavior" method="set_powered"]
 [connection signal="look_vector_changed_normalized" from="Synced" to="YSort/Flashlight/Behavior" method="set_target_vector"]
