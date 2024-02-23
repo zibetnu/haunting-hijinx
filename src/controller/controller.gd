@@ -4,8 +4,14 @@ extends Node2D
 
 signal input_handled
 
-@export var move_vector := Vector2.ZERO
-@export var look_vector := Vector2.ZERO
+@export var move_vector := Vector2.ZERO:
+	set(value):
+		move_vector = value.normalized()
+
+@export var look_vector := Vector2.ZERO:
+	set(value):
+		look_vector = value.normalized()
+
 @export var button_1_pressed := false
 @export var button_2_pressed := false
 
