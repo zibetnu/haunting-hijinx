@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=48 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -36,7 +36,6 @@
 [ext_resource type="PackedScene" uid="uid://bmqokcab4errr" path="res://src/peer_name_label/peer_name_label.tscn" id="39_gpntb"]
 [ext_resource type="PackedScene" uid="uid://dsccl51pqvbue" path="res://src/mediators/peer_process_mode/peer_process_mode.tscn" id="43_rsnb5"]
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_visibility_filter/peer_visibility_filter.tscn" id="44_mvfu7"]
-[ext_resource type="PackedScene" uid="uid://dsfctswtuferv" path="res://src/clear_sprite_texture/clear_sprite_texture.tscn" id="47_d25eg"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hflh2"]
 properties/0/path = NodePath(".:position")
@@ -392,9 +391,6 @@ layout_mode = 2
 
 [node name="PeerVisibilityFilter" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer" index="0" instance=ExtResource("44_mvfu7")]
 
-[node name="ClearSpriteTexture" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D" index="0" node_paths=PackedStringArray("sprite") instance=ExtResource("47_d25eg")]
-sprite = NodePath("..")
-
 [connection signal="changed" from="GhostPeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer/PeerVisibilityFilter" method="set_secondary_peer_id"]
 [connection signal="changed" from="GhostPeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/PeerProcessMode" method="set_secondary_peer_id"]
 [connection signal="changed" from="PeerID" to="Synced" method="set_input_authority"]
@@ -403,10 +399,10 @@ sprite = NodePath("..")
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/PeerProcessMode" method="set_primary_peer_id"]
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer/PeerVisibilityFilter" method="set_primary_peer_id"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/PeerNameLabel" method="hide"]
-[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D/ClearSpriteTexture" method="restore_texture"]
+[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D" method="show"]
 [connection signal="changed_to_local" from="PeerID" to="Camera2D" method="set_enabled" binds= [true]]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/PeerNameLabel" method="show"]
-[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D/ClearSpriteTexture" method="clear_texture"]
+[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D" method="show"]
 [connection signal="changed_to_remote" from="PeerID" to="Camera2D" method="set_enabled" binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="StateChart/Base/Dead/IsDead" method="set_true"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="DamageSignals/Revivable" method="enable"]
