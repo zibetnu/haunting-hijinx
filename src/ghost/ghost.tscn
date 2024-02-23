@@ -506,11 +506,11 @@ property_name = &"visible"
 
 [node name="AuraLargeCircle" parent="IgnoreCanvasModulate/FollowPlayer" instance=ExtResource("43_lxwi0")]
 color = Color(1, 1, 1, 0.247059)
-radius = 160
+radius = 160.0
 
 [node name="AuraSmallCircle" parent="IgnoreCanvasModulate/FollowPlayer" instance=ExtResource("43_lxwi0")]
 color = Color(1, 1, 1, 0.247059)
-radius = 96
+radius = 96.0
 
 [node name="PeerNameLabel" parent="IgnoreCanvasModulate/FollowPlayer" instance=ExtResource("43_qnogm")]
 modulate = Color(1, 1, 1, 0.501961)
