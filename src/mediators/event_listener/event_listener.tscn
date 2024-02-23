@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfhqyxu3iuptm"]
+
+[ext_resource type="Script" path="res://src/mediators/event_listener/event_listener.gd" id="1_nnymx"]
+
+[node name="EventListener" type="Node"]
+script = ExtResource("1_nnymx")

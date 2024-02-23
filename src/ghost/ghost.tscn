@@ -28,8 +28,8 @@
 [ext_resource type="PackedScene" uid="uid://ctcjena4x8kr0" path="res://src/aura/aura.tscn" id="13_e27lr"]
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/auto_texture_progress_bar/auto_texture_progress_bar.tscn" id="15_nnx8e"]
 [ext_resource type="PackedScene" uid="uid://dc3f3sy1vso5f" path="res://src/mediators/group_bool/group_bool.tscn" id="16_q6wqq"]
+[ext_resource type="PackedScene" uid="uid://bfhqyxu3iuptm" path="res://src/mediators/event_listener/event_listener.tscn" id="18_870ie"]
 [ext_resource type="PackedScene" uid="uid://b30o6hj6qsvu2" path="res://src/mediators/controller_state_chart_expression_properties/controller_state_chart_expression_properties.tscn" id="18_o8e6t"]
-[ext_resource type="PackedScene" uid="uid://bfhqyxu3iuptm" path="res://src/mediators/event_to_signal/event_to_signal.tscn" id="20_j823j"]
 [ext_resource type="PackedScene" uid="uid://cecfpltx40gs5" path="res://src/greater_timer/greater_timer.tscn" id="20_l54rd"]
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="29_1sq8w"]
 [ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_i4s33"]
@@ -201,7 +201,7 @@ controller = NodePath("../../../../../../Synced")
 state_chart = NodePath("../../../../..")
 active_state = NodePath("..")
 
-[node name="Damaged" parent="StateChart/Base/Behavior/Alive/Normal" instance=ExtResource("20_j823j")]
+[node name="Damaged" parent="StateChart/Base/Behavior/Alive/Normal" instance=ExtResource("18_870ie")]
 listen_for_event = &"damaged"
 
 [node name="Move" parent="StateChart/Base/Behavior/Alive/Normal" node_paths=PackedStringArray("character") instance=ExtResource("7_1d45a")]
@@ -244,7 +244,7 @@ state_chart = NodePath("../../../../..")
 ignore_button_2 = true
 active_state = NodePath("..")
 
-[node name="Damaged" parent="StateChart/Base/Behavior/Alive/Sprint" instance=ExtResource("20_j823j")]
+[node name="Damaged" parent="StateChart/Base/Behavior/Alive/Sprint" instance=ExtResource("18_870ie")]
 listen_for_event = &"damaged"
 
 [node name="Move" parent="StateChart/Base/Behavior/Alive/Sprint" node_paths=PackedStringArray("character") instance=ExtResource("7_1d45a")]
@@ -276,7 +276,7 @@ state_chart = NodePath("../../../../..")
 ignore_button_1 = true
 active_state = NodePath("..")
 
-[node name="Damaged" parent="StateChart/Base/Behavior/Alive/Summon" instance=ExtResource("20_j823j")]
+[node name="Damaged" parent="StateChart/Base/Behavior/Alive/Summon" instance=ExtResource("18_870ie")]
 listen_for_event = &"damaged"
 
 [node name="Stun" type="Node" parent="StateChart/Base/Behavior/Alive"]
@@ -299,15 +299,15 @@ character = NodePath("../../../../../..")
 speed = 154.0
 manual_process = true
 
-[node name="Damaged" parent="StateChart/Base/Behavior/Alive/Panic" instance=ExtResource("20_j823j")]
+[node name="Damaged" parent="StateChart/Base/Behavior/Alive/Panic" instance=ExtResource("18_870ie")]
 editor_description = "Restarts timers when ghost is damaged."
 listen_for_event = &"damaged"
 
-[node name="HuntersTouched" parent="StateChart/Base/Behavior/Alive/Panic" instance=ExtResource("20_j823j")]
+[node name="HuntersTouched" parent="StateChart/Base/Behavior/Alive/Panic" instance=ExtResource("18_870ie")]
 editor_description = "Pauses timers and makes ghost visible when a hunter is touched."
 listen_for_event = &"hunters_touched"
 
-[node name="NoHuntersTouched" parent="StateChart/Base/Behavior/Alive/Panic" instance=ExtResource("20_j823j")]
+[node name="NoHuntersTouched" parent="StateChart/Base/Behavior/Alive/Panic" instance=ExtResource("18_870ie")]
 editor_description = "Unpauses and restarts timers when no hunters are touched."
 listen_for_event = &"no_hunters_touched"
 
