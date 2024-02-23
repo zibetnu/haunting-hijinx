@@ -584,7 +584,7 @@ max_variable = "max_charge"
 [connection signal="area_count_changed" from="Summon" to="Summon/NamedPropertySignals" method="set_property_value"]
 [connection signal="summon_charging" from="Summon" to="StateChart" method="send_event" binds= [&"summon_charging"]]
 [connection signal="summoned" from="Summon" to="StateChart" method="send_event" binds= [&"summoned"]]
-[connection signal="property_changed" from="Summon/NamedPropertySignals" to="StateChart" method="set_expression_property"]
+[connection signal="property_changed" from="Summon/NamedPropertySignals" to="StateChart" method="set_expression_property" flags=3]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="StateChart/Base/Behavior/Dead/IsDead" method="set_true"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="DamageSignals" method="set_monitorable" flags=3 binds= [false]]
