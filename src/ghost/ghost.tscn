@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=51 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_visibility_filter/peer_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
@@ -28,7 +28,6 @@
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/auto_texture_progress_bar/auto_texture_progress_bar.tscn" id="15_nnx8e"]
 [ext_resource type="PackedScene" uid="uid://dc3f3sy1vso5f" path="res://src/mediators/group_bool/group_bool.tscn" id="16_q6wqq"]
 [ext_resource type="PackedScene" uid="uid://bfhqyxu3iuptm" path="res://src/mediators/event_listener/event_listener.tscn" id="18_870ie"]
-[ext_resource type="PackedScene" uid="uid://b30o6hj6qsvu2" path="res://src/mediators/controller_state_chart_expression_properties/controller_state_chart_expression_properties.tscn" id="18_o8e6t"]
 [ext_resource type="PackedScene" uid="uid://cecfpltx40gs5" path="res://src/greater_timer/greater_timer.tscn" id="20_l54rd"]
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="29_1sq8w"]
 [ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_i4s33"]
@@ -109,7 +108,7 @@ replication_config = SubResource("SceneReplicationConfig_hsnve")
 [node name="CallHolder" parent="MultiplayerSynchronizer/PeerVisibilityFilter" instance=ExtResource("5_s7auc")]
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
-nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../Synced/ControllerStateChartExpressionProperties"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior")]
+nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior")]
 
 [node name="GrabCutscene" parent="." instance=ExtResource("4_qoosa")]
 
@@ -433,10 +432,6 @@ controller_2 = NodePath("KeyboardAndMouse")
 [node name="Joypad" parent="Synced/UnpauseForce/AntiButtonSpam/Composite" instance=ExtResource("9_x08fo")]
 
 [node name="KeyboardAndMouse" parent="Synced/UnpauseForce/AntiButtonSpam/Composite" instance=ExtResource("10_el6fq")]
-
-[node name="ControllerStateChartExpressionProperties" parent="Synced" node_paths=PackedStringArray("controller", "state_chart") instance=ExtResource("18_o8e6t")]
-controller = NodePath("..")
-state_chart = NodePath("../../StateChart")
 
 [node name="AuraLarge" parent="." instance=ExtResource("13_e27lr")]
 
