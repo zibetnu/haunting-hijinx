@@ -6,22 +6,18 @@ signal button_1_changed(button_1: bool)
 signal button_2_changed(button_1: bool)
 signal input_handled
 signal move_vector_changed(move_vector: Vector2)
-signal move_vector_changed_normalized(move_vector: Vector2)
 signal look_vector_changed(look_vector: Vector2)
-signal look_vector_changed_normalized(look_vector: Vector2)
 
 
 @export var move_vector := Vector2.ZERO:
 	set(value):
-		move_vector = value
+		move_vector = value.normalized()
 		move_vector_changed.emit(move_vector)
-		move_vector_changed_normalized.emit(move_vector.normalized())
 
 @export var look_vector := Vector2.ZERO:
 	set(value):
-		look_vector = value
+		look_vector = value.normalized()
 		look_vector_changed.emit(look_vector)
-		look_vector_changed_normalized.emit(look_vector.normalized())
 
 @export var button_1 := false:
 	set(value):

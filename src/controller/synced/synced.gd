@@ -15,15 +15,7 @@ const LOOK_OFFSET = 8
 const MOVE_OFFSET = 32
 const VECTOR_MASK = 0xff_ff_ff
 
-@export var controller: Controller:
-	set(value):
-		if controller:
-			controller.input_handled.disconnect(_on_controller_input_handled)
-
-		controller = value
-		if controller:
-			controller.input_handled.connect(_on_controller_input_handled)
-
+@export var controller: Controller
 @export var input_authority := 1:
 	set(value):
 		input_authority = value
@@ -41,6 +33,10 @@ var _input_bits := 0:
 				(_input_bits & (VECTOR_MASK << MOVE_OFFSET)) >> MOVE_OFFSET
 		)
 		input_handled.emit()
+
+
+func _ready() -> void:
+	controller.input_handled.connect(_on_controller_input_handled)
 
 
 func force_handle_input() -> void:
