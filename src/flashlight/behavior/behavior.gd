@@ -1,7 +1,13 @@
 extends Area2D
 
 
-signal powering_failed
+signal battery_died
+signal battery_undied
+signal battery_lowed
+signal battery_unlowed
+signal powered_off
+signal powered_on
+signal powered_on_attempted
 
 const CAST_LENGTHS: Array[int] = [0, 4, 5, 6, 7, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48]
 const CAST_LONG_MAX_INDEX = 15
@@ -33,7 +39,7 @@ const CAST_SHORT_MAX_INDEX = 4
 	set(value):
 		data.flashlight_powered = data.battery > 0 and enabled and value
 		if value and data.battery == 0:
-			powering_failed.emit()
+			powered_on_attempted.emit()
 
 @export var target_rotation: float
 @export var target_vector: Vector2:
@@ -48,6 +54,10 @@ const CAST_SHORT_MAX_INDEX = 4
 var is_battery_low: bool:
 	get:
 		return data.battery_percentage < data.battery_low_percentage
+
+var _was_battery_dead := false
+var _was_battery_low := false
+var _was_flashlight_powered := false
 
 
 func _physics_process(delta: float) -> void:
@@ -180,3 +190,33 @@ func _on_data_changed() -> void:
 	rotation = data.flashlight_rotation
 	for raycast: RayCast2D in $RayCasts.get_children():
 		raycast.target_position.x = data.collision_cast_length
+
+	match [data.battery == 0, _was_battery_dead]:
+		[true, false]:
+			battery_died.emit()
+
+		[false, true]:
+			battery_undied.emit()
+
+	match [
+			data.battery == 0,
+			data.battery_percentage < data.battery_low_percentage,
+			_was_battery_low
+	]:
+		[false, true, false]:
+			battery_lowed.emit()
+
+		[false, false, true]:
+			battery_unlowed.emit()
+
+	match [data.flashlight_powered, _was_flashlight_powered]:
+		[true, false]:
+			powered_on.emit()
+
+		[false, true]:
+			powered_off.emit()
+
+	_was_battery_dead = data.battery == 0
+	_was_battery_low = data.battery_percentage < data.battery_low_percentage
+	_was_flashlight_powered = data.flashlight_powered
+

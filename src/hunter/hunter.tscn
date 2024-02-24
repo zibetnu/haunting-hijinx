@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=47 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -18,7 +18,6 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="12_y0078"]
 [ext_resource type="PackedScene" uid="uid://bm0ar7asqubxm" path="res://src/mediators/state_component/controller_state_chart_enter_events/controller_state_chart_enter_events.tscn" id="14_25vcg"]
 [ext_resource type="PackedScene" uid="uid://cy4qrm44icmyy" path="res://src/flashlight/flashlight.tscn" id="15_hljm8"]
-[ext_resource type="PackedScene" uid="uid://co1edbkdtjj35" path="res://src/mediators/flashlight_state_chart_events/flashlight_state_chart_events.tscn" id="16_c1vhd"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/not_guard.gd" id="17_gyo55"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="18_e766a"]
 [ext_resource type="PackedScene" uid="uid://cssdkhs4cty5c" path="res://src/costume/hunter_placeholder/hunter_placeholder.tscn" id="19_fj04q"]
@@ -313,11 +312,7 @@ default_set_battery_percentage = 0.75
 battery_alert = NodePath("../../../../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert")
 state_chart = NodePath("../../../../StateChart")
 
-[node name="FlashlightStateChartEvents" parent="YSort/Flashlight/Behavior" index="3" node_paths=PackedStringArray("flashlight_data", "state_chart") instance=ExtResource("16_c1vhd")]
-flashlight_data = NodePath("../../Data")
-state_chart = NodePath("../../../../StateChart")
-
-[node name="FlashlightStateChartProperties" parent="YSort/Flashlight/Behavior" index="4" node_paths=PackedStringArray("flashlight_data", "state_chart") instance=ExtResource("22_lt6pn")]
+[node name="FlashlightStateChartProperties" parent="YSort/Flashlight/Behavior" index="3" node_paths=PackedStringArray("flashlight_data", "state_chart") instance=ExtResource("22_lt6pn")]
 flashlight_data = NodePath("../../Data")
 state_chart = NodePath("../../../../StateChart")
 
@@ -439,7 +434,13 @@ layout_mode = 2
 [connection signal="damage_taken" from="DamageSignals/WeakTo" to="StateChart" method="send_event" binds= [&"died"]]
 [connection signal="grabbed" from="Grabbable" to="StateChart" method="send_event" binds= [&"died"]]
 [connection signal="flashlight_rotation_changed" from="YSort/Flashlight/Data" to="YSort/HunterPlaceholder/Behavior" method="set_direction_vector_from_angle"]
-[connection signal="powering_failed" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead"]
+[connection signal="battery_died" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_battery_died"]]
+[connection signal="battery_lowed" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_battery_lowed"]]
+[connection signal="battery_undied" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_battery_undied"]]
+[connection signal="battery_unlowed" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_battery_unlowed"]]
+[connection signal="powered_off" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_unpowered"]]
+[connection signal="powered_on" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_powered"]]
+[connection signal="powered_on_attempted" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead"]
 [connection signal="filter_ready" from="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer/PeerVisibilityFilter" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer" method="add_visibility_filter"]
 [connection signal="process_mode_updated" from="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/PeerProcessMode" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_process_mode"]
 [connection signal="filter_ready" from="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer/PeerVisibilityFilter" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer" method="add_visibility_filter"]
