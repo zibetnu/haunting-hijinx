@@ -18,8 +18,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	else:
 		look_vector = Vector2.ZERO
 
-	button_1_pressed = Input.is_action_pressed("button_1")
-	button_2_pressed = Input.is_action_pressed("button_2")
+	button_1 = Input.is_action_pressed("button_1")
+	button_2 = Input.is_action_pressed("button_2")
 
 	input_handled.emit()
 
@@ -34,8 +34,8 @@ func force_handle_input() -> void:
 	else:
 		look_vector = Vector2.ZERO
 
-	button_1_pressed = Input.is_action_pressed("button_1")
-	button_2_pressed = Input.is_action_pressed("button_2")
+	button_1 = Input.is_action_pressed("button_1")
+	button_2 = Input.is_action_pressed("button_2")
 	input_handled.emit()
 
 

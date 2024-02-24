@@ -24,8 +24,8 @@ const VECTOR_MASK = 0xff_ff_ff
 var _input_bits := 0:
 	set(value):
 		_input_bits = value
-		button_1_pressed = bool(_input_bits & BitFlags.BUTTON_1)
-		button_2_pressed = bool(_input_bits & BitFlags.BUTTON_2)
+		button_1 = bool(_input_bits & BitFlags.BUTTON_1)
+		button_2 = bool(_input_bits & BitFlags.BUTTON_2)
 		look_vector = _unserialize_vector(
 				(_input_bits & (VECTOR_MASK << LOOK_OFFSET)) >> LOOK_OFFSET
 		)
@@ -80,10 +80,10 @@ func _unserialize_vector(serialized_vector: int) -> Vector2:
 
 func _on_controller_input_handled() -> void:
 	var new_input_bits = 0
-	if controller.button_1_pressed:
+	if controller.button_1:
 		new_input_bits |= BitFlags.BUTTON_1
 
-	if controller.button_2_pressed:
+	if controller.button_2:
 		new_input_bits |= BitFlags.BUTTON_2
 
 	new_input_bits |= _serialize_vector(controller.look_vector) << LOOK_OFFSET

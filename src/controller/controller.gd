@@ -17,8 +17,8 @@ signal look_vector_changed(look_vector: Vector2)
 		look_vector = value.normalized()
 		look_vector_changed.emit(look_vector)
 
-@export var button_1_pressed := false
-@export var button_2_pressed := false
+@export var button_1 := false
+@export var button_2 := false
 
 
 func force_handle_input() -> void:
@@ -27,6 +27,6 @@ func force_handle_input() -> void:
 
 func is_action_pressed(action: StringName) -> bool:
 	return {
-			"button_1": button_1_pressed,
-			"button_2": button_2_pressed
+			"button_1": button_1,
+			"button_2": button_2
 	}.get(action, false)

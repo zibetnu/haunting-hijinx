@@ -28,6 +28,6 @@ func _on_controller_input_handled() -> void:
 	else:
 		look_vector = controller_2.look_vector
 
-	button_1_pressed = controller_1.button_1_pressed or controller_2.button_1_pressed
-	button_2_pressed = controller_1.button_2_pressed or controller_2.button_2_pressed
+	button_1 = controller_1.button_1 or controller_2.button_1
+	button_2 = controller_1.button_2 or controller_2.button_2
 	input_handled.emit()
