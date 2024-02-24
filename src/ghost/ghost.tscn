@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=52 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_visibility_filter/peer_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
@@ -21,7 +21,6 @@
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="9_x08fo"]
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="10_el6fq"]
 [ext_resource type="PackedScene" uid="uid://dhavwobkg4v8o" path="res://src/mediators/named_property_signals/named_property_signals.tscn" id="10_fwp7a"]
-[ext_resource type="PackedScene" uid="uid://c18war56not2c" path="res://src/mediators/controller_state_chart_events/controller_state_chart_events.tscn" id="11_2r614"]
 [ext_resource type="PackedScene" uid="uid://bm0ar7asqubxm" path="res://src/mediators/state_component/controller_state_chart_enter_events/controller_state_chart_enter_events.tscn" id="11_fqc8g"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="13_56q65"]
 [ext_resource type="PackedScene" uid="uid://nj5bu4130gy3" path="res://src/costume/ghost_placeholder/ghost_placeholder.tscn" id="13_arjsn"]
@@ -110,7 +109,7 @@ replication_config = SubResource("SceneReplicationConfig_hsnve")
 [node name="CallHolder" parent="MultiplayerSynchronizer/PeerVisibilityFilter" instance=ExtResource("5_s7auc")]
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
-nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../Synced/ControllerStateChartExpressionProperties"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior")]
+nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../Synced/ControllerStateChartExpressionProperties"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior")]
 
 [node name="GrabCutscene" parent="." instance=ExtResource("4_qoosa")]
 
@@ -435,10 +434,6 @@ controller_2 = NodePath("KeyboardAndMouse")
 
 [node name="KeyboardAndMouse" parent="Synced/UnpauseForce/AntiButtonSpam/Composite" instance=ExtResource("10_el6fq")]
 
-[node name="ControllerStateChartEvents" parent="Synced" node_paths=PackedStringArray("controller", "state_chart") instance=ExtResource("11_2r614")]
-controller = NodePath("..")
-state_chart = NodePath("../../StateChart")
-
 [node name="ControllerStateChartExpressionProperties" parent="Synced" node_paths=PackedStringArray("controller", "state_chart") instance=ExtResource("18_o8e6t")]
 controller = NodePath("..")
 state_chart = NodePath("../../StateChart")
@@ -652,6 +647,12 @@ max_variable = "max_charge"
 [connection signal="state_entered" from="StateChart/Base/Animation/Grab" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["move"]]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="enable"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="disable"]
+[connection signal="button_1_pressed" from="Synced" to="StateChart" method="send_event" binds= [&"button_1_pressed"]]
+[connection signal="button_1_released" from="Synced" to="StateChart" method="send_event" binds= [&"button_1_released"]]
+[connection signal="button_2_pressed" from="Synced" to="StateChart" method="send_event" binds= [&"button_2_pressed"]]
+[connection signal="button_2_released" from="Synced" to="StateChart" method="send_event" binds= [&"button_2_released"]]
+[connection signal="move_started" from="Synced" to="StateChart" method="send_event" binds= [&"move_started"]]
+[connection signal="move_stopped" from="Synced" to="StateChart" method="send_event" binds= [&"move_stopped"]]
 [connection signal="move_vector_changed" from="Synced" to="StateChart/Base/Behavior/Alive/Normal/Move" method="set_move_vector"]
 [connection signal="move_vector_changed" from="Synced" to="StateChart/Base/Behavior/Alive/Sprint/Move" method="set_move_vector"]
 [connection signal="move_vector_changed" from="Synced" to="StateChart/Base/Behavior/Alive/Panic/Move" method="set_move_vector"]

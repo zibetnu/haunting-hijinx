@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c18war56not2c"]
-
-[ext_resource type="Script" path="res://src/mediators/controller_state_chart_events/controller_state_chart_events.gd" id="1_eifii"]
-
-[node name="ControllerStateChartEvents" type="Node"]
-script = ExtResource("1_eifii")

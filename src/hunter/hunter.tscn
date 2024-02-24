@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=45 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="4_x2w3t"]
 [ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="5_uqurr"]
 [ext_resource type="PackedScene" uid="uid://gvf2peg6yuns" path="res://src/controller/unpause_force/unpause_force.tscn" id="6_ujhjn"]
-[ext_resource type="PackedScene" uid="uid://c18war56not2c" path="res://src/mediators/controller_state_chart_events/controller_state_chart_events.tscn" id="7_1ehsk"]
 [ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="7_lf1vk"]
 [ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="8_dmlm5"]
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="9_muve1"]
@@ -125,7 +124,7 @@ collision_mask = 5
 replication_config = SubResource("SceneReplicationConfig_hflh2")
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_uvtrm")]
-nodes = [NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../Synced/ControllerStateChartEvents"), NodePath("../AuraSense"), NodePath("../DamageSignals"), NodePath("../Grabbable"), NodePath("../YSort/Flashlight/Behavior"), NodePath("../YSort/HunterPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar/Behavior")]
+nodes = [NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../AuraSense"), NodePath("../DamageSignals"), NodePath("../Grabbable"), NodePath("../YSort/Flashlight/Behavior"), NodePath("../YSort/HunterPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar/Behavior")]
 
 [node name="GhostPeerID" parent="." groups=["ghost_peer_ids"] instance=ExtResource("1_fx0g1")]
 
@@ -268,10 +267,6 @@ controller_2 = NodePath("KeyboardAndMouse")
 [node name="Joypad" parent="Synced/UnpauseForce/AntiButtonSpam/Composite" instance=ExtResource("9_muve1")]
 
 [node name="KeyboardAndMouse" parent="Synced/UnpauseForce/AntiButtonSpam/Composite" instance=ExtResource("10_3bo02")]
-
-[node name="ControllerStateChartEvents" parent="Synced" node_paths=PackedStringArray("controller", "state_chart") instance=ExtResource("7_1ehsk")]
-controller = NodePath("..")
-state_chart = NodePath("../../StateChart")
 
 [node name="AuraSense" parent="." instance=ExtResource("28_dd2t8")]
 collision_mask = 0
@@ -418,7 +413,13 @@ layout_mode = 2
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="Grabbable" method="set_monitorable" flags=3 binds= [true]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer" method="play" binds= [&"RESET"]]
 [connection signal="button_1_changed" from="Synced" to="YSort/Flashlight/Behavior" method="set_powered"]
+[connection signal="button_1_pressed" from="Synced" to="StateChart" method="send_event" binds= [&"button_1_pressed"]]
+[connection signal="button_1_released" from="Synced" to="StateChart" method="send_event" binds= [&"button_1_released"]]
+[connection signal="button_2_pressed" from="Synced" to="StateChart" method="send_event" binds= [&"button_2_pressed"]]
+[connection signal="button_2_released" from="Synced" to="StateChart" method="send_event" binds= [&"button_2_released"]]
 [connection signal="look_vector_changed" from="Synced" to="YSort/Flashlight/Behavior" method="set_target_vector"]
+[connection signal="move_started" from="Synced" to="StateChart" method="send_event" binds= [&"move_started"]]
+[connection signal="move_stopped" from="Synced" to="StateChart" method="send_event" binds= [&"move_stopped"]]
 [connection signal="move_vector_changed" from="Synced" to="StateChart/Base/Alive/Movement/Move/MoveNormal/Move" method="set_move_vector"]
 [connection signal="move_vector_changed" from="Synced" to="StateChart/Base/Alive/Movement/Move/MoveSlow/Move" method="set_move_vector"]
 [connection signal="sensed_intensity_changed" from="AuraSense" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_alert_level_from_int"]
