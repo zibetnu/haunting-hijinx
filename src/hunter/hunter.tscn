@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=46 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -23,7 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://cssdkhs4cty5c" path="res://src/costume/hunter_placeholder/hunter_placeholder.tscn" id="19_fj04q"]
 [ext_resource type="PackedScene" uid="uid://r1i8jof331aw" path="res://src/mediators/flashlight_state_chart_properties/flashlight_state_chart_properties.tscn" id="22_lt6pn"]
 [ext_resource type="PackedScene" uid="uid://b4i2arqquha56" path="res://src/revivable/revivable.tscn" id="23_d234k"]
-[ext_resource type="PackedScene" uid="uid://biqy1culinvqm" path="res://src/mediators/flashlight_event_battery_alert/flashlight_event_battery_alert.tscn" id="24_1dwup"]
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="27_qehgg"]
 [ext_resource type="PackedScene" uid="uid://djs1c1w30m8gp" path="res://src/alert/alert.tscn" id="28_bjj70"]
 [ext_resource type="PackedScene" uid="uid://y03qjvt68tjj" path="res://src/aura_sense/aura_sense.tscn" id="28_dd2t8"]
@@ -308,11 +307,7 @@ y_sort_enabled = true
 [node name="Behavior" parent="YSort/Flashlight" index="1"]
 default_set_battery_percentage = 0.75
 
-[node name="FlashlightEventBatteryAlert" parent="YSort/Flashlight/Behavior" index="2" node_paths=PackedStringArray("battery_alert", "state_chart") instance=ExtResource("24_1dwup")]
-battery_alert = NodePath("../../../../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert")
-state_chart = NodePath("../../../../StateChart")
-
-[node name="FlashlightStateChartProperties" parent="YSort/Flashlight/Behavior" index="3" node_paths=PackedStringArray("flashlight_data", "state_chart") instance=ExtResource("22_lt6pn")]
+[node name="FlashlightStateChartProperties" parent="YSort/Flashlight/Behavior" index="2" node_paths=PackedStringArray("flashlight_data", "state_chart") instance=ExtResource("22_lt6pn")]
 flashlight_data = NodePath("../../Data")
 state_chart = NodePath("../../../../StateChart")
 
@@ -434,9 +429,12 @@ layout_mode = 2
 [connection signal="damage_taken" from="DamageSignals/WeakTo" to="StateChart" method="send_event" binds= [&"died"]]
 [connection signal="grabbed" from="Grabbable" to="StateChart" method="send_event" binds= [&"died"]]
 [connection signal="flashlight_rotation_changed" from="YSort/Flashlight/Data" to="YSort/HunterPlaceholder/Behavior" method="set_direction_vector_from_angle"]
+[connection signal="battery_died" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead"]
 [connection signal="battery_died" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_battery_died"]]
+[connection signal="battery_lowed" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_low"]
 [connection signal="battery_lowed" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_battery_lowed"]]
 [connection signal="battery_undied" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_battery_undied"]]
+[connection signal="battery_unlowed" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_none"]
 [connection signal="battery_unlowed" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_battery_unlowed"]]
 [connection signal="powered_off" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_unpowered"]]
 [connection signal="powered_on" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_powered"]]
