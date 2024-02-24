@@ -20,17 +20,17 @@ func _on_controller_input_handled() -> void:
 	move_vector = controller.move_vector
 	look_vector = controller.look_vector
 	if (
-			button_1_pressed != controller.button_1_pressed
+			button_1 != controller.button_1
 			and _button_1_changes < max_changes_per_second
 	):
-		button_1_pressed = controller.button_1_pressed
+		button_1 = controller.button_1
 		_button_1_changes += 1
 
 	if (
-			button_2_pressed != controller.button_2_pressed
+			button_2 != controller.button_2
 			and _button_2_changes < max_changes_per_second
 	):
-		button_2_pressed = controller.button_2_pressed
+		button_2 = controller.button_2
 		_button_2_changes += 1
 
 	input_handled.emit()

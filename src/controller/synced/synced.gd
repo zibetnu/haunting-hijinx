@@ -16,16 +16,16 @@ const MOVE_OFFSET = 32
 const VECTOR_MASK = 0xff_ff_ff
 
 @export var controller: Controller
-@export var peer_id := 1:
+@export var input_authority := 1:
 	set(value):
-		peer_id = value
-		set_multiplayer_authority(value)
+		input_authority = value
+		$InputSynchronizer.set_multiplayer_authority(value)
 
 var _input_bits := 0:
 	set(value):
 		_input_bits = value
-		button_1_pressed = bool(_input_bits & BitFlags.BUTTON_1)
-		button_2_pressed = bool(_input_bits & BitFlags.BUTTON_2)
+		button_1 = bool(_input_bits & BitFlags.BUTTON_1)
+		button_2 = bool(_input_bits & BitFlags.BUTTON_2)
 		look_vector = _unserialize_vector(
 				(_input_bits & (VECTOR_MASK << LOOK_OFFSET)) >> LOOK_OFFSET
 		)
@@ -36,19 +36,16 @@ var _input_bits := 0:
 
 
 func _ready() -> void:
-	# Get rid of the local controller if only remote input matters.
-	if not is_multiplayer_authority():
-		controller.queue_free()
-		return
-
 	controller.input_handled.connect(_on_controller_input_handled)
-	# Only the server needs to know about the server player's input.
-	$MultiplayerSynchronizer.public_visibility = not multiplayer.is_server()
 
 
 func force_handle_input() -> void:
 	if controller:
 		controller.force_handle_input()
+
+
+func set_input_authority(id: int) -> void:
+	input_authority = id
 
 
 func _serialize_vector(vector: Vector2) -> int:
@@ -79,11 +76,14 @@ func _unserialize_vector(serialized_vector: int) -> Vector2:
 
 
 func _on_controller_input_handled() -> void:
+	if not $InputSynchronizer.is_multiplayer_authority():
+		return
+
 	var new_input_bits = 0
-	if controller.button_1_pressed:
+	if controller.button_1:
 		new_input_bits |= BitFlags.BUTTON_1
 
-	if controller.button_2_pressed:
+	if controller.button_2:
 		new_input_bits |= BitFlags.BUTTON_2
 
 	new_input_bits |= _serialize_vector(controller.look_vector) << LOOK_OFFSET

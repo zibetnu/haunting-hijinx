@@ -25,9 +25,7 @@ const MAX_AXIS_VALUE = 6400
 		if _is_ready:
 			camera.enabled = value == multiplayer.get_unique_id()
 
-		if "peer_id" in controller:
-			controller.peer_id = value
-
+		controller.set("input_authority", value)
 		peer_id_changed.emit(value)
 
 @export var state_machine: StateMachine
