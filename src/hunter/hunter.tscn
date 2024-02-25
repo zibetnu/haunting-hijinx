@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=40 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -17,10 +17,7 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="12_y0078"]
 [ext_resource type="PackedScene" uid="uid://bm0ar7asqubxm" path="res://src/mediators/state_component/controller_state_chart_enter_events/controller_state_chart_enter_events.tscn" id="14_25vcg"]
 [ext_resource type="PackedScene" uid="uid://cy4qrm44icmyy" path="res://src/flashlight/flashlight.tscn" id="15_hljm8"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/not_guard.gd" id="17_gyo55"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="18_e766a"]
 [ext_resource type="PackedScene" uid="uid://cssdkhs4cty5c" path="res://src/costume/hunter_placeholder/hunter_placeholder.tscn" id="19_fj04q"]
-[ext_resource type="PackedScene" uid="uid://r1i8jof331aw" path="res://src/mediators/flashlight_state_chart_properties/flashlight_state_chart_properties.tscn" id="22_lt6pn"]
 [ext_resource type="PackedScene" uid="uid://b4i2arqquha56" path="res://src/revivable/revivable.tscn" id="23_d234k"]
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="27_qehgg"]
 [ext_resource type="PackedScene" uid="uid://djs1c1w30m8gp" path="res://src/alert/alert.tscn" id="28_bjj70"]
@@ -38,14 +35,6 @@
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
-
-[sub_resource type="Resource" id="Resource_pc1mk"]
-script = ExtResource("18_e766a")
-expression = "flashlight_powered"
-
-[sub_resource type="Resource" id="Resource_7lfvn"]
-script = ExtResource("17_gyo55")
-guard = SubResource("Resource_pc1mk")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vawb0"]
 radius = 8.0
@@ -158,17 +147,10 @@ initial_state = NodePath("Idle")
 [node name="Idle" type="Node" parent="StateChart/Base/Alive/Movement"]
 script = ExtResource("3_ocdoo")
 
-[node name="MoveFlashlightPowered" type="Node" parent="StateChart/Base/Alive/Movement/Idle"]
+[node name="MoveStarted" type="Node" parent="StateChart/Base/Alive/Movement/Idle"]
 script = ExtResource("4_x2w3t")
-to = NodePath("../../Move/MoveNormal")
+to = NodePath("../../Move")
 event = &"move_started"
-guard = SubResource("Resource_7lfvn")
-
-[node name="MoveFlashlightUnpowered" type="Node" parent="StateChart/Base/Alive/Movement/Idle"]
-script = ExtResource("4_x2w3t")
-to = NodePath("../../Move/MoveSlow")
-event = &"move_started"
-guard = SubResource("Resource_pc1mk")
 
 [node name="ControllerStateChartEnterEvents" parent="StateChart/Base/Alive/Movement/Idle" node_paths=PackedStringArray("controller", "state_chart", "active_state") instance=ExtResource("14_25vcg")]
 controller = NodePath("../../../../../../Synced")
@@ -176,8 +158,7 @@ state_chart = NodePath("../../../../..")
 active_state = NodePath("..")
 
 [node name="Move" type="Node" parent="StateChart/Base/Alive/Movement"]
-script = ExtResource("2_yqkoe")
-initial_state = NodePath("MoveNormal")
+script = ExtResource("3_ocdoo")
 
 [node name="MoveStopped" type="Node" parent="StateChart/Base/Alive/Movement/Move"]
 script = ExtResource("4_x2w3t")
@@ -189,30 +170,9 @@ controller = NodePath("../../../../../../Synced")
 state_chart = NodePath("../../../../..")
 active_state = NodePath("..")
 
-[node name="MoveNormal" type="Node" parent="StateChart/Base/Alive/Movement/Move"]
-script = ExtResource("3_ocdoo")
-
-[node name="FlashlightPowered" type="Node" parent="StateChart/Base/Alive/Movement/Move/MoveNormal"]
-script = ExtResource("4_x2w3t")
-to = NodePath("../../MoveSlow")
-event = &"flashlight_powered"
-
-[node name="Move" parent="StateChart/Base/Alive/Movement/Move/MoveNormal" node_paths=PackedStringArray("character") instance=ExtResource("12_r3uq0")]
-character = NodePath("../../../../../../..")
-speed = 74.0
-manual_process = true
-
-[node name="MoveSlow" type="Node" parent="StateChart/Base/Alive/Movement/Move"]
-script = ExtResource("3_ocdoo")
-
-[node name="FlashlightPowered" type="Node" parent="StateChart/Base/Alive/Movement/Move/MoveSlow"]
-script = ExtResource("4_x2w3t")
-to = NodePath("../../MoveNormal")
-event = &"flashlight_unpowered"
-
-[node name="Move" parent="StateChart/Base/Alive/Movement/Move/MoveSlow" node_paths=PackedStringArray("character") instance=ExtResource("12_r3uq0")]
-character = NodePath("../../../../../../..")
-speed = 29.6
+[node name="Move" parent="StateChart/Base/Alive/Movement/Move" node_paths=PackedStringArray("character") instance=ExtResource("12_r3uq0")]
+character = NodePath("../../../../../..")
+move_speed = 74.0
 manual_process = true
 
 [node name="Vulnerability" type="Node" parent="StateChart/Base/Alive"]
@@ -301,10 +261,6 @@ y_sort_enabled = true
 
 [node name="Behavior" parent="YSort/Flashlight" index="1"]
 default_set_battery_percentage = 0.75
-
-[node name="FlashlightStateChartProperties" parent="YSort/Flashlight/Behavior" index="2" node_paths=PackedStringArray("flashlight_data", "state_chart") instance=ExtResource("22_lt6pn")]
-flashlight_data = NodePath("../../Data")
-state_chart = NodePath("../../../../StateChart")
 
 [node name="HunterPlaceholder" parent="YSort" instance=ExtResource("19_fj04q")]
 
@@ -403,9 +359,8 @@ layout_mode = 2
 [connection signal="state_entered" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior" method="enable"]
 [connection signal="state_exited" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior" method="disable"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Movement/Idle" to="YSort/HunterPlaceholder/Behavior" method="set_animation_name" binds= ["idle"]]
-[connection signal="state_entered" from="StateChart/Base/Alive/Movement/Move" to="YSort/HunterPlaceholder/Behavior" method="set_animation_name" binds= ["move"]]
-[connection signal="state_physics_processing" from="StateChart/Base/Alive/Movement/Move/MoveNormal" to="StateChart/Base/Alive/Movement/Move/MoveNormal/Move" method="manual_physics_process"]
-[connection signal="state_physics_processing" from="StateChart/Base/Alive/Movement/Move/MoveSlow" to="StateChart/Base/Alive/Movement/Move/MoveSlow/Move" method="manual_physics_process"]
+[connection signal="state_entered" from="StateChart/Base/Alive/Movement/Move" to="YSort/HunterPlaceholder/Behavior" method="set_animation_name" binds= [&"move"]]
+[connection signal="state_physics_processing" from="StateChart/Base/Alive/Movement/Move" to="StateChart/Base/Alive/Movement/Move/Move" method="manual_physics_process"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="DamageSignals" method="set_monitorable" flags=3 binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="Grabbable" method="set_monitorable" flags=3 binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer" method="play" binds= [&"invulnerable"]]
@@ -420,8 +375,7 @@ layout_mode = 2
 [connection signal="look_vector_changed" from="Synced" to="YSort/Flashlight/Behavior" method="set_target_vector"]
 [connection signal="move_started" from="Synced" to="StateChart" method="send_event" binds= [&"move_started"]]
 [connection signal="move_stopped" from="Synced" to="StateChart" method="send_event" binds= [&"move_stopped"]]
-[connection signal="move_vector_changed" from="Synced" to="StateChart/Base/Alive/Movement/Move/MoveNormal/Move" method="set_move_vector"]
-[connection signal="move_vector_changed" from="Synced" to="StateChart/Base/Alive/Movement/Move/MoveSlow/Move" method="set_move_vector"]
+[connection signal="move_vector_changed" from="Synced" to="StateChart/Base/Alive/Movement/Move/Move" method="set_move_vector"]
 [connection signal="sensed_intensity_changed" from="AuraSense" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_alert_level_from_int"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/Revivable" method="take_damage"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
@@ -438,7 +392,9 @@ layout_mode = 2
 [connection signal="battery_unlowed" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_none"]
 [connection signal="battery_unlowed" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_battery_unlowed"]]
 [connection signal="powered_off" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_unpowered"]]
+[connection signal="powered_off" from="YSort/Flashlight/Behavior" to="StateChart/Base/Alive/Movement/Move/Move" method="set_move_speed" binds= [74.0]]
 [connection signal="powered_on" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_powered"]]
+[connection signal="powered_on" from="YSort/Flashlight/Behavior" to="StateChart/Base/Alive/Movement/Move/Move" method="set_move_speed" binds= [29.6]]
 [connection signal="powered_on_attempted" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead"]
 [connection signal="filter_ready" from="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer/PeerVisibilityFilter" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer" method="add_visibility_filter"]
 [connection signal="process_mode_updated" from="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/PeerProcessMode" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_process_mode"]

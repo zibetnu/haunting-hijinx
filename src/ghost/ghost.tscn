@@ -204,7 +204,7 @@ listen_for_event = &"damaged"
 
 [node name="Move" parent="StateChart/Base/Behavior/Alive/Normal" node_paths=PackedStringArray("character") instance=ExtResource("7_1d45a")]
 character = NodePath("../../../../../..")
-speed = 92.0
+move_speed = 92.0
 manual_process = true
 
 [node name="Sprint" type="Node" parent="StateChart/Base/Behavior/Alive"]
@@ -247,7 +247,7 @@ listen_for_event = &"damaged"
 
 [node name="Move" parent="StateChart/Base/Behavior/Alive/Sprint" node_paths=PackedStringArray("character") instance=ExtResource("7_1d45a")]
 character = NodePath("../../../../../..")
-speed = 123.0
+move_speed = 123.0
 manual_process = true
 
 [node name="Summon" type="Node" parent="StateChart/Base/Behavior/Alive"]
@@ -294,7 +294,7 @@ event = &"panic_ended"
 
 [node name="Move" parent="StateChart/Base/Behavior/Alive/Panic" node_paths=PackedStringArray("character") instance=ExtResource("7_1d45a")]
 character = NodePath("../../../../../..")
-speed = 154.0
+move_speed = 154.0
 manual_process = true
 
 [node name="Damaged" parent="StateChart/Base/Behavior/Alive/Panic" instance=ExtResource("18_870ie")]
