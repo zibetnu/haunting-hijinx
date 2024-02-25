@@ -285,7 +285,7 @@ wait_time = 1.5
 one_shot = true
 
 [node name="Panic" type="Node" parent="StateChart/Base/Behavior/Alive"]
-script = ExtResource("6_3dmdv")
+script = ExtResource("5_6yps6")
 
 [node name="PanicEnded" type="Node" parent="StateChart/Base/Behavior/Alive/Panic"]
 script = ExtResource("6_il0ju")
