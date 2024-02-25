@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=50 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_visibility_filter/peer_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
@@ -21,7 +21,6 @@
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="9_x08fo"]
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="10_el6fq"]
 [ext_resource type="PackedScene" uid="uid://dhavwobkg4v8o" path="res://src/mediators/named_property_signals/named_property_signals.tscn" id="10_fwp7a"]
-[ext_resource type="PackedScene" uid="uid://bm0ar7asqubxm" path="res://src/mediators/state_component/controller_state_chart_enter_events/controller_state_chart_enter_events.tscn" id="11_fqc8g"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="13_56q65"]
 [ext_resource type="PackedScene" uid="uid://nj5bu4130gy3" path="res://src/costume/ghost_placeholder/ghost_placeholder.tscn" id="13_arjsn"]
 [ext_resource type="PackedScene" uid="uid://ctcjena4x8kr0" path="res://src/aura/aura.tscn" id="13_e27lr"]
@@ -194,11 +193,6 @@ script = ExtResource("6_il0ju")
 to = NodePath("../../../../Animation/Idle")
 event = &"move_stopped"
 
-[node name="ControllerStateChartEnterEvents" parent="StateChart/Base/Behavior/Alive/Normal" node_paths=PackedStringArray("controller", "state_chart", "active_state") instance=ExtResource("11_fqc8g")]
-controller = NodePath("../../../../../../Synced")
-state_chart = NodePath("../../../../..")
-active_state = NodePath("..")
-
 [node name="Damaged" parent="StateChart/Base/Behavior/Alive/Normal" instance=ExtResource("18_870ie")]
 listen_for_event = &"damaged"
 
@@ -236,12 +230,6 @@ script = ExtResource("6_il0ju")
 to = NodePath("../../../../Animation/Idle")
 event = &"move_stopped"
 
-[node name="ControllerStateChartEnterEvents" parent="StateChart/Base/Behavior/Alive/Sprint" node_paths=PackedStringArray("controller", "state_chart", "active_state") instance=ExtResource("11_fqc8g")]
-controller = NodePath("../../../../../../Synced")
-state_chart = NodePath("../../../../..")
-ignore_button_2 = true
-active_state = NodePath("..")
-
 [node name="Damaged" parent="StateChart/Base/Behavior/Alive/Sprint" instance=ExtResource("18_870ie")]
 listen_for_event = &"damaged"
 
@@ -267,12 +255,6 @@ event = &"button_2_released"
 script = ExtResource("6_il0ju")
 to = NodePath("../../Normal")
 event = &"summoned"
-
-[node name="ControllerStateChartEnterEvents" parent="StateChart/Base/Behavior/Alive/Summon" node_paths=PackedStringArray("controller", "state_chart", "active_state") instance=ExtResource("11_fqc8g")]
-controller = NodePath("../../../../../../Synced")
-state_chart = NodePath("../../../../..")
-ignore_button_1 = true
-active_state = NodePath("..")
 
 [node name="Damaged" parent="StateChart/Base/Behavior/Alive/Summon" instance=ExtResource("18_870ie")]
 listen_for_event = &"damaged"
@@ -581,6 +563,9 @@ max_variable = "max_charge"
 [connection signal="state_exited" from="StateChart/Base/Behavior/Dead" to="StateChart/Base/Behavior/Dead/IsDead" method="set_false"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Dead" to="DamageSignals" method="set_monitorable" flags=3 binds= [true]]
 [connection signal="event_received" from="StateChart/Base/Behavior/Alive/Normal" to="StateChart/Base/Behavior/Alive/Normal/Damaged" method="receive_event"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Synced" method="force_emit_button_1_signals"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Synced" method="force_emit_move_vector_signals"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Synced" method="force_emit_button_2_signals"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="StateChart" method="send_event" binds= [&"invisibility_started"]]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Grabber" method="set_monitoring" flags=3 binds= [true]]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Normal" to="Grabber" method="set_monitoring" flags=3 binds= [false]]
