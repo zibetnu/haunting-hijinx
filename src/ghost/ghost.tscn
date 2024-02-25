@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=51 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_visibility_filter/peer_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/mediators/move/move.tscn" id="18_5mhrn"]
 [ext_resource type="PackedScene" uid="uid://bfhqyxu3iuptm" path="res://src/mediators/event_listener/event_listener.tscn" id="18_870ie"]
 [ext_resource type="PackedScene" uid="uid://cecfpltx40gs5" path="res://src/greater_timer/greater_timer.tscn" id="20_l54rd"]
+[ext_resource type="PackedScene" uid="uid://c6w7dk0uahxnu" path="res://src/controller/anti_axis_drift/anti_axis_drift.tscn" id="23_rknrl"]
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="29_1sq8w"]
 [ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_i4s33"]
 [ext_resource type="PackedScene" uid="uid://d4gb1ksm22wvh" path="res://src/damage_value_signal/damage_value_signal.tscn" id="34_617dy"]
@@ -405,15 +406,18 @@ controller = NodePath("UnpauseForce")
 controller = NodePath("AntiButtonSpam")
 
 [node name="AntiButtonSpam" parent="Synced/UnpauseForce" node_paths=PackedStringArray("controller") instance=ExtResource("7_ijrj0")]
+controller = NodePath("AntiAxisDrift")
+
+[node name="AntiAxisDrift" parent="Synced/UnpauseForce/AntiButtonSpam" node_paths=PackedStringArray("controller") instance=ExtResource("23_rknrl")]
 controller = NodePath("Composite")
 
-[node name="Composite" parent="Synced/UnpauseForce/AntiButtonSpam" node_paths=PackedStringArray("controller_1", "controller_2") instance=ExtResource("8_mynla")]
+[node name="Composite" parent="Synced/UnpauseForce/AntiButtonSpam/AntiAxisDrift" node_paths=PackedStringArray("controller_1", "controller_2") instance=ExtResource("8_mynla")]
 controller_1 = NodePath("Joypad")
 controller_2 = NodePath("KeyboardAndMouse")
 
-[node name="Joypad" parent="Synced/UnpauseForce/AntiButtonSpam/Composite" instance=ExtResource("9_x08fo")]
+[node name="Joypad" parent="Synced/UnpauseForce/AntiButtonSpam/AntiAxisDrift/Composite" instance=ExtResource("9_x08fo")]
 
-[node name="KeyboardAndMouse" parent="Synced/UnpauseForce/AntiButtonSpam/Composite" instance=ExtResource("10_el6fq")]
+[node name="KeyboardAndMouse" parent="Synced/UnpauseForce/AntiButtonSpam/AntiAxisDrift/Composite" instance=ExtResource("10_el6fq")]
 
 [node name="AuraLarge" parent="." instance=ExtResource("13_e27lr")]
 
@@ -563,8 +567,8 @@ max_variable = "max_charge"
 [connection signal="state_exited" from="StateChart/Base/Behavior/Dead" to="StateChart/Base/Behavior/Dead/IsDead" method="set_false"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Dead" to="DamageSignals" method="set_monitorable" flags=3 binds= [true]]
 [connection signal="event_received" from="StateChart/Base/Behavior/Alive/Normal" to="StateChart/Base/Behavior/Alive/Normal/Damaged" method="receive_event"]
-[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Synced" method="force_emit_button_1_signals"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Synced" method="force_emit_move_vector_signals"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Synced" method="force_emit_button_1_signals"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Synced" method="force_emit_button_2_signals"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="StateChart" method="send_event" binds= [&"invisibility_started"]]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Grabber" method="set_monitoring" flags=3 binds= [true]]

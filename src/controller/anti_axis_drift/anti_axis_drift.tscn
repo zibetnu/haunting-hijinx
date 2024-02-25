@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6w7dk0uahxnu"]
+
+[ext_resource type="Script" path="res://src/controller/anti_axis_drift/anti_axis_drift.gd" id="1_fgyb0"]
+
+[node name="AntiAxisDrift" type="Node2D"]
+script = ExtResource("1_fgyb0")

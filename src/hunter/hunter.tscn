@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=40 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/mediators/move/move.tscn" id="9_rpftm"]
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="10_3bo02"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="12_y0078"]
+[ext_resource type="PackedScene" uid="uid://c6w7dk0uahxnu" path="res://src/controller/anti_axis_drift/anti_axis_drift.tscn" id="13_xufeu"]
 [ext_resource type="PackedScene" uid="uid://cy4qrm44icmyy" path="res://src/flashlight/flashlight.tscn" id="15_hljm8"]
 [ext_resource type="PackedScene" uid="uid://cssdkhs4cty5c" path="res://src/costume/hunter_placeholder/hunter_placeholder.tscn" id="19_fj04q"]
 [ext_resource type="PackedScene" uid="uid://b4i2arqquha56" path="res://src/revivable/revivable.tscn" id="23_d234k"]
@@ -207,15 +208,18 @@ controller = NodePath("UnpauseForce")
 controller = NodePath("AntiButtonSpam")
 
 [node name="AntiButtonSpam" parent="Synced/UnpauseForce" node_paths=PackedStringArray("controller") instance=ExtResource("7_lf1vk")]
+controller = NodePath("AntiAxisDrift")
+
+[node name="AntiAxisDrift" parent="Synced/UnpauseForce/AntiButtonSpam" node_paths=PackedStringArray("controller") instance=ExtResource("13_xufeu")]
 controller = NodePath("Composite")
 
-[node name="Composite" parent="Synced/UnpauseForce/AntiButtonSpam" node_paths=PackedStringArray("controller_1", "controller_2") instance=ExtResource("8_dmlm5")]
+[node name="Composite" parent="Synced/UnpauseForce/AntiButtonSpam/AntiAxisDrift" node_paths=PackedStringArray("controller_1", "controller_2") instance=ExtResource("8_dmlm5")]
 controller_1 = NodePath("Joypad")
 controller_2 = NodePath("KeyboardAndMouse")
 
-[node name="Joypad" parent="Synced/UnpauseForce/AntiButtonSpam/Composite" instance=ExtResource("9_muve1")]
+[node name="Joypad" parent="Synced/UnpauseForce/AntiButtonSpam/AntiAxisDrift/Composite" instance=ExtResource("9_muve1")]
 
-[node name="KeyboardAndMouse" parent="Synced/UnpauseForce/AntiButtonSpam/Composite" instance=ExtResource("10_3bo02")]
+[node name="KeyboardAndMouse" parent="Synced/UnpauseForce/AntiButtonSpam/AntiAxisDrift/Composite" instance=ExtResource("10_3bo02")]
 
 [node name="AuraSense" parent="." instance=ExtResource("28_dd2t8")]
 collision_mask = 0
