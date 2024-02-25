@@ -12,8 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="8_dmlm5"]
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="9_muve1"]
 [ext_resource type="PackedScene" uid="uid://dc3f3sy1vso5f" path="res://src/mediators/group_bool/group_bool.tscn" id="9_n4b8t"]
+[ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/mediators/move/move.tscn" id="9_rpftm"]
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="10_3bo02"]
-[ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/mediators/state_component/move/move.tscn" id="12_r3uq0"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="12_y0078"]
 [ext_resource type="PackedScene" uid="uid://cy4qrm44icmyy" path="res://src/flashlight/flashlight.tscn" id="15_hljm8"]
 [ext_resource type="PackedScene" uid="uid://cssdkhs4cty5c" path="res://src/costume/hunter_placeholder/hunter_placeholder.tscn" id="19_fj04q"]
@@ -159,7 +159,7 @@ script = ExtResource("4_x2w3t")
 to = NodePath("../../Idle")
 event = &"move_stopped"
 
-[node name="Move" parent="StateChart/Base/Alive/Movement/Move" node_paths=PackedStringArray("character") instance=ExtResource("12_r3uq0")]
+[node name="Move" parent="StateChart/Base/Alive/Movement/Move" node_paths=PackedStringArray("character") instance=ExtResource("9_rpftm")]
 character = NodePath("../../../../../..")
 move_speed = 74.0
 manual_process = true
