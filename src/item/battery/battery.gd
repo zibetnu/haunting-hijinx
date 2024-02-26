@@ -28,17 +28,14 @@ func take_damage(source: DamageSource) -> void:
 
 
 func _acquirer_allowed(acquirer: Variant) -> bool:
-	if not "data" in acquirer:
+	if not "battery_percentage" in acquirer:
 		return false
 
-	if not "battery_percentage" in acquirer.data:
-		return false
-
-	if acquirer.data.battery_percentage >= 0.9:
+	if acquirer.battery_percentage >= 0.9:
 		return false
 
 	return true
 
 
 func _on_acquired(acquirer: Variant) -> void:
-	acquirer.data.battery_percentage = 1
+	acquirer.battery_percentage = 1

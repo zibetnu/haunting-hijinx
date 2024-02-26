@@ -23,23 +23,6 @@ signal flashlight_rotation_changed(flashlight_rotation: float)
 		flashlight_turn_speed = value
 		changed.emit()
 
-@export_group("Battery", "battery")
-@export var battery_low_percentage := 0.5:
-	set(value):
-		if battery_low_percentage == value:
-			return
-
-		battery_low_percentage = value
-		changed.emit()
-
-@export var battery_time := 43:
-	set(value):
-		if battery_time == value:
-			return
-
-		battery_time = value
-		changed.emit()
-
 @export_group("Collision", "collision")
 @export var collision_cast_length := 0.0:
 	set(value):
@@ -67,27 +50,6 @@ signal flashlight_rotation_changed(flashlight_rotation: float)
 
 		damage_weak_to = value
 		changed.emit()
-
-var battery := max_battery:
-	set(value):
-		if battery == value:
-			return
-
-		battery = clampi(value, 0, max_battery)
-		changed.emit()
-
-var battery_percentage: float:
-	get:
-		return float(battery) / max_battery
-
-	set(value):
-		battery = roundi(max_battery * clampf(value, 0, 1))
-
-var max_battery: int:
-	get:
-		return battery_time * ProjectSettings.get_setting(
-				"physics/common/physics_ticks_per_second"
-		)
 
 
 func set_collision_points(points: Array[Vector2]) -> void:

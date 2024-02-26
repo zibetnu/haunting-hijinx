@@ -18,6 +18,10 @@ const CAST_LONG_MAX_INDEX = 15
 const CAST_LONG_MIN_INDEX = 5
 const CAST_SHORT_MAX_INDEX = 4
 
+@export_group("Battery", "battery")
+@export var battery_low_percentage := 0.5
+@export var battery_time := 43
+
 @export var data: FlashlightData:
 	set(value):
 		if data and data.changed.is_connected(_on_data_changed):
@@ -38,7 +42,7 @@ const CAST_SHORT_MAX_INDEX = 4
 @export var powered: bool:
 	set(value):
 		var was_powered := powered
-		powered = data.battery > 0 and enabled and value
+		powered = battery > 0 and enabled and value
 		power_toggled.emit(powered)
 		match [was_powered, powered]:
 			[false, true]:
@@ -47,7 +51,7 @@ const CAST_SHORT_MAX_INDEX = 4
 			[true, false]:
 				powered_off.emit()
 
-		if value and data.battery == 0:
+		if value and battery == 0:
 			powered_on_attempted.emit()
 
 @export var target_rotation: float
@@ -59,13 +63,42 @@ const CAST_SHORT_MAX_INDEX = 4
 		if not value.is_zero_approx():
 			target_rotation = value.angle()
 
+var battery := max_battery:
+	set(value):
+		var was_battery_dead := battery == 0
+		var was_battery_low := is_battery_low
+		battery = clampi(value, 0, max_battery)
+		match [was_battery_dead, battery == 0]:
+			[false, true]:
+				battery_died.emit()
+
+			[true, false]:
+				battery_undied.emit()
+
+		if battery > 0:
+			match [was_battery_low, is_battery_low]:
+				[false, true]:
+					battery_lowed.emit()
+
+				[true, false]:
+					battery_unlowed.emit()
+
+var battery_percentage: float:
+	get:
+		return float(battery) / max_battery
+
+	set(value):
+		battery = roundi(max_battery * clampf(value, 0, 1))
+
+var max_battery: int:
+	get:
+		return battery_time * ProjectSettings.get_setting(
+				"physics/common/physics_ticks_per_second"
+		)
 
 var is_battery_low: bool:
 	get:
-		return data.battery_percentage < data.battery_low_percentage
-
-var _was_battery_dead := false
-var _was_battery_low := false
+		return battery_percentage < battery_low_percentage
 
 
 func _physics_process(delta: float) -> void:
@@ -76,7 +109,7 @@ func _physics_process(delta: float) -> void:
 	)
 	flashlight_rotation_changed.emit(data.flashlight_rotation)
 
-	if data.battery <= 0:
+	if battery <= 0:
 		powered = false
 		return
 
@@ -111,7 +144,7 @@ func _physics_process(delta: float) -> void:
 
 		collider.take_damage(data.damage_deals)
 
-	data.battery -= 1
+	battery -= 1
 	data.set_collision_points(_get_collision_points(all_colliders_and_points, all_repeat_raycasts))
 
 
@@ -132,7 +165,7 @@ func power_on() -> void:
 
 
 func set_battery_percentage(value: float) -> void:
-	data.battery_percentage = value
+	battery_percentage = value
 
 
 func set_powered(value: bool) -> void:
@@ -149,7 +182,7 @@ func set_target_vector(value: Vector2) -> void:
 
 func take_damage(source: DamageSource) -> void:
 	if source.damage_type == data.damage_weak_to:
-		data.battery = 0
+		battery = 0
 
 
 func _get_collision_points(all_colliders_and_points: Array, raycasts: Array) -> Array[Vector2]:
@@ -180,16 +213,20 @@ func _get_rotated_collision_point(colliders_and_points: Dictionary, raycast: Ray
 
 func _update_cast_length() -> void:
 	var index := 0
-	var percentage := data.battery_percentage
-	var low_perentage := data.battery_low_percentage
-	if percentage < low_perentage:
-		index = (ceil(CAST_SHORT_MAX_INDEX * (percentage / low_perentage)))
+	if battery_percentage < battery_low_percentage:
+		index = (ceil(
+				CAST_SHORT_MAX_INDEX
+				* (battery_percentage / battery_low_percentage)
+		))
 
 	else:
 		index = (
 				CAST_LONG_MIN_INDEX + ceil(
 						(CAST_LONG_MAX_INDEX - CAST_LONG_MIN_INDEX)
-						* ((percentage - low_perentage) / (1.0 - low_perentage))
+						* (
+								(battery_percentage - battery_low_percentage)
+								/ (1.0 - battery_low_percentage)
+						)
 				)
 		)
 
@@ -201,24 +238,3 @@ func _on_data_changed() -> void:
 	rotation = data.flashlight_rotation
 	for raycast: RayCast2D in $RayCasts.get_children():
 		raycast.target_position.x = data.collision_cast_length
-
-	match [data.battery == 0, _was_battery_dead]:
-		[true, false]:
-			battery_died.emit()
-
-		[false, true]:
-			battery_undied.emit()
-
-	match [
-			data.battery == 0,
-			data.battery_percentage < data.battery_low_percentage,
-			_was_battery_low
-	]:
-		[false, true, false]:
-			battery_lowed.emit()
-
-		[false, false, true]:
-			battery_unlowed.emit()
-
-	_was_battery_dead = data.battery == 0
-	_was_battery_low = data.battery_percentage < data.battery_low_percentage
