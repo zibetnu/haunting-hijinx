@@ -8,7 +8,7 @@
 properties/0/path = NodePath(".:beam_points")
 properties/0/spawn = true
 properties/0/replication_mode = 1
-properties/1/path = NodePath(".:flashlight_powered")
+properties/1/path = NodePath(".:powered")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 properties/2/path = NodePath(".:flashlight_rotation")

@@ -1,9 +1,6 @@
 extends Node2D
 
 
-const CAST_LONG_MAX_INDEX = 15
-const CAST_LONG_MIN_INDEX = 5
-const CAST_SHORT_MAX_INDEX = 4
 const LIGHT_FILE_PATH := "res://assets/flashlight/light_%s.png"
 const LIGHT_TEXTURES: Array[CompressedTexture2D] = [
 	null,
@@ -14,15 +11,6 @@ const LIGHT_TEXTURES: Array[CompressedTexture2D] = [
 	preload(LIGHT_FILE_PATH % 13), preload(LIGHT_FILE_PATH % 14), preload(LIGHT_FILE_PATH % 15),
 ]
 
-@export var data: FlashlightData:
-	set(value):
-		if data and data.changed.is_connected(_on_data_changed):
-			data.changed.disconnect(_on_data_changed)
-
-		data = value
-		if data and not data.changed.is_connected(_on_data_changed):
-			data.changed.connect(_on_data_changed)
-
 # Not typed as Array[Vector2] due to a MultiplayerSynchronizer bug.
 # See https://github.com/godotengine/godot/issues/74391.
 var beam_points: Array:
@@ -32,9 +20,9 @@ var beam_points: Array:
 	set(value):
 		_beam.set_points(value)
 
-var flashlight_powered: bool:
+var powered: bool:
 	set(value):
-		flashlight_powered = value
+		powered = value
 		_beam.visible = value
 		_body.frame = int(value)
 		_light.visible = value
@@ -57,24 +45,17 @@ var light_texture_index: int:
 @onready var _light := $RotationNode/Light
 
 
-func _update_light_texture_index() -> void:
-	var percentage := data.battery_percentage
-	var low_perentage := data.battery_low_percentage
-	if percentage < low_perentage:
-		light_texture_index = (ceil(CAST_SHORT_MAX_INDEX * (percentage / low_perentage)))
-
-	else:
-		light_texture_index = (
-				CAST_LONG_MIN_INDEX
-				+ ceil(
-						(CAST_LONG_MAX_INDEX - CAST_LONG_MIN_INDEX)
-						* ((percentage - low_perentage) / (1.0 - low_perentage))
-				)
-		)
+func set_collision_points(value: Array) -> void:
+	beam_points = [%BeamStartBottom.position, %BeamStartTop.position] + value
 
 
-func _on_data_changed() -> void:
-	beam_points = [%BeamStartBottom.position, %BeamStartTop.position] + data.collision_points
-	flashlight_powered = data.flashlight_powered
-	flashlight_rotation = data.flashlight_rotation
-	_update_light_texture_index()
+func set_powered(value: bool) -> void:
+	powered = value
+
+
+func set_flashlight_rotation(value: float) -> void:
+	flashlight_rotation = value
+
+
+func set_light_texture_index(value: int) -> void:
+	light_texture_index = value

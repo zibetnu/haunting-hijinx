@@ -5,6 +5,10 @@ signal battery_died
 signal battery_undied
 signal battery_lowed
 signal battery_unlowed
+signal beam_points_changed
+signal cast_length_index_changed(index: int)
+signal flashlight_rotation_changed(flashlight_rotation: float)
+signal power_toggled(powered: bool)
 signal powered_off
 signal powered_on
 signal powered_on_attempted
@@ -38,6 +42,7 @@ const CAST_SHORT_MAX_INDEX = 4
 
 	set(value):
 		data.flashlight_powered = data.battery > 0 and enabled and value
+		power_toggled.emit(data.flashlight_powered)
 		if value and data.battery == 0:
 			powered_on_attempted.emit()
 
@@ -66,6 +71,7 @@ func _physics_process(delta: float) -> void:
 			-data.flashlight_turn_speed * delta,
 			data.flashlight_turn_speed * delta
 	)
+	flashlight_rotation_changed.emit(data.flashlight_rotation)
 
 	if data.battery <= 0:
 		powered = false
@@ -150,6 +156,7 @@ func _get_collision_points(all_colliders_and_points: Array, raycasts: Array) -> 
 				all_colliders_and_points[i], raycasts[i]
 		))
 
+	beam_points_changed.emit(rotated_collision_points)
 	return rotated_collision_points
 
 
@@ -184,6 +191,7 @@ func _update_cast_length() -> void:
 		)
 
 	data.collision_cast_length = CAST_LENGTHS[index]
+	cast_length_index_changed.emit(index)
 
 
 func _on_data_changed() -> void:
