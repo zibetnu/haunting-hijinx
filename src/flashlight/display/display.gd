@@ -23,9 +23,9 @@ var beam_points: Array:
 var powered: bool:
 	set(value):
 		powered = value
-		_beam.visible = value
-		_body.frame = int(value)
-		_light.visible = value
+		_beam.visible = powered
+		_body.frame = int(powered)
+		_light.visible = powered
 
 var flashlight_rotation: float:
 	get:
