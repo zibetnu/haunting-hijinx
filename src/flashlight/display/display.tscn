@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://src/flashlight/display/beam.gd" id="3_rmag1"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jmwf3"]
-properties/0/path = NodePath(".:beam_points")
+properties/0/path = NodePath("./IgnoreCanvasModulate/RotationNode3/Beam:points")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 properties/1/path = NodePath(".:powered")

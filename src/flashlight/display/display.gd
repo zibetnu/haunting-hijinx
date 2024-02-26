@@ -11,15 +11,6 @@ const _LIGHT_TEXTURES: Array[CompressedTexture2D] = [
 	preload(_LIGHT_FILE_PATH % 13), preload(_LIGHT_FILE_PATH % 14), preload(_LIGHT_FILE_PATH % 15),
 ]
 
-# Not typed as Array[Vector2] due to a MultiplayerSynchronizer bug.
-# See https://github.com/godotengine/godot/issues/74391.
-var beam_points: Array:
-	get:
-		return _beam.points
-
-	set(value):
-		_beam.set_points(value)
-
 var powered: bool:
 	set(value):
 		powered = value
@@ -46,7 +37,7 @@ var light_texture_index: int:
 
 
 func set_collision_points(value: Array) -> void:
-	beam_points = [%BeamStartBottom.position, %BeamStartTop.position] + value
+	_beam.points = [%BeamStartBottom.position, %BeamStartTop.position] + value
 
 
 func set_powered(value: bool) -> void:
