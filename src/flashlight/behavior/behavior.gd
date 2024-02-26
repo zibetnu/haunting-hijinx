@@ -5,8 +5,8 @@ signal battery_died
 signal battery_undied
 signal battery_lowed
 signal battery_unlowed
-signal beam_points_changed
 signal cast_length_index_changed(index: int)
+signal collision_points_changed(points: Array[Vector2])
 signal flashlight_rotation_changed(flashlight_rotation: float)
 signal power_toggled(powered: bool)
 signal powered_off
@@ -142,7 +142,7 @@ func _physics_process(delta: float) -> void:
 		collider.take_damage(damage_deals)
 
 	battery -= 1
-	_get_collision_points(all_colliders_and_points, all_repeat_raycasts)
+	_emit_collision_points(all_colliders_and_points, all_repeat_raycasts)
 
 
 func disable() -> void:
@@ -182,15 +182,14 @@ func take_damage(source: DamageSource) -> void:
 		battery = 0
 
 
-func _get_collision_points(all_colliders_and_points: Array, raycasts: Array) -> Array[Vector2]:
+func _emit_collision_points(all_colliders_and_points: Array, raycasts: Array) -> void:
 	var rotated_collision_points: Array[Vector2] = []
 	for i in range(mini(all_colliders_and_points.size(), raycasts.size())):
 		rotated_collision_points.append(_get_rotated_collision_point(
 				all_colliders_and_points[i], raycasts[i]
 		))
 
-	beam_points_changed.emit(rotated_collision_points)
-	return rotated_collision_points
+	collision_points_changed.emit(rotated_collision_points)
 
 
 func _get_rotated_collision_point(colliders_and_points: Dictionary, raycast: RayCast2D) -> Vector2:
