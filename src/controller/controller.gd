@@ -38,27 +38,27 @@ signal look_vector_changed(look_vector: Vector2)
 
 @export var button_1 := false:
 	set(value):
-		var button_state: Array[bool] = [button_1, value]
+		var was_button_1 := button_1
 		button_1 = value
 		button_1_changed.emit(button_1)
-		match button_state:
-			[true, false]:
-				button_1_released.emit()
-
+		match [was_button_1, button_1]:
 			[false, true]:
 				button_1_pressed.emit()
 
+			[true, false]:
+				button_1_released.emit()
+
 @export var button_2 := false:
 	set(value):
-		var button_state: Array[bool] = [button_2, value]
+		var was_button_2 := button_2
 		button_2 = value
 		button_2_changed.emit(button_2)
-		match button_state:
-			[true, false]:
-				button_2_released.emit()
-
+		match [was_button_2, button_2]:
 			[false, true]:
 				button_2_pressed.emit()
+
+			[true, false]:
+				button_2_released.emit()
 
 
 func force_emit_move_vector_signals() -> void:
