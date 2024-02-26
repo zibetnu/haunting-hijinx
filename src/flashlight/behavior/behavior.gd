@@ -37,12 +37,17 @@ const CAST_SHORT_MAX_INDEX = 4
 			powered = false
 
 @export var powered: bool:
-	get:
-		return data.flashlight_powered
-
 	set(value):
-		data.flashlight_powered = data.battery > 0 and enabled and value
-		power_toggled.emit(data.flashlight_powered)
+		var was_powered := powered
+		powered = data.battery > 0 and enabled and value
+		power_toggled.emit(powered)
+		match [was_powered, powered]:
+			[false, true]:
+				powered_on.emit()
+
+			[true, false]:
+				powered_off.emit()
+
 		if value and data.battery == 0:
 			powered_on_attempted.emit()
 
@@ -62,7 +67,6 @@ var is_battery_low: bool:
 
 var _was_battery_dead := false
 var _was_battery_low := false
-var _was_flashlight_powered := false
 
 
 func _physics_process(delta: float) -> void:
@@ -217,14 +221,5 @@ func _on_data_changed() -> void:
 		[false, false, true]:
 			battery_unlowed.emit()
 
-	match [data.flashlight_powered, _was_flashlight_powered]:
-		[true, false]:
-			powered_on.emit()
-
-		[false, true]:
-			powered_off.emit()
-
 	_was_battery_dead = data.battery == 0
 	_was_battery_low = data.battery_percentage < data.battery_low_percentage
-	_was_flashlight_powered = data.flashlight_powered
-

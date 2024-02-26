@@ -6,14 +6,6 @@ signal changed()
 signal flashlight_rotation_changed(flashlight_rotation: float)
 
 @export_group("Flashlight", "flashlight")
-@export var flashlight_powered: bool:
-	set(value):
-		if flashlight_powered == value:
-			return
-
-		flashlight_powered = value
-		changed.emit()
-
 @export var flashlight_rotation := 0.0:
 	set(value):
 		if flashlight_rotation == value:
