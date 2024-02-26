@@ -102,12 +102,12 @@ var is_battery_low: bool:
 
 
 func _physics_process(delta: float) -> void:
-	data.flashlight_rotation += clampf(
-			angle_difference(data.flashlight_rotation, target_rotation),
+	rotation += clampf(
+			angle_difference(rotation, target_rotation),
 			-data.flashlight_turn_speed * delta,
 			data.flashlight_turn_speed * delta
 	)
-	flashlight_rotation_changed.emit(data.flashlight_rotation)
+	flashlight_rotation_changed.emit(rotation)
 
 	if battery <= 0:
 		powered = false
@@ -235,6 +235,5 @@ func _update_cast_length() -> void:
 
 
 func _on_data_changed() -> void:
-	rotation = data.flashlight_rotation
 	for raycast: RayCast2D in $RayCasts.get_children():
 		raycast.target_position.x = data.collision_cast_length
