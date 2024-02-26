@@ -10,9 +10,6 @@ func _draw() -> void:
 	if points.size() < 3:
 		return
 
-	if Geometry2D.is_polygon_clockwise(points):
-		return
-
 	draw_colored_polygon(points, Color8(255, 255 , 255))
 
 
