@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cecfpltx40gs5"]
-
-[ext_resource type="Script" path="res://src/greater_timer/greater_timer.gd" id="1_ksn2f"]
-
-[node name="GreaterTimer" type="Timer"]
-script = ExtResource("1_ksn2f")
