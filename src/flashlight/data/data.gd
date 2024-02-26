@@ -4,14 +4,6 @@ extends Node
 
 signal changed()
 
-@export var flashlight_turn_speed := 2 * PI:
-	set(value):
-		if flashlight_turn_speed == value:
-			return
-
-		flashlight_turn_speed = value
-		changed.emit()
-
 @export_group("Collision", "collision")
 @export var collision_cast_length := 0.0:
 	set(value):

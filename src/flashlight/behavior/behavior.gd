@@ -63,6 +63,8 @@ const CAST_SHORT_MAX_INDEX = 4
 		if not value.is_zero_approx():
 			target_rotation = value.angle()
 
+@export var turn_speed := 2 * PI
+
 var battery := max_battery:
 	set(value):
 		var was_battery_dead := battery == 0
@@ -104,8 +106,8 @@ var is_battery_low: bool:
 func _physics_process(delta: float) -> void:
 	rotation += clampf(
 			angle_difference(rotation, target_rotation),
-			-data.flashlight_turn_speed * delta,
-			data.flashlight_turn_speed * delta
+			-turn_speed * delta,
+			turn_speed * delta
 	)
 	flashlight_rotation_changed.emit(rotation)
 
