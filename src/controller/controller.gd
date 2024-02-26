@@ -17,14 +17,14 @@ signal look_vector_changed(look_vector: Vector2)
 @export var move_vector := Vector2.ZERO:
 	set(value):
 		value = value.normalized()
-		var vector_state: Array[bool] = [
+		var state: Array[bool] = [
 			move_vector.is_equal_approx(value),
 			move_vector.is_zero_approx(),
 			value.is_zero_approx(),
 		]
 		move_vector = value
 		move_vector_changed.emit(move_vector)
-		match vector_state:
+		match state:
 			[false, false, true]:
 				move_stopped.emit()
 
