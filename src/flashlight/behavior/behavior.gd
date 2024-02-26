@@ -27,7 +27,6 @@ const CAST_SHORT_MAX_INDEX = 4
 		if data and not data.changed.is_connected(_on_data_changed):
 			data.changed.connect(_on_data_changed)
 
-@export_range(0, 1) var default_set_battery_percentage = 1.0
 @export var enabled := true:
 	set(value):
 		enabled = value
@@ -132,7 +131,7 @@ func power_on() -> void:
 	powered = true
 
 
-func set_battery_percentage(value: float = default_set_battery_percentage) -> void:
+func set_battery_percentage(value: float) -> void:
 	data.battery_percentage = value
 
 

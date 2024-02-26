@@ -252,9 +252,6 @@ y_sort_enabled = true
 
 [node name="Flashlight" parent="YSort" instance=ExtResource("15_hljm8")]
 
-[node name="Behavior" parent="YSort/Flashlight" index="1"]
-default_set_battery_percentage = 0.75
-
 [node name="HunterPlaceholder" parent="YSort" instance=ExtResource("19_fj04q")]
 
 [node name="InvulnerableAnimationPlayer" type="AnimationPlayer" parent="YSort/HunterPlaceholder/Display" index="2"]
@@ -373,8 +370,8 @@ layout_mode = 2
 [connection signal="sensed_intensity_changed" from="AuraSense" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_alert_level_from_int"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/Revivable" method="take_damage"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
-[connection signal="revived" from="DamageSignals/Revivable" to="YSort/Flashlight/Behavior" method="set_battery_percentage"]
 [connection signal="revived" from="DamageSignals/Revivable" to="StateChart" method="send_event" binds= [&"revived"]]
+[connection signal="revived" from="DamageSignals/Revivable" to="YSort/Flashlight/Behavior" method="set_battery_percentage" binds= [0.75]]
 [connection signal="damage_taken" from="DamageSignals/WeakTo" to="StateChart" method="send_event" binds= [&"died"]]
 [connection signal="grabbed" from="Grabbable" to="StateChart" method="send_event" binds= [&"died"]]
 [connection signal="flashlight_rotation_changed" from="YSort/Flashlight/Data" to="YSort/HunterPlaceholder/Behavior" method="set_direction_vector_from_angle"]
