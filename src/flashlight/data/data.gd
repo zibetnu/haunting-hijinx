@@ -15,23 +15,6 @@ signal changed()
 
 @export var collision_points: Array[Vector2] = []
 
-@export_group("Damage", "damage")
-@export var damage_deals: DamageSource:
-	set(value):
-		if damage_deals == value:
-			return
-
-		damage_deals = value
-		changed.emit()
-
-@export var damage_weak_to: DamageSource.Type:
-	set(value):
-		if damage_weak_to == value:
-			return
-
-		damage_weak_to = value
-		changed.emit()
-
 
 func set_collision_points(points: Array[Vector2]) -> void:
 	if collision_points == points:

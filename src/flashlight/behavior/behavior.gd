@@ -22,6 +22,10 @@ const CAST_SHORT_MAX_INDEX = 4
 @export var battery_low_percentage := 0.5
 @export var battery_time := 43
 
+@export_group("Damage", "damage")
+@export var damage_deals: DamageSource
+@export var damage_weak_to := DamageSource.Type.DARK
+
 @export var data: FlashlightData:
 	set(value):
 		if data and data.changed.is_connected(_on_data_changed):
@@ -144,7 +148,7 @@ func _physics_process(delta: float) -> void:
 		if not collider.has_method("take_damage"):
 			continue
 
-		collider.take_damage(data.damage_deals)
+		collider.take_damage(damage_deals)
 
 	battery -= 1
 	data.set_collision_points(_get_collision_points(all_colliders_and_points, all_repeat_raycasts))
@@ -183,7 +187,7 @@ func set_target_vector(value: Vector2) -> void:
 
 
 func take_damage(source: DamageSource) -> void:
-	if source.damage_type == data.damage_weak_to:
+	if source.damage_type == damage_weak_to:
 		battery = 0
 
 
