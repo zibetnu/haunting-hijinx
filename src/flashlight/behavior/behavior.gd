@@ -26,15 +26,6 @@ const CAST_SHORT_MAX_INDEX = 4
 @export var damage_deals: DamageSource
 @export var damage_weak_to := DamageSource.Type.DARK
 
-@export var data: FlashlightData:
-	set(value):
-		if data and data.changed.is_connected(_on_data_changed):
-			data.changed.disconnect(_on_data_changed)
-
-		data = value
-		if data and not data.changed.is_connected(_on_data_changed):
-			data.changed.connect(_on_data_changed)
-
 @export var enabled := true:
 	set(value):
 		enabled = value
@@ -151,7 +142,7 @@ func _physics_process(delta: float) -> void:
 		collider.take_damage(damage_deals)
 
 	battery -= 1
-	data.set_collision_points(_get_collision_points(all_colliders_and_points, all_repeat_raycasts))
+	_get_collision_points(all_colliders_and_points, all_repeat_raycasts)
 
 
 func disable() -> void:
@@ -236,10 +227,7 @@ func _update_cast_length() -> void:
 				)
 		)
 
-	data.collision_cast_length = CAST_LENGTHS[index]
-	cast_length_index_changed.emit(index)
-
-
-func _on_data_changed() -> void:
 	for raycast: RayCast2D in $RayCasts.get_children():
-		raycast.target_position.x = data.collision_cast_length
+		raycast.target_position.x = CAST_LENGTHS[index]
+
+	cast_length_index_changed.emit(index)

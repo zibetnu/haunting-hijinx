@@ -1,16 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://cy4qrm44icmyy"]
+[gd_scene load_steps=3 format=3 uid="uid://cy4qrm44icmyy"]
 
-[ext_resource type="PackedScene" uid="uid://bcwdmxamsox8n" path="res://src/flashlight/data/data.tscn" id="1_e1ycg"]
 [ext_resource type="PackedScene" uid="uid://dyev6t6l5ykdp" path="res://src/flashlight/behavior/behavior.tscn" id="2_mk2br"]
 [ext_resource type="PackedScene" uid="uid://c7qmrgohocqfx" path="res://src/flashlight/display/display.tscn" id="3_olr6v"]
 
 [node name="Flashlight" type="Node2D"]
 y_sort_enabled = true
 
-[node name="Data" parent="." instance=ExtResource("1_e1ycg")]
-
-[node name="Behavior" parent="." node_paths=PackedStringArray("data") instance=ExtResource("2_mk2br")]
-data = NodePath("../Data")
+[node name="Behavior" parent="." instance=ExtResource("2_mk2br")]
 
 [node name="Display" parent="." instance=ExtResource("3_olr6v")]
 

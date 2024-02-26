@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcwdmxamsox8n"]
-
-[ext_resource type="Script" path="res://src/flashlight/data/data.gd" id="1_ero2n"]
-
-[node name="Data" type="Node"]
-script = ExtResource("1_ero2n")
