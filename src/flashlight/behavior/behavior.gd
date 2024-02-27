@@ -92,6 +92,12 @@ var is_battery_low: bool:
 	get:
 		return battery_percentage < battery_low_percentage
 
+@onready var _repeat_raycasts: Array[RepeatRayCast2D] = [
+	$RayCasts/RepeatRayCast2D,
+	$RayCasts/RepeatRayCast2D2,
+	$RayCasts/RepeatRayCast2D3,
+]
+
 
 func _physics_process(delta: float) -> void:
 	_update_rotation(delta)
@@ -100,8 +106,7 @@ func _physics_process(delta: float) -> void:
 
 	var all_colliders: Array[Object] = []
 	var all_colliders_and_points: Array[Dictionary] = []
-	var all_repeat_raycasts := $RayCasts.get_children()
-	for repeat_raycast: RepeatRayCast2D in all_repeat_raycasts:
+	for repeat_raycast: RepeatRayCast2D in _repeat_raycasts:
 		var colliders_and_points := repeat_raycast.get_colliders_and_points()
 		# Remove colliders that are past an object in the stop_flashlight group.
 		for collider: Object in colliders_and_points.colliders:
@@ -115,7 +120,7 @@ func _physics_process(delta: float) -> void:
 		all_colliders_and_points.append(colliders_and_points)
 
 	_damage_colliders(all_colliders)
-	_emit_collision_points(all_colliders_and_points, all_repeat_raycasts)
+	_emit_collision_points(all_colliders_and_points, _repeat_raycasts)
 	battery -= 1
 
 
