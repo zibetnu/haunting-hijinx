@@ -73,6 +73,8 @@ var battery := max_battery:
 				[true, false]:
 					battery_unlowed.emit()
 
+		_update_cast_length()
+
 var battery_percentage: float:
 	get:
 		return float(battery) / max_battery
@@ -96,7 +98,6 @@ func _physics_process(delta: float) -> void:
 	if not powered:
 		return
 
-	_update_cast_length()
 	var all_colliders: Array[Object] = []
 	var all_colliders_and_points: Array[Dictionary] = []
 	var all_repeat_raycasts := $RayCasts.get_children()
