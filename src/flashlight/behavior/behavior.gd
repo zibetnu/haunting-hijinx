@@ -217,7 +217,7 @@ func _update_cast_length() -> void:
 				/ (1.0 - battery_low_percentage)
 		))
 
-	for raycast: RayCast2D in $RayCasts.get_children():
+	for raycast: RayCast2D in _repeat_raycasts:
 		raycast.target_position.x = CAST_LENGTHS[index]
 
 	cast_length_index_changed.emit(index)
