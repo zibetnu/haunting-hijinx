@@ -209,22 +209,17 @@ func _get_rotated_collision_point(colliders_and_points: Dictionary, raycast: Ray
 
 func _update_cast_length() -> void:
 	var index := 0
-	if battery_percentage < battery_low_percentage:
+	if is_battery_low:
 		index = (ceil(
-				CAST_SHORT_MAX_INDEX
-				* (battery_percentage / battery_low_percentage)
+				CAST_SHORT_MAX_INDEX * battery_percentage / battery_low_percentage
 		))
 
 	else:
-		index = (
-				CAST_LONG_MIN_INDEX + ceil(
-						(CAST_LONG_MAX_INDEX - CAST_LONG_MIN_INDEX)
-						* (
-								(battery_percentage - battery_low_percentage)
-								/ (1.0 - battery_low_percentage)
-						)
-				)
-		)
+		index = (CAST_LONG_MIN_INDEX + ceil(
+				(CAST_LONG_MAX_INDEX - CAST_LONG_MIN_INDEX)
+				* (battery_percentage - battery_low_percentage)
+				/ (1.0 - battery_low_percentage)
+		))
 
 	for raycast: RayCast2D in $RayCasts.get_children():
 		raycast.target_position.x = CAST_LENGTHS[index]
