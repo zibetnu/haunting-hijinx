@@ -97,13 +97,13 @@ func _physics_process(delta: float) -> void:
 		return
 
 	_update_cast_length()
-	var all_colliders := []
+	var all_colliders: Array[Object] = []
 	var all_colliders_and_points: Array[Dictionary] = []
 	var all_repeat_raycasts := $RayCasts.get_children()
-	for repeat_raycast in all_repeat_raycasts:
-		var colliders_and_points = repeat_raycast.get_colliders_and_points()
+	for repeat_raycast: RepeatRayCast2D in all_repeat_raycasts:
+		var colliders_and_points := repeat_raycast.get_colliders_and_points()
 		# Remove colliders that are past an object in the stop_flashlight group.
-		for collider in colliders_and_points.colliders:
+		for collider: Object in colliders_and_points.colliders:
 			if collider.is_in_group("stop_flashlight"):
 				var resize_index: int = colliders_and_points.colliders.find(collider) + 1
 				colliders_and_points.colliders.resize(resize_index)
