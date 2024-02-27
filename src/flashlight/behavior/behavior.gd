@@ -91,13 +91,7 @@ var is_battery_low: bool:
 
 
 func _physics_process(delta: float) -> void:
-	rotation += clampf(
-			angle_difference(rotation, target_rotation),
-			-turn_speed * delta,
-			turn_speed * delta
-	)
-	flashlight_rotation_changed.emit(rotation)
-
+	_update_rotation(delta)
 	if battery <= 0:
 		powered = false
 		return
@@ -220,3 +214,12 @@ func _update_cast_length() -> void:
 		raycast.target_position.x = CAST_LENGTHS[index]
 
 	cast_length_index_changed.emit(index)
+
+
+func _update_rotation(delta: float) -> void:
+	rotation += clampf(
+			angle_difference(rotation, target_rotation),
+			-turn_speed * delta,
+			turn_speed * delta
+	)
+	flashlight_rotation_changed.emit(rotation)
