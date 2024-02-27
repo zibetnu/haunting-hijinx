@@ -113,19 +113,9 @@ func _physics_process(delta: float) -> void:
 		all_colliders += colliders_and_points.colliders
 		all_colliders_and_points.append(colliders_and_points)
 
-	var processed_colliders := []
-	for collider in all_colliders:
-		if collider in processed_colliders:
-			continue
-
-		processed_colliders.append(collider)
-		if not collider.has_method("take_damage"):
-			continue
-
-		collider.take_damage(damage_deals)
-
-	battery -= 1
+	_damage_colliders(all_colliders)
 	_emit_collision_points(all_colliders_and_points, all_repeat_raycasts)
+	battery -= 1
 
 
 func disable() -> void:
@@ -166,6 +156,19 @@ func set_target_rotation_from_vector(value: Vector2) -> void:
 func take_damage(source: DamageSource) -> void:
 	if source.damage_type == damage_weak_to:
 		battery = 0
+
+
+func _damage_colliders(colliders: Array[Object]) -> void:
+	var processed_colliders: Array[Object] = []
+	for collider: Object in colliders:
+		if collider in processed_colliders:
+			continue
+
+		processed_colliders.append(collider)
+		if not collider.has_method("take_damage"):
+			continue
+
+		collider.take_damage(damage_deals)
 
 
 func _emit_collision_points(all_colliders_and_points: Array, raycasts: Array) -> void:
