@@ -50,14 +50,6 @@ const CAST_SHORT_MAX_INDEX = 4
 			powered_on_attempted.emit()
 
 @export var target_rotation: float
-@export var target_vector: Vector2:
-	get:
-		return Vector2.from_angle(target_rotation)
-
-	set(value):
-		if not value.is_zero_approx():
-			target_rotation = value.angle()
-
 @export var turn_speed := 2 * PI
 
 var battery := max_battery:
@@ -173,8 +165,11 @@ func set_target_rotation(value: float) -> void:
 	target_rotation = value
 
 
-func set_target_vector(value: Vector2) -> void:
-	target_vector = value
+func set_target_rotation_from_vector(value: Vector2) -> void:
+	if value.is_zero_approx():
+		return
+
+	target_rotation = value.angle()
 
 
 func take_damage(source: DamageSource) -> void:

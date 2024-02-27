@@ -363,7 +363,7 @@ layout_mode = 2
 [connection signal="button_1_released" from="Synced" to="StateChart" method="send_event" binds= [&"button_1_released"]]
 [connection signal="button_2_pressed" from="Synced" to="StateChart" method="send_event" binds= [&"button_2_pressed"]]
 [connection signal="button_2_released" from="Synced" to="StateChart" method="send_event" binds= [&"button_2_released"]]
-[connection signal="look_vector_changed" from="Synced" to="YSort/Flashlight/Behavior" method="set_target_vector"]
+[connection signal="look_vector_changed" from="Synced" to="YSort/Flashlight/Behavior" method="set_target_rotation_from_vector"]
 [connection signal="move_started" from="Synced" to="StateChart" method="send_event" binds= [&"move_started"]]
 [connection signal="move_stopped" from="Synced" to="StateChart" method="send_event" binds= [&"move_stopped"]]
 [connection signal="move_vector_changed" from="Synced" to="StateChart/Base/Alive/Movement/Move/Move" method="set_move_vector"]
