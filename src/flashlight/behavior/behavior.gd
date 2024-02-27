@@ -37,7 +37,7 @@ const CAST_SHORT_MAX_INDEX = 4
 @export var powered: bool:
 	set(value):
 		var was_powered := powered
-		powered = battery > 0 and enabled and value
+		powered = value and battery > 0 and enabled
 		power_toggled.emit(powered)
 		match [was_powered, powered]:
 			[false, true]:
@@ -60,6 +60,7 @@ var battery := max_battery:
 		match [was_battery_dead, battery == 0]:
 			[false, true]:
 				battery_died.emit()
+				powered = false
 
 			[true, false]:
 				battery_undied.emit()
@@ -92,10 +93,6 @@ var is_battery_low: bool:
 
 func _physics_process(delta: float) -> void:
 	_update_rotation(delta)
-	if battery <= 0:
-		powered = false
-		return
-
 	if not powered:
 		return
 
