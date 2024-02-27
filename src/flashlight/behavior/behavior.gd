@@ -17,6 +17,7 @@ const CAST_LENGTHS: Array[int] = [0, 4, 5, 6, 7, 8, 12, 16, 20, 24, 28, 32, 36, 
 const CAST_LONG_MAX_INDEX = 15
 const CAST_LONG_MIN_INDEX = 5
 const CAST_SHORT_MAX_INDEX = 4
+const STOP_GROUP = "stop_flashlight"
 
 @export_group("Battery", "battery")
 @export var battery_low_percentage := 0.5
@@ -108,9 +109,9 @@ func _physics_process(delta: float) -> void:
 	var all_colliders_and_points: Array[Dictionary] = []
 	for repeat_raycast: RepeatRayCast2D in _repeat_raycasts:
 		var colliders_and_points := repeat_raycast.get_colliders_and_points()
-		# Remove colliders that are past an object in the stop_flashlight group.
+		# Remove colliders that are past an object in STOP_GROUP.
 		for collider: Object in colliders_and_points.colliders:
-			if collider.is_in_group("stop_flashlight"):
+			if collider.is_in_group(STOP_GROUP):
 				var resize_index: int = colliders_and_points.colliders.find(collider) + 1
 				colliders_and_points.colliders.resize(resize_index)
 				colliders_and_points.collision_points.resize(resize_index)
@@ -190,9 +191,9 @@ func _emit_collision_points(all_colliders_and_points: Array, raycasts: Array) ->
 func _get_rotated_collision_point(colliders_and_points: Dictionary, raycast: RayCast2D) -> Vector2:
 	if (
 			colliders_and_points.collision_points.size() == 0
-			# Assume that collider and point arrays have been resized to stop
-			# at the first node that's in the stop_flashlight group.
-			or not colliders_and_points.colliders[-1].is_in_group("stop_flashlight")
+			# Assume that collider and point arrays have been
+			# resized to stop at the first node in STOP_GROUP.
+			or not colliders_and_points.colliders[-1].is_in_group(STOP_GROUP)
 	):
 		return (raycast.position
 				+ Vector2(raycast.target_position.length(), 0).rotated(raycast.rotation)
