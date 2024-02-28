@@ -31,12 +31,13 @@ const STOP_GROUP = "stop_flashlight"
 	set(value):
 		var was_powered := powered
 		powered = value and battery > 0 and enabled
-		power_toggled.emit(powered)
 		match [was_powered, powered]:
 			[false, true]:
+				power_toggled.emit(powered)
 				powered_on.emit()
 
 			[true, false]:
+				power_toggled.emit(powered)
 				powered_off.emit()
 
 		if value and battery == 0:
