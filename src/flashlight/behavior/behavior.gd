@@ -20,7 +20,7 @@ const CAST_SHORT_MAX_INDEX = 4
 const STOP_GROUP = "stop_flashlight"
 
 @export_group("Battery", "battery")
-@export var battery_low_percentage := 0.5
+@export_range(0, 1) var battery_low_percentage := 0.5
 @export var battery_time_sec := 43.0
 
 @export_group("Damage", "damage")
