@@ -19,14 +19,6 @@ const CAST_LONG_MIN_INDEX = 5
 const CAST_SHORT_MAX_INDEX = 4
 const STOP_GROUP = "stop_flashlight"
 
-@export_group("Battery", "battery")
-@export_range(0, 1) var battery_low_percentage := 0.5
-@export var battery_time_sec := 43.0
-
-@export_group("Damage", "damage")
-@export var damage_deals: DamageSource
-@export var damage_weak_to := DamageSource.Type.DARK
-
 @export var enabled := true:
 	set(value):
 		enabled = value
@@ -49,6 +41,14 @@ const STOP_GROUP = "stop_flashlight"
 
 		if value and battery == 0:
 			powered_on_attempted.emit()
+
+@export_group("Battery", "battery")
+@export_range(0, 1) var battery_low_percentage := 0.5
+@export var battery_time_sec := 43.0
+
+@export_group("Damage", "damage")
+@export var damage_deals: DamageSource
+@export var damage_weak_to := DamageSource.Type.DARK
 
 @export_group("Turning", "turning")
 @export_range(0, 720, 0.1, "radians_as_degrees") var turning_speed_sec := 2 * PI
