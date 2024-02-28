@@ -50,8 +50,8 @@ const STOP_GROUP = "stop_flashlight"
 		if value and battery == 0:
 			powered_on_attempted.emit()
 
-@export var target_rotation: float
-@export var turn_speed := 2 * PI
+@export_group("Turning", "turning")
+@export_range(0, 720, 0.1, "radians_as_degrees") var turning_speed_sec := 2 * PI
 
 var battery := max_battery:
 	set(value):
@@ -92,6 +92,8 @@ var max_battery: int:
 var is_battery_low: bool:
 	get:
 		return battery_percentage < battery_low_percentage
+
+var target_rotation := 0.0
 
 @onready var _repeat_raycasts: Array[RepeatRayCast2D] = [
 	$RayCasts/RepeatRayCast2D,
@@ -226,7 +228,7 @@ func _update_cast_length() -> void:
 func _update_rotation(delta: float) -> void:
 	rotation += clampf(
 			angle_difference(rotation, target_rotation),
-			-turn_speed * delta,
-			turn_speed * delta
+			-turning_speed_sec * delta,
+			turning_speed_sec * delta
 	)
 	flashlight_rotation_changed.emit(rotation)
