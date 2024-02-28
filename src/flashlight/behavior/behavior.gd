@@ -21,7 +21,7 @@ const STOP_GROUP = "stop_flashlight"
 
 @export_group("Battery", "battery")
 @export var battery_low_percentage := 0.5
-@export var battery_time := 43
+@export var battery_time_sec := 43.0
 
 @export_group("Damage", "damage")
 @export var damage_deals: DamageSource
@@ -85,7 +85,7 @@ var battery_percentage: float:
 
 var max_battery: int:
 	get:
-		return battery_time * ProjectSettings.get_setting(
+		return battery_time_sec * ProjectSettings.get_setting(
 				"physics/common/physics_ticks_per_second"
 		)
 
