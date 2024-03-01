@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://yi6ydbok31ql"]
 
-[ext_resource type="Script" path="res://src/mediators/peer_visibility_filter/peer_visibility_filter.gd" id="1_0ot46"]
+[ext_resource type="Script" path="res://src/peer_visibility_filter/peer_visibility_filter.gd" id="1_0ot46"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_p3eyy"]
 properties/0/path = NodePath(".:enable_filter")

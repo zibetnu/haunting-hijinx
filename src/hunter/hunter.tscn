@@ -11,8 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="7_lf1vk"]
 [ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="8_dmlm5"]
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="9_muve1"]
-[ext_resource type="PackedScene" uid="uid://dc3f3sy1vso5f" path="res://src/mediators/group_bool/group_bool.tscn" id="9_n4b8t"]
-[ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/mediators/move/move.tscn" id="9_rpftm"]
+[ext_resource type="PackedScene" uid="uid://dc3f3sy1vso5f" path="res://src/group_bool/group_bool.tscn" id="9_n4b8t"]
+[ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/move/move.tscn" id="9_rpftm"]
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="10_3bo02"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="12_y0078"]
 [ext_resource type="PackedScene" uid="uid://c6w7dk0uahxnu" path="res://src/controller/anti_axis_drift/anti_axis_drift.tscn" id="13_xufeu"]
@@ -28,8 +28,8 @@
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/auto_texture_progress_bar/auto_texture_progress_bar.tscn" id="32_vdk32"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="33_a7fw2"]
 [ext_resource type="PackedScene" uid="uid://bmqokcab4errr" path="res://src/peer_name_label/peer_name_label.tscn" id="39_gpntb"]
-[ext_resource type="PackedScene" uid="uid://dsccl51pqvbue" path="res://src/mediators/peer_process_mode/peer_process_mode.tscn" id="43_rsnb5"]
-[ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/mediators/peer_visibility_filter/peer_visibility_filter.tscn" id="44_mvfu7"]
+[ext_resource type="PackedScene" uid="uid://dsccl51pqvbue" path="res://src/peer_process_mode/peer_process_mode.tscn" id="43_rsnb5"]
+[ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/peer_visibility_filter/peer_visibility_filter.tscn" id="44_mvfu7"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hflh2"]
 properties/0/path = NodePath(".:position")
