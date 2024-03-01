@@ -17,7 +17,6 @@ const CAST_LENGTHS: Array[int] = [0, 4, 5, 6, 7, 8, 12, 16, 20, 24, 28, 32, 36, 
 const CAST_LONG_MAX_INDEX = 15
 const CAST_LONG_MIN_INDEX = 5
 const CAST_SHORT_MAX_INDEX = 4
-const STOP_GROUP = "stop_flashlight"
 
 @export var enabled := true:
 	set(value):
@@ -108,23 +107,12 @@ func _physics_process(delta: float) -> void:
 	if not powered:
 		return
 
-	var all_colliders: Array[Object] = []
-	var all_colliders_and_points: Array[Dictionary] = []
+	var colliders := []
 	for repeat_raycast: RepeatRayCast2D in _repeat_raycasts:
-		var colliders_and_points := repeat_raycast.get_colliders_and_points()
-		# Remove colliders that are past an object in STOP_GROUP.
-		for collider: Object in colliders_and_points.colliders:
-			if collider.is_in_group(STOP_GROUP):
-				var resize_index: int = colliders_and_points.colliders.find(collider) + 1
-				colliders_and_points.colliders.resize(resize_index)
-				colliders_and_points.collision_points.resize(resize_index)
-				break
+		colliders.append_array(repeat_raycast.get_colliders())
 
-		all_colliders += colliders_and_points.colliders
-		all_colliders_and_points.append(colliders_and_points)
-
-	_damage_colliders(all_colliders)
-	_emit_collision_points(all_colliders_and_points, _repeat_raycasts)
+	_damage_colliders(colliders)
+	_emit_collision_points()
 	battery -= 1
 
 
@@ -168,9 +156,9 @@ func take_damage(source: DamageSource) -> void:
 		battery = 0
 
 
-func _damage_colliders(colliders: Array[Object]) -> void:
-	var processed_colliders: Array[Object] = []
-	for collider: Object in colliders:
+func _damage_colliders(colliders: Array) -> void:
+	var processed_colliders := []
+	for collider in colliders:
 		if collider in processed_colliders:
 			continue
 
@@ -181,29 +169,20 @@ func _damage_colliders(colliders: Array[Object]) -> void:
 		collider.take_damage(damage_deals)
 
 
-func _emit_collision_points(all_colliders_and_points: Array, raycasts: Array) -> void:
-	var rotated_collision_points: Array[Vector2] = []
-	for i in range(mini(all_colliders_and_points.size(), raycasts.size())):
-		rotated_collision_points.append(_get_rotated_collision_point(
-				all_colliders_and_points[i], raycasts[i]
-		))
+func _emit_collision_points() -> void:
+	var collision_points: Array[Vector2] = []
+	for raycast: RayCast2D in _repeat_raycasts:
+		if raycast.is_colliding():
+			collision_points.append(
+					raycast.to_local(raycast.get_collision_point()).rotated(raycast.rotation)
+			)
 
-	collision_points_changed.emit(rotated_collision_points)
+		else:
+			collision_points.append(
+					(raycast.position + raycast.target_position).rotated(raycast.rotation)
+			)
 
-
-func _get_rotated_collision_point(colliders_and_points: Dictionary, raycast: RayCast2D) -> Vector2:
-	if (
-			colliders_and_points.collision_points.size() == 0
-			# Assume that collider and point arrays have been
-			# resized to stop at the first node in STOP_GROUP.
-			or not colliders_and_points.colliders[-1].is_in_group(STOP_GROUP)
-	):
-		return (raycast.position
-				+ Vector2(raycast.target_position.length(), 0).rotated(raycast.rotation)
-		)
-
-	var collision_point := raycast.to_local(colliders_and_points.collision_points[-1])
-	return raycast.position + Vector2(collision_point.length(), 0).rotated(raycast.rotation)
+	collision_points_changed.emit(collision_points)
 
 
 func _update_cast_length() -> void:
