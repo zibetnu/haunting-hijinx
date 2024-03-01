@@ -61,6 +61,36 @@ signal look_vector_changed(look_vector: Vector2)
 				button_2_released.emit()
 
 
+func force_emit_move_vector_signals() -> void:
+	move_vector_changed.emit(move_vector)
+	if move_vector.is_zero_approx():
+		move_stopped.emit()
+
+	else:
+		move_started.emit()
+
+
+func force_emit_look_vector_signals() -> void:
+	look_vector_changed.emit(look_vector)
+
+
+func force_emit_button_1_signals() -> void:
+	button_1_changed.emit(button_1)
+	if button_1:
+		button_1_pressed.emit()
+
+	else:
+		button_1_released.emit()
+
+
+func force_emit_button_2_signals() -> void:
+	if button_2:
+		button_2_pressed.emit()
+
+	else:
+		button_2_released.emit()
+
+
 func force_handle_input() -> void:
 	pass
 
