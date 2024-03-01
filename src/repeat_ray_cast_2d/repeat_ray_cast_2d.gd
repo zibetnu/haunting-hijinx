@@ -17,21 +17,16 @@ func _physics_process(_delta: float) -> void:
 	_colliders = []
 	_collision_points = []
 
-	var exclude: Array[RID] = []
-	if exclude_parent:
-		exclude.append(get_parent())
-
 	var query := PhysicsRayQueryParameters2D.create(
 			global_position,
 			to_global(position + target_position),
 			# Include collision_mask so the loop will know to stop at stop_at.
-			repeat_collision_mask | collision_mask,
-			exclude
+			repeat_collision_mask | collision_mask
 	)
 	query.collide_with_areas = collide_with_areas
 	query.collide_with_bodies = collide_with_bodies
 	query.hit_from_inside = hit_from_inside
-
+	var exclude: Array[RID] = []  # TODO: take exclude_parent into account.
 	var space_state := get_world_2d().direct_space_state
 	var result := space_state.intersect_ray(query)
 	var stop_at := get_collider_rid()
