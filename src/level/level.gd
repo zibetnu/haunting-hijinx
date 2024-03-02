@@ -50,6 +50,7 @@ func add_player(id: int) -> void:
 	instance.name += str(id)
 	$SpawnRoot.add_child(instance, true)
 	instance.get_node("PeerID").id = id
+	instance.get_node("IgnoreCanvasModulate/FollowPlayer/NameLabel").text = PeerData.peer_names[id]
 	get_tree().call_group("ghost_peer_ids", "set_id", PeerData.ghost_peer)
 
 

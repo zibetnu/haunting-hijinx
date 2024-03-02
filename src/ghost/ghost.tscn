@@ -37,7 +37,6 @@
 [ext_resource type="PackedScene" uid="uid://oe321ygxttbo" path="res://src/grabber/grabber.tscn" id="38_ydesf"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="40_1b387"]
 [ext_resource type="PackedScene" uid="uid://bfe2ycxqwnpxi" path="res://src/draw_circle/draw_circle.tscn" id="43_lxwi0"]
-[ext_resource type="PackedScene" uid="uid://bmqokcab4errr" path="res://src/peer_name_label/peer_name_label.tscn" id="43_qnogm"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hiprh"]
 properties/0/path = NodePath("Dummy Synchronizer:editor_description")
@@ -91,6 +90,11 @@ gradient = SubResource("Gradient_a05sb")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_rfelf"]
+properties/0/path = NodePath(".:text")
+properties/0/spawn = true
+properties/0/replication_mode = 2
 
 [node name="Ghost" type="CharacterBody2D" groups=["ghosts", "players"]]
 collision_layer = 8
@@ -486,7 +490,7 @@ radius = 160.0
 color = Color(1, 1, 1, 0.247059)
 radius = 96.0
 
-[node name="PeerNameLabel" parent="IgnoreCanvasModulate/FollowPlayer" instance=ExtResource("43_qnogm")]
+[node name="NameLabel" type="Label" parent="IgnoreCanvasModulate/FollowPlayer"]
 modulate = Color(1, 1, 1, 0.501961)
 z_index = 1
 offset_left = -84.0
@@ -495,6 +499,9 @@ offset_right = 84.0
 offset_bottom = -24.0
 text = "peer name"
 horizontal_alignment = 1
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="IgnoreCanvasModulate/FollowPlayer/NameLabel"]
+replication_config = SubResource("SceneReplicationConfig_rfelf")
 
 [node name="NotificationContainer" type="HBoxContainer" parent="IgnoreCanvasModulate/FollowPlayer"]
 offset_left = -32.0
@@ -542,18 +549,18 @@ max_variable = "max_charge"
 [connection signal="cutscene_ended" from="GrabCutscene" to="StateChart" method="send_event" binds= [&"panic_started"]]
 [connection signal="changed" from="PeerID" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="set_primary_peer_id"]
 [connection signal="changed" from="PeerID" to="Synced" method="set_input_authority"]
-[connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/PeerNameLabel" method="set_peer_id"]
+[connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="set_peer_id"]
 [connection signal="changed_to_local" from="PeerID" to="GhostVisible" method="set_is_local_peer_true"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/PeerSetBool" method="set_is_local_peer_true"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraLargeCircle" method="show"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraSmallCircle" method="show"]
-[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/PeerNameLabel" method="hide"]
+[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="hide"]
 [connection signal="changed_to_local" from="PeerID" to="Camera2D" method="set_enabled" binds= [true]]
 [connection signal="changed_to_remote" from="PeerID" to="GhostVisible" method="set_is_local_peer_false"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/PeerSetBool" method="set_is_local_peer_false"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraLargeCircle" method="hide"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraSmallCircle" method="hide"]
-[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/PeerNameLabel" method="show"]
+[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="show"]
 [connection signal="changed_to_remote" from="PeerID" to="Camera2D" method="set_enabled" binds= [false]]
 [connection signal="area_count_changed" from="Summon" to="Summon/NamedPropertySignals" method="set_property_value"]
 [connection signal="summon_charging" from="Summon" to="StateChart" method="send_event" binds= [&"summon_charging"]]

@@ -27,7 +27,6 @@
 [ext_resource type="PackedScene" uid="uid://gh0mk0t85f13" path="res://src/battery_alert/battery_alert.tscn" id="31_vp1ot"]
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/auto_texture_progress_bar/auto_texture_progress_bar.tscn" id="32_vdk32"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="33_a7fw2"]
-[ext_resource type="PackedScene" uid="uid://bmqokcab4errr" path="res://src/peer_name_label/peer_name_label.tscn" id="39_gpntb"]
 [ext_resource type="PackedScene" uid="uid://dsccl51pqvbue" path="res://src/peer_process_mode/peer_process_mode.tscn" id="43_rsnb5"]
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/peer_visibility_filter/peer_visibility_filter.tscn" id="44_mvfu7"]
 
@@ -104,6 +103,11 @@ gradient = SubResource("Gradient_tkh6d")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_isui6"]
+properties/0/path = NodePath(".:text")
+properties/0/spawn = true
+properties/0/replication_mode = 2
 
 [node name="Hunter" type="CharacterBody2D" groups=["hunters", "players"]]
 collision_layer = 4
@@ -277,7 +281,7 @@ follow_viewport_enabled = true
 
 [node name="FollowPlayer" type="Node2D" parent="IgnoreCanvasModulate"]
 
-[node name="PeerNameLabel" parent="IgnoreCanvasModulate/FollowPlayer" instance=ExtResource("39_gpntb")]
+[node name="NameLabel" type="Label" parent="IgnoreCanvasModulate/FollowPlayer"]
 modulate = Color(1, 1, 1, 0.501961)
 z_index = 1
 offset_left = -84.0
@@ -286,6 +290,9 @@ offset_right = 84.0
 offset_bottom = -24.0
 text = "peer name"
 horizontal_alignment = 1
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="IgnoreCanvasModulate/FollowPlayer/NameLabel"]
+replication_config = SubResource("SceneReplicationConfig_isui6")
 
 [node name="NotificationContainer" type="HBoxContainer" parent="IgnoreCanvasModulate/FollowPlayer"]
 offset_left = -32.0
@@ -325,14 +332,14 @@ layout_mode = 2
 [connection signal="changed" from="GhostPeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer/PeerVisibilityFilter" method="set_secondary_peer_id"]
 [connection signal="changed" from="GhostPeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/PeerProcessMode" method="set_secondary_peer_id"]
 [connection signal="changed" from="PeerID" to="Synced" method="set_input_authority"]
-[connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/PeerNameLabel" method="set_peer_id"]
+[connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="set_peer_id"]
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer/PeerVisibilityFilter" method="set_primary_peer_id"]
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/PeerProcessMode" method="set_primary_peer_id"]
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer/PeerVisibilityFilter" method="set_primary_peer_id"]
-[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/PeerNameLabel" method="hide"]
+[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="hide"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D" method="show"]
 [connection signal="changed_to_local" from="PeerID" to="Camera2D" method="set_enabled" binds= [true]]
-[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/PeerNameLabel" method="show"]
+[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="show"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D" method="show"]
 [connection signal="changed_to_remote" from="PeerID" to="Camera2D" method="set_enabled" binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="StateChart/Base/Dead/IsDead" method="set_true"]
