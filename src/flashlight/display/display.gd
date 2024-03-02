@@ -31,13 +31,13 @@ var light_texture_index: int:
 		$RotationNode/Light/FloorLight.texture = _LIGHT_TEXTURES[light_texture_index]
 		$RotationNode/Light/WallLight.texture = _LIGHT_TEXTURES[light_texture_index]
 
-@onready var _beam := $IgnoreCanvasModulate/RotationNode3/Beam
+@onready var _beam := $IgnoreCanvasModulate/Beam
 @onready var _body := $RotationNode2/Body
 @onready var _light := $RotationNode/Light
 
 
 func set_collision_points(value: Array) -> void:
-	_beam.points = [%BeamStartBottom.position, %BeamStartTop.position] + value
+	_beam.polygon = [%BeamStartBottom.position, %BeamStartTop.position] + value
 
 
 func set_powered(value: bool) -> void:

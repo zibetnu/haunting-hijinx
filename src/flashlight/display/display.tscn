@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7qmrgohocqfx"]
+[gd_scene load_steps=6 format=3 uid="uid://c7qmrgohocqfx"]
 
 [ext_resource type="Script" path="res://src/flashlight/display/display.gd" id="1_rfbrn"]
 [ext_resource type="Texture2D" uid="uid://do78peki3jtm" path="res://assets/flashlight/body.png" id="2_lt2gs"]
-[ext_resource type="Script" path="res://src/flashlight/display/beam.gd" id="3_rmag1"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jmwf3"]
-properties/0/path = NodePath("./IgnoreCanvasModulate/RotationNode3/Beam:points")
+properties/0/path = NodePath("./IgnoreCanvasModulate/Beam:polygon")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 properties/1/path = NodePath(".:powered")
@@ -67,7 +66,7 @@ height = 16.0
 [node name="RotationNode2" type="RemoteTransform2D" parent="."]
 y_sort_enabled = true
 position = Vector2(0, -8)
-remote_path = NodePath("../IgnoreCanvasModulate/RotationNode3")
+remote_path = NodePath("../IgnoreCanvasModulate/Beam")
 update_scale = false
 
 [node name="Body" type="Sprite2D" parent="RotationNode2"]
@@ -90,10 +89,6 @@ position = Vector2(0, 2)
 [node name="IgnoreCanvasModulate" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 
-[node name="RotationNode3" type="Node2D" parent="IgnoreCanvasModulate"]
+[node name="Beam" type="Polygon2D" parent="IgnoreCanvasModulate"]
 position = Vector2(0, -8)
-
-[node name="Beam" type="Node2D" parent="IgnoreCanvasModulate/RotationNode3"]
-z_index = 1
-position = Vector2(16, 0)
-script = ExtResource("3_rmag1")
+offset = Vector2(16, 0)
