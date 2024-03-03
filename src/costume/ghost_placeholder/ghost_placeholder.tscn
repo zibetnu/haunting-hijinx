@@ -1,54 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://bgun5xps8jth7"]
+[gd_scene load_steps=5 format=3 uid="uid://nj5bu4130gy3"]
 
-[ext_resource type="PackedScene" uid="uid://brsavqoymiyc5" path="res://src/costume/costume.tscn" id="1_gqb0n"]
-[ext_resource type="AnimationLibrary" uid="uid://shvg27dohcpa" path="res://src/costume/core.res" id="2_ikofp"]
-[ext_resource type="Texture2D" uid="uid://e5vc2m7amjg2" path="res://assets/placeholder_sprite_wide.png" id="2_iyts8"]
-[ext_resource type="AnimationLibrary" uid="uid://danfci2b33wd5" path="res://src/costume/ghost_placeholder/ghost_placeholder.tres" id="3_5jmwu"]
+[ext_resource type="PackedScene" uid="uid://brsavqoymiyc5" path="res://src/costume/costume.tscn" id="1_asxsw"]
+[ext_resource type="AnimationLibrary" uid="uid://shvg27dohcpa" path="res://src/costume/core.res" id="2_m2jy8"]
+[ext_resource type="Texture2D" uid="uid://e5vc2m7amjg2" path="res://assets/placeholder_sprite_wide.png" id="2_odqb1"]
+[ext_resource type="AnimationLibrary" uid="uid://danfci2b33wd5" path="res://src/costume/ghost_placeholder/ghost_placeholder.tres" id="3_4e4cu"]
 
-[sub_resource type="Animation" id="Animation_erx8g"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(3, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
+[node name="GhostPlaceholder" instance=ExtResource("1_asxsw")]
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ummwp"]
-_data = {
-"RESET": SubResource("Animation_erx8g")
-}
-
-[node name="GhostPlaceholder" instance=ExtResource("1_gqb0n")]
-
-[node name="AnimationPlayer" parent="." index="0"]
+[node name="AnimationPlayer" parent="Display" index="1"]
 libraries = {
-"": SubResource("AnimationLibrary_ummwp"),
-"core": ExtResource("2_ikofp"),
-"ghost_placeholder": ExtResource("3_5jmwu")
+"core": ExtResource("2_m2jy8"),
+"ghost_placeholder": ExtResource("3_4e4cu")
 }
 
-[node name="Sprite2D" type="Sprite2D" parent="." index="2"]
-light_mask = 32
-texture = ExtResource("2_iyts8")
+[node name="Sprite2D" parent="Display" index="2"]
+texture = ExtResource("2_odqb1")
 hframes = 4
 vframes = 3
 frame = 7

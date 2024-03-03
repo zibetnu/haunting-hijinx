@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://cscnk1bc8v66d"]
+
+[ext_resource type="Script" path="res://src/summon/drain_area/drain_area.gd" id="1_trn6j"]
+[ext_resource type="Script" path="res://src/damage_source.gd" id="2_sfbjo"]
+[ext_resource type="Material" uid="uid://bbhp34kya5qm8" path="res://src/summon/drain_area/drain_area.tres" id="3_gl06h"]
+[ext_resource type="Texture2D" uid="uid://bs4bk3rh2y8ld" path="res://assets/drain_area.png" id="3_s6cxc"]
+
+[sub_resource type="Resource" id="Resource_1qh2u"]
+script = ExtResource("2_sfbjo")
+damage_amount = 0
+damage_type = 0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hg12p"]
+radius = 72.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0jot6"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+
+[sub_resource type="Gradient" id="Gradient_sjlgh"]
+colors = PackedColorArray(0.545174, 0.219333, 0.560815, 1, 0.576471, 0.219608, 0.560784, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pg77a"]
+gradient = SubResource("Gradient_sjlgh")
+width = 160
+height = 160
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="DrainArea" type="Area2D" groups=["drain_areas"]]
+z_index = -1
+collision_layer = 2
+collision_mask = 6
+script = ExtResource("1_trn6j")
+damage_source = SubResource("Resource_1qh2u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hg12p")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_0jot6")
+
+[node name="Foreground" type="Sprite2D" parent="."]
+material = ExtResource("3_gl06h")
+texture = ExtResource("3_s6cxc")
+
+[node name="IdleTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 2.2
+one_shot = true
+autostart = true
+
+[node name="ActiveTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 3.0
+range_item_cull_mask = 51
+texture = SubResource("GradientTexture2D_pg77a")
+height = 16.0
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="ActiveTimer" to="." method="_on_active_timer_timeout"]

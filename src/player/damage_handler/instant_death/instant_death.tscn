@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c76lyvhv5uic7"]
-
-[ext_resource type="Script" path="res://src/player/damage_handler/instant_death/instant_death.gd" id="1_gswxn"]
-
-[node name="InstantDeath" type="Node"]
-script = ExtResource("1_gswxn")

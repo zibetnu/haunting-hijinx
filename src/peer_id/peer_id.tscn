@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://da03scrbiqax2"]
+
+[ext_resource type="Script" path="res://src/peer_id/peer_id.gd" id="1_pfsr2"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_gda8m"]
+properties/0/path = NodePath(".:id")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[node name="PeerID" type="Node"]
+script = ExtResource("1_pfsr2")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_gda8m")

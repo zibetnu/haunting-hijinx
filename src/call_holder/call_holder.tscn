@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://beosdquy62xr4"]
+
+[ext_resource type="Script" path="res://src/call_holder/call_holder.gd" id="1_m0gio"]
+
+[node name="CallHolder" type="Node"]
+script = ExtResource("1_m0gio")

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c6td5osxfww2c"]
 
-[node name="TileMap" type="TileMap" groups=["stop_flashlight"]]
+[node name="TileMap" type="TileMap"]
 y_sort_enabled = true
 format = 2
 layer_0/name = "Floor"

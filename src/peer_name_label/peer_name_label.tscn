@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmqokcab4errr"]
+
+[ext_resource type="Script" path="res://src/peer_name_label/peer_name_label.gd" id="1_23vbq"]
+
+[node name="PeerNameLabel" type="Label"]
+script = ExtResource("1_23vbq")

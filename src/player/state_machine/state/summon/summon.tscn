@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://deglrps8484y8"]
-
-[ext_resource type="Script" path="res://src/player/state_machine/state/summon/summon.gd" id="1_ytne7"]
-
-[node name="Summon" type="Node"]
-script = ExtResource("1_ytne7")

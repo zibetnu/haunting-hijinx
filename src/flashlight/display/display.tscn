@@ -1,0 +1,99 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7qmrgohocqfx"]
+
+[ext_resource type="Script" path="res://src/flashlight/display/display.gd" id="1_rfbrn"]
+[ext_resource type="Texture2D" uid="uid://do78peki3jtm" path="res://assets/flashlight/body.png" id="2_lt2gs"]
+[ext_resource type="Script" path="res://src/flashlight/display/beam.gd" id="3_rmag1"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jmwf3"]
+properties/0/path = NodePath("./IgnoreCanvasModulate/RotationNode3/Beam:points")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:powered")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:flashlight_rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:light_texture_index")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+
+[sub_resource type="Gradient" id="Gradient_2xl7l"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mw7bx"]
+gradient = SubResource("Gradient_2xl7l")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="Display" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_rfbrn")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_jmwf3")
+
+[node name="RotationNode" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../RotationNode2")
+update_position = false
+update_scale = false
+
+[node name="Light" type="Node2D" parent="RotationNode"]
+visible = false
+position = Vector2(16, 0)
+
+[node name="FloorLight" type="PointLight2D" parent="RotationNode/Light"]
+shadow_enabled = true
+shadow_item_cull_mask = 18
+offset = Vector2(48, 0)
+height = 32.0
+
+[node name="WallLight" type="PointLight2D" parent="RotationNode/Light"]
+range_item_cull_mask = 26
+shadow_enabled = true
+shadow_item_cull_mask = 4
+offset = Vector2(48, 0)
+height = 32.0
+
+[node name="PlayerLight" type="PointLight2D" parent="RotationNode/Light"]
+position = Vector2(-16, 0)
+energy = 0.5
+range_item_cull_mask = 33
+shadow_item_cull_mask = 18
+texture = SubResource("GradientTexture2D_mw7bx")
+height = 16.0
+
+[node name="RotationNode2" type="RemoteTransform2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -8)
+remote_path = NodePath("../IgnoreCanvasModulate/RotationNode3")
+update_scale = false
+
+[node name="Body" type="Sprite2D" parent="RotationNode2"]
+light_mask = 32
+position = Vector2(12, 0)
+texture = ExtResource("2_lt2gs")
+hframes = 2
+
+[node name="BeamStarts" type="Node2D" parent="RotationNode2"]
+position = Vector2(16, 0)
+
+[node name="BeamStartTop" type="Marker2D" parent="RotationNode2/BeamStarts"]
+unique_name_in_owner = true
+position = Vector2(0, -2)
+
+[node name="BeamStartBottom" type="Marker2D" parent="RotationNode2/BeamStarts"]
+unique_name_in_owner = true
+position = Vector2(0, 2)
+
+[node name="IgnoreCanvasModulate" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="RotationNode3" type="Node2D" parent="IgnoreCanvasModulate"]
+position = Vector2(0, -8)
+
+[node name="Beam" type="Node2D" parent="IgnoreCanvasModulate/RotationNode3"]
+z_index = 1
+position = Vector2(16, 0)
+script = ExtResource("3_rmag1")

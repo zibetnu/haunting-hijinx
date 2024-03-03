@@ -51,10 +51,10 @@ func _on_timer_timeout() -> void:
 
 	var batteries_needed = 0
 	for flashlight in get_tree().get_nodes_in_group("flashlights"):
-		if not flashlight.is_battery_low:
+		if not flashlight.get("enabled"):
 			continue
 
-		if flashlight.player.health == 0:
+		if not flashlight.get("is_battery_low"):
 			continue
 
 		batteries_needed += 1

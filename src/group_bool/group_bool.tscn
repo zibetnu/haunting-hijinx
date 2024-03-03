@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dc3f3sy1vso5f"]
+
+[ext_resource type="Script" path="res://src/group_bool/group_bool.gd" id="1_87m0t"]
+
+[node name="GroupBool" type="Node"]
+script = ExtResource("1_87m0t")

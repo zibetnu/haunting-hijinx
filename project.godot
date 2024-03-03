@@ -33,6 +33,10 @@ window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/stretch/scale_mode="integer"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
+
 [global]
 
 settings_file_path="user://settings.cfg"
@@ -135,7 +139,7 @@ toggle_fullscreen={
 2d_physics/layer_2="interactables"
 2d_physics/layer_3="physical players"
 2d_physics/layer_4="spectral players"
-2d_physics/layer_5="invulnerable players"
+2d_physics/layer_5="grabbables"
 
 [rendering]
 

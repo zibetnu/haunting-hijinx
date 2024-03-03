@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxooivyeej01k"]
+
+[ext_resource type="Script" path="res://src/summon/summon.gd" id="1_4gkkd"]
+
+[node name="Summon" type="Node"]
+script = ExtResource("1_4gkkd")

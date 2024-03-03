@@ -1,6 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://d15idq0ucnvek"]
+[gd_scene load_steps=3 format=3 uid="uid://d15idq0ucnvek"]
 
-[ext_resource type="Script" path="res://src/auto_texture_progress_bar/auto_texture_progress_bar.gd" id="1_3yhpq"]
+[ext_resource type="Script" path="res://src/auto_texture_progress_bar/behavior.gd" id="2_qgaxg"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_3vvq2"]
+properties/0/path = NodePath(".:min_value")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:max_value")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:value")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:visible")
+properties/3/spawn = true
+properties/3/replication_mode = 2
 
 [node name="AutoTextureProgressBar" type="TextureProgressBar"]
-script = ExtResource("1_3yhpq")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_3vvq2")
+
+[node name="Behavior" type="Node" parent="."]
+script = ExtResource("2_qgaxg")
