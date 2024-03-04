@@ -39,20 +39,21 @@ func _input(event: InputEvent) -> void:
 func add_participant(id: int) -> void:
 	var card := _instantiate_card(id)
 	%ActiveCards.add_child(card, true)
-	%GhostSelector.add_item(PeerData.peer_names[card.peer_id], card.peer_id)
+	%GhostSelector.add_item(PeerData.peer_names[card.input_authority], card.input_authority)
 
 
 func add_spectator(id: int) -> void:
 	var card := _instantiate_card(id)
 	%SpectateCards.add_child(card, true)
-	%GhostSelector.add_item(PeerData.peer_names[card.peer_id], card.peer_id)
+	%GhostSelector.add_item(PeerData.peer_names[card.input_authority], card.input_authority)
 	%GhostSelector.set_item_disabled(%GhostSelector.get_item_index(id), true)
 
 
 func _instantiate_card(id: int) -> Node:
 	var card = player_card.instantiate()
 	card.name += str(id)
-	card.peer_id = id
+	card.input_authority = id
+	card.player_name_changed.connect(func(value): PeerData.set_peer_name(id, value))
 	return card
 
 
@@ -70,7 +71,7 @@ func _on_peer_connected(id: int) -> void:
 
 func _on_peer_disconnected(id: int) -> void:
 	for card in %ActiveCards.get_children() + %SpectateCards.get_children():
-		if card.peer_id == id:
+		if card.input_authority == id:
 			card.queue_free()
 
 	if %GhostSelector.get_item_index(id) != -1:
@@ -97,7 +98,7 @@ func _on_peer_participation_changed(id: int) -> void:
 
 	%StartButton.disabled = PeerData.participants.size() < MIN_PARTICIPANTS
 	for card in %ActiveCards.get_children() + %SpectateCards.get_children():
-		if card.peer_id != id:
+		if card.input_authority != id:
 			continue
 
 		if id in PeerData.participants:
