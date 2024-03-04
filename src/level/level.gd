@@ -30,9 +30,6 @@ func _ready():
 
 
 func add_player(id: int) -> void:
-	if _ghosts_spawned + _hunters_spawned >= PeerData.MAX_PARTICIPANTS:
-		return
-
 	var instance: Node2D = null
 	if id == PeerData.ghost_peer:
 		instance = Ghost.instantiate()
