@@ -1,7 +1,6 @@
 extends Node
 
 
-const MIN_PARTICIPANTS = 1
 const MAX_PARTICIPANTS = 5
 
 signal ghost_peer_changed(id: int)

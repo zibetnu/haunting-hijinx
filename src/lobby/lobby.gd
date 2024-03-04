@@ -1,6 +1,8 @@
 extends Control
 
 
+const MIN_PARTICIPANTS = 1
+
 @export var level: PackedScene
 @export var player_card: PackedScene
 
@@ -93,7 +95,7 @@ func _on_peer_participation_changed(id: int) -> void:
 	if disabled or %GhostSelector.get_selected_id() == -1:
 		%GhostSelector.select(%GhostSelector.get_selectable_item())
 
-	%StartButton.disabled = PeerData.participants.size() < PeerData.MIN_PARTICIPANTS
+	%StartButton.disabled = PeerData.participants.size() < MIN_PARTICIPANTS
 	for card in %ActiveCards.get_children() + %SpectateCards.get_children():
 		if card.peer_id != id:
 			continue
