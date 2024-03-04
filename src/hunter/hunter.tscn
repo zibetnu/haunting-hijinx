@@ -122,6 +122,7 @@ nodes = [NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath(".
 [node name="GhostPeerID" parent="." groups=["ghost_peer_ids"] instance=ExtResource("1_fx0g1")]
 
 [node name="PeerID" parent="." instance=ExtResource("1_fx0g1")]
+unique_name_in_owner = true
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("1_0xkip")
@@ -194,6 +195,7 @@ scale = Vector2(0.99, 0.99)
 shape = SubResource("CircleShape2D_vawb0")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
 process_mode = 3
 enabled = false
 limit_left = 0
@@ -282,6 +284,7 @@ follow_viewport_enabled = true
 [node name="FollowPlayer" type="Node2D" parent="IgnoreCanvasModulate"]
 
 [node name="NameLabel" type="Label" parent="IgnoreCanvasModulate/FollowPlayer"]
+unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.501961)
 z_index = 1
 offset_left = -84.0

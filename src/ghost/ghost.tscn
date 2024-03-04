@@ -116,6 +116,7 @@ nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../Collisio
 [node name="GrabCutscene" parent="." instance=ExtResource("4_qoosa")]
 
 [node name="PeerID" parent="." groups=["ghost_peer_ids"] instance=ExtResource("2_bh3m0")]
+unique_name_in_owner = true
 
 [node name="GhostTranslucent" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_bmx85")]
 target = NodePath("..")
@@ -390,6 +391,7 @@ scale = Vector2(0.99, 0.99)
 shape = SubResource("CircleShape2D_xn3hr")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
 process_mode = 3
 enabled = false
 limit_left = 0
@@ -491,6 +493,7 @@ color = Color(1, 1, 1, 0.247059)
 radius = 96.0
 
 [node name="NameLabel" type="Label" parent="IgnoreCanvasModulate/FollowPlayer"]
+unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.501961)
 z_index = 1
 offset_left = -84.0
