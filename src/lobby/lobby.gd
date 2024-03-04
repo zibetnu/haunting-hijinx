@@ -108,5 +108,5 @@ func _on_peer_participation_changed(id: int) -> void:
 
 
 func _on_start_button_pressed() -> void:
-		PeerData.ghost_peer = %GhostSelector.get_selected_id()
-		SceneChanger.change_scene_to_packed(level)
+	PeerData.ghost_peer = %GhostSelector.get_selected_id()
+	SceneChanger.change_scene_to_packed(level)
