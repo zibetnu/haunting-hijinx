@@ -101,13 +101,17 @@ func _on_peer_participation_changed(id: int) -> void:
 		if card.input_authority != id:
 			continue
 
+		var player_name: String = card.player_name
+		var input_authority: int = card.input_authority
+		card.queue_free()
+		var new_card = _instantiate_card(input_authority)
+		new_card.player_name = player_name
+
 		if id in PeerData.participants:
-			card.reparent(%ActiveCards)
-			card.ready.emit()  # Fix for MultiplayerSpawner error.
+			%ActiveCards.add_child(new_card)
 
 		elif id in PeerData.spectators:
-			card.reparent(%SpectateCards)
-			card.ready.emit()  # Fix for MultiplayerSpawner error.
+			%SpectateCards.add_child(new_card)
 
 
 func _on_start_button_pressed() -> void:
