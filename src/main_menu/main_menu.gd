@@ -5,12 +5,20 @@ const SECTION = "network"
 const IP_KEY = "ip_address"
 const PORT_KEY = "port"
 
+@onready var connecting_dialog: AcceptDialog = $ConnectingDialog
+@onready var connection_failed_dialog: AcceptDialog = $ConnectionFailedDialog
+
 
 func _ready() -> void:
-	ConnectionManager.client_created.connect(start_lobby)
 	ConnectionManager.server_created.connect(start_lobby)
+	multiplayer.connected_to_server.connect(queue_free)
+	multiplayer.connection_failed.connect(func(): connection_failed_dialog.popup_centered())
 	_load_address()
 	%JoinButton.grab_focus()
+
+
+func cancel_connection_attempt() -> void:
+	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 
 
 func start_lobby() -> void:
@@ -47,7 +55,10 @@ func _on_host_button_pressed() -> void:
 
 
 func _on_join_button_pressed() -> void:
-	ConnectionManager.create_client(%IPText.text, int(%PortText.text))
+	if not ConnectionManager.create_client(%IPText.text, int(%PortText.text)):
+		return
+
+	connecting_dialog.popup_centered()
 
 
 func _on_quit_button_pressed() -> void:

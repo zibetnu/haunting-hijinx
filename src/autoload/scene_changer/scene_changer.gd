@@ -6,7 +6,7 @@ extends Node
 
 
 func _ready() -> void:
-	ConnectionManager.connection_closed.connect(func(): change_scene_to_packed(main_menu))
+	multiplayer.server_disconnected.connect(func(): change_scene_to_packed(main_menu))
 
 
 func change_scene_to_file(path: String) -> void:

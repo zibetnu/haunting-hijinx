@@ -23,18 +23,27 @@ var match_in_progress := false
 
 
 func _ready() -> void:
-	ConnectionManager.connection_closed.connect(erase_peer_data)
 	ConnectionManager.server_created.connect(_on_server_created)
 	multiplayer.peer_connected.connect(_on_peer_connected)
-	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
-	multiplayer.server_disconnected.connect(erase_peer_data)
+	multiplayer.peer_disconnected.connect(erase_data_for_peer)
+	multiplayer.server_disconnected.connect(erase_data)
 
 
-func erase_peer_data() -> void:
-	participants = []
+func erase_data() -> void:
 	ghost_peer = 1
+	participants = []
 	peer_names = {}
 	spectators = []
+
+
+func erase_data_for_peer(id: int) -> void:
+	if ghost_peer == id:
+		ghost_peer = 1
+
+	participants.erase(id)
+	peer_names.erase(id)
+	spectators.erase(id)
+	peer_participation_changed.emit(id)
 
 
 @rpc("call_local", "reliable")
@@ -61,16 +70,6 @@ func toggle_participation(id: int) -> void:
 	peer_participation_changed.emit(id)
 
 
-func _on_peer_disconnected(id: int) -> void:
-	if not multiplayer.is_server():
-		return
-
-	participants.erase(id)
-	peer_names.erase(id)
-	spectators.erase(id)
-	peer_participation_changed.emit(id)
-
-
 func _on_peer_connected(id: int) -> void:
 	if not multiplayer.is_server():
 		return
@@ -91,5 +90,5 @@ func _on_peer_connected(id: int) -> void:
 
 
 func _on_server_created() -> void:
-	if not OS.has_feature("dedicated_server"):
-		_on_peer_connected(1)
+	erase_data()
+	_on_peer_connected(1)
