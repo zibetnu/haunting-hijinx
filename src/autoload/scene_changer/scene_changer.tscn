@@ -10,7 +10,7 @@ lobby = ExtResource("2_nsjnt")
 main_menu = ExtResource("3_667vk")
 
 [node name="SceneSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://src/level/main_floor/main_floor.tscn", "res://src/lobby/lobby.tscn", "res://src/main_menu/main_menu.tscn")
+_spawnable_scenes = PackedStringArray("res://src/level/main_floor/main_floor.tscn", "res://src/lobby/lobby.tscn")
 spawn_path = NodePath("../SceneContainer")
 spawn_limit = 1
 
