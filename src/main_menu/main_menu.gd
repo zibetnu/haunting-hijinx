@@ -10,7 +10,6 @@ const PORT_KEY = "port"
 
 
 func _ready() -> void:
-	ConnectionManager.server_created.connect(start_lobby)
 	multiplayer.connected_to_server.connect(queue_free)
 	multiplayer.connection_failed.connect(func(): connection_failed_dialog.popup_centered())
 	_load_address()
@@ -19,11 +18,6 @@ func _ready() -> void:
 
 func cancel_connection_attempt() -> void:
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
-
-
-func start_lobby() -> void:
-	_save_address()
-	SceneChanger.change_scene_to_packed(SceneChanger.lobby)
 
 
 func _load_address() -> void:
@@ -51,7 +45,12 @@ func _save_address() -> void:
 
 
 func _on_host_button_pressed() -> void:
-	ConnectionManager.create_server(int(%PortText.text))
+	if not ConnectionManager.create_server(int(%PortText.text)):
+		return
+
+	_save_address()
+	multiplayer.peer_connected.emit(1)  # Set up server's player like any other.
+	SceneChanger.change_scene_to_packed(SceneChanger.lobby)
 
 
 func _on_join_button_pressed() -> void:

@@ -1,9 +1,6 @@
 extends Node
 
 
-signal server_created
-
-
 func _ready() -> void:
 	# Disable server relay to ensure that data is only shared between clients when necessary.
 	multiplayer.server_relay = false
@@ -28,15 +25,15 @@ func create_client(address: String, port: int) -> bool:
 	return true
 
 
-func create_server(port: int) -> void:
+func create_server(port: int) -> bool:
 	var peer := ENetMultiplayerPeer.new()
 	peer.create_server(port)
 	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
 		_notify_user("Failed to create server")
-		return
+		return false
 
 	multiplayer.multiplayer_peer = peer
-	server_created.emit()
+	return true
 
 
 func _notify_user(message: String) -> void:

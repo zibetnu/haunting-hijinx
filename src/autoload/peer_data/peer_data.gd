@@ -23,7 +23,6 @@ var match_in_progress := false
 
 
 func _ready() -> void:
-	ConnectionManager.server_created.connect(_on_server_created)
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(erase_data_for_peer)
 	multiplayer.server_disconnected.connect(erase_data)
@@ -71,6 +70,9 @@ func toggle_participation(id: int) -> void:
 
 
 func _on_peer_connected(id: int) -> void:
+	if id == 1:  # A new server is starting, so erase old data.
+		erase_data()
+
 	if not multiplayer.is_server():
 		return
 
@@ -87,8 +89,3 @@ func _on_peer_connected(id: int) -> void:
 		spectators.append(id)
 
 	peer_participation_changed.emit(id)
-
-
-func _on_server_created() -> void:
-	erase_data()
-	_on_peer_connected(1)
