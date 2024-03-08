@@ -10,7 +10,7 @@ const PORT_KEY = "port"
 
 
 func _ready() -> void:
-	multiplayer.connected_to_server.connect(queue_free)
+	multiplayer.connected_to_server.connect(queue_free)  # Free self and let server spawn lobby.
 	multiplayer.connection_failed.connect(func(): _notify_user("Failed to connect."))
 	_load_address()
 	%JoinButton.grab_focus()
