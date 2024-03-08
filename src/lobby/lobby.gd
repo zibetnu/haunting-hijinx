@@ -32,7 +32,7 @@ func _ready():
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		ConnectionManager.close_connection()
+		close_connection()
 		SceneChanger.change_scene_to_packed(SceneChanger.main_menu)
 
 
@@ -47,6 +47,13 @@ func add_spectator(id: int) -> void:
 	%SpectateCards.add_child(card, true)
 	%GhostSelector.add_item(PeerData.peer_names[card.input_authority], card.input_authority)
 	%GhostSelector.set_item_disabled(%GhostSelector.get_item_index(id), true)
+
+
+func close_connection() -> void:
+	for peer in multiplayer.get_peers():
+		multiplayer.multiplayer_peer.disconnect_peer(peer)
+
+	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 
 
 func _instantiate_card(id: int) -> Node:
