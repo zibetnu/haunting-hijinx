@@ -85,6 +85,7 @@ func _on_join_button_pressed() -> void:
 	if not create_client(%IPText.text, int(%PortText.text)):
 		return
 
+	_save_address()
 	connecting_dialog.popup_centered()
 
 
