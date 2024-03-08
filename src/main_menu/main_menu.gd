@@ -1,6 +1,9 @@
 extends Control
 
 
+signal address_loaded(address: String)
+signal port_loaded_string(port_string: String)
+
 const SECTION = "network"
 const IP_KEY = "ip_address"
 const PORT_KEY = "port"
@@ -51,12 +54,12 @@ func _load_address() -> void:
 		return
 
 	if config.has_section_key(SECTION, IP_KEY):
-		%IPText.text = config.get_value(SECTION, IP_KEY)
+		address_loaded.emit(str(config.get_value(SECTION, IP_KEY)))
 
 	if config.has_section_key(SECTION, PORT_KEY):
 		var port: int = config.get_value(SECTION, PORT_KEY)
 		if port != 0:
-			%PortText.text = str(port)
+			port_loaded_string.emit(str(port))
 
 
 func _notify_user(message: String) -> void:

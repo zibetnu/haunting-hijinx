@@ -69,6 +69,8 @@ dialog_text = "Attempting to connect..."
 title = ""
 size = Vector2i(216, 100)
 
+[connection signal="address_loaded" from="." to="VBoxContainer/IPText" method="set_text"]
+[connection signal="port_string_loaded" from="." to="VBoxContainer/PortText" method="set_text"]
 [connection signal="pressed" from="VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
