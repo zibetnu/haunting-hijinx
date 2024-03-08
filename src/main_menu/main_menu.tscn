@@ -65,14 +65,13 @@ size = Vector2i(203, 100)
 ok_button_text = "Cancel"
 dialog_text = "Attempting to connect..."
 
-[node name="ConnectionFailedDialog" type="AcceptDialog" parent="."]
+[node name="NotifyDialog" type="AcceptDialog" parent="."]
 title = ""
 size = Vector2i(216, 100)
-dialog_text = "Failed to connect."
 
 [connection signal="pressed" from="VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="canceled" from="ConnectingDialog" to="." method="cancel_connection_attempt"]
 [connection signal="confirmed" from="ConnectingDialog" to="." method="cancel_connection_attempt"]
-[connection signal="about_to_popup" from="ConnectionFailedDialog" to="ConnectingDialog" method="hide"]
+[connection signal="about_to_popup" from="NotifyDialog" to="ConnectingDialog" method="hide"]
