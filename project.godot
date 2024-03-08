@@ -16,7 +16,6 @@ config/features=PackedStringArray("4.2", "GL Compatibility")
 
 [autoload]
 
-ConnectionManager="*res://src/autoload/connection_manager/connection_manager.tscn"
 PeerData="*res://src/autoload/peer_data/peer_data.tscn"
 SceneChanger="*res://src/autoload/scene_changer/scene_changer.tscn"
 PauseManager="*res://src/autoload/pause_manager.gd"
