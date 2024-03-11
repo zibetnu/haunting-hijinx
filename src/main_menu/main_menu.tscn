@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://civfmojof07gs"]
+[gd_scene load_steps=3 format=3 uid="uid://civfmojof07gs"]
 
 [ext_resource type="Script" path="res://src/main_menu/main_menu.gd" id="1_mjvxa"]
+[ext_resource type="PackedScene" uid="uid://bjuo2ufoah314" path="res://src/main_menu/e_net_connector/e_net_connector.tscn" id="2_ykvnp"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -69,11 +70,21 @@ dialog_text = "Attempting to connect..."
 title = ""
 size = Vector2i(216, 100)
 
+[node name="ENetConnector" parent="." instance=ExtResource("2_ykvnp")]
+
 [connection signal="address_loaded" from="." to="VBoxContainer/IPText" method="set_text"]
+[connection signal="address_loaded" from="." to="ENetConnector" method="set_address"]
 [connection signal="port_string_loaded" from="." to="VBoxContainer/PortText" method="set_text"]
-[connection signal="pressed" from="VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="port_string_loaded" from="." to="ENetConnector" method="set_port_from_string"]
+[connection signal="text_changed" from="VBoxContainer/IPText" to="ENetConnector" method="set_address"]
+[connection signal="text_changed" from="VBoxContainer/PortText" to="ENetConnector" method="set_port_from_string"]
+[connection signal="pressed" from="VBoxContainer/HostButton" to="ENetConnector" method="create_server"]
+[connection signal="pressed" from="VBoxContainer/JoinButton" to="ENetConnector" method="create_client"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="canceled" from="ConnectingDialog" to="." method="cancel_connection_attempt"]
 [connection signal="confirmed" from="ConnectingDialog" to="." method="cancel_connection_attempt"]
 [connection signal="about_to_popup" from="NotifyDialog" to="ConnectingDialog" method="hide"]
+[connection signal="client_created" from="ENetConnector" to="." method="_on_client_created"]
+[connection signal="create_client_failed" from="ENetConnector" to="." method="notify_user" binds= ["Failed to create client."]]
+[connection signal="create_server_failed" from="ENetConnector" to="." method="notify_user" binds= ["Failed to create server."]]
+[connection signal="server_created" from="ENetConnector" to="." method="_on_server_created"]
