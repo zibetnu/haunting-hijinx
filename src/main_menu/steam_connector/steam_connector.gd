@@ -56,6 +56,7 @@ func _on_lobby_joined(
 		join_lobby_failed.emit()
 		return
 
+	# Don't set peer again if it was already set in _on_lobby_created.
 	var lobby_owner_steam_id := Steam.getLobbyOwner(lobby_id)
 	if Steam.getSteamID() == lobby_owner_steam_id:
 		return
