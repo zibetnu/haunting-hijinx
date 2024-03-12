@@ -35,7 +35,7 @@ func set_join_lobby_id_from_string(value: String) -> void:
 	join_lobby_id = int(value)
 
 
-func _on_lobby_created(result: Steam.Result, lobby_id: int) -> void:
+func _on_lobby_created(result: Steam.Result, _lobby_id: int) -> void:
 	if result != Steam.RESULT_OK:
 		create_lobby_failed.emit()
 		return
