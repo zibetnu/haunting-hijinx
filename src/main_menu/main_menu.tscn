@@ -28,9 +28,10 @@ grow_vertical = 2
 [node name="IPText" type="LineEdit" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_top = NodePath("../JoinButton")
+focus_neighbor_top = NodePath("../QuitButton")
 focus_neighbor_bottom = NodePath("../PortText")
 focus_next = NodePath("../PortText")
+focus_previous = NodePath("../QuitButton")
 placeholder_text = "IP address (only for joining)"
 context_menu_enabled = false
 
@@ -39,6 +40,7 @@ unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../IPText")
 focus_neighbor_bottom = NodePath("../HostButton")
+focus_next = NodePath("../HostButton")
 focus_previous = NodePath("../IPText")
 placeholder_text = "Port (for hosting and joining)"
 context_menu_enabled = false
@@ -46,18 +48,27 @@ context_menu_enabled = false
 [node name="HostButton" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../PortText")
 focus_neighbor_bottom = NodePath("../JoinButton")
+focus_next = NodePath("../JoinButton")
+focus_previous = NodePath("../PortText")
 text = "Host"
 
 [node name="JoinButton" type="Button" parent="VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../HostButton")
-focus_neighbor_bottom = NodePath("../IPText")
+focus_neighbor_bottom = NodePath("../QuitButton")
+focus_next = NodePath("../QuitButton")
+focus_previous = NodePath("../HostButton")
 text = "Join"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../JoinButton")
+focus_neighbor_bottom = NodePath("../IPText")
+focus_next = NodePath("../IPText")
+focus_previous = NodePath("../JoinButton")
 text = "Quit"
 
 [node name="ConnectingDialog" type="AcceptDialog" parent="."]
