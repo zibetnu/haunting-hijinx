@@ -26,6 +26,7 @@ CutsceneManager="*res://src/autoload/cutscene_manager.gd"
 
 window/size/viewport_width=640
 window/size/viewport_height=360
+window/size/mode=4
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/stretch/scale_mode="integer"
