@@ -8,6 +8,8 @@ const SECTION = "network"
 const IP_KEY = "ip_address"
 const PORT_KEY = "port"
 
+@export var first_button: Button
+
 @onready var connecting_dialog: AcceptDialog = $ConnectingDialog
 @onready var notify_dialog: AcceptDialog = $NotifyDialog
 
@@ -16,7 +18,7 @@ func _ready() -> void:
 	multiplayer.connected_to_server.connect(queue_free)  # Free self and let server spawn lobby.
 	multiplayer.connection_failed.connect(func(): notify_user("Failed to connect."))
 	_load_address()
-	%JoinButton.grab_focus()
+	first_button.grab_focus()
 
 
 func cancel_connection_attempt() -> void:
