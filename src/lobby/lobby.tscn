@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://df63fi5u7xpjt"]
+[gd_scene load_steps=6 format=3 uid="uid://df63fi5u7xpjt"]
 
 [ext_resource type="Script" path="res://src/lobby/lobby.gd" id="1_g8t6r"]
 [ext_resource type="PackedScene" uid="uid://2uclu3gf4iyj" path="res://src/level/main_floor/main_floor.tscn" id="2_px70m"]
 [ext_resource type="PackedScene" uid="uid://bapt74v2o7kig" path="res://src/lobby/player_card/player_card.tscn" id="3_87r7n"]
 [ext_resource type="PackedScene" uid="uid://jcjsaq8tvx3j" path="res://src/copy_label_button/copy_label_button.tscn" id="4_8oiix"]
+[ext_resource type="PackedScene" uid="uid://jq6h228c5ics" path="res://src/lobby/e_net_connection_closer/e_net_connection_closer.tscn" id="5_j6ggc"]
 
 [node name="Lobby" type="Control"]
 layout_mode = 3
@@ -114,4 +115,8 @@ layout_mode = 2
 focus_neighbor_top = NodePath("../HBoxContainer/GhostSelector")
 text = "Start Game"
 
+[node name="ENetConnectionCloser" parent="." instance=ExtResource("5_j6ggc")]
+
+[connection signal="close_connection_requested" from="." to="ENetConnectionCloser" method="close_connection"]
 [connection signal="pressed" from="HostMenu/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="connection_closed" from="ENetConnectionCloser" to="." method="_on_connection_closed"]

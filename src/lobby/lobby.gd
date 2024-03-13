@@ -1,6 +1,8 @@
 extends Control
 
 
+signal close_connection_requested
+
 const AUTOLOAD_LOBBY_PROPERTY := &"lobby_id"
 const AUTOLOAD_PATH := ^"/root/PeerData"
 const MIN_PARTICIPANTS = 1
@@ -37,8 +39,7 @@ func _ready():
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		close_connection()
-		SceneChanger.change_scene_to_packed(SceneChanger.main_menu)
+		close_connection_requested.emit()
 
 
 func add_participant(id: int) -> void:
@@ -52,13 +53,6 @@ func add_spectator(id: int) -> void:
 	%SpectateCards.add_child(card, true)
 	%GhostSelector.add_item(PeerData.peer_names[card.input_authority], card.input_authority)
 	%GhostSelector.set_item_disabled(%GhostSelector.get_item_index(id), true)
-
-
-func close_connection() -> void:
-	for peer in multiplayer.get_peers():
-		multiplayer.multiplayer_peer.disconnect_peer(peer)
-
-	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 
 
 func _get_autoload_lobby_id() -> Variant:
@@ -75,6 +69,10 @@ func _instantiate_card(id: int) -> Node:
 	card.input_authority = id
 	card.player_name_changed.connect(func(value): PeerData.set_peer_name(id, value))
 	return card
+
+
+func _on_connection_closed() -> void:
+	SceneChanger.change_scene_to_packed(SceneChanger.main_menu)
 
 
 func _on_ghost_peer_changed(id: int) -> void:
