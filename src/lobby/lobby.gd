@@ -1,14 +1,19 @@
 extends Control
 
 
+const AUTOLOAD_LOBBY_PROPERTY := &"lobby_id"
+const AUTOLOAD_PATH := ^"/root/PeerData"
 const MIN_PARTICIPANTS = 1
 
 @export var level: PackedScene
 @export var player_card: PackedScene
 
+@onready var lobby_id_value_label: Label = %LobbyIDValueLabel
+
 
 func _ready():
 	%HostMenu.visible = multiplayer.is_server()
+	lobby_id_value_label.text = str(_get_autoload_lobby_id())
 
 	# Only the server needs to spawn the players.
 	if not multiplayer.is_server():
@@ -54,6 +59,14 @@ func close_connection() -> void:
 		multiplayer.multiplayer_peer.disconnect_peer(peer)
 
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
+
+
+func _get_autoload_lobby_id() -> Variant:
+	var autoload := get_node_or_null(AUTOLOAD_PATH)
+	if autoload:
+		return autoload.get(AUTOLOAD_LOBBY_PROPERTY)
+
+	return null
 
 
 func _instantiate_card(id: int) -> Node:
