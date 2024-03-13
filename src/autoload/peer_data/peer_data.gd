@@ -19,6 +19,7 @@ signal peer_participation_changed(id: int)
 @export var peer_names := {}
 @export var spectators := []
 
+var lobby_id := -1
 var match_in_progress := false
 
 
