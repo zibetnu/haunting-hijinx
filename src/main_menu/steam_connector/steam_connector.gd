@@ -6,6 +6,8 @@ signal join_lobby_failed
 signal lobby_created
 signal lobby_joined
 
+const AUTOLOAD_LOBBY_PROPERTY := &"lobby_id"
+const AUTOLOAD_PATH := ^"/root/PeerData"
 const MAX_MEMBERS := 8
 
 var join_lobby_id := -1
@@ -35,7 +37,7 @@ func set_join_lobby_id_from_string(value: String) -> void:
 	join_lobby_id = int(value)
 
 
-func _on_lobby_created(result: Steam.Result, _lobby_id: int) -> void:
+func _on_lobby_created(result: Steam.Result, lobby_id: int) -> void:
 	if result != Steam.RESULT_OK:
 		create_lobby_failed.emit()
 		return
@@ -43,6 +45,7 @@ func _on_lobby_created(result: Steam.Result, _lobby_id: int) -> void:
 	var peer := SteamMultiplayerPeer.new()
 	peer.create_host(0, [])
 	multiplayer.multiplayer_peer = peer
+	_set_autoload_lobby_id(lobby_id)
 	lobby_created.emit()
 
 
@@ -64,4 +67,11 @@ func _on_lobby_joined(
 	var peer := SteamMultiplayerPeer.new()
 	peer.create_client(lobby_owner_steam_id, 0, [])
 	multiplayer.multiplayer_peer = peer
+	_set_autoload_lobby_id(lobby_id)
 	lobby_joined.emit()
+
+
+func _set_autoload_lobby_id(lobby_id: int) -> void:
+	var autoload := get_node_or_null(AUTOLOAD_PATH)
+	if autoload:
+		autoload.set(AUTOLOAD_LOBBY_PROPERTY, lobby_id)
