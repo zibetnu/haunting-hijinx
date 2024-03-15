@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dfnfk01kkwejl"]
-
-[ext_resource type="Script" path="res://src/lobby/steam_connection_closer/steam_connection_closer.gd" id="1_nghj8"]
-
-[node name="SteamConnectionCloser" type="Node"]
-script = ExtResource("1_nghj8")

@@ -1,6 +1,7 @@
 extends Node
 
 
+signal connection_closed
 signal create_lobby_failed
 signal join_lobby_failed
 signal lobby_created
@@ -8,15 +9,27 @@ signal lobby_joined
 
 const AUTOLOAD_LOBBY_PROPERTY := &"lobby_id"
 const AUTOLOAD_PATH := ^"/root/PeerData"
+const DEFAULT_LOBBY_ID := -1
 const MAX_MEMBERS := 8
 
-var join_lobby_id := -1
+var join_lobby_id := DEFAULT_LOBBY_ID
 
 
 func _ready() -> void:
 	Steam.lobby_created.connect(_on_lobby_created)
 	Steam.lobby_joined.connect(_on_lobby_joined)
 	Steam.steamInit()
+
+
+func close_connection() -> void:
+	var lobby_id = _get_autoload_lobby_id()
+	if lobby_id != null and lobby_id != DEFAULT_LOBBY_ID:
+		Steam.leaveLobby(lobby_id)
+		_set_autoload_lobby_id(DEFAULT_LOBBY_ID)
+
+	multiplayer.multiplayer_peer.close()
+	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
+	connection_closed.emit()
 
 
 func create_lobby() -> void:
@@ -69,6 +82,14 @@ func _on_lobby_joined(
 	multiplayer.multiplayer_peer = peer
 	_set_autoload_lobby_id(lobby_id)
 	lobby_joined.emit()
+
+
+func _get_autoload_lobby_id() -> Variant:
+	var autoload := get_node_or_null(AUTOLOAD_PATH)
+	if autoload:
+		return autoload.get(AUTOLOAD_LOBBY_PROPERTY)
+
+	return null
 
 
 func _set_autoload_lobby_id(lobby_id: int) -> void:
