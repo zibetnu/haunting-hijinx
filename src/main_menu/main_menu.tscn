@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://civfmojof07gs"]
 
 [ext_resource type="Script" path="res://src/main_menu/main_menu.gd" id="1_mjvxa"]
-[ext_resource type="PackedScene" uid="uid://bjuo2ufoah314" path="res://src/main_menu/e_net_connector/e_net_connector.tscn" id="2_ykvnp"]
+[ext_resource type="PackedScene" uid="uid://bjuo2ufoah314" path="res://src/e_net_connector/e_net_connector.tscn" id="2_cmbr0"]
 [ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/main_menu/steam_connector/steam_connector.tscn" id="3_w4nd0"]
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("first_button")]
@@ -136,7 +136,7 @@ dialog_text = "Attempting to connect..."
 title = ""
 size = Vector2i(216, 100)
 
-[node name="ENetConnector" parent="." instance=ExtResource("2_ykvnp")]
+[node name="ENetConnector" parent="." instance=ExtResource("2_cmbr0")]
 
 [node name="SteamConnector" parent="." instance=ExtResource("3_w4nd0")]
 
