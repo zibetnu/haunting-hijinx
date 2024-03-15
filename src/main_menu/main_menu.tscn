@@ -163,4 +163,4 @@ size = Vector2i(216, 100)
 [connection signal="create_lobby_failed" from="SteamConnector" to="." method="notify_user" binds= ["Failed to create lobby."]]
 [connection signal="join_lobby_failed" from="SteamConnector" to="." method="notify_user" binds= ["Failed to join lobby."]]
 [connection signal="lobby_created" from="SteamConnector" to="." method="_on_server_created"]
-[connection signal="lobby_joined" from="SteamConnector" to="." method="_on_client_created"]
+[connection signal="lobby_joined" from="SteamConnector" to="." method="_on_lobby_joined"]
