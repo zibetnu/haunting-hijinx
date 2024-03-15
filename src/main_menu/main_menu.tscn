@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/main_menu/main_menu.gd" id="1_mjvxa"]
 [ext_resource type="PackedScene" uid="uid://bjuo2ufoah314" path="res://src/e_net_connector/e_net_connector.tscn" id="2_cmbr0"]
-[ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/main_menu/steam_connector/steam_connector.tscn" id="3_w4nd0"]
+[ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="3_53w45"]
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("first_button")]
 layout_mode = 3
@@ -138,7 +138,7 @@ size = Vector2i(216, 100)
 
 [node name="ENetConnector" parent="." instance=ExtResource("2_cmbr0")]
 
-[node name="SteamConnector" parent="." instance=ExtResource("3_w4nd0")]
+[node name="SteamConnector" parent="." instance=ExtResource("3_53w45")]
 
 [connection signal="address_loaded" from="." to="ENetContainer/IPText" method="set_text"]
 [connection signal="address_loaded" from="." to="ENetConnector" method="set_address"]
