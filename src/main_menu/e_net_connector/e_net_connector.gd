@@ -2,12 +2,21 @@ extends Node
 
 
 signal client_created
+signal connection_closed
 signal server_created
 signal create_client_failed
 signal create_server_failed
 
 @export var address := "localhost"
 @export var port := 9999
+
+
+func close_connection() -> void:
+	for peer in multiplayer.get_peers():
+		multiplayer.multiplayer_peer.disconnect_peer(peer)
+
+	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
+	connection_closed.emit()
 
 
 func create_client() -> void:

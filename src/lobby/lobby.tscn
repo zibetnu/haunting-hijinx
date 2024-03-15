@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://2uclu3gf4iyj" path="res://src/level/main_floor/main_floor.tscn" id="2_px70m"]
 [ext_resource type="PackedScene" uid="uid://bapt74v2o7kig" path="res://src/lobby/player_card/player_card.tscn" id="3_87r7n"]
 [ext_resource type="PackedScene" uid="uid://jcjsaq8tvx3j" path="res://src/copy_label_button/copy_label_button.tscn" id="4_8oiix"]
-[ext_resource type="PackedScene" uid="uid://jq6h228c5ics" path="res://src/lobby/e_net_connection_closer/e_net_connection_closer.tscn" id="5_j6ggc"]
+[ext_resource type="PackedScene" uid="uid://bjuo2ufoah314" path="res://src/main_menu/e_net_connector/e_net_connector.tscn" id="5_y8eeq"]
 [ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/main_menu/steam_connector/steam_connector.tscn" id="6_8o2lp"]
 
 [node name="Lobby" type="Control"]
@@ -116,11 +116,11 @@ layout_mode = 2
 focus_neighbor_top = NodePath("../HBoxContainer/GhostSelector")
 text = "Start Game"
 
-[node name="ENetConnectionCloser" parent="." instance=ExtResource("5_j6ggc")]
+[node name="ENetConnector" parent="." instance=ExtResource("5_y8eeq")]
 
 [node name="SteamConnector" parent="." instance=ExtResource("6_8o2lp")]
 
 [connection signal="close_connection_requested" from="." to="SteamConnector" method="close_connection"]
 [connection signal="pressed" from="HostMenu/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="connection_closed" from="ENetConnectionCloser" to="." method="_on_connection_closed"]
+[connection signal="connection_closed" from="ENetConnector" to="." method="_on_connection_closed"]
 [connection signal="connection_closed" from="SteamConnector" to="." method="_on_connection_closed"]
