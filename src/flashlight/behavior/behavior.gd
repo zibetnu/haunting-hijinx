@@ -53,7 +53,26 @@ const CAST_SHORT_MAX_INDEX = 4
 @export_group("Turning", "turning")
 @export_range(0, 720, 0.1, "radians_as_degrees") var turning_speed_sec := 2 * PI
 
-var battery := max_battery:
+var battery_percentage: float:
+	get:
+		return float(battery) / max_battery
+
+	set(value):
+		battery = roundi(max_battery * clampf(value, 0, 1))
+
+var max_battery: int:
+	get:
+		return battery_time * ProjectSettings.get_setting(
+				"physics/common/physics_ticks_per_second"
+		)
+
+var is_battery_low: bool:
+	get:
+		return battery_percentage < battery_low_percentage
+
+var target_rotation := 0.0
+
+@onready var battery := max_battery:
 	set(value):
 		var was_battery_dead := battery == 0
 		var was_battery_low := is_battery_low
@@ -75,25 +94,6 @@ var battery := max_battery:
 					battery_unlowed.emit()
 
 		_update_cast_length()
-
-var battery_percentage: float:
-	get:
-		return float(battery) / max_battery
-
-	set(value):
-		battery = roundi(max_battery * clampf(value, 0, 1))
-
-var max_battery: int:
-	get:
-		return battery_time * ProjectSettings.get_setting(
-				"physics/common/physics_ticks_per_second"
-		)
-
-var is_battery_low: bool:
-	get:
-		return battery_percentage < battery_low_percentage
-
-var target_rotation := 0.0
 
 @onready var _repeat_raycasts: Array[RepeatRayCast2D] = [
 	$RayCasts/RepeatRayCast2D,
