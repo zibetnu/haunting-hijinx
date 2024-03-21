@@ -38,7 +38,7 @@ const CAST_SHORT_MAX_INDEX = 4
 
 @export_group("Battery", "battery")
 @export_range(0, 1) var battery_low_percentage := 0.5
-@export_range(0, 120, 0.1, "suffix:s") var battery_time := 43.0
+@export_range(0, 120, 0.1, "or_greater", "suffix:s") var battery_time := 43.0
 
 @export_group("Damage", "damage")
 @export var damage_deals: DamageSource
