@@ -45,7 +45,7 @@ const CAST_SHORT_MAX_INDEX = 4
 @export var damage_weak_to := DamageSource.Type.DARK
 
 @export_group("Turning", "turning")
-@export_range(0, 720, 0.1, "radians_as_degrees") var turning_speed_sec := 2 * PI
+@export_range(0, 720, 0.1, "or_greater", "radians_as_degrees") var turning_speed_sec := 2 * PI
 
 var battery_percentage: float:
 	get:
