@@ -27,20 +27,14 @@ const CAST_SHORT_MAX_INDEX = 4
 			powered = false
 
 @export var powered: bool:
+	get:
+		return _powered
+
 	set(value):
-		var was_powered := powered
-		powered = value and battery > 0 and enabled
-		match [was_powered, powered]:
-			[false, true]:
-				power_toggled.emit(powered)
-				powered_on.emit()
+		if not is_node_ready():
+			await ready
 
-			[true, false]:
-				power_toggled.emit(powered)
-				powered_off.emit()
-
-		if value and battery == 0:
-			powered_on_attempted.emit()
+		_powered = value
 
 @export_group("Battery", "battery")
 @export_range(0, 1) var battery_low_percentage := 0.5
@@ -94,6 +88,22 @@ var target_rotation := 0.0
 					battery_unlowed.emit()
 
 		_update_cast_length()
+
+@onready var _powered: bool:
+	set(value):
+		var was_powered := _powered
+		_powered = value and battery > 0 and enabled
+		match [was_powered, _powered]:
+			[false, true]:
+				power_toggled.emit(_powered)
+				powered_on.emit()
+
+			[true, false]:
+				power_toggled.emit(_powered)
+				powered_off.emit()
+
+		if value and battery == 0:
+			powered_on_attempted.emit()
 
 @onready var _repeat_raycasts: Array[RepeatRayCast2D] = [
 	$RayCasts/RepeatRayCast2D,

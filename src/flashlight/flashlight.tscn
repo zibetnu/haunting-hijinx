@@ -10,7 +10,7 @@ y_sort_enabled = true
 
 [node name="Display" parent="." instance=ExtResource("3_olr6v")]
 
-[connection signal="cast_length_index_changed" from="Behavior" to="Display" method="set_light_texture_index"]
-[connection signal="collision_points_changed" from="Behavior" to="Display" method="set_collision_points"]
-[connection signal="flashlight_rotation_changed" from="Behavior" to="Display" method="set_flashlight_rotation"]
-[connection signal="power_toggled" from="Behavior" to="Display" method="set_powered"]
+[connection signal="cast_length_index_changed" from="Behavior" to="Display" method="set_light_texture_index" flags=3]
+[connection signal="collision_points_changed" from="Behavior" to="Display" method="set_collision_points" flags=3]
+[connection signal="flashlight_rotation_changed" from="Behavior" to="Display" method="set_flashlight_rotation" flags=3]
+[connection signal="power_toggled" from="Behavior" to="Display" method="set_powered" flags=3]
