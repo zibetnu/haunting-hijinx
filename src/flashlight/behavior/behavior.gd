@@ -46,6 +46,12 @@ const CAST_SHORT_MAX_INDEX = 4
 
 @export_group("Turning", "turning")
 @export_range(0, 720, 0.1, "or_greater", "radians_as_degrees") var turning_speed_sec := 2 * PI
+@export_range(-360, 360, 0.1, "radians_as_degrees") var turning_target_rotation: float:
+	get:
+		return target_rotation
+
+	set(value):
+		target_rotation = value
 
 var battery_percentage: float:
 	get:
