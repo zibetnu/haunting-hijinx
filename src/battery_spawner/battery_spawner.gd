@@ -9,26 +9,8 @@ const MAX_BATTERY_SPAWN_ATTEMPTS = 100
 @export var spawn_root : Node2D
 
 var _batteries_spawned := 0
-var _exception_count := 0
 
 @onready var _position_checker := $PositionChecker
-
-
-func _ready() -> void:
-	_add_exceptions()
-
-
-func _add_exceptions() -> void:
-	if _exception_count >= get_tree().get_nodes_in_group("aura_areas").size():
-		return
-
-	_exception_count = 0
-	_position_checker.clear_exceptions()
-	get_tree().get_nodes_in_group("aura_areas").map(
-			func(aura_area):
-					_position_checker.add_exception(aura_area)
-					_exception_count += 1
-	)
 
 
 func _get_random_battery_position() -> Vector2:
@@ -39,7 +21,6 @@ func _get_random_battery_position() -> Vector2:
 
 
 func _is_position_clear(check_position: Vector2) -> bool:
-	_add_exceptions()
 	_position_checker.position = check_position
 	_position_checker.force_shapecast_update()
 	return not _position_checker.is_colliding()
