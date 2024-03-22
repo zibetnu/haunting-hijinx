@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/aura/aura.gd" id="1_itduv"]
 
 [node name="Aura" type="Area2D"]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_itduv")
 
