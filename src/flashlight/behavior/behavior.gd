@@ -187,7 +187,7 @@ func _damage_colliders(colliders: Array) -> void:
 
 func _emit_collision_points() -> void:
 	var collision_points: Array[Vector2] = []
-	for raycast: RayCast2D in _repeat_raycasts:
+	for raycast: RepeatRayCast2D in _repeat_raycasts:
 		if raycast.is_colliding():
 			collision_points.append(
 					raycast.to_local(raycast.get_collision_point()).rotated(raycast.rotation)
@@ -215,7 +215,7 @@ func _update_cast_length() -> void:
 				/ (1.0 - battery_low_percentage)
 		))
 
-	for raycast: RayCast2D in _repeat_raycasts:
+	for raycast: RepeatRayCast2D in _repeat_raycasts:
 		raycast.target_position.x = CAST_LENGTHS[index]
 
 	cast_length_index_changed.emit(index)
