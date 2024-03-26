@@ -1,12 +1,21 @@
 extends Control
 
 
+signal close_connection_requested
+
+const AUTOLOAD_LOBBY_PROPERTY := &"lobby_id"
+const AUTOLOAD_PATH := ^"/root/PeerData"
+const MIN_PARTICIPANTS = 1
+
 @export var level: PackedScene
 @export var player_card: PackedScene
+
+@onready var lobby_id_value_label: Label = %LobbyIDValueLabel
 
 
 func _ready():
 	%HostMenu.visible = multiplayer.is_server()
+	lobby_id_value_label.text = str(_get_autoload_lobby_id())
 
 	# Only the server needs to spawn the players.
 	if not multiplayer.is_server():
@@ -30,28 +39,40 @@ func _ready():
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		ConnectionManager.close_connection()
-		SceneChanger.change_scene_to_packed(SceneChanger.main_menu)
+		close_connection_requested.emit()
 
 
 func add_participant(id: int) -> void:
 	var card := _instantiate_card(id)
 	%ActiveCards.add_child(card, true)
-	%GhostSelector.add_item(PeerData.peer_names[card.peer_id], card.peer_id)
+	%GhostSelector.add_item(PeerData.peer_names[card.input_authority], card.input_authority)
 
 
 func add_spectator(id: int) -> void:
 	var card := _instantiate_card(id)
 	%SpectateCards.add_child(card, true)
-	%GhostSelector.add_item(PeerData.peer_names[card.peer_id], card.peer_id)
+	%GhostSelector.add_item(PeerData.peer_names[card.input_authority], card.input_authority)
 	%GhostSelector.set_item_disabled(%GhostSelector.get_item_index(id), true)
+
+
+func _get_autoload_lobby_id() -> Variant:
+	var autoload := get_node_or_null(AUTOLOAD_PATH)
+	if autoload:
+		return autoload.get(AUTOLOAD_LOBBY_PROPERTY)
+
+	return null
 
 
 func _instantiate_card(id: int) -> Node:
 	var card = player_card.instantiate()
 	card.name += str(id)
-	card.peer_id = id
+	card.input_authority = id
+	card.player_name_changed.connect(func(value): PeerData.set_peer_name(id, value))
 	return card
+
+
+func _on_connection_closed() -> void:
+	SceneChanger.change_scene_to_packed(SceneChanger.main_menu)
 
 
 func _on_ghost_peer_changed(id: int) -> void:
@@ -68,7 +89,7 @@ func _on_peer_connected(id: int) -> void:
 
 func _on_peer_disconnected(id: int) -> void:
 	for card in %ActiveCards.get_children() + %SpectateCards.get_children():
-		if card.peer_id == id:
+		if card.input_authority == id:
 			card.queue_free()
 
 	if %GhostSelector.get_item_index(id) != -1:
@@ -93,20 +114,24 @@ func _on_peer_participation_changed(id: int) -> void:
 	if disabled or %GhostSelector.get_selected_id() == -1:
 		%GhostSelector.select(%GhostSelector.get_selectable_item())
 
-	%StartButton.disabled = PeerData.participants.size() < PeerData.MIN_PARTICIPANTS
+	%StartButton.disabled = PeerData.participants.size() < MIN_PARTICIPANTS
 	for card in %ActiveCards.get_children() + %SpectateCards.get_children():
-		if card.peer_id != id:
+		if card.input_authority != id:
 			continue
 
+		var player_name: String = card.player_name
+		var input_authority: int = card.input_authority
+		card.queue_free()
+		var new_card = _instantiate_card(input_authority)
+		new_card.player_name = player_name
+
 		if id in PeerData.participants:
-			card.reparent(%ActiveCards)
-			card.ready.emit()  # Fix for MultiplayerSpawner error.
+			%ActiveCards.add_child(new_card)
 
 		elif id in PeerData.spectators:
-			card.reparent(%SpectateCards)
-			card.ready.emit()  # Fix for MultiplayerSpawner error.
+			%SpectateCards.add_child(new_card)
 
 
 func _on_start_button_pressed() -> void:
-		PeerData.ghost_peer = %GhostSelector.get_selected_id()
-		SceneChanger.change_scene_to_packed(level)
+	PeerData.ghost_peer = %GhostSelector.get_selected_id()
+	SceneChanger.change_scene_to_packed(level)

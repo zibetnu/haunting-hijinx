@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://j7t8go4if5di"]
+
+[ext_resource type="Script" path="res://src/grabbable/grabbable.gd" id="1_v1626"]
+
+[node name="Grabbable" type="Area2D" groups=["grabbable"]]
+collision_layer = 16
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_v1626")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

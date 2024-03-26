@@ -1,51 +1,66 @@
 extends Control
 
 
-var spectating_index := 0:
+const _CAMERA_PATH = ^"%Camera2D"
+const _NAME_LABEL_PATH = ^"%NameLabel"
+const _PLAYER_GROUP = &"players"
+const _UNKNOWN_NAME = "name unknown"
+
+var spectate_index := 0:
 	set(value):
-		if value >= PeerData.participants.size():
-			spectating_index = 0
+		if value >= _players.size():
+			spectate_index = 0
 
 		elif value < 0:
-			spectating_index = PeerData.participants.size() - 1
+			spectate_index = _players.size() - 1
 
 		else:
-			spectating_index = value
+			spectate_index = value
 
-		_set_active_camera()
+		_spectate_player_at_index()
+
+var _players: Array[Node]:
+	get:
+		return get_tree().get_nodes_in_group(_PLAYER_GROUP)
+
+@onready var _left_button := %LeftButton
+@onready var _right_button := %RightButton
+@onready var _spectating_label := %SpectatingLabel
 
 
 func _ready() -> void:
-	_set_active_camera()
-	%RightButton.grab_focus()
+	await get_tree().process_frame  # Wait until players are set up.
+	_right_button.grab_focus()
+	_spectate_player_at_index()
 
 
 func _on_left_button_pressed() -> void:
-	spectating_index -= 1
+	spectate_index -= 1
 
 
 func _on_right_button_pressed() -> void:
-	spectating_index += 1
+	spectate_index += 1
 
 
 func _on_cutscene_ended(_cutscene_name: String) -> void:
-	%LeftButton.disabled = false
-	%RightButton.disabled = false
-	_set_active_camera()
+	_left_button.disabled = false
+	_right_button.disabled = false
+	_spectate_player_at_index()
 
 
 func _on_cutscene_started(_cutscene_name: String) -> void:
-	%LeftButton.disabled = true
-	%RightButton.disabled = true
+	_left_button.disabled = true
+	_right_button.disabled = true
 
 
-func _set_active_camera() -> void:
-	for player in get_tree().get_nodes_in_group("players"):
-		player.get_node("Camera2D").enabled = (
-				player.peer_id == PeerData.participants[spectating_index]
-		)
+func _spectate_player_at_index() -> void:
+	if _players.is_empty():
+		return
 
-	%SpectatingLabel.text = PeerData.peer_names.get(
-			PeerData.participants[spectating_index],
-			"username"
-	)
+	for player in _players:
+		var camera: Camera2D = player.get_node_or_null(_CAMERA_PATH)
+		if camera:
+			camera.enabled = player == _players[spectate_index]
+
+	var label: Label = _players[spectate_index].get_node_or_null(_NAME_LABEL_PATH)
+	_spectating_label.text = label.text if label else _UNKNOWN_NAME

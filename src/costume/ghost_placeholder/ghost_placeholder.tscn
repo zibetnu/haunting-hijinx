@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://nj5bu4130gy3"]
+
+[ext_resource type="PackedScene" uid="uid://brsavqoymiyc5" path="res://src/costume/costume.tscn" id="1_asxsw"]
+[ext_resource type="AnimationLibrary" uid="uid://shvg27dohcpa" path="res://src/costume/core.res" id="2_m2jy8"]
+[ext_resource type="Texture2D" uid="uid://e5vc2m7amjg2" path="res://assets/placeholder_sprite_wide.png" id="2_odqb1"]
+[ext_resource type="AnimationLibrary" uid="uid://danfci2b33wd5" path="res://src/costume/ghost_placeholder/ghost_placeholder.tres" id="3_4e4cu"]
+
+[node name="GhostPlaceholder" instance=ExtResource("1_asxsw")]
+
+[node name="AnimationPlayer" parent="Display" index="1"]
+libraries = {
+"core": ExtResource("2_m2jy8"),
+"ghost_placeholder": ExtResource("3_4e4cu")
+}
+
+[node name="Sprite2D" parent="Display" index="2"]
+texture = ExtResource("2_odqb1")
+hframes = 4
+vframes = 3
+frame = 7

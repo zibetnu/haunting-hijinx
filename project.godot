@@ -10,19 +10,18 @@ config_version=5
 
 [application]
 
-config/name="Ghost Game"
+config/name="Haunting Hijinks"
 run/main_scene="res://src/main.tscn"
-config/features=PackedStringArray("4.1", "GL Compatibility")
-config/icon="res://assets/icon.svg"
+config/features=PackedStringArray("4.2", "GL Compatibility")
 
 [autoload]
 
-ConnectionManager="*res://src/autoload/connection_manager/connection_manager.tscn"
 PeerData="*res://src/autoload/peer_data/peer_data.tscn"
 SceneChanger="*res://src/autoload/scene_changer/scene_changer.tscn"
 PauseManager="*res://src/autoload/pause_manager.gd"
 FullscreenToggle="*res://src/autoload/fullscreen_toggle.gd"
 CutsceneManager="*res://src/autoload/cutscene_manager.gd"
+SteamCallbacks="*res://src/autoload/steam_callbacks.gd"
 
 [display]
 
@@ -30,6 +29,12 @@ window/size/viewport_width=640
 window/size/viewport_height=360
 window/size/mode=4
 window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+window/stretch/scale_mode="integer"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
 
 [global]
 
@@ -55,24 +60,28 @@ move_left={
 "deadzone": 0.5,
 "events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":-1.0,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":97,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":13,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
 move_right={
 "deadzone": 0.5,
 "events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":1.0,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":100,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":14,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
 move_up={
 "deadzone": 0.5,
 "events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":-1.0,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"key_label":0,"unicode":119,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":11,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
 move_down={
 "deadzone": 0.5,
 "events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":1.0,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":115,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":12,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
 button_1={
@@ -125,12 +134,11 @@ toggle_fullscreen={
 2d_render/layer_4="Wall Caps"
 2d_render/layer_5="Props"
 2d_render/layer_6="Players"
-2d_render/layer_7="Beam Light"
 2d_physics/layer_1="obstacles"
 2d_physics/layer_2="interactables"
 2d_physics/layer_3="physical players"
 2d_physics/layer_4="spectral players"
-2d_physics/layer_5="invulnerable players"
+2d_physics/layer_5="grabbables"
 
 [rendering]
 

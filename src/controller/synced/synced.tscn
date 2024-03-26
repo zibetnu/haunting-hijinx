@@ -1,19 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbv2ondm7xhnv"]
+[gd_scene load_steps=4 format=3 uid="uid://cbv2ondm7xhnv"]
 
 [ext_resource type="Script" path="res://src/controller/synced/synced.gd" id="1_c5045"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_pbac4"]
-properties/0/path = NodePath(".:peer_id")
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_s4b3h"]
+properties/0/path = NodePath(".:input_authority")
 properties/0/spawn = true
-properties/0/sync = false
-properties/0/watch = true
-properties/1/path = NodePath(".:input_bits")
-properties/1/spawn = true
-properties/1/sync = false
-properties/1/watch = true
+properties/0/replication_mode = 2
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_pbac4"]
+properties/0/path = NodePath(".:_input_bits")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="Synced" type="Node2D"]
 script = ExtResource("1_c5045")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="AuthoritySynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_s4b3h")
+
+[node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_pbac4")

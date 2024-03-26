@@ -9,8 +9,13 @@ script = ExtResource("1_6yofi")
 lobby = ExtResource("2_nsjnt")
 main_menu = ExtResource("3_667vk")
 
+[node name="DisconnectedDialog" type="AcceptDialog" parent="."]
+title = ""
+size = Vector2i(216, 100)
+dialog_text = "Disconnected from server."
+
 [node name="SceneSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://src/level/main_floor/main_floor.tscn", "res://src/lobby/lobby.tscn", "res://src/main_menu/main_menu.tscn")
+_spawnable_scenes = PackedStringArray("res://src/level/main_floor/main_floor.tscn", "res://src/lobby/lobby.tscn")
 spawn_path = NodePath("../SceneContainer")
 spawn_limit = 1
 

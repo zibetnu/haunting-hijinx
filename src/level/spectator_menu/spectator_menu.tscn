@@ -45,7 +45,7 @@ custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
-text = "username"
+text = "name unknown"
 horizontal_alignment = 1
 
 [node name="RightButton" type="Button" parent="VBoxContainer/HBoxContainer"]

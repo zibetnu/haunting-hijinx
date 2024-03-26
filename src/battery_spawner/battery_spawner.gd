@@ -10,6 +10,8 @@ const MAX_BATTERY_SPAWN_ATTEMPTS = 100
 
 var _batteries_spawned := 0
 
+@onready var _position_checker := $PositionChecker
+
 
 func _get_random_battery_position() -> Vector2:
 	return Vector2(
@@ -19,21 +21,9 @@ func _get_random_battery_position() -> Vector2:
 
 
 func _is_position_clear(check_position: Vector2) -> bool:
-	var shape_rid := PhysicsServer2D.circle_shape_create()
-	var radius := 8
-	PhysicsServer2D.shape_set_data(shape_rid, radius)
-
-	var parameters := PhysicsShapeQueryParameters2D.new()
-	parameters.collide_with_areas = true
-	parameters.exclude += get_tree().get_nodes_in_group("aura_areas").map(
-			func(aura_area): return aura_area.get_rid()
-	)
-	parameters.shape_rid = shape_rid
-	parameters.transform = Transform2D(0, check_position)
-
-	var intersections := get_world_2d().direct_space_state.intersect_shape(parameters)
-	PhysicsServer2D.free_rid(shape_rid)
-	return intersections.size() == 0
+	_position_checker.position = check_position
+	_position_checker.force_shapecast_update()
+	return not _position_checker.is_colliding()
 
 
 func _on_timer_timeout() -> void:
@@ -42,10 +32,10 @@ func _on_timer_timeout() -> void:
 
 	var batteries_needed = 0
 	for flashlight in get_tree().get_nodes_in_group("flashlights"):
-		if not flashlight.is_battery_low:
+		if not flashlight.get("enabled"):
 			continue
 
-		if flashlight.player.health == 0:
+		if not flashlight.get("is_battery_low"):
 			continue
 
 		batteries_needed += 1

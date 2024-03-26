@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://31u5yaj3y8wu"]
-
-[ext_resource type="Script" path="res://src/player/ability/direction_setter/direction_setter.gd" id="1_pppv5"]
-
-[node name="DirectionSetter" type="Node2D"]
-script = ExtResource("1_pppv5")

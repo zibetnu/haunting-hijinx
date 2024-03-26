@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjuo2ufoah314"]
+
+[ext_resource type="Script" path="res://src/e_net_connector/e_net_connector.gd" id="1_8thq1"]
+
+[node name="ENetConnector" type="Node"]
+script = ExtResource("1_8thq1")

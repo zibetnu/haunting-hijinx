@@ -2,7 +2,7 @@ class_name SyncedController
 extends Controller
 
 
-# Use the first byte of input_bits to store booleans.
+# Use the first byte of _input_bits to store booleans.
 enum BitFlags {
 	BUTTON_1 = 1 << 0,
 	BUTTON_2 = 1 << 1,
@@ -15,54 +15,37 @@ const LOOK_OFFSET = 8
 const MOVE_OFFSET = 32
 const VECTOR_MASK = 0xff_ff_ff
 
-@export var local_controller: Controller
-@export var input_bits := 0:
+@export var controller: Controller
+@export var input_authority := 1:
 	set(value):
-		input_bits = value
-		button_1_pressed = bool(input_bits & BitFlags.BUTTON_1)
-		button_2_pressed = bool(input_bits & BitFlags.BUTTON_2)
+		input_authority = value
+		$InputSynchronizer.set_multiplayer_authority(value)
+
+var _input_bits := 0:
+	set(value):
+		_input_bits = value
+		button_1 = bool(_input_bits & BitFlags.BUTTON_1)
+		button_2 = bool(_input_bits & BitFlags.BUTTON_2)
 		look_vector = _unserialize_vector(
-				(input_bits & (VECTOR_MASK << LOOK_OFFSET)) >> LOOK_OFFSET
+				(_input_bits & (VECTOR_MASK << LOOK_OFFSET)) >> LOOK_OFFSET
 		)
 		move_vector = _unserialize_vector(
-				(input_bits & (VECTOR_MASK << MOVE_OFFSET)) >> MOVE_OFFSET
+				(_input_bits & (VECTOR_MASK << MOVE_OFFSET)) >> MOVE_OFFSET
 		)
-
-@export var peer_id := 1:
-	set(value):
-		peer_id = value
-		set_multiplayer_authority(value)
-		if _is_ready:
-			set_process(_is_authority())
-
-var _is_ready := false
+		input_handled.emit()
 
 
 func _ready() -> void:
-	set_process(_is_authority())
-
-	# Get rid of the local controller if only remote input matters.
-	if not _is_authority():
-		local_controller.queue_free()
-
-	# Only the server needs to know about the server player's input.
-	if multiplayer.is_server():
-		$MultiplayerSynchronizer.public_visibility = false
-
-	_is_ready = true
+	controller.input_handled.connect(_on_controller_input_handled)
 
 
-func _process(_delta: float) -> void:
-	var new_input_bits = 0
-	if local_controller.button_1_pressed:
-		new_input_bits |= BitFlags.BUTTON_1
+func force_handle_input() -> void:
+	if controller:
+		controller.force_handle_input()
 
-	if local_controller.button_2_pressed:
-		new_input_bits |= BitFlags.BUTTON_2
 
-	new_input_bits |= _serialize_vector(local_controller.look_vector) << LOOK_OFFSET
-	new_input_bits |= _serialize_vector(local_controller.move_vector) << MOVE_OFFSET
-	input_bits = new_input_bits
+func set_input_authority(id: int) -> void:
+	input_authority = id
 
 
 func _serialize_vector(vector: Vector2) -> int:
@@ -81,10 +64,6 @@ func _serialize_vector(vector: Vector2) -> int:
 	return serialized_vector
 
 
-func _is_authority() -> bool:
-	return get_multiplayer_authority() == multiplayer.get_unique_id()
-
-
 func _unserialize_vector(serialized_vector: int) -> Vector2:
 	var unserialized_degrees = float(serialized_vector & 0xff_ff) / ANGLE_MULTIPLIER
 	if unserialized_degrees > 180:
@@ -94,3 +73,19 @@ func _unserialize_vector(serialized_vector: int) -> Vector2:
 	var unserialized_vector := Vector2(unserialized_length, 0)
 
 	return unserialized_vector.rotated(deg_to_rad(unserialized_degrees))
+
+
+func _on_controller_input_handled() -> void:
+	if not $InputSynchronizer.is_multiplayer_authority():
+		return
+
+	var new_input_bits = 0
+	if controller.button_1:
+		new_input_bits |= BitFlags.BUTTON_1
+
+	if controller.button_2:
+		new_input_bits |= BitFlags.BUTTON_2
+
+	new_input_bits |= _serialize_vector(controller.look_vector) << LOOK_OFFSET
+	new_input_bits |= _serialize_vector(controller.move_vector) << MOVE_OFFSET
+	_input_bits = new_input_bits

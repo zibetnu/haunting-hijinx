@@ -4,6 +4,8 @@ extends Node
 @export var lobby: PackedScene
 @export var main_menu: PackedScene
 
+@onready var disconnected_dialog: AcceptDialog = $DisconnectedDialog
+
 
 func _ready() -> void:
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
@@ -34,4 +36,6 @@ func remove_scene() -> void:
 
 
 func _on_server_disconnected() -> void:
+	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
+	disconnected_dialog.popup_centered()
 	change_scene_to_packed(main_menu)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://gxh15sde0me5"]
+[gd_scene load_steps=8 format=3 uid="uid://gxh15sde0me5"]
 
 [ext_resource type="Script" path="res://src/level/level.gd" id="1_el04s"]
-[ext_resource type="PackedScene" uid="uid://grxm3658ukjj" path="res://src/battery_spawner/battery_spawner.tscn" id="2_00csm"]
+[ext_resource type="PackedScene" uid="uid://vl432076bm8p" path="res://src/level/steam_lobby_chat_update/steam_lobby_chat_update.tscn" id="2_acesl"]
+[ext_resource type="PackedScene" uid="uid://grxm3658ukjj" path="res://src/battery_spawner/battery_spawner.tscn" id="2_d8ks1"]
 [ext_resource type="PackedScene" uid="uid://chog7qk0d8wy7" path="res://src/timer_label/timer_label.tscn" id="2_tx202"]
 [ext_resource type="PackedScene" uid="uid://7wne64wo1epb" path="res://src/counting_spawner/counting_spawner.tscn" id="3_xxci0"]
 [ext_resource type="PackedScene" uid="uid://ojjy8keargbf" path="res://src/ping_label/ping_label.tscn" id="5_ijd43"]
@@ -9,14 +10,12 @@
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_63iby"]
 properties/0/path = NodePath("CanvasLayer/EndLabel:text")
 properties/0/spawn = true
-properties/0/sync = false
-properties/0/watch = true
+properties/0/replication_mode = 2
 properties/1/path = NodePath("CanvasLayer/EndLabel:visible")
 properties/1/spawn = true
-properties/1/sync = false
-properties/1/watch = true
+properties/1/replication_mode = 2
 
-[node name="Level" type="Node2D" groups=["pause_sync"]]
+[node name="Level" type="Node2D" groups=["levels", "pause_sync"]]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_el04s")
@@ -26,7 +25,9 @@ wait_time = 300.0
 one_shot = true
 autostart = true
 
-[node name="BatterySpawner" parent="." node_paths=PackedStringArray("spawn_root") instance=ExtResource("2_00csm")]
+[node name="SteamLobbyChatUpdate" parent="." instance=ExtResource("2_acesl")]
+
+[node name="BatterySpawner" parent="." node_paths=PackedStringArray("spawn_root") instance=ExtResource("2_d8ks1")]
 spawn_root = NodePath("../SpawnRoot")
 
 [node name="CameraLimits" type="Node2D" parent="."]
@@ -40,7 +41,7 @@ position = Vector2(640, 360)
 y_sort_enabled = true
 
 [node name="CountingSpawner" parent="." instance=ExtResource("3_xxci0")]
-_spawnable_scenes = PackedStringArray("res://src/player/ghost.tscn", "res://src/player/hunter.tscn", "res://src/drain_area/drain_area.tscn", "res://src/item/battery/battery.tscn")
+_spawnable_scenes = PackedStringArray("res://src/ghost/ghost.tscn", "res://src/hunter/hunter.tscn", "res://src/summon/drain_area/drain_area.tscn", "res://src/item/battery/battery.tscn")
 spawn_path = NodePath("../SpawnRoot")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
@@ -57,9 +58,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -101.0
-offset_top = -24.0
+offset_top = -22.5
 offset_right = 101.0
-offset_bottom = 24.0
+offset_bottom = 22.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -75,6 +76,7 @@ anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -16.0
 offset_right = 16.0
+offset_bottom = 23.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -84,13 +86,15 @@ horizontal_alignment = 1
 timer = NodePath("../../MatchTimer")
 
 [node name="PingLabel" parent="CanvasLayer" instance=ExtResource("5_ijd43")]
-offset_left = 5.0
-offset_top = 336.0
-offset_right = 42.0
-offset_bottom = 362.0
+modulate = Color(1, 1, 1, 0.498039)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 37.0
+grow_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
-text = "0 ms"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.0588235, 0.0588235, 0.0588235, 1)

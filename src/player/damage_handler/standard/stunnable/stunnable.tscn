@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://2hyqex1r6vhj"]
-
-[ext_resource type="Script" path="res://src/player/damage_handler/standard/stunnable/stunnable.gd" id="1_ohh1d"]
-
-[node name="Stunnable" type="Node"]
-script = ExtResource("1_ohh1d")

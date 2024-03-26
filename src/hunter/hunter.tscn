@@ -1,0 +1,408 @@
+[gd_scene load_steps=40 format=3 uid="uid://ccvsw508kh4ot"]
+
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
+[ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
+[ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_uvtrm"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="2_yqkoe"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="3_ocdoo"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="4_x2w3t"]
+[ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="5_uqurr"]
+[ext_resource type="PackedScene" uid="uid://gvf2peg6yuns" path="res://src/controller/unpause_force/unpause_force.tscn" id="6_ujhjn"]
+[ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="7_lf1vk"]
+[ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="8_dmlm5"]
+[ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="9_muve1"]
+[ext_resource type="PackedScene" uid="uid://dc3f3sy1vso5f" path="res://src/group_bool/group_bool.tscn" id="9_n4b8t"]
+[ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/move/move.tscn" id="9_rpftm"]
+[ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="10_3bo02"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="12_y0078"]
+[ext_resource type="PackedScene" uid="uid://c6w7dk0uahxnu" path="res://src/controller/anti_axis_drift/anti_axis_drift.tscn" id="13_xufeu"]
+[ext_resource type="PackedScene" uid="uid://cy4qrm44icmyy" path="res://src/flashlight/flashlight.tscn" id="15_hljm8"]
+[ext_resource type="PackedScene" uid="uid://cssdkhs4cty5c" path="res://src/costume/hunter_placeholder/hunter_placeholder.tscn" id="19_fj04q"]
+[ext_resource type="PackedScene" uid="uid://b4i2arqquha56" path="res://src/revivable/revivable.tscn" id="23_d234k"]
+[ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="27_qehgg"]
+[ext_resource type="PackedScene" uid="uid://djs1c1w30m8gp" path="res://src/alert/alert.tscn" id="28_bjj70"]
+[ext_resource type="PackedScene" uid="uid://y03qjvt68tjj" path="res://src/aura_sense/aura_sense.tscn" id="28_dd2t8"]
+[ext_resource type="PackedScene" uid="uid://j7t8go4if5di" path="res://src/grabbable/grabbable.tscn" id="28_gvlgf"]
+[ext_resource type="PackedScene" uid="uid://cpvs73t8l3h88" path="res://src/weak_to/weak_to.tscn" id="30_dc3ty"]
+[ext_resource type="PackedScene" uid="uid://gh0mk0t85f13" path="res://src/battery_alert/battery_alert.tscn" id="31_vp1ot"]
+[ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/auto_texture_progress_bar/auto_texture_progress_bar.tscn" id="32_vdk32"]
+[ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="33_a7fw2"]
+[ext_resource type="PackedScene" uid="uid://dsccl51pqvbue" path="res://src/peer_process_mode/peer_process_mode.tscn" id="43_rsnb5"]
+[ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/peer_visibility_filter/peer_visibility_filter.tscn" id="44_mvfu7"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hflh2"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vawb0"]
+radius = 8.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2bhal"]
+properties/0/path = NodePath(".:limit_left")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:limit_top")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:limit_right")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:limit_bottom")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+
+[sub_resource type="Animation" id="Animation_bwnbh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_syg7v"]
+resource_name = "invulnerable"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.701961)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_id0td"]
+_data = {
+"RESET": SubResource("Animation_bwnbh"),
+"invulnerable": SubResource("Animation_syg7v")
+}
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_fjbw1"]
+properties/0/path = NodePath(".:current_animation")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[sub_resource type="Gradient" id="Gradient_tkh6d"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xocc6"]
+gradient = SubResource("Gradient_tkh6d")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_isui6"]
+properties/0/path = NodePath(".:text")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[node name="Hunter" type="CharacterBody2D" groups=["hunters", "players"]]
+collision_layer = 4
+collision_mask = 5
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_hflh2")
+
+[node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_uvtrm")]
+nodes = [NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../AuraSense"), NodePath("../DamageSignals"), NodePath("../Grabbable"), NodePath("../YSort/Flashlight/Behavior"), NodePath("../YSort/HunterPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar/Behavior")]
+
+[node name="GhostPeerID" parent="." groups=["ghost_peer_ids"] instance=ExtResource("1_fx0g1")]
+
+[node name="PeerID" parent="." instance=ExtResource("1_fx0g1")]
+unique_name_in_owner = true
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("1_0xkip")
+
+[node name="Base" type="Node" parent="StateChart"]
+script = ExtResource("2_yqkoe")
+initial_state = NodePath("Alive")
+
+[node name="Dead" type="Node" parent="StateChart/Base"]
+script = ExtResource("3_ocdoo")
+
+[node name="Revived" type="Node" parent="StateChart/Base/Dead"]
+script = ExtResource("4_x2w3t")
+to = NodePath("../../Alive")
+event = &"revived"
+
+[node name="IsDead" parent="StateChart/Base/Dead" groups=["hunter_is_deads"] instance=ExtResource("9_n4b8t")]
+group = &"levels"
+
+[node name="Alive" type="Node" parent="StateChart/Base"]
+script = ExtResource("12_y0078")
+
+[node name="Movement" type="Node" parent="StateChart/Base/Alive"]
+script = ExtResource("2_yqkoe")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/Base/Alive/Movement"]
+script = ExtResource("3_ocdoo")
+
+[node name="MoveStarted" type="Node" parent="StateChart/Base/Alive/Movement/Idle"]
+script = ExtResource("4_x2w3t")
+to = NodePath("../../Move")
+event = &"move_started"
+
+[node name="Move" type="Node" parent="StateChart/Base/Alive/Movement"]
+script = ExtResource("3_ocdoo")
+
+[node name="MoveStopped" type="Node" parent="StateChart/Base/Alive/Movement/Move"]
+script = ExtResource("4_x2w3t")
+to = NodePath("../../Idle")
+event = &"move_stopped"
+
+[node name="Move" parent="StateChart/Base/Alive/Movement/Move" node_paths=PackedStringArray("character") instance=ExtResource("9_rpftm")]
+character = NodePath("../../../../../..")
+move_speed = 74.0
+manual_process = true
+
+[node name="Vulnerability" type="Node" parent="StateChart/Base/Alive"]
+script = ExtResource("2_yqkoe")
+initial_state = NodePath("Invulnerable")
+
+[node name="Invulnerable" type="Node" parent="StateChart/Base/Alive/Vulnerability"]
+script = ExtResource("3_ocdoo")
+
+[node name="TimedOut" type="Node" parent="StateChart/Base/Alive/Vulnerability/Invulnerable"]
+script = ExtResource("4_x2w3t")
+to = NodePath("../../Vulnerable")
+delay_seconds = 4.0
+
+[node name="Vulnerable" type="Node" parent="StateChart/Base/Alive/Vulnerability"]
+script = ExtResource("3_ocdoo")
+
+[node name="Died" type="Node" parent="StateChart/Base/Alive/Vulnerability/Vulnerable"]
+script = ExtResource("4_x2w3t")
+to = NodePath("../../../../Dead")
+event = &"died"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.99, 0.99)
+shape = SubResource("CircleShape2D_vawb0")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+enabled = false
+limit_left = 0
+limit_top = 0
+limit_right = 6400
+limit_bottom = 6400
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Camera2D"]
+replication_config = SubResource("SceneReplicationConfig_2bhal")
+
+[node name="Synced" parent="." node_paths=PackedStringArray("controller") instance=ExtResource("5_uqurr")]
+process_mode = 1
+controller = NodePath("UnpauseForce")
+
+[node name="UnpauseForce" parent="Synced" node_paths=PackedStringArray("controller") instance=ExtResource("6_ujhjn")]
+controller = NodePath("AntiButtonSpam")
+
+[node name="AntiButtonSpam" parent="Synced/UnpauseForce" node_paths=PackedStringArray("controller") instance=ExtResource("7_lf1vk")]
+controller = NodePath("AntiAxisDrift")
+
+[node name="AntiAxisDrift" parent="Synced/UnpauseForce/AntiButtonSpam" node_paths=PackedStringArray("controller") instance=ExtResource("13_xufeu")]
+controller = NodePath("Composite")
+
+[node name="Composite" parent="Synced/UnpauseForce/AntiButtonSpam/AntiAxisDrift" node_paths=PackedStringArray("controller_1", "controller_2") instance=ExtResource("8_dmlm5")]
+controller_1 = NodePath("Joypad")
+controller_2 = NodePath("KeyboardAndMouse")
+
+[node name="Joypad" parent="Synced/UnpauseForce/AntiButtonSpam/AntiAxisDrift/Composite" instance=ExtResource("9_muve1")]
+
+[node name="KeyboardAndMouse" parent="Synced/UnpauseForce/AntiButtonSpam/AntiAxisDrift/Composite" instance=ExtResource("10_3bo02")]
+
+[node name="AuraSense" parent="." instance=ExtResource("28_dd2t8")]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AuraSense"]
+shape = SubResource("CircleShape2D_vawb0")
+
+[node name="DamageSignals" parent="." instance=ExtResource("27_qehgg")]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageSignals"]
+shape = SubResource("CircleShape2D_vawb0")
+
+[node name="Revivable" parent="DamageSignals" instance=ExtResource("23_d234k")]
+enabled = false
+revives_with = 1
+
+[node name="WeakTo" parent="DamageSignals" instance=ExtResource("30_dc3ty")]
+weak_to = 2
+
+[node name="Grabbable" parent="." instance=ExtResource("28_gvlgf")]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grabbable"]
+shape = SubResource("CircleShape2D_vawb0")
+
+[node name="YSort" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Flashlight" parent="YSort" instance=ExtResource("15_hljm8")]
+
+[node name="HunterPlaceholder" parent="YSort" instance=ExtResource("19_fj04q")]
+
+[node name="InvulnerableAnimationPlayer" type="AnimationPlayer" parent="YSort/HunterPlaceholder/Display" index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_id0td")
+}
+speed_scale = 2.0
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer"]
+replication_config = SubResource("SceneReplicationConfig_fjbw1")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.5
+range_item_cull_mask = 33
+texture = SubResource("GradientTexture2D_xocc6")
+height = 16.0
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../IgnoreCanvasModulate/FollowPlayer")
+
+[node name="IgnoreCanvasModulate" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="FollowPlayer" type="Node2D" parent="IgnoreCanvasModulate"]
+
+[node name="NameLabel" type="Label" parent="IgnoreCanvasModulate/FollowPlayer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.501961)
+z_index = 1
+offset_left = -84.0
+offset_top = -50.0
+offset_right = 84.0
+offset_bottom = -24.0
+text = "peer name"
+horizontal_alignment = 1
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="IgnoreCanvasModulate/FollowPlayer/NameLabel"]
+replication_config = SubResource("SceneReplicationConfig_isui6")
+
+[node name="NotificationContainer" type="HBoxContainer" parent="IgnoreCanvasModulate/FollowPlayer"]
+offset_left = -32.0
+offset_top = -42.0
+offset_right = 32.0
+offset_bottom = -26.0
+alignment = 1
+
+[node name="ReviveBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("32_vdk32")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+fill_mode = 3
+texture_under = ExtResource("33_a7fw2")
+texture_progress = ExtResource("33_a7fw2")
+tint_under = Color(1, 1, 1, 0.247059)
+
+[node name="Behavior" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" index="1" node_paths=PackedStringArray("source_node")]
+source_node = NodePath("../../../../../DamageSignals/Revivable")
+value_variable = "progress"
+max_variable = "max_progress"
+
+[node name="Alert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("28_bjj70")]
+layout_mode = 2
+
+[node name="PeerVisibilityFilter" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer" index="0" instance=ExtResource("44_mvfu7")]
+secondary_allow_in_filter = true
+
+[node name="PeerProcessMode" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" instance=ExtResource("43_rsnb5")]
+secondary_include = true
+
+[node name="BatteryAlert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("31_vp1ot")]
+layout_mode = 2
+
+[node name="PeerVisibilityFilter" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer" index="0" instance=ExtResource("44_mvfu7")]
+
+[connection signal="changed" from="GhostPeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer/PeerVisibilityFilter" method="set_secondary_peer_id"]
+[connection signal="changed" from="GhostPeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/PeerProcessMode" method="set_secondary_peer_id"]
+[connection signal="changed" from="PeerID" to="Synced" method="set_input_authority"]
+[connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="set_peer_id"]
+[connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer/PeerVisibilityFilter" method="set_primary_peer_id"]
+[connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/PeerProcessMode" method="set_primary_peer_id"]
+[connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer/PeerVisibilityFilter" method="set_primary_peer_id"]
+[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="hide"]
+[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D" method="show"]
+[connection signal="changed_to_local" from="PeerID" to="Camera2D" method="set_enabled" binds= [true]]
+[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="show"]
+[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D" method="show"]
+[connection signal="changed_to_remote" from="PeerID" to="Camera2D" method="set_enabled" binds= [false]]
+[connection signal="state_entered" from="StateChart/Base/Dead" to="StateChart/Base/Dead/IsDead" method="set_true"]
+[connection signal="state_entered" from="StateChart/Base/Dead" to="DamageSignals/Revivable" method="enable"]
+[connection signal="state_entered" from="StateChart/Base/Dead" to="YSort/Flashlight/Behavior" method="disable"]
+[connection signal="state_entered" from="StateChart/Base/Dead" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" method="show"]
+[connection signal="state_entered" from="StateChart/Base/Dead" to="CollisionShape2D" method="set_disabled" flags=3 binds= [true]]
+[connection signal="state_entered" from="StateChart/Base/Dead" to="Grabbable" method="set_monitorable" flags=3 binds= [false]]
+[connection signal="state_entered" from="StateChart/Base/Dead" to="YSort/HunterPlaceholder/Behavior" method="set_animation_name" binds= ["dead"]]
+[connection signal="state_exited" from="StateChart/Base/Dead" to="StateChart/Base/Dead/IsDead" method="set_false"]
+[connection signal="state_exited" from="StateChart/Base/Dead" to="DamageSignals/Revivable" method="disable"]
+[connection signal="state_exited" from="StateChart/Base/Dead" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" method="hide"]
+[connection signal="state_exited" from="StateChart/Base/Dead" to="CollisionShape2D" method="set_disabled" flags=3 binds= [false]]
+[connection signal="state_entered" from="StateChart/Base/Alive" to="Synced" method="force_emit_move_vector_signals"]
+[connection signal="state_entered" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior" method="enable"]
+[connection signal="state_exited" from="StateChart/Base/Alive" to="YSort/Flashlight/Behavior" method="disable"]
+[connection signal="state_entered" from="StateChart/Base/Alive/Movement/Idle" to="YSort/HunterPlaceholder/Behavior" method="set_animation_name" binds= ["idle"]]
+[connection signal="state_entered" from="StateChart/Base/Alive/Movement/Move" to="YSort/HunterPlaceholder/Behavior" method="set_animation_name" binds= [&"move"]]
+[connection signal="state_physics_processing" from="StateChart/Base/Alive/Movement/Move" to="StateChart/Base/Alive/Movement/Move/Move" method="manual_physics_process"]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="DamageSignals" method="set_monitorable" flags=3 binds= [false]]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="Grabbable" method="set_monitorable" flags=3 binds= [false]]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer" method="play" binds= [&"invulnerable"]]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="DamageSignals" method="set_monitorable" flags=3 binds= [true]]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="Grabbable" method="set_monitorable" flags=3 binds= [true]]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer" method="play" binds= [&"RESET"]]
+[connection signal="button_1_changed" from="Synced" to="YSort/Flashlight/Behavior" method="set_powered"]
+[connection signal="button_1_pressed" from="Synced" to="StateChart" method="send_event" binds= [&"button_1_pressed"]]
+[connection signal="button_1_released" from="Synced" to="StateChart" method="send_event" binds= [&"button_1_released"]]
+[connection signal="button_2_pressed" from="Synced" to="StateChart" method="send_event" binds= [&"button_2_pressed"]]
+[connection signal="button_2_released" from="Synced" to="StateChart" method="send_event" binds= [&"button_2_released"]]
+[connection signal="look_vector_changed" from="Synced" to="YSort/Flashlight/Behavior" method="set_target_rotation_from_vector"]
+[connection signal="move_started" from="Synced" to="StateChart" method="send_event" binds= [&"move_started"]]
+[connection signal="move_stopped" from="Synced" to="StateChart" method="send_event" binds= [&"move_stopped"]]
+[connection signal="move_vector_changed" from="Synced" to="StateChart/Base/Alive/Movement/Move/Move" method="set_move_vector"]
+[connection signal="sensed_intensity_changed" from="AuraSense" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_alert_level_from_int"]
+[connection signal="damaged_by" from="DamageSignals" to="DamageSignals/Revivable" method="take_damage"]
+[connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
+[connection signal="revived" from="DamageSignals/Revivable" to="StateChart" method="send_event" binds= [&"revived"]]
+[connection signal="revived" from="DamageSignals/Revivable" to="YSort/Flashlight/Behavior" method="set_battery_percentage" binds= [0.75]]
+[connection signal="damage_taken" from="DamageSignals/WeakTo" to="StateChart" method="send_event" binds= [&"died"]]
+[connection signal="grabbed" from="Grabbable" to="StateChart" method="send_event" binds= [&"died"]]
+[connection signal="battery_died" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead" flags=3]
+[connection signal="battery_died" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_battery_died"]]
+[connection signal="battery_lowed" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_low" flags=3]
+[connection signal="battery_lowed" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_battery_lowed"]]
+[connection signal="battery_undied" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_battery_undied"]]
+[connection signal="battery_unlowed" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_none" flags=3]
+[connection signal="battery_unlowed" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_battery_unlowed"]]
+[connection signal="flashlight_rotation_changed" from="YSort/Flashlight/Behavior" to="YSort/HunterPlaceholder/Behavior" method="set_direction_vector_from_angle"]
+[connection signal="powered_off" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_unpowered"]]
+[connection signal="powered_off" from="YSort/Flashlight/Behavior" to="StateChart/Base/Alive/Movement/Move/Move" method="set_move_speed" binds= [74.0]]
+[connection signal="powered_on" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_powered"]]
+[connection signal="powered_on" from="YSort/Flashlight/Behavior" to="StateChart/Base/Alive/Movement/Move/Move" method="set_move_speed" binds= [29.6]]
+[connection signal="powered_on_attempted" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead" flags=3]
+[connection signal="filter_ready" from="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer/PeerVisibilityFilter" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer" method="add_visibility_filter"]
+[connection signal="process_mode_updated" from="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/PeerProcessMode" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_process_mode"]
+[connection signal="filter_ready" from="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer/PeerVisibilityFilter" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer" method="add_visibility_filter"]
+
+[editable path="YSort/Flashlight"]
+[editable path="YSort/HunterPlaceholder"]
+[editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar"]
+[editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert"]
+[editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert"]

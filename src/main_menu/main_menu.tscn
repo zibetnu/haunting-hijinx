@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://civfmojof07gs"]
+[gd_scene load_steps=4 format=3 uid="uid://civfmojof07gs"]
 
 [ext_resource type="Script" path="res://src/main_menu/main_menu.gd" id="1_mjvxa"]
+[ext_resource type="PackedScene" uid="uid://bjuo2ufoah314" path="res://src/e_net_connector/e_net_connector.tscn" id="2_cmbr0"]
+[ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="3_53w45"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("first_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,8 +14,10 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_mjvxa")
+first_button = NodePath("SteamContainer/HostButton")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="ENetContainer" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -24,37 +28,139 @@ offset_bottom = 72.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HostButton" type="Button" parent="VBoxContainer"]
+[node name="IPText" type="LineEdit" parent="ENetContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_bottom = NodePath("../JoinButton")
-text = "Host"
-
-[node name="JoinButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-focus_neighbor_top = NodePath("../HostButton")
-focus_neighbor_bottom = NodePath("../IPText")
-text = "Join"
-
-[node name="IPText" type="TextEdit" parent="VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-focus_neighbor_top = NodePath("../JoinButton")
+focus_neighbor_top = NodePath("../QuitButton")
 focus_neighbor_bottom = NodePath("../PortText")
 focus_next = NodePath("../PortText")
+focus_previous = NodePath("../QuitButton")
 placeholder_text = "IP address (only for joining)"
 context_menu_enabled = false
-scroll_fit_content_height = true
 
-[node name="PortText" type="TextEdit" parent="VBoxContainer"]
+[node name="PortText" type="LineEdit" parent="ENetContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../IPText")
 focus_neighbor_bottom = NodePath("../HostButton")
+focus_next = NodePath("../HostButton")
 focus_previous = NodePath("../IPText")
 placeholder_text = "Port (for hosting and joining)"
 context_menu_enabled = false
-scroll_fit_content_height = true
 
-[connection signal="pressed" from="VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[node name="HostButton" type="Button" parent="ENetContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../PortText")
+focus_neighbor_bottom = NodePath("../JoinButton")
+focus_next = NodePath("../JoinButton")
+focus_previous = NodePath("../PortText")
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="ENetContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_top = NodePath("../HostButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+focus_next = NodePath("../QuitButton")
+focus_previous = NodePath("../HostButton")
+text = "Join"
+
+[node name="QuitButton" type="Button" parent="ENetContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../JoinButton")
+focus_neighbor_bottom = NodePath("../IPText")
+focus_next = NodePath("../IPText")
+focus_previous = NodePath("../JoinButton")
+text = "Quit"
+
+[node name="SteamContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -50.5
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HostButton" type="Button" parent="SteamContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../HBoxContainer/JoinButton")
+focus_next = NodePath("../HBoxContainer/JoinButton")
+focus_previous = NodePath("../QuitButton")
+text = "Host"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SteamContainer"]
+layout_mode = 2
+
+[node name="LobbyIDText" type="LineEdit" parent="SteamContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+focus_neighbor_top = NodePath("../../HostButton")
+focus_neighbor_right = NodePath("../JoinButton")
+focus_neighbor_bottom = NodePath("../../QuitButton")
+focus_next = NodePath("../JoinButton")
+focus_previous = NodePath("../../HostButton")
+placeholder_text = "Lobby ID (only for joining)"
+context_menu_enabled = false
+
+[node name="JoinButton" type="Button" parent="SteamContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../LobbyIDText")
+focus_neighbor_top = NodePath("../../HostButton")
+focus_neighbor_bottom = NodePath("../../QuitButton")
+focus_next = NodePath("../../QuitButton")
+focus_previous = NodePath("../../HostButton")
+text = "Join"
+
+[node name="QuitButton" type="Button" parent="SteamContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../HBoxContainer/JoinButton")
+focus_neighbor_bottom = NodePath("../HostButton")
+focus_next = NodePath("../HostButton")
+focus_previous = NodePath("../HBoxContainer/JoinButton")
+text = "Quit"
+
+[node name="ConnectingDialog" type="AcceptDialog" parent="."]
+title = ""
+size = Vector2i(203, 100)
+ok_button_text = "Cancel"
+dialog_text = "Attempting to connect..."
+
+[node name="NotifyDialog" type="AcceptDialog" parent="."]
+title = ""
+size = Vector2i(216, 100)
+
+[node name="ENetConnector" parent="." instance=ExtResource("2_cmbr0")]
+
+[node name="SteamConnector" parent="." instance=ExtResource("3_53w45")]
+
+[connection signal="address_loaded" from="." to="ENetContainer/IPText" method="set_text"]
+[connection signal="address_loaded" from="." to="ENetConnector" method="set_address"]
+[connection signal="port_string_loaded" from="." to="ENetContainer/PortText" method="set_text"]
+[connection signal="port_string_loaded" from="." to="ENetConnector" method="set_port_from_string"]
+[connection signal="text_changed" from="ENetContainer/IPText" to="ENetConnector" method="set_address"]
+[connection signal="text_changed" from="ENetContainer/PortText" to="ENetConnector" method="set_port_from_string"]
+[connection signal="pressed" from="ENetContainer/HostButton" to="ENetConnector" method="create_server"]
+[connection signal="pressed" from="ENetContainer/JoinButton" to="ENetConnector" method="create_client"]
+[connection signal="pressed" from="ENetContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="SteamContainer/HostButton" to="SteamConnector" method="create_lobby"]
+[connection signal="text_changed" from="SteamContainer/HBoxContainer/LobbyIDText" to="SteamConnector" method="set_join_lobby_id_from_string"]
+[connection signal="pressed" from="SteamContainer/HBoxContainer/JoinButton" to="SteamConnector" method="join_lobby"]
+[connection signal="pressed" from="SteamContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="canceled" from="ConnectingDialog" to="." method="cancel_connection_attempt"]
+[connection signal="confirmed" from="ConnectingDialog" to="." method="cancel_connection_attempt"]
+[connection signal="about_to_popup" from="NotifyDialog" to="ConnectingDialog" method="hide"]
+[connection signal="client_created" from="ENetConnector" to="." method="_on_client_created"]
+[connection signal="create_client_failed" from="ENetConnector" to="." method="notify_user" binds= ["Failed to create client."]]
+[connection signal="create_server_failed" from="ENetConnector" to="." method="notify_user" binds= ["Failed to create server."]]
+[connection signal="server_created" from="ENetConnector" to="." method="_on_server_created"]
+[connection signal="create_lobby_failed" from="SteamConnector" to="." method="notify_user" binds= ["Failed to create lobby."]]
+[connection signal="join_lobby_failed" from="SteamConnector" to="." method="notify_user" binds= ["Failed to join lobby."]]
+[connection signal="lobby_created" from="SteamConnector" to="." method="_on_server_created"]
+[connection signal="lobby_joined" from="SteamConnector" to="." method="_on_lobby_joined"]

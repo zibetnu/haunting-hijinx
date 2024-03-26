@@ -15,8 +15,8 @@ func force_handle_input() -> void:
 func _on_controller_input_handled() -> void:
 	move_vector = controller.move_vector
 	look_vector = controller.look_vector
-	button_1_pressed = controller.button_1_pressed
-	button_2_pressed = controller.button_2_pressed
+	button_1 = controller.button_1
+	button_2 = controller.button_2
 	input_handled.emit()
 
 

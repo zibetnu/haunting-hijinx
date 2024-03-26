@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://myko8836tn6o"]
-
-[ext_resource type="Script" path="res://src/rotation_to_vector/rotation_to_vector.gd" id="1_jw88x"]
-
-[node name="RotationToVector" type="Node"]
-script = ExtResource("1_jw88x")

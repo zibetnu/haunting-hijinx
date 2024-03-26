@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://vl432076bm8p"]
+
+[ext_resource type="Script" path="res://src/level/steam_lobby_chat_update/steam_lobby_chat_update.gd" id="1_is3mb"]
+
+[node name="SteamLobbyChatUpdate" type="Node"]
+script = ExtResource("1_is3mb")

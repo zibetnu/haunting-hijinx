@@ -1,0 +1,663 @@
+[gd_scene load_steps=50 format=3 uid="uid://8qaswvkeb8qd"]
+
+[ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/peer_visibility_filter/peer_visibility_filter.tscn" id="1_0yuv7"]
+[ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
+[ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="2_bh3m0"]
+[ext_resource type="PackedScene" uid="uid://bxooivyeej01k" path="res://src/summon/summon.tscn" id="3_26ncu"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_wp1tu"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_74yim"]
+[ext_resource type="PackedScene" uid="uid://bsgx1owl3cxou" path="res://src/grab_cutscene/grab_cutscene.tscn" id="4_qoosa"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_6yps6"]
+[ext_resource type="PackedScene" uid="uid://beosdquy62xr4" path="res://src/call_holder/call_holder.tscn" id="5_s7auc"]
+[ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="5_xwsa3"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="6_3dmdv"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_il0ju"]
+[ext_resource type="PackedScene" uid="uid://gvf2peg6yuns" path="res://src/controller/unpause_force/unpause_force.tscn" id="6_wi10c"]
+[ext_resource type="PackedScene" uid="uid://ca2ymkyj3cv7e" path="res://src/translucent/translucent.tscn" id="7_bmx85"]
+[ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="7_ijrj0"]
+[ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="8_mynla"]
+[ext_resource type="PackedScene" uid="uid://y5w40m6pqbvt" path="res://src/peer_set_bool/peer_set_bool.tscn" id="8_yrkp2"]
+[ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="9_x08fo"]
+[ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="10_el6fq"]
+[ext_resource type="PackedScene" uid="uid://dhavwobkg4v8o" path="res://src/named_property_signals/named_property_signals.tscn" id="10_fwp7a"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="13_56q65"]
+[ext_resource type="PackedScene" uid="uid://nj5bu4130gy3" path="res://src/costume/ghost_placeholder/ghost_placeholder.tscn" id="13_arjsn"]
+[ext_resource type="PackedScene" uid="uid://ctcjena4x8kr0" path="res://src/aura/aura.tscn" id="13_e27lr"]
+[ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/auto_texture_progress_bar/auto_texture_progress_bar.tscn" id="15_nnx8e"]
+[ext_resource type="PackedScene" uid="uid://dc3f3sy1vso5f" path="res://src/group_bool/group_bool.tscn" id="16_q6wqq"]
+[ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/move/move.tscn" id="18_5mhrn"]
+[ext_resource type="PackedScene" uid="uid://bfhqyxu3iuptm" path="res://src/event_listener/event_listener.tscn" id="18_870ie"]
+[ext_resource type="PackedScene" uid="uid://c6w7dk0uahxnu" path="res://src/controller/anti_axis_drift/anti_axis_drift.tscn" id="23_rknrl"]
+[ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="29_1sq8w"]
+[ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_i4s33"]
+[ext_resource type="PackedScene" uid="uid://d4gb1ksm22wvh" path="res://src/damage_value_signal/damage_value_signal.tscn" id="34_617dy"]
+[ext_resource type="PackedScene" uid="uid://cpvs73t8l3h88" path="res://src/weak_to/weak_to.tscn" id="35_u2g7w"]
+[ext_resource type="PackedScene" uid="uid://dq7ts6lhskwyn" path="res://src/nodes_touched/nodes_touched.tscn" id="35_yndqj"]
+[ext_resource type="PackedScene" uid="uid://dpwfunjqyfike" path="res://src/health/health.tscn" id="38_arcfj"]
+[ext_resource type="PackedScene" uid="uid://oe321ygxttbo" path="res://src/grabber/grabber.tscn" id="38_ydesf"]
+[ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="40_1b387"]
+[ext_resource type="PackedScene" uid="uid://bfe2ycxqwnpxi" path="res://src/draw_circle/draw_circle.tscn" id="43_lxwi0"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hiprh"]
+properties/0/path = NodePath("Dummy Synchronizer:editor_description")
+properties/0/spawn = false
+properties/0/replication_mode = 0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hsnve"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[sub_resource type="Resource" id="Resource_knfa0"]
+script = ExtResource("13_56q65")
+expression = "drain_areas == 0"
+
+[sub_resource type="Resource" id="Resource_0r4f3"]
+script = ExtResource("13_56q65")
+expression = "drain_areas == 0"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xn3hr"]
+radius = 16.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bqubs"]
+properties/0/path = NodePath(".:limit_left")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:limit_top")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:limit_right")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:limit_bottom")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_51u44"]
+radius = 160.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m31g4"]
+radius = 96.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o7ptf"]
+radius = 17.0
+
+[sub_resource type="Gradient" id="Gradient_a05sb"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u72sc"]
+gradient = SubResource("Gradient_a05sb")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_rfelf"]
+properties/0/path = NodePath(".:text")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[node name="Ghost" type="CharacterBody2D" groups=["ghosts", "players"]]
+collision_layer = 8
+
+[node name="DummySynchronizer" type="MultiplayerSynchronizer" parent="."]
+editor_description = "https://github.com/godotengine/godot/issues/68508"
+replication_config = SubResource("SceneReplicationConfig_hiprh")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_hsnve")
+
+[node name="PeerVisibilityFilter" parent="MultiplayerSynchronizer" instance=ExtResource("1_0yuv7")]
+
+[node name="CallHolder" parent="MultiplayerSynchronizer/PeerVisibilityFilter" instance=ExtResource("5_s7auc")]
+
+[node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
+nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior")]
+
+[node name="GrabCutscene" parent="." instance=ExtResource("4_qoosa")]
+
+[node name="PeerID" parent="." groups=["ghost_peer_ids"] instance=ExtResource("2_bh3m0")]
+unique_name_in_owner = true
+
+[node name="GhostTranslucent" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_bmx85")]
+target = NodePath("..")
+
+[node name="GhostVisible" parent="." node_paths=PackedStringArray("node") instance=ExtResource("8_yrkp2")]
+is_local_peer = false
+node = NodePath("..")
+property_name = &"visible"
+
+[node name="Summon" parent="." instance=ExtResource("3_26ncu")]
+target_group = &"hunters"
+
+[node name="NamedPropertySignals" parent="Summon" instance=ExtResource("10_fwp7a")]
+emit_on_ready = true
+property_name = &"drain_areas"
+initial_property_value = [0]
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("3_wp1tu")
+
+[node name="Base" type="Node" parent="StateChart"]
+script = ExtResource("6_3dmdv")
+
+[node name="Behavior" type="Node" parent="StateChart/Base"]
+script = ExtResource("4_74yim")
+initial_state = NodePath("Alive")
+
+[node name="Dead" type="Node" parent="StateChart/Base/Behavior"]
+script = ExtResource("5_6yps6")
+
+[node name="IsDead" parent="StateChart/Base/Behavior/Dead" groups=["ghost_is_deads"] instance=ExtResource("16_q6wqq")]
+group = &"levels"
+
+[node name="Alive" type="Node" parent="StateChart/Base/Behavior"]
+script = ExtResource("4_74yim")
+initial_state = NodePath("Normal")
+
+[node name="Died" type="Node" parent="StateChart/Base/Behavior/Alive"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Dead")
+event = &"died"
+
+[node name="PanicStarted" type="Node" parent="StateChart/Base/Behavior/Alive"]
+script = ExtResource("6_il0ju")
+to = NodePath("../Panic")
+event = &"panic_started"
+
+[node name="Stunned" type="Node" parent="StateChart/Base/Behavior/Alive"]
+script = ExtResource("6_il0ju")
+to = NodePath("../Stun")
+event = &"stunned"
+
+[node name="Normal" type="Node" parent="StateChart/Base/Behavior/Alive"]
+script = ExtResource("5_6yps6")
+
+[node name="Button1Pressed" type="Node" parent="StateChart/Base/Behavior/Alive/Normal"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Sprint")
+event = &"button_1_pressed"
+
+[node name="Button2Pressed" type="Node" parent="StateChart/Base/Behavior/Alive/Normal"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Summon")
+event = &"button_2_pressed"
+guard = SubResource("Resource_knfa0")
+
+[node name="Grabbed" type="Node" parent="StateChart/Base/Behavior/Alive/Normal"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Grab")
+event = &"grabbed"
+
+[node name="MoveStarted" type="Node" parent="StateChart/Base/Behavior/Alive/Normal"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../../../Animation/Move")
+event = &"move_started"
+
+[node name="MoveStopped" type="Node" parent="StateChart/Base/Behavior/Alive/Normal"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../../../Animation/Idle")
+event = &"move_stopped"
+
+[node name="Damaged" parent="StateChart/Base/Behavior/Alive/Normal" instance=ExtResource("18_870ie")]
+listen_for_event = &"damaged"
+
+[node name="Move" parent="StateChart/Base/Behavior/Alive/Normal" node_paths=PackedStringArray("character") instance=ExtResource("18_5mhrn")]
+character = NodePath("../../../../../..")
+move_speed = 92.0
+manual_process = true
+
+[node name="Sprint" type="Node" parent="StateChart/Base/Behavior/Alive"]
+script = ExtResource("5_6yps6")
+
+[node name="Button1Released" type="Node" parent="StateChart/Base/Behavior/Alive/Sprint"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Normal")
+event = &"button_1_released"
+
+[node name="Button2Pressed" type="Node" parent="StateChart/Base/Behavior/Alive/Sprint"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Summon")
+event = &"button_2_pressed"
+guard = SubResource("Resource_0r4f3")
+
+[node name="Grabbed" type="Node" parent="StateChart/Base/Behavior/Alive/Sprint"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Grab")
+event = &"grabbed"
+
+[node name="MoveStarted" type="Node" parent="StateChart/Base/Behavior/Alive/Sprint"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../../../Animation/Sprint")
+event = &"move_started"
+
+[node name="MoveStopped" type="Node" parent="StateChart/Base/Behavior/Alive/Sprint"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../../../Animation/Idle")
+event = &"move_stopped"
+
+[node name="Damaged" parent="StateChart/Base/Behavior/Alive/Sprint" instance=ExtResource("18_870ie")]
+listen_for_event = &"damaged"
+
+[node name="Move" parent="StateChart/Base/Behavior/Alive/Sprint" node_paths=PackedStringArray("character") instance=ExtResource("18_5mhrn")]
+character = NodePath("../../../../../..")
+move_speed = 122.36
+manual_process = true
+
+[node name="Summon" type="Node" parent="StateChart/Base/Behavior/Alive"]
+script = ExtResource("5_6yps6")
+
+[node name="Button1Pressed" type="Node" parent="StateChart/Base/Behavior/Alive/Summon"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Sprint")
+event = &"button_1_pressed"
+
+[node name="Button2Released" type="Node" parent="StateChart/Base/Behavior/Alive/Summon"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Normal")
+event = &"button_2_released"
+
+[node name="Summoned" type="Node" parent="StateChart/Base/Behavior/Alive/Summon"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Normal")
+event = &"summoned"
+
+[node name="Damaged" parent="StateChart/Base/Behavior/Alive/Summon" instance=ExtResource("18_870ie")]
+listen_for_event = &"damaged"
+
+[node name="Stun" type="Node" parent="StateChart/Base/Behavior/Alive"]
+script = ExtResource("5_6yps6")
+
+[node name="PanicTimeout" type="Timer" parent="StateChart/Base/Behavior/Alive/Stun"]
+wait_time = 1.5
+one_shot = true
+
+[node name="Panic" type="Node" parent="StateChart/Base/Behavior/Alive"]
+script = ExtResource("5_6yps6")
+
+[node name="PanicEnded" type="Node" parent="StateChart/Base/Behavior/Alive/Panic"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Normal")
+event = &"panic_ended"
+
+[node name="Move" parent="StateChart/Base/Behavior/Alive/Panic" node_paths=PackedStringArray("character") instance=ExtResource("18_5mhrn")]
+character = NodePath("../../../../../..")
+move_speed = 152.72
+manual_process = true
+
+[node name="Damaged" parent="StateChart/Base/Behavior/Alive/Panic" instance=ExtResource("18_870ie")]
+editor_description = "Restarts timers when ghost is damaged."
+listen_for_event = &"damaged"
+
+[node name="HuntersTouched" parent="StateChart/Base/Behavior/Alive/Panic" instance=ExtResource("18_870ie")]
+editor_description = "Pauses timers and makes ghost visible when a hunter is touched."
+listen_for_event = &"hunters_touched"
+
+[node name="NoHuntersTouched" parent="StateChart/Base/Behavior/Alive/Panic" instance=ExtResource("18_870ie")]
+editor_description = "Unpauses and restarts timers when no hunters are touched."
+listen_for_event = &"no_hunters_touched"
+
+[node name="VisibleTimer" type="Timer" parent="StateChart/Base/Behavior/Alive/Panic"]
+editor_description = "Times how long the ghost should stay visible after something made it visible. Makes ghost invisible on timeout."
+wait_time = 0.5
+one_shot = true
+
+[node name="EndTimer" type="Timer" parent="StateChart/Base/Behavior/Alive/Panic"]
+editor_description = "Times how long the ghost should stay in panic. Makes ghost end panic on timeout."
+wait_time = 3.0
+
+[node name="Grab" type="Node" parent="StateChart/Base/Behavior/Alive"]
+script = ExtResource("5_6yps6")
+
+[node name="Animation" type="Node" parent="StateChart/Base"]
+script = ExtResource("4_74yim")
+initial_state = NodePath("Idle")
+
+[node name="Grabbed" type="Node" parent="StateChart/Base/Animation"]
+script = ExtResource("6_il0ju")
+to = NodePath("../Grab")
+event = &"grabbed"
+
+[node name="HealthZeroed" type="Node" parent="StateChart/Base/Animation"]
+script = ExtResource("6_il0ju")
+to = NodePath("../Dead")
+event = &"died"
+
+[node name="PanicStarted" type="Node" parent="StateChart/Base/Animation"]
+script = ExtResource("6_il0ju")
+to = NodePath("../Panic")
+event = &"panic_started"
+
+[node name="Stunned" type="Node" parent="StateChart/Base/Animation"]
+script = ExtResource("6_il0ju")
+to = NodePath("../Stun")
+event = &"stunned"
+
+[node name="SummonCharging" type="Node" parent="StateChart/Base/Animation"]
+script = ExtResource("6_il0ju")
+to = NodePath("../Summon")
+event = &"summon_charging"
+
+[node name="Dead" type="Node" parent="StateChart/Base/Animation"]
+script = ExtResource("5_6yps6")
+
+[node name="Idle" type="Node" parent="StateChart/Base/Animation"]
+script = ExtResource("5_6yps6")
+
+[node name="Move" type="Node" parent="StateChart/Base/Animation"]
+script = ExtResource("5_6yps6")
+
+[node name="Sprint" type="Node" parent="StateChart/Base/Animation"]
+script = ExtResource("5_6yps6")
+
+[node name="Summon" type="Node" parent="StateChart/Base/Animation"]
+script = ExtResource("5_6yps6")
+
+[node name="Stun" type="Node" parent="StateChart/Base/Animation"]
+script = ExtResource("5_6yps6")
+
+[node name="Panic" type="Node" parent="StateChart/Base/Animation"]
+script = ExtResource("5_6yps6")
+
+[node name="Grab" type="Node" parent="StateChart/Base/Animation"]
+script = ExtResource("5_6yps6")
+
+[node name="Visibility" type="Node" parent="StateChart/Base"]
+script = ExtResource("4_74yim")
+initial_state = NodePath("Invisibile")
+
+[node name="Invisibile" type="Node" parent="StateChart/Base/Visibility"]
+script = ExtResource("5_6yps6")
+
+[node name="InvisibilityEnded" type="Node" parent="StateChart/Base/Visibility/Invisibile"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Visibile")
+event = &"invisibility_ended"
+
+[node name="Damaged" type="Node" parent="StateChart/Base/Visibility/Invisibile"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Visibile")
+event = &"damaged"
+
+[node name="Visibile" type="Node" parent="StateChart/Base/Visibility"]
+script = ExtResource("5_6yps6")
+
+[node name="InvisibilityStarted" type="Node" parent="StateChart/Base/Visibility/Visibile"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Invisibile")
+event = &"invisibility_started"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.99, 0.99)
+shape = SubResource("CircleShape2D_xn3hr")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+enabled = false
+limit_left = 0
+limit_top = 0
+limit_right = 6400
+limit_bottom = 6400
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Camera2D"]
+replication_config = SubResource("SceneReplicationConfig_bqubs")
+
+[node name="Synced" parent="." node_paths=PackedStringArray("controller") instance=ExtResource("5_xwsa3")]
+process_mode = 1
+controller = NodePath("UnpauseForce")
+
+[node name="UnpauseForce" parent="Synced" node_paths=PackedStringArray("controller") instance=ExtResource("6_wi10c")]
+controller = NodePath("AntiButtonSpam")
+
+[node name="AntiButtonSpam" parent="Synced/UnpauseForce" node_paths=PackedStringArray("controller") instance=ExtResource("7_ijrj0")]
+controller = NodePath("AntiAxisDrift")
+
+[node name="AntiAxisDrift" parent="Synced/UnpauseForce/AntiButtonSpam" node_paths=PackedStringArray("controller") instance=ExtResource("23_rknrl")]
+controller = NodePath("Composite")
+
+[node name="Composite" parent="Synced/UnpauseForce/AntiButtonSpam/AntiAxisDrift" node_paths=PackedStringArray("controller_1", "controller_2") instance=ExtResource("8_mynla")]
+controller_1 = NodePath("Joypad")
+controller_2 = NodePath("KeyboardAndMouse")
+
+[node name="Joypad" parent="Synced/UnpauseForce/AntiButtonSpam/AntiAxisDrift/Composite" instance=ExtResource("9_x08fo")]
+
+[node name="KeyboardAndMouse" parent="Synced/UnpauseForce/AntiButtonSpam/AntiAxisDrift/Composite" instance=ExtResource("10_el6fq")]
+
+[node name="AuraLarge" parent="." instance=ExtResource("13_e27lr")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AuraLarge"]
+shape = SubResource("CircleShape2D_51u44")
+
+[node name="AuraSmall" parent="." instance=ExtResource("13_e27lr")]
+intensity = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AuraSmall"]
+shape = SubResource("CircleShape2D_m31g4")
+
+[node name="DamageSignals" parent="." instance=ExtResource("29_1sq8w")]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageSignals"]
+shape = SubResource("CircleShape2D_xn3hr")
+
+[node name="WeakTo" parent="DamageSignals" instance=ExtResource("35_u2g7w")]
+weak_to = 1
+
+[node name="DamageValueSignal" parent="DamageSignals/WeakTo" instance=ExtResource("34_617dy")]
+
+[node name="Health" parent="DamageSignals/WeakTo/DamageValueSignal" instance=ExtResource("38_arcfj")]
+
+[node name="Grabber" parent="." instance=ExtResource("38_ydesf")]
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grabber"]
+shape = SubResource("CircleShape2D_o7ptf")
+
+[node name="HuntersTouched" parent="." instance=ExtResource("35_yndqj")]
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+count_group = &"hunters"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HuntersTouched"]
+shape = SubResource("CircleShape2D_o7ptf")
+
+[node name="GhostPlaceholder" parent="." instance=ExtResource("13_arjsn")]
+position = Vector2(0, -8)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+range_item_cull_mask = 33
+texture = SubResource("GradientTexture2D_u72sc")
+height = 16.0
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../IgnoreCanvasModulate/FollowPlayer")
+
+[node name="IgnoreCanvasModulate" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="PeerSetBool" parent="IgnoreCanvasModulate" node_paths=PackedStringArray("node") instance=ExtResource("8_yrkp2")]
+is_local_peer = false
+node = NodePath("..")
+property_name = &"visible"
+
+[node name="FollowPlayer" type="Node2D" parent="IgnoreCanvasModulate"]
+
+[node name="AuraLargeCircle" parent="IgnoreCanvasModulate/FollowPlayer" instance=ExtResource("43_lxwi0")]
+color = Color(1, 1, 1, 0.247059)
+radius = 160.0
+
+[node name="AuraSmallCircle" parent="IgnoreCanvasModulate/FollowPlayer" instance=ExtResource("43_lxwi0")]
+color = Color(1, 1, 1, 0.247059)
+radius = 96.0
+
+[node name="NameLabel" type="Label" parent="IgnoreCanvasModulate/FollowPlayer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.501961)
+z_index = 1
+offset_left = -84.0
+offset_top = -50.0
+offset_right = 84.0
+offset_bottom = -24.0
+text = "peer name"
+horizontal_alignment = 1
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="IgnoreCanvasModulate/FollowPlayer/NameLabel"]
+replication_config = SubResource("SceneReplicationConfig_rfelf")
+
+[node name="NotificationContainer" type="HBoxContainer" parent="IgnoreCanvasModulate/FollowPlayer"]
+offset_left = -32.0
+offset_top = -42.0
+offset_right = 32.0
+offset_bottom = -26.0
+alignment = 1
+
+[node name="HealthBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("15_nnx8e")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+fill_mode = 3
+texture_under = ExtResource("40_1b387")
+texture_progress = ExtResource("40_1b387")
+tint_under = Color(1, 1, 1, 0.247059)
+
+[node name="Behavior" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" index="1" node_paths=PackedStringArray("source_node")]
+source_node = NodePath("../../../../../DamageSignals/WeakTo/DamageValueSignal/Health")
+value_variable = "health"
+max_variable = "max_health"
+
+[node name="SummonBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("15_nnx8e")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+texture_under = ExtResource("29_i4s33")
+texture_progress = ExtResource("29_i4s33")
+tint_under = Color(1, 1, 1, 0.247059)
+
+[node name="Behavior" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" index="1" node_paths=PackedStringArray("source_node")]
+source_node = NodePath("../../../../../Summon")
+value_variable = "charge"
+max_variable = "max_charge"
+
+[connection signal="synchronized" from="MultiplayerSynchronizer" to="MultiplayerSynchronizer/PeerVisibilityFilter/CallHolder" method="release"]
+[connection signal="filter_disabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="MultiplayerSynchronizer/PeerVisibilityFilter/CallHolder" method="hold"]
+[connection signal="filter_disabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="GhostTranslucent" method="disable_translucency"]
+[connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="GhostTranslucent" method="enable_translucency"]
+[connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="GhostVisible" method="set_value_false"]
+[connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="IgnoreCanvasModulate/PeerSetBool" method="set_value_false"]
+[connection signal="filter_ready" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="MultiplayerSynchronizer" method="add_visibility_filter"]
+[connection signal="call_released" from="MultiplayerSynchronizer/PeerVisibilityFilter/CallHolder" to="GhostVisible" method="set_value_true"]
+[connection signal="call_released" from="MultiplayerSynchronizer/PeerVisibilityFilter/CallHolder" to="IgnoreCanvasModulate/PeerSetBool" method="set_value_true"]
+[connection signal="cutscene_ended" from="GrabCutscene" to="StateChart" method="send_event" binds= [&"panic_started"]]
+[connection signal="changed" from="PeerID" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="set_primary_peer_id"]
+[connection signal="changed" from="PeerID" to="Synced" method="set_input_authority"]
+[connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="set_peer_id"]
+[connection signal="changed_to_local" from="PeerID" to="GhostVisible" method="set_is_local_peer_true"]
+[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/PeerSetBool" method="set_is_local_peer_true"]
+[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraLargeCircle" method="show"]
+[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraSmallCircle" method="show"]
+[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="hide"]
+[connection signal="changed_to_local" from="PeerID" to="Camera2D" method="set_enabled" binds= [true]]
+[connection signal="changed_to_remote" from="PeerID" to="GhostVisible" method="set_is_local_peer_false"]
+[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/PeerSetBool" method="set_is_local_peer_false"]
+[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraLargeCircle" method="hide"]
+[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraSmallCircle" method="hide"]
+[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="show"]
+[connection signal="changed_to_remote" from="PeerID" to="Camera2D" method="set_enabled" binds= [false]]
+[connection signal="area_count_changed" from="Summon" to="Summon/NamedPropertySignals" method="set_property_value"]
+[connection signal="summon_charging" from="Summon" to="StateChart" method="send_event" binds= [&"summon_charging"]]
+[connection signal="summoned" from="Summon" to="StateChart" method="send_event" binds= [&"summoned"]]
+[connection signal="property_changed" from="Summon/NamedPropertySignals" to="StateChart" method="set_expression_property" flags=3]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="StateChart/Base/Behavior/Dead/IsDead" method="set_true"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="DamageSignals" method="set_monitorable" flags=3 binds= [false]]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Dead" to="StateChart/Base/Behavior/Dead/IsDead" method="set_false"]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Dead" to="DamageSignals" method="set_monitorable" flags=3 binds= [true]]
+[connection signal="event_received" from="StateChart/Base/Behavior/Alive/Normal" to="StateChart/Base/Behavior/Alive/Normal/Damaged" method="receive_event"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Synced" method="force_emit_move_vector_signals"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Synced" method="force_emit_button_1_signals"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Synced" method="force_emit_button_2_signals"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="StateChart" method="send_event" binds= [&"invisibility_started"]]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Grabber" method="set_monitoring" flags=3 binds= [true]]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Normal" to="Grabber" method="set_monitoring" flags=3 binds= [false]]
+[connection signal="state_physics_processing" from="StateChart/Base/Behavior/Alive/Normal" to="StateChart/Base/Behavior/Alive/Normal/Move" method="manual_physics_process"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Normal/Damaged" to="StateChart" method="send_event" binds= [&"stunned"]]
+[connection signal="event_received" from="StateChart/Base/Behavior/Alive/Sprint" to="StateChart/Base/Behavior/Alive/Sprint/Damaged" method="receive_event"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Sprint" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Sprint" to="Grabber" method="set_monitoring" flags=3 binds= [true]]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Sprint" to="Grabber" method="set_monitoring" flags=3 binds= [false]]
+[connection signal="state_physics_processing" from="StateChart/Base/Behavior/Alive/Sprint" to="StateChart/Base/Behavior/Alive/Sprint/Move" method="manual_physics_process"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Sprint/Damaged" to="StateChart" method="send_event" binds= [&"stunned"]]
+[connection signal="event_received" from="StateChart/Base/Behavior/Alive/Summon" to="StateChart/Base/Behavior/Alive/Summon/Damaged" method="receive_event"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="start_charging"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="show"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="stop_charging"]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="release_charge"]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="hide"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Summon/Damaged" to="StateChart" method="send_event" binds= [&"stunned"]]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Stun" to="StateChart/Base/Behavior/Alive/Stun/PanicTimeout" method="start"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Stun" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="show"]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Stun" to="StateChart/Base/Behavior/Alive/Stun/PanicTimeout" method="stop"]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Stun" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="hide"]
+[connection signal="timeout" from="StateChart/Base/Behavior/Alive/Stun/PanicTimeout" to="StateChart" method="send_event" binds= [&"panic_started"]]
+[connection signal="event_received" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/Damaged" method="receive_event"]
+[connection signal="event_received" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/HuntersTouched" method="receive_event"]
+[connection signal="event_received" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/NoHuntersTouched" method="receive_event"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="start"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/EndTimer" method="start"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="show"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="set_paused" binds= [false]]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/EndTimer" method="set_paused" binds= [false]]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="HuntersTouched" method="set_monitoring" flags=3 binds= [true]]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="stop"]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/EndTimer" method="stop"]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="hide"]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="HuntersTouched" method="set_monitoring" flags=3 binds= [false]]
+[connection signal="state_physics_processing" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/Move" method="manual_physics_process"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/Damaged" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="start"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/Damaged" to="StateChart/Base/Behavior/Alive/Panic/EndTimer" method="start" binds= [1.33]]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/HuntersTouched" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/HuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="set_paused" binds= [true]]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/HuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/EndTimer" method="set_paused" binds= [true]]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/NoHuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="start"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/NoHuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="set_paused" binds= [false]]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/NoHuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/EndTimer" method="start" binds= [1.33]]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/NoHuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/EndTimer" method="set_paused" binds= [false]]
+[connection signal="timeout" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" to="StateChart" method="send_event" binds= [&"invisibility_started"]]
+[connection signal="timeout" from="StateChart/Base/Behavior/Alive/Panic/EndTimer" to="StateChart" method="send_event" binds= [&"panic_ended"]]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Grab" to="GrabCutscene" method="start_cutscene"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Grab" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Dead" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["dead"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Idle" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["idle"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Move" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["move"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Sprint" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["move"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Summon" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["idle"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Stun" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["stun"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Panic" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["panic"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Grab" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["move"]]
+[connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="enable"]
+[connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="disable"]
+[connection signal="button_1_pressed" from="Synced" to="StateChart" method="send_event" binds= [&"button_1_pressed"]]
+[connection signal="button_1_released" from="Synced" to="StateChart" method="send_event" binds= [&"button_1_released"]]
+[connection signal="button_2_pressed" from="Synced" to="StateChart" method="send_event" binds= [&"button_2_pressed"]]
+[connection signal="button_2_released" from="Synced" to="StateChart" method="send_event" binds= [&"button_2_released"]]
+[connection signal="move_started" from="Synced" to="StateChart" method="send_event" binds= [&"move_started"]]
+[connection signal="move_stopped" from="Synced" to="StateChart" method="send_event" binds= [&"move_stopped"]]
+[connection signal="move_vector_changed" from="Synced" to="StateChart/Base/Behavior/Alive/Normal/Move" method="set_move_vector"]
+[connection signal="move_vector_changed" from="Synced" to="StateChart/Base/Behavior/Alive/Sprint/Move" method="set_move_vector"]
+[connection signal="move_vector_changed" from="Synced" to="StateChart/Base/Behavior/Alive/Panic/Move" method="set_move_vector"]
+[connection signal="move_vector_changed" from="Synced" to="GhostPlaceholder/Behavior" method="set_direction_vector"]
+[connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
+[connection signal="damage_taken" from="DamageSignals/WeakTo" to="StateChart" method="send_event" binds= [&"damaged"]]
+[connection signal="damaged_by" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageValueSignal" method="take_damage"]
+[connection signal="damaged_by_amount" from="DamageSignals/WeakTo/DamageValueSignal" to="DamageSignals/WeakTo/DamageValueSignal/Health" method="subtract_health"]
+[connection signal="health_emptied" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="StateChart" method="send_event" binds= [&"died"]]
+[connection signal="grabbable_grabbed" from="Grabber" to="StateChart" method="send_event" binds= [&"grabbed"]]
+[connection signal="first_node_entered" from="HuntersTouched" to="StateChart" method="send_event" binds= [&"hunters_touched"]]
+[connection signal="last_node_exited" from="HuntersTouched" to="StateChart" method="send_event" binds= [&"no_hunters_touched"]]
+
+[editable path="GhostPlaceholder"]
+[editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar"]
+[editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar"]

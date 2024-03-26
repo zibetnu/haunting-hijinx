@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://crwq6sbjhom1j"]
-
-[ext_resource type="Script" path="res://src/player/ability/condition_transition/condition/composite/composite.gd" id="1_4wylr"]
-
-[node name="Composite" type="Node"]
-script = ExtResource("1_4wylr")
