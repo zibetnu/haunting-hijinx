@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://gxh15sde0me5"]
+[gd_scene load_steps=8 format=3 uid="uid://gxh15sde0me5"]
 
 [ext_resource type="Script" path="res://src/level/level.gd" id="1_el04s"]
+[ext_resource type="PackedScene" uid="uid://vl432076bm8p" path="res://src/level/steam_lobby_chat_update/steam_lobby_chat_update.tscn" id="2_acesl"]
 [ext_resource type="PackedScene" uid="uid://grxm3658ukjj" path="res://src/battery_spawner/battery_spawner.tscn" id="2_d8ks1"]
 [ext_resource type="PackedScene" uid="uid://chog7qk0d8wy7" path="res://src/timer_label/timer_label.tscn" id="2_tx202"]
 [ext_resource type="PackedScene" uid="uid://7wne64wo1epb" path="res://src/counting_spawner/counting_spawner.tscn" id="3_xxci0"]
@@ -23,6 +24,8 @@ script = ExtResource("1_el04s")
 wait_time = 300.0
 one_shot = true
 autostart = true
+
+[node name="SteamLobbyChatUpdate" parent="." instance=ExtResource("2_acesl")]
 
 [node name="BatterySpawner" parent="." node_paths=PackedStringArray("spawn_root") instance=ExtResource("2_d8ks1")]
 spawn_root = NodePath("../SpawnRoot")
