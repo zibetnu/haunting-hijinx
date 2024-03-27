@@ -18,7 +18,7 @@ const JOIN_LOBBY_FAILED_MESSAGE := "Failed to join lobby. Try restarting the gam
 
 @onready var connecting_dialog: AcceptDialog = $ConnectingDialog
 @onready var notify_dialog: AcceptDialog = $NotifyDialog
-@onready var steam_host_button: Button = $SteamContainer/HostButton
+@onready var create_lobby_button: Button = $SteamContainer/CreateLobbyButton
 @onready var steam_join_button: Button = $SteamContainer/HBoxContainer/JoinButton
 
 
@@ -77,14 +77,14 @@ func _on_client_created() -> void:
 # The game will crash if the user cancels in the middle of joining a Steam
 # lobby. _on_lobby_joined avoids that crash by not allowing canceling.
 func _on_lobby_joined() -> void:
-	steam_host_button.disabled = true
+	create_lobby_button.disabled = true
 	steam_join_button.disabled = true
 	steam_join_button.text = JOINING_TEXT
 
 	await get_tree().create_timer(JOIN_TIMEOUT_SEC).timeout
 
 	notify_user(JOIN_LOBBY_FAILED_MESSAGE)
-	steam_host_button.disabled = false
+	create_lobby_button.disabled = false
 	steam_join_button.disabled = false
 	steam_join_button.text = JOIN_TEXT
 

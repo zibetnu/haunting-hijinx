@@ -14,7 +14,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_mjvxa")
-first_button = NodePath("SteamContainer/HostButton")
+first_button = NodePath("SteamContainer/CreateLobbyButton")
 
 [node name="ENetContainer" type="VBoxContainer" parent="."]
 visible = false
@@ -85,13 +85,13 @@ offset_bottom = 50.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HostButton" type="Button" parent="SteamContainer"]
+[node name="CreateLobbyButton" type="Button" parent="SteamContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../QuitButton")
 focus_neighbor_bottom = NodePath("../HBoxContainer/JoinButton")
 focus_next = NodePath("../HBoxContainer/JoinButton")
 focus_previous = NodePath("../QuitButton")
-text = "Host"
+text = "Create Lobby"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SteamContainer"]
 layout_mode = 2
@@ -100,11 +100,11 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 4.0
-focus_neighbor_top = NodePath("../../HostButton")
+focus_neighbor_top = NodePath("../../CreateLobbyButton")
 focus_neighbor_right = NodePath("../JoinButton")
 focus_neighbor_bottom = NodePath("../../QuitButton")
 focus_next = NodePath("../JoinButton")
-focus_previous = NodePath("../../HostButton")
+focus_previous = NodePath("../../CreateLobbyButton")
 placeholder_text = "Lobby ID (only for joining)"
 context_menu_enabled = false
 
@@ -112,17 +112,17 @@ context_menu_enabled = false
 layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_left = NodePath("../LobbyIDText")
-focus_neighbor_top = NodePath("../../HostButton")
+focus_neighbor_top = NodePath("../../CreateLobbyButton")
 focus_neighbor_bottom = NodePath("../../QuitButton")
 focus_next = NodePath("../../QuitButton")
-focus_previous = NodePath("../../HostButton")
+focus_previous = NodePath("../../CreateLobbyButton")
 text = "Join"
 
 [node name="QuitButton" type="Button" parent="SteamContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../HBoxContainer/JoinButton")
-focus_neighbor_bottom = NodePath("../HostButton")
-focus_next = NodePath("../HostButton")
+focus_neighbor_bottom = NodePath("../CreateLobbyButton")
+focus_next = NodePath("../CreateLobbyButton")
 focus_previous = NodePath("../HBoxContainer/JoinButton")
 text = "Quit"
 
@@ -149,7 +149,7 @@ size = Vector2i(216, 100)
 [connection signal="pressed" from="ENetContainer/HostButton" to="ENetConnector" method="create_server"]
 [connection signal="pressed" from="ENetContainer/JoinButton" to="ENetConnector" method="create_client"]
 [connection signal="pressed" from="ENetContainer/QuitButton" to="." method="_on_quit_button_pressed"]
-[connection signal="pressed" from="SteamContainer/HostButton" to="SteamConnector" method="create_lobby"]
+[connection signal="pressed" from="SteamContainer/CreateLobbyButton" to="SteamConnector" method="create_lobby"]
 [connection signal="text_changed" from="SteamContainer/HBoxContainer/LobbyIDText" to="SteamConnector" method="set_join_lobby_id_from_string"]
 [connection signal="pressed" from="SteamContainer/HBoxContainer/JoinButton" to="SteamConnector" method="join_lobby"]
 [connection signal="pressed" from="SteamContainer/QuitButton" to="." method="_on_quit_button_pressed"]
