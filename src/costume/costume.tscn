@@ -27,3 +27,4 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="Display"]
+light_mask = 32
