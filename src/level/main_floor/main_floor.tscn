@@ -8,7 +8,7 @@
 ghost_spawn_point = NodePath("SpawnPoints/GhostSpawnPoint")
 hunter_spawn_points = [NodePath("SpawnPoints/HunterSpawnPoint"), NodePath("SpawnPoints/HunterSpawnPoint2"), NodePath("SpawnPoints/HunterSpawnPoint3"), NodePath("SpawnPoints/HunterSpawnPoint4")]
 
-[node name="BatterySpawner" parent="." index="1" node_paths=PackedStringArray("spawn_area_top_left", "spawn_area_bottom_right")]
+[node name="BatterySpawner" parent="." index="2" node_paths=PackedStringArray("spawn_area_top_left", "spawn_area_bottom_right")]
 spawn_area_top_left = NodePath("TopLeft")
 spawn_area_bottom_right = NodePath("BottomRight")
 
@@ -17,12 +17,6 @@ position = Vector2(16, 32)
 
 [node name="BottomRight" type="Marker2D" parent="BatterySpawner" index="2"]
 position = Vector2(720, 432)
-
-[node name="TopLeft" parent="CameraLimits" index="0"]
-position = Vector2(0, 4)
-
-[node name="BottomRight" parent="CameraLimits" index="1"]
-position = Vector2(736, 436)
 
 [node name="TileMaps" type="Node2D" parent="." index="3"]
 y_sort_enabled = true
@@ -107,6 +101,12 @@ position = Vector2(704, 48)
 
 [node name="HunterSpawnPoint4" type="Marker2D" parent="SpawnPoints" index="4"]
 position = Vector2(32, 416)
+
+[node name="TopLeft" parent="CameraLimits" index="0"]
+position = Vector2(0, 4)
+
+[node name="BottomRight" parent="CameraLimits" index="1"]
+position = Vector2(736, 436)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." index="10"]
 rotation = 0.785398
