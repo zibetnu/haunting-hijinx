@@ -94,7 +94,7 @@ load_path = "res://.godot/imported/diffuse.png-24e115782f26d80b4c0fe3f0e010b7d0.
 diffuse_texture = SubResource("CompressedTexture2D_nmb43")
 normal_texture = ExtResource("1_xaonm")
 specular_texture = ExtResource("3_nbdqv")
-specular_shininess = 0.5
+specular_shininess = 0.6
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5yopg"]
 texture = SubResource("CanvasTexture_62uv1")
