@@ -75,8 +75,8 @@ polygon = PackedVector2Array(-7, -2, -5, -2, -5, 0, -7, 0)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_reenq"]
 polygon = PackedVector2Array(5, 0, 7, 0, 7, -2, 5, -2)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3dqjs"]
-polygon = PackedVector2Array(-8, -8, 56, -8, 56, 8, -7, 8, -8, 7)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_q45nc"]
+polygon = PackedVector2Array(-8, -8, 56, -8, 56, 8, -7, 8, -7, 7, -8, 7)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r3wnv"]
 polygon = PackedVector2Array(-8, -24, 88, -24, 88, 4, 86, 4, 86, 8, 82, 8, 82, 4, -2, 4, -2, 8, -6, 8, -6, 4, -8, 4)
@@ -1432,7 +1432,7 @@ texture = SubResource("CanvasTexture_62uv1")
 24:1/size_in_atlas = Vector2i(4, 2)
 24:1/0 = 0
 24:1/0/texture_origin = Vector2i(-24, 8)
-24:1/0/occlusion_layer_4/polygon = SubResource("OccluderPolygon2D_3dqjs")
+24:1/0/occlusion_layer_4/polygon = SubResource("OccluderPolygon2D_q45nc")
 24:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 24:1/0/physics_layer_0/angular_velocity = 0.0
 24:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 56, -8, 56, 8, -8, 8)
