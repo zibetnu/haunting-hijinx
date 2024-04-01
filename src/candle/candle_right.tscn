@@ -75,7 +75,7 @@ _data = {
 diffuse_texture = ExtResource("3_mutbf")
 normal_texture = ExtResource("4_fxbfd")
 specular_texture = ExtResource("5_inca4")
-specular_shininess = 0.99
+specular_shininess = 0.6
 
 [sub_resource type="Gradient" id="Gradient_glnhu"]
 colors = PackedColorArray(0, 0.804089, 0.976547, 1, 1, 1, 1, 0)
