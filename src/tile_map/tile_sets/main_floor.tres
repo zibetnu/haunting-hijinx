@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=34 format=3 uid="uid://26wcy33gmwrh"]
+[gd_resource type="TileSet" load_steps=38 format=3 uid="uid://26wcy33gmwrh"]
 
 [ext_resource type="Texture2D" uid="uid://e5tc842y66xv" path="res://assets/tile_sets/main_floor/normal.png" id="1_xaonm"]
 [ext_resource type="PackedScene" uid="uid://ciga14osg5c77" path="res://src/candle/candle.tscn" id="3_cs81d"]
@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://dhdp0bpx7lbgv" path="res://assets/tile_sets/main_floor/door_frame/diffuse.png" id="6_7bbi3"]
 [ext_resource type="Texture2D" uid="uid://bpv8wamoqowa8" path="res://assets/tile_sets/main_floor/door_frame/normal.png" id="7_1bls3"]
 [ext_resource type="Texture2D" uid="uid://c1x3pqrgptrwl" path="res://assets/tile_sets/main_floor/door_frame/specular.png" id="8_534ie"]
+[ext_resource type="Texture2D" uid="uid://thcgdmvvhkcb" path="res://assets/tile_sets/main_floor/dining_room_rug/diffuse.png" id="9_myh5c"]
+[ext_resource type="Texture2D" uid="uid://djhb584fvcwjb" path="res://assets/tile_sets/main_floor/dining_room_rug/normal.png" id="10_cfei0"]
+[ext_resource type="Texture2D" uid="uid://drxul81n4fplp" path="res://assets/tile_sets/main_floor/dining_room_rug/specular.png" id="11_b6g4j"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1bcvr"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -61,9 +64,6 @@ polygon = PackedVector2Array(-8, -8, 56, -8, 56, 8, -7, 8, -7, 7, -8, 7)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r3wnv"]
 polygon = PackedVector2Array(-8, -24, 88, -24, 88, 4, 86, 4, 86, 8, 82, 8, 82, 4, -2, 4, -2, 8, -6, 8, -6, 4, -8, 4)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_b01kj"]
-polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nmb43"]
 load_path = "res://.godot/imported/diffuse.png-24e115782f26d80b4c0fe3f0e010b7d0.ctex"
 
@@ -107,52 +107,6 @@ texture = SubResource("CanvasTexture_62uv1")
 4:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_7s2in")
 4:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:1/0/physics_layer_0/angular_velocity = 0.0
-5:1/0 = 0
-5:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_7s2in")
-5:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-5:1/0/physics_layer_0/angular_velocity = 0.0
-6:1/next_alternative_id = 4
-6:1/0 = 0
-6:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_7s2in")
-6:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-6:1/0/physics_layer_0/angular_velocity = 0.0
-6:1/1 = 1
-6:1/1/flip_h = true
-6:1/1/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_b01kj")
-6:1/1/physics_layer_0/linear_velocity = Vector2(0, 0)
-6:1/1/physics_layer_0/angular_velocity = 0.0
-6:1/2 = 2
-6:1/2/flip_v = true
-6:1/2/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_b01kj")
-6:1/2/physics_layer_0/linear_velocity = Vector2(0, 0)
-6:1/2/physics_layer_0/angular_velocity = 0.0
-6:1/3 = 3
-6:1/3/flip_h = true
-6:1/3/flip_v = true
-6:1/3/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_b01kj")
-6:1/3/physics_layer_0/linear_velocity = Vector2(0, 0)
-6:1/3/physics_layer_0/angular_velocity = 0.0
-7:1/next_alternative_id = 4
-7:1/0 = 0
-7:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_7s2in")
-7:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-7:1/0/physics_layer_0/angular_velocity = 0.0
-7:1/1 = 1
-7:1/1/flip_h = true
-7:1/1/transpose = true
-7:1/1/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_b01kj")
-7:1/1/physics_layer_0/linear_velocity = Vector2(0, 0)
-7:1/1/physics_layer_0/angular_velocity = 0.0
-7:1/2 = 2
-7:1/2/transpose = true
-7:1/2/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_b01kj")
-7:1/2/physics_layer_0/linear_velocity = Vector2(0, 0)
-7:1/2/physics_layer_0/angular_velocity = 0.0
-7:1/3 = 3
-7:1/3/flip_v = true
-7:1/3/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_b01kj")
-7:1/3/physics_layer_0/linear_velocity = Vector2(0, 0)
-7:1/3/physics_layer_0/angular_velocity = 0.0
 0:2/0 = 0
 0:2/0/terrain_set = 0
 0:2/0/terrain = 0
@@ -1408,6 +1362,42 @@ texture = SubResource("CanvasTexture_kwlxp")
 1:0/1/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:0/1/physics_layer_0/angular_velocity = 0.0
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_54hh6"]
+diffuse_texture = ExtResource("9_myh5c")
+normal_texture = ExtResource("10_cfei0")
+specular_texture = ExtResource("11_b6g4j")
+specular_shininess = 0.5
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ltyj1"]
+texture = SubResource("CanvasTexture_54hh6")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+0:2/0 = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
+1:2/0 = 0
+1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:2/0/physics_layer_0/angular_velocity = 0.0
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+2:1/0 = 0
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+2:2/0 = 0
+2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:2/0/physics_layer_0/angular_velocity = 0.0
+
 [resource]
 occlusion_layer_0/light_mask = 1
 occlusion_layer_1/light_mask = 2
@@ -1423,3 +1413,4 @@ terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_5yopg")
 sources/1 = SubResource("TileSetScenesCollectionSource_lkygb")
 sources/2 = SubResource("TileSetAtlasSource_lt0jx")
+sources/3 = SubResource("TileSetAtlasSource_ltyj1")
