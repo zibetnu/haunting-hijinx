@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfvfpxjet5s2x"
-path="res://.godot/imported/diffuse.png-4e7f0e618c460cfac65c064b8f092e7a.ctex"
+uid="uid://djhyo0x10s62m"
+path="res://.godot/imported/specular.png-ccd1ca3f3e1c2169f56b741440a70a1a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/candle/base_side/diffuse.png"
-dest_files=["res://.godot/imported/diffuse.png-4e7f0e618c460cfac65c064b8f092e7a.ctex"]
+source_file="res://assets/candle/base_right/specular.png"
+dest_files=["res://.godot/imported/specular.png-ccd1ca3f3e1c2169f56b741440a70a1a.ctex"]
 
 [params]
 

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://src/candle/candle.gd" id="1_4a0uo"]
 [ext_resource type="Texture2D" uid="uid://bwecne3kh8e4i" path="res://assets/candle/flame.png" id="2_l1sra"]
-[ext_resource type="Texture2D" uid="uid://bfvfpxjet5s2x" path="res://assets/candle/base_side/diffuse.png" id="3_mutbf"]
-[ext_resource type="Texture2D" uid="uid://b3q6lfg27ku0y" path="res://assets/candle/base_side/normal.png" id="4_fxbfd"]
-[ext_resource type="Texture2D" uid="uid://djhyo0x10s62m" path="res://assets/candle/base_side/specular.png" id="5_inca4"]
+[ext_resource type="Texture2D" uid="uid://drm66avxr1mik" path="res://assets/candle/base_left/diffuse.png" id="3_qeq4l"]
+[ext_resource type="Texture2D" uid="uid://bqlvcfqqen7xl" path="res://assets/candle/base_left/normal.png" id="4_pgg3a"]
+[ext_resource type="Texture2D" uid="uid://btsmh4gwawjb" path="res://assets/candle/base_left/specular.png" id="5_nd0al"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_iwwh5"]
 light_mode = 1
@@ -72,9 +72,9 @@ _data = {
 }
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_36c1m"]
-diffuse_texture = ExtResource("3_mutbf")
-normal_texture = ExtResource("4_fxbfd")
-specular_texture = ExtResource("5_inca4")
+diffuse_texture = ExtResource("3_qeq4l")
+normal_texture = ExtResource("4_pgg3a")
+specular_texture = ExtResource("5_nd0al")
 specular_shininess = 0.6
 
 [sub_resource type="Gradient" id="Gradient_glnhu"]
@@ -108,7 +108,6 @@ speed_scale = 0.8
 light_mask = 16
 position = Vector2(-10, -6)
 texture = SubResource("CanvasTexture_36c1m")
-flip_h = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(-10, -6)
