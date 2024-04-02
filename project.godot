@@ -139,6 +139,7 @@ toggle_fullscreen={
 2d_physics/layer_3="physical players"
 2d_physics/layer_4="spectral players"
 2d_physics/layer_5="grabbables"
+2d_physics/layer_6="revivables"
 
 [rendering]
 
