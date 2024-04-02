@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7qmrgohocqfx"]
+[gd_scene load_steps=7 format=3 uid="uid://c7qmrgohocqfx"]
 
 [ext_resource type="Script" path="res://src/flashlight/display/display.gd" id="1_rfbrn"]
 [ext_resource type="Texture2D" uid="uid://do78peki3jtm" path="res://assets/flashlight/body.png" id="2_lt2gs"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jmwf3"]
-properties/0/path = NodePath("./IgnoreCanvasModulate/Beam:polygon")
+properties/0/path = NodePath("RotationNode2/Beam:polygon")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 properties/1/path = NodePath(".:powered")
@@ -25,6 +25,9 @@ gradient = SubResource("Gradient_2xl7l")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lnymb"]
+light_mode = 1
 
 [node name="Display" type="Node2D"]
 y_sort_enabled = true
@@ -63,11 +66,9 @@ shadow_item_cull_mask = 18
 texture = SubResource("GradientTexture2D_mw7bx")
 height = 16.0
 
-[node name="RotationNode2" type="RemoteTransform2D" parent="."]
+[node name="RotationNode2" type="Node2D" parent="."]
 y_sort_enabled = true
 position = Vector2(0, -8)
-remote_path = NodePath("../IgnoreCanvasModulate/Beam")
-update_scale = false
 
 [node name="Body" type="Sprite2D" parent="RotationNode2"]
 light_mask = 32
@@ -86,9 +87,6 @@ position = Vector2(0, -2)
 unique_name_in_owner = true
 position = Vector2(0, 2)
 
-[node name="IgnoreCanvasModulate" type="CanvasLayer" parent="."]
-follow_viewport_enabled = true
-
-[node name="Beam" type="Polygon2D" parent="IgnoreCanvasModulate"]
-position = Vector2(0, -8)
-offset = Vector2(16, 0)
+[node name="Beam" type="Polygon2D" parent="RotationNode2"]
+material = SubResource("CanvasItemMaterial_lnymb")
+position = Vector2(16, 0)
