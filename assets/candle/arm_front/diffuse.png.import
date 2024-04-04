@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfvfpxjet5s2x"
-path="res://.godot/imported/diffuse.png-632085896dd5f3ad7bbabae4b9c6df64.ctex"
+uid="uid://6d3uxok27qav"
+path="res://.godot/imported/diffuse.png-50a879b3bc4cdee6d429d92945171205.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/candle/base_right/diffuse.png"
-dest_files=["res://.godot/imported/diffuse.png-632085896dd5f3ad7bbabae4b9c6df64.ctex"]
+source_file="res://assets/candle/arm_front/diffuse.png"
+dest_files=["res://.godot/imported/diffuse.png-50a879b3bc4cdee6d429d92945171205.ctex"]
 
 [params]
 

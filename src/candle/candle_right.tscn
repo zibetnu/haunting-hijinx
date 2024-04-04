@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cttcme7ghj4se"]
+[gd_scene load_steps=10 format=3 uid="uid://cttcme7ghj4se"]
 
 [ext_resource type="Script" path="res://src/candle/candle.gd" id="1_4a0uo"]
+[ext_resource type="Texture2D" uid="uid://btftmi3k8807f" path="res://src/candle/arm_side_texture.tres" id="2_4gev0"]
 [ext_resource type="Texture2D" uid="uid://bwecne3kh8e4i" path="res://assets/candle/flame.png" id="2_l1sra"]
-[ext_resource type="Texture2D" uid="uid://bfvfpxjet5s2x" path="res://assets/candle/base_right/diffuse.png" id="3_mutbf"]
-[ext_resource type="Texture2D" uid="uid://b3q6lfg27ku0y" path="res://assets/candle/base_right/normal.png" id="4_fxbfd"]
-[ext_resource type="Texture2D" uid="uid://djhyo0x10s62m" path="res://assets/candle/base_right/specular.png" id="5_inca4"]
+[ext_resource type="Texture2D" uid="uid://jv4efllfhfwn" path="res://src/candle/base_texture.tres" id="3_cufov"]
 [ext_resource type="Texture2D" uid="uid://g6hr1h2v2mvu" path="res://src/candle/candle_light_texture.tres" id="6_bsbux"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_iwwh5"]
@@ -72,19 +71,22 @@ _data = {
 "candle": SubResource("Animation_p82no")
 }
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_36c1m"]
-diffuse_texture = ExtResource("3_mutbf")
-normal_texture = ExtResource("4_fxbfd")
-specular_texture = ExtResource("5_inca4")
-specular_shininess = 0.6
-
 [node name="Candle" type="Node2D"]
 position = Vector2(0, 8)
 script = ExtResource("1_4a0uo")
 
+[node name="arm" type="Sprite2D" parent="."]
+position = Vector2(10, -6)
+texture = ExtResource("2_4gev0")
+
+[node name="Base" type="Sprite2D" parent="."]
+light_mask = 16
+position = Vector2(11, -8)
+texture = ExtResource("3_cufov")
+
 [node name="Flame" type="Sprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_iwwh5")
-position = Vector2(10, -14)
+position = Vector2(11, -14)
 texture = ExtResource("2_l1sra")
 hframes = 7
 
@@ -93,11 +95,6 @@ libraries = {
 "": SubResource("AnimationLibrary_pfeov")
 }
 speed_scale = 0.8
-
-[node name="Base" type="Sprite2D" parent="."]
-light_mask = 16
-position = Vector2(10, -6)
-texture = SubResource("CanvasTexture_36c1m")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(10, -6)

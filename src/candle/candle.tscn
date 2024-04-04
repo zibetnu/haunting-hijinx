@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://ciga14osg5c77"]
+[gd_scene load_steps=10 format=3 uid="uid://ciga14osg5c77"]
 
 [ext_resource type="Texture2D" uid="uid://bwecne3kh8e4i" path="res://assets/candle/flame.png" id="1_f8n4e"]
 [ext_resource type="Script" path="res://src/candle/candle.gd" id="1_wepcn"]
-[ext_resource type="Texture2D" uid="uid://dh8bxlus0gx8u" path="res://assets/candle/base/diffuse.png" id="2_y08nr"]
-[ext_resource type="Texture2D" uid="uid://d1mnwqjs3gm67" path="res://assets/candle/base/normal.png" id="3_elj3h"]
-[ext_resource type="Texture2D" uid="uid://d1acqsxch7t16" path="res://assets/candle/base/specular.png" id="4_gpm4k"]
+[ext_resource type="Texture2D" uid="uid://kiaxchjuucyh" path="res://src/candle/arm_front_texture.tres" id="2_3mdjh"]
+[ext_resource type="Texture2D" uid="uid://jv4efllfhfwn" path="res://src/candle/base_texture.tres" id="5_e3wtp"]
 [ext_resource type="Texture2D" uid="uid://g6hr1h2v2mvu" path="res://src/candle/candle_light_texture.tres" id="6_mu4jo"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_iwwh5"]
@@ -72,15 +71,18 @@ _data = {
 "candle": SubResource("Animation_p82no")
 }
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_36c1m"]
-diffuse_texture = ExtResource("2_y08nr")
-normal_texture = ExtResource("3_elj3h")
-specular_texture = ExtResource("4_gpm4k")
-specular_shininess = 0.6
-
 [node name="Candle" type="Node2D"]
 position = Vector2(0, 8)
 script = ExtResource("1_wepcn")
+
+[node name="Arm" type="Sprite2D" parent="."]
+position = Vector2(8, -8)
+texture = ExtResource("2_3mdjh")
+
+[node name="Base" type="Sprite2D" parent="."]
+light_mask = 16
+position = Vector2(8, -8)
+texture = ExtResource("5_e3wtp")
 
 [node name="Flame" type="Sprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_iwwh5")
@@ -93,11 +95,6 @@ libraries = {
 "": SubResource("AnimationLibrary_pfeov")
 }
 speed_scale = 0.8
-
-[node name="Base" type="Sprite2D" parent="."]
-light_mask = 16
-position = Vector2(8, -7)
-texture = SubResource("CanvasTexture_36c1m")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(8, -6)

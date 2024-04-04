@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3q6lfg27ku0y"
-path="res://.godot/imported/normal.png-036eb68a1603b6696a626fba9a2b2601.ctex"
+uid="uid://b0x1xxab4cp5u"
+path="res://.godot/imported/specular.png-25aa239702215c92c9f54d1853fc9a78.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/candle/base_right/normal.png"
-dest_files=["res://.godot/imported/normal.png-036eb68a1603b6696a626fba9a2b2601.ctex"]
+source_file="res://assets/candle/arm_front/specular.png"
+dest_files=["res://.godot/imported/specular.png-25aa239702215c92c9f54d1853fc9a78.ctex"]
 
 [params]
 
