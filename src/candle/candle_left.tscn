@@ -98,8 +98,8 @@ libraries = {
 speed_scale = 0.8
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(-10, -6)
+position = Vector2(-11, 0)
 color = Color(0, 0.804089, 0.976547, 1)
 range_item_cull_mask = 27
 texture = ExtResource("6_eek8d")
-height = 4.0
+height = 10.0
