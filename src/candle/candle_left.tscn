@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://m057ftqicl1u"]
+[gd_scene load_steps=12 format=3 uid="uid://m057ftqicl1u"]
 
 [ext_resource type="Script" path="res://src/candle/candle.gd" id="1_4a0uo"]
 [ext_resource type="Texture2D" uid="uid://bwecne3kh8e4i" path="res://assets/candle/flame.png" id="2_l1sra"]
 [ext_resource type="Texture2D" uid="uid://drm66avxr1mik" path="res://assets/candle/base_left/diffuse.png" id="3_qeq4l"]
 [ext_resource type="Texture2D" uid="uid://bqlvcfqqen7xl" path="res://assets/candle/base_left/normal.png" id="4_pgg3a"]
 [ext_resource type="Texture2D" uid="uid://btsmh4gwawjb" path="res://assets/candle/base_left/specular.png" id="5_nd0al"]
+[ext_resource type="Texture2D" uid="uid://g6hr1h2v2mvu" path="res://src/candle/candle_light_texture.tres" id="6_eek8d"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_iwwh5"]
 light_mode = 1
@@ -77,17 +78,6 @@ normal_texture = ExtResource("4_pgg3a")
 specular_texture = ExtResource("5_nd0al")
 specular_shininess = 0.6
 
-[sub_resource type="Gradient" id="Gradient_glnhu"]
-colors = PackedColorArray(0, 0.804089, 0.976547, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_nnayx"]
-gradient = SubResource("Gradient_glnhu")
-width = 32
-height = 32
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.5, 0)
-
 [node name="Candle" type="Node2D"]
 position = Vector2(0, 8)
 script = ExtResource("1_4a0uo")
@@ -112,5 +102,5 @@ texture = SubResource("CanvasTexture_36c1m")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(-10, -6)
 range_item_cull_mask = 27
-texture = SubResource("GradientTexture2D_nnayx")
+texture = ExtResource("6_eek8d")
 height = 4.0
