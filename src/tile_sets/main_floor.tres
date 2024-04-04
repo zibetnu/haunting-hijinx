@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=38 format=3 uid="uid://26wcy33gmwrh"]
+[gd_resource type="TileSet" load_steps=44 format=3 uid="uid://26wcy33gmwrh"]
 
 [ext_resource type="Texture2D" uid="uid://e5tc842y66xv" path="res://assets/tile_sets/main_floor/normal.png" id="1_xaonm"]
 [ext_resource type="PackedScene" uid="uid://ciga14osg5c77" path="res://src/candle/candle.tscn" id="3_cs81d"]
@@ -11,6 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://thcgdmvvhkcb" path="res://assets/tile_sets/main_floor/dining_room_rug/diffuse.png" id="9_myh5c"]
 [ext_resource type="Texture2D" uid="uid://djhb584fvcwjb" path="res://assets/tile_sets/main_floor/dining_room_rug/normal.png" id="10_cfei0"]
 [ext_resource type="Texture2D" uid="uid://drxul81n4fplp" path="res://assets/tile_sets/main_floor/dining_room_rug/specular.png" id="11_b6g4j"]
+[ext_resource type="Texture2D" uid="uid://c1roq1mo8jeki" path="res://assets/tile_sets/main_floor/nightstand/diffuse.png" id="12_5fcq7"]
+[ext_resource type="Texture2D" uid="uid://cc7nv73dpx8km" path="res://assets/tile_sets/main_floor/nightstand/normal.png" id="13_u0jlu"]
+[ext_resource type="Texture2D" uid="uid://des554onxdkvj" path="res://assets/tile_sets/main_floor/nightstand/specular.png" id="14_swigs"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1bcvr"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -1432,6 +1435,25 @@ texture = SubResource("CanvasTexture_54hh6")
 2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:2/0/physics_layer_0/angular_velocity = 0.0
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7a3f7"]
+polygon = PackedVector2Array(-7, 8, -6, 8, -6, 7, 22, 7, 22, 8, 23, 8, 23, 6, 24, 6, 24, -8, -8, -8, -8, 6, -7, 6)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_tx6ah"]
+diffuse_texture = ExtResource("12_5fcq7")
+normal_texture = ExtResource("13_u0jlu")
+specular_texture = ExtResource("14_swigs")
+specular_shininess = 0.5
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c7kpv"]
+texture = SubResource("CanvasTexture_tx6ah")
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(-8, 8)
+0:0/0/occlusion_layer_4/polygon = SubResource("OccluderPolygon2D_7a3f7")
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 24, -8, 24, 8, -8, 8)
+
 [resource]
 occlusion_layer_0/light_mask = 1
 occlusion_layer_1/light_mask = 2
@@ -1448,3 +1470,4 @@ sources/0 = SubResource("TileSetAtlasSource_5yopg")
 sources/1 = SubResource("TileSetScenesCollectionSource_lkygb")
 sources/2 = SubResource("TileSetAtlasSource_lt0jx")
 sources/3 = SubResource("TileSetAtlasSource_ltyj1")
+sources/4 = SubResource("TileSetAtlasSource_c7kpv")
