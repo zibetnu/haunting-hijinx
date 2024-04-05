@@ -1,79 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://ciga14osg5c77"]
+[gd_scene load_steps=5 format=3 uid="uid://ciga14osg5c77"]
 
-[ext_resource type="Texture2D" uid="uid://bwecne3kh8e4i" path="res://assets/candle/flame.png" id="1_f8n4e"]
-[ext_resource type="Script" path="res://src/candle/candle.gd" id="1_wepcn"]
 [ext_resource type="Texture2D" uid="uid://kiaxchjuucyh" path="res://src/candle/arm_front_texture.tres" id="2_3mdjh"]
+[ext_resource type="PackedScene" uid="uid://sk7k142ijsc7" path="res://src/candle/flame/flame.tscn" id="4_fq7hg"]
 [ext_resource type="Texture2D" uid="uid://jv4efllfhfwn" path="res://src/candle/base_texture.tres" id="5_e3wtp"]
 [ext_resource type="Texture2D" uid="uid://g6hr1h2v2mvu" path="res://src/candle/candle_light_texture.tres" id="6_mu4jo"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_iwwh5"]
-light_mode = 1
-
-[sub_resource type="Animation" id="Animation_oyn6q"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../PointLight2D:energy")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
-}
-
-[sub_resource type="Animation" id="Animation_p82no"]
-resource_name = "candle"
-length = 0.7
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../PointLight2D:energy")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.0, 0.9]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_pfeov"]
-_data = {
-"RESET": SubResource("Animation_oyn6q"),
-"candle": SubResource("Animation_p82no")
-}
-
 [node name="Candle" type="Node2D"]
 position = Vector2(0, 8)
-script = ExtResource("1_wepcn")
 
 [node name="Arm" type="Sprite2D" parent="."]
 position = Vector2(8, -8)
@@ -84,17 +17,8 @@ light_mask = 16
 position = Vector2(8, -8)
 texture = ExtResource("5_e3wtp")
 
-[node name="Flame" type="Sprite2D" parent="."]
-material = SubResource("CanvasItemMaterial_iwwh5")
+[node name="Flame" parent="." instance=ExtResource("4_fq7hg")]
 position = Vector2(8, -14)
-texture = ExtResource("1_f8n4e")
-hframes = 7
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Flame"]
-libraries = {
-"": SubResource("AnimationLibrary_pfeov")
-}
-speed_scale = 0.8
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(8, 0)

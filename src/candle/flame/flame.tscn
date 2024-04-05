@@ -1,0 +1,81 @@
+[gd_scene load_steps=7 format=3 uid="uid://sk7k142ijsc7"]
+
+[ext_resource type="Texture2D" uid="uid://bwecne3kh8e4i" path="res://assets/candle/flame.png" id="1_ujmh6"]
+[ext_resource type="Script" path="res://src/candle/flame/flame.gd" id="2_l1fv8"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_iwwh5"]
+light_mode = 1
+
+[sub_resource type="Animation" id="Animation_oyn6q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../PointLight2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_p82no"]
+resource_name = "candle"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../PointLight2D:energy")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pfeov"]
+_data = {
+"RESET": SubResource("Animation_oyn6q"),
+"candle": SubResource("Animation_p82no")
+}
+
+[node name="Flame" type="Sprite2D"]
+material = SubResource("CanvasItemMaterial_iwwh5")
+texture = ExtResource("1_ujmh6")
+hframes = 7
+script = ExtResource("2_l1fv8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pfeov")
+}
+speed_scale = 0.8
