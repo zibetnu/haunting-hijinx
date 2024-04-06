@@ -86,6 +86,7 @@ horizontal_alignment = 1
 timer = NodePath("../../MatchTimer")
 
 [node name="PingLabel" parent="CanvasLayer" instance=ExtResource("5_ijd43")]
+visible = false
 modulate = Color(1, 1, 1, 0.498039)
 anchors_preset = 2
 anchor_top = 1.0
