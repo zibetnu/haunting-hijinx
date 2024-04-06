@@ -40,6 +40,10 @@ enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
 
 settings_file_path="user://settings.cfg"
 
+[gui]
+
+theme/custom="res://src/theme/theme.tres"
+
 [input]
 
 ui_accept={
