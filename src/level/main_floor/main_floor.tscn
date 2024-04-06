@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://2uclu3gf4iyj"]
+[gd_scene load_steps=4 format=3 uid="uid://2uclu3gf4iyj"]
 
 [ext_resource type="PackedScene" uid="uid://gxh15sde0me5" path="res://src/level/level.tscn" id="1_sri5i"]
 [ext_resource type="TileSet" uid="uid://26wcy33gmwrh" path="res://src/tile_sets/main_floor.tres" id="2_6q4uq"]
+[ext_resource type="PackedScene" uid="uid://b6sumweqwhyet" path="res://src/candle/candelabra.tscn" id="3_1xcu7"]
 
 [node name="MainFloor" node_paths=PackedStringArray("ghost_spawn_point", "hunter_spawn_points") instance=ExtResource("1_sri5i")]
 ghost_spawn_point = NodePath("SpawnPoints/GhostSpawnPoint")
@@ -60,6 +61,12 @@ format = 2
 layer_0/name = "Props"
 layer_0/y_sort_enabled = true
 layer_0/tile_data = PackedInt32Array(1310753, 1572864, 3, 1572897, 1572864, 3, 393233, 1376256, 0, 393243, 1376256, 0, 393244, 1507328, 0, 393234, 1507328, 0, 262168, 1507328, 0, 262165, 1376256, 0, 262167, 1441792, 0, 262166, 1441792, 0, 65553, 1, 65536, 65563, 1, 65536, 65576, 1, 65536, 1114119, 1, 131072, 1376256, 1, 131072, 393216, 1, 131072, 1376301, 1, 196608, 917508, 1, 131072, 655398, 1572864, 1, 851995, 4, 0, 1245209, 4, 0, 1245204, 4, 0, 851985, 4, 0)
+
+[node name="Candelabra" parent="TileMaps/Props" index="0" instance=ExtResource("3_1xcu7")]
+position = Vector2(272, 224)
+
+[node name="Candelabra2" parent="TileMaps/Props" index="1" instance=ExtResource("3_1xcu7")]
+position = Vector2(432, 224)
 
 [node name="SpawnPoints" type="Node2D" parent="." index="4"]
 
