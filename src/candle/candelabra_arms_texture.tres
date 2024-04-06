@@ -1,0 +1,11 @@
+[gd_resource type="CanvasTexture" load_steps=4 format=3 uid="uid://cu1bvhbtfg"]
+
+[ext_resource type="Texture2D" uid="uid://er1vl24uqipq" path="res://assets/candle/candelabra_arms/diffuse.png" id="1_gjjsk"]
+[ext_resource type="Texture2D" uid="uid://dry40btfenvy6" path="res://assets/candle/candelabra_arms/normal.png" id="2_i411d"]
+[ext_resource type="Texture2D" uid="uid://dyru1c8re2732" path="res://assets/candle/candelabra_arms/specular.png" id="3_78fel"]
+
+[resource]
+diffuse_texture = ExtResource("1_gjjsk")
+normal_texture = ExtResource("2_i411d")
+specular_texture = ExtResource("3_78fel")
+specular_shininess = 0.4
