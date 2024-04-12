@@ -18,7 +18,6 @@ var join_lobby_id := DEFAULT_LOBBY_ID
 func _ready() -> void:
 	Steam.lobby_created.connect(_on_lobby_created)
 	Steam.lobby_joined.connect(_on_lobby_joined)
-	Steam.steamInit()
 
 
 func close_connection() -> void:
