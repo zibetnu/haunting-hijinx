@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://y52o5l4t82oi"]
+
+[ext_resource type="Script" path="res://src/lobby/lobby_location_setter/lobby_location_setter.gd" id="1_ugr3b"]
+
+[node name="LobbyLocationSetter" type="Node"]
+script = ExtResource("1_ugr3b")
