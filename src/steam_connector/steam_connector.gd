@@ -38,11 +38,11 @@ func create_lobby() -> void:
 	Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, MAX_MEMBERS)
 
 
-func join_lobby() -> void:
+func join_lobby(lobby_id: int = join_lobby_id) -> void:
 	if not Steam.isSteamRunning():
 		return
 
-	Steam.joinLobby(join_lobby_id)
+	Steam.joinLobby(lobby_id)
 
 
 func set_join_lobby_id_from_string(value: String) -> void:
