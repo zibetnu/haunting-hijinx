@@ -131,7 +131,11 @@ func _on_player_death_state_changed() -> void:
 		return
 
 	var is_dead := func(node: Node):
-			return node.get("is_true") or node.owner.is_queued_for_deletion()
+			return (
+					node.get("is_true")
+					or node.owner == null
+					or node.owner.is_queued_for_deletion()
+			)
 
 	if get_tree().get_nodes_in_group("ghost_is_deads").all(is_dead):
 		_end_match("Hunters win!")
