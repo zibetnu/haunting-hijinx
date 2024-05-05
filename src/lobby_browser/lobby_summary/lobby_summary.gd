@@ -15,7 +15,7 @@ var lobby_type := "Unknown":
 		lobby_type = value
 		lobby_type_label.text = value
 
-var ping := -1:
+var ping := 999:
 	set(value):
 		ping = value
 		ping_label.text = "%s ms" % value
