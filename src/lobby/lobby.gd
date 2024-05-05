@@ -10,12 +10,9 @@ const MIN_PARTICIPANTS = 1
 @export var level: PackedScene
 @export var player_card: PackedScene
 
-@onready var lobby_id_value_label: Label = %LobbyIDValueLabel
-
 
 func _ready():
 	%HostMenu.visible = multiplayer.is_server()
-	lobby_id_value_label.text = str(_get_autoload_lobby_id())
 
 	# Only the server needs to spawn the players.
 	if not multiplayer.is_server():

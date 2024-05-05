@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://src/lobby/lobby.gd" id="1_g8t6r"]
 [ext_resource type="PackedScene" uid="uid://2uclu3gf4iyj" path="res://src/level/main_floor/main_floor.tscn" id="2_px70m"]
 [ext_resource type="PackedScene" uid="uid://bapt74v2o7kig" path="res://src/lobby/player_card/player_card.tscn" id="3_87r7n"]
-[ext_resource type="PackedScene" uid="uid://jcjsaq8tvx3j" path="res://src/copy_label_button/copy_label_button.tscn" id="4_8oiix"]
 [ext_resource type="PackedScene" uid="uid://bjuo2ufoah314" path="res://src/e_net_connector/e_net_connector.tscn" id="5_kupri"]
 [ext_resource type="PackedScene" uid="uid://y52o5l4t82oi" path="res://src/lobby/lobby_location_setter/lobby_location_setter.tscn" id="6_mojxj"]
 [ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="6_qmxdg"]
+[ext_resource type="PackedScene" uid="uid://lgxoth4h2cd0" path="res://src/lobby/lobby_name_setter/lobby_name_setter.tscn" id="7_7ee1f"]
 [ext_resource type="PackedScene" uid="uid://bj8n2x3jkcbgs" path="res://src/relay_initializer/relay_initializer.tscn" id="8_tfeyi"]
 
 [node name="Lobby" type="Control"]
@@ -81,22 +81,17 @@ grow_horizontal = 0
 grow_vertical = 0
 metadata/_edit_group_ = true
 
-[node name="LobbyIDContainer" type="HBoxContainer" parent="HostMenu"]
+[node name="LobbyNameContainer" type="HBoxContainer" parent="HostMenu"]
 layout_mode = 2
 
-[node name="LobbyIDNameLabel" type="Label" parent="HostMenu/LobbyIDContainer"]
+[node name="Label" type="Label" parent="HostMenu/LobbyNameContainer"]
 layout_mode = 2
-text = "Lobby:"
+text = "Name:"
 
-[node name="LobbyIDValueLabel" type="Label" parent="HostMenu/LobbyIDContainer"]
-unique_name_in_owner = true
+[node name="LobbyNameLineEdit" type="LineEdit" parent="HostMenu/LobbyNameContainer"]
 layout_mode = 2
-text = "-1"
-
-[node name="CopyLabelButton" parent="HostMenu/LobbyIDContainer" node_paths=PackedStringArray("label") instance=ExtResource("4_8oiix")]
-layout_mode = 2
-size_flags_horizontal = 10
-label = NodePath("../LobbyIDValueLabel")
+size_flags_horizontal = 3
+placeholder_text = "Lobby Name"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HostMenu"]
 layout_mode = 2
@@ -124,9 +119,12 @@ text = "Start Game"
 
 [node name="LobbyLocationSetter" parent="." instance=ExtResource("6_mojxj")]
 
+[node name="LobbyNameSetter" parent="." instance=ExtResource("7_7ee1f")]
+
 [node name="RelayInitializer" parent="." instance=ExtResource("8_tfeyi")]
 
 [connection signal="close_connection_requested" from="." to="SteamConnector" method="close_connection"]
+[connection signal="text_changed" from="HostMenu/LobbyNameContainer/LobbyNameLineEdit" to="LobbyNameSetter" method="set_lobby_name"]
 [connection signal="pressed" from="HostMenu/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="connection_closed" from="ENetConnector" to="." method="_on_connection_closed"]
 [connection signal="connection_closed" from="SteamConnector" to="." method="_on_connection_closed"]
