@@ -4,6 +4,13 @@ extends Control
 
 signal join_pressed
 
+const GOOD_COLOR = Color.GREEN
+const OKAY_COLOR = Color.ORANGE
+const BAD_COLOR = Color.RED
+
+const GOOD_PING_MAX = 99
+const OKAY_PING_MAX = 199
+
 var lobby_id := -1
 var lobby_name := "Unknown":
 	set(value):
@@ -19,6 +26,7 @@ var ping := 999:
 	set(value):
 		ping = value
 		ping_label.text = "%s ms" % value
+		_update_ping_label_color()
 
 var player_count := 0:
 	set(value):
@@ -40,6 +48,17 @@ func _to_string() -> String:
 	return "Lobby %s \n\tName: %s\n\tType: %s\n\tPlayers: %s\n\tPing: %s" % [
 			lobby_id, lobby_name, lobby_type, player_count_label.text, ping
 	]
+
+
+func _update_ping_label_color() -> void:
+	if ping <= GOOD_PING_MAX:
+		ping_label.modulate = GOOD_COLOR
+
+	elif ping <= OKAY_PING_MAX:
+		ping_label.modulate = OKAY_COLOR
+
+	else:
+		ping_label.modulate = BAD_COLOR
 
 
 func _on_join_pressed() -> void:
