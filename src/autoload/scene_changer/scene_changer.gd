@@ -33,6 +33,10 @@ func change_to_lobby() -> void:
 	change_scene_to_packed(lobby)
 
 
+func change_to_main_menu() -> void:
+	change_scene_to_packed(main_menu)
+
+
 func remove_scene() -> void:
 	for child in $SceneContainer.get_children():
 		$SceneContainer.remove_child(child)
