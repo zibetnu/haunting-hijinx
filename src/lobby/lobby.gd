@@ -69,7 +69,7 @@ func _instantiate_card(id: int) -> Node:
 
 
 func _on_connection_closed() -> void:
-	SceneChanger.change_scene_to_packed(SceneChanger.main_menu)
+	SceneChanger.change_to_lobby_browser()
 
 
 func _on_ghost_peer_changed(id: int) -> void:
