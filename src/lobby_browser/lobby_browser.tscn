@@ -1,0 +1,142 @@
+[gd_scene load_steps=5 format=3 uid="uid://crqc4k74es8j6"]
+
+[ext_resource type="Script" path="res://src/lobby_browser/lobby_browser.gd" id="1_wpwcv"]
+[ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="2_dwt65"]
+[ext_resource type="PackedScene" uid="uid://dmoov6v60pobv" path="res://src/lobby_browser/lobby_summary/lobby_summary.tscn" id="2_tlwtl"]
+[ext_resource type="PackedScene" uid="uid://bj8n2x3jkcbgs" path="res://src/relay_initializer/relay_initializer.tscn" id="3_w7k6n"]
+
+[node name="LobbyBrowser" type="Control" node_paths=PackedStringArray("first_button")]
+layout_mode = 3
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_right = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wpwcv")
+first_button = NodePath("HBoxContainer/LeftMenu/Refresh")
+lobby_summary_scene = ExtResource("2_tlwtl")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeftMenu" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Back" type="Button" parent="HBoxContainer/LeftMenu"]
+layout_mode = 2
+text = "Back"
+
+[node name="Refresh" type="Button" parent="HBoxContainer/LeftMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Refresh"
+
+[node name="CreateLobby" type="Button" parent="HBoxContainer/LeftMenu"]
+layout_mode = 2
+text = "Create Lobby"
+
+[node name="Filters" type="Label" parent="HBoxContainer/LeftMenu"]
+layout_mode = 2
+text = "Filters"
+horizontal_alignment = 1
+
+[node name="Joinable" type="CheckButton" parent="HBoxContainer/LeftMenu"]
+layout_mode = 2
+text = "Joinable"
+
+[node name="LowPing" type="CheckButton" parent="HBoxContainer/LeftMenu"]
+layout_mode = 2
+text = "Low ping"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+text = "Name"
+
+[node name="Type" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Type"
+
+[node name="Players" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Players"
+
+[node name="Ping" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ping"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="LobbySummaries" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="JoiningWindow" type="Window" parent="."]
+unique_name_in_owner = true
+visible = false
+transient = true
+exclusive = true
+unresizable = true
+borderless = true
+
+[node name="Label" type="Label" parent="JoiningWindow"]
+offset_right = 80.0
+offset_bottom = 16.0
+text = "Joining..."
+
+[node name="NotifyDialog" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+title = ""
+size = Vector2i(216, 100)
+
+[node name="RefreshTimer" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
+[node name="RelayInitializer" parent="." instance=ExtResource("3_w7k6n")]
+initialize_on_ready = false
+
+[node name="SteamConnector" parent="." instance=ExtResource("2_dwt65")]
+
+[connection signal="join_lobby_requested" from="." to="SteamConnector" method="join_lobby"]
+[connection signal="ready" from="." to="RelayInitializer" method="initialize_relay"]
+[connection signal="pressed" from="HBoxContainer/LeftMenu/Back" to="." method="go_back"]
+[connection signal="pressed" from="HBoxContainer/LeftMenu/Refresh" to="." method="refresh"]
+[connection signal="pressed" from="HBoxContainer/LeftMenu/CreateLobby" to="SteamConnector" method="create_lobby"]
+[connection signal="about_to_popup" from="NotifyDialog" to="JoiningWindow" method="hide"]
+[connection signal="timeout" from="RefreshTimer" to="." method="refresh"]
+[connection signal="relay_initialized" from="RelayInitializer" to="." method="refresh"]
+[connection signal="create_lobby_failed" from="SteamConnector" to="." method="notify" binds= ["Failed to create lobby."]]
+[connection signal="join_lobby_failed" from="SteamConnector" to="." method="notify" binds= ["Failed to join lobby."]]
+[connection signal="lobby_created" from="SteamConnector" to="." method="_on_lobby_created"]
+[connection signal="lobby_joined" from="SteamConnector" to="." method="_on_lobby_joined"]
