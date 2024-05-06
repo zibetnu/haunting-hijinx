@@ -29,6 +29,10 @@ func change_scene_to_packed(packed_scene: PackedScene) -> void:
 	PauseManager.set_pause.rpc(false)
 
 
+func change_to_lobby() -> void:
+	change_scene_to_packed(lobby)
+
+
 func remove_scene() -> void:
 	for child in $SceneContainer.get_children():
 		$SceneContainer.remove_child(child)
