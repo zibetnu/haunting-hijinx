@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://df63fi5u7xpjt"]
+[gd_scene load_steps=10 format=3 uid="uid://df63fi5u7xpjt"]
 
 [ext_resource type="Script" path="res://src/lobby/lobby.gd" id="1_g8t6r"]
 [ext_resource type="PackedScene" uid="uid://2uclu3gf4iyj" path="res://src/level/main_floor/main_floor.tscn" id="2_px70m"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="6_qmxdg"]
 [ext_resource type="PackedScene" uid="uid://lgxoth4h2cd0" path="res://src/lobby/lobby_name_setter/lobby_name_setter.tscn" id="7_7ee1f"]
 [ext_resource type="PackedScene" uid="uid://bj8n2x3jkcbgs" path="res://src/relay_initializer/relay_initializer.tscn" id="8_tfeyi"]
+[ext_resource type="PackedScene" uid="uid://vl432076bm8p" path="res://src/level/steam_lobby_chat_update/steam_lobby_chat_update.tscn" id="9_tuqyh"]
 
 [node name="Lobby" type="Control"]
 layout_mode = 3
@@ -122,6 +123,8 @@ text = "Start Game"
 [node name="LobbyNameSetter" parent="." instance=ExtResource("7_7ee1f")]
 
 [node name="RelayInitializer" parent="." instance=ExtResource("8_tfeyi")]
+
+[node name="SteamLobbyChatUpdate" parent="." instance=ExtResource("9_tuqyh")]
 
 [connection signal="close_connection_requested" from="." to="SteamConnector" method="close_connection"]
 [connection signal="text_changed" from="HostMenu/LobbyNameContainer/LobbyNameLineEdit" to="LobbyNameSetter" method="set_lobby_name"]
