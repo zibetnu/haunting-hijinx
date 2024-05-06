@@ -4,3 +4,5 @@
 
 [resource]
 default_font = ExtResource("1_kj04y")
+MarginContainer/constants/margin_left = 7
+MarginContainer/constants/margin_right = 7
