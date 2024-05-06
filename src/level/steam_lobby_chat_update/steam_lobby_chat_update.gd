@@ -22,4 +22,9 @@ func _on_lobby_chat_update(
 		if steam_multiplayer_peer.get_steam64_from_peer_id(peer_id) != changed_id:
 			continue
 
+		# Workaround to promptly get rid of a player when Steam is aware they
+		# left but the SteamMultiplayerPeer hasn't figured it out yet. This
+		# does not fix the issue where the player is kicked if they quickly
+		# rejoin.
+		# See https://github.com/expressobits/steam-multiplayer-peer/issues/12.
 		multiplayer.peer_disconnected.emit(peer_id)
