@@ -12,8 +12,6 @@ const AUTOLOAD_PATH := ^"/root/PeerData"
 const DEFAULT_LOBBY_ID := -1
 const MAX_MEMBERS := 8
 
-var join_lobby_id := DEFAULT_LOBBY_ID
-
 
 func _ready() -> void:
 	Steam.lobby_created.connect(_on_lobby_created)
@@ -38,15 +36,11 @@ func create_lobby() -> void:
 	Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, MAX_MEMBERS)
 
 
-func join_lobby(lobby_id: int = join_lobby_id) -> void:
+func join_lobby(lobby_id: int) -> void:
 	if not Steam.isSteamRunning():
 		return
 
 	Steam.joinLobby(lobby_id)
-
-
-func set_join_lobby_id_from_string(value: String) -> void:
-	join_lobby_id = int(value)
 
 
 func _on_lobby_created(result: Steam.Result, lobby_id: int) -> void:
