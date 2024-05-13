@@ -45,11 +45,13 @@ layout_mode = 2
 text = "Create Lobby"
 
 [node name="Filters" type="Label" parent="HBoxContainer/LeftMenu"]
+visible = false
 layout_mode = 2
 text = "Filters"
 horizontal_alignment = 1
 
 [node name="LowPing" type="CheckButton" parent="HBoxContainer/LeftMenu"]
+visible = false
 layout_mode = 2
 text = "Low ping"
 
