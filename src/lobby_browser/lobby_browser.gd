@@ -10,6 +10,7 @@ const REFRESHING_TEXT = "Refreshing..."
 const DISABLE_WHILE_REFRESHING = true
 
 const NAME_KEY = "name"
+const TYPE_KEY = "type"
 
 const LOCATION_KEY = "location"
 const PARSED_SUCCESS_KEY = "success"
@@ -133,9 +134,7 @@ func _on_lobby_match_list(untyped_lobby_ids: Array) -> void:
 			continue
 
 		summary.lobby_name = Steam.getLobbyData(lobby_id, NAME_KEY)
-
-		# TODO: Get lobby type.
-
+		summary.lobby_type = Steam.getLobbyData(lobby_id, TYPE_KEY)
 		summary.player_count = Steam.getNumLobbyMembers(lobby_id)
 		summary.player_limit = Steam.getLobbyMemberLimit(lobby_id)
 		_set_ping_for(summary)
