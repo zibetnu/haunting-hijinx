@@ -11,6 +11,13 @@ const AUTOLOAD_PATH = ^"/root/PeerData"
 const LOBBY_ID_PROPERTY = &"lobby_id"
 const PLACEHOLDER_LOBBY_ID = -1
 
+const LOBBY_NAME_KEY = "name"
+const LOBBY_NAME_FORMAT = "%s Lobby"
+
+const LOBBY_TYPE = Steam.LOBBY_TYPE_PUBLIC
+const LOBBY_TYPE_KEY = "type"
+const LOBBY_TYPE_NAME = "Public"
+
 const MAX_MEMBERS = 8
 
 
@@ -34,7 +41,7 @@ func create_lobby() -> void:
 	if not Steam.isSteamRunning():
 		return
 
-	Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, MAX_MEMBERS)
+	Steam.createLobby(LOBBY_TYPE, MAX_MEMBERS)
 
 
 func join_lobby(lobby_id: int) -> void:
@@ -42,6 +49,11 @@ func join_lobby(lobby_id: int) -> void:
 		return
 
 	Steam.joinLobby(lobby_id)
+
+
+func _init_lobby_data(lobby_id: int) -> void:
+	Steam.setLobbyData(lobby_id, LOBBY_NAME_KEY, LOBBY_NAME_FORMAT % Steam.getPersonaName())
+	Steam.setLobbyData(lobby_id, LOBBY_TYPE_KEY, LOBBY_TYPE_NAME)
 
 
 func _on_lobby_created(result: Steam.Result, lobby_id: int) -> void:
@@ -53,6 +65,7 @@ func _on_lobby_created(result: Steam.Result, lobby_id: int) -> void:
 	peer.create_host(0, [])
 	multiplayer.multiplayer_peer = peer
 	_set_autoload_property(LOBBY_ID_PROPERTY, lobby_id)
+	_init_lobby_data(lobby_id)
 	lobby_created.emit()
 
 
