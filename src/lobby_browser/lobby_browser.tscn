@@ -49,10 +49,6 @@ layout_mode = 2
 text = "Filters"
 horizontal_alignment = 1
 
-[node name="Joinable" type="CheckButton" parent="HBoxContainer/LeftMenu"]
-layout_mode = 2
-text = "Joinable"
-
 [node name="LowPing" type="CheckButton" parent="HBoxContainer/LeftMenu"]
 layout_mode = 2
 text = "Low ping"
