@@ -1,10 +1,21 @@
 extends Node
 
 
+signal lobby_name_on_ready(lobby_name: String)
+
 const AUTOLOAD_PATH = ^"/root/PeerData"
 const LOBBY_PROPERTY = &"lobby_id"
 const NAME_KEY = "name"
 const PLACEHOLDER_LOBBY_ID = -1
+
+
+func _ready() -> void:
+	lobby_name_on_ready.emit(get_lobby_name())
+
+
+func get_lobby_name() -> String:
+	var lobby_id := _get_autoload_lobby_id()
+	return Steam.getLobbyData(lobby_id, NAME_KEY)
 
 
 func set_lobby_name(value: String) -> void:

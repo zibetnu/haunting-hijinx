@@ -131,4 +131,5 @@ text = "Start Game"
 [connection signal="pressed" from="HostMenu/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="connection_closed" from="ENetConnector" to="." method="_on_connection_closed"]
 [connection signal="connection_closed" from="SteamConnector" to="." method="_on_connection_closed"]
+[connection signal="lobby_name_on_ready" from="LobbyNameSetter" to="HostMenu/LobbyNameContainer/LobbyNameLineEdit" method="set_text"]
 [connection signal="relay_initialized" from="RelayInitializer" to="LobbyLocationSetter" method="set_lobby_location"]
