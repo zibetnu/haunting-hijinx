@@ -67,7 +67,7 @@ text = "Spectators"
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="HostMenu" type="VBoxContainer" parent="."]
+[node name="HostMenu" type="GridContainer" parent="."]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(280, 0)
 layout_mode = 1
@@ -80,38 +80,38 @@ offset_left = -280.0
 offset_top = -76.0
 grow_horizontal = 0
 grow_vertical = 0
+columns = 2
 metadata/_edit_group_ = true
 
-[node name="LobbyNameContainer" type="HBoxContainer" parent="HostMenu"]
+[node name="LobbyNameLabel" type="Label" parent="HostMenu"]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="HostMenu/LobbyNameContainer"]
-layout_mode = 2
+size_flags_horizontal = 8
 text = "Name:"
 
-[node name="LobbyNameLineEdit" type="LineEdit" parent="HostMenu/LobbyNameContainer"]
+[node name="LobbyNameLineEdit" type="LineEdit" parent="HostMenu"]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Lobby Name"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HostMenu"]
+[node name="GhostLabel" type="Label" parent="HostMenu"]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="HostMenu/HBoxContainer"]
-layout_mode = 2
+size_flags_horizontal = 8
 text = "Ghost:"
 
-[node name="GhostSelector" type="OptionButton" parent="HostMenu/HBoxContainer"]
+[node name="GhostSelector" type="OptionButton" parent="HostMenu"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-focus_neighbor_bottom = NodePath("../../StartButton")
+focus_neighbor_bottom = NodePath("../StartButton")
 text_overrun_behavior = 3
+
+[node name="Spacer" type="Control" parent="HostMenu"]
+layout_mode = 2
 
 [node name="StartButton" type="Button" parent="HostMenu"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_top = NodePath("../HBoxContainer/GhostSelector")
+focus_neighbor_top = NodePath("../GhostSelector")
 text = "Start Game"
 
 [node name="ENetConnector" parent="." instance=ExtResource("5_kupri")]
@@ -127,9 +127,9 @@ text = "Start Game"
 [node name="SteamLobbyChatUpdate" parent="." instance=ExtResource("9_tuqyh")]
 
 [connection signal="close_connection_requested" from="." to="SteamConnector" method="close_connection"]
-[connection signal="text_changed" from="HostMenu/LobbyNameContainer/LobbyNameLineEdit" to="LobbyNameSetter" method="set_lobby_name"]
+[connection signal="text_changed" from="HostMenu/LobbyNameLineEdit" to="LobbyNameSetter" method="set_lobby_name"]
 [connection signal="pressed" from="HostMenu/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="connection_closed" from="ENetConnector" to="." method="_on_connection_closed"]
 [connection signal="connection_closed" from="SteamConnector" to="." method="_on_connection_closed"]
-[connection signal="lobby_name_on_ready" from="LobbyNameSetter" to="HostMenu/LobbyNameContainer/LobbyNameLineEdit" method="set_text"]
+[connection signal="lobby_name_on_ready" from="LobbyNameSetter" to="HostMenu/LobbyNameLineEdit" method="set_text"]
 [connection signal="relay_initialized" from="RelayInitializer" to="LobbyLocationSetter" method="set_lobby_location"]
