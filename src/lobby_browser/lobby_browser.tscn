@@ -37,6 +37,7 @@ text = "Back"
 
 [node name="Refresh" type="Button" parent="HBoxContainer/LeftMenu"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(112, 0)
 layout_mode = 2
 text = "Refresh"
 
