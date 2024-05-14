@@ -128,6 +128,7 @@ initialize_on_ready = false
 
 [connection signal="join_lobby_requested" from="." to="SteamConnector" method="join_lobby"]
 [connection signal="ready" from="." to="RelayInitializer" method="initialize_relay"]
+[connection signal="refreshed" from="." to="RefreshTimer" method="start"]
 [connection signal="pressed" from="HBoxContainer/LeftMenu/Back" to="." method="go_back"]
 [connection signal="pressed" from="HBoxContainer/LeftMenu/Refresh" to="." method="refresh"]
 [connection signal="pressed" from="HBoxContainer/LeftMenu/CreateLobby" to="SteamConnector" method="create_lobby"]

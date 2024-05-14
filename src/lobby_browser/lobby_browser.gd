@@ -2,6 +2,7 @@ extends Control
 
 
 signal join_lobby_requested(lobby_id: int)
+signal refreshed
 
 const REFRESH_TEXT = "Refresh"
 const DISABLE_WHILE_NOT_REFRESHING = false
@@ -141,3 +142,4 @@ func _on_lobby_match_list(untyped_lobby_ids: Array) -> void:
 
 	refresh_button.disabled = DISABLE_WHILE_NOT_REFRESHING
 	refresh_button.text = REFRESH_TEXT
+	refreshed.emit()
