@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv616iqaq6lgw"]
+
+[ext_resource type="Script" path="res://src/lobby_type_setter/lobby_type_setter.gd" id="1_my1kr"]
+
+[node name="LobbyTypeSetter" type="Node"]
+script = ExtResource("1_my1kr")
