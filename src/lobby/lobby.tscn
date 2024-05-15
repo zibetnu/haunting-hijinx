@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://df63fi5u7xpjt"]
+[gd_scene load_steps=11 format=3 uid="uid://df63fi5u7xpjt"]
 
 [ext_resource type="Script" path="res://src/lobby/lobby.gd" id="1_g8t6r"]
 [ext_resource type="PackedScene" uid="uid://2uclu3gf4iyj" path="res://src/level/main_floor/main_floor.tscn" id="2_px70m"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://lgxoth4h2cd0" path="res://src/lobby/lobby_name_setter/lobby_name_setter.tscn" id="7_7ee1f"]
 [ext_resource type="PackedScene" uid="uid://bj8n2x3jkcbgs" path="res://src/relay_initializer/relay_initializer.tscn" id="8_tfeyi"]
 [ext_resource type="PackedScene" uid="uid://vl432076bm8p" path="res://src/level/steam_lobby_chat_update/steam_lobby_chat_update.tscn" id="9_tuqyh"]
+[ext_resource type="PackedScene" uid="uid://bv616iqaq6lgw" path="res://src/lobby_type_setter/lobby_type_setter.tscn" id="10_gp772"]
 
 [node name="Lobby" type="Control"]
 layout_mode = 3
@@ -93,6 +94,21 @@ layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Lobby Name"
 
+[node name="LobbyTypeLabel" type="Label" parent="HostMenu"]
+layout_mode = 2
+text = "Type:"
+horizontal_alignment = 2
+
+[node name="LobbyTypeOptionButton" type="OptionButton" parent="HostMenu"]
+layout_mode = 2
+item_count = 3
+popup/item_0/text = "Private"
+popup/item_0/id = 0
+popup/item_1/text = "Friends Only"
+popup/item_1/id = 1
+popup/item_2/text = "Public"
+popup/item_2/id = 2
+
 [node name="GhostLabel" type="Label" parent="HostMenu"]
 layout_mode = 2
 size_flags_horizontal = 8
@@ -126,10 +142,14 @@ text = "Start Game"
 
 [node name="SteamLobbyChatUpdate" parent="." instance=ExtResource("9_tuqyh")]
 
+[node name="LobbyTypeSetter" parent="." instance=ExtResource("10_gp772")]
+
 [connection signal="close_connection_requested" from="." to="SteamConnector" method="close_connection"]
 [connection signal="text_changed" from="HostMenu/LobbyNameLineEdit" to="LobbyNameSetter" method="set_lobby_name"]
+[connection signal="item_selected" from="HostMenu/LobbyTypeOptionButton" to="LobbyTypeSetter" method="set_lobby_type"]
 [connection signal="pressed" from="HostMenu/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="connection_closed" from="ENetConnector" to="." method="_on_connection_closed"]
 [connection signal="connection_closed" from="SteamConnector" to="." method="_on_connection_closed"]
 [connection signal="lobby_name_on_ready" from="LobbyNameSetter" to="HostMenu/LobbyNameLineEdit" method="set_text"]
 [connection signal="relay_initialized" from="RelayInitializer" to="LobbyLocationSetter" method="set_lobby_location"]
+[connection signal="lobby_type_on_ready" from="LobbyTypeSetter" to="HostMenu/LobbyTypeOptionButton" method="select"]
