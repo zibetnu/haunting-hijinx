@@ -3,6 +3,7 @@ extends Node
 
 
 signal area_count_changed(area_count: int)
+signal charge_percentage_changed(value: float)
 signal summon_charged
 signal summon_charging
 signal summoned
@@ -27,6 +28,7 @@ var area_count := 0:
 var charge := 0:
 	set(value):
 		charge = clampi(value, 0, max_charge)
+		charge_percentage_changed.emit(charge / float(max_charge))
 		if charge == max_charge:
 			summon_charged.emit()
 
