@@ -126,6 +126,7 @@ autostart = true
 initialize_on_ready = false
 
 [node name="SteamConnector" parent="." instance=ExtResource("2_dwt65")]
+editor_description = "Calls close_connection on ready to make sure that Steam doesn't think this player is still in a lobby."
 
 [connection signal="join_lobby_requested" from="." to="SteamConnector" method="join_lobby"]
 [connection signal="ready" from="." to="RelayInitializer" method="initialize_relay"]
@@ -140,3 +141,4 @@ initialize_on_ready = false
 [connection signal="join_lobby_failed" from="SteamConnector" to="." method="notify" binds= ["Failed to join lobby."]]
 [connection signal="lobby_created" from="SteamConnector" to="." method="_on_lobby_created"]
 [connection signal="lobby_joined" from="SteamConnector" to="." method="_on_lobby_joined"]
+[connection signal="ready" from="SteamConnector" to="SteamConnector" method="close_connection"]

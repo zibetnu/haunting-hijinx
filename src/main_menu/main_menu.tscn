@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://civfmojof07gs"]
+[gd_scene load_steps=3 format=3 uid="uid://civfmojof07gs"]
 
 [ext_resource type="Script" path="res://src/main_menu/main_menu.gd" id="1_mjvxa"]
+[ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="2_7d7kt"]
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("first_button")]
 layout_mode = 3
@@ -33,5 +34,9 @@ text = "Browse Lobbies"
 layout_mode = 2
 text = "Quit"
 
+[node name="SteamConnector" parent="." instance=ExtResource("2_7d7kt")]
+editor_description = "Calls close_connection on ready to make sure that Steam doesn't think this player is still in a lobby."
+
 [connection signal="pressed" from="VBoxContainer/BrowseLobbies" to="." method="_on_browse_lobbies_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="ready" from="SteamConnector" to="SteamConnector" method="close_connection"]
