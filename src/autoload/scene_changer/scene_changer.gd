@@ -2,6 +2,7 @@ extends Node
 
 
 @export var lobby: PackedScene
+@export var lobby_browser: PackedScene
 @export var main_menu: PackedScene
 
 @onready var disconnected_dialog: AcceptDialog = $DisconnectedDialog
@@ -27,6 +28,18 @@ func change_scene_to_packed(packed_scene: PackedScene) -> void:
 
 	$SceneContainer.add_child(packed_scene.instantiate(), true)
 	PauseManager.set_pause.rpc(false)
+
+
+func change_to_lobby() -> void:
+	change_scene_to_packed(lobby)
+
+
+func change_to_lobby_browser() -> void:
+	change_scene_to_packed(lobby_browser)
+
+
+func change_to_main_menu() -> void:
+	change_scene_to_packed(main_menu)
 
 
 func remove_scene() -> void:

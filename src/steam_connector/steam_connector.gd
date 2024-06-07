@@ -7,25 +7,30 @@ signal join_lobby_failed
 signal lobby_created
 signal lobby_joined
 
-const AUTOLOAD_LOBBY_PROPERTY := &"lobby_id"
-const AUTOLOAD_PATH := ^"/root/PeerData"
-const DEFAULT_LOBBY_ID := -1
-const MAX_MEMBERS := 8
+const AUTOLOAD_PATH = ^"/root/PeerData"
+const LOBBY_ID_PROPERTY = &"lobby_id"
+const PLACEHOLDER_LOBBY_ID = -1
 
-var join_lobby_id := DEFAULT_LOBBY_ID
+const LOBBY_NAME_KEY = "name"
+const LOBBY_NAME_FORMAT = "%s Lobby"
+
+const LOBBY_TYPE = Steam.LOBBY_TYPE_PUBLIC
+const LOBBY_TYPE_KEY = "type"
+const LOBBY_TYPE_NAME = "Public"
+
+const MAX_MEMBERS = 8
 
 
 func _ready() -> void:
 	Steam.lobby_created.connect(_on_lobby_created)
 	Steam.lobby_joined.connect(_on_lobby_joined)
-	Steam.steamInit()
 
 
 func close_connection() -> void:
-	var lobby_id = _get_autoload_lobby_id()
-	if lobby_id != null and lobby_id != DEFAULT_LOBBY_ID:
+	var lobby_id := _get_autoload_lobby_id()
+	if lobby_id != PLACEHOLDER_LOBBY_ID:
 		Steam.leaveLobby(lobby_id)
-		_set_autoload_lobby_id(DEFAULT_LOBBY_ID)
+		_set_autoload_property(LOBBY_ID_PROPERTY, PLACEHOLDER_LOBBY_ID)
 
 	multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
@@ -36,18 +41,19 @@ func create_lobby() -> void:
 	if not Steam.isSteamRunning():
 		return
 
-	Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC, MAX_MEMBERS)
+	Steam.createLobby(LOBBY_TYPE, MAX_MEMBERS)
 
 
-func join_lobby() -> void:
+func join_lobby(lobby_id: int) -> void:
 	if not Steam.isSteamRunning():
 		return
 
-	Steam.joinLobby(join_lobby_id)
+	Steam.joinLobby(lobby_id)
 
 
-func set_join_lobby_id_from_string(value: String) -> void:
-	join_lobby_id = int(value)
+func _init_lobby_data(lobby_id: int) -> void:
+	Steam.setLobbyData(lobby_id, LOBBY_NAME_KEY, LOBBY_NAME_FORMAT % Steam.getPersonaName())
+	Steam.setLobbyData(lobby_id, LOBBY_TYPE_KEY, LOBBY_TYPE_NAME)
 
 
 func _on_lobby_created(result: Steam.Result, lobby_id: int) -> void:
@@ -58,7 +64,8 @@ func _on_lobby_created(result: Steam.Result, lobby_id: int) -> void:
 	var peer := SteamMultiplayerPeer.new()
 	peer.create_host(0, [])
 	multiplayer.multiplayer_peer = peer
-	_set_autoload_lobby_id(lobby_id)
+	_set_autoload_property(LOBBY_ID_PROPERTY, lobby_id)
+	_init_lobby_data(lobby_id)
 	lobby_created.emit()
 
 
@@ -80,19 +87,24 @@ func _on_lobby_joined(
 	var peer := SteamMultiplayerPeer.new()
 	peer.create_client(lobby_owner_steam_id, 0, [])
 	multiplayer.multiplayer_peer = peer
-	_set_autoload_lobby_id(lobby_id)
+	_set_autoload_property(LOBBY_ID_PROPERTY, lobby_id)
 	lobby_joined.emit()
 
 
-func _get_autoload_lobby_id() -> Variant:
+# TODO: move autoload get/set functions to dedicated script.
+func _get_autoload_lobby_id() -> int:
+	var autoload := get_node_or_null(AUTOLOAD_PATH)
+	if autoload == null:
+		return PLACEHOLDER_LOBBY_ID
+
+	var lobby_id: Variant = autoload.get(LOBBY_ID_PROPERTY)
+	if not lobby_id is int:
+		return PLACEHOLDER_LOBBY_ID
+
+	return lobby_id as int
+
+
+func _set_autoload_property(property: StringName, value: Variant) -> void:
 	var autoload := get_node_or_null(AUTOLOAD_PATH)
 	if autoload:
-		return autoload.get(AUTOLOAD_LOBBY_PROPERTY)
-
-	return null
-
-
-func _set_autoload_lobby_id(lobby_id: int) -> void:
-	var autoload := get_node_or_null(AUTOLOAD_PATH)
-	if autoload:
-		autoload.set(AUTOLOAD_LOBBY_PROPERTY, lobby_id)
+		autoload.set(property, value)

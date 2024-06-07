@@ -10,12 +10,9 @@ const MIN_PARTICIPANTS = 1
 @export var level: PackedScene
 @export var player_card: PackedScene
 
-@onready var lobby_id_value_label: Label = %LobbyIDValueLabel
-
 
 func _ready():
 	%HostMenu.visible = multiplayer.is_server()
-	lobby_id_value_label.text = str(_get_autoload_lobby_id())
 
 	# Only the server needs to spawn the players.
 	if not multiplayer.is_server():
@@ -72,7 +69,7 @@ func _instantiate_card(id: int) -> Node:
 
 
 func _on_connection_closed() -> void:
-	SceneChanger.change_scene_to_packed(SceneChanger.main_menu)
+	SceneChanger.change_to_lobby_browser()
 
 
 func _on_ghost_peer_changed(id: int) -> void:

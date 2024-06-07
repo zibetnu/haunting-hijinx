@@ -1,6 +1,7 @@
 extends Node
 
 
+signal progress_percentage_changed(value: float)
 signal revived
 
 @export var enabled := true:
@@ -19,6 +20,7 @@ var max_progress: int:
 var progress := 0:
 	set(value):
 		progress = clampi(value, 0, max_progress)
+		progress_percentage_changed.emit(progress / float(max_progress))
 		if progress >= max_progress:
 			progress = 0
 			revived.emit()

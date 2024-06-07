@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cttcme7ghj4se"]
+
+[ext_resource type="Texture2D" uid="uid://btftmi3k8807f" path="res://src/candle/arm_side_texture.tres" id="1_p82m5"]
+[ext_resource type="Texture2D" uid="uid://jv4efllfhfwn" path="res://src/candle/base_texture.tres" id="3_cufov"]
+[ext_resource type="PackedScene" uid="uid://sk7k142ijsc7" path="res://src/candle/flame/flame.tscn" id="3_sfbcs"]
+[ext_resource type="Texture2D" uid="uid://g6hr1h2v2mvu" path="res://src/candle/candle_light_texture.tres" id="6_bsbux"]
+
+[node name="Candle" type="Node2D"]
+position = Vector2(0, 8)
+
+[node name="arm" type="Sprite2D" parent="."]
+position = Vector2(10, -6)
+texture = ExtResource("1_p82m5")
+
+[node name="Base" type="Sprite2D" parent="."]
+light_mask = 16
+position = Vector2(11, -8)
+texture = ExtResource("3_cufov")
+
+[node name="Flame" parent="." instance=ExtResource("3_sfbcs")]
+position = Vector2(11, -14)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(11, 0)
+color = Color(0, 0.804089, 0.976547, 1)
+range_item_cull_mask = 27
+texture = ExtResource("6_bsbux")
+height = 10.0

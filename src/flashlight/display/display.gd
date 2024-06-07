@@ -31,7 +31,7 @@ var light_texture_index: int:
 		$RotationNode/Light/FloorLight.texture = _LIGHT_TEXTURES[light_texture_index]
 		$RotationNode/Light/WallLight.texture = _LIGHT_TEXTURES[light_texture_index]
 
-@onready var _beam := $IgnoreCanvasModulate/Beam
+@onready var _beam := $RotationNode2/Beam
 @onready var _body := $RotationNode2/Body
 @onready var _light := $RotationNode/Light
 

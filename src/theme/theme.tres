@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://k2680qtkyab6"]
+
+[ext_resource type="FontFile" uid="uid://cmyudnfjlpktv" path="res://src/theme/modern_dos_8x16.ttf" id="1_kj04y"]
+
+[resource]
+default_font = ExtResource("1_kj04y")
+MarginContainer/constants/margin_left = 4
+MarginContainer/constants/margin_right = 4

@@ -3,6 +3,7 @@ extends Node
 
 signal health_emptied
 signal health_filled
+signal health_percentage_changed(value: float)
 
 
 @export var health_time := 10
@@ -16,6 +17,7 @@ var health := max_health:
 			health_filled.emit()
 
 		health = clampi(value, 0, max_health)
+		health_percentage_changed.emit(health / float(max_health))
 
 var max_health: int:
 	get:

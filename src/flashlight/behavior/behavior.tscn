@@ -29,13 +29,15 @@ position = Vector2(16, 0)
 position = Vector2(0, -2)
 rotation = -0.185005
 target_position = Vector2(0, 0)
-repeat_collision_mask = 12
+collision_mask = 5
+repeat_collision_mask = 42
 hit_from_inside = true
 collide_with_areas = true
 
 [node name="RepeatRayCast2D2" parent="RayCasts" instance=ExtResource("1_mmhtb")]
 target_position = Vector2(0, 0)
-repeat_collision_mask = 12
+collision_mask = 5
+repeat_collision_mask = 42
 hit_from_inside = true
 collide_with_areas = true
 
@@ -43,6 +45,7 @@ collide_with_areas = true
 position = Vector2(0, 2)
 rotation = 0.185005
 target_position = Vector2(0, 0)
-repeat_collision_mask = 12
+collision_mask = 5
+repeat_collision_mask = 42
 hit_from_inside = true
 collide_with_areas = true

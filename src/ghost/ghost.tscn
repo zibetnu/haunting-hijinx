@@ -23,7 +23,6 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="13_56q65"]
 [ext_resource type="PackedScene" uid="uid://nj5bu4130gy3" path="res://src/costume/ghost_placeholder/ghost_placeholder.tscn" id="13_arjsn"]
 [ext_resource type="PackedScene" uid="uid://ctcjena4x8kr0" path="res://src/aura/aura.tscn" id="13_e27lr"]
-[ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/auto_texture_progress_bar/auto_texture_progress_bar.tscn" id="15_nnx8e"]
 [ext_resource type="PackedScene" uid="uid://dc3f3sy1vso5f" path="res://src/group_bool/group_bool.tscn" id="16_q6wqq"]
 [ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/move/move.tscn" id="18_5mhrn"]
 [ext_resource type="PackedScene" uid="uid://bfhqyxu3iuptm" path="res://src/event_listener/event_listener.tscn" id="18_870ie"]
@@ -31,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="29_1sq8w"]
 [ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_i4s33"]
 [ext_resource type="PackedScene" uid="uid://d4gb1ksm22wvh" path="res://src/damage_value_signal/damage_value_signal.tscn" id="34_617dy"]
+[ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/floored_texture_progress_bar/floored_texture_progress_bar.tscn" id="35_5xob5"]
 [ext_resource type="PackedScene" uid="uid://cpvs73t8l3h88" path="res://src/weak_to/weak_to.tscn" id="35_u2g7w"]
 [ext_resource type="PackedScene" uid="uid://dq7ts6lhskwyn" path="res://src/nodes_touched/nodes_touched.tscn" id="35_yndqj"]
 [ext_resource type="PackedScene" uid="uid://dpwfunjqyfike" path="res://src/health/health.tscn" id="38_arcfj"]
@@ -111,7 +111,7 @@ replication_config = SubResource("SceneReplicationConfig_hsnve")
 [node name="CallHolder" parent="MultiplayerSynchronizer/PeerVisibilityFilter" instance=ExtResource("5_s7auc")]
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
-nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched"), NodePath("../GhostPlaceholder/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar/Behavior"), NodePath("../IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar/Behavior")]
+nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched"), NodePath("../GhostPlaceholder/Behavior")]
 
 [node name="GrabCutscene" parent="." instance=ExtResource("4_qoosa")]
 
@@ -513,32 +513,24 @@ offset_right = 32.0
 offset_bottom = -26.0
 alignment = 1
 
-[node name="HealthBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("15_nnx8e")]
+[node name="HealthBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("35_5xob5")]
 visible = false
 layout_mode = 2
 size_flags_vertical = 8
+max_value = 8.0
 fill_mode = 3
 texture_under = ExtResource("40_1b387")
 texture_progress = ExtResource("40_1b387")
 tint_under = Color(1, 1, 1, 0.247059)
 
-[node name="Behavior" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" index="1" node_paths=PackedStringArray("source_node")]
-source_node = NodePath("../../../../../DamageSignals/WeakTo/DamageValueSignal/Health")
-value_variable = "health"
-max_variable = "max_health"
-
-[node name="SummonBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("15_nnx8e")]
+[node name="SummonBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("35_5xob5")]
 visible = false
 layout_mode = 2
 size_flags_vertical = 8
+max_value = 24.0
 texture_under = ExtResource("29_i4s33")
 texture_progress = ExtResource("29_i4s33")
 tint_under = Color(1, 1, 1, 0.247059)
-
-[node name="Behavior" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" index="1" node_paths=PackedStringArray("source_node")]
-source_node = NodePath("../../../../../Summon")
-value_variable = "charge"
-max_variable = "max_charge"
 
 [connection signal="synchronized" from="MultiplayerSynchronizer" to="MultiplayerSynchronizer/PeerVisibilityFilter/CallHolder" method="release"]
 [connection signal="filter_disabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="MultiplayerSynchronizer/PeerVisibilityFilter/CallHolder" method="hold"]
@@ -566,6 +558,7 @@ max_variable = "max_charge"
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="show"]
 [connection signal="changed_to_remote" from="PeerID" to="Camera2D" method="set_enabled" binds= [false]]
 [connection signal="area_count_changed" from="Summon" to="Summon/NamedPropertySignals" method="set_property_value"]
+[connection signal="charge_percentage_changed" from="Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="set_as_ratio_floored"]
 [connection signal="summon_charging" from="Summon" to="StateChart" method="send_event" binds= [&"summon_charging"]]
 [connection signal="summoned" from="Summon" to="StateChart" method="send_event" binds= [&"summoned"]]
 [connection signal="property_changed" from="Summon/NamedPropertySignals" to="StateChart" method="set_expression_property" flags=3]
@@ -654,10 +647,9 @@ max_variable = "max_charge"
 [connection signal="damaged_by" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageValueSignal" method="take_damage"]
 [connection signal="damaged_by_amount" from="DamageSignals/WeakTo/DamageValueSignal" to="DamageSignals/WeakTo/DamageValueSignal/Health" method="subtract_health"]
 [connection signal="health_emptied" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="StateChart" method="send_event" binds= [&"died"]]
+[connection signal="health_percentage_changed" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="set_as_ratio_floored"]
 [connection signal="grabbable_grabbed" from="Grabber" to="StateChart" method="send_event" binds= [&"grabbed"]]
 [connection signal="first_node_entered" from="HuntersTouched" to="StateChart" method="send_event" binds= [&"hunters_touched"]]
 [connection signal="last_node_exited" from="HuntersTouched" to="StateChart" method="send_event" binds= [&"no_hunters_touched"]]
 
 [editable path="GhostPlaceholder"]
-[editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar"]
-[editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar"]

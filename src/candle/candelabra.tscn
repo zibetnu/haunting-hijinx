@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6sumweqwhyet"]
+
+[ext_resource type="Texture2D" uid="uid://cu1bvhbtfg" path="res://src/candle/candelabra_arms_texture.tres" id="1_kr3k5"]
+[ext_resource type="Texture2D" uid="uid://jv4efllfhfwn" path="res://src/candle/base_texture.tres" id="2_4cw5o"]
+[ext_resource type="PackedScene" uid="uid://sk7k142ijsc7" path="res://src/candle/flame/flame.tscn" id="3_ukd4a"]
+
+[sub_resource type="Gradient" id="Gradient_mfklc"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ueinb"]
+gradient = SubResource("Gradient_mfklc")
+width = 48
+height = 48
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="Candelabra" type="Node2D"]
+
+[node name="Arms" type="Sprite2D" parent="."]
+light_mask = 2
+position = Vector2(16, -21)
+texture = ExtResource("1_kr3k5")
+
+[node name="Base" type="Sprite2D" parent="."]
+light_mask = 2
+position = Vector2(8, -23)
+texture = ExtResource("2_4cw5o")
+
+[node name="Base2" type="Sprite2D" parent="."]
+light_mask = 2
+position = Vector2(16, -25)
+texture = ExtResource("2_4cw5o")
+
+[node name="Base3" type="Sprite2D" parent="."]
+light_mask = 2
+position = Vector2(24, -23)
+texture = ExtResource("2_4cw5o")
+
+[node name="Flame" parent="." instance=ExtResource("3_ukd4a")]
+position = Vector2(8, -29)
+
+[node name="Flame2" parent="." instance=ExtResource("3_ukd4a")]
+position = Vector2(16, -31)
+
+[node name="Flame3" parent="." instance=ExtResource("3_ukd4a")]
+position = Vector2(24, -29)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(16, -17)
+color = Color(0, 0.804089, 0.976547, 1)
+range_item_cull_mask = 27
+texture = SubResource("GradientTexture2D_ueinb")
+height = 10.0

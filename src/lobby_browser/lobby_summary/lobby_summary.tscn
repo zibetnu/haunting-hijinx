@@ -1,0 +1,61 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmoov6v60pobv"]
+
+[ext_resource type="Script" path="res://src/lobby_browser/lobby_summary/lobby_summary.gd" id="1_u1an3"]
+
+[node name="LobbySummary" type="Control"]
+custom_minimum_size = Vector2(320, 24)
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+script = ExtResource("1_u1an3")
+
+[node name="Join" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="LobbyName" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+text = "Unknown"
+text_overrun_behavior = 3
+
+[node name="LobbyType" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Unknown"
+text_overrun_behavior = 3
+
+[node name="PlayerCount" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Unknown"
+
+[node name="Ping" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Unknown"
+
+[connection signal="pressed" from="Join" to="." method="_on_join_pressed"]

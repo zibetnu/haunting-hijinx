@@ -13,15 +13,16 @@ config_version=5
 config/name="Haunting Hijinks"
 run/main_scene="res://src/main.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
+config/steam_app_id=2499500
 
 [autoload]
 
 PeerData="*res://src/autoload/peer_data/peer_data.tscn"
 SceneChanger="*res://src/autoload/scene_changer/scene_changer.tscn"
 PauseManager="*res://src/autoload/pause_manager.gd"
-FullscreenToggle="*res://src/autoload/fullscreen_toggle.gd"
+FullscreenToggle="res://src/autoload/fullscreen_toggle.gd"
 CutsceneManager="*res://src/autoload/cutscene_manager.gd"
-SteamCallbacks="*res://src/autoload/steam_callbacks.gd"
+SteamCallbacks="res://src/autoload/steam_callbacks.gd"
 
 [display]
 
@@ -39,6 +40,10 @@ enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
 [global]
 
 settings_file_path="user://settings.cfg"
+
+[gui]
+
+theme/custom="res://src/theme/theme.tres"
 
 [input]
 
@@ -139,10 +144,13 @@ toggle_fullscreen={
 2d_physics/layer_3="physical players"
 2d_physics/layer_4="spectral players"
 2d_physics/layer_5="grabbables"
+2d_physics/layer_6="revivables"
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+limits/opengl/max_renderable_lights=64
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 2d/snap/snap_2d_transforms_to_pixel=true

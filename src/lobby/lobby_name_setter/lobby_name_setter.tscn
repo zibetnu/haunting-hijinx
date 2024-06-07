@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://lgxoth4h2cd0"]
+
+[ext_resource type="Script" path="res://src/lobby/lobby_name_setter/lobby_name_setter.gd" id="1_31awr"]
+
+[node name="LobbyNameSetter" type="Node"]
+script = ExtResource("1_31awr")
