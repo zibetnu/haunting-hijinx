@@ -497,9 +497,9 @@ unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.501961)
 z_index = 1
 offset_left = -84.0
-offset_top = -50.0
+offset_top = 8.0
 offset_right = 84.0
-offset_bottom = -24.0
+offset_bottom = 34.0
 text = "peer name"
 horizontal_alignment = 1
 
