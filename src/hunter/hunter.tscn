@@ -285,7 +285,7 @@ follow_viewport_enabled = true
 
 [node name="NameLabel" type="Label" parent="IgnoreCanvasModulate/FollowPlayer"]
 unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0.501961)
+modulate = Color(1, 1, 1, 0.247059)
 z_index = 1
 offset_left = -84.0
 offset_top = 8.0
