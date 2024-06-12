@@ -156,6 +156,9 @@ func take_damage(source: DamageSource) -> void:
 func _damage_colliders(colliders: Array) -> void:
 	var processed_colliders := []
 	for collider in colliders:
+		if collider == null:
+			continue
+
 		if collider in processed_colliders:
 			continue
 
