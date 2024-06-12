@@ -98,6 +98,7 @@ properties/0/replication_mode = 2
 
 [node name="Ghost" type="CharacterBody2D" groups=["ghosts", "players"]]
 collision_layer = 8
+motion_mode = 1
 
 [node name="DummySynchronizer" type="MultiplayerSynchronizer" parent="."]
 editor_description = "https://github.com/godotengine/godot/issues/68508"
