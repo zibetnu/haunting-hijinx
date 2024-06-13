@@ -31,9 +31,6 @@ func _acquirer_allowed(acquirer: Variant) -> bool:
 	if not "battery_percentage" in acquirer:
 		return false
 
-	if acquirer.battery_percentage >= 0.9:
-		return false
-
 	return true
 
 
