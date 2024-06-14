@@ -4,5 +4,7 @@
 
 [resource]
 default_font = ExtResource("1_kj04y")
+LabelBig/base_type = &"Label"
+LabelBig/font_sizes/font_size = 32
 MarginContainer/constants/margin_left = 4
 MarginContainer/constants/margin_right = 4
