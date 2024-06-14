@@ -431,7 +431,7 @@ controller_2 = NodePath("KeyboardAndMouse")
 shape = SubResource("CircleShape2D_51u44")
 
 [node name="AuraSmall" parent="." instance=ExtResource("13_e27lr")]
-intensity = 3
+intensity = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AuraSmall"]
 shape = SubResource("CircleShape2D_m31g4")
