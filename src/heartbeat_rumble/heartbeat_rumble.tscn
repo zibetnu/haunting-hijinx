@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://mt548ar3ll4w"]
+
+[ext_resource type="Script" path="res://src/heartbeat_rumble/heartbeat_rumble.gd" id="1_kpvxc"]
+
+[node name="HeartbeatRumble" type="Node"]
+script = ExtResource("1_kpvxc")
