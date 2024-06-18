@@ -113,6 +113,6 @@ text = "3"
 timer = NodePath("../../MatchTimer")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+color = Color(0.122252, 0.122252, 0.122252, 1)
 
 [connection signal="timeout" from="MatchTimer" to="." method="_on_match_timer_timeout"]
