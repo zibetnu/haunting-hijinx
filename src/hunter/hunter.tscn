@@ -124,8 +124,18 @@ nodes = [NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath(".
 
 [node name="GhostPeerID" parent="." groups=["ghost_peer_ids"] instance=ExtResource("1_fx0g1")]
 
+[node name="PeerProcessMode" parent="GhostPeerID" instance=ExtResource("43_rsnb5")]
+secondary_include = true
+
+[node name="PeerVisibilityFilter" parent="GhostPeerID" instance=ExtResource("44_mvfu7")]
+secondary_allow_in_filter = true
+
 [node name="PeerID" parent="." instance=ExtResource("1_fx0g1")]
 unique_name_in_owner = true
+
+[node name="PeerProcessMode" parent="PeerID" instance=ExtResource("43_rsnb5")]
+
+[node name="PeerVisibilityFilter" parent="PeerID" instance=ExtResource("44_mvfu7")]
 
 [node name="HeartbeatRumble" parent="." instance=ExtResource("18_jndug")]
 
@@ -322,35 +332,29 @@ tint_under = Color(1, 1, 1, 0.247059)
 [node name="Alert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("28_bjj70")]
 layout_mode = 2
 
-[node name="PeerVisibilityFilter" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer" index="0" instance=ExtResource("44_mvfu7")]
-secondary_allow_in_filter = true
-
-[node name="PeerProcessMode" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" instance=ExtResource("43_rsnb5")]
-secondary_include = true
-
 [node name="BatteryAlert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("31_vp1ot")]
 layout_mode = 2
 
-[node name="PeerVisibilityFilter" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer" index="0" instance=ExtResource("44_mvfu7")]
-
-[node name="PeerProcessMode" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" instance=ExtResource("43_rsnb5")]
-
-[connection signal="changed" from="GhostPeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer/PeerVisibilityFilter" method="set_secondary_peer_id"]
-[connection signal="changed" from="GhostPeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/PeerProcessMode" method="set_secondary_peer_id"]
+[connection signal="changed" from="GhostPeerID" to="GhostPeerID/PeerProcessMode" method="set_secondary_peer_id"]
+[connection signal="changed" from="GhostPeerID" to="GhostPeerID/PeerVisibilityFilter" method="set_secondary_peer_id"]
+[connection signal="process_mode_updated" from="GhostPeerID/PeerProcessMode" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_process_mode"]
+[connection signal="filter_ready" from="GhostPeerID/PeerVisibilityFilter" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer" method="add_visibility_filter"]
+[connection signal="changed" from="PeerID" to="GhostPeerID/PeerProcessMode" method="set_primary_peer_id"]
+[connection signal="changed" from="PeerID" to="GhostPeerID/PeerVisibilityFilter" method="set_primary_peer_id"]
+[connection signal="changed" from="PeerID" to="PeerID/PeerProcessMode" method="set_primary_peer_id"]
+[connection signal="changed" from="PeerID" to="PeerID/PeerVisibilityFilter" method="set_primary_peer_id"]
 [connection signal="changed" from="PeerID" to="Synced" method="set_input_authority"]
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="set_peer_id"]
-[connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer/PeerVisibilityFilter" method="set_primary_peer_id"]
-[connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/PeerProcessMode" method="set_primary_peer_id"]
-[connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer/PeerVisibilityFilter" method="set_primary_peer_id"]
-[connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/PeerProcessMode" method="set_primary_peer_id"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="hide"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D" method="show"]
 [connection signal="changed_to_local" from="PeerID" to="Camera2D" method="set_enabled" binds= [true]]
-[connection signal="changed_to_local" from="PeerID" to="HeartbeatRumble" method="set_enabled" binds= [true]]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="show"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D" method="show"]
 [connection signal="changed_to_remote" from="PeerID" to="Camera2D" method="set_enabled" binds= [false]]
-[connection signal="changed_to_remote" from="PeerID" to="HeartbeatRumble" method="set_enabled" binds= [false]]
+[connection signal="process_mode_updated" from="PeerID/PeerProcessMode" to="HeartbeatRumble" method="set_process_mode"]
+[connection signal="process_mode_updated" from="PeerID/PeerProcessMode" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="set_process_mode"]
+[connection signal="filter_ready" from="PeerID/PeerVisibilityFilter" to="HeartbeatRumble/MultiplayerSynchronizer" method="add_visibility_filter"]
+[connection signal="filter_ready" from="PeerID/PeerVisibilityFilter" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer" method="add_visibility_filter"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="StateChart/Base/Dead/IsDead" method="set_true"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="DamageSignals/Revivable" method="enable"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" method="show"]
@@ -407,11 +411,8 @@ layout_mode = 2
 [connection signal="powered_on" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_powered"]]
 [connection signal="powered_on" from="YSort/Flashlight/Behavior" to="StateChart/Base/Alive/Movement/Move/Move" method="set_move_speed" binds= [29.6]]
 [connection signal="powered_on_attempted" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead" flags=3]
-[connection signal="filter_ready" from="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer/PeerVisibilityFilter" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer" method="add_visibility_filter"]
-[connection signal="process_mode_updated" from="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/PeerProcessMode" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_process_mode"]
-[connection signal="filter_ready" from="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer/PeerVisibilityFilter" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer" method="add_visibility_filter"]
-[connection signal="process_mode_updated" from="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/PeerProcessMode" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="set_process_mode"]
 
+[editable path="HeartbeatRumble"]
 [editable path="YSort/Flashlight"]
 [editable path="YSort/HunterPlaceholder"]
 [editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert"]

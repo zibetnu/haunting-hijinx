@@ -18,8 +18,6 @@ const WEAK_MAGNITUDE = 0.1
 
 const _MINUTE = 60
 
-@export var enabled := true: set = set_enabled
-
 ## The number of heartbeats per minute.
 @export var heart_rate: HeartRate = HeartRate.NORMAL
 
@@ -33,10 +31,6 @@ func _process(delta: float) -> void:
 
 	_time_elapsed = 0.0
 	_vibrate()
-
-
-func set_enabled(value: bool) -> void:
-	enabled = value
 
 
 ## Sets [enum heart_rate] to the [enum HeartRate] value pointed to by
