@@ -306,6 +306,7 @@ one_shot = true
 [node name="EndTimer" type="Timer" parent="StateChart/Base/Behavior/Alive/Panic"]
 editor_description = "Times how long the ghost should stay in panic. Makes ghost end panic on timeout."
 wait_time = 3.0
+one_shot = true
 
 [node name="Grab" type="Node" parent="StateChart/Base/Behavior/Alive"]
 script = ExtResource("5_6yps6")
