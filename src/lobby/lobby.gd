@@ -6,6 +6,7 @@ signal close_connection_requested
 const AUTOLOAD_LOBBY_PROPERTY := &"lobby_id"
 const AUTOLOAD_PATH := ^"/root/PeerData"
 const MIN_PARTICIPANTS = 1
+const TOGGLE_BUTTON_PATH = ^"%ParticipationToggle"
 
 @export var level: PackedScene
 @export var player_card: PackedScene
@@ -127,6 +128,11 @@ func _on_peer_participation_changed(id: int) -> void:
 
 		elif id in PeerData.spectators:
 			%SpectateCards.add_child(new_card)
+
+		# Grab focus again after it was lost by freeing the prior card.
+		var toggle_button := new_card.get_node_or_null(TOGGLE_BUTTON_PATH) as Button
+		if toggle_button != null:
+			toggle_button.grab_focus.call_deferred()
 
 
 func _on_start_button_pressed() -> void:
