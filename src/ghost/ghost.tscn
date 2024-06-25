@@ -98,6 +98,8 @@ properties/0/replication_mode = 2
 
 [node name="Ghost" type="CharacterBody2D" groups=["ghosts", "players"]]
 collision_layer = 8
+motion_mode = 1
+wall_min_slide_angle = 0.0174533
 
 [node name="DummySynchronizer" type="MultiplayerSynchronizer" parent="."]
 editor_description = "https://github.com/godotengine/godot/issues/68508"
@@ -304,6 +306,7 @@ one_shot = true
 [node name="EndTimer" type="Timer" parent="StateChart/Base/Behavior/Alive/Panic"]
 editor_description = "Times how long the ghost should stay in panic. Makes ghost end panic on timeout."
 wait_time = 3.0
+one_shot = true
 
 [node name="Grab" type="Node" parent="StateChart/Base/Behavior/Alive"]
 script = ExtResource("5_6yps6")
@@ -429,7 +432,7 @@ controller_2 = NodePath("KeyboardAndMouse")
 shape = SubResource("CircleShape2D_51u44")
 
 [node name="AuraSmall" parent="." instance=ExtResource("13_e27lr")]
-intensity = 3
+intensity = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AuraSmall"]
 shape = SubResource("CircleShape2D_m31g4")
@@ -494,12 +497,12 @@ radius = 96.0
 
 [node name="NameLabel" type="Label" parent="IgnoreCanvasModulate/FollowPlayer"]
 unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0.501961)
+modulate = Color(1, 1, 1, 0.247059)
 z_index = 1
 offset_left = -84.0
-offset_top = -50.0
+offset_top = 8.0
 offset_right = 84.0
-offset_bottom = -24.0
+offset_bottom = 34.0
 text = "peer name"
 horizontal_alignment = 1
 

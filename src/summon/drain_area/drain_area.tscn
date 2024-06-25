@@ -43,10 +43,10 @@ replication_config = SubResource("SceneReplicationConfig_0jot6")
 
 [node name="Foreground" type="ColorRect" parent="."]
 material = ExtResource("3_gl06h")
-offset_left = -72.0
-offset_top = -72.0
-offset_right = 72.0
-offset_bottom = 72.0
+offset_left = -79.0
+offset_top = -79.0
+offset_right = 79.0
+offset_bottom = 79.0
 
 [node name="IdleTimer" type="Timer" parent="."]
 process_callback = 0
