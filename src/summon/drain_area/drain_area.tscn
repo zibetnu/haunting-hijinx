@@ -49,7 +49,6 @@ offset_right = 79.0
 offset_bottom = 79.0
 
 [node name="IdleTimer" type="Timer" parent="."]
-process_callback = 0
 wait_time = 2.2
 one_shot = true
 autostart = true
