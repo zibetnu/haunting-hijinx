@@ -64,9 +64,9 @@ range_item_cull_mask = 51
 texture = SubResource("GradientTexture2D_pg77a")
 height = 16.0
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="area_exited" from="." to="." method="_on_area_exited"]
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="area_entered" from="." to="." method="_on_entered"]
+[connection signal="area_exited" from="." to="." method="_on_exited"]
+[connection signal="body_entered" from="." to="." method="_on_entered"]
+[connection signal="body_exited" from="." to="." method="_on_exited"]
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="ActiveTimer" to="." method="_on_active_timer_timeout"]

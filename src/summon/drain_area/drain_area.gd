@@ -24,22 +24,6 @@ func _damage_affected_collision_objects() -> void:
 			queue_free()
 
 
-func _on_area_entered(area: Area2D) -> void:
-	_on_entered(area)
-
-
-func _on_area_exited(area: Area2D) -> void:
-	_on_exited(area)
-
-
-func _on_body_entered(body: PhysicsBody2D) -> void:
-	_on_entered(body)
-
-
-func _on_body_exited(body: PhysicsBody2D) -> void:
-	_on_exited(body)
-
-
 func _on_entered(collision_object: CollisionObject2D) -> void:
 	if collision_object in _affected_collision_objects:
 		return
