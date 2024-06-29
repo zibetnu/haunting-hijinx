@@ -3,10 +3,29 @@ extends Area2D
 
 signal activated
 
+const IDLE_PARAMETERS = {
+	"amplitude": 1,
+	"frequency": -4,
+	"ripple_rate": 6,
+}
+const ACTIVE_PARAMETERS = {
+	"amplitude": 2,
+	"frequency": 4,
+	"ripple_rate": 12,
+}
+const DAMAGE_METHOD = &"take_damage"
+
 @export var damage_source: DamageSource
 
 var _active := false
 var _affected_collision_objects: Array[CollisionObject2D] = []
+
+@onready var _active_timer: Timer = $ActiveTimer
+@onready var _waves_material: ShaderMaterial = ($Waves as ColorRect).material
+
+
+func _ready() -> void:
+	_set_parameters_from_dictionary(IDLE_PARAMETERS)
 
 
 func activate() -> void:
@@ -16,10 +35,8 @@ func activate() -> void:
 	_active = true
 	activated.emit()
 	_damage_affected_collision_objects()
-	$Foreground.material.set_shader_parameter("amplitude", 2)
-	$Foreground.material.set_shader_parameter("frequency", 4)
-	$Foreground.material.set_shader_parameter("ripple_rate", 12)
-	$ActiveTimer.start()
+	_set_parameters_from_dictionary(ACTIVE_PARAMETERS)
+	_active_timer.start()
 
 
 func _damage_affected_collision_objects() -> void:
@@ -27,10 +44,10 @@ func _damage_affected_collision_objects() -> void:
 		return
 
 	for collision_object in _affected_collision_objects:
-		if not collision_object.has_method("take_damage"):
+		if not collision_object.has_method(DAMAGE_METHOD):
 			continue
 
-		collision_object.take_damage(damage_source)
+		collision_object.call(DAMAGE_METHOD, damage_source)
 
 		if multiplayer.is_server():
 			queue_free()
@@ -46,3 +63,8 @@ func _on_entered(collision_object: CollisionObject2D) -> void:
 
 func _on_exited(collision_object: CollisionObject2D) -> void:
 	_affected_collision_objects.erase(collision_object)
+
+
+func _set_parameters_from_dictionary(parameters: Dictionary) -> void:
+	for key: String in parameters:
+		_waves_material.set_shader_parameter(key, parameters[key])

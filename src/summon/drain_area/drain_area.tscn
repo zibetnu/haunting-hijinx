@@ -9,13 +9,13 @@ script = ExtResource("2_sfbjo")
 damage_amount = 0
 damage_type = 0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_hg12p"]
-radius = 72.0
-
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0jot6"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hg12p"]
+radius = 72.0
 
 [sub_resource type="Gradient" id="Gradient_sjlgh"]
 colors = PackedColorArray(0.545174, 0.219333, 0.560815, 1, 0.576471, 0.219608, 0.560784, 0)
@@ -35,27 +35,20 @@ collision_mask = 6
 script = ExtResource("1_trn6j")
 damage_source = SubResource("Resource_1qh2u")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_hg12p")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_0jot6")
-
-[node name="Foreground" type="ColorRect" parent="."]
-material = ExtResource("3_gl06h")
-offset_left = -79.0
-offset_top = -79.0
-offset_right = 79.0
-offset_bottom = 79.0
+[node name="ActiveTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
 
 [node name="IdleTimer" type="Timer" parent="."]
 wait_time = 2.2
 one_shot = true
 autostart = true
 
-[node name="ActiveTimer" type="Timer" parent="."]
-wait_time = 4.0
-one_shot = true
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_0jot6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hg12p")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 3.0
@@ -63,9 +56,16 @@ range_item_cull_mask = 51
 texture = SubResource("GradientTexture2D_pg77a")
 height = 16.0
 
+[node name="Waves" type="ColorRect" parent="."]
+material = ExtResource("3_gl06h")
+offset_left = -79.0
+offset_top = -79.0
+offset_right = 79.0
+offset_bottom = 79.0
+
 [connection signal="area_entered" from="." to="." method="_on_entered"]
 [connection signal="area_exited" from="." to="." method="_on_exited"]
 [connection signal="body_entered" from="." to="." method="_on_entered"]
 [connection signal="body_exited" from="." to="." method="_on_exited"]
-[connection signal="timeout" from="IdleTimer" to="." method="activate"]
 [connection signal="timeout" from="ActiveTimer" to="." method="queue_free"]
+[connection signal="timeout" from="IdleTimer" to="." method="activate"]
