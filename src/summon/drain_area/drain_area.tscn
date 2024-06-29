@@ -67,5 +67,5 @@ height = 16.0
 [connection signal="area_exited" from="." to="." method="_on_exited"]
 [connection signal="body_entered" from="." to="." method="_on_entered"]
 [connection signal="body_exited" from="." to="." method="_on_exited"]
-[connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
-[connection signal="timeout" from="ActiveTimer" to="." method="_on_active_timer_timeout"]
+[connection signal="timeout" from="IdleTimer" to="." method="activate"]
+[connection signal="timeout" from="ActiveTimer" to="." method="queue_free"]
