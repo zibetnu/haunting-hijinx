@@ -2,14 +2,12 @@ extends Area2D
 
 
 signal acquired
-signal disabled
+signal destroyed
 
 const ACQUIRER_PROPERTY = &"battery_percentage"
 const ACQUIRER_VALUE = 1.0
 
 @export var weak_to: DamageSource.Type
-
-@onready var _collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 
 func acquire(acquirer: Object) -> void:
@@ -21,13 +19,13 @@ func acquire(acquirer: Object) -> void:
 	queue_free()
 
 
-func disable() -> void:
-	_collision_shape_2d.disabled = true
-	disabled.emit()
+func destroy() -> void:
+	destroyed.emit()
+	queue_free()
 
 
 func take_damage(source: DamageSource) -> void:
 	if source.damage_type != weak_to:
 		return
 
-	disable()
+	destroy()

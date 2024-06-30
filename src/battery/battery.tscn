@@ -22,5 +22,5 @@ nodes = [NodePath("..")]
 [node name="Display" parent="." instance=ExtResource("3_ge6cj")]
 
 [connection signal="acquired" from="Behavior" to="." method="queue_free"]
-[connection signal="disabled" from="Behavior" to="Display" method="destroy"]
+[connection signal="destroyed" from="Behavior" to="Display" method="destroy"]
 [connection signal="destroyed" from="Display" to="." method="queue_free"]
