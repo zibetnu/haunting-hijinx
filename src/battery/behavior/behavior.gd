@@ -18,6 +18,7 @@ func acquire(acquirer: Object) -> void:
 
 	acquirer.set(ACQUIRER_PROPERTY, ACQUIRER_VALUE)
 	acquired.emit()
+	queue_free()
 
 
 func disable() -> void:
