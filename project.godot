@@ -45,6 +45,10 @@ window/stretch/scale_mode="integer"
 
 enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
 
+[filesystem]
+
+import/blender/enabled=false
+
 [global]
 
 settings_file_path="user://settings.cfg"
