@@ -42,7 +42,7 @@ position = Vector2(640, 360)
 y_sort_enabled = true
 
 [node name="CountingSpawner" parent="." instance=ExtResource("3_xxci0")]
-_spawnable_scenes = PackedStringArray("res://src/ghost/ghost.tscn", "res://src/hunter/hunter.tscn", "res://src/summon/drain_area/drain_area.tscn", "res://src/item/battery/battery.tscn")
+_spawnable_scenes = PackedStringArray("res://src/ghost/ghost.tscn", "res://src/hunter/hunter.tscn", "res://src/summon/drain_area/drain_area.tscn", "res://src/battery/battery.tscn")
 spawn_path = NodePath("../SpawnRoot")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

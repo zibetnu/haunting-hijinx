@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://bw11rdhjv3j62"]
 
-[ext_resource type="Script" path="res://src/item/battery/battery.gd" id="2_0rfgm"]
+[ext_resource type="Script" path="res://src/battery/battery.gd" id="2_0rfgm"]
 [ext_resource type="Texture2D" uid="uid://b3ocf1ud7ioc7" path="res://assets/battery/battery.png" id="3_bermm"]
 [ext_resource type="AudioStream" uid="uid://g5tcldah12p3" path="res://assets/battery/battery_spawn.wav" id="4_q0qy0"]
 

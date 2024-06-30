@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://grxm3658ukjj"]
 
 [ext_resource type="Script" path="res://src/battery_spawner/battery_spawner.gd" id="1_ygxh4"]
-[ext_resource type="PackedScene" uid="uid://bw11rdhjv3j62" path="res://src/item/battery/battery.tscn" id="2_ynbbk"]
+[ext_resource type="PackedScene" uid="uid://bw11rdhjv3j62" path="res://src/battery/battery.tscn" id="2_5j1gl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_repyt"]
 radius = 8.0
 
 [node name="BatterySpawner" type="Node2D"]
 script = ExtResource("1_ygxh4")
-battery_scene = ExtResource("2_ynbbk")
+battery_scene = ExtResource("2_5j1gl")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
