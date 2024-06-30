@@ -1,20 +1,29 @@
 extends Area2D
 
 
+const ACQUIRER_PROPERTY = &"battery_percentage"
+const ACQUIRER_VALUE = 1.0
+const BOB_NAME = &"bob"
+const DESTROY_NAME = &"destroy"
+const SPAWN_NAME = &"spawn"
+
 @export var weak_to: DamageSource.Type
+
+@onready var _animation_player: AnimationPlayer = $AnimationPlayer
+@onready var _collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 
 func _ready() -> void:
-	$AnimationPlayer.play("spawn")
-	await $AnimationPlayer.animation_finished
-	$AnimationPlayer.play("bob")
+	_animation_player.play(SPAWN_NAME)
+	await _animation_player.animation_finished
+	_animation_player.play(BOB_NAME)
 
 
 @rpc("call_local")
 func destoy() -> void:
-	$AnimationPlayer.play("destroy")
-	$CollisionShape2D.disabled = true
-	await $AnimationPlayer.animation_finished
+	_animation_player.play(DESTROY_NAME)
+	_collision_shape_2d.disabled = true
+	await _animation_player.animation_finished
 	if multiplayer.is_server():
 		queue_free()
 
@@ -27,31 +36,12 @@ func take_damage(source: DamageSource) -> void:
 		destoy.rpc()
 
 
-func _acquirer_allowed(acquirer: Variant) -> bool:
-	if not "battery_percentage" in acquirer:
-		return false
-
-	return true
-
-
-func _on_acquired(acquirer: Variant) -> void:
-	acquirer.battery_percentage = 1
-
-
-func _on_entered(acquirer: Variant) -> void:
-	if not _acquirer_allowed(acquirer):
+func _on_entered(acquirer: Object) -> void:
+	if not ACQUIRER_PROPERTY in acquirer:
 		return
 
 	if not multiplayer.is_server():
 		return
 
-	_on_acquired(acquirer)
+	acquirer.set(ACQUIRER_PROPERTY, ACQUIRER_VALUE)
 	queue_free()
-
-
-func _on_area_entered(area: Area2D) -> void:
-	_on_entered(area)
-
-
-func _on_body_entered(body: Node2D) -> void:
-	_on_entered(body)
