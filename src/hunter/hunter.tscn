@@ -339,7 +339,7 @@ layout_mode = 2
 [connection signal="state_physics_processing" from="StateChart/Base/Alive/Movement/Move" to="StateChart/Base/Alive/Movement/Move/Move" method="manual_physics_process"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="DamageSignals" method="set_monitorable" flags=3 binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="Grabbable" method="set_monitorable" flags=3 binds= [false]]
-[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer" method="play" binds= [&"general_sprite/invulnerable"]]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer" method="play" binds= [&"general_sprite/flash"]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="DamageSignals" method="set_monitorable" flags=3 binds= [true]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="Grabbable" method="set_monitorable" flags=3 binds= [true]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer" method="play" binds= [&"general_sprite/RESET"]]

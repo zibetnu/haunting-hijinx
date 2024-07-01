@@ -16,7 +16,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_syg7v"]
-resource_name = "invulnerable"
+resource_name = "flash"
 length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -35,5 +35,5 @@ tracks/0/keys = {
 [resource]
 _data = {
 "RESET": SubResource("Animation_bwnbh"),
-"invulnerable": SubResource("Animation_syg7v")
+"flash": SubResource("Animation_syg7v")
 }
