@@ -242,7 +242,6 @@ y_sort_enabled = true
 libraries = {
 "general_sprite": ExtResource("27_jpk4a")
 }
-speed_scale = 2.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer"]
 replication_config = SubResource("SceneReplicationConfig_fjbw1")
