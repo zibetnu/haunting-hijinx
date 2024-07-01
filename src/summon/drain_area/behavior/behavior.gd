@@ -5,6 +5,8 @@ signal active_ended
 signal active_started
 
 const DAMAGE_METHOD = &"take_damage"
+const DESTROY_GROUP = &"batteries"
+const DESTROY_METHOD = &"destroy"
 
 @export var damage_source: DamageSource
 
@@ -23,6 +25,7 @@ func end_active() -> void:
 func start_active() -> void:
 	_active = true
 	active_started.emit()
+	get_tree().call_group(DESTROY_GROUP, DESTROY_METHOD)
 	_damage_affected_collision_objects()
 	_active_timer.start()
 
