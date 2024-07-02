@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=52 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/peer_visibility_filter/peer_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="29_1sq8w"]
 [ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_i4s33"]
 [ext_resource type="PackedScene" uid="uid://d4gb1ksm22wvh" path="res://src/damage_value_signal/damage_value_signal.tscn" id="34_617dy"]
+[ext_resource type="AnimationLibrary" uid="uid://krtfia4oqseg" path="res://src/general_sprite.tres" id="34_dn6ic"]
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/floored_texture_progress_bar/floored_texture_progress_bar.tscn" id="35_5xob5"]
 [ext_resource type="PackedScene" uid="uid://cpvs73t8l3h88" path="res://src/weak_to/weak_to.tscn" id="35_u2g7w"]
 [ext_resource type="PackedScene" uid="uid://dq7ts6lhskwyn" path="res://src/nodes_touched/nodes_touched.tscn" id="35_yndqj"]
@@ -81,6 +82,11 @@ radius = 96.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o7ptf"]
 radius = 17.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_amkwy"]
+properties/0/path = NodePath(".:current_animation")
+properties/0/spawn = true
+properties/0/replication_mode = 2
 
 [sub_resource type="Gradient" id="Gradient_a05sb"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -469,6 +475,14 @@ shape = SubResource("CircleShape2D_o7ptf")
 [node name="GhostPlaceholder" parent="." instance=ExtResource("13_arjsn")]
 position = Vector2(0, -8)
 
+[node name="ShakeAnimationPlayer" type="AnimationPlayer" parent="GhostPlaceholder/Display" index="2"]
+libraries = {
+"general_sprite": ExtResource("34_dn6ic")
+}
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="GhostPlaceholder/Display/ShakeAnimationPlayer"]
+replication_config = SubResource("SceneReplicationConfig_amkwy")
+
 [node name="PointLight2D" type="PointLight2D" parent="."]
 range_item_cull_mask = 33
 texture = SubResource("GradientTexture2D_u72sc")
@@ -631,6 +645,8 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="state_entered" from="StateChart/Base/Animation/Sprint" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["move"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Summon" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["idle"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Stun" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["stun"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Stun" to="GhostPlaceholder/Display/ShakeAnimationPlayer" method="play" binds= [&"general_sprite/shake"]]
+[connection signal="state_exited" from="StateChart/Base/Animation/Stun" to="GhostPlaceholder/Display/ShakeAnimationPlayer" method="play" binds= [&"general_sprite/RESET"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Panic" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["panic"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Grab" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["move"]]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="enable"]
