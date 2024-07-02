@@ -34,11 +34,15 @@ func _damage_affected_collision_objects() -> void:
 	if not _active:
 		return
 
+	var collided := false
 	for collision_object in _affected_collision_objects:
 		if not collision_object.has_method(DAMAGE_METHOD):
 			continue
 
+		collided = true
 		collision_object.call(DAMAGE_METHOD, damage_source)
+
+	if collided:
 		end_active()
 
 
