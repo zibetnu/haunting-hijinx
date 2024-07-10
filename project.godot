@@ -37,7 +37,6 @@ gdscript/warnings/unsafe_call_argument=1
 
 window/size/viewport_width=640
 window/size/viewport_height=360
-window/size/mode=4
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/stretch/scale_mode="integer"
