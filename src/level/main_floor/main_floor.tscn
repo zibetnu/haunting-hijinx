@@ -107,10 +107,10 @@ position = Vector2(704, 48)
 position = Vector2(32, 416)
 
 [node name="TopLeft" parent="CameraLimits" index="0"]
-position = Vector2(0, 4)
+position = Vector2(0, 6)
 
 [node name="BottomRight" parent="CameraLimits" index="1"]
-position = Vector2(736, 436)
+position = Vector2(736, 432)
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." index="10"]
 rotation = 0.785398
