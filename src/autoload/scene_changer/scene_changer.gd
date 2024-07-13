@@ -6,19 +6,11 @@ extends Node
 @export var main_menu: PackedScene
 
 @onready var disconnected_dialog: AcceptDialog = $DisconnectedDialog
+@onready var scene_spawner: MultiplayerSpawner = $SceneSpawner
 
 
 func _ready() -> void:
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
-
-
-func change_scene_to_file(path: String) -> void:
-	remove_scene()
-	if not multiplayer.is_server():
-		return
-
-	$SceneContainer.add_child(load(path).instantiate(), true)
-	PauseManager.set_pause.rpc(false)
 
 
 func change_scene_to_packed(packed_scene: PackedScene) -> void:
@@ -26,7 +18,7 @@ func change_scene_to_packed(packed_scene: PackedScene) -> void:
 	if not multiplayer.is_server():
 		return
 
-	$SceneContainer.add_child(packed_scene.instantiate(), true)
+	scene_spawner.add_child(packed_scene.instantiate(), true)
 	PauseManager.set_pause.rpc(false)
 
 
@@ -43,8 +35,8 @@ func change_to_main_menu() -> void:
 
 
 func remove_scene() -> void:
-	for child in $SceneContainer.get_children():
-		$SceneContainer.remove_child(child)
+	for child in scene_spawner.get_children():
+		scene_spawner.remove_child(child)
 		child.queue_free()
 
 
