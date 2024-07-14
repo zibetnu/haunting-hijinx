@@ -10,7 +10,7 @@ properties/0/replication_mode = 2
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_pbac4"]
 properties/0/path = NodePath(".:_input_bits")
 properties/0/spawn = true
-properties/0/replication_mode = 1
+properties/0/replication_mode = 2
 
 [node name="Synced" type="Node2D"]
 script = ExtResource("1_c5045")
