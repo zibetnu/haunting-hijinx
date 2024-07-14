@@ -412,7 +412,6 @@ limit_bottom = 6400
 replication_config = SubResource("SceneReplicationConfig_bqubs")
 
 [node name="Synced" parent="." node_paths=PackedStringArray("controller") instance=ExtResource("5_xwsa3")]
-process_mode = 1
 controller = NodePath("UnpauseForce")
 
 [node name="UnpauseForce" parent="Synced" node_paths=PackedStringArray("controller") instance=ExtResource("6_wi10c")]
