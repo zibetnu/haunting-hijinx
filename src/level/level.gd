@@ -92,15 +92,15 @@ func remove_player(id: int) -> void:
 
 
 func _end_match(message: String) -> void:
-		%EndLabel.text = message
-		%EndLabel.visible = true
-		if not multiplayer.is_server():
-			return
+	%EndLabel.text = message
+	%EndLabel.visible = true
+	if not multiplayer.is_server():
+		return
 
-		PauseManager.set_pause.rpc(true)
-		await get_tree().create_timer(3).timeout
-		PeerData.match_in_progress = false
-		SceneChanger.change_scene_to_packed(SceneChanger.lobby)
+	PauseManager.set_pause.rpc(true)
+	await get_tree().create_timer(3).timeout
+	PeerData.match_in_progress = false
+	SceneChanger.change_scene_to_packed(SceneChanger.lobby)
 
 
 func _on_counting_spawner_all_scenes_spawned() -> void:
