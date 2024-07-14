@@ -20,7 +20,6 @@ config/config_path="user://settings.cfg"
 
 PeerData="*res://src/autoload/peer_data/peer_data.tscn"
 SceneChanger="*res://src/autoload/scene_changer/scene_changer.tscn"
-PauseManager="*res://src/autoload/pause_manager.gd"
 FullscreenToggle="res://src/autoload/fullscreen_toggle/fullscreen_toggle.tscn"
 CutsceneManager="*res://src/autoload/cutscene_manager.gd"
 SteamCallbacks="res://src/autoload/steam_callbacks.gd"

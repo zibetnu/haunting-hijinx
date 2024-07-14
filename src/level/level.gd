@@ -97,7 +97,9 @@ func _end_match(message: String) -> void:
 	if not multiplayer.is_server():
 		return
 
-	PauseManager.set_pause.rpc(true)
+	# Force level to stay paused even if scene tree is not paused.
+	set_process_mode.call_deferred(Node.PROCESS_MODE_DISABLED)
+
 	await get_tree().create_timer(3).timeout
 	PeerData.match_in_progress = false
 	SceneChanger.change_scene_to_packed(SceneChanger.lobby)

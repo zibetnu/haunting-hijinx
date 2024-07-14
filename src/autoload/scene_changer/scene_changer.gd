@@ -19,7 +19,7 @@ func change_scene_to_packed(packed_scene: PackedScene) -> void:
 		return
 
 	scene_spawner.add_child(packed_scene.instantiate(), true)
-	PauseManager.set_pause.rpc(false)
+	get_tree().set_pause(false)
 
 
 func change_to_lobby() -> void:

@@ -21,7 +21,7 @@ func _on_cutscene_ended(cutscene_name: String) -> void:
 	if not multiplayer.is_server():
 		return
 
-	PauseManager.set_pause.rpc(false)
+	get_tree().set_pause(false)
 	cutscene_ended.emit()
 
 
@@ -35,7 +35,7 @@ func _on_cutscene_started(cutscene_name: String) -> void:
 		return
 
 	_sync_ghost.rpc(owner.position)
-	PauseManager.set_pause.rpc(true)
+	get_tree().set_pause(true)
 
 
 func _focus_cameras_ghost() -> void:
