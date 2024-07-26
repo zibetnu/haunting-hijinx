@@ -92,10 +92,11 @@ func remove_player(id: int) -> void:
 
 
 func _end_match(message: String) -> void:
-	%EndLabel.text = message
-	%EndLabel.visible = true
 	if not multiplayer.is_server():
 		return
+
+	%EndLabel.text = message
+	%EndLabel.visible = true
 
 	# Force level to stay paused even if scene tree is not paused.
 	set_process_mode.call_deferred(Node.PROCESS_MODE_DISABLED)
