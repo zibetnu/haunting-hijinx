@@ -158,6 +158,6 @@ func _set_camera_limits(camera: Camera2D) -> void:
 	camera.limit_bottom = $CameraLimits/BottomRight.position.y
 
 
-@rpc
+@rpc("reliable")
 func _sync_timer(time_left: float) -> void:
 	$MatchTimer.start(time_left)
