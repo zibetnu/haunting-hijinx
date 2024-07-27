@@ -119,3 +119,4 @@ timer = NodePath("../../MatchTimer")
 color = Color(0.122252, 0.122252, 0.122252, 1)
 
 [connection signal="timeout" from="MatchTimer" to="." method="_on_match_timer_timeout"]
+[connection signal="all_scenes_spawned" from="CountingSpawner" to="." method="_on_counting_spawner_all_scenes_spawned"]
