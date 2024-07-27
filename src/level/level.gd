@@ -16,7 +16,6 @@ func _ready():
 	get_tree().root.size_changed.connect(center_play_area)
 	center_play_area()
 
-	# Only the server needs to spawn the players.
 	if not multiplayer.is_server():
 		return
 
@@ -24,7 +23,6 @@ func _ready():
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(remove_player)
 
-	# Spawn active players.
 	for peer_id in PeerData.participants:
 		add_player(peer_id)
 
