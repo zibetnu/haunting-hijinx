@@ -238,9 +238,6 @@ shape = SubResource("CircleShape2D_vawb0")
 enabled = false
 revives_with = 1
 
-[node name="WeakTo" parent="DamageSignals" instance=ExtResource("30_dc3ty")]
-weak_to = 2
-
 [node name="WeakToStun" parent="DamageSignals" instance=ExtResource("30_dc3ty")]
 
 [node name="Grabbable" parent="." instance=ExtResource("28_gvlgf")]
@@ -386,12 +383,10 @@ layout_mode = 2
 [connection signal="sensed_intensity_changed" from="AuraSense" to="HeartbeatRumble" method="set_heart_rate_from_index"]
 [connection signal="sensed_intensity_changed" from="AuraSense" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_alert_level_from_int"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/Revivable" method="take_damage"]
-[connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakToStun" method="take_damage"]
 [connection signal="progress_percentage_changed" from="DamageSignals/Revivable" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" method="set_as_ratio_floored"]
 [connection signal="revived" from="DamageSignals/Revivable" to="StateChart" method="send_event" binds= [&"revived"]]
 [connection signal="revived" from="DamageSignals/Revivable" to="YSort/Flashlight/Behavior" method="set_battery_percentage" binds= [0.75]]
-[connection signal="damage_taken" from="DamageSignals/WeakTo" to="StateChart" method="send_event" binds= [&"died"]]
 [connection signal="damage_taken" from="DamageSignals/WeakToStun" to="StateChart" method="send_event" binds= [&"stunned"]]
 [connection signal="grabbed" from="Grabbable" to="StateChart" method="send_event" binds= [&"died"]]
 [connection signal="battery_died" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead" flags=3]
