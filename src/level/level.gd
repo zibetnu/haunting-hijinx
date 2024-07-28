@@ -49,10 +49,6 @@ func add_player(id: int) -> void:
 	get_tree().call_group("ghost_peer_ids", "set_id", PeerData.ghost_peer)
 
 
-func allow_set_pause() -> bool:
-	return not %EndLabel.visible or not get_tree().paused
-
-
 func center_play_area() -> void:
 	var visible_rect_size := get_tree().root.get_visible_rect().size
 	var bottom_right_camera_limit: Vector2 = $CameraLimits/BottomRight.position
