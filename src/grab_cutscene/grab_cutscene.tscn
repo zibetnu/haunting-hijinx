@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsgx1owl3cxou"]
+[gd_scene load_steps=4 format=3 uid="uid://bsgx1owl3cxou"]
 
 [ext_resource type="Script" path="res://src/grab_cutscene/grab_cutscene.gd" id="1_53wad"]
 [ext_resource type="AudioStream" uid="uid://b450kuirfnnfq" path="res://assets/ghost_grab.wav" id="2_0vh0e"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ujmsm"]
+properties/0/path = NodePath(".:_tree_paused")
+properties/0/spawn = true
+properties/0/replication_mode = 2
 
 [node name="GrabCutscene" type="Node" groups=["cutscene_sync"]]
 process_mode = 3
@@ -10,3 +15,6 @@ script = ExtResource("1_53wad")
 [node name="GrabSound" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("2_0vh0e")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ujmsm")

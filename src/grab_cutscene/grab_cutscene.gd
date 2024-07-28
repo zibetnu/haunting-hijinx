@@ -6,6 +6,10 @@ extends Node
 signal cutscene_ended
 
 var _cutscene_name := "grab"
+var _tree_paused := false:  # Used to sync pause state across all peers.
+	set(value):
+		get_tree().set_pause(value)
+		_tree_paused = get_tree().paused
 
 
 func start_cutscene() -> void:
@@ -21,7 +25,7 @@ func _on_cutscene_ended(cutscene_name: String) -> void:
 	if not multiplayer.is_server():
 		return
 
-	get_tree().set_pause(false)
+	_tree_paused = false
 	cutscene_ended.emit()
 
 
@@ -35,7 +39,7 @@ func _on_cutscene_started(cutscene_name: String) -> void:
 		return
 
 	_sync_ghost.rpc(owner.position)
-	get_tree().set_pause(true)
+	_tree_paused = true
 
 
 func _focus_cameras_ghost() -> void:
