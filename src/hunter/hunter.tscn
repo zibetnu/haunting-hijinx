@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=38 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -26,7 +26,6 @@
 [ext_resource type="PackedScene" uid="uid://djs1c1w30m8gp" path="res://src/alert/alert.tscn" id="28_bjj70"]
 [ext_resource type="PackedScene" uid="uid://y03qjvt68tjj" path="res://src/aura_sense/aura_sense.tscn" id="28_dd2t8"]
 [ext_resource type="PackedScene" uid="uid://j7t8go4if5di" path="res://src/grabbable/grabbable.tscn" id="28_gvlgf"]
-[ext_resource type="PackedScene" uid="uid://cpvs73t8l3h88" path="res://src/weak_to/weak_to.tscn" id="30_dc3ty"]
 [ext_resource type="PackedScene" uid="uid://gh0mk0t85f13" path="res://src/battery_alert/battery_alert.tscn" id="31_vp1ot"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="33_a7fw2"]
 [ext_resource type="PackedScene" uid="uid://dsccl51pqvbue" path="res://src/peer_process_mode/peer_process_mode.tscn" id="43_rsnb5"]
@@ -238,8 +237,6 @@ shape = SubResource("CircleShape2D_vawb0")
 enabled = false
 revives_with = 1
 
-[node name="WeakToStun" parent="DamageSignals" instance=ExtResource("30_dc3ty")]
-
 [node name="Grabbable" parent="." instance=ExtResource("28_gvlgf")]
 monitorable = false
 
@@ -383,11 +380,9 @@ layout_mode = 2
 [connection signal="sensed_intensity_changed" from="AuraSense" to="HeartbeatRumble" method="set_heart_rate_from_index"]
 [connection signal="sensed_intensity_changed" from="AuraSense" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_alert_level_from_int"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/Revivable" method="take_damage"]
-[connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakToStun" method="take_damage"]
 [connection signal="progress_percentage_changed" from="DamageSignals/Revivable" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" method="set_as_ratio_floored"]
 [connection signal="revived" from="DamageSignals/Revivable" to="StateChart" method="send_event" binds= [&"revived"]]
 [connection signal="revived" from="DamageSignals/Revivable" to="YSort/Flashlight/Behavior" method="set_battery_percentage" binds= [0.75]]
-[connection signal="damage_taken" from="DamageSignals/WeakToStun" to="StateChart" method="send_event" binds= [&"stunned"]]
 [connection signal="grabbed" from="Grabbable" to="StateChart" method="send_event" binds= [&"died"]]
 [connection signal="battery_died" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead" flags=3]
 [connection signal="battery_died" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_battery_died"]]
@@ -396,6 +391,7 @@ layout_mode = 2
 [connection signal="battery_undied" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_battery_undied"]]
 [connection signal="battery_unlowed" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_none" flags=3]
 [connection signal="battery_unlowed" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_battery_unlowed"]]
+[connection signal="damage_taken" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"stunned"]]
 [connection signal="flashlight_rotation_changed" from="YSort/Flashlight/Behavior" to="YSort/HunterPlaceholder/Behavior" method="set_direction_vector_from_angle"]
 [connection signal="powered_off" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_unpowered"]]
 [connection signal="powered_off" from="YSort/Flashlight/Behavior" to="StateChart/Base/Alive/Movement/Move/Move" method="set_move_speed" binds= [74.0]]
