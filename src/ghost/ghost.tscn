@@ -15,8 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://gvf2peg6yuns" path="res://src/controller/unpause_force/unpause_force.tscn" id="6_wi10c"]
 [ext_resource type="PackedScene" uid="uid://ca2ymkyj3cv7e" path="res://src/translucent/translucent.tscn" id="7_bmx85"]
 [ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="7_ijrj0"]
+[ext_resource type="PackedScene" uid="uid://y5w40m6pqbvt" path="res://src/allow_set_bool/allow_set_bool.tscn" id="7_w2y4n"]
 [ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="8_mynla"]
-[ext_resource type="PackedScene" uid="uid://y5w40m6pqbvt" path="res://src/peer_set_bool/peer_set_bool.tscn" id="8_yrkp2"]
 [ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="9_x08fo"]
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="10_el6fq"]
 [ext_resource type="PackedScene" uid="uid://dhavwobkg4v8o" path="res://src/named_property_signals/named_property_signals.tscn" id="10_fwp7a"]
@@ -129,8 +129,7 @@ unique_name_in_owner = true
 [node name="GhostTranslucent" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_bmx85")]
 target = NodePath("..")
 
-[node name="GhostVisible" parent="." node_paths=PackedStringArray("node") instance=ExtResource("8_yrkp2")]
-is_local_peer = false
+[node name="GhostVisible" parent="." node_paths=PackedStringArray("node") instance=ExtResource("7_w2y4n")]
 node = NodePath("..")
 property_name = &"visible"
 
@@ -493,8 +492,7 @@ remote_path = NodePath("../IgnoreCanvasModulate/FollowPlayer")
 [node name="IgnoreCanvasModulate" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 
-[node name="PeerSetBool" parent="IgnoreCanvasModulate" node_paths=PackedStringArray("node") instance=ExtResource("8_yrkp2")]
-is_local_peer = false
+[node name="AllowSetBool" parent="IgnoreCanvasModulate" node_paths=PackedStringArray("node") instance=ExtResource("7_w2y4n")]
 node = NodePath("..")
 property_name = &"visible"
 
@@ -552,27 +550,27 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="filter_disabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="MultiplayerSynchronizer/PeerVisibilityFilter/CallHolder" method="hold"]
 [connection signal="filter_disabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="GhostTranslucent" method="disable_translucency"]
 [connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="GhostTranslucent" method="enable_translucency"]
-[connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="GhostVisible" method="set_value_false"]
-[connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="IgnoreCanvasModulate/PeerSetBool" method="set_value_false"]
+[connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="GhostVisible" method="set_property_value" binds= [false]]
+[connection signal="filter_enabled" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="IgnoreCanvasModulate/AllowSetBool" method="set_property_value" binds= [false]]
 [connection signal="filter_ready" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="MultiplayerSynchronizer" method="add_visibility_filter"]
-[connection signal="call_released" from="MultiplayerSynchronizer/PeerVisibilityFilter/CallHolder" to="GhostVisible" method="set_value_true"]
-[connection signal="call_released" from="MultiplayerSynchronizer/PeerVisibilityFilter/CallHolder" to="IgnoreCanvasModulate/PeerSetBool" method="set_value_true"]
+[connection signal="call_released" from="MultiplayerSynchronizer/PeerVisibilityFilter/CallHolder" to="GhostVisible" method="set_property_value" binds= [true]]
+[connection signal="call_released" from="MultiplayerSynchronizer/PeerVisibilityFilter/CallHolder" to="IgnoreCanvasModulate/AllowSetBool" method="set_property_value" binds= [true]]
 [connection signal="cutscene_ended" from="GrabCutscene" to="StateChart" method="send_event" binds= [&"panic_started"]]
 [connection signal="changed" from="PeerID" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="set_primary_peer_id"]
 [connection signal="changed" from="PeerID" to="Synced" method="set_input_authority"]
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="set_peer_id"]
-[connection signal="changed_to_local" from="PeerID" to="GhostVisible" method="set_is_local_peer_true"]
-[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/PeerSetBool" method="set_is_local_peer_true"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraLargeCircle" method="show"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraSmallCircle" method="show"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="hide"]
+[connection signal="changed_to_local" from="PeerID" to="GhostVisible" method="set_is_allowed" binds= [false]]
 [connection signal="changed_to_local" from="PeerID" to="Camera2D" method="set_enabled" binds= [true]]
-[connection signal="changed_to_remote" from="PeerID" to="GhostVisible" method="set_is_local_peer_false"]
-[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/PeerSetBool" method="set_is_local_peer_false"]
+[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/AllowSetBool" method="set_is_allowed" binds= [false]]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraLargeCircle" method="hide"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraSmallCircle" method="hide"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="show"]
+[connection signal="changed_to_remote" from="PeerID" to="GhostVisible" method="set_is_allowed" binds= [true]]
 [connection signal="changed_to_remote" from="PeerID" to="Camera2D" method="set_enabled" binds= [false]]
+[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/AllowSetBool" method="set_is_allowed" binds= [true]]
 [connection signal="area_count_changed" from="Summon" to="Summon/NamedPropertySignals" method="set_property_value"]
 [connection signal="charge_percentage_changed" from="Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="set_as_ratio_floored"]
 [connection signal="summon_charging" from="Summon" to="StateChart" method="send_event" binds= [&"summon_charging"]]
