@@ -10,6 +10,10 @@ func _ready() -> void:
 	controller.input_handled.connect(_on_controller_input_handled)
 
 
+func force_handle_input() -> void:
+	controller.force_handle_input()
+
+
 func remove_axis_drift(vector: Vector2) -> Vector2:
 	if abs(vector.x) < x_deadzone:
 		vector.x = 0

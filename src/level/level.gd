@@ -16,7 +16,6 @@ func _ready():
 	get_tree().root.size_changed.connect(center_play_area)
 	center_play_area()
 
-	# Only the server needs to spawn the players.
 	if not multiplayer.is_server():
 		return
 
@@ -24,7 +23,6 @@ func _ready():
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(remove_player)
 
-	# Spawn active players.
 	for peer_id in PeerData.participants:
 		add_player(peer_id)
 
@@ -49,10 +47,6 @@ func add_player(id: int) -> void:
 	instance.get_node("PeerID").id = id
 	instance.get_node("IgnoreCanvasModulate/FollowPlayer/NameLabel").text = PeerData.peer_names[id]
 	get_tree().call_group("ghost_peer_ids", "set_id", PeerData.ghost_peer)
-
-
-func allow_set_pause() -> bool:
-	return not %EndLabel.visible or not get_tree().paused
 
 
 func center_play_area() -> void:
@@ -92,15 +86,18 @@ func remove_player(id: int) -> void:
 
 
 func _end_match(message: String) -> void:
-		%EndLabel.text = message
-		%EndLabel.visible = true
-		if not multiplayer.is_server():
-			return
+	if not multiplayer.is_server():
+		return
 
-		PauseManager.set_pause.rpc(true)
-		await get_tree().create_timer(3).timeout
-		PeerData.match_in_progress = false
-		SceneChanger.change_scene_to_packed(SceneChanger.lobby)
+	%EndLabel.text = message
+	%EndLabel.visible = true
+
+	# Force level to stay paused even if scene tree is not paused.
+	set_process_mode.call_deferred(Node.PROCESS_MODE_DISABLED)
+
+	await get_tree().create_timer(3).timeout
+	PeerData.match_in_progress = false
+	SceneChanger.change_scene_to_packed(SceneChanger.lobby)
 
 
 func _on_counting_spawner_all_scenes_spawned() -> void:
@@ -155,6 +152,6 @@ func _set_camera_limits(camera: Camera2D) -> void:
 	camera.limit_bottom = $CameraLimits/BottomRight.position.y
 
 
-@rpc
+@rpc("reliable")
 func _sync_timer(time_left: float) -> void:
 	$MatchTimer.start(time_left)

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://btqnfps722xj7"]
+
+[ext_resource type="Script" path="res://src/autoload/fullscreen_toggle/fullscreen_toggle.gd" id="1_38b55"]
+[ext_resource type="PackedScene" uid="uid://beclheud7fmo4" path="res://src/config_handler/config_handler.tscn" id="2_yopfo"]
+
+[node name="FullscreenToggle" type="Node"]
+process_mode = 3
+script = ExtResource("1_38b55")
+
+[node name="ConfigHandler" parent="." instance=ExtResource("2_yopfo")]
+section = "display"
+key = "window_mode"
+
+[connection signal="window_mode_changed" from="." to="ConfigHandler" method="save_value"]
+[connection signal="loaded" from="ConfigHandler" to="." method="set_window_mode"]
+[connection signal="ready" from="ConfigHandler" to="ConfigHandler" method="load_value"]

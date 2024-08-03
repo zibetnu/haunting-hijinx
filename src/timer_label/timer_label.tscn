@@ -4,6 +4,6 @@
 
 [node name="TimerLabel" type="Label"]
 offset_right = 32.0
-offset_bottom = 26.0
+offset_bottom = 16.0
 text = "0:00"
 script = ExtResource("1_u1jf4")

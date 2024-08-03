@@ -18,7 +18,5 @@ dialog_text = "Disconnected from server."
 
 [node name="SceneSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://src/level/main_floor/main_floor.tscn", "res://src/lobby/lobby.tscn")
-spawn_path = NodePath("../SceneContainer")
+spawn_path = NodePath(".")
 spawn_limit = 1
-
-[node name="SceneContainer" type="Node" parent="."]

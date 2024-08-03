@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=38 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -21,11 +21,11 @@
 [ext_resource type="PackedScene" uid="uid://cssdkhs4cty5c" path="res://src/costume/hunter_placeholder/hunter_placeholder.tscn" id="19_fj04q"]
 [ext_resource type="PackedScene" uid="uid://b4i2arqquha56" path="res://src/revivable/revivable.tscn" id="23_d234k"]
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/floored_texture_progress_bar/floored_texture_progress_bar.tscn" id="24_qych1"]
+[ext_resource type="AnimationLibrary" uid="uid://krtfia4oqseg" path="res://src/general_sprite.tres" id="27_jpk4a"]
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="27_qehgg"]
 [ext_resource type="PackedScene" uid="uid://djs1c1w30m8gp" path="res://src/alert/alert.tscn" id="28_bjj70"]
 [ext_resource type="PackedScene" uid="uid://y03qjvt68tjj" path="res://src/aura_sense/aura_sense.tscn" id="28_dd2t8"]
 [ext_resource type="PackedScene" uid="uid://j7t8go4if5di" path="res://src/grabbable/grabbable.tscn" id="28_gvlgf"]
-[ext_resource type="PackedScene" uid="uid://cpvs73t8l3h88" path="res://src/weak_to/weak_to.tscn" id="30_dc3ty"]
 [ext_resource type="PackedScene" uid="uid://gh0mk0t85f13" path="res://src/battery_alert/battery_alert.tscn" id="31_vp1ot"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="33_a7fw2"]
 [ext_resource type="PackedScene" uid="uid://dsccl51pqvbue" path="res://src/peer_process_mode/peer_process_mode.tscn" id="43_rsnb5"]
@@ -52,44 +52,6 @@ properties/2/replication_mode = 2
 properties/3/path = NodePath(".:limit_bottom")
 properties/3/spawn = true
 properties/3/replication_mode = 2
-
-[sub_resource type="Animation" id="Animation_bwnbh"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_syg7v"]
-resource_name = "invulnerable"
-length = 0.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.701961)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_id0td"]
-_data = {
-"RESET": SubResource("Animation_bwnbh"),
-"invulnerable": SubResource("Animation_syg7v")
-}
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_fjbw1"]
 properties/0/path = NodePath(".:current_animation")
@@ -132,8 +94,6 @@ secondary_allow_in_filter = true
 
 [node name="PeerID" parent="." instance=ExtResource("1_fx0g1")]
 unique_name_in_owner = true
-
-[node name="PeerProcessMode" parent="PeerID" instance=ExtResource("43_rsnb5")]
 
 [node name="PeerVisibilityFilter" parent="PeerID" instance=ExtResource("44_mvfu7")]
 
@@ -185,6 +145,18 @@ character = NodePath("../../../../../..")
 move_speed = 74.0
 manual_process = true
 
+[node name="Stun" type="Node" parent="StateChart/Base/Alive/Movement"]
+script = ExtResource("3_ocdoo")
+
+[node name="StunEnded" type="Node" parent="StateChart/Base/Alive/Movement/Stun"]
+script = ExtResource("4_x2w3t")
+to = NodePath("../../Idle")
+event = &"stun_ended"
+
+[node name="StunTimeout" type="Timer" parent="StateChart/Base/Alive/Movement/Stun"]
+wait_time = 1.5
+one_shot = true
+
 [node name="Vulnerability" type="Node" parent="StateChart/Base/Alive"]
 script = ExtResource("2_yqkoe")
 initial_state = NodePath("Invulnerable")
@@ -205,6 +177,11 @@ script = ExtResource("4_x2w3t")
 to = NodePath("../../../../Dead")
 event = &"died"
 
+[node name="Stunned" type="Node" parent="StateChart/Base/Alive/Vulnerability/Vulnerable"]
+script = ExtResource("4_x2w3t")
+to = NodePath("../../../Movement/Stun")
+event = &"stunned"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.99, 0.99)
 shape = SubResource("CircleShape2D_vawb0")
@@ -222,7 +199,6 @@ limit_bottom = 6400
 replication_config = SubResource("SceneReplicationConfig_2bhal")
 
 [node name="Synced" parent="." node_paths=PackedStringArray("controller") instance=ExtResource("5_uqurr")]
-process_mode = 1
 controller = NodePath("UnpauseForce")
 
 [node name="UnpauseForce" parent="Synced" node_paths=PackedStringArray("controller") instance=ExtResource("6_ujhjn")]
@@ -259,9 +235,6 @@ shape = SubResource("CircleShape2D_vawb0")
 enabled = false
 revives_with = 1
 
-[node name="WeakTo" parent="DamageSignals" instance=ExtResource("30_dc3ty")]
-weak_to = 2
-
 [node name="Grabbable" parent="." instance=ExtResource("28_gvlgf")]
 monitorable = false
 
@@ -277,11 +250,18 @@ y_sort_enabled = true
 
 [node name="InvulnerableAnimationPlayer" type="AnimationPlayer" parent="YSort/HunterPlaceholder/Display" index="2"]
 libraries = {
-"": SubResource("AnimationLibrary_id0td")
+"general_sprite": ExtResource("27_jpk4a")
 }
-speed_scale = 2.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer"]
+replication_config = SubResource("SceneReplicationConfig_fjbw1")
+
+[node name="ShakeAnimationPlayer" type="AnimationPlayer" parent="YSort/HunterPlaceholder/Display" index="3"]
+libraries = {
+"general_sprite": ExtResource("27_jpk4a")
+}
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="YSort/HunterPlaceholder/Display/ShakeAnimationPlayer"]
 replication_config = SubResource("SceneReplicationConfig_fjbw1")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
@@ -341,18 +321,17 @@ layout_mode = 2
 [connection signal="filter_ready" from="GhostPeerID/PeerVisibilityFilter" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer" method="add_visibility_filter"]
 [connection signal="changed" from="PeerID" to="GhostPeerID/PeerProcessMode" method="set_primary_peer_id"]
 [connection signal="changed" from="PeerID" to="GhostPeerID/PeerVisibilityFilter" method="set_primary_peer_id"]
-[connection signal="changed" from="PeerID" to="PeerID/PeerProcessMode" method="set_primary_peer_id"]
 [connection signal="changed" from="PeerID" to="PeerID/PeerVisibilityFilter" method="set_primary_peer_id"]
 [connection signal="changed" from="PeerID" to="Synced" method="set_input_authority"]
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="set_peer_id"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="hide"]
-[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D" method="show"]
+[connection signal="changed_to_local" from="PeerID" to="HeartbeatRumble" method="set_process" binds= [true]]
 [connection signal="changed_to_local" from="PeerID" to="Camera2D" method="set_enabled" binds= [true]]
+[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/AllowSetBool" method="set_is_allowed" binds= [true]]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="show"]
-[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/Sprite2D" method="show"]
+[connection signal="changed_to_remote" from="PeerID" to="HeartbeatRumble" method="set_process" binds= [false]]
 [connection signal="changed_to_remote" from="PeerID" to="Camera2D" method="set_enabled" binds= [false]]
-[connection signal="process_mode_updated" from="PeerID/PeerProcessMode" to="HeartbeatRumble" method="set_process_mode"]
-[connection signal="process_mode_updated" from="PeerID/PeerProcessMode" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="set_process_mode"]
+[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/AllowSetBool" method="set_is_allowed" binds= [false]]
 [connection signal="filter_ready" from="PeerID/PeerVisibilityFilter" to="HeartbeatRumble/MultiplayerSynchronizer" method="add_visibility_filter"]
 [connection signal="filter_ready" from="PeerID/PeerVisibilityFilter" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer" method="add_visibility_filter"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="StateChart/Base/Dead/IsDead" method="set_true"]
@@ -374,12 +353,18 @@ layout_mode = 2
 [connection signal="state_entered" from="StateChart/Base/Alive/Movement/Idle" to="YSort/HunterPlaceholder/Behavior" method="set_animation_name" binds= ["idle"]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Movement/Move" to="YSort/HunterPlaceholder/Behavior" method="set_animation_name" binds= [&"move"]]
 [connection signal="state_physics_processing" from="StateChart/Base/Alive/Movement/Move" to="StateChart/Base/Alive/Movement/Move/Move" method="manual_physics_process"]
+[connection signal="state_entered" from="StateChart/Base/Alive/Movement/Stun" to="StateChart/Base/Alive/Movement/Stun/StunTimeout" method="start"]
+[connection signal="state_entered" from="StateChart/Base/Alive/Movement/Stun" to="YSort/HunterPlaceholder/Display/ShakeAnimationPlayer" method="play" binds= [&"general_sprite/shake"]]
+[connection signal="state_exited" from="StateChart/Base/Alive/Movement/Stun" to="StateChart/Base/Alive/Movement/Stun/StunTimeout" method="stop"]
+[connection signal="state_exited" from="StateChart/Base/Alive/Movement/Stun" to="Synced" method="force_emit_move_vector_signals"]
+[connection signal="state_exited" from="StateChart/Base/Alive/Movement/Stun" to="YSort/HunterPlaceholder/Display/ShakeAnimationPlayer" method="play" binds= [&"general_sprite/RESET"]]
+[connection signal="timeout" from="StateChart/Base/Alive/Movement/Stun/StunTimeout" to="StateChart" method="send_event" binds= [&"stun_ended"]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="DamageSignals" method="set_monitorable" flags=3 binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="Grabbable" method="set_monitorable" flags=3 binds= [false]]
-[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer" method="play" binds= [&"invulnerable"]]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer" method="play" binds= [&"general_sprite/flash"]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="DamageSignals" method="set_monitorable" flags=3 binds= [true]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="Grabbable" method="set_monitorable" flags=3 binds= [true]]
-[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer" method="play" binds= [&"RESET"]]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer" method="play" binds= [&"general_sprite/RESET"]]
 [connection signal="button_1_changed" from="Synced" to="YSort/Flashlight/Behavior" method="set_powered"]
 [connection signal="button_1_pressed" from="Synced" to="StateChart" method="send_event" binds= [&"button_1_pressed"]]
 [connection signal="button_1_released" from="Synced" to="StateChart" method="send_event" binds= [&"button_1_released"]]
@@ -392,11 +377,9 @@ layout_mode = 2
 [connection signal="sensed_intensity_changed" from="AuraSense" to="HeartbeatRumble" method="set_heart_rate_from_index"]
 [connection signal="sensed_intensity_changed" from="AuraSense" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_alert_level_from_int"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/Revivable" method="take_damage"]
-[connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
 [connection signal="progress_percentage_changed" from="DamageSignals/Revivable" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" method="set_as_ratio_floored"]
 [connection signal="revived" from="DamageSignals/Revivable" to="StateChart" method="send_event" binds= [&"revived"]]
 [connection signal="revived" from="DamageSignals/Revivable" to="YSort/Flashlight/Behavior" method="set_battery_percentage" binds= [0.75]]
-[connection signal="damage_taken" from="DamageSignals/WeakTo" to="StateChart" method="send_event" binds= [&"died"]]
 [connection signal="grabbed" from="Grabbable" to="StateChart" method="send_event" binds= [&"died"]]
 [connection signal="battery_died" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead" flags=3]
 [connection signal="battery_died" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_battery_died"]]
@@ -405,6 +388,7 @@ layout_mode = 2
 [connection signal="battery_undied" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_battery_undied"]]
 [connection signal="battery_unlowed" from="YSort/Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_none" flags=3]
 [connection signal="battery_unlowed" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_battery_unlowed"]]
+[connection signal="damage_taken" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"stunned"]]
 [connection signal="flashlight_rotation_changed" from="YSort/Flashlight/Behavior" to="YSort/HunterPlaceholder/Behavior" method="set_direction_vector_from_angle"]
 [connection signal="powered_off" from="YSort/Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_unpowered"]]
 [connection signal="powered_off" from="YSort/Flashlight/Behavior" to="StateChart/Base/Alive/Movement/Move/Move" method="set_move_speed" binds= [74.0]]

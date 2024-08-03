@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://y5w40m6pqbvt"]
-
-[ext_resource type="Script" path="res://src/peer_set_bool/peer_set_bool.gd" id="1_eei0y"]
-
-[node name="PeerSetBool" type="Node"]
-script = ExtResource("1_eei0y")

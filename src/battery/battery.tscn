@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bw11rdhjv3j62"]
+
+[ext_resource type="PackedScene" uid="uid://ffxaye3n8b7e" path="res://src/battery/behavior/behavior.tscn" id="2_2d76p"]
+[ext_resource type="PackedScene" uid="uid://uuq811gwpafg" path="res://src/battery/display/display.tscn" id="3_ge6cj"]
+[ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="3_n85i4"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_624qb"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+
+[node name="Battery" type="Node2D"]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_624qb")
+
+[node name="Behavior" parent="." instance=ExtResource("2_2d76p")]
+
+[node name="ClientNodeDeleter" parent="Behavior" node_paths=PackedStringArray("nodes") instance=ExtResource("3_n85i4")]
+nodes = [NodePath("..")]
+
+[node name="Display" parent="." instance=ExtResource("3_ge6cj")]
+
+[connection signal="acquired" from="Behavior" to="." method="queue_free"]
+[connection signal="destroyed" from="Behavior" to="Display" method="destroy"]
+[connection signal="destroyed" from="Display" to="." method="queue_free"]

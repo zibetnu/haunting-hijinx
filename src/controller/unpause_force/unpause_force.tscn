@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://src/controller/unpause_force/unpause_force.gd" id="1_fgmpa"]
 
-[node name="UnpauseForce" type="Node2D" groups=["pause_sync"]]
+[node name="UnpauseForce" type="Node2D"]
 script = ExtResource("1_fgmpa")

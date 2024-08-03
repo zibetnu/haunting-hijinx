@@ -1,9 +1,9 @@
 extends Node2D
 
 
-const Battery = preload("res://src/item/battery/battery.tscn")
 const MAX_BATTERY_SPAWN_ATTEMPTS = 100
 
+@export var battery_scene: PackedScene
 @export var spawn_area_top_left: Node2D
 @export var spawn_area_bottom_right: Node2D
 @export var spawn_root : Node2D
@@ -43,7 +43,7 @@ func _on_timer_timeout() -> void:
 	if _batteries_spawned >= batteries_needed:
 		return
 
-	var instance = Battery.instantiate()
+	var instance = battery_scene.instantiate()
 	var instance_position := _get_random_battery_position()
 	var i := 0
 	while i < MAX_BATTERY_SPAWN_ATTEMPTS and not _is_position_clear(instance_position):

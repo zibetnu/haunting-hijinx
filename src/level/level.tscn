@@ -15,8 +15,11 @@ properties/0/replication_mode = 2
 properties/1/path = NodePath("CanvasLayer/EndLabel:visible")
 properties/1/spawn = true
 properties/1/replication_mode = 2
+properties/2/path = NodePath(".:process_mode")
+properties/2/spawn = true
+properties/2/replication_mode = 2
 
-[node name="Level" type="Node2D" groups=["levels", "pause_sync"]]
+[node name="Level" type="Node2D" groups=["levels"]]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_el04s")
@@ -42,7 +45,7 @@ position = Vector2(640, 360)
 y_sort_enabled = true
 
 [node name="CountingSpawner" parent="." instance=ExtResource("3_xxci0")]
-_spawnable_scenes = PackedStringArray("res://src/ghost/ghost.tscn", "res://src/hunter/hunter.tscn", "res://src/summon/drain_area/drain_area.tscn", "res://src/item/battery/battery.tscn")
+_spawnable_scenes = PackedStringArray("res://src/ghost/ghost.tscn", "res://src/hunter/hunter.tscn", "res://src/summon/drain_area/drain_area.tscn", "res://src/battery/battery.tscn")
 spawn_path = NodePath("../SpawnRoot")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
@@ -116,3 +119,4 @@ timer = NodePath("../../MatchTimer")
 color = Color(0.122252, 0.122252, 0.122252, 1)
 
 [connection signal="timeout" from="MatchTimer" to="." method="_on_match_timer_timeout"]
+[connection signal="all_scenes_spawned" from="CountingSpawner" to="." method="_on_counting_spawner_all_scenes_spawned"]

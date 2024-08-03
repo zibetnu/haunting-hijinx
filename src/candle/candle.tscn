@@ -9,19 +9,19 @@
 position = Vector2(0, 8)
 
 [node name="Arm" type="Sprite2D" parent="."]
-position = Vector2(8, -8)
+position = Vector2(8, -12)
 texture = ExtResource("2_3mdjh")
 
 [node name="Base" type="Sprite2D" parent="."]
 light_mask = 16
-position = Vector2(8, -8)
+position = Vector2(8, -12)
 texture = ExtResource("5_e3wtp")
 
 [node name="Flame" parent="." instance=ExtResource("4_fq7hg")]
-position = Vector2(8, -14)
+position = Vector2(8, -18)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(8, 0)
+position = Vector2(8, -5)
 color = Color(0, 0.804089, 0.976547, 1)
 range_item_cull_mask = 27
 texture = ExtResource("6_mu4jo")

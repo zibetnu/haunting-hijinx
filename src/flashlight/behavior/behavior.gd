@@ -7,6 +7,7 @@ signal battery_lowed
 signal battery_unlowed
 signal cast_length_index_changed(index: int)
 signal collision_points_changed(points: Array[Vector2])
+signal damage_taken
 signal flashlight_rotation_changed(flashlight_rotation: float)
 signal power_toggled(powered: bool)
 signal powered_off
@@ -151,6 +152,7 @@ func set_target_rotation_from_vector(value: Vector2) -> void:
 func take_damage(source: DamageSource) -> void:
 	if source.damage_type == damage_weak_to:
 		battery = 0
+		damage_taken.emit()
 
 
 func _damage_colliders(colliders: Array) -> void:

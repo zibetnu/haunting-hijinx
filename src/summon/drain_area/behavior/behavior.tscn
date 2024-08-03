@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://boluqe005mis1"]
+
+[ext_resource type="Script" path="res://src/summon/drain_area/behavior/behavior.gd" id="1_2jy2r"]
+[ext_resource type="Script" path="res://src/damage_source.gd" id="2_4217s"]
+
+[sub_resource type="Resource" id="Resource_1qh2u"]
+script = ExtResource("2_4217s")
+damage_amount = 0
+damage_type = 0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_frs5h"]
+radius = 72.0
+
+[node name="Behavior" type="Area2D" groups=["drain_areas"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_2jy2r")
+damage_source = SubResource("Resource_1qh2u")
+
+[node name="ActiveTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="IdleTimer" type="Timer" parent="."]
+wait_time = 2.2
+one_shot = true
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_frs5h")
+
+[connection signal="area_entered" from="." to="." method="_on_entered"]
+[connection signal="area_exited" from="." to="." method="_on_exited"]
+[connection signal="body_entered" from="." to="." method="_on_entered"]
+[connection signal="body_exited" from="." to="." method="_on_exited"]
+[connection signal="timeout" from="ActiveTimer" to="." method="end_active"]
+[connection signal="timeout" from="IdleTimer" to="." method="start_active"]
