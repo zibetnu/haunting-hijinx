@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://gxh15sde0me5"]
+[gd_scene load_steps=10 format=3 uid="uid://gxh15sde0me5"]
 
 [ext_resource type="Script" path="res://src/level/level.gd" id="1_el04s"]
 [ext_resource type="PackedScene" uid="uid://vl432076bm8p" path="res://src/level/steam_lobby_chat_update/steam_lobby_chat_update.tscn" id="2_acesl"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://7wne64wo1epb" path="res://src/counting_spawner/counting_spawner.tscn" id="3_xxci0"]
 [ext_resource type="PackedScene" uid="uid://ojjy8keargbf" path="res://src/ping_label/ping_label.tscn" id="5_ijd43"]
 [ext_resource type="PackedScene" uid="uid://qdsau1mq5mj1" path="res://src/timer_low_label/timer_low_label.tscn" id="7_a1tmf"]
+[ext_resource type="PackedScene" uid="uid://kshsc10g60hy" path="res://src/match_menu/match_menu.tscn" id="8_v81sd"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_63iby"]
 properties/0/path = NodePath("CanvasLayer/EndLabel:text")
@@ -114,6 +115,8 @@ size_flags_horizontal = 4
 theme_type_variation = &"LabelBigOutlined"
 text = "3"
 timer = NodePath("../../MatchTimer")
+
+[node name="MatchMenu" parent="CanvasLayer" instance=ExtResource("8_v81sd")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.122252, 0.122252, 0.122252, 1)
