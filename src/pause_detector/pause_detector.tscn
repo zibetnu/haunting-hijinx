@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7iwtbp54tlpx"]
+
+[ext_resource type="Script" path="res://src/pause_detector/pause_detector.gd" id="1_qgku3"]
+
+[node name="PauseDetector" type="Node"]
+process_mode = 3
+script = ExtResource("1_qgku3")
