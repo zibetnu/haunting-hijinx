@@ -2,14 +2,14 @@ extends Node
 
 
 @export var is_allowed := false:
-	set=set_is_allowed
+	set = set_is_allowed
 
 @export var node: Node
 
 @export_group("Boolean Property", "property")
 @export var property_name: StringName
 @export var property_value := false:
-	set=set_property_value
+	set = set_property_value
 
 
 func _ready() -> void:
