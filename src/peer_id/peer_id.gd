@@ -8,6 +8,13 @@ signal changed_to_remote()
 @export var id := 1:
 	set = set_id
 
+@export var emit_on_ready := true
+
+
+func _ready() -> void:
+	if emit_on_ready:
+		set_id(id)  # Set to current value again so signals will emit.
+
 
 func set_id(value: int) -> void:
 	id = value
