@@ -16,7 +16,16 @@ title = ""
 size = Vector2i(216, 100)
 dialog_text = "Disconnected from server."
 
+[node name="FallbackTimer" type="Timer" parent="."]
+process_mode = 3
+wait_time = 3.0
+one_shot = true
+
 [node name="SceneSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://src/level/main_floor/main_floor.tscn", "res://src/lobby/lobby.tscn")
 spawn_path = NodePath(".")
 spawn_limit = 1
+
+[connection signal="timeout" from="FallbackTimer" to="." method="_main_menu_fallback"]
+[connection signal="child_entered_tree" from="SceneSpawner" to="FallbackTimer" method="stop" unbinds=1]
+[connection signal="child_exiting_tree" from="SceneSpawner" to="FallbackTimer" method="start" unbinds=1]

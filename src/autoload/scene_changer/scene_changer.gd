@@ -40,6 +40,16 @@ func remove_scene() -> void:
 		child.queue_free()
 
 
+# Resets multiplayer peer and returns to
+# main menu if there isn't a spawned scene.
+func _main_menu_fallback() -> void:
+	if scene_spawner.get_child_count() > 0:
+		return
+
+	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
+	change_to_main_menu()
+
+
 func _on_server_disconnected() -> void:
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 	disconnected_dialog.popup_centered()
