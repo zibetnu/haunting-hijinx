@@ -1,4 +1,4 @@
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > Haunting Hijinks does not have any public releases yet. However, you can open it in Godot 4.2.x.
 
 # Haunting Hijinks
