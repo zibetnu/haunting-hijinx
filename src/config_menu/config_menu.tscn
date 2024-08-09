@@ -52,7 +52,7 @@ popup/item_2/text = "Exclusive Fullscreen"
 popup/item_2/id = 4
 script = ExtResource("1_ekxna")
 
-[node name="ConfigHandler" parent="VBoxContainer/TabContainer/Display/MarginContainer/GridContainer/WindowModeOptionButton" instance=ExtResource("2_hf7id")]
+[node name="ConfigHandler" parent="VBoxContainer/TabContainer/Display/MarginContainer/GridContainer/WindowModeOptionButton" groups=["window_mode_config_handlers"] instance=ExtResource("2_hf7id")]
 section = "display"
 key = "window_mode"
 
