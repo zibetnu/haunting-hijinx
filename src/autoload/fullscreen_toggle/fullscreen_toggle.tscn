@@ -15,12 +15,14 @@ group = &"window_mode_config_handlers"
 method = &"load_value"
 
 [node name="ConfigHandler" parent="." instance=ExtResource("2_yopfo")]
+editor_description = "Window mode defaults to exclusive fullscreen (4) if ConfigHandler fails to load a value."
 section = "display"
 key = "window_mode"
 
 [node name="WindowModeSetter" parent="." instance=ExtResource("3_3b2w7")]
 
 [connection signal="window_mode_requested" from="." to="WindowModeSetter" method="set_window_mode"]
+[connection signal="load_failed" from="ConfigHandler" to="WindowModeSetter" method="set_window_mode" binds= [4]]
 [connection signal="loaded" from="ConfigHandler" to="WindowModeSetter" method="set_window_mode"]
 [connection signal="ready" from="ConfigHandler" to="ConfigHandler" method="load_value"]
 [connection signal="saved" from="ConfigHandler" to="CallGroup" method="call_group"]
