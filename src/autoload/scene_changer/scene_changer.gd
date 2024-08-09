@@ -1,6 +1,7 @@
 extends Node
 
 
+@export var config_menu: PackedScene
 @export var lobby: PackedScene
 @export var lobby_browser: PackedScene
 @export var main_menu: PackedScene
@@ -20,6 +21,10 @@ func change_scene_to_packed(packed_scene: PackedScene) -> void:
 
 	scene_spawner.add_child(packed_scene.instantiate(), true)
 	get_tree().set_pause(false)
+
+
+func change_to_config_menu() -> void:
+	change_scene_to_packed(config_menu)
 
 
 func change_to_lobby() -> void:

@@ -1,12 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmhqty6g1sgls"]
+[gd_scene load_steps=6 format=3 uid="uid://cmhqty6g1sgls"]
 
 [ext_resource type="Script" path="res://src/autoload/scene_changer/scene_changer.gd" id="1_6yofi"]
 [ext_resource type="PackedScene" uid="uid://df63fi5u7xpjt" path="res://src/lobby/lobby.tscn" id="2_nsjnt"]
+[ext_resource type="PackedScene" uid="uid://cmta6hi75dnwf" path="res://src/config_menu/config_menu.tscn" id="2_v6cn0"]
 [ext_resource type="PackedScene" uid="uid://civfmojof07gs" path="res://src/main_menu/main_menu.tscn" id="3_667vk"]
 [ext_resource type="PackedScene" uid="uid://crqc4k74es8j6" path="res://src/lobby_browser/lobby_browser.tscn" id="3_gctsf"]
 
 [node name="SceneChanger" type="Node"]
 script = ExtResource("1_6yofi")
+config_menu = ExtResource("2_v6cn0")
 lobby = ExtResource("2_nsjnt")
 lobby_browser = ExtResource("3_gctsf")
 main_menu = ExtResource("3_667vk")
