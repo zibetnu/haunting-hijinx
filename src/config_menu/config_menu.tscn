@@ -43,6 +43,12 @@ size_flags_horizontal = 8
 size_flags_vertical = 6
 text = "Window Mode"
 
+[node name="Brightness" type="Label" parent="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+text = "Brightness"
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer"]
 layout_mode = 2
 
@@ -65,6 +71,20 @@ key = "window_mode"
 
 [node name="WindowModeSetter" parent="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode" instance=ExtResource("1_v58bw")]
 
+[node name="Brightness" type="HSlider" parent="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+min_value = 0.063
+max_value = 0.378
+step = 0.063
+value = 0.126
+tick_count = 6
+
+[node name="ConfigHandler" parent="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/Brightness" instance=ExtResource("2_hf7id")]
+editor_description = "Defaults to 0.126."
+section = "display"
+key = "brightness"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -83,4 +103,9 @@ method = &"change_to_main_menu"
 [connection signal="loaded" from="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode/ConfigHandler" to="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode" method="select_id"]
 [connection signal="ready" from="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode/ConfigHandler" to="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode/ConfigHandler" method="load_value"]
 [connection signal="window_mode_changed" from="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode/WindowModeSetter" to="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode/ConfigHandler" method="save_value"]
+[connection signal="drag_ended" from="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/Brightness" to="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/Brightness/ConfigHandler" method="save_value" unbinds=1]
+[connection signal="value_changed" from="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/Brightness" to="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/Brightness/ConfigHandler" method="set_staged_value"]
+[connection signal="load_failed" from="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/Brightness/ConfigHandler" to="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/Brightness" method="set_value" binds= [0.126]]
+[connection signal="loaded" from="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/Brightness/ConfigHandler" to="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/Brightness" method="set_value"]
+[connection signal="ready" from="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/Brightness/ConfigHandler" to="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/Brightness/ConfigHandler" method="load_value"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Back" to="VBoxContainer/HBoxContainer/Back/CallAttempter" method="attempt_method_call"]

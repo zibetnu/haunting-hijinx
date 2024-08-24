@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://gxh15sde0me5"]
+[gd_scene load_steps=12 format=3 uid="uid://gxh15sde0me5"]
 
 [ext_resource type="Script" path="res://src/level/level.gd" id="1_el04s"]
 [ext_resource type="PackedScene" uid="uid://vl432076bm8p" path="res://src/level/steam_lobby_chat_update/steam_lobby_chat_update.tscn" id="2_acesl"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://ojjy8keargbf" path="res://src/ping_label/ping_label.tscn" id="5_ijd43"]
 [ext_resource type="PackedScene" uid="uid://qdsau1mq5mj1" path="res://src/timer_low_label/timer_low_label.tscn" id="7_a1tmf"]
 [ext_resource type="PackedScene" uid="uid://kshsc10g60hy" path="res://src/match_menu/match_menu.tscn" id="8_v81sd"]
+[ext_resource type="PackedScene" uid="uid://c2coqqrfwvkcy" path="res://src/color_darken_signals/color_darken_signals.tscn" id="9_8c7s2"]
+[ext_resource type="PackedScene" uid="uid://beclheud7fmo4" path="res://src/config_handler/config_handler.tscn" id="10_14385"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_63iby"]
 properties/0/path = NodePath("CanvasLayer/EndLabel:text")
@@ -119,7 +121,17 @@ timer = NodePath("../../MatchTimer")
 [node name="MatchMenu" parent="CanvasLayer" instance=ExtResource("8_v81sd")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.122252, 0.122252, 0.122252, 1)
+color = Color(0.126, 0.126, 0.126, 1)
+
+[node name="ColorDarkenSignals" parent="CanvasModulate" instance=ExtResource("9_8c7s2")]
+color = Color(1, 1, 1, 1)
+
+[node name="ConfigHandler" parent="CanvasModulate/ColorDarkenSignals" instance=ExtResource("10_14385")]
+section = "display"
+key = "brightness"
 
 [connection signal="timeout" from="MatchTimer" to="." method="_on_match_timer_timeout"]
 [connection signal="all_scenes_spawned" from="CountingSpawner" to="." method="_on_counting_spawner_all_scenes_spawned"]
+[connection signal="darkened_color_changed" from="CanvasModulate/ColorDarkenSignals" to="CanvasModulate" method="set_color"]
+[connection signal="loaded" from="CanvasModulate/ColorDarkenSignals/ConfigHandler" to="CanvasModulate/ColorDarkenSignals" method="set_inverted_darken_amount"]
+[connection signal="ready" from="CanvasModulate/ColorDarkenSignals/ConfigHandler" to="CanvasModulate/ColorDarkenSignals/ConfigHandler" method="load_value"]
