@@ -31,16 +31,22 @@ layout_mode = 2
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TabContainer/Display"]
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/TabContainer/Display/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Display/MarginContainer"]
 layout_mode = 2
-columns = 2
 
-[node name="WindowModeLabel" type="Label" parent="VBoxContainer/TabContainer/Display/MarginContainer/GridContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="WindowMode" type="Label" parent="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
+size_flags_vertical = 6
 text = "Window Mode"
 
-[node name="WindowModeOptionButton" type="OptionButton" parent="VBoxContainer/TabContainer/Display/MarginContainer/GridContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="WindowMode" type="OptionButton" parent="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 alignment = 1
 item_count = 3
@@ -52,11 +58,11 @@ popup/item_2/text = "Exclusive Fullscreen"
 popup/item_2/id = 4
 script = ExtResource("1_ekxna")
 
-[node name="ConfigHandler" parent="VBoxContainer/TabContainer/Display/MarginContainer/GridContainer/WindowModeOptionButton" groups=["window_mode_config_handlers"] instance=ExtResource("2_hf7id")]
+[node name="ConfigHandler" parent="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode" groups=["window_mode_config_handlers"] instance=ExtResource("2_hf7id")]
 section = "display"
 key = "window_mode"
 
-[node name="WindowModeSetter" parent="VBoxContainer/TabContainer/Display/MarginContainer/GridContainer/WindowModeOptionButton" instance=ExtResource("1_v58bw")]
+[node name="WindowModeSetter" parent="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode" instance=ExtResource("1_v58bw")]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -70,9 +76,9 @@ text = "Back"
 node_path = NodePath("/root/SceneChanger")
 method = &"change_to_main_menu"
 
-[connection signal="ready" from="." to="VBoxContainer/TabContainer/Display/MarginContainer/GridContainer/WindowModeOptionButton" method="grab_focus"]
-[connection signal="item_id_selected" from="VBoxContainer/TabContainer/Display/MarginContainer/GridContainer/WindowModeOptionButton" to="VBoxContainer/TabContainer/Display/MarginContainer/GridContainer/WindowModeOptionButton/WindowModeSetter" method="set_window_mode"]
-[connection signal="loaded" from="VBoxContainer/TabContainer/Display/MarginContainer/GridContainer/WindowModeOptionButton/ConfigHandler" to="VBoxContainer/TabContainer/Display/MarginContainer/GridContainer/WindowModeOptionButton" method="select_id"]
-[connection signal="ready" from="VBoxContainer/TabContainer/Display/MarginContainer/GridContainer/WindowModeOptionButton/ConfigHandler" to="VBoxContainer/TabContainer/Display/MarginContainer/GridContainer/WindowModeOptionButton/ConfigHandler" method="load_value"]
-[connection signal="window_mode_changed" from="VBoxContainer/TabContainer/Display/MarginContainer/GridContainer/WindowModeOptionButton/WindowModeSetter" to="VBoxContainer/TabContainer/Display/MarginContainer/GridContainer/WindowModeOptionButton/ConfigHandler" method="save_value"]
+[connection signal="ready" from="." to="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode" method="grab_focus"]
+[connection signal="item_id_selected" from="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode" to="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode/WindowModeSetter" method="set_window_mode"]
+[connection signal="loaded" from="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode/ConfigHandler" to="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode" method="select_id"]
+[connection signal="ready" from="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode/ConfigHandler" to="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode/ConfigHandler" method="load_value"]
+[connection signal="window_mode_changed" from="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode/WindowModeSetter" to="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode/ConfigHandler" method="save_value"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Back" to="VBoxContainer/HBoxContainer/Back/CallAttempter" method="attempt_method_call"]
