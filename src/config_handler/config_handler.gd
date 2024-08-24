@@ -5,11 +5,16 @@ signal loaded(value: Variant)
 signal load_failed
 signal saved
 signal save_failed
+signal staged_value_changed(staged_value: Variant)
 
 const PATH_SETTING_NAME = "application/config/config_path"
 
 @export var section: String
 @export var key: String
+
+## The default value passed to [method save_value].
+var staged_value: Variant:
+	set = set_staged_value
 
 @onready var _path := ProjectSettings.get_setting(PATH_SETTING_NAME) as String
 
@@ -23,7 +28,7 @@ func load_value() -> void:
 	loaded.emit(config_file.get_value(section, key))
 
 
-func save_value(value: Variant) -> void:
+func save_value(value: Variant = staged_value) -> void:
 	var config_file: ConfigFile = _get_existing_config_file()
 	config_file.set_value(section, key, value)
 	var error: Error = config_file.save(_path)
@@ -32,6 +37,11 @@ func save_value(value: Variant) -> void:
 		return
 
 	saved.emit()
+
+
+func set_staged_value(value: Variant) -> void:
+	staged_value = value
+	staged_value_changed.emit(staged_value)
 
 
 func _get_existing_config_file() -> ConfigFile:
