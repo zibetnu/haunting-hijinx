@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=45 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/peer_visibility_filter/peer_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
@@ -15,16 +15,16 @@
 [ext_resource type="PackedScene" uid="uid://y5w40m6pqbvt" path="res://src/allow_set_bool/allow_set_bool.tscn" id="7_w2y4n"]
 [ext_resource type="PackedScene" uid="uid://dhavwobkg4v8o" path="res://src/named_property_signals/named_property_signals.tscn" id="10_fwp7a"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="13_56q65"]
-[ext_resource type="PackedScene" uid="uid://nj5bu4130gy3" path="res://src/costume/ghost_placeholder/ghost_placeholder.tscn" id="13_arjsn"]
 [ext_resource type="PackedScene" uid="uid://ctcjena4x8kr0" path="res://src/aura/aura.tscn" id="13_e27lr"]
 [ext_resource type="PackedScene" uid="uid://dc3f3sy1vso5f" path="res://src/group_bool/group_bool.tscn" id="16_q6wqq"]
 [ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/move/move.tscn" id="18_5mhrn"]
 [ext_resource type="PackedScene" uid="uid://bfhqyxu3iuptm" path="res://src/event_listener/event_listener.tscn" id="18_870ie"]
 [ext_resource type="PackedScene" uid="uid://bkuic22finfse" path="res://src/controller/player_controller_stack.tscn" id="19_swqdr"]
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="29_1sq8w"]
+[ext_resource type="PackedScene" uid="uid://dc83s644ta6eo" path="res://src/placeholder_costume.tscn" id="29_ftfj4"]
 [ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_i4s33"]
+[ext_resource type="Texture2D" uid="uid://bhta7pnif21mf" path="res://assets/placeholder_sprite_wide.png" id="30_rab3d"]
 [ext_resource type="PackedScene" uid="uid://d4gb1ksm22wvh" path="res://src/damage_value_signal/damage_value_signal.tscn" id="34_617dy"]
-[ext_resource type="AnimationLibrary" uid="uid://krtfia4oqseg" path="res://src/general_sprite.tres" id="34_dn6ic"]
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/floored_texture_progress_bar/floored_texture_progress_bar.tscn" id="35_5xob5"]
 [ext_resource type="PackedScene" uid="uid://cpvs73t8l3h88" path="res://src/weak_to/weak_to.tscn" id="35_u2g7w"]
 [ext_resource type="PackedScene" uid="uid://dq7ts6lhskwyn" path="res://src/nodes_touched/nodes_touched.tscn" id="35_yndqj"]
@@ -77,11 +77,6 @@ radius = 96.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_o7ptf"]
 radius = 17.0
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_amkwy"]
-properties/0/path = NodePath(".:current_animation")
-properties/0/spawn = true
-properties/0/replication_mode = 2
-
 [sub_resource type="Gradient" id="Gradient_a05sb"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
@@ -113,7 +108,7 @@ replication_config = SubResource("SceneReplicationConfig_hsnve")
 [node name="CallHolder" parent="MultiplayerSynchronizer/PeerVisibilityFilter" instance=ExtResource("5_s7auc")]
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
-nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched"), NodePath("../GhostPlaceholder/Behavior")]
+nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched")]
 
 [node name="GrabCutscene" parent="." instance=ExtResource("4_qoosa")]
 
@@ -446,16 +441,8 @@ count_group = &"hunters"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HuntersTouched"]
 shape = SubResource("CircleShape2D_o7ptf")
 
-[node name="GhostPlaceholder" parent="." instance=ExtResource("13_arjsn")]
-position = Vector2(0, -8)
-
-[node name="ShakeAnimationPlayer" type="AnimationPlayer" parent="GhostPlaceholder/Display/Sprite2D" index="0"]
-libraries = {
-"general_sprite": ExtResource("34_dn6ic")
-}
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="GhostPlaceholder/Display/Sprite2D/ShakeAnimationPlayer"]
-replication_config = SubResource("SceneReplicationConfig_amkwy")
+[node name="PlaceholderCostume" parent="." instance=ExtResource("29_ftfj4")]
+texture = ExtResource("30_rab3d")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 range_item_cull_mask = 33
@@ -612,16 +599,17 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="timeout" from="StateChart/Base/Behavior/Alive/Panic/EndTimer" to="StateChart" method="send_event" binds= [&"panic_ended"]]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Grab" to="GrabCutscene" method="start_cutscene"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Grab" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Dead" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["dead"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Idle" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["idle"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Move" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["move"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Sprint" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["move"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Summon" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["idle"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Stun" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["stun"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Stun" to="GhostPlaceholder/Display/Sprite2D/ShakeAnimationPlayer" method="play" binds= [&"general_sprite/shake"]]
-[connection signal="state_exited" from="StateChart/Base/Animation/Stun" to="GhostPlaceholder/Display/Sprite2D/ShakeAnimationPlayer" method="play" binds= [&"general_sprite/RESET"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Panic" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["panic"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Grab" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["move"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Dead" to="PlaceholderCostume/Vector2iSignals/VframeAnimationPlayer" method="play" binds= ["dead"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Idle" to="PlaceholderCostume/Vector2iSignals/VframeAnimationPlayer" method="play" binds= ["idle"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Move" to="PlaceholderCostume/Vector2iSignals/VframeAnimationPlayer" method="play" binds= ["move"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Sprint" to="PlaceholderCostume/Vector2iSignals/VframeAnimationPlayer" method="play" binds= ["move"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Summon" to="PlaceholderCostume/Vector2iSignals/VframeAnimationPlayer" method="play" binds= ["idle"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Stun" to="PlaceholderCostume/EffectAnimationPlayer" method="play" binds= [&"sprite/shake"]]
+[connection signal="state_exited" from="StateChart/Base/Animation/Stun" to="PlaceholderCostume/EffectAnimationPlayer" method="play" binds= [&"RESET"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Panic" to="PlaceholderCostume/EffectAnimationPlayer" method="play" binds= ["canvas_item/pulse"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Panic" to="PlaceholderCostume/Vector2iSignals/VframeAnimationPlayer" method="play" binds= [&"move"]]
+[connection signal="state_exited" from="StateChart/Base/Animation/Panic" to="PlaceholderCostume/EffectAnimationPlayer" method="play" binds= [&"RESET"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Grab" to="PlaceholderCostume/Vector2iSignals/VframeAnimationPlayer" method="play" binds= ["move"]]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="enable"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="disable"]
 [connection signal="button_1_pressed" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_1_pressed"]]
@@ -633,7 +621,7 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="move_vector_changed" from="PlayerControllerStack/Synced" to="StateChart/Base/Behavior/Alive/Normal/Move" method="set_move_vector"]
 [connection signal="move_vector_changed" from="PlayerControllerStack/Synced" to="StateChart/Base/Behavior/Alive/Sprint/Move" method="set_move_vector"]
 [connection signal="move_vector_changed" from="PlayerControllerStack/Synced" to="StateChart/Base/Behavior/Alive/Panic/Move" method="set_move_vector"]
-[connection signal="move_vector_changed" from="PlayerControllerStack/Synced" to="GhostPlaceholder/Behavior" method="set_direction_vector"]
+[connection signal="move_vector_changed" from="PlayerControllerStack/Synced" to="PlaceholderCostume/Vector2iSignals/RotationToIntRange" method="set_range_value_from_vector"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
 [connection signal="damage_taken" from="DamageSignals/WeakTo" to="StateChart" method="send_event" binds= [&"damaged"]]
 [connection signal="damaged_by" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageValueSignal" method="take_damage"]
@@ -645,4 +633,4 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="last_node_exited" from="HuntersTouched" to="StateChart" method="send_event" binds= [&"no_hunters_touched"]]
 
 [editable path="PlayerControllerStack"]
-[editable path="GhostPlaceholder"]
+[editable path="PlaceholderCostume"]
