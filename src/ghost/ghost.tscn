@@ -449,12 +449,12 @@ shape = SubResource("CircleShape2D_o7ptf")
 [node name="GhostPlaceholder" parent="." instance=ExtResource("13_arjsn")]
 position = Vector2(0, -8)
 
-[node name="ShakeAnimationPlayer" type="AnimationPlayer" parent="GhostPlaceholder/Display" index="2"]
+[node name="ShakeAnimationPlayer" type="AnimationPlayer" parent="GhostPlaceholder/Display/Sprite2D" index="0"]
 libraries = {
 "general_sprite": ExtResource("34_dn6ic")
 }
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="GhostPlaceholder/Display/ShakeAnimationPlayer"]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="GhostPlaceholder/Display/Sprite2D/ShakeAnimationPlayer"]
 replication_config = SubResource("SceneReplicationConfig_amkwy")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
@@ -618,8 +618,8 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="state_entered" from="StateChart/Base/Animation/Sprint" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["move"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Summon" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["idle"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Stun" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["stun"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Stun" to="GhostPlaceholder/Display/ShakeAnimationPlayer" method="play" binds= [&"general_sprite/shake"]]
-[connection signal="state_exited" from="StateChart/Base/Animation/Stun" to="GhostPlaceholder/Display/ShakeAnimationPlayer" method="play" binds= [&"general_sprite/RESET"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Stun" to="GhostPlaceholder/Display/Sprite2D/ShakeAnimationPlayer" method="play" binds= [&"general_sprite/shake"]]
+[connection signal="state_exited" from="StateChart/Base/Animation/Stun" to="GhostPlaceholder/Display/Sprite2D/ShakeAnimationPlayer" method="play" binds= [&"general_sprite/RESET"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Panic" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["panic"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Grab" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["move"]]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="enable"]

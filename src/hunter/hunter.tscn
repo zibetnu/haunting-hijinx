@@ -224,20 +224,20 @@ y_sort_enabled = true
 
 [node name="HunterPlaceholder" parent="YSort" instance=ExtResource("19_fj04q")]
 
-[node name="InvulnerableAnimationPlayer" type="AnimationPlayer" parent="YSort/HunterPlaceholder/Display" index="2"]
+[node name="InvulnerableAnimationPlayer" type="AnimationPlayer" parent="YSort/HunterPlaceholder/Display/Sprite2D" index="0"]
 libraries = {
 "general_sprite": ExtResource("27_jpk4a")
 }
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer"]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="YSort/HunterPlaceholder/Display/Sprite2D/InvulnerableAnimationPlayer"]
 replication_config = SubResource("SceneReplicationConfig_fjbw1")
 
-[node name="ShakeAnimationPlayer" type="AnimationPlayer" parent="YSort/HunterPlaceholder/Display" index="3"]
+[node name="ShakeAnimationPlayer" type="AnimationPlayer" parent="YSort/HunterPlaceholder/Display/Sprite2D" index="1"]
 libraries = {
 "general_sprite": ExtResource("27_jpk4a")
 }
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="YSort/HunterPlaceholder/Display/ShakeAnimationPlayer"]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="YSort/HunterPlaceholder/Display/Sprite2D/ShakeAnimationPlayer"]
 replication_config = SubResource("SceneReplicationConfig_fjbw1")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
@@ -330,17 +330,17 @@ layout_mode = 2
 [connection signal="state_entered" from="StateChart/Base/Alive/Movement/Move" to="YSort/HunterPlaceholder/Behavior" method="set_animation_name" binds= [&"move"]]
 [connection signal="state_physics_processing" from="StateChart/Base/Alive/Movement/Move" to="StateChart/Base/Alive/Movement/Move/Move" method="manual_physics_process"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Movement/Stun" to="StateChart/Base/Alive/Movement/Stun/StunTimeout" method="start"]
-[connection signal="state_entered" from="StateChart/Base/Alive/Movement/Stun" to="YSort/HunterPlaceholder/Display/ShakeAnimationPlayer" method="play" binds= [&"general_sprite/shake"]]
+[connection signal="state_entered" from="StateChart/Base/Alive/Movement/Stun" to="YSort/HunterPlaceholder/Display/Sprite2D/ShakeAnimationPlayer" method="play" binds= [&"general_sprite/shake"]]
 [connection signal="state_exited" from="StateChart/Base/Alive/Movement/Stun" to="StateChart/Base/Alive/Movement/Stun/StunTimeout" method="stop"]
 [connection signal="state_exited" from="StateChart/Base/Alive/Movement/Stun" to="PlayerControllerStack/Synced" method="force_emit_move_vector_signals"]
-[connection signal="state_exited" from="StateChart/Base/Alive/Movement/Stun" to="YSort/HunterPlaceholder/Display/ShakeAnimationPlayer" method="play" binds= [&"general_sprite/RESET"]]
+[connection signal="state_exited" from="StateChart/Base/Alive/Movement/Stun" to="YSort/HunterPlaceholder/Display/Sprite2D/ShakeAnimationPlayer" method="play" binds= [&"general_sprite/RESET"]]
 [connection signal="timeout" from="StateChart/Base/Alive/Movement/Stun/StunTimeout" to="StateChart" method="send_event" binds= [&"stun_ended"]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="DamageSignals" method="set_monitorable" flags=3 binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="Grabbable" method="set_monitorable" flags=3 binds= [false]]
-[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer" method="play" binds= [&"general_sprite/flash"]]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="YSort/HunterPlaceholder/Display/Sprite2D/InvulnerableAnimationPlayer" method="play" binds= [&"general_sprite/flash"]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="DamageSignals" method="set_monitorable" flags=3 binds= [true]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="Grabbable" method="set_monitorable" flags=3 binds= [true]]
-[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="YSort/HunterPlaceholder/Display/InvulnerableAnimationPlayer" method="play" binds= [&"general_sprite/RESET"]]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="YSort/HunterPlaceholder/Display/Sprite2D/InvulnerableAnimationPlayer" method="play" binds= [&"general_sprite/RESET"]]
 [connection signal="button_1_changed" from="PlayerControllerStack/Synced" to="YSort/Flashlight/Behavior" method="set_powered"]
 [connection signal="button_1_pressed" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_1_pressed"]]
 [connection signal="button_1_released" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_1_released"]]
