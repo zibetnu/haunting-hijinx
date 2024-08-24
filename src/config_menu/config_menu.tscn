@@ -59,6 +59,7 @@ popup/item_2/id = 4
 script = ExtResource("1_ekxna")
 
 [node name="ConfigHandler" parent="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode" groups=["window_mode_config_handlers"] instance=ExtResource("2_hf7id")]
+editor_description = "Defaults to 4 (exclusive fullscreen)."
 section = "display"
 key = "window_mode"
 
@@ -78,6 +79,7 @@ method = &"change_to_main_menu"
 
 [connection signal="ready" from="." to="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode" method="grab_focus"]
 [connection signal="item_id_selected" from="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode" to="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode/WindowModeSetter" method="set_window_mode"]
+[connection signal="load_failed" from="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode/ConfigHandler" to="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode" method="select_id" binds= [4]]
 [connection signal="loaded" from="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode/ConfigHandler" to="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode" method="select_id"]
 [connection signal="ready" from="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode/ConfigHandler" to="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode/ConfigHandler" method="load_value"]
 [connection signal="window_mode_changed" from="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode/WindowModeSetter" to="VBoxContainer/TabContainer/Display/MarginContainer/HBoxContainer/VBoxContainer2/WindowMode/ConfigHandler" method="save_value"]
