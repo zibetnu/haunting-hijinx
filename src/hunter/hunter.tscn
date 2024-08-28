@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=32 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://cy4qrm44icmyy" path="res://src/flashlight/flashlight.tscn" id="15_hljm8"]
 [ext_resource type="PackedScene" uid="uid://mt548ar3ll4w" path="res://src/heartbeat_rumble/heartbeat_rumble.tscn" id="18_jndug"]
 [ext_resource type="PackedScene" uid="uid://dc83s644ta6eo" path="res://src/placeholder_costume/placeholder_costume.tscn" id="19_gui16"]
+[ext_resource type="Texture2D" uid="uid://dkbhsutxrqjnb" path="res://assets/hunter.png" id="20_eyuev"]
+[ext_resource type="AnimationLibrary" uid="uid://dlimo4w07d43t" path="res://src/hunter/one_v_frame.tres" id="21_rmd00"]
 [ext_resource type="PackedScene" uid="uid://b4i2arqquha56" path="res://src/revivable/revivable.tscn" id="23_d234k"]
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/floored_texture_progress_bar/floored_texture_progress_bar.tscn" id="24_qych1"]
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="27_qehgg"]
@@ -216,7 +218,26 @@ y_sort_enabled = true
 
 [node name="Flashlight" parent="YSort" instance=ExtResource("15_hljm8")]
 
+[node name="Body" parent="YSort/Flashlight/Display/RotationNode2" index="0"]
+visible = false
+
 [node name="PlaceholderCostume" parent="YSort" instance=ExtResource("19_gui16")]
+texture = ExtResource("20_eyuev")
+hframes = 16
+vframes = 1
+frame = 0
+
+[node name="Vector2iSignals" parent="YSort/PlaceholderCostume" index="1"]
+vector = Vector2i(0, 0)
+
+[node name="RotationToIntRange" parent="YSort/PlaceholderCostume/Vector2iSignals" index="0"]
+range_size = 16
+range_value = 0
+
+[node name="VframeAnimationPlayer" parent="YSort/PlaceholderCostume/Vector2iSignals" index="1"]
+libraries = {
+"": ExtResource("21_rmd00")
+}
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.5
@@ -353,6 +374,7 @@ layout_mode = 2
 [editable path="HeartbeatRumble"]
 [editable path="PlayerControllerStack"]
 [editable path="YSort/Flashlight"]
+[editable path="YSort/Flashlight/Display"]
 [editable path="YSort/PlaceholderCostume"]
 [editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert"]
 [editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert"]
