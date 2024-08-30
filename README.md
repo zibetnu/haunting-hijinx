@@ -1,7 +1,7 @@
 > [!IMPORTANT]
-> Haunting Hijinks does not have any public releases yet. However, you can open it in Godot 4.2.x.
+> Haunting Hijinx does not have any public releases yet. However, you can open it in Godot 4.2.x.
 
-# Haunting Hijinks
+# Haunting Hijinx
 
 An open-source remake of a classic minigame from Nintendo Land. Supports online multiplayer for 2-5 players.
 
