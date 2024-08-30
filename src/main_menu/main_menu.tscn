@@ -4,7 +4,17 @@
 [ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="2_7d7kt"]
 [ext_resource type="PackedScene" uid="uid://56f6sbrp31ud" path="res://src/call_attempter/call_attempter.tscn" id="2_ojbel"]
 
-[node name="MainMenu" type="VBoxContainer" node_paths=PackedStringArray("first_button")]
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mjvxa")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -15,29 +25,28 @@ offset_top = -80.0
 offset_right = 60.0
 grow_horizontal = 2
 grow_vertical = 0
-script = ExtResource("1_mjvxa")
-first_button = NodePath("BrowseLobbies")
 
-[node name="BrowseLobbies" type="Button" parent="."]
+[node name="BrowseLobbies" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Browse Lobbies"
 
-[node name="Settings" type="Button" parent="."]
+[node name="Settings" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Settings"
 
-[node name="CallAttempter" parent="Settings" instance=ExtResource("2_ojbel")]
+[node name="CallAttempter" parent="VBoxContainer/Settings" instance=ExtResource("2_ojbel")]
 node_path = NodePath("/root/SceneChanger")
 method = &"change_to_config_menu"
 
-[node name="Quit" type="Button" parent="."]
+[node name="Quit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Quit"
 
-[node name="SteamConnector" parent="." instance=ExtResource("2_7d7kt")]
+[node name="SteamConnector" parent="VBoxContainer" instance=ExtResource("2_7d7kt")]
 editor_description = "Calls close_connection on ready to make sure that Steam doesn't think this player is still in a lobby."
 
-[connection signal="pressed" from="BrowseLobbies" to="." method="_on_browse_lobbies_pressed"]
-[connection signal="pressed" from="Settings" to="Settings/CallAttempter" method="attempt_method_call"]
-[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
-[connection signal="ready" from="SteamConnector" to="SteamConnector" method="close_connection"]
+[connection signal="pressed" from="VBoxContainer/BrowseLobbies" to="." method="_on_browse_lobbies_pressed"]
+[connection signal="ready" from="VBoxContainer/BrowseLobbies" to="VBoxContainer/BrowseLobbies" method="grab_focus"]
+[connection signal="pressed" from="VBoxContainer/Settings" to="VBoxContainer/Settings/CallAttempter" method="attempt_method_call"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="ready" from="VBoxContainer/SteamConnector" to="VBoxContainer/SteamConnector" method="close_connection"]
