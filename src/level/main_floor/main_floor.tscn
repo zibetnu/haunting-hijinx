@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://2uclu3gf4iyj"]
+[gd_scene load_steps=7 format=3 uid="uid://2uclu3gf4iyj"]
 
 [ext_resource type="PackedScene" uid="uid://gxh15sde0me5" path="res://src/level/level.tscn" id="1_sri5i"]
 [ext_resource type="TileSet" uid="uid://26wcy33gmwrh" path="res://src/tile_sets/main_floor.tres" id="2_6q4uq"]
 [ext_resource type="PackedScene" uid="uid://b6sumweqwhyet" path="res://src/candle/candelabra.tscn" id="3_1xcu7"]
 [ext_resource type="PackedScene" uid="uid://cai8ypa3j3wip" path="res://src/stairs/stairs.tscn" id="4_ry2f1"]
 [ext_resource type="PackedScene" uid="uid://ciga14osg5c77" path="res://src/candle/candle.tscn" id="5_5yume"]
+[ext_resource type="PackedScene" uid="uid://qvu7pdftkg8y" path="res://src/ghost_statue/ghost_statue.tscn" id="6_hc5gu"]
 
 [node name="MainFloor" node_paths=PackedStringArray("ghost_spawn_point", "hunter_spawn_points") instance=ExtResource("1_sri5i")]
 ghost_spawn_point = NodePath("SpawnPoints/GhostSpawnPoint")
@@ -88,6 +89,12 @@ position = Vector2(394, 57)
 [node name="PointLight2D" parent="TileMaps/Props/Candle2" index="3"]
 position = Vector2(8, 8)
 height = 18.0
+
+[node name="GhostStatue" parent="TileMaps/Props" index="5" instance=ExtResource("6_hc5gu")]
+position = Vector2(272, 239)
+
+[node name="GhostStatue2" parent="TileMaps/Props" index="6" instance=ExtResource("6_hc5gu")]
+position = Vector2(192, 47)
 
 [node name="SpawnPoints" type="Node2D" parent="." index="4"]
 
