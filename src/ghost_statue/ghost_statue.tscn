@@ -1,0 +1,40 @@
+[gd_scene load_steps=10 format=3 uid="uid://qvu7pdftkg8y"]
+
+[ext_resource type="Texture2D" uid="uid://bcud6153v4cd5" path="res://assets/statue/base/diffuse.png" id="1_nkf4o"]
+[ext_resource type="Texture2D" uid="uid://chw30io6tbvqx" path="res://assets/statue/base/normal.png" id="2_c6hu8"]
+[ext_resource type="Texture2D" uid="uid://sfy2hreb7xxo" path="res://assets/statue/base/specular.png" id="3_hd512"]
+[ext_resource type="Texture2D" uid="uid://cbnm4xrkfeutt" path="res://assets/statue/ghost/diffuse.png" id="4_mtkty"]
+[ext_resource type="Texture2D" uid="uid://dp4kwc7cfkiem" path="res://assets/statue/ghost/normal.png" id="5_prf3r"]
+[ext_resource type="Texture2D" uid="uid://0wk0eimjy2gc" path="res://assets/statue/ghost/specular.png" id="6_w2v7l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ob8gk"]
+size = Vector2(32, 32)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_kqstq"]
+diffuse_texture = ExtResource("1_nkf4o")
+normal_texture = ExtResource("2_c6hu8")
+specular_texture = ExtResource("3_hd512")
+specular_shininess = 0.5
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_xixck"]
+diffuse_texture = ExtResource("4_mtkty")
+normal_texture = ExtResource("5_prf3r")
+specular_texture = ExtResource("6_w2v7l")
+specular_shininess = 0.5
+
+[node name="GhostStatue" type="StaticBody2D"]
+position = Vector2(0, -5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_ob8gk")
+
+[node name="Base" type="Sprite2D" parent="."]
+light_mask = 16
+z_index = -1
+texture = SubResource("CanvasTexture_kqstq")
+
+[node name="Ghost" type="Sprite2D" parent="."]
+light_mask = 16
+position = Vector2(0, -10)
+texture = SubResource("CanvasTexture_xixck")
