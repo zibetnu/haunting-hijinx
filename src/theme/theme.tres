@@ -1,9 +1,19 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://k2680qtkyab6"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://k2680qtkyab6"]
 
 [ext_resource type="FontFile" uid="uid://cmyudnfjlpktv" path="res://src/theme/modern_dos_8x16.ttf" id="1_kj04y"]
+[ext_resource type="StyleBox" uid="uid://jj64njhm1d1i" path="res://src/theme/button_style_box/disabled.tres" id="1_reryu"]
+[ext_resource type="StyleBox" uid="uid://bvcimthgdycfr" path="res://src/theme/button_style_box/focus.tres" id="2_bggbf"]
+[ext_resource type="StyleBox" uid="uid://c2nr3hgck48wu" path="res://src/theme/button_style_box/hover.tres" id="3_rj728"]
+[ext_resource type="StyleBox" uid="uid://dkoxqvoe76t51" path="res://src/theme/button_style_box/normal.tres" id="4_6ch3r"]
+[ext_resource type="StyleBox" uid="uid://1x4ej0jqmvk3" path="res://src/theme/button_style_box/pressed.tres" id="5_toa5b"]
 
 [resource]
 default_font = ExtResource("1_kj04y")
+Button/styles/disabled = ExtResource("1_reryu")
+Button/styles/focus = ExtResource("2_bggbf")
+Button/styles/hover = ExtResource("3_rj728")
+Button/styles/normal = ExtResource("4_6ch3r")
+Button/styles/pressed = ExtResource("5_toa5b")
 LabelBig/base_type = &"Label"
 LabelBig/font_sizes/font_size = 32
 LabelBigOutlined/base_type = &"LabelBig"
