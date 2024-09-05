@@ -25,6 +25,7 @@
 
 [resource]
 default_font = ExtResource("1_kj04y")
+AcceptDialog/styles/panel = ExtResource("9_3p1nt")
 Button/styles/disabled = ExtResource("1_reryu")
 Button/styles/focus = ExtResource("2_bggbf")
 Button/styles/hover = ExtResource("3_rj728")
