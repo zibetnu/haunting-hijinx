@@ -49,6 +49,7 @@ layout_mode = 2
 text = "Main Menu"
 
 [node name="EndMatchConfirmationDialog" type="ConfirmationDialog" parent="."]
+transparent_bg = true
 initial_position = 2
 size = Vector2i(200, 104)
 borderless = true
@@ -59,6 +60,7 @@ dialog_autowrap = true
 cancel_button_text = "No"
 
 [node name="MainMenuConfirmationDialog" type="ConfirmationDialog" parent="."]
+transparent_bg = true
 initial_position = 2
 size = Vector2i(200, 104)
 borderless = true

@@ -14,6 +14,7 @@ lobby_browser = ExtResource("3_gctsf")
 main_menu = ExtResource("3_667vk")
 
 [node name="DisconnectedDialog" type="AcceptDialog" parent="."]
+transparent_bg = true
 size = Vector2i(216, 100)
 borderless = true
 dialog_text = "Disconnected from server."
