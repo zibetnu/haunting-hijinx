@@ -92,9 +92,8 @@ text = "Back"
 node_path = NodePath("/root/SceneChanger")
 method = &"change_to_main_menu"
 
-[connection signal="ready" from="." to="VBoxContainer/TabContainer/Display/WindowMode/OptionButton" method="grab_focus"]
+[connection signal="ready" from="." to="VBoxContainer/TabContainer/Display/WindowMode/OptionButton" method="grab_focus" flags=3]
 [connection signal="item_id_selected" from="VBoxContainer/TabContainer/Display/WindowMode/OptionButton" to="VBoxContainer/TabContainer/Display/WindowMode/OptionButton/WindowModeSetter" method="set_window_mode"]
-[connection signal="ready" from="VBoxContainer/TabContainer/Display/WindowMode/OptionButton" to="VBoxContainer/TabContainer/Display/WindowMode/OptionButton" method="grab_focus"]
 [connection signal="load_failed" from="VBoxContainer/TabContainer/Display/WindowMode/OptionButton/ConfigHandler" to="VBoxContainer/TabContainer/Display/WindowMode/OptionButton" method="select_id" binds= [4]]
 [connection signal="loaded" from="VBoxContainer/TabContainer/Display/WindowMode/OptionButton/ConfigHandler" to="VBoxContainer/TabContainer/Display/WindowMode/OptionButton" method="select_id"]
 [connection signal="ready" from="VBoxContainer/TabContainer/Display/WindowMode/OptionButton/ConfigHandler" to="VBoxContainer/TabContainer/Display/WindowMode/OptionButton/ConfigHandler" method="load_value"]
