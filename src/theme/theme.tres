@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://k2680qtkyab6"]
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://k2680qtkyab6"]
 
 [ext_resource type="FontFile" uid="uid://cmyudnfjlpktv" path="res://src/theme/modern_dos_8x16.ttf" id="1_kj04y"]
 [ext_resource type="StyleBox" uid="uid://jj64njhm1d1i" path="res://src/theme/button_style_box/disabled.tres" id="1_reryu"]
@@ -6,7 +6,13 @@
 [ext_resource type="StyleBox" uid="uid://c2nr3hgck48wu" path="res://src/theme/button_style_box/hover.tres" id="3_rj728"]
 [ext_resource type="StyleBox" uid="uid://dkoxqvoe76t51" path="res://src/theme/button_style_box/normal.tres" id="4_6ch3r"]
 [ext_resource type="StyleBox" uid="uid://1x4ej0jqmvk3" path="res://src/theme/button_style_box/pressed.tres" id="5_toa5b"]
+[ext_resource type="Texture2D" uid="uid://caa465lk7yoib" path="res://assets/theme/grabber/normal.png" id="6_17eta"]
+[ext_resource type="Texture2D" uid="uid://5fh0wvfaqs6l" path="res://assets/theme/grabber/disabled.png" id="7_rjcc0"]
+[ext_resource type="Texture2D" uid="uid://ccnt6xf5wfbru" path="res://assets/theme/grabber/highlight.png" id="8_4k5fq"]
 [ext_resource type="StyleBox" uid="uid://c4dluklj5xsoq" path="res://src/theme/panel_style_box.tres" id="9_3p1nt"]
+[ext_resource type="StyleBox" uid="uid://cqr517uebyp5l" path="res://src/theme/grabber_area.tres" id="9_bp31u"]
+[ext_resource type="Texture2D" uid="uid://ry5cc3txtp3k" path="res://assets/theme/tick.png" id="9_ude6r"]
+[ext_resource type="StyleBox" uid="uid://cs18g45r1ofpg" path="res://src/theme/slider.tres" id="10_uwbet"]
 
 [resource]
 default_font = ExtResource("1_kj04y")
@@ -15,6 +21,13 @@ Button/styles/focus = ExtResource("2_bggbf")
 Button/styles/hover = ExtResource("3_rj728")
 Button/styles/normal = ExtResource("4_6ch3r")
 Button/styles/pressed = ExtResource("5_toa5b")
+HSlider/icons/grabber = ExtResource("6_17eta")
+HSlider/icons/grabber_disabled = ExtResource("7_rjcc0")
+HSlider/icons/grabber_highlight = ExtResource("8_4k5fq")
+HSlider/icons/tick = ExtResource("9_ude6r")
+HSlider/styles/grabber_area = ExtResource("9_bp31u")
+HSlider/styles/grabber_area_highlight = ExtResource("9_bp31u")
+HSlider/styles/slider = ExtResource("10_uwbet")
 LabelBig/base_type = &"Label"
 LabelBig/font_sizes/font_size = 32
 LabelBigOutlined/base_type = &"LabelBig"
