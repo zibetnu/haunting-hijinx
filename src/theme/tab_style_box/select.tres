@@ -1,0 +1,15 @@
+[gd_resource type="StyleBoxTexture" load_steps=3 format=3 uid="uid://dfayfm7g4qbgy"]
+
+[ext_resource type="Texture2D" uid="uid://ev7c7ydvgblm" path="res://assets/theme/button_style_box/normal.png" id="1_vntyd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_okv5g"]
+atlas = ExtResource("1_vntyd")
+region = Rect2(0, 0, 17, 9)
+
+[resource]
+texture = SubResource("AtlasTexture_okv5g")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
