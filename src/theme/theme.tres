@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=19 format=3 uid="uid://k2680qtkyab6"]
+[gd_resource type="Theme" load_steps=23 format=3 uid="uid://k2680qtkyab6"]
 
 [ext_resource type="FontFile" uid="uid://cmyudnfjlpktv" path="res://src/theme/modern_dos_8x16.ttf" id="1_kj04y"]
 [ext_resource type="StyleBox" uid="uid://jj64njhm1d1i" path="res://src/theme/button_style_box/disabled.tres" id="1_reryu"]
@@ -13,9 +13,13 @@
 [ext_resource type="StyleBox" uid="uid://cqr517uebyp5l" path="res://src/theme/grabber_area.tres" id="9_bp31u"]
 [ext_resource type="Texture2D" uid="uid://ry5cc3txtp3k" path="res://assets/theme/tick.png" id="9_ude6r"]
 [ext_resource type="StyleBox" uid="uid://cs18g45r1ofpg" path="res://src/theme/slider.tres" id="10_uwbet"]
+[ext_resource type="Texture2D" uid="uid://bbcb76q404fw6" path="res://assets/theme/arrow.png" id="12_pu2tr"]
 [ext_resource type="StyleBox" uid="uid://5gsgqi5vc6ra" path="res://src/theme/tab_style_box/disabled.tres" id="13_jy2fp"]
+[ext_resource type="Texture2D" uid="uid://dse46nrpcj0a" path="res://assets/theme/radio/checked.png" id="13_wn5s0"]
 [ext_resource type="StyleBox" uid="uid://b2ldkwr83fi68" path="res://src/theme/tab_style_box/focus.tres" id="14_0p2kk"]
+[ext_resource type="Texture2D" uid="uid://dac0goplbncmm" path="res://assets/theme/radio/unchecked.png" id="14_k5srh"]
 [ext_resource type="StyleBox" uid="uid://bltvixfutkkcf" path="res://src/theme/tab_style_box/hover.tres" id="15_3a3nu"]
+[ext_resource type="Texture2D" uid="uid://c8to53nfcjw4s" path="res://assets/theme/radio/disabled.png" id="15_q5kya"]
 [ext_resource type="StyleBox" uid="uid://dfayfm7g4qbgy" path="res://src/theme/tab_style_box/select.tres" id="16_jbexi"]
 [ext_resource type="StyleBox" uid="uid://bpbnwfxmkkmmc" path="res://src/theme/tab_style_box/unselect.tres" id="17_dx43s"]
 
@@ -43,8 +47,16 @@ LabelOutlined/colors/font_outline_color = Color(0, 0, 0, 1)
 LabelOutlined/constants/outline_size = 3
 MarginContainer/constants/margin_left = 8
 MarginContainer/constants/margin_right = 8
+OptionButton/constants/arrow_margin = 8
+OptionButton/icons/arrow = ExtResource("12_pu2tr")
 Panel/styles/panel = ExtResource("9_3p1nt")
 PanelContainer/styles/panel = ExtResource("9_3p1nt")
+PopupMenu/constants/item_end_padding = 8
+PopupMenu/constants/item_start_padding = 8
+PopupMenu/icons/radio_checked = ExtResource("13_wn5s0")
+PopupMenu/icons/radio_unchecked = ExtResource("14_k5srh")
+PopupMenu/icons/radio_unchecked_disabled = ExtResource("15_q5kya")
+PopupMenu/styles/hover = ExtResource("2_bggbf")
 PopupMenu/styles/panel = ExtResource("9_3p1nt")
 TabContainer/styles/panel = ExtResource("9_3p1nt")
 TabContainer/styles/tab_disabled = ExtResource("13_jy2fp")
