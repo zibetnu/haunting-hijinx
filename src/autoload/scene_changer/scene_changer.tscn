@@ -14,8 +14,8 @@ lobby_browser = ExtResource("3_gctsf")
 main_menu = ExtResource("3_667vk")
 
 [node name="DisconnectedDialog" type="AcceptDialog" parent="."]
-title = ""
 size = Vector2i(216, 100)
+borderless = true
 dialog_text = "Disconnected from server."
 
 [node name="FallbackTimer" type="Timer" parent="."]
