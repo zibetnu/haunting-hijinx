@@ -8,10 +8,10 @@ signal vector_y_changed(value: int)
 @export var vector: Vector2i:
 	set = set_vector
 
-var vector_x: int:
+@export var vector_x: int:
 	get = get_vector_x, set = set_vector_x
 
-var vector_y: int:
+@export var vector_y: int:
 	get = get_vector_y, set = set_vector_y
 
 
