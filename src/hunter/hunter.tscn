@@ -218,9 +218,6 @@ y_sort_enabled = true
 
 [node name="Flashlight" parent="YSort" instance=ExtResource("15_hljm8")]
 
-[node name="Body" parent="YSort/Flashlight/Display/RotationNode2" index="0"]
-visible = false
-
 [node name="PlaceholderCostume" parent="YSort" instance=ExtResource("19_gui16")]
 texture = ExtResource("20_eyuev")
 hframes = 16

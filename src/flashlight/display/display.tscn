@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7qmrgohocqfx"]
+[gd_scene load_steps=8 format=3 uid="uid://c7qmrgohocqfx"]
 
 [ext_resource type="Script" path="res://src/flashlight/display/display.gd" id="1_rfbrn"]
 [ext_resource type="Texture2D" uid="uid://do78peki3jtm" path="res://assets/flashlight/body.png" id="2_lt2gs"]
+[ext_resource type="PackedScene" uid="uid://dk7dsekk0sapx" path="res://src/rotation_to_int_range/rotation_to_int_range.tscn" id="3_dgpk2"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jmwf3"]
 properties/0/path = NodePath("RotationNode2/Beam:polygon")
@@ -35,6 +36,16 @@ script = ExtResource("1_rfbrn")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_jmwf3")
+
+[node name="Body" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+light_mask = 32
+position = Vector2(0, -8)
+texture = ExtResource("2_lt2gs")
+hframes = 32
+
+[node name="RotationToIntRange" parent="Body" instance=ExtResource("3_dgpk2")]
+range_size = 32
 
 [node name="RotationNode" type="RemoteTransform2D" parent="."]
 remote_path = NodePath("../RotationNode2")
@@ -70,12 +81,6 @@ height = 16.0
 y_sort_enabled = true
 position = Vector2(0, -8)
 
-[node name="Body" type="Sprite2D" parent="RotationNode2"]
-light_mask = 32
-position = Vector2(12, 0)
-texture = ExtResource("2_lt2gs")
-hframes = 2
-
 [node name="BeamStarts" type="Node2D" parent="RotationNode2"]
 position = Vector2(16, 0)
 
@@ -90,3 +95,6 @@ position = Vector2(0, 2)
 [node name="Beam" type="Polygon2D" parent="RotationNode2"]
 material = SubResource("CanvasItemMaterial_lnymb")
 position = Vector2(16, 0)
+
+[connection signal="flashlight_rotation_changed" from="." to="Body/RotationToIntRange" method="set_range_value_from_rotation"]
+[connection signal="range_value_changed" from="Body/RotationToIntRange" to="Body" method="set_frame"]

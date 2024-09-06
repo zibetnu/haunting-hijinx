@@ -1,6 +1,8 @@
 extends Node2D
 
 
+signal flashlight_rotation_changed(flashlight_rotation: float)
+
 const _LIGHT_FILE_PATH := "res://assets/flashlight/light_%s.png"
 const _LIGHT_TEXTURES: Array[CompressedTexture2D] = [
 	null,
@@ -15,7 +17,6 @@ var powered: bool:
 	set(value):
 		powered = value
 		_beam.visible = powered
-		_body.frame = int(powered)
 		_light.visible = powered
 
 var flashlight_rotation: float:
@@ -24,6 +25,7 @@ var flashlight_rotation: float:
 
 	set(value):
 		$RotationNode.rotation = value
+		flashlight_rotation_changed.emit(flashlight_rotation)
 
 var light_texture_index: int:
 	set(value):
@@ -32,7 +34,6 @@ var light_texture_index: int:
 		$RotationNode/Light/WallLight.texture = _LIGHT_TEXTURES[light_texture_index]
 
 @onready var _beam := $RotationNode2/Beam
-@onready var _body := $RotationNode2/Body
 @onready var _light := $RotationNode/Light
 
 
