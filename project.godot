@@ -23,6 +23,7 @@ SceneChanger="*res://src/autoload/scene_changer/scene_changer.tscn"
 FullscreenToggle="res://src/autoload/fullscreen_toggle/fullscreen_toggle.tscn"
 CutsceneManager="*res://src/autoload/cutscene_manager.gd"
 SteamCallbacks="res://src/autoload/steam_callbacks.gd"
+InterfaceSounds="res://src/autoload/interface_sounds/interface_sounds.tscn"
 
 [debug]
 

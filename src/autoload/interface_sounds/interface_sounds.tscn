@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch5nu02vso40r"]
+
+[ext_resource type="Script" path="res://src/autoload/interface_sounds/interface_sounds.gd" id="1_6f1ot"]
+[ext_resource type="AudioStream" uid="uid://dyxlv1xko7tdx" path="res://assets/button_pressed.wav" id="2_buadf"]
+
+[node name="InterfaceSounds" type="Node"]
+script = ExtResource("1_6f1ot")
+
+[node name="Pressed" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_buadf")
