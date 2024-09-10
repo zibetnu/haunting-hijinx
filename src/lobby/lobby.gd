@@ -124,10 +124,10 @@ func _on_peer_participation_changed(id: int) -> void:
 		new_card.player_name = player_name
 
 		if id in PeerData.participants:
-			%ActiveCards.add_child(new_card)
+			%ActiveCards.add_child(new_card, true)
 
 		elif id in PeerData.spectators:
-			%SpectateCards.add_child(new_card)
+			%SpectateCards.add_child(new_card, true)
 
 		# Grab focus again after it was lost by freeing the prior card.
 		var toggle_button := new_card.get_node_or_null(TOGGLE_BUTTON_PATH) as Button
