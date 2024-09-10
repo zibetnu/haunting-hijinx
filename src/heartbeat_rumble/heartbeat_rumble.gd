@@ -33,6 +33,10 @@ func _process(delta: float) -> void:
 	_vibrate()
 
 
+func _exit_tree() -> void:
+	Input.stop_joy_vibration(DEVICE_INDEX)
+
+
 ## Sets [enum heart_rate] to the [enum HeartRate] value pointed to by
 ## [param index] as if [enum HeartRate] was an [Array]. Has no effect if
 ## [param index] is out of range.
