@@ -44,13 +44,14 @@ func add_participant(id: int) -> void:
 	var card := _instantiate_card(id)
 	%ActiveCards.add_child(card, true)
 	%GhostSelector.add_item(PeerData.peer_names[card.input_authority], card.input_authority)
+	_on_peer_participation_changed(id)
 
 
 func add_spectator(id: int) -> void:
 	var card := _instantiate_card(id)
 	%SpectateCards.add_child(card, true)
 	%GhostSelector.add_item(PeerData.peer_names[card.input_authority], card.input_authority)
-	%GhostSelector.set_item_disabled(%GhostSelector.get_item_index(id), true)
+	_on_peer_participation_changed(id)
 
 
 func _get_autoload_lobby_id() -> Variant:
