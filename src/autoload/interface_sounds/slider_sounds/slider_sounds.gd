@@ -28,10 +28,16 @@ func _play_pitched(pitch_scale: float) -> void:
 
 
 func _on_node_added(node: Node) -> void:
-	var slider := node as Slider
-	if slider == null:
+	if not node is Slider:
 		return
 
+	if not is_node_ready():
+		await ready
+
+	if not node.is_node_ready():
+		await node.ready
+
+	var slider: Slider = node
 	slider.value_changed.connect(
 			func(_value: float) -> void: play_for_slider(slider)
 	)
