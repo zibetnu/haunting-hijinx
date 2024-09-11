@@ -53,6 +53,21 @@ import/blender/enabled=false
 
 theme/custom="res://src/theme/theme.tres"
 
+[importer_defaults]
+
+wav={
+"compress/mode": 0,
+"edit/loop_begin": 0,
+"edit/loop_end": -1,
+"edit/loop_mode": 0,
+"edit/normalize": true,
+"edit/trim": true,
+"force/8_bit": false,
+"force/max_rate": false,
+"force/max_rate_hz": 44100,
+"force/mono": false
+}
+
 [input]
 
 ui_accept={
