@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://0fbqpsh8pbhf"]
 
-[ext_resource type="Script" path="res://src/autoload/interface_sounds/button_sounds/button_sounds.gd" id="1_u178v"]
+[ext_resource type="Script" path="res://src/autoload/global_sounds/button_sounds/button_sounds.gd" id="1_u178v"]
 [ext_resource type="AudioStream" uid="uid://dyxlv1xko7tdx" path="res://assets/button_pressed.wav" id="2_wp00d"]
 
 [node name="ButtonSounds" type="Node"]

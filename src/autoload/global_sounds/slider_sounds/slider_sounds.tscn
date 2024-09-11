@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cxc7da7e8jxu1"]
 
-[ext_resource type="Script" path="res://src/autoload/interface_sounds/slider_sounds/slider_sounds.gd" id="1_8tg6y"]
+[ext_resource type="Script" path="res://src/autoload/global_sounds/slider_sounds/slider_sounds.gd" id="1_8tg6y"]
 [ext_resource type="AudioStream" uid="uid://dyxlv1xko7tdx" path="res://assets/button_pressed.wav" id="2_fwew2"]
 
 [node name="SliderSounds" type="Node"]
