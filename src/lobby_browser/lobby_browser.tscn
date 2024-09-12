@@ -37,7 +37,8 @@ text = "Back"
 
 [node name="Refresh" type="Button" parent="HBoxContainer/LeftMenu"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(112, 0)
+editor_description = "Minimum size is set to keep button width the same when text changes to \"Refreshing...\""
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "Refresh"
 

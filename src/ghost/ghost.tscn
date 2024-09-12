@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=45 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://yi6ydbok31ql" path="res://src/peer_visibility_filter/peer_visibility_filter.tscn" id="1_0yuv7"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
@@ -9,28 +9,22 @@
 [ext_resource type="PackedScene" uid="uid://bsgx1owl3cxou" path="res://src/grab_cutscene/grab_cutscene.tscn" id="4_qoosa"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_6yps6"]
 [ext_resource type="PackedScene" uid="uid://beosdquy62xr4" path="res://src/call_holder/call_holder.tscn" id="5_s7auc"]
-[ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="5_xwsa3"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="6_3dmdv"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_il0ju"]
-[ext_resource type="PackedScene" uid="uid://gvf2peg6yuns" path="res://src/controller/unpause_force/unpause_force.tscn" id="6_wi10c"]
 [ext_resource type="PackedScene" uid="uid://ca2ymkyj3cv7e" path="res://src/translucent/translucent.tscn" id="7_bmx85"]
-[ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="7_ijrj0"]
 [ext_resource type="PackedScene" uid="uid://y5w40m6pqbvt" path="res://src/allow_set_bool/allow_set_bool.tscn" id="7_w2y4n"]
-[ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="8_mynla"]
-[ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="9_x08fo"]
-[ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="10_el6fq"]
 [ext_resource type="PackedScene" uid="uid://dhavwobkg4v8o" path="res://src/named_property_signals/named_property_signals.tscn" id="10_fwp7a"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="13_56q65"]
-[ext_resource type="PackedScene" uid="uid://nj5bu4130gy3" path="res://src/costume/ghost_placeholder/ghost_placeholder.tscn" id="13_arjsn"]
 [ext_resource type="PackedScene" uid="uid://ctcjena4x8kr0" path="res://src/aura/aura.tscn" id="13_e27lr"]
 [ext_resource type="PackedScene" uid="uid://dc3f3sy1vso5f" path="res://src/group_bool/group_bool.tscn" id="16_q6wqq"]
 [ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/move/move.tscn" id="18_5mhrn"]
 [ext_resource type="PackedScene" uid="uid://bfhqyxu3iuptm" path="res://src/event_listener/event_listener.tscn" id="18_870ie"]
-[ext_resource type="PackedScene" uid="uid://c6w7dk0uahxnu" path="res://src/controller/anti_axis_drift/anti_axis_drift.tscn" id="23_rknrl"]
+[ext_resource type="PackedScene" uid="uid://bkuic22finfse" path="res://src/controller/player_controller_stack.tscn" id="19_swqdr"]
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="29_1sq8w"]
+[ext_resource type="PackedScene" uid="uid://dc83s644ta6eo" path="res://src/placeholder_costume/placeholder_costume.tscn" id="29_ftfj4"]
 [ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_i4s33"]
+[ext_resource type="Texture2D" uid="uid://bhta7pnif21mf" path="res://assets/placeholder_sprite_wide.png" id="30_rab3d"]
 [ext_resource type="PackedScene" uid="uid://d4gb1ksm22wvh" path="res://src/damage_value_signal/damage_value_signal.tscn" id="34_617dy"]
-[ext_resource type="AnimationLibrary" uid="uid://krtfia4oqseg" path="res://src/general_sprite.tres" id="34_dn6ic"]
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/floored_texture_progress_bar/floored_texture_progress_bar.tscn" id="35_5xob5"]
 [ext_resource type="PackedScene" uid="uid://cpvs73t8l3h88" path="res://src/weak_to/weak_to.tscn" id="35_u2g7w"]
 [ext_resource type="PackedScene" uid="uid://dq7ts6lhskwyn" path="res://src/nodes_touched/nodes_touched.tscn" id="35_yndqj"]
@@ -83,11 +77,6 @@ radius = 96.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_o7ptf"]
 radius = 17.0
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_amkwy"]
-properties/0/path = NodePath(".:current_animation")
-properties/0/spawn = true
-properties/0/replication_mode = 2
-
 [sub_resource type="Gradient" id="Gradient_a05sb"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
@@ -119,7 +108,7 @@ replication_config = SubResource("SceneReplicationConfig_hsnve")
 [node name="CallHolder" parent="MultiplayerSynchronizer/PeerVisibilityFilter" instance=ExtResource("5_s7auc")]
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
-nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched"), NodePath("../GhostPlaceholder/Behavior")]
+nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched")]
 
 [node name="GrabCutscene" parent="." instance=ExtResource("4_qoosa")]
 
@@ -190,11 +179,6 @@ to = NodePath("../../Summon")
 event = &"button_2_pressed"
 guard = SubResource("Resource_knfa0")
 
-[node name="Grabbed" type="Node" parent="StateChart/Base/Behavior/Alive/Normal"]
-script = ExtResource("6_il0ju")
-to = NodePath("../../Grab")
-event = &"grabbed"
-
 [node name="MoveStarted" type="Node" parent="StateChart/Base/Behavior/Alive/Normal"]
 script = ExtResource("6_il0ju")
 to = NodePath("../../../../Animation/Move")
@@ -226,11 +210,6 @@ script = ExtResource("6_il0ju")
 to = NodePath("../../Summon")
 event = &"button_2_pressed"
 guard = SubResource("Resource_0r4f3")
-
-[node name="Grabbed" type="Node" parent="StateChart/Base/Behavior/Alive/Sprint"]
-script = ExtResource("6_il0ju")
-to = NodePath("../../Grab")
-event = &"grabbed"
 
 [node name="MoveStarted" type="Node" parent="StateChart/Base/Behavior/Alive/Sprint"]
 script = ExtResource("6_il0ju")
@@ -313,17 +292,9 @@ editor_description = "Times how long the ghost should stay in panic. Makes ghost
 wait_time = 3.0
 one_shot = true
 
-[node name="Grab" type="Node" parent="StateChart/Base/Behavior/Alive"]
-script = ExtResource("5_6yps6")
-
 [node name="Animation" type="Node" parent="StateChart/Base"]
 script = ExtResource("4_74yim")
 initial_state = NodePath("Idle")
-
-[node name="Grabbed" type="Node" parent="StateChart/Base/Animation"]
-script = ExtResource("6_il0ju")
-to = NodePath("../Grab")
-event = &"grabbed"
 
 [node name="HealthZeroed" type="Node" parent="StateChart/Base/Animation"]
 script = ExtResource("6_il0ju")
@@ -364,9 +335,6 @@ script = ExtResource("5_6yps6")
 script = ExtResource("5_6yps6")
 
 [node name="Panic" type="Node" parent="StateChart/Base/Animation"]
-script = ExtResource("5_6yps6")
-
-[node name="Grab" type="Node" parent="StateChart/Base/Animation"]
 script = ExtResource("5_6yps6")
 
 [node name="Visibility" type="Node" parent="StateChart/Base"]
@@ -410,25 +378,7 @@ limit_bottom = 6400
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Camera2D"]
 replication_config = SubResource("SceneReplicationConfig_bqubs")
 
-[node name="Synced" parent="." node_paths=PackedStringArray("controller") instance=ExtResource("5_xwsa3")]
-controller = NodePath("UnpauseForce")
-
-[node name="UnpauseForce" parent="Synced" node_paths=PackedStringArray("controller") instance=ExtResource("6_wi10c")]
-controller = NodePath("AntiButtonSpam")
-
-[node name="AntiButtonSpam" parent="Synced/UnpauseForce" node_paths=PackedStringArray("controller") instance=ExtResource("7_ijrj0")]
-controller = NodePath("AntiAxisDrift")
-
-[node name="AntiAxisDrift" parent="Synced/UnpauseForce/AntiButtonSpam" node_paths=PackedStringArray("controller") instance=ExtResource("23_rknrl")]
-controller = NodePath("Composite")
-
-[node name="Composite" parent="Synced/UnpauseForce/AntiButtonSpam/AntiAxisDrift" node_paths=PackedStringArray("controller_1", "controller_2") instance=ExtResource("8_mynla")]
-controller_1 = NodePath("Joypad")
-controller_2 = NodePath("KeyboardAndMouse")
-
-[node name="Joypad" parent="Synced/UnpauseForce/AntiButtonSpam/AntiAxisDrift/Composite" instance=ExtResource("9_x08fo")]
-
-[node name="KeyboardAndMouse" parent="Synced/UnpauseForce/AntiButtonSpam/AntiAxisDrift/Composite" instance=ExtResource("10_el6fq")]
+[node name="PlayerControllerStack" parent="." instance=ExtResource("19_swqdr")]
 
 [node name="AuraLarge" parent="." instance=ExtResource("13_e27lr")]
 
@@ -470,16 +420,8 @@ count_group = &"hunters"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HuntersTouched"]
 shape = SubResource("CircleShape2D_o7ptf")
 
-[node name="GhostPlaceholder" parent="." instance=ExtResource("13_arjsn")]
-position = Vector2(0, -8)
-
-[node name="ShakeAnimationPlayer" type="AnimationPlayer" parent="GhostPlaceholder/Display" index="2"]
-libraries = {
-"general_sprite": ExtResource("34_dn6ic")
-}
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="GhostPlaceholder/Display/ShakeAnimationPlayer"]
-replication_config = SubResource("SceneReplicationConfig_amkwy")
+[node name="PlaceholderCostume" parent="." instance=ExtResource("29_ftfj4")]
+texture = ExtResource("30_rab3d")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 range_item_cull_mask = 33
@@ -555,16 +497,20 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="filter_ready" from="MultiplayerSynchronizer/PeerVisibilityFilter" to="MultiplayerSynchronizer" method="add_visibility_filter"]
 [connection signal="call_released" from="MultiplayerSynchronizer/PeerVisibilityFilter/CallHolder" to="GhostVisible" method="set_property_value" binds= [true]]
 [connection signal="call_released" from="MultiplayerSynchronizer/PeerVisibilityFilter/CallHolder" to="IgnoreCanvasModulate/AllowSetBool" method="set_property_value" binds= [true]]
-[connection signal="cutscene_ended" from="GrabCutscene" to="StateChart" method="send_event" binds= [&"panic_started"]]
+[connection signal="ghost_position_synced" from="GrabCutscene" to="GhostVisible" method="set_property_value" binds= [true]]
 [connection signal="changed" from="PeerID" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="set_primary_peer_id"]
-[connection signal="changed" from="PeerID" to="Synced" method="set_input_authority"]
+[connection signal="changed" from="PeerID" to="PlayerControllerStack/Synced" method="set_input_authority"]
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="set_peer_id"]
+[connection signal="changed_to_local" from="PeerID" to="." method="show"]
+[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate" method="show"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraLargeCircle" method="show"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraSmallCircle" method="show"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="hide"]
 [connection signal="changed_to_local" from="PeerID" to="GhostVisible" method="set_is_allowed" binds= [false]]
 [connection signal="changed_to_local" from="PeerID" to="Camera2D" method="set_enabled" binds= [true]]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/AllowSetBool" method="set_is_allowed" binds= [false]]
+[connection signal="changed_to_remote" from="PeerID" to="." method="hide"]
+[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate" method="hide"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraLargeCircle" method="hide"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraSmallCircle" method="hide"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="show"]
@@ -582,9 +528,9 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="state_exited" from="StateChart/Base/Behavior/Dead" to="StateChart/Base/Behavior/Dead/IsDead" method="set_false"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Dead" to="DamageSignals" method="set_monitorable" flags=3 binds= [true]]
 [connection signal="event_received" from="StateChart/Base/Behavior/Alive/Normal" to="StateChart/Base/Behavior/Alive/Normal/Damaged" method="receive_event"]
-[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Synced" method="force_emit_move_vector_signals"]
-[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Synced" method="force_emit_button_1_signals"]
-[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Synced" method="force_emit_button_2_signals"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="PlayerControllerStack/Synced" method="force_emit_button_1_signals"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="PlayerControllerStack/Synced" method="force_emit_move_vector_signals"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="PlayerControllerStack/Synced" method="force_emit_button_2_signals"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="StateChart" method="send_event" binds= [&"invisibility_started"]]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Grabber" method="set_monitoring" flags=3 binds= [true]]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Normal" to="Grabber" method="set_monitoring" flags=3 binds= [false]]
@@ -634,38 +580,37 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/NoHuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/EndTimer" method="set_paused" binds= [false]]
 [connection signal="timeout" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" to="StateChart" method="send_event" binds= [&"invisibility_started"]]
 [connection signal="timeout" from="StateChart/Base/Behavior/Alive/Panic/EndTimer" to="StateChart" method="send_event" binds= [&"panic_ended"]]
-[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Grab" to="GrabCutscene" method="start_cutscene"]
-[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Grab" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Dead" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["dead"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Idle" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["idle"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Move" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["move"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Sprint" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["move"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Summon" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["idle"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Stun" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["stun"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Stun" to="GhostPlaceholder/Display/ShakeAnimationPlayer" method="play" binds= [&"general_sprite/shake"]]
-[connection signal="state_exited" from="StateChart/Base/Animation/Stun" to="GhostPlaceholder/Display/ShakeAnimationPlayer" method="play" binds= [&"general_sprite/RESET"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Panic" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["panic"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Grab" to="GhostPlaceholder/Behavior" method="set_animation_name" binds= ["move"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Dead" to="PlaceholderCostume/Vector2iSignals/VframeAnimationPlayer" method="play" binds= ["dead"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Idle" to="PlaceholderCostume/Vector2iSignals/VframeAnimationPlayer" method="play" binds= ["idle"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Move" to="PlaceholderCostume/Vector2iSignals/VframeAnimationPlayer" method="play" binds= ["move"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Sprint" to="PlaceholderCostume/Vector2iSignals/VframeAnimationPlayer" method="play" binds= ["move"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Summon" to="PlaceholderCostume/Vector2iSignals/VframeAnimationPlayer" method="play" binds= ["idle"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Stun" to="PlaceholderCostume/EffectAnimationPlayer" method="play" binds= [&"sprite/shake"]]
+[connection signal="state_exited" from="StateChart/Base/Animation/Stun" to="PlaceholderCostume/EffectAnimationPlayer" method="play" binds= [&"RESET"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Panic" to="PlaceholderCostume/EffectAnimationPlayer" method="play" binds= ["canvas_item/pulse"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Panic" to="PlaceholderCostume/Vector2iSignals/VframeAnimationPlayer" method="play" binds= [&"move"]]
+[connection signal="state_exited" from="StateChart/Base/Animation/Panic" to="PlaceholderCostume/EffectAnimationPlayer" method="play" binds= [&"RESET"]]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="enable"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="MultiplayerSynchronizer/PeerVisibilityFilter" method="disable"]
-[connection signal="button_1_pressed" from="Synced" to="StateChart" method="send_event" binds= [&"button_1_pressed"]]
-[connection signal="button_1_released" from="Synced" to="StateChart" method="send_event" binds= [&"button_1_released"]]
-[connection signal="button_2_pressed" from="Synced" to="StateChart" method="send_event" binds= [&"button_2_pressed"]]
-[connection signal="button_2_released" from="Synced" to="StateChart" method="send_event" binds= [&"button_2_released"]]
-[connection signal="move_started" from="Synced" to="StateChart" method="send_event" binds= [&"move_started"]]
-[connection signal="move_stopped" from="Synced" to="StateChart" method="send_event" binds= [&"move_stopped"]]
-[connection signal="move_vector_changed" from="Synced" to="StateChart/Base/Behavior/Alive/Normal/Move" method="set_move_vector"]
-[connection signal="move_vector_changed" from="Synced" to="StateChart/Base/Behavior/Alive/Sprint/Move" method="set_move_vector"]
-[connection signal="move_vector_changed" from="Synced" to="StateChart/Base/Behavior/Alive/Panic/Move" method="set_move_vector"]
-[connection signal="move_vector_changed" from="Synced" to="GhostPlaceholder/Behavior" method="set_direction_vector"]
+[connection signal="button_1_pressed" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_1_pressed"]]
+[connection signal="button_1_released" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_1_released"]]
+[connection signal="button_2_pressed" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_2_pressed"]]
+[connection signal="button_2_released" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_2_released"]]
+[connection signal="move_started" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"move_started"]]
+[connection signal="move_stopped" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"move_stopped"]]
+[connection signal="move_vector_changed" from="PlayerControllerStack/Synced" to="StateChart/Base/Behavior/Alive/Normal/Move" method="set_move_vector"]
+[connection signal="move_vector_changed" from="PlayerControllerStack/Synced" to="StateChart/Base/Behavior/Alive/Sprint/Move" method="set_move_vector"]
+[connection signal="move_vector_changed" from="PlayerControllerStack/Synced" to="StateChart/Base/Behavior/Alive/Panic/Move" method="set_move_vector"]
+[connection signal="move_vector_changed" from="PlayerControllerStack/Synced" to="PlaceholderCostume/Vector2iSignals/RotationToIntRange" method="set_range_value_from_vector"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
 [connection signal="damage_taken" from="DamageSignals/WeakTo" to="StateChart" method="send_event" binds= [&"damaged"]]
 [connection signal="damaged_by" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageValueSignal" method="take_damage"]
 [connection signal="damaged_by_amount" from="DamageSignals/WeakTo/DamageValueSignal" to="DamageSignals/WeakTo/DamageValueSignal/Health" method="subtract_health"]
 [connection signal="health_emptied" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="StateChart" method="send_event" binds= [&"died"]]
 [connection signal="health_percentage_changed" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="set_as_ratio_floored"]
-[connection signal="grabbable_grabbed" from="Grabber" to="StateChart" method="send_event" binds= [&"grabbed"]]
+[connection signal="grabbable_grabbed" from="Grabber" to="GrabCutscene" method="start_cutscene"]
 [connection signal="first_node_entered" from="HuntersTouched" to="StateChart" method="send_event" binds= [&"hunters_touched"]]
 [connection signal="last_node_exited" from="HuntersTouched" to="StateChart" method="send_event" binds= [&"no_hunters_touched"]]
 
-[editable path="GhostPlaceholder"]
+[editable path="PlayerControllerStack"]
+[editable path="PlaceholderCostume"]

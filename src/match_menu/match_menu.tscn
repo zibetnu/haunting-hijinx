@@ -1,0 +1,92 @@
+[gd_scene load_steps=5 format=3 uid="uid://kshsc10g60hy"]
+
+[ext_resource type="Script" path="res://src/match_menu/match_menu.gd" id="1_o1w5u"]
+[ext_resource type="PackedScene" uid="uid://56f6sbrp31ud" path="res://src/call_attempter/call_attempter.tscn" id="2_0ack1"]
+[ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="2_2qtrp"]
+[ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="3_o38nd"]
+
+[node name="MatchMenu" type="Control" node_paths=PackedStringArray("focus_first")]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 180.0
+offset_right = 320.0
+offset_bottom = 180.0
+script = ExtResource("1_o1w5u")
+focus_first = NodePath("CenterContainer/PanelContainer/VBoxContainer/Resume")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -44.0
+offset_top = -40.0
+offset_right = 44.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="EndMatch" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "End Match"
+
+[node name="MainMenu" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Main Menu"
+
+[node name="EndMatchConfirmationDialog" type="ConfirmationDialog" parent="."]
+transparent_bg = true
+initial_position = 2
+size = Vector2i(200, 104)
+borderless = true
+ok_button_text = "Yes"
+dialog_text = "End match early and return to lobby?"
+dialog_hide_on_ok = false
+dialog_autowrap = true
+cancel_button_text = "No"
+
+[node name="MainMenuConfirmationDialog" type="ConfirmationDialog" parent="."]
+transparent_bg = true
+initial_position = 2
+size = Vector2i(200, 104)
+borderless = true
+ok_button_text = "Yes"
+dialog_text = "Leave match early and return to main menu?"
+dialog_hide_on_ok = false
+dialog_autowrap = true
+cancel_button_text = "No"
+
+[node name="LobbyCall" parent="." instance=ExtResource("2_0ack1")]
+node_path = NodePath("/root/SceneChanger")
+method = &"change_to_lobby"
+
+[node name="MainMenuCall" parent="." instance=ExtResource("2_0ack1")]
+node_path = NodePath("/root/SceneChanger")
+method = &"change_to_main_menu"
+
+[node name="PeerID" parent="." instance=ExtResource("3_o38nd")]
+
+[node name="SteamConnector" parent="." instance=ExtResource("2_2qtrp")]
+
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/Resume" to="." method="hide"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/EndMatch" to="EndMatchConfirmationDialog" method="popup"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/MainMenu" to="MainMenuConfirmationDialog" method="popup"]
+[connection signal="confirmed" from="EndMatchConfirmationDialog" to="LobbyCall" method="attempt_method_call"]
+[connection signal="confirmed" from="MainMenuConfirmationDialog" to="SteamConnector" method="close_connection"]
+[connection signal="changed_to_local" from="PeerID" to="CenterContainer/PanelContainer/VBoxContainer/EndMatch" method="set_disabled" binds= [false]]
+[connection signal="changed_to_remote" from="PeerID" to="CenterContainer/PanelContainer/VBoxContainer/EndMatch" method="set_disabled" binds= [true]]
+[connection signal="connection_closed" from="SteamConnector" to="MainMenuCall" method="attempt_method_call"]

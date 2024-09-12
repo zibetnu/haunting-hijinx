@@ -1,4 +1,3 @@
-class_name PeerID
 extends Node
 
 
@@ -7,15 +6,21 @@ signal changed_to_local()
 signal changed_to_remote()
 
 @export var id := 1:
-	set(value):
-		id = value
-		changed.emit(id)
-		if value == multiplayer.get_unique_id():
-			changed_to_local.emit()
+	set = set_id
 
-		else:
-			changed_to_remote.emit()
+@export var emit_on_ready := true
+
+
+func _ready() -> void:
+	if emit_on_ready:
+		set_id(id)  # Set to current value again so signals will emit.
 
 
 func set_id(value: int) -> void:
 	id = value
+	changed.emit(id)
+	if id == multiplayer.get_unique_id():
+		changed_to_local.emit()
+
+	else:
+		changed_to_remote.emit()

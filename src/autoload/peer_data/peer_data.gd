@@ -31,6 +31,7 @@ func _ready() -> void:
 
 func erase_data() -> void:
 	ghost_peer = 1
+	match_in_progress = false
 	participants = []
 	peer_names = {}
 	spectators = []

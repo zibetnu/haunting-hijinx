@@ -27,6 +27,10 @@ func _ready():
 		add_player(peer_id)
 
 
+func _exit_tree() -> void:
+	PeerData.match_in_progress = false
+
+
 func add_player(id: int) -> void:
 	var instance: Node2D = null
 	if id == PeerData.ghost_peer:
@@ -96,7 +100,6 @@ func _end_match(message: String) -> void:
 	set_process_mode.call_deferred(Node.PROCESS_MODE_DISABLED)
 
 	await get_tree().create_timer(3).timeout
-	PeerData.match_in_progress = false
 	SceneChanger.change_scene_to_packed(SceneChanger.lobby)
 
 

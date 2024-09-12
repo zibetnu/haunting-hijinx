@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmkrovbbqls32"]
+
+[ext_resource type="Script" path="res://src/vector_2i_signals/vector_2i_signals.gd" id="1_4fcg2"]
+
+[node name="Vector2iSignals" type="Node"]
+script = ExtResource("1_4fcg2")

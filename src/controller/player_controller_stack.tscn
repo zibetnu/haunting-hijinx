@@ -1,0 +1,33 @@
+[gd_scene load_steps=8 format=3 uid="uid://bkuic22finfse"]
+
+[ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="1_4xp33"]
+[ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="2_k8yp3"]
+[ext_resource type="PackedScene" uid="uid://c6w7dk0uahxnu" path="res://src/controller/anti_axis_drift/anti_axis_drift.tscn" id="3_7dtc5"]
+[ext_resource type="PackedScene" uid="uid://bee5jtcost270" path="res://src/controller/composite/composite.tscn" id="4_06qpn"]
+[ext_resource type="PackedScene" uid="uid://dfe7skxjkwons" path="res://src/controller/joypad/joypad.tscn" id="5_xeoah"]
+[ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="6_t7mqd"]
+[ext_resource type="PackedScene" uid="uid://b7iwtbp54tlpx" path="res://src/pause_detector/pause_detector.tscn" id="8_enodv"]
+
+[node name="PlayerControllerStack" type="Node2D"]
+
+[node name="Synced" parent="." node_paths=PackedStringArray("controller") instance=ExtResource("1_4xp33")]
+controller = NodePath("AntiButtonSpam")
+
+[node name="AntiButtonSpam" parent="Synced" node_paths=PackedStringArray("controller") instance=ExtResource("2_k8yp3")]
+controller = NodePath("AntiAxisDrift")
+
+[node name="AntiAxisDrift" parent="Synced/AntiButtonSpam" node_paths=PackedStringArray("controller") instance=ExtResource("3_7dtc5")]
+controller = NodePath("Composite")
+
+[node name="Composite" parent="Synced/AntiButtonSpam/AntiAxisDrift" node_paths=PackedStringArray("controller_1", "controller_2") instance=ExtResource("4_06qpn")]
+controller_1 = NodePath("Joypad")
+controller_2 = NodePath("KeyboardAndMouse")
+
+[node name="Joypad" parent="Synced/AntiButtonSpam/AntiAxisDrift/Composite" instance=ExtResource("5_xeoah")]
+
+[node name="KeyboardAndMouse" parent="Synced/AntiButtonSpam/AntiAxisDrift/Composite" instance=ExtResource("6_t7mqd")]
+
+[node name="PauseDetector" parent="." instance=ExtResource("8_enodv")]
+
+[connection signal="pause_detected" from="PauseDetector" to="Synced" method="force_handle_input"]
+[connection signal="unpause_detected" from="PauseDetector" to="Synced" method="force_handle_input"]

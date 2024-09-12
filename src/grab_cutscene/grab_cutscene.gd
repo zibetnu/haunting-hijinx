@@ -4,6 +4,7 @@ extends Node
 
 
 signal cutscene_ended
+signal ghost_position_synced
 
 var _cutscene_name := "grab"
 var _tree_paused := false:  # Used to sync pause state across all peers.
@@ -38,7 +39,7 @@ func _on_cutscene_started(cutscene_name: String) -> void:
 	if not multiplayer.is_server():
 		return
 
-	_sync_ghost.rpc(owner.position)
+	_sync_ghost_position.rpc(owner.position)
 	_tree_paused = true
 
 
@@ -55,6 +56,6 @@ func _focus_cameras_local() -> void:
 
 
 @rpc("reliable")
-func _sync_ghost(value: Vector2) -> void:
+func _sync_ghost_position(value: Vector2) -> void:
 	owner.position = value
-	$"../GhostVisible".set_value_true()
+	ghost_position_synced.emit()

@@ -44,13 +44,14 @@ func add_participant(id: int) -> void:
 	var card := _instantiate_card(id)
 	%ActiveCards.add_child(card, true)
 	%GhostSelector.add_item(PeerData.peer_names[card.input_authority], card.input_authority)
+	_on_peer_participation_changed(id)
 
 
 func add_spectator(id: int) -> void:
 	var card := _instantiate_card(id)
 	%SpectateCards.add_child(card, true)
 	%GhostSelector.add_item(PeerData.peer_names[card.input_authority], card.input_authority)
-	%GhostSelector.set_item_disabled(%GhostSelector.get_item_index(id), true)
+	_on_peer_participation_changed(id)
 
 
 func _get_autoload_lobby_id() -> Variant:
@@ -124,10 +125,10 @@ func _on_peer_participation_changed(id: int) -> void:
 		new_card.player_name = player_name
 
 		if id in PeerData.participants:
-			%ActiveCards.add_child(new_card)
+			%ActiveCards.add_child(new_card, true)
 
 		elif id in PeerData.spectators:
-			%SpectateCards.add_child(new_card)
+			%SpectateCards.add_child(new_card, true)
 
 		# Grab focus again after it was lost by freeing the prior card.
 		var toggle_button := new_card.get_node_or_null(TOGGLE_BUTTON_PATH) as Button

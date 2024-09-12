@@ -1,0 +1,14 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://cs18g45r1ofpg"]
+
+[ext_resource type="Texture2D" uid="uid://hspg871ry6gk" path="res://assets/theme/slider.png" id="1_pf5wn"]
+
+[resource]
+texture = ExtResource("1_pf5wn")
+texture_margin_left = 9.0
+texture_margin_top = 2.0
+texture_margin_right = 9.0
+texture_margin_bottom = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 6.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
