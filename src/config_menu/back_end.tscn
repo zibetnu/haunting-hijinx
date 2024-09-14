@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctywx8ryp0b8f"]
+[gd_scene load_steps=3 format=3 uid="uid://ctywx8ryp0b8f"]
 
 [ext_resource type="PackedScene" uid="uid://beclheud7fmo4" path="res://src/config_handler/config_handler.tscn" id="1_s2lhb"]
 [ext_resource type="PackedScene" uid="uid://m41j0s7lbwbr" path="res://src/window_mode_setter/window_mode_setter.tscn" id="2_40max"]
-[ext_resource type="PackedScene" uid="uid://56f6sbrp31ud" path="res://src/call_attempter/call_attempter.tscn" id="3_kanre"]
 
 [node name="BackEnd" type="Node"]
 
@@ -15,10 +14,6 @@ key = "window_mode"
 [node name="BrightnessConfig" parent="." instance=ExtResource("1_s2lhb")]
 section = "display"
 key = "brightness"
-
-[node name="ChangeToMainMenu" parent="." instance=ExtResource("3_kanre")]
-node_path = NodePath("/root/SceneChanger")
-method = &"change_to_main_menu"
 
 [connection signal="ready" from="WindowModeConfig" to="WindowModeConfig" method="load_value"]
 [connection signal="window_mode_changed" from="WindowModeSetter" to="WindowModeConfig" method="save_value"]

@@ -10,10 +10,6 @@
 node_path = NodePath("/root/SceneChanger")
 method = &"change_to_lobby_browser"
 
-[node name="ChangeToconfigMenu" parent="." instance=ExtResource("1_456mq")]
-node_path = NodePath("/root/SceneChanger")
-method = &"change_to_config_menu"
-
 [node name="Quit" type="Node" parent="."]
 script = ExtResource("2_8f0is")
 

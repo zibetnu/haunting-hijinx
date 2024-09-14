@@ -30,7 +30,6 @@ layout_mode = 1
 [connection signal="item_id_selected" from="FrontEnd/TabContainer/Display/WindowMode/OptionButton" to="BackEnd/WindowModeSetter" method="set_window_mode"]
 [connection signal="drag_ended" from="FrontEnd/TabContainer/Display/Brightness/HSlider" to="BackEnd/BrightnessConfig" method="save_value" unbinds=1]
 [connection signal="value_changed" from="FrontEnd/TabContainer/Display/Brightness/HSlider" to="BackEnd/BrightnessConfig" method="set_staged_value"]
-[connection signal="pressed" from="FrontEnd/HBoxContainer/Back" to="BackEnd/ChangeToMainMenu" method="attempt_method_call"]
 
 [editable path="BackEnd"]
 [editable path="FrontEnd"]

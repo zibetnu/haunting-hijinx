@@ -17,7 +17,6 @@ grow_vertical = 2
 layout_mode = 1
 
 [connection signal="pressed" from="FrontEnd/VBoxContainer/BrowseLobbies" to="BackEnd/ChangeToLobbyBrowser" method="attempt_method_call"]
-[connection signal="pressed" from="FrontEnd/VBoxContainer/Settings" to="BackEnd/ChangeToconfigMenu" method="attempt_method_call"]
 [connection signal="pressed" from="FrontEnd/VBoxContainer/Quit" to="BackEnd/Quit" method="quit"]
 [connection signal="shown" from="FrontEnd/VisibilitySignals" to="BackEnd/SteamConnector" method="close_connection"]
 
