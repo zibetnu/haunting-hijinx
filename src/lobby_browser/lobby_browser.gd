@@ -25,7 +25,6 @@ const SCENE_CHANGER_PATH = ^"/root/SceneChanger"
 const LOBBY_METHOD = &"change_to_lobby"
 const MAIN_MENU_METHOD = &"change_to_main_menu"
 
-@export var first_button: Button
 @export var lobby_summary_scene: PackedScene
 
 @onready var joining_window: Window = %JoiningWindow
@@ -35,12 +34,9 @@ const MAIN_MENU_METHOD = &"change_to_main_menu"
 
 
 func _ready() -> void:
+	Steam.lobby_match_list.connect(_on_lobby_match_list)
 	# Free self and let server load lobby.
 	multiplayer.connected_to_server.connect(queue_free)
-
-	Steam.lobby_match_list.connect(_on_lobby_match_list)
-	refresh()
-	first_button.grab_focus()
 
 
 func call_scene_changer_method(method: StringName) -> void:
