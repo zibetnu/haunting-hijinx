@@ -20,10 +20,13 @@ const LOBBY_TYPE_NAME = "Public"
 
 const MAX_MEMBERS = 8
 
+@export var connect_steam_signals := true:
+	set = set_connect_steam_signals
+
 
 func _ready() -> void:
-	Steam.lobby_created.connect(_on_lobby_created)
-	Steam.lobby_joined.connect(_on_lobby_joined)
+	# Use setter to apply initial value.
+	connect_steam_signals = connect_steam_signals
 
 
 func close_connection() -> void:
@@ -49,6 +52,20 @@ func join_lobby(lobby_id: int) -> void:
 		return
 
 	Steam.joinLobby(lobby_id)
+
+
+func set_connect_steam_signals(value: bool) -> void:
+	var methods: Array[Callable] = [_on_lobby_created, _on_lobby_joined]
+	var signals: Array[Signal] = [Steam.lobby_created, Steam.lobby_joined]
+	for i: int in range(mini(methods.size(), signals.size())):
+		match [value, signals[i].is_connected(methods[i])]:
+			[false, true]:
+				signals[i].disconnect(methods[i])
+
+			[true, false]:
+				signals[i].connect(methods[i])
+
+	connect_steam_signals = value
 
 
 func _init_lobby_data(lobby_id: int) -> void:
