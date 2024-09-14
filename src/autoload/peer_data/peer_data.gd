@@ -89,5 +89,3 @@ func _on_peer_connected(id: int) -> void:
 
 	else:
 		spectators.append(id)
-
-	peer_participation_changed.emit(id)
