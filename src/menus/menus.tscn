@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnoti7vnd7pk7"]
+[gd_scene load_steps=4 format=3 uid="uid://bnoti7vnd7pk7"]
 
-[ext_resource type="AudioStream" uid="uid://bdm27dwyhj8tw" path="res://assets/main_theme.wav" id="1_7txx6"]
 [ext_resource type="PackedScene" uid="uid://civfmojof07gs" path="res://src/main_menu/main_menu.tscn" id="1_yg0vw"]
 [ext_resource type="PackedScene" uid="uid://cmta6hi75dnwf" path="res://src/config_menu/config_menu.tscn" id="2_ypteh"]
 
@@ -15,10 +14,6 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_67gcq")
 tabs_visible = false
 
-[node name="MainTheme" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_7txx6")
-autoplay = true
-
 [node name="MainMenu" parent="." instance=ExtResource("1_yg0vw")]
 layout_mode = 2
 
@@ -26,7 +21,6 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[connection signal="finished" from="MainTheme" to="MainTheme" method="play"]
 [connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/Settings" to="." method="set_current_tab" binds= [1]]
 [connection signal="pressed" from="ConfigMenu/FrontEnd/HBoxContainer/Back" to="." method="set_current_tab" binds= [0]]
 
