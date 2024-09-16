@@ -19,6 +19,9 @@ editor_description = "Defaults to 4 (exclusive fullscreen)."
 [node name="BrightnessConfig" parent="BackEnd" index="2"]
 editor_description = "Defaults to 0.126."
 
+[node name="VisibilitySignals" parent="BackEnd" index="3" node_paths=PackedStringArray("canvas_item")]
+canvas_item = NodePath("../..")
+
 [node name="FrontEnd" parent="." instance=ExtResource("2_bmk2u")]
 layout_mode = 1
 
@@ -27,6 +30,7 @@ layout_mode = 1
 [connection signal="saved" from="BackEnd/WindowModeConfig" to="FrontEnd/TabContainer/Display/WindowMode/OptionButton" method="select_id"]
 [connection signal="load_failed" from="BackEnd/BrightnessConfig" to="FrontEnd/TabContainer/Display/Brightness/HSlider" method="set_value" binds= [0.126]]
 [connection signal="loaded" from="BackEnd/BrightnessConfig" to="FrontEnd/TabContainer/Display/Brightness/HSlider" method="set_value"]
+[connection signal="shown" from="BackEnd/VisibilitySignals" to="FrontEnd/TabContainer/Display/WindowMode/OptionButton" method="grab_focus" flags=3]
 [connection signal="item_id_selected" from="FrontEnd/TabContainer/Display/WindowMode/OptionButton" to="BackEnd/WindowModeSetter" method="set_window_mode"]
 [connection signal="drag_ended" from="FrontEnd/TabContainer/Display/Brightness/HSlider" to="BackEnd/BrightnessConfig" method="save_value" unbinds=1]
 [connection signal="value_changed" from="FrontEnd/TabContainer/Display/Brightness/HSlider" to="BackEnd/BrightnessConfig" method="set_staged_value"]

@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://cuj5g6cmj5s20"]
+[gd_scene load_steps=2 format=3 uid="uid://cuj5g6cmj5s20"]
 
-[ext_resource type="PackedScene" uid="uid://c6ql67s5oafpr" path="res://src/visibility_signals/visibility_signals.tscn" id="1_23ayn"]
 [ext_resource type="Script" path="res://src/config_menu/front_end/option_button_id.gd" id="1_fsl6f"]
 
 [node name="FrontEnd" type="VBoxContainer"]
@@ -14,9 +13,6 @@ offset_top = -126.0
 offset_right = 160.0
 grow_horizontal = 2
 grow_vertical = 0
-
-[node name="VisibilitySignals" parent="." node_paths=PackedStringArray("canvas_item") instance=ExtResource("1_23ayn")]
-canvas_item = NodePath("..")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 custom_minimum_size = Vector2(320, 0)
@@ -73,5 +69,3 @@ layout_mode = 2
 [node name="Back" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 text = "Back"
-
-[connection signal="shown" from="VisibilitySignals" to="TabContainer/Display/WindowMode/OptionButton" method="grab_focus" flags=3]
