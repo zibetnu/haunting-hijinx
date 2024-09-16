@@ -19,4 +19,9 @@ func _on_node_added(node: Node) -> void:
 		await node.ready
 
 	var button: Button = node
-	button.pressed.connect(_audio_stream_player.play)
+	var button_signal: Signal = button.pressed
+	var receiver: Callable = _audio_stream_player.play
+	if button_signal.is_connected(receiver):
+		return
+
+	button_signal.connect(receiver)
