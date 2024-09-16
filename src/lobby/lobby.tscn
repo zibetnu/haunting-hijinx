@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://df63fi5u7xpjt"]
+[gd_scene load_steps=10 format=3 uid="uid://df63fi5u7xpjt"]
 
 [ext_resource type="Script" path="res://src/lobby/lobby.gd" id="1_g8t6r"]
 [ext_resource type="PackedScene" uid="uid://2uclu3gf4iyj" path="res://src/level/main_floor/main_floor.tscn" id="2_px70m"]
 [ext_resource type="PackedScene" uid="uid://bapt74v2o7kig" path="res://src/lobby/player_card/player_card.tscn" id="3_87r7n"]
-[ext_resource type="PackedScene" uid="uid://bjuo2ufoah314" path="res://src/e_net_connector/e_net_connector.tscn" id="5_kupri"]
 [ext_resource type="PackedScene" uid="uid://y52o5l4t82oi" path="res://src/lobby/lobby_location_setter/lobby_location_setter.tscn" id="6_mojxj"]
 [ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="6_qmxdg"]
 [ext_resource type="PackedScene" uid="uid://lgxoth4h2cd0" path="res://src/lobby/lobby_name_setter/lobby_name_setter.tscn" id="7_7ee1f"]
@@ -130,8 +129,6 @@ layout_mode = 2
 focus_neighbor_top = NodePath("../GhostSelector")
 text = "Start Game"
 
-[node name="ENetConnector" parent="." instance=ExtResource("5_kupri")]
-
 [node name="SteamConnector" parent="." instance=ExtResource("6_qmxdg")]
 
 [node name="LobbyLocationSetter" parent="." instance=ExtResource("6_mojxj")]
@@ -148,7 +145,6 @@ text = "Start Game"
 [connection signal="text_changed" from="HostMenu/LobbyNameLineEdit" to="LobbyNameSetter" method="set_lobby_name"]
 [connection signal="item_selected" from="HostMenu/LobbyTypeOptionButton" to="LobbyTypeSetter" method="set_lobby_type"]
 [connection signal="pressed" from="HostMenu/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="connection_closed" from="ENetConnector" to="." method="_on_connection_closed"]
 [connection signal="connection_closed" from="SteamConnector" to="." method="_on_connection_closed"]
 [connection signal="lobby_name_on_ready" from="LobbyNameSetter" to="HostMenu/LobbyNameLineEdit" method="set_text"]
 [connection signal="relay_initialized" from="RelayInitializer" to="LobbyLocationSetter" method="set_lobby_location"]
