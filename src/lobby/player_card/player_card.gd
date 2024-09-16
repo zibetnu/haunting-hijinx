@@ -20,7 +20,11 @@ var player_name: String:
 
 
 func _ready() -> void:
-	PeerData.peer_participation_changed.connect(_on_peer_participation_changed)
+	var participation_signal: Signal = PeerData.peer_participation_changed
+	var participation_receiver: Callable = _on_peer_participation_changed
+	if not participation_signal.is_connected(participation_receiver):
+		participation_signal.connect(participation_receiver)
+
 	set_player_name(str(_get_autoload_peer_name(input_authority)), true)
 	%NameLineEdit.visible = multiplayer.get_unique_id() == input_authority
 	%NameLabel.visible = not %NameLineEdit.visible
