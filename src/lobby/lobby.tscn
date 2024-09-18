@@ -30,6 +30,7 @@ offset_bottom = 360.0
 [node name="ActiveScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+follow_focus = true
 horizontal_scroll_mode = 0
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="HBoxContainer/ActiveScrollContainer"]
@@ -50,6 +51,7 @@ layout_mode = 2
 [node name="SpectateScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+follow_focus = true
 horizontal_scroll_mode = 0
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="HBoxContainer/SpectateScrollContainer"]
