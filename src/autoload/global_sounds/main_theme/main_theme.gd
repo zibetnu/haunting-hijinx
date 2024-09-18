@@ -12,7 +12,7 @@ var _scenes_present := 0:
 @onready var timer: Timer = $Timer
 
 
-func _enter_tree() -> void:
+func _ready() -> void:
 	get_tree().node_added.connect(_on_node_added)
 
 
