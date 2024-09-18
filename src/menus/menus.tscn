@@ -21,7 +21,7 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/Settings" to="." method="set_current_tab" binds= [1]]
+[connection signal="pressed" from="MainMenu/FrontEnd/Settings" to="." method="set_current_tab" binds= [1]]
 [connection signal="pressed" from="ConfigMenu/FrontEnd/HBoxContainer/Back" to="." method="set_current_tab" binds= [0]]
 
 [editable path="MainMenu"]
