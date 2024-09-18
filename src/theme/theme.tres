@@ -52,6 +52,7 @@ LineEdit/styles/read_only = ExtResource("1_reryu")
 MarginContainer/constants/margin_left = 8
 MarginContainer/constants/margin_right = 8
 OptionButton/constants/arrow_margin = 8
+OptionButton/constants/modulate_arrow = 1
 OptionButton/icons/arrow = ExtResource("12_pu2tr")
 Panel/styles/panel = ExtResource("9_3p1nt")
 PanelContainer/styles/panel = ExtResource("9_3p1nt")
