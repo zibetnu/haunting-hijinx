@@ -23,9 +23,12 @@ level = ExtResource("2_px70m")
 player_card = ExtResource("3_87r7n")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 360.0
-offset_bottom = 360.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ActiveScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -39,6 +42,8 @@ spawn_path = NodePath("../VBoxContainer/ActiveCards")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ActiveScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="HBoxContainer/ActiveScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -47,6 +52,7 @@ text = "Participants"
 [node name="ActiveCards" type="VBoxContainer" parent="HBoxContainer/ActiveScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="SpectateScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -60,6 +66,8 @@ spawn_path = NodePath("../VBoxContainer/SpectateCards")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/SpectateScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="HBoxContainer/SpectateScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -68,39 +76,34 @@ text = "Spectators"
 [node name="SpectateCards" type="VBoxContainer" parent="HBoxContainer/SpectateScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="HostMenu" type="GridContainer" parent="."]
+[node name="HostMenu" type="GridContainer" parent="HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(280, 0)
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -280.0
-offset_top = -76.0
-grow_horizontal = 0
-grow_vertical = 0
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+size_flags_stretch_ratio = 1.5
 columns = 2
 metadata/_edit_group_ = true
 
-[node name="LobbyNameLabel" type="Label" parent="HostMenu"]
+[node name="LobbyNameLabel" type="Label" parent="HBoxContainer/HostMenu"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Name:"
 
-[node name="LobbyNameLineEdit" type="LineEdit" parent="HostMenu"]
+[node name="LobbyNameLineEdit" type="LineEdit" parent="HBoxContainer/HostMenu"]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Lobby Name"
 
-[node name="LobbyTypeLabel" type="Label" parent="HostMenu"]
+[node name="LobbyTypeLabel" type="Label" parent="HBoxContainer/HostMenu"]
 layout_mode = 2
+size_flags_horizontal = 8
 text = "Type:"
 horizontal_alignment = 2
 
-[node name="LobbyTypeOptionButton" type="OptionButton" parent="HostMenu"]
+[node name="LobbyTypeOptionButton" type="OptionButton" parent="HBoxContainer/HostMenu"]
 layout_mode = 2
 item_count = 3
 popup/item_0/text = "Private"
@@ -110,22 +113,22 @@ popup/item_1/id = 1
 popup/item_2/text = "Public"
 popup/item_2/id = 2
 
-[node name="GhostLabel" type="Label" parent="HostMenu"]
+[node name="GhostLabel" type="Label" parent="HBoxContainer/HostMenu"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Ghost:"
 
-[node name="GhostSelector" type="OptionButton" parent="HostMenu"]
+[node name="GhostSelector" type="OptionButton" parent="HBoxContainer/HostMenu"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_bottom = NodePath("../StartButton")
 text_overrun_behavior = 3
 
-[node name="Spacer" type="Control" parent="HostMenu"]
+[node name="Spacer" type="Control" parent="HBoxContainer/HostMenu"]
 layout_mode = 2
 
-[node name="StartButton" type="Button" parent="HostMenu"]
+[node name="StartButton" type="Button" parent="HBoxContainer/HostMenu"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../GhostSelector")
@@ -144,10 +147,10 @@ text = "Start Game"
 [node name="LobbyTypeSetter" parent="." instance=ExtResource("10_gp772")]
 
 [connection signal="close_connection_requested" from="." to="SteamConnector" method="close_connection"]
-[connection signal="text_changed" from="HostMenu/LobbyNameLineEdit" to="LobbyNameSetter" method="set_lobby_name"]
-[connection signal="item_selected" from="HostMenu/LobbyTypeOptionButton" to="LobbyTypeSetter" method="set_lobby_type"]
-[connection signal="pressed" from="HostMenu/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="text_changed" from="HBoxContainer/HostMenu/LobbyNameLineEdit" to="LobbyNameSetter" method="set_lobby_name"]
+[connection signal="item_selected" from="HBoxContainer/HostMenu/LobbyTypeOptionButton" to="LobbyTypeSetter" method="set_lobby_type"]
+[connection signal="pressed" from="HBoxContainer/HostMenu/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="connection_closed" from="SteamConnector" to="." method="_on_connection_closed"]
-[connection signal="lobby_name_on_ready" from="LobbyNameSetter" to="HostMenu/LobbyNameLineEdit" method="set_text"]
+[connection signal="lobby_name_on_ready" from="LobbyNameSetter" to="HBoxContainer/HostMenu/LobbyNameLineEdit" method="set_text"]
 [connection signal="relay_initialized" from="RelayInitializer" to="LobbyLocationSetter" method="set_lobby_location"]
-[connection signal="lobby_type_on_ready" from="LobbyTypeSetter" to="HostMenu/LobbyTypeOptionButton" method="select"]
+[connection signal="lobby_type_on_ready" from="LobbyTypeSetter" to="HBoxContainer/HostMenu/LobbyTypeOptionButton" method="select"]
