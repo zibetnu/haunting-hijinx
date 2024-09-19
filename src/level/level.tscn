@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://chog7qk0d8wy7" path="res://src/timer_label/timer_label.tscn" id="2_tx202"]
 [ext_resource type="PackedScene" uid="uid://7wne64wo1epb" path="res://src/counting_spawner/counting_spawner.tscn" id="3_xxci0"]
 [ext_resource type="PackedScene" uid="uid://ojjy8keargbf" path="res://src/ping_label/ping_label.tscn" id="5_ijd43"]
-[ext_resource type="PackedScene" uid="uid://qdsau1mq5mj1" path="res://src/timer_low_label/timer_low_label.tscn" id="7_a1tmf"]
+[ext_resource type="PackedScene" uid="uid://qdsau1mq5mj1" path="res://src/countdown/countdown.tscn" id="7_qv3yx"]
 [ext_resource type="PackedScene" uid="uid://kshsc10g60hy" path="res://src/match_menu/match_menu.tscn" id="8_v81sd"]
 [ext_resource type="PackedScene" uid="uid://c2coqqrfwvkcy" path="res://src/color_darken_signals/color_darken_signals.tscn" id="9_8c7s2"]
 [ext_resource type="PackedScene" uid="uid://beclheud7fmo4" path="res://src/config_handler/config_handler.tscn" id="10_14385"]
@@ -101,21 +101,20 @@ grow_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 
-[node name="TimerLowLabel" parent="CanvasLayer" node_paths=PackedStringArray("timer") instance=ExtResource("7_a1tmf")]
+[node name="Countdown" parent="CanvasLayer" node_paths=PackedStringArray("timer") instance=ExtResource("7_qv3yx")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -8.0
-offset_right = 4.0
-offset_bottom = 8.0
+offset_left = -9.5
+offset_top = -14.0
+offset_right = 9.5
+offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_type_variation = &"LabelBigOutlined"
-text = "3"
 timer = NodePath("../../MatchTimer")
 
 [node name="MatchMenu" parent="CanvasLayer" instance=ExtResource("8_v81sd")]

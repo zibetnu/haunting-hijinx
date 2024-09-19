@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://qdsau1mq5mj1"]
+[gd_scene load_steps=6 format=3 uid="uid://qdsau1mq5mj1"]
 
-[ext_resource type="Script" path="res://src/timer_low_label/timer_low_label.gd" id="1_qp5m1"]
+[ext_resource type="Script" path="res://src/countdown/countdown.gd" id="1_hldn3"]
+[ext_resource type="Texture2D" uid="uid://co47gbfbe1rfx" path="res://assets/big_digits.png" id="2_rpv7k"]
 
 [sub_resource type="Animation" id="Animation_ta44n"]
 length = 0.001
@@ -63,11 +64,19 @@ _data = {
 "pulse": SubResource("Animation_21gu7")
 }
 
-[node name="TimerLowLabel" type="Label"]
+[node name="Countdown" type="Control"]
 visible = false
-offset_right = 1.0
-offset_bottom = 16.0
-script = ExtResource("1_qp5m1")
+custom_minimum_size = Vector2(19, 28)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 19.0
+offset_bottom = 28.0
+script = ExtResource("1_hldn3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_rpv7k")
+centered = false
+hframes = 10
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

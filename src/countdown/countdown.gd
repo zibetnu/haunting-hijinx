@@ -1,4 +1,4 @@
-extends Label
+extends Control
 ## Pulses for every whole second less than [param low_threshold], including 0.
 
 
@@ -7,6 +7,7 @@ extends Label
 
 @onready var _animation_player: AnimationPlayer = $AnimationPlayer
 @onready var _last_pulse_time: int = low_threshold
+@onready var _sprite_2d: Sprite2D = $Sprite2D
 
 
 func _ready() -> void:
@@ -27,6 +28,6 @@ func _update() -> void:
 	if not floored_time < _last_pulse_time:
 		return
 
-	text = str(floored_time)
+	_sprite_2d.frame = floored_time % _sprite_2d.hframes
 	_animation_player.play("pulse")
 	_last_pulse_time = floored_time
