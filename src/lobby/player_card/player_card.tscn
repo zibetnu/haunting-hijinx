@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bapt74v2o7kig"]
+[gd_scene load_steps=7 format=3 uid="uid://bapt74v2o7kig"]
 
 [ext_resource type="Script" path="res://src/lobby/player_card/player_card.gd" id="1_aanr4"]
+[ext_resource type="Texture2D" uid="uid://c4ybyyfobhm40" path="res://assets/player_card_icons.png" id="2_77ty2"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wemvv"]
 properties/0/path = NodePath(".:input_authority")
@@ -12,14 +13,17 @@ properties/0/path = NodePath(".:player_name")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_onw1q"]
-properties/0/path = NodePath(".:text")
+[sub_resource type="ViewportTexture" id="ViewportTexture_7jif5"]
+viewport_path = NodePath("HBoxContainer/CycleType/SubViewport")
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mbgbv"]
+properties/0/path = NodePath(".:frame")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[node name="PlayerCard" type="PanelContainer"]
+[node name="PlayerCard" type="PanelContainer" groups=["player_cards"]]
 offset_right = 180.0
-offset_bottom = 66.0
+offset_bottom = 46.0
 size_flags_horizontal = 3
 script = ExtResource("1_aanr4")
 
@@ -30,46 +34,38 @@ replication_config = SubResource("SceneReplicationConfig_wemvv")
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_opv0w")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="NameLineEdit" type="LineEdit" parent="VBoxContainer"]
+[node name="CycleType" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_colors/icon_disabled_color = Color(1, 1, 1, 1)
+icon = SubResource("ViewportTexture_7jif5")
+icon_alignment = 1
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/CycleType"]
+transparent_bg = true
+size = Vector2i(16, 16)
+
+[node name="Sprite2D" type="Sprite2D" parent="HBoxContainer/CycleType/SubViewport"]
+texture = ExtResource("2_77ty2")
+centered = false
+hframes = 3
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="HBoxContainer/CycleType/SubViewport/Sprite2D"]
+replication_config = SubResource("SceneReplicationConfig_mbgbv")
+
+[node name="NameLineEdit" type="LineEdit" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_uneditable_color = Color(1, 1, 1, 1)
 placeholder_text = "player name"
 max_length = 20
 context_menu_enabled = false
 
-[node name="NameLabel" type="Label" parent="VBoxContainer"]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(180, 0)
-layout_mode = 2
-text = "player name"
-clip_text = true
-text_overrun_behavior = 3
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="VBoxContainer/NameLabel"]
-replication_config = SubResource("SceneReplicationConfig_onw1q")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "ID:"
-
-[node name="IDLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "1"
-
-[node name="ParticipationToggle" type="Button" parent="VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_horizontal = 10
-text = ">>"
-
-[connection signal="text_changed" from="VBoxContainer/NameLineEdit" to="." method="set_player_name"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/ParticipationToggle" to="." method="_on_participation_toggle_pressed"]
+[connection signal="player_type_changed" from="." to="HBoxContainer/CycleType/SubViewport/Sprite2D" method="set_frame"]
+[connection signal="pressed" from="HBoxContainer/CycleType" to="." method="cycle_player_type"]
+[connection signal="text_changed" from="HBoxContainer/NameLineEdit" to="." method="set_player_name"]
