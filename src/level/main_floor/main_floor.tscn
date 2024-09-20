@@ -119,10 +119,5 @@ position = Vector2(0, 6)
 [node name="BottomRight" parent="CameraLimits" index="1"]
 position = Vector2(736, 432)
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." index="10"]
-rotation = 0.785398
-energy = 0.07
-height = 0.3
-
 [editable path="TileMaps/Props/Candle"]
 [editable path="TileMaps/Props/Candle2"]
