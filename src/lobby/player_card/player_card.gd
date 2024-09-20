@@ -85,9 +85,7 @@ func cycle_player_type() -> void:
 func set_player_name(value: String) -> void:
 	player_name = value
 	player_name_changed.emit(player_name)
-	var caret_column: int = name_line_edit.caret_column
-	name_line_edit.text = player_name
-	name_line_edit.caret_column = caret_column
+	_set_text_keep_caret_column.call_deferred(player_name)
 
 
 func set_player_type(value: PlayerType) -> void:
@@ -115,3 +113,9 @@ func _get_autoload_peer_name(id: int) -> Variant:
 
 func _on_participation_toggle_pressed() -> void:
 	PeerData.toggle_participation(input_authority)
+
+
+func _set_text_keep_caret_column(text: String) -> void:
+	var caret_column: int = name_line_edit.caret_column
+	name_line_edit.text = text
+	name_line_edit.caret_column = caret_column
