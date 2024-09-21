@@ -1,7 +1,7 @@
 extends Node
 
 
-const DRAIN_AREA_GROUP_NAME = &"drain_areas"
+const DRAIN_AREA_GROUP_NAME = &"drain_area_displays"
 const ACTIVATED_SIGNAL_NAME = &"active_started"
 
 @onready var spawn: AudioStreamPlayer = $Spawn

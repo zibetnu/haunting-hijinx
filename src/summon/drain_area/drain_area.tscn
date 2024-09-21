@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=3 uid="uid://cscnk1bc8v66d"]
+[gd_scene load_steps=5 format=3 uid="uid://cscnk1bc8v66d"]
 
-[ext_resource type="Script" path="res://src/summon/drain_area/drain_area.gd" id="1_241hw"]
 [ext_resource type="PackedScene" uid="uid://boluqe005mis1" path="res://src/summon/drain_area/behavior/behavior.tscn" id="1_quv1b"]
 [ext_resource type="PackedScene" uid="uid://jnvo3fkujlu4" path="res://src/summon/drain_area/display/display.tscn" id="2_avw1c"]
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="3_0f5nh"]
@@ -11,7 +10,6 @@ properties/0/spawn = true
 properties/0/replication_mode = 0
 
 [node name="DrainArea" type="Node2D"]
-script = ExtResource("1_241hw")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_nr7fe")
@@ -21,8 +19,13 @@ replication_config = SubResource("SceneReplicationConfig_nr7fe")
 [node name="ClientNodeDeleter" parent="Behavior" node_paths=PackedStringArray("nodes") instance=ExtResource("3_0f5nh")]
 nodes = [NodePath("..")]
 
+[node name="QueueFreeTimer" type="Timer" parent="Behavior"]
+wait_time = 0.5
+one_shot = true
+
 [node name="Display" parent="." instance=ExtResource("2_avw1c")]
 
-[connection signal="active_ended" from="Behavior" to="." method="queue_free_workaround"]
-[connection signal="active_ended" from="Behavior" to="Display" method="set_idle"]
+[connection signal="active_ended" from="Behavior" to="Behavior/QueueFreeTimer" method="start"]
+[connection signal="active_ended" from="Behavior" to="Display" method="collide"]
 [connection signal="active_started" from="Behavior" to="Display" method="set_active"]
+[connection signal="timeout" from="Behavior/QueueFreeTimer" to="." method="queue_free"]
