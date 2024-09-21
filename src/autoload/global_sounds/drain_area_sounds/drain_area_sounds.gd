@@ -12,6 +12,20 @@ func _enter_tree() -> void:
 	get_tree().node_added.connect(_on_node_added)
 
 
+func _on_activated() -> void:
+	if activate.is_playing():
+		return
+
+	activate.play()
+
+
+func _on_spawned() -> void:
+	if spawn.is_playing():
+		return
+
+	spawn.play()
+
+
 func _on_node_added(node: Node) -> void:
 	if not node.is_in_group(DRAIN_AREA_GROUP_NAME):
 		return
@@ -22,5 +36,5 @@ func _on_node_added(node: Node) -> void:
 	if not node.is_node_ready():
 		await node.ready
 
-	spawn.play()
-	node.connect(ACTIVATED_SIGNAL_NAME, activate.play)
+	_on_spawned()
+	node.connect(ACTIVATED_SIGNAL_NAME, _on_activated)
