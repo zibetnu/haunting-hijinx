@@ -34,7 +34,11 @@ var player_name: String:
 
 func _ready() -> void:
 	cycle_type.disabled = not multiplayer.is_server()
-	name_line_edit.editable = multiplayer.get_unique_id() == input_authority
+	var is_input_authority := multiplayer.get_unique_id() == input_authority
+	name_line_edit.editable = is_input_authority
+	if is_input_authority:
+		name_line_edit.grab_focus()
+
 	set_player_name(str(_get_autoload_peer_name(input_authority)))
 
 
