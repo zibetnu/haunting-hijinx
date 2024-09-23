@@ -1,5 +1,7 @@
 extends Node
 ## Mimics a heartbeat using gamepad vibration.
+##
+## Useful as a way of alerting a player without using visuals.
 
 
 ## Each value is the number of heartbeats per minute associated with the key.
@@ -28,12 +30,7 @@ func _process(delta: float) -> void:
 		return
 
 	_time_elapsed = 0.0
-	Input.start_joy_vibration(
-			DEVICE_INDEX,
-			WEAK_MAGNITUDE,
-			STRONG_MAGNITUDE,
-			RUMBLE_DURATION
-	)
+	_vibrate()
 
 
 func _exit_tree() -> void:
@@ -51,3 +48,10 @@ func set_heart_rate_from_index(index: int) -> void:
 		return
 
 	heart_rate = HeartRate[HeartRate.keys()[index]]
+
+
+func _vibrate() -> void:
+	# Setting duration in start_joy_vibration doesn't seem to work properly.
+	Input.start_joy_vibration(DEVICE_INDEX, WEAK_MAGNITUDE, STRONG_MAGNITUDE)
+	await get_tree().create_timer(RUMBLE_DURATION).timeout
+	Input.stop_joy_vibration(DEVICE_INDEX)
