@@ -55,29 +55,33 @@ func auto_set_player_type(caller: Node) -> void:
 		cards.map(func(card: Node) -> PlayerType: return card.get("player_type"))
 	)
 
-	var ghosts_full: bool = player_types.count(PlayerType.GHOST) > MAX_GHOSTS
-	var hunters_full: bool = player_types.count(PlayerType.HUNTER) > MAX_HUNTERS
-	if not (ghosts_full or hunters_full):
-		return
-
+	var ghost_count: int = player_types.count(PlayerType.GHOST)
+	var hunter_count: int = player_types.count(PlayerType.HUNTER)
 	var new_player_type: PlayerType = player_type
 	match player_type:
 		PlayerType.HUNTER:
-			if hunters_full:
+			var too_many_hunters: bool = hunter_count > MAX_HUNTERS
+			if not too_many_hunters:
+				return
+
+			var ghosts_full: bool = ghost_count >= MAX_GHOSTS
+			if not ghosts_full:
 				new_player_type = PlayerType.GHOST
 
-			if ghosts_full:
+			else:
 				new_player_type = PlayerType.SPECTATOR
 
 		PlayerType.GHOST:
-			if ghosts_full:
+			var too_many_ghosts: bool = ghost_count > MAX_GHOSTS
+			if not too_many_ghosts:
+				return
+
+			var hunters_full: bool = hunter_count >= MAX_HUNTERS
+			if not hunters_full:
 				new_player_type = PlayerType.HUNTER
 
-			if hunters_full:
+			else:
 				new_player_type = PlayerType.SPECTATOR
-
-	if player_type == new_player_type:
-		return
 
 	set_player_type(new_player_type)
 
