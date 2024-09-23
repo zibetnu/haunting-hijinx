@@ -145,6 +145,9 @@ func _on_player_death_state_changed() -> void:
 
 
 func _on_peer_connected(id: int) -> void:
+	if not is_inside_tree():
+		return
+
 	_sync_timer.rpc_id(id, $MatchTimer.time_left)
 
 

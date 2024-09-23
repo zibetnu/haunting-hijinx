@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://ch5nu02vso40r"]
+
+[ext_resource type="PackedScene" uid="uid://0fbqpsh8pbhf" path="res://src/autoload/global_sounds/button_sounds/button_sounds.tscn" id="1_m4lnm"]
+[ext_resource type="PackedScene" uid="uid://b6edrvqnuo5bq" path="res://src/autoload/global_sounds/drain_area_sounds/drain_area_sounds.tscn" id="2_bcr66"]
+[ext_resource type="PackedScene" uid="uid://cxc7da7e8jxu1" path="res://src/autoload/global_sounds/slider_sounds/slider_sounds.tscn" id="2_wk4fe"]
+[ext_resource type="PackedScene" uid="uid://bvrn6ky085d6r" path="res://src/autoload/global_sounds/main_theme/main_theme.tscn" id="3_umvfy"]
+
+[node name="GlobalSounds" type="Node"]
+
+[node name="ButtonSounds" parent="." instance=ExtResource("1_m4lnm")]
+
+[node name="DrainAreaSounds" parent="." instance=ExtResource("2_bcr66")]
+
+[node name="MainTheme" parent="." instance=ExtResource("3_umvfy")]
+
+[node name="RangeSounds" parent="." instance=ExtResource("2_wk4fe")]

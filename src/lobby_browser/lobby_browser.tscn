@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://crqc4k74es8j6"]
+[gd_scene load_steps=6 format=3 uid="uid://crqc4k74es8j6"]
 
 [ext_resource type="Script" path="res://src/lobby_browser/lobby_browser.gd" id="1_wpwcv"]
 [ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="2_dwt65"]
 [ext_resource type="PackedScene" uid="uid://dmoov6v60pobv" path="res://src/lobby_browser/lobby_summary/lobby_summary.tscn" id="2_tlwtl"]
 [ext_resource type="PackedScene" uid="uid://bj8n2x3jkcbgs" path="res://src/relay_initializer/relay_initializer.tscn" id="3_w7k6n"]
+[ext_resource type="PackedScene" uid="uid://c6ql67s5oafpr" path="res://src/visibility_signals/visibility_signals.tscn" id="5_shjsd"]
 
-[node name="LobbyBrowser" type="Control" node_paths=PackedStringArray("first_button")]
+[node name="LobbyBrowser" type="Control"]
 layout_mode = 3
 anchors_preset = 13
 anchor_left = 0.5
@@ -16,7 +17,6 @@ offset_right = 320.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wpwcv")
-first_button = NodePath("HBoxContainer/LeftMenu/Refresh")
 lobby_summary_scene = ExtResource("2_tlwtl")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -118,6 +118,7 @@ text = "Joining..."
 unique_name_in_owner = true
 title = ""
 size = Vector2i(216, 100)
+borderless = true
 
 [node name="RefreshTimer" type="Timer" parent="."]
 wait_time = 30.0
@@ -127,7 +128,10 @@ autostart = true
 initialize_on_ready = false
 
 [node name="SteamConnector" parent="." instance=ExtResource("2_dwt65")]
-editor_description = "Calls close_connection on ready to make sure that Steam doesn't think this player is still in a lobby."
+
+[node name="VisibilitySignals" parent="." node_paths=PackedStringArray("canvas_item") instance=ExtResource("5_shjsd")]
+editor_description = "Calls close_connection on shown to make sure that Steam doesn't think this player is still in a lobby."
+canvas_item = NodePath("..")
 
 [connection signal="join_lobby_requested" from="." to="SteamConnector" method="join_lobby"]
 [connection signal="ready" from="." to="RelayInitializer" method="initialize_relay"]
@@ -142,4 +146,6 @@ editor_description = "Calls close_connection on ready to make sure that Steam do
 [connection signal="join_lobby_failed" from="SteamConnector" to="." method="notify" binds= ["Failed to join lobby."]]
 [connection signal="lobby_created" from="SteamConnector" to="." method="_on_lobby_created"]
 [connection signal="lobby_joined" from="SteamConnector" to="." method="_on_lobby_joined"]
-[connection signal="ready" from="SteamConnector" to="SteamConnector" method="close_connection"]
+[connection signal="shown" from="VisibilitySignals" to="." method="refresh" flags=3]
+[connection signal="shown" from="VisibilitySignals" to="HBoxContainer/LeftMenu/Refresh" method="grab_focus" flags=3]
+[connection signal="shown" from="VisibilitySignals" to="SteamConnector" method="close_connection" flags=3]

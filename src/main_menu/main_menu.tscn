@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://civfmojof07gs"]
+[gd_scene load_steps=3 format=3 uid="uid://civfmojof07gs"]
 
-[ext_resource type="Script" path="res://src/main_menu/main_menu.gd" id="1_mjvxa"]
-[ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="2_7d7kt"]
-[ext_resource type="Texture2D" uid="uid://c2f3ky3uiujc6" path="res://assets/logo.png" id="2_63rp5"]
-[ext_resource type="PackedScene" uid="uid://56f6sbrp31ud" path="res://src/call_attempter/call_attempter.tscn" id="2_ojbel"]
+[ext_resource type="PackedScene" uid="uid://dtev64q8rmhnn" path="res://src/main_menu/back_end/back_end.tscn" id="1_hhg0o"]
+[ext_resource type="PackedScene" uid="uid://50ijwh32vu0w" path="res://src/main_menu/front_end.tscn" id="2_hib2w"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -12,54 +10,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_mjvxa")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="BackEnd" parent="." instance=ExtResource("1_hhg0o")]
+
+[node name="VisibilitySignals" parent="BackEnd" index="3" node_paths=PackedStringArray("canvas_item")]
+canvas_item = NodePath("../..")
+
+[node name="FrontEnd" parent="." instance=ExtResource("2_hib2w")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
-[node name="Logo" type="TextureRect" parent="CenterContainer"]
-layout_mode = 2
-texture = ExtResource("2_63rp5")
+[connection signal="shown" from="BackEnd/VisibilitySignals" to="FrontEnd/VBoxContainer/BrowseLobbies" method="grab_focus" flags=3]
+[connection signal="pressed" from="FrontEnd/VBoxContainer/BrowseLobbies" to="BackEnd/ChangeToLobbyBrowser" method="attempt_method_call"]
+[connection signal="pressed" from="FrontEnd/VBoxContainer/Quit" to="BackEnd/Quit" method="quit"]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -60.0
-offset_top = -80.0
-offset_right = 60.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="BrowseLobbies" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Browse Lobbies"
-
-[node name="Settings" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Settings"
-
-[node name="CallAttempter" parent="VBoxContainer/Settings" instance=ExtResource("2_ojbel")]
-node_path = NodePath("/root/SceneChanger")
-method = &"change_to_config_menu"
-
-[node name="Quit" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Quit"
-
-[node name="SteamConnector" parent="VBoxContainer" instance=ExtResource("2_7d7kt")]
-editor_description = "Calls close_connection on ready to make sure that Steam doesn't think this player is still in a lobby."
-
-[connection signal="pressed" from="VBoxContainer/BrowseLobbies" to="." method="_on_browse_lobbies_pressed"]
-[connection signal="ready" from="VBoxContainer/BrowseLobbies" to="VBoxContainer/BrowseLobbies" method="grab_focus"]
-[connection signal="pressed" from="VBoxContainer/Settings" to="VBoxContainer/Settings/CallAttempter" method="attempt_method_call"]
-[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
-[connection signal="ready" from="VBoxContainer/SteamConnector" to="VBoxContainer/SteamConnector" method="close_connection"]
+[editable path="BackEnd"]
+[editable path="FrontEnd"]

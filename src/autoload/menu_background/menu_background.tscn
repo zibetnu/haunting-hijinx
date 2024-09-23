@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmrvrkyh2t2pf"]
+
+[ext_resource type="Script" path="res://src/autoload/menu_background/menu_background.gd" id="1_7v3o7"]
+[ext_resource type="PackedScene" uid="uid://ebt35jjk5feh" path="res://src/level/main_floor/tile_maps.tscn" id="2_ma24s"]
+[ext_resource type="PackedScene" uid="uid://b0jfn7wspsy4c" path="res://src/level/level_lighting.tscn" id="7_ebbh2"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_eduse"]
+viewport_path = NodePath("TextureRect/SubViewport")
+
+[node name="MenuBackground" type="CenterContainer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7v3o7")
+scene_names = Array[StringName]([&"Menus", &"LobbyBrowser", &"Lobby"])
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = SubResource("ViewportTexture_eduse")
+
+[node name="SubViewport" type="SubViewport" parent="TextureRect"]
+disable_3d = true
+snap_2d_transforms_to_pixel = true
+size = Vector2i(736, 487)
+
+[node name="TileMaps" parent="TextureRect/SubViewport" instance=ExtResource("2_ma24s")]
+position = Vector2(0, 38)
+
+[node name="LevelLighting" parent="TextureRect/SubViewport" instance=ExtResource("7_ebbh2")]

@@ -19,11 +19,12 @@ config/config_path="user://settings.cfg"
 [autoload]
 
 PeerData="*res://src/autoload/peer_data/peer_data.tscn"
+MenuBackground="res://src/autoload/menu_background/menu_background.tscn"
 SceneChanger="*res://src/autoload/scene_changer/scene_changer.tscn"
 FullscreenToggle="res://src/autoload/fullscreen_toggle/fullscreen_toggle.tscn"
 CutsceneManager="*res://src/autoload/cutscene_manager.gd"
 SteamCallbacks="res://src/autoload/steam_callbacks.gd"
-InterfaceSounds="res://src/autoload/interface_sounds/interface_sounds.tscn"
+GlobalSounds="res://src/autoload/global_sounds/global_sounds.tscn"
 
 [debug]
 
@@ -52,6 +53,21 @@ import/blender/enabled=false
 [gui]
 
 theme/custom="res://src/theme/theme.tres"
+
+[importer_defaults]
+
+wav={
+"compress/mode": 0,
+"edit/loop_begin": 0,
+"edit/loop_end": -1,
+"edit/loop_mode": 0,
+"edit/normalize": true,
+"edit/trim": true,
+"force/8_bit": false,
+"force/max_rate": false,
+"force/max_rate_hz": 44100,
+"force/mono": false
+}
 
 [input]
 
