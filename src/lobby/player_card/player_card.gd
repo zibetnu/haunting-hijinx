@@ -29,13 +29,15 @@ var player_name: String:
 	set = set_player_name
 
 @onready var cycle_type: Button = %CycleType
+@onready var display_line_edit: LineEdit = %DisplayLineEdit
 @onready var name_line_edit: LineEdit = %NameLineEdit
 
 
 func _ready() -> void:
 	cycle_type.disabled = not multiplayer.is_server()
 	var is_input_authority := multiplayer.get_unique_id() == input_authority
-	name_line_edit.editable = is_input_authority
+	display_line_edit.visible = not is_input_authority
+	name_line_edit.visible = is_input_authority
 	if is_input_authority:
 		name_line_edit.grab_focus()
 
