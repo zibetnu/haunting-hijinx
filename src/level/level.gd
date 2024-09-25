@@ -11,10 +11,15 @@ const SpectatorMenu = preload("res://src/level/spectator_menu/spectator_menu.tsc
 var _ghosts_spawned := 0
 var _hunters_spawned := 0
 
+@onready var ghost_timer_sprite: Node2D = %GhostTimerSprite
+@onready var hunter_timer_sprite: Node2D = %HunterTimerSprite
+@onready var spectator_timer_sprite: Node2D = %SpectatorTimerSprite
+
 
 func _ready():
 	get_tree().root.size_changed.connect(center_play_area)
 	center_play_area()
+	show_matching_timer_sprite()
 
 	if not multiplayer.is_server():
 		return
@@ -87,6 +92,17 @@ func remove_player(id: int) -> void:
 
 		player.queue_free()
 		_on_player_death_state_changed()
+
+
+## Shows timer sprite matching the local peer's type.
+func show_matching_timer_sprite() -> void:
+	var local_peer_type: int = PeerData.get_peer_type(
+			multiplayer.get_unique_id()
+	)
+	var peer_type: Dictionary = PeerData.PeerType
+	hunter_timer_sprite.visible = local_peer_type == peer_type.HUNTER
+	ghost_timer_sprite.visible = local_peer_type == peer_type.GHOST
+	spectator_timer_sprite.visible = local_peer_type == peer_type.SPECTATOR
 
 
 func _end_match(message: String) -> void:
