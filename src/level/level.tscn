@@ -1,14 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://gxh15sde0me5"]
+[gd_scene load_steps=13 format=3 uid="uid://gxh15sde0me5"]
 
 [ext_resource type="Script" path="res://src/level/level.gd" id="1_el04s"]
 [ext_resource type="PackedScene" uid="uid://vl432076bm8p" path="res://src/level/steam_lobby_chat_update/steam_lobby_chat_update.tscn" id="2_acesl"]
 [ext_resource type="PackedScene" uid="uid://grxm3658ukjj" path="res://src/battery_spawner/battery_spawner.tscn" id="2_d8ks1"]
-[ext_resource type="PackedScene" uid="uid://chog7qk0d8wy7" path="res://src/timer_label/timer_label.tscn" id="2_tx202"]
 [ext_resource type="PackedScene" uid="uid://7wne64wo1epb" path="res://src/counting_spawner/counting_spawner.tscn" id="3_xxci0"]
 [ext_resource type="PackedScene" uid="uid://ojjy8keargbf" path="res://src/ping_label/ping_label.tscn" id="5_ijd43"]
 [ext_resource type="PackedScene" uid="uid://qdsau1mq5mj1" path="res://src/countdown/countdown.tscn" id="7_qv3yx"]
+[ext_resource type="PackedScene" uid="uid://mqch0psyq7vp" path="res://src/timer_sprite/ghost_timer_sprite.tscn" id="8_1aado"]
 [ext_resource type="PackedScene" uid="uid://kshsc10g60hy" path="res://src/match_menu/match_menu.tscn" id="8_v81sd"]
 [ext_resource type="PackedScene" uid="uid://b0jfn7wspsy4c" path="res://src/level/level_lighting.tscn" id="9_35o1b"]
+[ext_resource type="PackedScene" uid="uid://t58d7k6o6dox" path="res://src/timer_sprite/hunter_timer_sprite.tscn" id="9_dajyl"]
+[ext_resource type="PackedScene" uid="uid://dppt0dsngt68c" path="res://src/timer_sprite/spectator_timer_sprite.tscn" id="10_4jcdm"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_63iby"]
 properties/0/path = NodePath("CanvasLayer/EndLabel:text")
@@ -74,20 +76,6 @@ text = "end message"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TimerLabel" parent="CanvasLayer" node_paths=PackedStringArray("timer") instance=ExtResource("2_tx202")]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -16.0
-offset_right = 16.0
-offset_bottom = 23.0
-grow_horizontal = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_type_variation = &"LabelOutlined"
-horizontal_alignment = 1
-timer = NodePath("../../MatchTimer")
-
 [node name="PingLabel" parent="CanvasLayer" instance=ExtResource("5_ijd43")]
 visible = false
 modulate = Color(1, 1, 1, 0.498039)
@@ -117,6 +105,34 @@ theme_type_variation = &"LabelBigOutlined"
 timer = NodePath("../../MatchTimer")
 
 [node name="MatchMenu" parent="CanvasLayer" instance=ExtResource("8_v81sd")]
+
+[node name="TimerSprites" type="Control" parent="CanvasLayer"]
+custom_minimum_size = Vector2(38, 22)
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -19.0
+offset_right = 19.0
+offset_bottom = 22.0
+grow_horizontal = 2
+
+[node name="GhostTimerSprite" parent="CanvasLayer/TimerSprites" node_paths=PackedStringArray("timer") instance=ExtResource("8_1aado")]
+unique_name_in_owner = true
+visible = false
+position = Vector2(19, 11)
+timer = NodePath("../../../MatchTimer")
+
+[node name="HunterTimerSprite" parent="CanvasLayer/TimerSprites" node_paths=PackedStringArray("timer") instance=ExtResource("9_dajyl")]
+unique_name_in_owner = true
+visible = false
+position = Vector2(19, 11)
+timer = NodePath("../../../MatchTimer")
+
+[node name="SpectatorTimerSprite" parent="CanvasLayer/TimerSprites" node_paths=PackedStringArray("timer") instance=ExtResource("10_4jcdm")]
+unique_name_in_owner = true
+position = Vector2(19, 7)
+timer = NodePath("../../../MatchTimer")
 
 [node name="LevelLighting" parent="." instance=ExtResource("9_35o1b")]
 
