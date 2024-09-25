@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://t58d7k6o6dox"]
+
+[ext_resource type="Script" path="res://src/timer_sprite/timer_sprite.gd" id="1_fddy3"]
+[ext_resource type="Texture2D" uid="uid://cwwmndj3obcvn" path="res://assets/timer_sprite/hunter/frame.png" id="2_23u2i"]
+[ext_resource type="Texture2D" uid="uid://bea4n1twccmyu" path="res://assets/timer_sprite/hunter/digits.png" id="3_6p1dh"]
+
+[node name="HunterTimerSprite" type="Node2D"]
+script = ExtResource("1_fddy3")
+
+[node name="Frame" type="Sprite2D" parent="."]
+texture = ExtResource("2_23u2i")
+
+[node name="MinuteOnes" type="Sprite2D" parent="."]
+position = Vector2(-9, 1)
+scale = Vector2(2, 2)
+texture = ExtResource("3_6p1dh")
+hframes = 10
+
+[node name="SecondTens" type="Sprite2D" parent="."]
+position = Vector2(3, 1)
+scale = Vector2(2, 2)
+texture = ExtResource("3_6p1dh")
+hframes = 10
+
+[node name="SecondOnes" type="Sprite2D" parent="."]
+position = Vector2(11, 1)
+scale = Vector2(2, 2)
+texture = ExtResource("3_6p1dh")
+hframes = 10
