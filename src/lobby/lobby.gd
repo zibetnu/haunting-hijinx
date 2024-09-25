@@ -46,11 +46,11 @@ func add_card(id: int) -> void:
 	if card.has_signal(PLAYER_TYPE_SIGNAL):
 		card.connect(
 				PLAYER_TYPE_SIGNAL,
-				func(value: int)-> void: TypeAdapter.set_peer_type(id, value)
+				func(value: int)-> void: PeerData.set_peer_type(id, value)
 		)
 	cards.add_child(card, true)
 	if card.has_method(PLAYER_TYPE_METHOD):
-		card.call(PLAYER_TYPE_METHOD, TypeAdapter.get_peer_type(id))
+		card.call(PLAYER_TYPE_METHOD, PeerData.get_peer_type(id))
 
 	_on_peer_participation_changed(id)
 
@@ -78,41 +78,3 @@ func _on_peer_participation_changed(_id: int) -> void:
 
 func _on_start_button_pressed() -> void:
 	SceneChanger.change_scene_to_packed(level)
-
-
-class TypeAdapter:
-	enum PeerType {
-		HUNTER = 0,
-		GHOST = 1,
-		SPECTATOR = 2,
-	}
-
-
-	static func get_peer_type(id: int) -> PeerType:
-		if id in PeerData.spectators:
-			return PeerType.SPECTATOR
-
-		if id == PeerData.ghost_peer:
-			return PeerType.GHOST
-
-		return PeerType.HUNTER
-
-
-	static func set_peer_type(id: int, type: PeerType) -> void:
-		match type:
-			PeerType.HUNTER:
-				if id in PeerData.spectators:
-					PeerData.toggle_participation(id)
-
-				if id == PeerData.ghost_peer:
-					PeerData.ghost_peer = -1
-
-			PeerType.GHOST:
-				if id in PeerData.spectators:
-					PeerData.toggle_participation(id)
-
-				PeerData.ghost_peer = id
-
-			PeerType.SPECTATOR:
-				if id in PeerData.participants:
-					PeerData.toggle_participation(id)

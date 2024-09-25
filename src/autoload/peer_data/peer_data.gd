@@ -7,6 +7,12 @@ signal ghost_peer_changed(id: int)
 signal peer_name_changed(id: int)
 signal peer_participation_changed(id: int)
 
+enum PeerType {
+	HUNTER = 0,
+	GHOST = 1,
+	SPECTATOR = 2,
+}
+
 @export var ghost_peer := 1:
 	set(value):
 		ghost_peer = value
@@ -47,6 +53,16 @@ func erase_data_for_peer(id: int) -> void:
 	peer_participation_changed.emit(id)
 
 
+func get_peer_type(id: int) -> PeerType:
+	if id in spectators:
+		return PeerType.SPECTATOR
+
+	if id == ghost_peer:
+		return PeerType.GHOST
+
+	return PeerType.HUNTER
+
+
 @rpc("call_local", "reliable")
 func set_peer_name(id: int, peer_name: String) -> void:
 	if peer_names.get(id, null) == peer_name:
@@ -54,6 +70,26 @@ func set_peer_name(id: int, peer_name: String) -> void:
 
 	peer_names[id] = peer_name
 	peer_name_changed.emit(id)
+
+
+func set_peer_type(id: int, type: PeerType) -> void:
+	match type:
+		PeerType.HUNTER:
+			if id in spectators:
+				toggle_participation(id)
+
+			if id == ghost_peer:
+				ghost_peer = -1
+
+		PeerType.GHOST:
+			if id in spectators:
+				toggle_participation(id)
+
+			ghost_peer = id
+
+		PeerType.SPECTATOR:
+			if id in participants:
+				toggle_participation(id)
 
 
 func toggle_participation(id: int) -> void:
