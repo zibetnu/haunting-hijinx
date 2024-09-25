@@ -1,16 +1,20 @@
-[gd_scene load_steps=15 format=3 uid="uid://ctn825io87i34"]
+[gd_scene load_steps=13 format=3 uid="uid://ctn825io87i34"]
 
 [ext_resource type="AnimationLibrary" uid="uid://fs3jht0ivdhm" path="res://src/animation_libaries/canvas_item.tres" id="1_7b0n7"]
+[ext_resource type="Script" path="res://src/hunter/costume/hunter_costume.gd" id="1_auu5i"]
 [ext_resource type="AnimationLibrary" uid="uid://krtfia4oqseg" path="res://src/animation_libaries/sprite.tres" id="2_jv5mw"]
-[ext_resource type="PackedScene" uid="uid://cmkrovbbqls32" path="res://src/vector_2i_signals/vector_2i_signals.tscn" id="3_sn6gs"]
-[ext_resource type="PackedScene" uid="uid://dk7dsekk0sapx" path="res://src/rotation_to_int_range/rotation_to_int_range.tscn" id="4_qgldn"]
-[ext_resource type="AnimationLibrary" uid="uid://c7o5f7iqmtla1" path="res://src/hunter/costume/hunter_y_frames.tres" id="5_5a8fv"]
+[ext_resource type="AnimationLibrary" uid="uid://bss842gjvgyiu" path="res://src/hunter/costume/hunter_costume.tres" id="2_wvtms"]
 [ext_resource type="Texture2D" uid="uid://iy2jvayptac2" path="res://assets/hunter/legs.png" id="6_wc0vr"]
 [ext_resource type="Texture2D" uid="uid://cncgj1kxmgybg" path="res://assets/hunter/torso.png" id="7_l744e"]
 [ext_resource type="Texture2D" uid="uid://blnr62by4pipw" path="res://assets/hunter/arms.png" id="8_or3nn"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_nu623"]
 viewport_path = NodePath("SubViewport")
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_72euo"]
+properties/0/path = NodePath(".:costume_current_animation")
+properties/0/spawn = true
+properties/0/replication_mode = 2
 
 [sub_resource type="Animation" id="Animation_74m6x"]
 resource_name = "RESET"
@@ -49,20 +53,14 @@ properties/0/path = NodePath(".:current_animation")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_dm4ux"]
-properties/0/path = NodePath(".:range_value")
-properties/0/spawn = true
-properties/0/replication_mode = 2
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6op3x"]
-properties/0/path = NodePath(".:current_animation")
-properties/0/spawn = true
-properties/0/replication_mode = 2
-
 [node name="HunterCostume" type="Sprite2D"]
 light_mask = 32
 position = Vector2(0, -8)
 texture = SubResource("ViewportTexture_nu623")
+script = ExtResource("1_auu5i")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_72euo")
 
 [node name="Effects" type="AnimationPlayer" parent="."]
 libraries = {
@@ -74,26 +72,20 @@ libraries = {
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Effects"]
 replication_config = SubResource("SceneReplicationConfig_cfqbp")
 
-[node name="SubViewport" type="SubViewport" parent="."]
-transparent_bg = true
-size = Vector2i(32, 32)
-
-[node name="CoordsSource" parent="SubViewport" instance=ExtResource("3_sn6gs")]
-
-[node name="XSource" parent="SubViewport/CoordsSource" instance=ExtResource("4_qgldn")]
-range_size = 16
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="SubViewport/CoordsSource/XSource"]
-replication_config = SubResource("SceneReplicationConfig_dm4ux")
-
-[node name="YSource" type="AnimationPlayer" parent="SubViewport/CoordsSource"]
-root_node = NodePath("../../Legs")
+[node name="Hunter" type="AnimationPlayer" parent="."]
 libraries = {
-"": ExtResource("5_5a8fv")
+"": ExtResource("2_wvtms")
 }
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="SubViewport/CoordsSource/YSource"]
-replication_config = SubResource("SceneReplicationConfig_6op3x")
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Hunter"]
+replication_config = SubResource("SceneReplicationConfig_cfqbp")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+snap_2d_transforms_to_pixel = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(32, 32)
 
 [node name="Legs" type="Sprite2D" parent="SubViewport"]
 position = Vector2(16, 16)
@@ -110,8 +102,4 @@ hframes = 16
 position = Vector2(16, 16)
 texture = ExtResource("8_or3nn")
 hframes = 16
-
-[connection signal="vector_changed" from="SubViewport/CoordsSource" to="SubViewport/Legs" method="set_frame_coords"]
-[connection signal="vector_x_changed" from="SubViewport/CoordsSource" to="SubViewport/Torso" method="set_frame"]
-[connection signal="vector_x_changed" from="SubViewport/CoordsSource" to="SubViewport/Arms" method="set_frame"]
-[connection signal="range_value_changed" from="SubViewport/CoordsSource/XSource" to="SubViewport/CoordsSource" method="set_vector_x"]
+vframes = 3
