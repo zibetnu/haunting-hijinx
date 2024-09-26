@@ -12,7 +12,7 @@
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_72euo"]
-properties/0/path = NodePath(".:costume_current_animation")
+properties/0/path = NodePath(".:costume_rotation")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
