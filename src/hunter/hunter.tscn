@@ -225,12 +225,12 @@ visible = false
 y_sort_enabled = true
 texture = SubResource("ViewportTexture_shnpn")
 
-[node name="FlashlightBack" type="Sprite2D" parent="HunterCostume/SubViewport" index="2"]
+[node name="FlashlightBack" type="Sprite2D" parent="HunterCostume/SubViewport" index="1"]
 position = Vector2(16, 16)
 texture = ExtResource("20_g6qtr")
 hframes = 32
 
-[node name="FlashlightFront" type="Sprite2D" parent="HunterCostume/SubViewport" index="4"]
+[node name="FlashlightFront" type="Sprite2D" parent="HunterCostume/SubViewport" index="3"]
 position = Vector2(16, 16)
 texture = ExtResource("21_pbkwq")
 hframes = 32
@@ -312,7 +312,7 @@ layout_mode = 2
 [connection signal="state_entered" from="StateChart/Base/Dead" to="CollisionShape2D" method="set_disabled" flags=3 binds= [true]]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="Grabbable" method="set_monitorable" flags=3 binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="Flashlight/Behavior" method="set_enabled" binds= [false]]
-[connection signal="state_entered" from="StateChart/Base/Dead" to="HunterCostume/SubViewport/CoordsSource/YSource" method="play" binds= [&"dead"]]
+[connection signal="state_entered" from="StateChart/Base/Dead" to="HunterCostume" method="play" binds= ["dead"]]
 [connection signal="state_exited" from="StateChart/Base/Dead" to="StateChart/Base/Dead/IsDead" method="set_false"]
 [connection signal="state_exited" from="StateChart/Base/Dead" to="DamageSignals/Revivable" method="disable"]
 [connection signal="state_exited" from="StateChart/Base/Dead" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" method="hide"]
@@ -321,8 +321,8 @@ layout_mode = 2
 [connection signal="state_entered" from="StateChart/Base/Alive" to="PlayerControllerStack/Synced" method="force_emit_move_vector_signals"]
 [connection signal="state_entered" from="StateChart/Base/Alive" to="Flashlight/Behavior" method="set_enabled" binds= [true]]
 [connection signal="state_exited" from="StateChart/Base/Alive" to="Flashlight/Behavior" method="set_enabled" binds= [false]]
-[connection signal="state_entered" from="StateChart/Base/Alive/Movement/Idle" to="HunterCostume/SubViewport/CoordsSource/YSource" method="play" binds= [&"idle"]]
-[connection signal="state_entered" from="StateChart/Base/Alive/Movement/Move" to="HunterCostume/SubViewport/CoordsSource/YSource" method="play" binds= [&"move"]]
+[connection signal="state_entered" from="StateChart/Base/Alive/Movement/Idle" to="HunterCostume" method="play" binds= ["idle"]]
+[connection signal="state_entered" from="StateChart/Base/Alive/Movement/Move" to="HunterCostume" method="play" binds= ["move"]]
 [connection signal="state_physics_processing" from="StateChart/Base/Alive/Movement/Move" to="StateChart/Base/Alive/Movement/Move/Move" method="manual_physics_process"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Movement/Stun" to="StateChart/Base/Alive/Movement/Stun/StunTimeout" method="start"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Movement/Stun" to="HunterCostume/Effects" method="play" binds= [&"sprite/shake"]]
@@ -360,7 +360,7 @@ layout_mode = 2
 [connection signal="battery_unlowed" from="Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_none" flags=3]
 [connection signal="battery_unlowed" from="Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_battery_unlowed"]]
 [connection signal="damage_taken" from="Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"stunned"]]
-[connection signal="flashlight_rotation_changed" from="Flashlight/Behavior" to="HunterCostume/SubViewport/CoordsSource/XSource" method="set_range_value_from_rotation"]
+[connection signal="flashlight_rotation_changed" from="Flashlight/Behavior" to="HunterCostume" method="set_costume_rotation"]
 [connection signal="powered_off" from="Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_unpowered"]]
 [connection signal="powered_off" from="Flashlight/Behavior" to="StateChart/Base/Alive/Movement/Move/Move" method="set_move_speed" binds= [74.0]]
 [connection signal="powered_on" from="Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_powered"]]
