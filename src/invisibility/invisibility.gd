@@ -25,11 +25,22 @@ func set_visible(value: bool) -> void:
 	if is_local:
 		return
 
-	if visible and not while_visible.is_multiplayer_authority():
-		await while_visible.synchronized
-
+	await _await_synchronization()
 	visibility_changed.emit(visible)
 
 
 func _visibility_filter(peer_id: int) -> bool:
 	return visible or peer_id == local_peer_id
+
+
+func _await_synchronization() -> void:
+	if not visible:
+		return
+
+	if while_visible.is_multiplayer_authority():
+		return
+
+	if while_visible.replication_config.get_properties().size() < 1:
+		return
+
+	await while_visible.synchronized
