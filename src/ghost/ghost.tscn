@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=43 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="2_bh3m0"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_74yim"]
 [ext_resource type="PackedScene" uid="uid://bsgx1owl3cxou" path="res://src/grab_cutscene/grab_cutscene.tscn" id="4_qoosa"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_6yps6"]
+[ext_resource type="PackedScene" uid="uid://drxvuet3qhe60" path="res://src/invisibility/invisibility.tscn" id="5_gosxk"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="6_3dmdv"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_il0ju"]
 [ext_resource type="PackedScene" uid="uid://ca2ymkyj3cv7e" path="res://src/translucent/translucent.tscn" id="7_bmx85"]
@@ -30,13 +31,15 @@
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="40_1b387"]
 [ext_resource type="PackedScene" uid="uid://bfe2ycxqwnpxi" path="res://src/draw_circle/draw_circle.tscn" id="43_lxwi0"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_q3imy"]
+properties/0/path = NodePath(".:enabled")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hsnve"]
-properties/0/path = NodePath(".:position")
+properties/0/path = NodePath("..:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
-properties/1/path = NodePath("GhostTranslucent:enabled")
-properties/1/spawn = true
-properties/1/replication_mode = 2
 
 [sub_resource type="Resource" id="Resource_knfa0"]
 script = ExtResource("13_56q65")
@@ -91,9 +94,6 @@ collision_layer = 8
 motion_mode = 1
 wall_min_slide_angle = 0.0174533
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_hsnve")
-
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
 nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched")]
 
@@ -104,6 +104,14 @@ unique_name_in_owner = true
 
 [node name="GhostTranslucent" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_bmx85")]
 target = NodePath("..")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="GhostTranslucent"]
+replication_config = SubResource("SceneReplicationConfig_q3imy")
+
+[node name="Invisibility" parent="." instance=ExtResource("5_gosxk")]
+
+[node name="WhileVisible" parent="Invisibility" index="0"]
+replication_config = SubResource("SceneReplicationConfig_hsnve")
 
 [node name="Summon" parent="." instance=ExtResource("3_26ncu")]
 target_group = &"hunters"
@@ -467,16 +475,25 @@ texture_under = ExtResource("29_i4s33")
 texture_progress = ExtResource("29_i4s33")
 tint_under = Color(1, 1, 1, 0.247059)
 
+[connection signal="cutscene_ended" from="GrabCutscene" to="StateChart" method="send_event" binds= [&"invisibility_started"]]
+[connection signal="cutscene_started" from="GrabCutscene" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
+[connection signal="changed" from="PeerID" to="Invisibility" method="set_local_peer_id"]
 [connection signal="changed" from="PeerID" to="PlayerControllerStack/Synced" method="set_input_authority"]
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="set_peer_id"]
+[connection signal="changed_to_local" from="PeerID" to="." method="show"]
+[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate" method="show"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraLargeCircle" method="show"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraSmallCircle" method="show"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="hide"]
 [connection signal="changed_to_local" from="PeerID" to="Camera2D" method="set_enabled" binds= [true]]
+[connection signal="changed_to_remote" from="PeerID" to="." method="hide"]
+[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate" method="hide"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraLargeCircle" method="hide"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraSmallCircle" method="hide"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="show"]
 [connection signal="changed_to_remote" from="PeerID" to="Camera2D" method="set_enabled" binds= [false]]
+[connection signal="visibility_changed" from="Invisibility" to="." method="set_visible"]
+[connection signal="visibility_changed" from="Invisibility" to="IgnoreCanvasModulate" method="set_visible"]
 [connection signal="area_count_changed" from="Summon" to="Summon/NamedPropertySignals" method="set_property_value"]
 [connection signal="charge_percentage_changed" from="Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="set_as_ratio_floored"]
 [connection signal="summon_charging" from="Summon" to="StateChart" method="send_event" binds= [&"summon_charging"]]
@@ -551,7 +568,9 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="state_entered" from="StateChart/Base/Animation/Panic" to="PlaceholderCostume/Vector2iSignals/VframeAnimationPlayer" method="play" binds= [&"move"]]
 [connection signal="state_exited" from="StateChart/Base/Animation/Panic" to="PlaceholderCostume/EffectAnimationPlayer" method="play" binds= [&"RESET"]]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="GhostTranslucent" method="enable_translucency"]
+[connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="Invisibility" method="set_visible" binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="GhostTranslucent" method="disable_translucency"]
+[connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="Invisibility" method="set_visible" binds= [true]]
 [connection signal="button_1_pressed" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_1_pressed"]]
 [connection signal="button_1_released" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_1_released"]]
 [connection signal="button_2_pressed" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_2_pressed"]]
@@ -572,5 +591,6 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="first_node_entered" from="HuntersTouched" to="StateChart" method="send_event" binds= [&"hunters_touched"]]
 [connection signal="last_node_exited" from="HuntersTouched" to="StateChart" method="send_event" binds= [&"no_hunters_touched"]]
 
+[editable path="Invisibility"]
 [editable path="PlayerControllerStack"]
 [editable path="PlaceholderCostume"]
