@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://drxvuet3qhe60"]
+
+[ext_resource type="Script" path="res://src/invisibility/invisibility.gd" id="1_mdh47"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_qgrd7"]
+properties/0/path = NodePath(".:local_peer_id")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:visible")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+
+[node name="Invisibility" type="Node"]
+process_mode = 3
+script = ExtResource("1_mdh47")
+
+[node name="WhileVisible" type="MultiplayerSynchronizer" parent="."]
+
+[node name="Settings" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_qgrd7")
