@@ -22,7 +22,6 @@ PeerData="*res://src/autoload/peer_data/peer_data.tscn"
 MenuBackground="res://src/autoload/menu_background/menu_background.tscn"
 SceneChanger="*res://src/autoload/scene_changer/scene_changer.tscn"
 FullscreenToggle="res://src/autoload/fullscreen_toggle/fullscreen_toggle.tscn"
-CutsceneManager="*res://src/autoload/cutscene_manager.gd"
 SteamCallbacks="res://src/autoload/steam_callbacks.gd"
 GlobalSounds="res://src/autoload/global_sounds/global_sounds.tscn"
 
