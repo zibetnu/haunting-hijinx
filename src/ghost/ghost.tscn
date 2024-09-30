@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=42 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="2_bh3m0"]
@@ -26,7 +26,6 @@
 [ext_resource type="PackedScene" uid="uid://cpvs73t8l3h88" path="res://src/weak_to/weak_to.tscn" id="35_u2g7w"]
 [ext_resource type="PackedScene" uid="uid://dq7ts6lhskwyn" path="res://src/nodes_touched/nodes_touched.tscn" id="35_yndqj"]
 [ext_resource type="PackedScene" uid="uid://dpwfunjqyfike" path="res://src/health/health.tscn" id="38_arcfj"]
-[ext_resource type="PackedScene" uid="uid://oe321ygxttbo" path="res://src/grabber/grabber.tscn" id="38_ydesf"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="40_1b387"]
 [ext_resource type="PackedScene" uid="uid://bfe2ycxqwnpxi" path="res://src/draw_circle/draw_circle.tscn" id="43_lxwi0"]
 
@@ -97,7 +96,7 @@ motion_mode = 1
 wall_min_slide_angle = 0.0174533
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
-nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched")]
+nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../HuntersTouched")]
 
 [node name="GrabCutscene" parent="." instance=ExtResource("4_qoosa")]
 
@@ -398,12 +397,6 @@ weak_to = 1
 
 [node name="Health" parent="DamageSignals/WeakTo/DamageValueSignal" instance=ExtResource("38_arcfj")]
 
-[node name="Grabber" parent="." instance=ExtResource("38_ydesf")]
-monitoring = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Grabber"]
-shape = SubResource("CircleShape2D_o7ptf")
-
 [node name="HuntersTouched" parent="." instance=ExtResource("35_yndqj")]
 collision_layer = 0
 collision_mask = 4
@@ -512,14 +505,10 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="PlayerControllerStack/Synced" method="force_emit_move_vector_signals"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="PlayerControllerStack/Synced" method="force_emit_button_2_signals"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="StateChart" method="send_event" binds= [&"invisibility_started"]]
-[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Grabber" method="set_monitoring" flags=3 binds= [true]]
-[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Normal" to="Grabber" method="set_monitoring" flags=3 binds= [false]]
 [connection signal="state_physics_processing" from="StateChart/Base/Behavior/Alive/Normal" to="StateChart/Base/Behavior/Alive/Normal/Move" method="manual_physics_process"]
 [connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Normal/Damaged" to="StateChart" method="send_event" binds= [&"stunned"]]
 [connection signal="event_received" from="StateChart/Base/Behavior/Alive/Sprint" to="StateChart/Base/Behavior/Alive/Sprint/Damaged" method="receive_event"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Sprint" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
-[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Sprint" to="Grabber" method="set_monitoring" flags=3 binds= [true]]
-[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Sprint" to="Grabber" method="set_monitoring" flags=3 binds= [false]]
 [connection signal="state_physics_processing" from="StateChart/Base/Behavior/Alive/Sprint" to="StateChart/Base/Behavior/Alive/Sprint/Move" method="manual_physics_process"]
 [connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Sprint/Damaged" to="StateChart" method="send_event" binds= [&"stunned"]]
 [connection signal="event_received" from="StateChart/Base/Behavior/Alive/Summon" to="StateChart/Base/Behavior/Alive/Summon/Damaged" method="receive_event"]
@@ -590,7 +579,6 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="damaged_by_amount" from="DamageSignals/WeakTo/DamageValueSignal" to="DamageSignals/WeakTo/DamageValueSignal/Health" method="subtract_health"]
 [connection signal="health_emptied" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="StateChart" method="send_event" binds= [&"died"]]
 [connection signal="health_percentage_changed" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="set_as_ratio_floored"]
-[connection signal="grabbable_grabbed" from="Grabber" to="GrabCutscene" method="start_cutscene"]
 [connection signal="first_node_entered" from="HuntersTouched" to="StateChart" method="send_event" binds= [&"hunters_touched"]]
 [connection signal="last_node_exited" from="HuntersTouched" to="StateChart" method="send_event" binds= [&"no_hunters_touched"]]
 
