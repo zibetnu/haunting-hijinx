@@ -6,3 +6,5 @@
 script = ExtResource("1_vf0yw")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+update_rotation = false
+update_scale = false
