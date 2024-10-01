@@ -12,7 +12,9 @@ signal input_handled
 signal move_started
 signal move_stopped
 signal move_vector_changed(move_vector: Vector2)
+signal move_rotation_changed(move_rotation: float)
 signal look_vector_changed(look_vector: Vector2)
+signal look_rotation_changed(look_rotation: float)
 
 @export var move_vector := Vector2.ZERO:
 	set(value):
@@ -24,6 +26,9 @@ signal look_vector_changed(look_vector: Vector2)
 		]
 		move_vector = value
 		move_vector_changed.emit(move_vector)
+		if not move_vector.is_zero_approx():
+			move_rotation_changed.emit(move_vector.angle())
+
 		match state:
 			[false, false, true]:
 				move_stopped.emit()
@@ -35,6 +40,8 @@ signal look_vector_changed(look_vector: Vector2)
 	set(value):
 		look_vector = value.normalized()
 		look_vector_changed.emit(look_vector)
+		if not look_vector.is_zero_approx():
+			look_rotation_changed.emit(look_vector.angle())
 
 @export var button_1 := false:
 	set(value):
@@ -68,10 +75,13 @@ func force_emit_move_vector_signals() -> void:
 
 	else:
 		move_started.emit()
+		move_rotation_changed.emit(move_vector.angle())
 
 
 func force_emit_look_vector_signals() -> void:
 	look_vector_changed.emit(look_vector)
+	if not look_vector.is_zero_approx():
+		look_rotation_changed.emit(look_vector.angle())
 
 
 func force_emit_button_1_signals() -> void:

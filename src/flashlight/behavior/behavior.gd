@@ -142,13 +142,6 @@ func set_target_rotation(value: float) -> void:
 	target_rotation = value
 
 
-func set_target_rotation_from_vector(value: Vector2) -> void:
-	if value.is_zero_approx():
-		return
-
-	target_rotation = value.angle()
-
-
 func take_damage(source: DamageSource) -> void:
 	if source.damage_type == damage_weak_to:
 		battery = 0
