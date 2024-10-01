@@ -433,6 +433,7 @@ monitorable = false
 shape = SubResource("CircleShape2D_o7ptf")
 
 [node name="Grabber" parent="Grab" instance=ExtResource("38_ydesf")]
+position = Vector2(16, 0)
 
 [node name="HuntersTouched" parent="." instance=ExtResource("35_yndqj")]
 collision_layer = 0
@@ -617,6 +618,7 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="button_1_released" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_1_released"]]
 [connection signal="button_2_pressed" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_2_pressed"]]
 [connection signal="button_2_released" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_2_released"]]
+[connection signal="move_rotation_changed" from="PlayerControllerStack/Synced" to="Grab" method="set_rotation"]
 [connection signal="move_rotation_changed" from="PlayerControllerStack/Synced" to="GhostCostume" method="set_costume_rotation"]
 [connection signal="move_started" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"move_started"]]
 [connection signal="move_stopped" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"move_stopped"]]
