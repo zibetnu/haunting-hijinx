@@ -14,8 +14,6 @@ const _MAX_ROTATION = 2 * PI
 @export var range_value: int = _MIN_RANGE_VALUE:
 	set = set_range_value
 
-@export var ignore_zero_vector := true
-
 
 func set_range_value(value: int) -> void:
 	range_value = clampi(
@@ -31,13 +29,6 @@ func set_range_value_from_rotation(rotation: float) -> void:
 	var rotation_percent: float = normalized_rotation / _MAX_ROTATION
 	var scaled_value := roundi(range_size * rotation_percent)
 	range_value = _MIN_RANGE_VALUE + (scaled_value % range_size)
-
-
-func set_range_value_from_vector(vector: Vector2) -> void:
-	if vector == Vector2.ZERO and ignore_zero_vector:
-		return
-
-	set_range_value_from_rotation(vector.angle())
 
 
 func set_range_size(value: int) -> void:
