@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://klrwcohuhynk"]
+
+[ext_resource type="Script" path="res://src/ghost/costume/ghost_costume.gd" id="1_giptv"]
+[ext_resource type="Texture2D" uid="uid://cqklbgsp8hsst" path="res://assets/ghost.png" id="1_su5en"]
+[ext_resource type="AnimationLibrary" uid="uid://fs3jht0ivdhm" path="res://src/animation_libaries/canvas_item.tres" id="3_fxyvi"]
+[ext_resource type="AnimationLibrary" uid="uid://krtfia4oqseg" path="res://src/animation_libaries/sprite.tres" id="4_httx6"]
+[ext_resource type="AnimationLibrary" uid="uid://cpgm7lkqrgqbv" path="res://src/ghost/costume/ghost_costume.tres" id="5_tqb6x"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_euls0"]
+properties/0/path = NodePath(".:frame_coord_x")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[sub_resource type="Animation" id="Animation_74m6x"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mpegg"]
+_data = {
+"RESET": SubResource("Animation_74m6x")
+}
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6y2tp"]
+properties/0/path = NodePath(".:current_animation")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ucqbf"]
+properties/0/path = NodePath(".:current_animation")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[node name="GhostCostume" type="Sprite2D"]
+position = Vector2(0, -8)
+texture = ExtResource("1_su5en")
+hframes = 8
+vframes = 2
+script = ExtResource("1_giptv")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_euls0")
+
+[node name="Effects" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mpegg"),
+"canvas_item": ExtResource("3_fxyvi"),
+"sprite": ExtResource("4_httx6")
+}
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Effects"]
+replication_config = SubResource("SceneReplicationConfig_6y2tp")
+
+[node name="Ghost" type="AnimationPlayer" parent="."]
+libraries = {
+"": ExtResource("5_tqb6x")
+}
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Ghost"]
+replication_config = SubResource("SceneReplicationConfig_ucqbf")
