@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=42 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="2_bh3m0"]
@@ -18,10 +18,9 @@
 [ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/move/move.tscn" id="18_5mhrn"]
 [ext_resource type="PackedScene" uid="uid://bfhqyxu3iuptm" path="res://src/event_listener/event_listener.tscn" id="18_870ie"]
 [ext_resource type="PackedScene" uid="uid://bkuic22finfse" path="res://src/controller/player_controller_stack.tscn" id="19_swqdr"]
+[ext_resource type="PackedScene" uid="uid://klrwcohuhynk" path="res://src/ghost/costume/ghost_costume.tscn" id="25_s3y3d"]
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="29_1sq8w"]
-[ext_resource type="PackedScene" uid="uid://dc83s644ta6eo" path="res://src/placeholder_costume/placeholder_costume.tscn" id="29_ftfj4"]
 [ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_i4s33"]
-[ext_resource type="Texture2D" uid="uid://bhta7pnif21mf" path="res://assets/placeholder_sprite_wide.png" id="30_rab3d"]
 [ext_resource type="PackedScene" uid="uid://d4gb1ksm22wvh" path="res://src/damage_value_signal/damage_value_signal.tscn" id="34_617dy"]
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/floored_texture_progress_bar/floored_texture_progress_bar.tscn" id="35_5xob5"]
 [ext_resource type="PackedScene" uid="uid://cpvs73t8l3h88" path="res://src/weak_to/weak_to.tscn" id="35_u2g7w"]
@@ -411,8 +410,7 @@ count_group = &"hunters"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HuntersTouched"]
 shape = SubResource("CircleShape2D_o7ptf")
 
-[node name="PlaceholderCostume" parent="." instance=ExtResource("29_ftfj4")]
-texture = ExtResource("30_rab3d")
+[node name="GhostCostume" parent="." instance=ExtResource("25_s3y3d")]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 range_item_cull_mask = 33
@@ -557,16 +555,16 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/NoHuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/EndTimer" method="set_paused" binds= [false]]
 [connection signal="timeout" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" to="StateChart" method="send_event" binds= [&"invisibility_started"]]
 [connection signal="timeout" from="StateChart/Base/Behavior/Alive/Panic/EndTimer" to="StateChart" method="send_event" binds= [&"panic_ended"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Dead" to="PlaceholderCostume/Vector2iSignals/VframeAnimationPlayer" method="play" binds= ["dead"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Idle" to="PlaceholderCostume/Vector2iSignals/VframeAnimationPlayer" method="play" binds= ["idle"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Move" to="PlaceholderCostume/Vector2iSignals/VframeAnimationPlayer" method="play" binds= ["move"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Sprint" to="PlaceholderCostume/Vector2iSignals/VframeAnimationPlayer" method="play" binds= ["move"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Summon" to="PlaceholderCostume/Vector2iSignals/VframeAnimationPlayer" method="play" binds= ["idle"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Stun" to="PlaceholderCostume/EffectAnimationPlayer" method="play" binds= [&"sprite/shake"]]
-[connection signal="state_exited" from="StateChart/Base/Animation/Stun" to="PlaceholderCostume/EffectAnimationPlayer" method="play" binds= [&"RESET"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Panic" to="PlaceholderCostume/EffectAnimationPlayer" method="play" binds= ["canvas_item/pulse"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Panic" to="PlaceholderCostume/Vector2iSignals/VframeAnimationPlayer" method="play" binds= [&"move"]]
-[connection signal="state_exited" from="StateChart/Base/Animation/Panic" to="PlaceholderCostume/EffectAnimationPlayer" method="play" binds= [&"RESET"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Dead" to="GhostCostume" method="play" binds= ["dead"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Idle" to="GhostCostume" method="play" binds= ["idle"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Move" to="GhostCostume" method="play" binds= ["move"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Sprint" to="GhostCostume" method="play" binds= ["move"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Summon" to="GhostCostume" method="play" binds= ["idle"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Stun" to="GhostCostume" method="play_effect" binds= [&"sprite/shake"]]
+[connection signal="state_exited" from="StateChart/Base/Animation/Stun" to="GhostCostume" method="play_effect" binds= [&"RESET"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Panic" to="GhostCostume" method="play" binds= [&"move"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Panic" to="GhostCostume" method="play_effect" binds= ["canvas_item/pulse"]]
+[connection signal="state_exited" from="StateChart/Base/Animation/Panic" to="GhostCostume" method="play_effect" binds= [&"RESET"]]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="GhostTranslucent" method="enable_translucency"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="Invisibility" method="set_visible" binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="GhostTranslucent" method="disable_translucency"]
@@ -575,7 +573,7 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="button_1_released" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_1_released"]]
 [connection signal="button_2_pressed" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_2_pressed"]]
 [connection signal="button_2_released" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_2_released"]]
-[connection signal="move_rotation_changed" from="PlayerControllerStack/Synced" to="PlaceholderCostume/Vector2iSignals/RotationToIntRange" method="set_range_value_from_rotation"]
+[connection signal="move_rotation_changed" from="PlayerControllerStack/Synced" to="GhostCostume" method="set_costume_rotation"]
 [connection signal="move_started" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"move_started"]]
 [connection signal="move_stopped" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"move_stopped"]]
 [connection signal="move_vector_changed" from="PlayerControllerStack/Synced" to="StateChart/Base/Behavior/Alive/Normal/Move" method="set_move_vector"]
@@ -593,4 +591,3 @@ tint_under = Color(1, 1, 1, 0.247059)
 
 [editable path="Invisibility"]
 [editable path="PlayerControllerStack"]
-[editable path="PlaceholderCostume"]
