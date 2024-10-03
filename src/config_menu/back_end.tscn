@@ -23,9 +23,15 @@ source_signal = &"staged_value_changed"
 receiver_group = &"color_darken_signals"
 receiver_method = &"set_inverted_darken_amount"
 
+[node name="SaveTimer" type="Timer" parent="BrightnessConfig"]
+wait_time = 0.5
+one_shot = true
+
 [node name="VisibilitySignals" parent="." instance=ExtResource("3_f2jjc")]
 
 [connection signal="ready" from="WindowModeConfig" to="WindowModeConfig" method="load_value"]
 [connection signal="window_mode_changed" from="WindowModeSetter" to="WindowModeConfig" method="save_value"]
 [connection signal="ready" from="BrightnessConfig" to="BrightnessConfig" method="load_value"]
+[connection signal="staged_value_changed" from="BrightnessConfig" to="BrightnessConfig/SaveTimer" method="start" unbinds=1]
 [connection signal="ready" from="BrightnessConfig/ConnectGroup" to="BrightnessConfig/ConnectGroup" method="connect_group"]
+[connection signal="timeout" from="BrightnessConfig/SaveTimer" to="BrightnessConfig" method="save_value"]
