@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 
+signal dropped
+
 const GRABBED_EVENT = &"died"
 
 @export_group("State Collision", "state")
@@ -25,3 +27,7 @@ func enable_invulnerable_collision_layer() -> void:
 
 func on_grabbed() -> void:
 	state_chart.send_event(GRABBED_EVENT)
+
+
+func on_dropped() -> void:
+	dropped.emit()

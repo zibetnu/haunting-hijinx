@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=34 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bkuic22finfse" path="res://src/controller/player_controller_stack.tscn" id="13_rf2iy"]
 [ext_resource type="PackedScene" uid="uid://cy4qrm44icmyy" path="res://src/flashlight/flashlight.tscn" id="15_hljm8"]
 [ext_resource type="PackedScene" uid="uid://mt548ar3ll4w" path="res://src/heartbeat_rumble/heartbeat_rumble.tscn" id="18_jndug"]
+[ext_resource type="PackedScene" uid="uid://doo22pvhedm4n" path="res://src/collision_avoider/collision_avoider.tscn" id="18_rtxip"]
 [ext_resource type="PackedScene" uid="uid://ctn825io87i34" path="res://src/hunter/costume/hunter_costume.tscn" id="19_c0d8f"]
 [ext_resource type="Texture2D" uid="uid://cve418b7kooru" path="res://assets/flashlight/body_back.png" id="20_g6qtr"]
 [ext_resource type="Texture2D" uid="uid://cbev4n3hmsa8" path="res://assets/flashlight/body_front.png" id="21_pbkwq"]
@@ -81,7 +82,7 @@ state_invulnerable_layer = 4
 replication_config = SubResource("SceneReplicationConfig_hflh2")
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_uvtrm")]
-nodes = [NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../AuraSense"), NodePath("../DamageSignals"), NodePath("../Flashlight/Behavior")]
+nodes = [NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../AuraSense"), NodePath("../DamageSignals"), NodePath("../CollisionAvoider"), NodePath("../Flashlight/Behavior")]
 
 [node name="GhostPeerID" parent="." groups=["ghost_peer_ids"] instance=ExtResource("1_fx0g1")]
 
@@ -216,6 +217,10 @@ shape = SubResource("CircleShape2D_vawb0")
 enabled = false
 revives_with = 1
 
+[node name="CollisionAvoider" parent="." node_paths=PackedStringArray("target") instance=ExtResource("18_rtxip")]
+target = NodePath("..")
+collision_shape = SubResource("CircleShape2D_vawb0")
+
 [node name="Flashlight" parent="." instance=ExtResource("15_hljm8")]
 
 [node name="Body" parent="Flashlight/Display" index="1"]
@@ -286,6 +291,7 @@ layout_mode = 2
 [node name="BatteryAlert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("31_vp1ot")]
 layout_mode = 2
 
+[connection signal="dropped" from="." to="CollisionAvoider" method="move_target"]
 [connection signal="changed" from="GhostPeerID" to="GhostPeerID/PeerProcessMode" method="set_secondary_peer_id"]
 [connection signal="changed" from="GhostPeerID" to="GhostPeerID/PeerVisibilityFilter" method="set_secondary_peer_id"]
 [connection signal="process_mode_updated" from="GhostPeerID/PeerProcessMode" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_process_mode"]
