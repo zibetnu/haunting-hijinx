@@ -39,6 +39,17 @@ bus_name = &"Master"
 wait_time = 0.5
 one_shot = true
 
+[node name="MusicBusConfig" parent="." instance=ExtResource("1_s2lhb")]
+section = "audio"
+key = "music"
+
+[node name="BusVolumeSetter" parent="MusicBusConfig" instance=ExtResource("4_1acpm")]
+bus_name = &"Music"
+
+[node name="SaveTimer" type="Timer" parent="MusicBusConfig"]
+wait_time = 0.5
+one_shot = true
+
 [node name="VisibilitySignals" parent="." instance=ExtResource("3_f2jjc")]
 
 [connection signal="ready" from="WindowModeConfig" to="WindowModeConfig" method="load_value"]
@@ -52,3 +63,8 @@ one_shot = true
 [connection signal="staged_value_changed" from="MasterBusConfig" to="MasterBusConfig/SaveTimer" method="start" unbinds=1]
 [connection signal="volume_linear_changed" from="MasterBusConfig/BusVolumeSetter" to="MasterBusConfig" method="set_staged_value"]
 [connection signal="timeout" from="MasterBusConfig/SaveTimer" to="MasterBusConfig" method="save_value"]
+[connection signal="loaded" from="MusicBusConfig" to="MusicBusConfig/BusVolumeSetter" method="set_volume_linear"]
+[connection signal="ready" from="MusicBusConfig" to="MusicBusConfig" method="load_value"]
+[connection signal="staged_value_changed" from="MusicBusConfig" to="MusicBusConfig/SaveTimer" method="start" unbinds=1]
+[connection signal="volume_linear_changed" from="MusicBusConfig/BusVolumeSetter" to="MusicBusConfig" method="set_staged_value"]
+[connection signal="timeout" from="MusicBusConfig/SaveTimer" to="MusicBusConfig" method="save_value"]
