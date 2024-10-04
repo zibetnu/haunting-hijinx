@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctywx8ryp0b8f"]
+[gd_scene load_steps=6 format=3 uid="uid://ctywx8ryp0b8f"]
 
 [ext_resource type="PackedScene" uid="uid://beclheud7fmo4" path="res://src/config_handler/config_handler.tscn" id="1_s2lhb"]
 [ext_resource type="PackedScene" uid="uid://m41j0s7lbwbr" path="res://src/window_mode_setter/window_mode_setter.tscn" id="2_40max"]
 [ext_resource type="PackedScene" uid="uid://c6ql67s5oafpr" path="res://src/visibility_signals/visibility_signals.tscn" id="3_f2jjc"]
 [ext_resource type="PackedScene" uid="uid://l85mp1rghtu0" path="res://src/connect_group/connect_group.tscn" id="3_f5p5f"]
+[ext_resource type="PackedScene" uid="uid://c4pe2q3xrfk36" path="res://src/bus_volume_setter/bus_volume_setter.tscn" id="4_1acpm"]
 
 [node name="BackEnd" type="Node"]
 
@@ -27,6 +28,17 @@ receiver_method = &"set_inverted_darken_amount"
 wait_time = 0.5
 one_shot = true
 
+[node name="MasterBusConfig" parent="." instance=ExtResource("1_s2lhb")]
+section = "audio"
+key = "master"
+
+[node name="BusVolumeSetter" parent="MasterBusConfig" instance=ExtResource("4_1acpm")]
+bus_name = &"Master"
+
+[node name="SaveTimer" type="Timer" parent="MasterBusConfig"]
+wait_time = 0.5
+one_shot = true
+
 [node name="VisibilitySignals" parent="." instance=ExtResource("3_f2jjc")]
 
 [connection signal="ready" from="WindowModeConfig" to="WindowModeConfig" method="load_value"]
@@ -35,3 +47,8 @@ one_shot = true
 [connection signal="staged_value_changed" from="BrightnessConfig" to="BrightnessConfig/SaveTimer" method="start" unbinds=1]
 [connection signal="ready" from="BrightnessConfig/ConnectGroup" to="BrightnessConfig/ConnectGroup" method="connect_group"]
 [connection signal="timeout" from="BrightnessConfig/SaveTimer" to="BrightnessConfig" method="save_value"]
+[connection signal="loaded" from="MasterBusConfig" to="MasterBusConfig/BusVolumeSetter" method="set_volume_linear"]
+[connection signal="ready" from="MasterBusConfig" to="MasterBusConfig" method="load_value"]
+[connection signal="staged_value_changed" from="MasterBusConfig" to="MasterBusConfig/SaveTimer" method="start" unbinds=1]
+[connection signal="volume_linear_changed" from="MasterBusConfig/BusVolumeSetter" to="MasterBusConfig" method="set_staged_value"]
+[connection signal="timeout" from="MasterBusConfig/SaveTimer" to="MasterBusConfig" method="save_value"]
