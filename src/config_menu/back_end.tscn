@@ -50,6 +50,17 @@ bus_name = &"Music"
 wait_time = 0.5
 one_shot = true
 
+[node name="EffectsBusConfig" parent="." instance=ExtResource("1_s2lhb")]
+section = "audio"
+key = "effects"
+
+[node name="BusVolumeSetter" parent="EffectsBusConfig" instance=ExtResource("4_1acpm")]
+bus_name = &"Effects"
+
+[node name="SaveTimer" type="Timer" parent="EffectsBusConfig"]
+wait_time = 0.5
+one_shot = true
+
 [node name="VisibilitySignals" parent="." instance=ExtResource("3_f2jjc")]
 
 [connection signal="ready" from="WindowModeConfig" to="WindowModeConfig" method="load_value"]
@@ -68,3 +79,8 @@ one_shot = true
 [connection signal="staged_value_changed" from="MusicBusConfig" to="MusicBusConfig/SaveTimer" method="start" unbinds=1]
 [connection signal="volume_linear_changed" from="MusicBusConfig/BusVolumeSetter" to="MusicBusConfig" method="set_staged_value"]
 [connection signal="timeout" from="MusicBusConfig/SaveTimer" to="MusicBusConfig" method="save_value"]
+[connection signal="loaded" from="EffectsBusConfig" to="EffectsBusConfig/BusVolumeSetter" method="set_volume_linear"]
+[connection signal="ready" from="EffectsBusConfig" to="EffectsBusConfig" method="load_value"]
+[connection signal="staged_value_changed" from="EffectsBusConfig" to="EffectsBusConfig/SaveTimer" method="start" unbinds=1]
+[connection signal="volume_linear_changed" from="EffectsBusConfig/BusVolumeSetter" to="EffectsBusConfig" method="set_staged_value"]
+[connection signal="timeout" from="EffectsBusConfig/SaveTimer" to="EffectsBusConfig" method="save_value"]

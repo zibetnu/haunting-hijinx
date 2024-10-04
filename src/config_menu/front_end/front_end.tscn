@@ -104,6 +104,24 @@ step = 0.2
 value = 1.0
 tick_count = 6
 
+[node name="Effects" type="HBoxContainer" parent="TabContainer/Audio"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Audio/Effects"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Effects"
+
+[node name="HSlider" type="HSlider" parent="TabContainer/Audio/Effects"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.2
+value = 1.0
+tick_count = 6
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 
