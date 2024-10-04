@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://uuq811gwpafg"]
+[gd_scene load_steps=29 format=3 uid="uid://uuq811gwpafg"]
 
 [ext_resource type="Script" path="res://src/battery/display/display.gd" id="1_8ur3x"]
 [ext_resource type="AudioStream" uid="uid://g5tcldah12p3" path="res://assets/battery/battery_spawn.wav" id="2_nf8f5"]
@@ -211,6 +211,9 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_er14f"]
+light_mode = 1
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_jrk2e"]
 atlas = ExtResource("3_88tfj")
 region = Rect2(0, 0, 16, 16)
@@ -347,12 +350,14 @@ texture = SubResource("GradientTexture2D_id3md")
 height = 16.0
 
 [node name="Body" type="AnimatedSprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_er14f")
 position = Vector2(0, -16)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_uot7s")
 autoplay = "default"
 
 [node name="Decorations" type="AnimatedSprite2D" parent="Body"]
+use_parent_material = true
 position = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_wypok")
 autoplay = "default"
