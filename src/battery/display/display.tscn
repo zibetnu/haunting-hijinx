@@ -8,9 +8,6 @@
 properties/0/path = NodePath("AnimationPlayer:current_animation")
 properties/0/spawn = true
 properties/0/replication_mode = 2
-properties/1/path = NodePath("AudioStreamPlayer2D:playing")
-properties/1/spawn = true
-properties/1/replication_mode = 2
 
 [sub_resource type="Animation" id="Animation_yccv2"]
 length = 0.001
