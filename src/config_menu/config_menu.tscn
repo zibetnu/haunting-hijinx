@@ -34,6 +34,7 @@ layout_mode = 1
 [connection signal="loaded" from="BackEnd/MusicBusConfig" to="FrontEnd/TabContainer/Audio/Music/HSlider" method="set_value_no_signal"]
 [connection signal="loaded" from="BackEnd/EffectsBusConfig" to="FrontEnd/TabContainer/Audio/Effects/HSlider" method="set_value_no_signal"]
 [connection signal="shown" from="BackEnd/VisibilitySignals" to="FrontEnd/TabContainer/Display/WindowMode/OptionButton" method="grab_focus" flags=3]
+[connection signal="shown" from="BackEnd/VisibilitySignals" to="FrontEnd/TabContainer" method="set_current_tab" binds= [0]]
 [connection signal="item_id_selected" from="FrontEnd/TabContainer/Display/WindowMode/OptionButton" to="BackEnd/WindowModeSetter" method="set_window_mode"]
 [connection signal="value_changed" from="FrontEnd/TabContainer/Display/Brightness/HSlider" to="BackEnd/BrightnessConfig" method="set_staged_value"]
 [connection signal="value_changed" from="FrontEnd/TabContainer/Audio/Master/HSlider" to="BackEnd/MasterBusConfig/BusVolumeSetter" method="set_volume_linear"]
