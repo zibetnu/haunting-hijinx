@@ -347,6 +347,7 @@ stream = ExtResource("2_nf8f5")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(-3, -3)
 skew = 0.523599
+color = Color(1, 0.921828, 0.340978, 1)
 range_item_cull_mask = 27
 texture = SubResource("GradientTexture2D_id3md")
 height = 16.0
