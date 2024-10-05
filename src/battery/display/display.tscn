@@ -207,6 +207,7 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_id3md"]
 gradient = SubResource("Gradient_mfklc")
+height = 32
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
@@ -346,7 +347,7 @@ stream = ExtResource("2_nf8f5")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(-3, -3)
-skew = 0.523599
+rotation = -0.785398
 color = Color(1, 0.921828, 0.340978, 1)
 range_item_cull_mask = 27
 texture = SubResource("GradientTexture2D_id3md")
