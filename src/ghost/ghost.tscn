@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=43 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="2_bh3m0"]
@@ -73,6 +73,9 @@ radius = 96.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o7ptf"]
 radius = 17.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4kpbo"]
+light_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_a05sb"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -411,8 +414,10 @@ count_group = &"hunters"
 shape = SubResource("CircleShape2D_o7ptf")
 
 [node name="GhostCostume" parent="." instance=ExtResource("25_s3y3d")]
+material = SubResource("CanvasItemMaterial_4kpbo")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.768917, 0.141176, 0.188067, 1)
 range_item_cull_mask = 33
 texture = SubResource("GradientTexture2D_u72sc")
 height = 16.0
