@@ -54,7 +54,7 @@ properties/0/spawn = true
 properties/0/replication_mode = 2
 
 [node name="GhostCostume" type="Sprite2D"]
-position = Vector2(0, -8)
+position = Vector2(0, -10)
 texture = ExtResource("1_su5en")
 hframes = 8
 vframes = 2
