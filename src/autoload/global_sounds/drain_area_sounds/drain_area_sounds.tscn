@@ -10,6 +10,8 @@ script = ExtResource("1_d6g5b")
 [node name="Spawn" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_o3774")
 volume_db = -10.0
+bus = &"Effects"
 
 [node name="Activate" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_jl703")
+bus = &"Effects"

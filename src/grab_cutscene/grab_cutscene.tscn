@@ -15,6 +15,7 @@ script = ExtResource("1_53wad")
 [node name="GrabSound" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("2_0vh0e")
+bus = &"Effects"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ujmsm")

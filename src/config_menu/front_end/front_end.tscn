@@ -18,6 +18,7 @@ grow_vertical = 0
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 size_flags_vertical = 10
+use_hidden_tabs_for_min_size = true
 
 [node name="Display" type="VBoxContainer" parent="TabContainer"]
 layout_mode = 2
@@ -61,6 +62,64 @@ min_value = 0.063
 max_value = 0.378
 step = 0.063
 value = 0.126
+tick_count = 6
+
+[node name="Audio" type="VBoxContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Master" type="HBoxContainer" parent="TabContainer/Audio"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Audio/Master"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Master"
+
+[node name="HSlider" type="HSlider" parent="TabContainer/Audio/Master"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.2
+value = 1.0
+tick_count = 6
+
+[node name="Music" type="HBoxContainer" parent="TabContainer/Audio"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Audio/Music"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Music"
+
+[node name="HSlider" type="HSlider" parent="TabContainer/Audio/Music"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.2
+value = 1.0
+tick_count = 6
+
+[node name="Effects" type="HBoxContainer" parent="TabContainer/Audio"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Audio/Effects"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Effects"
+
+[node name="HSlider" type="HSlider" parent="TabContainer/Audio/Effects"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.2
+value = 1.0
 tick_count = 6
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]

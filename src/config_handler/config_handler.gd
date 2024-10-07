@@ -40,6 +40,9 @@ func save_value(value: Variant = staged_value) -> void:
 
 
 func set_staged_value(value: Variant) -> void:
+	if value == staged_value:
+		return
+
 	staged_value = value
 	staged_value_changed.emit(staged_value)
 
