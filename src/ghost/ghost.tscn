@@ -97,7 +97,7 @@ motion_mode = 1
 wall_min_slide_angle = 0.0174533
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
-nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grabber"), NodePath("../HuntersTouched")]
+nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grab"), NodePath("../HuntersTouched")]
 
 [node name="GrabCutscene" parent="." instance=ExtResource("4_qoosa")]
 
@@ -147,6 +147,11 @@ initial_state = NodePath("Normal")
 script = ExtResource("6_il0ju")
 to = NodePath("../../Dead")
 event = &"died"
+
+[node name="GrabStarted" type="Node" parent="StateChart/Base/Behavior/Alive"]
+script = ExtResource("6_il0ju")
+to = NodePath("../Grab")
+event = &"grab_started"
 
 [node name="PanicStarted" type="Node" parent="StateChart/Base/Behavior/Alive"]
 script = ExtResource("6_il0ju")
@@ -285,6 +290,26 @@ editor_description = "Times how long the ghost should stay in panic. Makes ghost
 wait_time = 3.0
 one_shot = true
 
+[node name="Grab" type="Node" parent="StateChart/Base/Behavior/Alive"]
+script = ExtResource("5_6yps6")
+
+[node name="GrabEnded" type="Node" parent="StateChart/Base/Behavior/Alive/Grab"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Normal")
+event = &"grab_ended"
+
+[node name="EndTimer" type="Timer" parent="StateChart/Base/Behavior/Alive/Grab"]
+wait_time = 1.5
+one_shot = true
+
+[node name="Damaged" parent="StateChart/Base/Behavior/Alive/Grab" instance=ExtResource("18_870ie")]
+listen_for_event = &"damaged"
+
+[node name="Move" parent="StateChart/Base/Behavior/Alive/Grab" node_paths=PackedStringArray("character") instance=ExtResource("18_5mhrn")]
+character = NodePath("../../../../../..")
+move_speed = 152.72
+manual_process = true
+
 [node name="Animation" type="Node" parent="StateChart/Base"]
 script = ExtResource("4_74yim")
 initial_state = NodePath("Idle")
@@ -398,11 +423,17 @@ weak_to = 1
 
 [node name="Health" parent="DamageSignals/WeakTo/DamageValueSignal" instance=ExtResource("38_arcfj")]
 
-[node name="Grabber" parent="." instance=ExtResource("38_ydesf")]
+[node name="Grab" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
 monitoring = false
+monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Grabber"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grab"]
 shape = SubResource("CircleShape2D_o7ptf")
+
+[node name="Grabber" parent="Grab" instance=ExtResource("38_ydesf")]
+position = Vector2(16, 0)
 
 [node name="HuntersTouched" parent="." instance=ExtResource("35_yndqj")]
 collision_layer = 0
@@ -478,8 +509,6 @@ texture_under = ExtResource("29_i4s33")
 texture_progress = ExtResource("29_i4s33")
 tint_under = Color(1, 1, 1, 0.247059)
 
-[connection signal="cutscene_ended" from="GrabCutscene" to="StateChart" method="send_event" binds= [&"invisibility_started"]]
-[connection signal="cutscene_started" from="GrabCutscene" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
 [connection signal="changed" from="PeerID" to="Invisibility" method="set_local_peer_id"]
 [connection signal="changed" from="PeerID" to="PlayerControllerStack/Synced" method="set_input_authority"]
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="set_peer_id"]
@@ -512,26 +541,26 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="PlayerControllerStack/Synced" method="force_emit_move_vector_signals"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="PlayerControllerStack/Synced" method="force_emit_button_2_signals"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="StateChart" method="send_event" binds= [&"invisibility_started"]]
-[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Grabber" method="set_monitoring" flags=3 binds= [true]]
-[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Normal" to="Grabber" method="set_monitoring" flags=3 binds= [false]]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Grab" method="set_monitoring" flags=3 binds= [true]]
 [connection signal="state_physics_processing" from="StateChart/Base/Behavior/Alive/Normal" to="StateChart/Base/Behavior/Alive/Normal/Move" method="manual_physics_process"]
 [connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Normal/Damaged" to="StateChart" method="send_event" binds= [&"stunned"]]
 [connection signal="event_received" from="StateChart/Base/Behavior/Alive/Sprint" to="StateChart/Base/Behavior/Alive/Sprint/Damaged" method="receive_event"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Sprint" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
-[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Sprint" to="Grabber" method="set_monitoring" flags=3 binds= [true]]
-[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Sprint" to="Grabber" method="set_monitoring" flags=3 binds= [false]]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Sprint" to="Grab" method="set_monitoring" flags=3 binds= [true]]
 [connection signal="state_physics_processing" from="StateChart/Base/Behavior/Alive/Sprint" to="StateChart/Base/Behavior/Alive/Sprint/Move" method="manual_physics_process"]
 [connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Sprint/Damaged" to="StateChart" method="send_event" binds= [&"stunned"]]
 [connection signal="event_received" from="StateChart/Base/Behavior/Alive/Summon" to="StateChart/Base/Behavior/Alive/Summon/Damaged" method="receive_event"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="start_charging"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="show"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="Grab" method="set_monitoring" flags=3 binds= [true]]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="stop_charging"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="release_charge"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="hide"]
 [connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Summon/Damaged" to="StateChart" method="send_event" binds= [&"stunned"]]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Stun" to="StateChart/Base/Behavior/Alive/Stun/PanicTimeout" method="start"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Stun" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="show"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Stun" to="Grab" method="set_monitoring" flags=3 binds= [false]]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Stun" to="StateChart/Base/Behavior/Alive/Stun/PanicTimeout" method="stop"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Stun" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="hide"]
 [connection signal="timeout" from="StateChart/Base/Behavior/Alive/Stun/PanicTimeout" to="StateChart" method="send_event" binds= [&"panic_started"]]
@@ -543,6 +572,7 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="show"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="set_paused" binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/EndTimer" method="set_paused" binds= [false]]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="Grab" method="set_monitoring" flags=3 binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="HuntersTouched" method="set_monitoring" flags=3 binds= [true]]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" method="stop"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/EndTimer" method="stop"]
@@ -560,6 +590,16 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Panic/NoHuntersTouched" to="StateChart/Base/Behavior/Alive/Panic/EndTimer" method="set_paused" binds= [false]]
 [connection signal="timeout" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" to="StateChart" method="send_event" binds= [&"invisibility_started"]]
 [connection signal="timeout" from="StateChart/Base/Behavior/Alive/Panic/EndTimer" to="StateChart" method="send_event" binds= [&"panic_ended"]]
+[connection signal="event_received" from="StateChart/Base/Behavior/Alive/Grab" to="StateChart/Base/Behavior/Alive/Grab/Damaged" method="receive_event"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Grab" to="GrabCutscene" method="start_cutscene"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Grab" to="StateChart/Base/Behavior/Alive/Grab/EndTimer" method="start"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Grab" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Grab" to="Grab" method="set_monitoring" flags=3 binds= [false]]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Grab" to="StateChart/Base/Behavior/Alive/Grab/EndTimer" method="stop"]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Grab" to="Grab/Grabber" method="drop"]
+[connection signal="state_physics_processing" from="StateChart/Base/Behavior/Alive/Grab" to="StateChart/Base/Behavior/Alive/Grab/Move" method="manual_physics_process"]
+[connection signal="timeout" from="StateChart/Base/Behavior/Alive/Grab/EndTimer" to="StateChart" method="send_event" binds= [&"grab_ended"]]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Grab/Damaged" to="StateChart" method="send_event" binds= [&"stunned"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Dead" to="GhostCostume" method="play" binds= ["dead"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Idle" to="GhostCostume" method="play" binds= ["idle"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Move" to="GhostCostume" method="play" binds= ["move"]]
@@ -578,19 +618,22 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="button_1_released" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_1_released"]]
 [connection signal="button_2_pressed" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_2_pressed"]]
 [connection signal="button_2_released" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_2_released"]]
+[connection signal="move_rotation_changed" from="PlayerControllerStack/Synced" to="Grab" method="set_rotation"]
 [connection signal="move_rotation_changed" from="PlayerControllerStack/Synced" to="GhostCostume" method="set_costume_rotation"]
 [connection signal="move_started" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"move_started"]]
 [connection signal="move_stopped" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"move_stopped"]]
 [connection signal="move_vector_changed" from="PlayerControllerStack/Synced" to="StateChart/Base/Behavior/Alive/Normal/Move" method="set_move_vector"]
 [connection signal="move_vector_changed" from="PlayerControllerStack/Synced" to="StateChart/Base/Behavior/Alive/Sprint/Move" method="set_move_vector"]
 [connection signal="move_vector_changed" from="PlayerControllerStack/Synced" to="StateChart/Base/Behavior/Alive/Panic/Move" method="set_move_vector"]
+[connection signal="move_vector_changed" from="PlayerControllerStack/Synced" to="StateChart/Base/Behavior/Alive/Grab/Move" method="set_move_vector"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
 [connection signal="damage_taken" from="DamageSignals/WeakTo" to="StateChart" method="send_event" binds= [&"damaged"]]
 [connection signal="damaged_by" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageValueSignal" method="take_damage"]
 [connection signal="damaged_by_amount" from="DamageSignals/WeakTo/DamageValueSignal" to="DamageSignals/WeakTo/DamageValueSignal/Health" method="subtract_health"]
 [connection signal="health_emptied" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="StateChart" method="send_event" binds= [&"died"]]
 [connection signal="health_percentage_changed" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="set_as_ratio_floored"]
-[connection signal="grabbable_grabbed" from="Grabber" to="GrabCutscene" method="start_cutscene"]
+[connection signal="body_entered" from="Grab" to="Grab/Grabber" method="grab"]
+[connection signal="grabbed_target" from="Grab/Grabber" to="StateChart" method="send_event" binds= [&"grab_started"]]
 [connection signal="first_node_entered" from="HuntersTouched" to="StateChart" method="send_event" binds= [&"hunters_touched"]]
 [connection signal="last_node_exited" from="HuntersTouched" to="StateChart" method="send_event" binds= [&"no_hunters_touched"]]
 

@@ -2,11 +2,9 @@
 
 [ext_resource type="Script" path="res://src/grabber/grabber.gd" id="1_vf0yw"]
 
-[node name="Grabber" type="Area2D"]
-collision_layer = 0
-collision_mask = 16
-monitorable = false
+[node name="Grabber" type="Node2D"]
 script = ExtResource("1_vf0yw")
 
-[connection signal="area_entered" from="." to="." method="attempt_grab_on"]
-[connection signal="body_entered" from="." to="." method="attempt_grab_on"]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+update_rotation = false
+update_scale = false

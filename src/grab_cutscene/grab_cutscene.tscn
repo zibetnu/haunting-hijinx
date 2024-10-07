@@ -4,18 +4,24 @@
 [ext_resource type="AudioStream" uid="uid://b450kuirfnnfq" path="res://assets/ghost_grab.wav" id="2_0vh0e"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ujmsm"]
-properties/0/path = NodePath(".:_tree_paused")
+properties/0/path = NodePath(".:cutscene_in_progress")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[node name="GrabCutscene" type="Node" groups=["cutscene_sync"]]
-process_mode = 3
+[node name="GrabCutscene" type="Node"]
 script = ExtResource("1_53wad")
 
-[node name="GrabSound" type="AudioStreamPlayer" parent="."]
+[node name="Grab" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("2_0vh0e")
 bus = &"Effects"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ujmsm")
+
+[node name="Timer" type="Timer" parent="."]
+process_mode = 3
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="end_cutscene"]

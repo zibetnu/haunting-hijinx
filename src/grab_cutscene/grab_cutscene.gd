@@ -1,55 +1,93 @@
 extends Node
-## This is jank code that's mostly copied over from the older version of the
-## game, but it's fine for now since it'll be completely remade later.
 
 
 signal cutscene_ended
 signal cutscene_started
 
-var _cutscene_name := "grab"
-var _tree_paused := false:  # Used to sync pause state across all peers.
-	set(value):
-		get_tree().set_pause(value)
-		_tree_paused = get_tree().paused
+const CAMERA_PATH = ^"%Camera2D"
+const GHOST_GROUP = &"ghosts"
+const PLAYER_GROUP = &"players"
+
+@export var cutscene_in_progress := false:
+	set = set_cutscene_in_progress
+
+var _camera_enabled_states: Dictionary
+
+@onready var grab: AudioStreamPlayer = $Grab
+@onready var synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
+@onready var timer: Timer = $Timer
+
+
+func _ready() -> void:
+	cutscene_started.connect(_on_cutscene_started)
+	cutscene_ended.connect(_on_cutscene_ended)
+
+
+func set_cutscene_in_progress(value: bool) -> void:
+	var prior_value: bool = cutscene_in_progress
+	cutscene_in_progress = value
+	match [prior_value, value]:
+		[false, true]:
+			cutscene_started.emit()
+
+		[true, false]:
+			cutscene_ended.emit()
 
 
 func start_cutscene() -> void:
-	if multiplayer.is_server():
-		CutsceneManager.play_cutscene.rpc(_cutscene_name, 2)
+	cutscene_in_progress = true
 
 
-func _on_cutscene_ended(cutscene_name: String) -> void:
-	if cutscene_name != _cutscene_name:
-		return
-
-	_focus_cameras_local()
-	if not multiplayer.is_server():
-		return
-
-	_tree_paused = false
-	cutscene_ended.emit()
+func end_cutscene() -> void:
+	cutscene_in_progress = false
 
 
-func _on_cutscene_started(cutscene_name: String) -> void:
-	if cutscene_name != _cutscene_name:
-		return
-
-	cutscene_started.emit()
+func _on_cutscene_started() -> void:
+	get_tree().paused = true
+	_save_camera_enabled_states()
 	_focus_cameras_ghost()
-	$GrabSound.play()
-	if not multiplayer.is_server():
+	grab.play()
+	if not synchronizer.is_multiplayer_authority():
 		return
 
-	_tree_paused = true
+	timer.start()
+
+
+func _on_cutscene_ended() -> void:
+	_restore_camera_enabled_states()
+	get_tree().paused = false
 
 
 func _focus_cameras_ghost() -> void:
-	get_tree().get_first_node_in_group("ghosts").get_node("Camera2D").enabled = true
-	for hunter in get_tree().get_nodes_in_group("hunters"):
-		hunter.get_node("Camera2D").enabled = false
+	var ghost: Node = get_tree().get_first_node_in_group(GHOST_GROUP)
+	if ghost == null:
+		return
+
+	var camera: Camera2D = ghost.get_node_or_null(CAMERA_PATH)
+	if camera == null:
+		return
+
+	camera.enabled = true
+	camera.make_current()
 
 
-func _focus_cameras_local() -> void:
-	for player in get_tree().get_nodes_in_group("players"):
-		var is_local = player.get_node("PeerID").id == multiplayer.get_unique_id()
-		player.get_node("Camera2D").enabled = is_local
+func _restore_camera_enabled_states() -> void:
+	for player in get_tree().get_nodes_in_group(PLAYER_GROUP):
+		var camera: Camera2D = player.get_node_or_null(CAMERA_PATH)
+		if camera == null:
+			continue
+
+		var key: NodePath = camera.get_path()
+		if not _camera_enabled_states.has(key):
+			continue
+
+		camera.enabled = _camera_enabled_states[key]
+
+
+func _save_camera_enabled_states() -> void:
+	for player in get_tree().get_nodes_in_group(PLAYER_GROUP):
+		var camera: Camera2D = player.get_node_or_null(CAMERA_PATH)
+		if camera == null:
+			continue
+
+		_camera_enabled_states[camera.get_path()] = camera.enabled
