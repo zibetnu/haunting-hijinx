@@ -307,7 +307,7 @@ listen_for_event = &"damaged"
 
 [node name="Move" parent="StateChart/Base/Behavior/Alive/Grab" node_paths=PackedStringArray("character") instance=ExtResource("18_5mhrn")]
 character = NodePath("../../../../../..")
-move_speed = 92.0
+move_speed = 152.72
 manual_process = true
 
 [node name="Animation" type="Node" parent="StateChart/Base"]
