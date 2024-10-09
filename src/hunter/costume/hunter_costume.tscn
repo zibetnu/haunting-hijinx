@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ctn825io87i34"]
+[gd_scene load_steps=14 format=3 uid="uid://ctn825io87i34"]
 
 [ext_resource type="AnimationLibrary" uid="uid://fs3jht0ivdhm" path="res://src/animation_libaries/canvas_item.tres" id="1_7b0n7"]
 [ext_resource type="Script" path="res://src/hunter/costume/hunter_costume.gd" id="1_auu5i"]
@@ -6,6 +6,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://bss842gjvgyiu" path="res://src/hunter/costume/hunter_costume.tres" id="2_wvtms"]
 [ext_resource type="Texture2D" uid="uid://iy2jvayptac2" path="res://assets/hunter/legs.png" id="6_wc0vr"]
 [ext_resource type="Texture2D" uid="uid://cncgj1kxmgybg" path="res://assets/hunter/torso.png" id="7_l744e"]
+[ext_resource type="Texture2D" uid="uid://c6jxona5mctlp" path="res://assets/hunter/dead.png" id="8_8f8lf"]
 [ext_resource type="Texture2D" uid="uid://blnr62by4pipw" path="res://assets/hunter/arms.png" id="8_or3nn"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_nu623"]
@@ -103,3 +104,9 @@ position = Vector2(16, 16)
 texture = ExtResource("8_or3nn")
 hframes = 16
 vframes = 3
+
+[node name="Dead" type="Sprite2D" parent="SubViewport"]
+visible = false
+position = Vector2(4, 16)
+texture = ExtResource("8_8f8lf")
+centered = false
