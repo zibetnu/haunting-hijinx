@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=36 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -51,6 +51,13 @@ properties/2/replication_mode = 2
 properties/3/path = NodePath(".:limit_bottom")
 properties/3/spawn = true
 properties/3/replication_mode = 2
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_duydy"]
+radius = 8.0
+height = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bscnp"]
+radius = 12.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_shnpn"]
 viewport_path = NodePath("SubViewport")
@@ -211,7 +218,8 @@ collision_layer = 32
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageSignals"]
-shape = SubResource("CircleShape2D_vawb0")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_duydy")
 
 [node name="Revivable" parent="DamageSignals" instance=ExtResource("23_d234k")]
 enabled = false
@@ -219,7 +227,7 @@ revives_with = 1
 
 [node name="CollisionAvoider" parent="." node_paths=PackedStringArray("target") instance=ExtResource("18_rtxip")]
 target = NodePath("..")
-collision_shape = SubResource("CircleShape2D_vawb0")
+collision_shape = SubResource("CircleShape2D_bscnp")
 
 [node name="Flashlight" parent="." instance=ExtResource("15_hljm8")]
 
