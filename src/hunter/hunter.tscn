@@ -371,6 +371,10 @@ layout_mode = 2
 [connection signal="powered_on_attempted" from="Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead" flags=3]
 [connection signal="range_value_changed" from="Flashlight/Display/Body/RotationToIntRange" to="HunterCostume/SubViewport/FlashlightBack" method="set_frame"]
 [connection signal="range_value_changed" from="Flashlight/Display/Body/RotationToIntRange" to="HunterCostume/SubViewport/FlashlightFront" method="set_frame"]
+[connection signal="draw" from="HunterCostume/SubViewport/Arms" to="HunterCostume/SubViewport/FlashlightBack" method="show"]
+[connection signal="draw" from="HunterCostume/SubViewport/Arms" to="HunterCostume/SubViewport/FlashlightFront" method="show"]
+[connection signal="draw" from="HunterCostume/SubViewport/Dead" to="HunterCostume/SubViewport/FlashlightBack" method="hide"]
+[connection signal="draw" from="HunterCostume/SubViewport/Dead" to="HunterCostume/SubViewport/FlashlightFront" method="hide"]
 
 [editable path="HeartbeatRumble"]
 [editable path="PlayerControllerStack"]
