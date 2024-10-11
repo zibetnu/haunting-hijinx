@@ -1,6 +1,8 @@
 extends Sprite2D
 
 
+const COSTUME_GROUP = &"hunter_costumes"
+const PALETTE_PARAMETER = &"new_palette"
 const HFRAME_COUNT = 16
 const MIN_ROTATION = 0.0
 
@@ -14,6 +16,12 @@ const MIN_ROTATION = 0.0
 @export var effects_current_animation: String:
 	set = play_effect
 
+@export_group("Palette", "palette")
+@export var palette_auto_set := true
+@export var palette_index: int:
+	set = set_palette_index
+@export var palette_array: Array[Texture2D]
+
 @export_group("Y Frames", "y_frame")
 @export var y_frame_arms: int:
 	set = set_y_frame_arms
@@ -22,9 +30,15 @@ const MIN_ROTATION = 0.0
 
 @onready var effects: AnimationPlayer = $Effects
 @onready var hunter: AnimationPlayer = $Hunter
-@onready var legs: Sprite2D = $SubViewport/Legs
-@onready var torso: Sprite2D = $SubViewport/Torso
-@onready var arms: Sprite2D = $SubViewport/Arms
+@onready var material_parent: Node2D = %MaterialParent
+@onready var legs: Sprite2D = %Legs
+@onready var torso: Sprite2D = %Torso
+@onready var arms: Sprite2D = %Arms
+
+
+func _ready() -> void:
+	if palette_auto_set:
+		set_palette_index_from_group_index()
 
 
 func play(value: String) -> void:
@@ -47,6 +61,22 @@ func set_costume_rotation(value: float) -> void:
 	legs.frame_coords.x = x_frame
 	torso.frame_coords.x = x_frame
 	arms.frame_coords.x = x_frame
+
+
+func set_palette_index(value: int) -> void:
+	var palette_array_size: int = palette_array.size()
+	palette_index = posmod(value, palette_array_size)
+	if palette_array_size == 0:
+		return
+
+	(material_parent.material as ShaderMaterial).set_shader_parameter(
+			PALETTE_PARAMETER,
+			palette_array[palette_index]
+	)
+
+
+func set_palette_index_from_group_index() -> void:
+	palette_index = get_tree().get_nodes_in_group(COSTUME_GROUP).find(self)
 
 
 func set_y_frame_arms(value: int) -> void:
