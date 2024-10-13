@@ -106,7 +106,8 @@ func _get_property_list() -> Array:
         {
             "name": "licenses",
             "type": TYPE_ARRAY,
-            "constructor": License.new,
+            # https://github.com/godotengine/godot/issues/80526
+            "constructor": func(): return License.new(),
         },
     ]
 
