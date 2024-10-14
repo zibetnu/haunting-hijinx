@@ -175,6 +175,10 @@ open_menu={
 2d_physics/layer_5="grabbables"
 2d_physics/layer_6="revivables"
 
+[plugins]
+
+licenses/data_file="res://assets/licenses.json"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
