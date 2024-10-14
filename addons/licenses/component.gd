@@ -36,11 +36,15 @@ class License:
             return self.text
 
         var file: FileAccess = FileAccess.open(self.file, FileAccess.READ)
-        if file == null:
-            return "License text not available. (Could not load file)"
-        var text: String = file.get_as_text()
-        file = null
-        return text
+        if file != null:
+            var text: String = file.get_as_text()
+            file = null
+            return text
+
+        if not web.is_empty():
+            return web
+
+        return "License text not available."
 
     func serialize() -> Dictionary:
         return {
