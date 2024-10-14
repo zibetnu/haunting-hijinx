@@ -1,4 +1,6 @@
 shader_type canvas_item;
+// Modified version of
+// https://godotshaders.com/shader/palette-swap-post-process-image-parametrized/
 
 uniform sampler2D old_palette;
 uniform sampler2D new_palette;
