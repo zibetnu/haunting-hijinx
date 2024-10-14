@@ -108,8 +108,8 @@ func set_component(component: Component) -> void:
 	paths.text = PATHS_SEPARATOR.join(component.paths)
 	paths_container.visible = not paths.text.is_empty()
 
-	web.text = component.web
-	web_container.visible = not web.text.is_empty()
+	web.text = URL_FORMAT_STRING % component.web
+	web_container.visible = not component.web.is_empty()
 
 	license_name.clear()
 	license_text.clear()

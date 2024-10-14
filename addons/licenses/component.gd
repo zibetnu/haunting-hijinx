@@ -7,6 +7,8 @@ var readonly: bool = false
 class License:
     extends RefCounted
 
+    const URL_FORMAT_STRING = "[url]%s[/url]"
+
     var name: String
     var identifier: String
     ## Use either license_text or license_file
@@ -42,7 +44,7 @@ class License:
             return text
 
         if not web.is_empty():
-            return web
+            return URL_FORMAT_STRING % web
 
         return "License text not available."
 
