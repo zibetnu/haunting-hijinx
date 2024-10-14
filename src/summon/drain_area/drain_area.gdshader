@@ -1,4 +1,5 @@
 shader_type canvas_item;
+// Taken from https://godotshaders.com/shader/circular-waves-2d/
 
 // for circles
 uniform float amplitude: hint_range(0, 2, 0.01) = 2.0;
