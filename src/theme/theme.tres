@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=24 format=3 uid="uid://k2680qtkyab6"]
+[gd_resource type="Theme" load_steps=26 format=3 uid="uid://k2680qtkyab6"]
 
 [ext_resource type="FontFile" uid="uid://cmyudnfjlpktv" path="res://assets/modern_dos_8x16.ttf" id="1_kj04y"]
 [ext_resource type="StyleBox" uid="uid://jj64njhm1d1i" path="res://src/theme/button_style_box/disabled.tres" id="1_reryu"]
@@ -23,7 +23,14 @@
 [ext_resource type="StyleBox" uid="uid://dfayfm7g4qbgy" path="res://src/theme/tab_style_box/select.tres" id="16_jbexi"]
 [ext_resource type="StyleBox" uid="uid://bpbnwfxmkkmmc" path="res://src/theme/tab_style_box/unselect.tres" id="17_dx43s"]
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_1ql8x"]
+color = Color(1, 1, 1, 1)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k4gs8"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_3jjtl"]
+color = Color(1, 1, 1, 1)
+vertical = true
 
 [resource]
 default_font = ExtResource("1_kj04y")
@@ -33,6 +40,8 @@ Button/styles/focus = ExtResource("2_bggbf")
 Button/styles/hover = ExtResource("3_rj728")
 Button/styles/normal = ExtResource("4_6ch3r")
 Button/styles/pressed = ExtResource("5_toa5b")
+HSeparator/constants/separation = 0
+HSeparator/styles/separator = SubResource("StyleBoxLine_1ql8x")
 HSlider/icons/grabber = ExtResource("6_17eta")
 HSlider/icons/grabber_disabled = ExtResource("7_rjcc0")
 HSlider/icons/grabber_highlight = ExtResource("8_4k5fq")
@@ -82,3 +91,5 @@ Tree/styles/focus = ExtResource("2_bggbf")
 Tree/styles/panel = ExtResource("9_3p1nt")
 Tree/styles/selected = SubResource("StyleBoxEmpty_k4gs8")
 Tree/styles/selected_focus = ExtResource("2_bggbf")
+VSeparator/constants/separation = 0
+VSeparator/styles/separator = SubResource("StyleBoxLine_3jjtl")
