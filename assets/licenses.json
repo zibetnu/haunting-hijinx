@@ -1,0 +1,216 @@
+{
+	"components": [
+		{
+			"category": "Addons",
+			"contact": "",
+			"copyright": [
+				"Jan Thomä",
+				"Contributors"
+			],
+			"description": "A simple, yet powerful state charts library for Godot",
+			"id": "godot_state_charts",
+			"licenses": [
+				{
+					"file": "res://addons/godot_state_charts/LICENSE",
+					"identifier": "MIT",
+					"name": "MIT License",
+					"text": "",
+					"web": ""
+				}
+			],
+			"name": "Godot State Charts",
+			"paths": [
+				"res://addons/godot_state_charts"
+			],
+			"version": "0.13.2",
+			"web": ""
+		},
+		{
+			"category": "Addons",
+			"contact": "",
+			"copyright": [
+				"GP Garcia",
+				"Contributors"
+			],
+			"description": "An ecosystem of tools for Godot Engine and Valve's Steam.",
+			"id": "godot_steam",
+			"licenses": [
+				{
+					"file": "",
+					"identifier": "MIT",
+					"name": "MIT License",
+					"text": "MIT License\n\nCopyright (c) 2017-Current | CoaguCo Industries and GP Garcia\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+					"web": ""
+				}
+			],
+			"name": "GodotSteam GDExtension",
+			"paths": [
+				"res://addons/godotsteam"
+			],
+			"version": "4.9",
+			"web": ""
+		},
+		{
+			"category": "Addons",
+			"contact": "",
+			"copyright": [
+				"Iceflower S"
+			],
+			"description": "Manage license and copyright for third party graphics, software or libraries.",
+			"id": "license_manager",
+			"licenses": [
+				{
+					"file": "res://addons/licenses/LICENSE.md",
+					"identifier": "MIT",
+					"name": "MIT License",
+					"text": "",
+					"web": ""
+				}
+			],
+			"name": "License Manager",
+			"paths": [
+				"res://addons/licenses"
+			],
+			"version": "1.7.8",
+			"web": ""
+		},
+		{
+			"category": "Addons",
+			"contact": "",
+			"copyright": [
+				"Expresso Bits"
+			],
+			"description": "Steam Sockets Multiplayer Peer for Godot 4 via GDExtension.",
+			"id": "steam_multiplayer_peer",
+			"licenses": [
+				{
+					"file": "res://addons/steam-multiplayer-peer/LICENSE",
+					"identifier": "MIT",
+					"name": "MIT License",
+					"text": "",
+					"web": ""
+				}
+			],
+			"name": "Steam Multiplayer Peer",
+			"paths": [
+				"res://addons/steam-multiplayer-peer"
+			],
+			"version": "0.0.3",
+			"web": ""
+		},
+		{
+			"category": "Assets",
+			"contact": "",
+			"copyright": [],
+			"description": "",
+			"id": "cymbal_hit",
+			"licenses": [
+				{
+					"file": "",
+					"identifier": "CC0",
+					"name": "CC0-1.0",
+					"text": "",
+					"web": "https://creativecommons.org/publicdomain/zero/1.0/"
+				}
+			],
+			"name": "CymbalHit11.wav",
+			"paths": [
+				"res://assets/drain_area_spawn.wav"
+			],
+			"version": "",
+			"web": "https://freesound.org/s/315623/"
+		},
+		{
+			"category": "Assets",
+			"contact": "",
+			"copyright": [],
+			"description": "",
+			"id": "menu_seleciton_click",
+			"licenses": [
+				{
+					"file": "",
+					"identifier": "CC0",
+					"name": "CC0-1.0",
+					"text": "",
+					"web": "https://creativecommons.org/publicdomain/zero/1.0/"
+				}
+			],
+			"name": "Menu Selection Click",
+			"paths": [
+				"res://assets/button_press.wav"
+			],
+			"version": "",
+			"web": "https://freesound.org/s/171697/"
+		},
+		{
+			"category": "Assets",
+			"contact": "",
+			"copyright": [
+				"Jayvee Enaguas (HarvettFox96)"
+			],
+			"description": "",
+			"id": "modern_dos",
+			"licenses": [
+				{
+					"file": "",
+					"identifier": "CC0",
+					"name": "CC0-1.0",
+					"text": "",
+					"web": "https://creativecommons.org/publicdomain/zero/1.0/"
+				}
+			],
+			"name": "Modern DOS",
+			"paths": [
+				"res://assets/modern_dos_8x16.ttf"
+			],
+			"version": "20190101.02",
+			"web": "https://notabug.org/HarvettFox96/ttf-moderndos"
+		},
+		{
+			"category": "Assets",
+			"contact": "",
+			"copyright": [],
+			"description": "",
+			"id": "ridecrash",
+			"licenses": [
+				{
+					"file": "",
+					"identifier": "CC0",
+					"name": "CC0-1.0",
+					"text": "",
+					"web": "https://creativecommons.org/publicdomain/zero/1.0/"
+				}
+			],
+			"name": "ridecrash [stereo][2496]",
+			"paths": [
+				"res://assets/drain_area_activate.wav"
+			],
+			"version": "",
+			"web": "https://freesound.org/s/724953/"
+		},
+		{
+			"category": "Shaders",
+			"contact": "",
+			"copyright": [
+				"Erich Lamontagne"
+			],
+			"description": "",
+			"id": "circular_waves_2d",
+			"licenses": [
+				{
+					"file": "",
+					"identifier": "MIT",
+					"name": "MIT License",
+					"text": "Copyright 2023 Erich Lamontagne\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\n of this software and associated documentation files (the “Software”), to\n deal in the Software without restriction, including without limitation the\n rights to use, copy, modify, merge, publish, distribute, sublicense, and/or\n sell copies of the Software, and to permit persons to whom the Software is\n furnished to do so, subject to the following conditions:\n\n The above copyright notice and this permission notice shall be included in\n all copies or substantial portions of the Software.\n\n THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\n FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER\n DEALINGS IN THE SOFTWARE.",
+					"web": ""
+				}
+			],
+			"name": "Circular Waves 2D",
+			"paths": [
+				"res://src/summon/drain_area/drain_area.gdshader"
+			],
+			"version": "",
+			"web": "https://godotshaders.com/shader/circular-waves-2d/"
+		}
+	]
+}

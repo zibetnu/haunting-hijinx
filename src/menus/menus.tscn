@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnoti7vnd7pk7"]
+[gd_scene load_steps=6 format=3 uid="uid://bnoti7vnd7pk7"]
 
 [ext_resource type="PackedScene" uid="uid://civfmojof07gs" path="res://src/main_menu/main_menu.tscn" id="1_yg0vw"]
 [ext_resource type="PackedScene" uid="uid://cmta6hi75dnwf" path="res://src/config_menu/config_menu.tscn" id="2_ypteh"]
+[ext_resource type="PackedScene" uid="uid://chr26ux2vsrxq" path="res://src/license_menu/license_menu.tscn" id="3_503pn"]
+[ext_resource type="PackedScene" uid="uid://c4t7474tk0tok" path="res://src/about_menu/about_menu.tscn" id="3_bdgwc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_67gcq"]
 
@@ -21,8 +23,20 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
+[node name="AboutMenu" parent="." instance=ExtResource("3_bdgwc")]
+visible = false
+layout_mode = 2
+
+[node name="LicenseMenu" parent="." instance=ExtResource("3_503pn")]
+visible = false
+layout_mode = 2
+
 [connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/Settings" to="." method="set_current_tab" binds= [1]]
+[connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/HBoxContainer/About" to="." method="set_current_tab" binds= [2]]
 [connection signal="pressed" from="ConfigMenu/FrontEnd/HBoxContainer/Back" to="." method="set_current_tab" binds= [0]]
+[connection signal="pressed" from="AboutMenu/HBoxContainer/VBoxContainer/HBoxContainer/Back" to="." method="set_current_tab" binds= [0]]
+[connection signal="pressed" from="AboutMenu/HBoxContainer/VBoxContainer/HBoxContainer/Licenses" to="." method="set_current_tab" binds= [3]]
+[connection signal="pressed" from="LicenseMenu/HBoxContainer/VBoxContainer/HBoxContainer/Back" to="." method="set_current_tab" binds= [2]]
 
 [editable path="MainMenu"]
 [editable path="MainMenu/BackEnd"]
@@ -30,3 +44,11 @@ layout_mode = 2
 [editable path="ConfigMenu"]
 [editable path="ConfigMenu/BackEnd"]
 [editable path="ConfigMenu/FrontEnd"]
+[editable path="AboutMenu"]
+[editable path="AboutMenu/HBoxContainer/VBoxContainer/Zibetnu"]
+[editable path="AboutMenu/HBoxContainer/VBoxContainer/MagicPencilAnimations"]
+[editable path="AboutMenu/HBoxContainer/VBoxContainer2/GrabSound"]
+[editable path="AboutMenu/HBoxContainer/VBoxContainer2/MainTheme"]
+[editable path="AboutMenu/HBoxContainer/VBoxContainer2/Trailers"]
+[editable path="AboutMenu/HBoxContainer/VBoxContainer2/PlaytestingAndFeedback"]
+[editable path="LicenseMenu"]

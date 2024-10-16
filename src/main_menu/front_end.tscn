@@ -29,6 +29,15 @@ text = "Browse Lobbies"
 layout_mode = 2
 text = "Settings"
 
-[node name="Quit" type="Button" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+
+[node name="About" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "About"
+
+[node name="Quit" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Quit"
