@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c10ej4vwbr3uy"]
+
+[node name="Credit" type="MarginContainer"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Achievement" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(88, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_type_variation = &"LabelOutlined"
+text = "Achievement"
+horizontal_alignment = 2
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Names" type="GridContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
