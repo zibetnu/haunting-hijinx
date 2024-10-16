@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ot87wiivjhvg"]
+
+[ext_resource type="Script" path="res://src/autoload/tree_sounds/tree_sounds.gd" id="1_bexjq"]
+[ext_resource type="AudioStream" uid="uid://dyxlv1xko7tdx" path="res://assets/button_press.wav" id="2_g04r1"]
+
+[node name="TreeSounds" type="Node"]
+script = ExtResource("1_bexjq")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_g04r1")
+bus = &"Effects"
