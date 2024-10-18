@@ -24,6 +24,7 @@ SceneChanger="*res://src/autoload/scene_changer/scene_changer.tscn"
 FullscreenToggle="res://src/autoload/fullscreen_toggle/fullscreen_toggle.tscn"
 SteamCallbacks="res://src/autoload/steam_callbacks.gd"
 GlobalSounds="res://src/autoload/global_sounds/global_sounds.tscn"
+MouseHider="res://src/autoload/mouse_hider.gd"
 
 [debug]
 
