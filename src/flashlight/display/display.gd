@@ -3,6 +3,9 @@ extends Node2D
 
 signal flashlight_rotation_changed(flashlight_rotation: float)
 
+const PITCH_RANGE = 0.1
+const POWERED_PITCH = 1.0
+const UNPOWERED_PITCH = 0.8
 const _LIGHT_FILE_PATH := "res://assets/flashlight/light_%s.png"
 const _LIGHT_TEXTURES: Array[CompressedTexture2D] = [
 	null,
@@ -15,9 +18,21 @@ const _LIGHT_TEXTURES: Array[CompressedTexture2D] = [
 
 var powered: bool:
 	set(value):
+		var was_powered: bool = powered
 		powered = value
 		_beam.visible = powered
 		_light.visible = powered
+		if powered == was_powered:
+			return
+
+		if _click.playing:
+			return
+
+		_click.set_pitch_scale(
+				POWERED_PITCH if powered else UNPOWERED_PITCH
+				+ randf_range(-PITCH_RANGE, PITCH_RANGE)
+		)
+		_click.play()
 
 var flashlight_rotation: float:
 	get:
@@ -34,6 +49,7 @@ var light_texture_index: int:
 		$RotationNode/Light/WallLight.texture = _LIGHT_TEXTURES[light_texture_index]
 
 @onready var _beam := $RotationNode2/Beam
+@onready var _click: AudioStreamPlayer2D = $Click
 @onready var _light := $RotationNode/Light
 
 

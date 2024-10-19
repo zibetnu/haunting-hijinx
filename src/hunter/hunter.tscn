@@ -239,7 +239,7 @@ collision_shape = SubResource("CircleShape2D_bscnp")
 
 [node name="Flashlight" parent="." instance=ExtResource("15_hljm8")]
 
-[node name="Body" parent="Flashlight/Display" index="1"]
+[node name="Body" parent="Flashlight/Display" index="2"]
 visible = false
 
 [node name="HunterCostume" parent="." instance=ExtResource("19_c0d8f")]
