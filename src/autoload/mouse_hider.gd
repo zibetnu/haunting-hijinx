@@ -1,7 +1,7 @@
 extends Node
 
 
-const ACTIVE_MODE = Input.MOUSE_MODE_CONFINED
+const ACTIVE_MODE = Input.MOUSE_MODE_VISIBLE
 const INACTIVE_MODE = Input.MOUSE_MODE_HIDDEN
 
 
