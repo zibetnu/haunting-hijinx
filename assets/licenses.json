@@ -124,6 +124,28 @@
 			"category": "Assets",
 			"contact": "",
 			"copyright": [],
+			"description": "All assets that are not already under another license.",
+			"id": "haunting_hijinx",
+			"licenses": [
+				{
+					"file": "",
+					"identifier": "CC0",
+					"name": "CC0-1.0",
+					"text": "",
+					"web": "https://creativecommons.org/publicdomain/zero/1.0/"
+				}
+			],
+			"name": "Haunting Hijinx",
+			"paths": [
+				"res://assets"
+			],
+			"version": "",
+			"web": ""
+		},
+		{
+			"category": "Assets",
+			"contact": "",
+			"copyright": [],
 			"description": "",
 			"id": "menu_seleciton_click",
 			"licenses": [
