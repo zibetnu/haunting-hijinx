@@ -27,7 +27,6 @@ layout_mode = 1
 
 [connection signal="load_failed" from="BackEnd/WindowModeConfig" to="FrontEnd/TabContainer/Display/WindowMode/OptionButton" method="select_id" binds= [4]]
 [connection signal="loaded" from="BackEnd/WindowModeConfig" to="FrontEnd/TabContainer/Display/WindowMode/OptionButton" method="select_id"]
-[connection signal="saved" from="BackEnd/WindowModeConfig" to="FrontEnd/TabContainer/Display/WindowMode/OptionButton" method="select_id"]
 [connection signal="load_failed" from="BackEnd/BrightnessConfig" to="FrontEnd/TabContainer/Display/Brightness/HSlider" method="set_value" binds= [0.126]]
 [connection signal="loaded" from="BackEnd/BrightnessConfig" to="FrontEnd/TabContainer/Display/Brightness/HSlider" method="set_value"]
 [connection signal="loaded" from="BackEnd/MasterBusConfig" to="FrontEnd/TabContainer/Audio/Master/HSlider" method="set_value_no_signal"]
