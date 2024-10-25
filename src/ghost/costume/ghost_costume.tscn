@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://klrwcohuhynk"]
+[gd_scene load_steps=10 format=3 uid="uid://klrwcohuhynk"]
 
 [ext_resource type="Script" path="res://src/ghost/costume/ghost_costume.gd" id="1_giptv"]
 [ext_resource type="Texture2D" uid="uid://cqklbgsp8hsst" path="res://assets/ghost.png" id="1_su5en"]
@@ -43,11 +43,6 @@ _data = {
 "RESET": SubResource("Animation_74m6x")
 }
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6y2tp"]
-properties/0/path = NodePath(".:current_animation")
-properties/0/spawn = true
-properties/0/replication_mode = 2
-
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ucqbf"]
 properties/0/path = NodePath(".:current_animation")
 properties/0/spawn = true
@@ -69,9 +64,6 @@ libraries = {
 "canvas_item": ExtResource("3_fxyvi"),
 "sprite": ExtResource("4_httx6")
 }
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Effects"]
-replication_config = SubResource("SceneReplicationConfig_6y2tp")
 
 [node name="Ghost" type="AnimationPlayer" parent="."]
 libraries = {

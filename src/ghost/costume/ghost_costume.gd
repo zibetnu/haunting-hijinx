@@ -26,10 +26,6 @@ func play(value: String) -> void:
 	ghost.play(_get_first_partial_match(ghost, value))
 
 
-func play_effect(value: String) -> void:
-	effects.play(_get_first_partial_match(effects, value))
-
-
 func set_costume_rotation(value: float) -> void:
 	frame_coord_x = roundi(remap(
 			fposmod(value, TAU),
