@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cmta6hi75dnwf"]
 
-[ext_resource type="PackedScene" uid="uid://ctywx8ryp0b8f" path="res://src/config_menu/back_end.tscn" id="1_60csf"]
+[ext_resource type="PackedScene" uid="uid://ctywx8ryp0b8f" path="res://src/config_menu/back_end/back_end.tscn" id="1_60csf"]
 [ext_resource type="PackedScene" uid="uid://cuj5g6cmj5s20" path="res://src/config_menu/front_end/front_end.tscn" id="2_bmk2u"]
 
 [node name="ConfigMenu" type="Control"]
