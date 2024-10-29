@@ -103,15 +103,20 @@ size_flags_vertical = 3
 
 [node name="JoiningWindow" type="Window" parent="."]
 unique_name_in_owner = true
+transparent_bg = true
+size = Vector2i(94, 30)
 visible = false
 transient = true
 exclusive = true
 unresizable = true
 borderless = true
 
-[node name="Label" type="Label" parent="JoiningWindow"]
-offset_right = 80.0
-offset_bottom = 16.0
+[node name="PanelContainer" type="PanelContainer" parent="JoiningWindow"]
+offset_right = 94.0
+offset_bottom = 30.0
+
+[node name="Label" type="Label" parent="JoiningWindow/PanelContainer"]
+layout_mode = 2
 text = "Joining..."
 
 [node name="NotifyDialog" type="AcceptDialog" parent="."]
