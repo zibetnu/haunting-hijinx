@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://bfhqyxu3iuptm" path="res://src/event_listener/event_listener.tscn" id="18_870ie"]
 [ext_resource type="PackedScene" uid="uid://bkuic22finfse" path="res://src/controller/player_controller_stack.tscn" id="19_swqdr"]
 [ext_resource type="PackedScene" uid="uid://klrwcohuhynk" path="res://src/ghost/costume/ghost_costume.tscn" id="25_s3y3d"]
+[ext_resource type="Texture2D" uid="uid://d6ydfogp5pkh" path="res://assets/ghost/aura_outlines.png" id="26_lh4y1"]
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="29_1sq8w"]
 [ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_i4s33"]
 [ext_resource type="PackedScene" uid="uid://d4gb1ksm22wvh" path="res://src/damage_value_signal/damage_value_signal.tscn" id="34_617dy"]
@@ -28,7 +29,6 @@
 [ext_resource type="PackedScene" uid="uid://dpwfunjqyfike" path="res://src/health/health.tscn" id="38_arcfj"]
 [ext_resource type="PackedScene" uid="uid://oe321ygxttbo" path="res://src/grabber/grabber.tscn" id="38_ydesf"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="40_1b387"]
-[ext_resource type="PackedScene" uid="uid://bfe2ycxqwnpxi" path="res://src/draw_circle/draw_circle.tscn" id="43_lxwi0"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_q3imy"]
 properties/0/path = NodePath(".:enabled")
@@ -461,13 +461,9 @@ follow_viewport_enabled = true
 
 [node name="FollowPlayer" type="Node2D" parent="IgnoreCanvasModulate"]
 
-[node name="AuraLargeCircle" parent="IgnoreCanvasModulate/FollowPlayer" instance=ExtResource("43_lxwi0")]
-color = Color(1, 1, 1, 0.247059)
-radius = 160.0
-
-[node name="AuraSmallCircle" parent="IgnoreCanvasModulate/FollowPlayer" instance=ExtResource("43_lxwi0")]
-color = Color(1, 1, 1, 0.247059)
-radius = 96.0
+[node name="AuraOutlines" type="Sprite2D" parent="IgnoreCanvasModulate/FollowPlayer"]
+modulate = Color(1, 1, 1, 0.121569)
+texture = ExtResource("26_lh4y1")
 
 [node name="NameLabel" type="Label" parent="IgnoreCanvasModulate/FollowPlayer"]
 unique_name_in_owner = true
@@ -514,14 +510,12 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="set_peer_id"]
 [connection signal="changed_to_local" from="PeerID" to="." method="show"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate" method="show"]
-[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraLargeCircle" method="show"]
-[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraSmallCircle" method="show"]
+[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraOutlines" method="show"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="hide"]
 [connection signal="changed_to_local" from="PeerID" to="Camera2D" method="set_enabled" binds= [true]]
 [connection signal="changed_to_remote" from="PeerID" to="." method="hide"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate" method="hide"]
-[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraLargeCircle" method="hide"]
-[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraSmallCircle" method="hide"]
+[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/AuraOutlines" method="hide"]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="show"]
 [connection signal="changed_to_remote" from="PeerID" to="Camera2D" method="set_enabled" binds= [false]]
 [connection signal="visibility_changed" from="Invisibility" to="." method="set_visible"]
