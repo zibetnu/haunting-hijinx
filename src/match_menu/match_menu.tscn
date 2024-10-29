@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="3_o38nd"]
 
 [node name="MatchMenu" type="Control" node_paths=PackedStringArray("focus_first")]
+process_mode = 3
 visible = false
 layout_mode = 3
 anchors_preset = 0
