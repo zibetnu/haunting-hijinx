@@ -229,6 +229,7 @@ offset_left = -79.0
 offset_top = -79.0
 offset_right = 79.0
 offset_bottom = 79.0
+mouse_filter = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Waves"]
 libraries = {
