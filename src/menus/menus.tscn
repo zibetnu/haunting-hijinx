@@ -33,7 +33,7 @@ layout_mode = 2
 
 [connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/Settings" to="." method="set_current_tab" binds= [1]]
 [connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/HBoxContainer/About" to="." method="set_current_tab" binds= [2]]
-[connection signal="pressed" from="ConfigMenu/FrontEnd/HBoxContainer/Back" to="." method="set_current_tab" binds= [0]]
+[connection signal="pressed" from="ConfigMenu/FrontEnd/VBoxContainer/HBoxContainer/Back" to="." method="set_current_tab" binds= [0]]
 [connection signal="pressed" from="AboutMenu/HBoxContainer/VBoxContainer/HBoxContainer/Back" to="." method="set_current_tab" binds= [0]]
 [connection signal="pressed" from="AboutMenu/HBoxContainer/VBoxContainer/HBoxContainer/Licenses" to="." method="set_current_tab" binds= [3]]
 [connection signal="pressed" from="LicenseMenu/HBoxContainer/VBoxContainer/HBoxContainer/Back" to="." method="set_current_tab" binds= [2]]
