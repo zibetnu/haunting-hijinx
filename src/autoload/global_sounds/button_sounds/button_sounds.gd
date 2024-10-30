@@ -1,7 +1,11 @@
 extends Node
+## Plays sound for signals emitted by various buttons.
 
-
-@onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var signals_to_callables: Dictionary = {
+	&"item_activated": audio_stream_player.play,
+	&"pressed": audio_stream_player.play,
+}
 
 
 func _enter_tree() -> void:
@@ -9,19 +13,15 @@ func _enter_tree() -> void:
 
 
 func _on_node_added(node: Node) -> void:
-	if not node is Button:
-		return
-
 	if not is_node_ready():
 		await ready
 
-	if not node.is_node_ready():
-		await node.ready
+	for signal_name: StringName in signals_to_callables:
+		if not node.has_signal(signal_name):
+			continue
 
-	var button: Button = node
-	var button_signal: Signal = button.pressed
-	var receiver: Callable = _audio_stream_player.play
-	if button_signal.is_connected(receiver):
-		return
+		var callable: Callable = signals_to_callables[signal_name]
+		if node.is_connected(signal_name, callable):
+			continue
 
-	button_signal.connect(receiver)
+		node.connect(signal_name, callable)
