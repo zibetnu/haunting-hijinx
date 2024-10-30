@@ -5,6 +5,7 @@ extends Node
 @onready var signals_to_callables: Dictionary = {
 	&"item_activated": audio_stream_player.play,
 	&"pressed": audio_stream_player.play,
+	&"pressed_sound_requested": audio_stream_player.play,
 	&"tab_selected": func(_tab: int) -> void: audio_stream_player.play(),
 }
 
