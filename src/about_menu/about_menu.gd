@@ -3,7 +3,7 @@ extends Control
 
 const CANCEL_ACTION = &"ui_cancel"
 
-@onready var back: Button = $HBoxContainer/VBoxContainer/HBoxContainer/Back
+@onready var back: Button = %Back
 
 
 func _on_gui_input(event: InputEvent) -> void:
