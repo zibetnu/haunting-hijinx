@@ -5,46 +5,33 @@
 [ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="2_2qtrp"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="3_o38nd"]
 
-[node name="MatchMenu" type="Control" node_paths=PackedStringArray("focus_first")]
+[node name="MatchMenu" type="CenterContainer" node_paths=PackedStringArray("focus_first")]
 process_mode = 3
 visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_left = 320.0
-offset_top = 180.0
-offset_right = 320.0
-offset_bottom = 180.0
-script = ExtResource("1_o1w5u")
-focus_first = NodePath("CenterContainer/PanelContainer/VBoxContainer/Resume")
-
-[node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -44.0
-offset_top = -40.0
-offset_right = 44.0
-offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_o1w5u")
+focus_first = NodePath("PanelContainer/VBoxContainer/Resume")
 
-[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 
-[node name="Resume" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer"]
+[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Resume"
 
-[node name="EndMatch" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer"]
+[node name="EndMatch" type="Button" parent="PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "End Match"
 
-[node name="MainMenu" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer"]
+[node name="MainMenu" type="Button" parent="PanelContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Main Menu"
@@ -83,11 +70,11 @@ method = &"change_to_main_menu"
 
 [node name="SteamConnector" parent="." instance=ExtResource("2_2qtrp")]
 
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/Resume" to="." method="hide"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/EndMatch" to="EndMatchConfirmationDialog" method="popup"]
-[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/MainMenu" to="MainMenuConfirmationDialog" method="popup"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="hide"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/EndMatch" to="EndMatchConfirmationDialog" method="popup"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MainMenu" to="MainMenuConfirmationDialog" method="popup"]
 [connection signal="confirmed" from="EndMatchConfirmationDialog" to="LobbyCall" method="attempt_method_call"]
 [connection signal="confirmed" from="MainMenuConfirmationDialog" to="SteamConnector" method="close_connection"]
-[connection signal="changed_to_local" from="PeerID" to="CenterContainer/PanelContainer/VBoxContainer/EndMatch" method="set_disabled" binds= [false]]
-[connection signal="changed_to_remote" from="PeerID" to="CenterContainer/PanelContainer/VBoxContainer/EndMatch" method="set_disabled" binds= [true]]
+[connection signal="changed_to_local" from="PeerID" to="PanelContainer/VBoxContainer/EndMatch" method="set_disabled" binds= [false]]
+[connection signal="changed_to_remote" from="PeerID" to="PanelContainer/VBoxContainer/EndMatch" method="set_disabled" binds= [true]]
 [connection signal="connection_closed" from="SteamConnector" to="MainMenuCall" method="attempt_method_call"]
