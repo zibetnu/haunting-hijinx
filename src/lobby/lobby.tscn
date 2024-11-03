@@ -119,6 +119,7 @@ dialog_text = "Leave lobby and return to lobby browser?"
 dialog_autowrap = true
 
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Leave" to="LeaveConfirmationDialog" method="popup_centered"]
+[connection signal="focus_exited" from="HBoxContainer/HostMenu/LobbyNameLineEdit" to="HBoxContainer/HostMenu/LobbyTypeOptionButton" method="grab_focus"]
 [connection signal="text_changed" from="HBoxContainer/HostMenu/LobbyNameLineEdit" to="LobbyNameSetter" method="set_lobby_name"]
 [connection signal="item_selected" from="HBoxContainer/HostMenu/LobbyTypeOptionButton" to="LobbyTypeSetter" method="set_lobby_type"]
 [connection signal="pressed" from="HBoxContainer/HostMenu/StartButton" to="." method="_on_start_button_pressed"]
