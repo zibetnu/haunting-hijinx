@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctywx8ryp0b8f"]
+[gd_scene load_steps=7 format=3 uid="uid://ctywx8ryp0b8f"]
 
 [ext_resource type="PackedScene" uid="uid://beclheud7fmo4" path="res://src/config_handler/config_handler.tscn" id="1_s2lhb"]
 [ext_resource type="PackedScene" uid="uid://m41j0s7lbwbr" path="res://src/window_mode_setter/window_mode_setter.tscn" id="2_40max"]
 [ext_resource type="PackedScene" uid="uid://c6ql67s5oafpr" path="res://src/visibility_signals/visibility_signals.tscn" id="3_f2jjc"]
 [ext_resource type="PackedScene" uid="uid://l85mp1rghtu0" path="res://src/connect_group/connect_group.tscn" id="3_f5p5f"]
 [ext_resource type="PackedScene" uid="uid://c4pe2q3xrfk36" path="res://src/bus_volume_setter/bus_volume_setter.tscn" id="4_1acpm"]
+[ext_resource type="PackedScene" uid="uid://5vtot7ad4s11" path="res://src/config_menu/back_end/scale_slider/scale_slider.tscn" id="4_7inaw"]
 
 [node name="BackEnd" type="Node"]
 
@@ -27,6 +28,8 @@ receiver_method = &"set_inverted_darken_amount"
 [node name="SaveTimer" type="Timer" parent="BrightnessConfig"]
 wait_time = 0.5
 one_shot = true
+
+[node name="ScaleSlider" parent="." instance=ExtResource("4_7inaw")]
 
 [node name="MasterBusConfig" parent="." instance=ExtResource("1_s2lhb")]
 section = "audio"

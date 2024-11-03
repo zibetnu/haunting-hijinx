@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://5vtot7ad4s11"]
+
+[ext_resource type="Script" path="res://src/config_menu/back_end/scale_slider/scale_slider.gd" id="1_hwayq"]
+
+[node name="ScaleSlider" type="Node"]
+script = ExtResource("1_hwayq")
+
+[node name="DebounceTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="DebounceTimer" to="." method="_on_debounce_timer_timeout"]

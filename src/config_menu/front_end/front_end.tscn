@@ -67,6 +67,38 @@ step = 0.063
 value = 0.126
 tick_count = 6
 
+[node name="Scale" type="PanelContainer" parent="VBoxContainer/TabContainer/Display"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Display/Scale"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Display/Scale/VBoxContainer"]
+layout_mode = 2
+
+[node name="Min" type="Label" parent="VBoxContainer/TabContainer/Display/Scale/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "1x"
+
+[node name="Name" type="Label" parent="VBoxContainer/TabContainer/Display/Scale/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Scale"
+
+[node name="Max" type="Label" parent="VBoxContainer/TabContainer/Display/Scale/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "4x"
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/TabContainer/Display/Scale/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 4.0
+value = 3.0
+tick_count = 4
+
 [node name="Audio" type="VBoxContainer" parent="VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2

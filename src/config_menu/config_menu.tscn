@@ -19,7 +19,13 @@ editor_description = "Defaults to 4 (exclusive fullscreen)."
 [node name="BrightnessConfig" parent="BackEnd" index="2"]
 editor_description = "Defaults to 0.126."
 
-[node name="VisibilitySignals" parent="BackEnd" index="6" node_paths=PackedStringArray("canvas_item")]
+[node name="ScaleSlider" parent="BackEnd" index="3" node_paths=PackedStringArray("container", "min_label", "max_label", "slider")]
+container = NodePath("../../FrontEnd/VBoxContainer/TabContainer/Display/Scale")
+min_label = NodePath("../../FrontEnd/VBoxContainer/TabContainer/Display/Scale/VBoxContainer/HBoxContainer/Min")
+max_label = NodePath("../../FrontEnd/VBoxContainer/TabContainer/Display/Scale/VBoxContainer/HBoxContainer/Max")
+slider = NodePath("../../FrontEnd/VBoxContainer/TabContainer/Display/Scale/VBoxContainer/HSlider")
+
+[node name="VisibilitySignals" parent="BackEnd" index="7" node_paths=PackedStringArray("canvas_item")]
 canvas_item = NodePath("../..")
 
 [node name="FrontEnd" parent="." instance=ExtResource("2_bmk2u")]
