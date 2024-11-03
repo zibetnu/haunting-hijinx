@@ -25,6 +25,7 @@ SceneChanger="*res://src/autoload/scene_changer/scene_changer.tscn"
 FullscreenToggle="res://src/autoload/fullscreen_toggle/fullscreen_toggle.tscn"
 SteamCallbacks="res://src/autoload/steam_callbacks.gd"
 MouseHider="res://src/autoload/mouse_hider.gd"
+WindowScaler="res://src/autoload/window_scaler/window_scaler.tscn"
 
 [debug]
 
