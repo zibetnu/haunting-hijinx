@@ -1,8 +1,6 @@
 extends Control
 
 
-signal close_connection_requested
-
 const CLOSE_CONNECTION_ACTION = &"ui_cancel"
 const MIN_PARTICIPANTS = 1
 const PLAYER_TYPE_METHOD = &"set_player_type"
@@ -14,6 +12,7 @@ const TOGGLE_BUTTON_PATH = ^"%ParticipationToggle"
 
 @onready var cards: VBoxContainer = %Cards
 @onready var host_menu: GridContainer = %HostMenu
+@onready var leave: Button = %Leave
 @onready var start_button: Button = %StartButton
 
 
@@ -31,9 +30,9 @@ func _ready() -> void:
 		add_card(peer_id)
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(CLOSE_CONNECTION_ACTION):
-		close_connection_requested.emit()
+		leave.pressed.emit()  # Act as though leave button was pressed.
 
 
 func add_card(id: int) -> void:
