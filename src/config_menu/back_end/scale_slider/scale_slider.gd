@@ -3,6 +3,7 @@ extends Node
 signal min_value_changed(min_value: int)
 signal max_value_changed(max_value: int)
 signal scale_multiplier_changed(scale_multiplier: int)
+signal slider_value_changed(scale_multiplier: int)
 
 const LABEL_FORMAT_STRING = "%sx"
 const MIN_SCALE_MULTIPLIER = 1
@@ -23,6 +24,13 @@ const MIN_SCALE_MULTIPLIER = 1
 
 func _ready() -> void:
 	slider.value_changed.connect(_on_slider_value_changed)
+	slider_value_changed.connect(WindowScaler.set_scale_multiplier)
+	min_value = WindowScaler.min_value
+	max_value = WindowScaler.max_value
+	scale_multiplier = WindowScaler.scale_multiplier
+	WindowScaler.min_value_changed.connect(set_min_value)
+	WindowScaler.max_value_changed.connect(set_max_value)
+	WindowScaler.scale_multiplier_changed.connect(set_scale_multiplier)
 
 
 func set_min_value(value: int) -> void:
@@ -67,3 +75,4 @@ func _on_slider_value_changed(_value: float) -> void:
 
 func _on_debounce_timer_timeout() -> void:
 	scale_multiplier = int(slider.value)
+	slider_value_changed.emit(scale_multiplier)

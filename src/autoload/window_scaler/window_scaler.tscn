@@ -4,3 +4,4 @@
 
 [node name="WindowScaler" type="Node"]
 script = ExtResource("1_41y8o")
+auto_scale = false
