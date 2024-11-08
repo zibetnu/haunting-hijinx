@@ -1,3 +1,4 @@
+@tool  # Allows editor to see results of setting frame_coord_x and y.
 extends Sprite2D
 
 
