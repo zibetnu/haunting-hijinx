@@ -35,7 +35,7 @@ func set_costume_rotation(value: float) -> void:
 			fposmod(value, TAU),
 			_MIN_ROTATION, TAU,
 			_MIN_FRAME, hframes
-	))
+	)) % hframes
 
 
 func set_frame_coord_x(value: int) -> void:
