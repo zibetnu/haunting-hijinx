@@ -4,7 +4,6 @@ extends Sprite2D
 
 const _MIN_FRAME = 0
 const _MIN_ROTATION = 0.0
-const _PLACEHOLDER_ANIMATION = "all"
 
 @export var frame_coord_x: int:
 	get = get_frame_coord_x, set = set_frame_coord_x
