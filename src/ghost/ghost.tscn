@@ -598,7 +598,7 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="state_entered" from="StateChart/Base/Animation/Idle" to="GhostCostume" method="play" binds= ["idle"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Move" to="GhostCostume" method="play" binds= ["move"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Sprint" to="GhostCostume" method="play" binds= ["sprint"]]
-[connection signal="state_entered" from="StateChart/Base/Animation/Summon" to="GhostCostume" method="play" binds= ["idle"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/Summon" to="GhostCostume" method="play" binds= ["summon"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Stun" to="GhostCostume" method="play" binds= [&"stun"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Panic" to="GhostCostume" method="play" binds= [&"panic"]]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="GhostTranslucent" method="enable_translucency"]
