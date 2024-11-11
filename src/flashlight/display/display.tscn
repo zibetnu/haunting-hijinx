@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7qmrgohocqfx"]
+[gd_scene load_steps=9 format=3 uid="uid://c7qmrgohocqfx"]
 
 [ext_resource type="Script" path="res://src/flashlight/display/display.gd" id="1_rfbrn"]
 [ext_resource type="Texture2D" uid="uid://do78peki3jtm" path="res://assets/flashlight/body.png" id="2_lt2gs"]
+[ext_resource type="AudioStream" uid="uid://bdauwuj37f6qm" path="res://assets/flashlight/click.wav" id="2_sji0g"]
 [ext_resource type="PackedScene" uid="uid://dk7dsekk0sapx" path="res://src/rotation_to_int_range/rotation_to_int_range.tscn" id="3_dgpk2"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jmwf3"]
@@ -36,6 +37,11 @@ script = ExtResource("1_rfbrn")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_jmwf3")
+
+[node name="Click" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_sji0g")
+volume_db = -9.1
+bus = &"Effects"
 
 [node name="Body" type="Sprite2D" parent="."]
 unique_name_in_owner = true
