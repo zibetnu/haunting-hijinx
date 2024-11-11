@@ -6,26 +6,21 @@
 [ext_resource type="PackedScene" uid="uid://bj8n2x3jkcbgs" path="res://src/relay_initializer/relay_initializer.tscn" id="3_w7k6n"]
 [ext_resource type="PackedScene" uid="uid://c6ql67s5oafpr" path="res://src/visibility_signals/visibility_signals.tscn" id="5_shjsd"]
 
-[node name="LobbyBrowser" type="Control"]
-layout_mode = 3
+[node name="LobbyBrowser" type="MarginContainer"]
+custom_minimum_size = Vector2(640, 0)
 anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -320.0
-offset_right = 320.0
+offset_left = -156.0
+offset_right = 156.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wpwcv")
 lobby_summary_scene = ExtResource("2_tlwtl")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
 [node name="LeftMenu" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -67,6 +62,9 @@ layout_mode = 2
 [node name="Header" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
+[node name="LeftSpacer" type="Control" parent="HBoxContainer/VBoxContainer/MarginContainer/Header"]
+layout_mode = 2
+
 [node name="Name" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -88,6 +86,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Ping"
 
+[node name="RightSpacer" type="Control" parent="HBoxContainer/VBoxContainer/MarginContainer/Header"]
+layout_mode = 2
+
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer"]
 clip_contents = false
 layout_mode = 2
@@ -103,15 +104,20 @@ size_flags_vertical = 3
 
 [node name="JoiningWindow" type="Window" parent="."]
 unique_name_in_owner = true
+transparent_bg = true
+size = Vector2i(94, 30)
 visible = false
 transient = true
 exclusive = true
 unresizable = true
 borderless = true
 
-[node name="Label" type="Label" parent="JoiningWindow"]
-offset_right = 80.0
-offset_bottom = 16.0
+[node name="PanelContainer" type="PanelContainer" parent="JoiningWindow"]
+offset_right = 94.0
+offset_bottom = 30.0
+
+[node name="Label" type="Label" parent="JoiningWindow/PanelContainer"]
+layout_mode = 2
 text = "Joining..."
 
 [node name="NotifyDialog" type="AcceptDialog" parent="."]

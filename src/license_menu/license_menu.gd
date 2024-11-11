@@ -1,5 +1,6 @@
 extends Control
 
+signal pressed_sound_requested
 
 const Component := preload("res://addons/licenses/component.gd")
 const Licenses := preload("res://addons/licenses/licenses.gd")
@@ -94,6 +95,7 @@ func focus_tree() -> void:
 
 
 func set_component(component: Component) -> void:
+	pressed_sound_requested.emit()
 	component_name.text = component.name
 
 	version.text = component.version
@@ -142,6 +144,7 @@ func _on_item_selected() -> void:
 
 func _on_license_text_gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed(CANCEL_ACTION):
+		pressed_sound_requested.emit()
 		tree.grab_focus()
 
 

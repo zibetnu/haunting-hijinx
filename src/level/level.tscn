@@ -56,6 +56,7 @@ spawn_path = NodePath("../SpawnRoot")
 replication_config = SubResource("SceneReplicationConfig_63iby")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="EndLabel" type="Label" parent="CanvasLayer"]
 unique_name_in_owner = true

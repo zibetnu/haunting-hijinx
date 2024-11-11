@@ -33,6 +33,9 @@ mouse_filter = 2
 layout_mode = 2
 mouse_filter = 2
 
+[node name="LeftSpacer" type="Control" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
 [node name="LobbyName" type="Label" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -59,5 +62,8 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Unknown"
+
+[node name="RightSpacer" type="Control" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
 
 [connection signal="pressed" from="Join" to="." method="_on_join_pressed"]
