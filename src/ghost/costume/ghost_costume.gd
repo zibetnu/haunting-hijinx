@@ -1,9 +1,9 @@
+@tool  # Allows editor to see results of setting frame_coord_x and y.
 extends Sprite2D
 
 
 const _MIN_FRAME = 0
 const _MIN_ROTATION = 0.0
-const _PLACEHOLDER_ANIMATION = "all"
 
 @export var frame_coord_x: int:
 	get = get_frame_coord_x, set = set_frame_coord_x
@@ -26,16 +26,12 @@ func play(value: String) -> void:
 	ghost.play(_get_first_partial_match(ghost, value))
 
 
-func play_effect(value: String) -> void:
-	effects.play(_get_first_partial_match(effects, value))
-
-
 func set_costume_rotation(value: float) -> void:
 	frame_coord_x = roundi(remap(
 			fposmod(value, TAU),
 			_MIN_ROTATION, TAU,
 			_MIN_FRAME, hframes
-	))
+	)) % hframes
 
 
 func set_frame_coord_x(value: int) -> void:
