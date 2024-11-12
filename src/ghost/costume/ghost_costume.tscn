@@ -53,7 +53,7 @@ properties/0/replication_mode = 2
 position = Vector2(0, -10)
 texture = ExtResource("1_su5en")
 hframes = 8
-vframes = 2
+vframes = 3
 script = ExtResource("1_giptv")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
