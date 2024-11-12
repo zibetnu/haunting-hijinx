@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://klrwcohuhynk"]
+[gd_scene load_steps=11 format=3 uid="uid://klrwcohuhynk"]
 
 [ext_resource type="Script" path="res://src/ghost/costume/ghost_costume.gd" id="1_giptv"]
 [ext_resource type="Texture2D" uid="uid://cqklbgsp8hsst" path="res://assets/ghost/ghost.png" id="1_su5en"]
