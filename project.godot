@@ -25,6 +25,7 @@ SceneChanger="*res://src/autoload/scene_changer/scene_changer.tscn"
 FullscreenToggle="res://src/autoload/fullscreen_toggle/fullscreen_toggle.tscn"
 SteamCallbacks="res://src/autoload/steam_callbacks.gd"
 MouseHider="res://src/autoload/mouse_hider.gd"
+WindowScaler="res://src/autoload/window_scaler/window_scaler.tscn"
 
 [debug]
 
@@ -39,7 +40,6 @@ gdscript/warnings/unsafe_call_argument=1
 window/size/viewport_width=640
 window/size/viewport_height=360
 window/stretch/mode="viewport"
-window/stretch/aspect="expand"
 window/stretch/scale_mode="integer"
 
 [editor_plugins]
