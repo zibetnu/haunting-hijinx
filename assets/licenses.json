@@ -235,6 +235,28 @@
 			"web": "https://freesound.org/s/724953/"
 		},
 		{
+			"category": "Assets",
+			"contact": "",
+			"copyright": [],
+			"description": "",
+			"id": "switch",
+			"licenses": [
+				{
+					"file": "",
+					"identifier": "CC0",
+					"name": "CC0-1.0",
+					"text": "",
+					"web": "https://creativecommons.org/publicdomain/zero/1.0/"
+				}
+			],
+			"name": "Switch 08.WAV",
+			"paths": [
+				"res://assets/flashlight/click.wav"
+			],
+			"version": "",
+			"web": "https://freesound.org/s/217498/"
+		},
+		{
 			"category": "Shaders",
 			"contact": "",
 			"copyright": [
