@@ -123,6 +123,30 @@
 		{
 			"category": "Assets",
 			"contact": "",
+			"copyright": [
+				"IndyTheCringeMaster"
+			],
+			"description": "",
+			"id": "ghost_gasp",
+			"licenses": [
+				{
+					"file": "",
+					"identifier": "CCBY",
+					"name": "CC-BY-4.0",
+					"text": "",
+					"web": "https://creativecommons.org/licenses/by/4.0/"
+				}
+			],
+			"name": "Ghostgasp (Quick, Eerie Breath)",
+			"paths": [
+				"res://assets/ghost/ghost_stun.wav"
+			],
+			"version": "",
+			"web": "https://freesound.org/s/720420/"
+		},
+		{
+			"category": "Assets",
+			"contact": "",
 			"copyright": [],
 			"description": "All assets that are not already under another license.",
 			"id": "haunting_hijinx",

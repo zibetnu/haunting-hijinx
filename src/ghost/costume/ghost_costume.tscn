@@ -5,6 +5,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://fs3jht0ivdhm" path="res://src/animation_libaries/canvas_item.tres" id="3_fxyvi"]
 [ext_resource type="AnimationLibrary" uid="uid://krtfia4oqseg" path="res://src/animation_libaries/sprite.tres" id="4_httx6"]
 [ext_resource type="AnimationLibrary" uid="uid://cpgm7lkqrgqbv" path="res://src/ghost/costume/ghost_costume.tres" id="5_tqb6x"]
+[ext_resource type="AudioStream" uid="uid://brjvbwuqm27ud" path="res://assets/ghost/ghost_stun.wav" id="6_0krtw"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_euls0"]
 properties/0/path = NodePath(".:frame_coord_x")
@@ -72,3 +73,7 @@ libraries = {
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Ghost"]
 replication_config = SubResource("SceneReplicationConfig_ucqbf")
+
+[node name="Stun" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_0krtw")
+bus = &"Effects"
