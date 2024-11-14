@@ -25,6 +25,7 @@ key = "master"
 bus_name = &"Master"
 
 [node name="MusicBusConfig" parent="." instance=ExtResource("5_yj1co")]
+editor_description = "Defaults to 0.4."
 section = "audio"
 key = "music"
 
@@ -40,6 +41,7 @@ bus_name = &"Effects"
 
 [connection signal="loaded" from="MasterBusConfig" to="MasterBusConfig/BusVolumeSetter" method="set_volume_linear"]
 [connection signal="ready" from="MasterBusConfig" to="MasterBusConfig" method="load_value"]
+[connection signal="load_failed" from="MusicBusConfig" to="MusicBusConfig/BusVolumeSetter" method="set_volume_linear" binds= [0.4]]
 [connection signal="loaded" from="MusicBusConfig" to="MusicBusConfig/BusVolumeSetter" method="set_volume_linear"]
 [connection signal="ready" from="MusicBusConfig" to="MusicBusConfig" method="load_value"]
 [connection signal="loaded" from="EffectsBusConfig" to="EffectsBusConfig/BusVolumeSetter" method="set_volume_linear"]
