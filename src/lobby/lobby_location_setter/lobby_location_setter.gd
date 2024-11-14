@@ -17,7 +17,7 @@ func set_lobby_location() -> void:
 			lobby_id,
 			LOCATION_KEY,
 			Steam.convertPingLocationToString(
-					ping_dict.get(LOCATION_KEY, PLACEHOLDER_LOCATION)
+					ping_dict.get(LOCATION_KEY, PLACEHOLDER_LOCATION) as Array
 			)
 	)
 
@@ -27,8 +27,8 @@ func _get_autoload_lobby_id() -> int:
 	if not autoload:
 		return PLACEHOLDER_LOBBY_ID
 
-	var lobby_id = autoload.get(LOBBY_PROPERTY)
+	var lobby_id: Variant = autoload.get(LOBBY_PROPERTY)
 	if not lobby_id is int:
 		return PLACEHOLDER_LOBBY_ID
 
-	return int(lobby_id)
+	return lobby_id as int
