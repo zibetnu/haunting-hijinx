@@ -42,17 +42,6 @@ func _on_right_button_pressed() -> void:
 	spectate_index += 1
 
 
-func _on_cutscene_ended(_cutscene_name: String) -> void:
-	_left_button.disabled = false
-	_right_button.disabled = false
-	_spectate_player_at_index()
-
-
-func _on_cutscene_started(_cutscene_name: String) -> void:
-	_left_button.disabled = true
-	_right_button.disabled = true
-
-
 func _spectate_player_at_index() -> void:
 	if _players.is_empty():
 		return
