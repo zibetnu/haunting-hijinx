@@ -19,7 +19,7 @@ signal filter_ready(filter: Callable)
 @export var secondary_peer_id := 1
 @export var secondary_allow_in_filter := false
 
-var _filter := func(id):
+var _filter := func(id: int) -> bool:
 	return (
 			not enable_filter  # Always return true if filter is disabled.
 			or id == primary_peer_id
