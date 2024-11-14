@@ -10,6 +10,7 @@ extends Node
 
 func _ready() -> void:
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
+	Steam.join_requested.connect(_on_join_requested)
 
 
 func change_scene_to_packed(packed_scene: PackedScene) -> void:
@@ -33,6 +34,11 @@ func change_to_main_menu() -> void:
 	change_scene_to_packed(main_menu)
 
 
+func join_lobby(lobby_id: int) -> void:
+	change_to_lobby_browser()
+	Steam.joinLobby(lobby_id)
+
+
 func remove_scene() -> void:
 	for child in scene_spawner.get_children():
 		scene_spawner.remove_child(child)
@@ -53,3 +59,7 @@ func _on_server_disconnected() -> void:
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 	disconnected_dialog.popup_centered()
 	change_scene_to_packed(main_menu)
+
+
+func _on_join_requested(lobby_id: int, _steam_id: int) -> void:
+	join_lobby(lobby_id)
