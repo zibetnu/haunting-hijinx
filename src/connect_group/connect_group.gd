@@ -1,6 +1,5 @@
 extends Node
 
-
 @export var source: Node
 @export var source_signal: StringName
 @export var receiver_group: StringName

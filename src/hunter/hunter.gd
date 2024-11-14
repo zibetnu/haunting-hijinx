@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 signal dropped
 
 const GRABBED_EVENT = &"died"

@@ -1,6 +1,5 @@
 extends Node
 
-
 signal filter_enabled
 signal filter_disabled
 signal filter_ready(filter: Callable)
@@ -21,11 +20,11 @@ signal filter_ready(filter: Callable)
 @export var secondary_allow_in_filter := false
 
 var _filter := func(id):
-		return (
-				not enable_filter  # Always return true if filter is disabled.
-				or id == primary_peer_id
-				or (id == secondary_peer_id and secondary_allow_in_filter)
-		)
+	return (
+			not enable_filter  # Always return true if filter is disabled.
+			or id == primary_peer_id
+			or (id == secondary_peer_id and secondary_allow_in_filter)
+	)
 
 
 func _ready() -> void:

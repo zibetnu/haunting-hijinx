@@ -1,6 +1,5 @@
 extends Area2D
 
-
 signal sensed_intensity_changed(intensity: int)
 
 @export var active := true:

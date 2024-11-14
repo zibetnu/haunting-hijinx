@@ -1,6 +1,5 @@
 extends Node
 
-
 @export var character: CharacterBody2D
 @export var move_speed := 128.0
 @export var manual_process := false:

@@ -1,10 +1,8 @@
 extends Node
 
-
 signal health_emptied
 signal health_filled
 signal health_percentage_changed(value: float)
-
 
 @export var health_time := 10
 
@@ -21,8 +19,12 @@ var health := max_health:
 
 var max_health: int:
 	get:
-		return (health_time
-				* ProjectSettings.get_setting("physics/common/physics_ticks_per_second"))
+		return (
+				health_time
+				* ProjectSettings.get_setting(
+						"physics/common/physics_ticks_per_second"
+				)
+		)
 
 
 func add_health(value: int) -> void:

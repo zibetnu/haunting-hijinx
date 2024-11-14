@@ -1,6 +1,5 @@
 extends Node2D
 
-
 signal flashlight_rotation_changed(flashlight_rotation: float)
 
 const PITCH_RANGE = 0.1
@@ -9,11 +8,21 @@ const UNPOWERED_PITCH = 0.8
 const _LIGHT_FILE_PATH := "res://assets/flashlight/light_%s.png"
 const _LIGHT_TEXTURES: Array[CompressedTexture2D] = [
 	null,
-	preload(_LIGHT_FILE_PATH % 1), preload(_LIGHT_FILE_PATH % 2), preload(_LIGHT_FILE_PATH % 3),
-	preload(_LIGHT_FILE_PATH % 4), preload(_LIGHT_FILE_PATH % 5), preload(_LIGHT_FILE_PATH % 6),
-	preload(_LIGHT_FILE_PATH % 7), preload(_LIGHT_FILE_PATH % 8), preload(_LIGHT_FILE_PATH % 9),
-	preload(_LIGHT_FILE_PATH % 10), preload(_LIGHT_FILE_PATH % 11), preload(_LIGHT_FILE_PATH % 12),
-	preload(_LIGHT_FILE_PATH % 13), preload(_LIGHT_FILE_PATH % 14), preload(_LIGHT_FILE_PATH % 15),
+	preload(_LIGHT_FILE_PATH % 1),
+	preload(_LIGHT_FILE_PATH % 2),
+	preload(_LIGHT_FILE_PATH % 3),
+	preload(_LIGHT_FILE_PATH % 4),
+	preload(_LIGHT_FILE_PATH % 5),
+	preload(_LIGHT_FILE_PATH % 6),
+	preload(_LIGHT_FILE_PATH % 7),
+	preload(_LIGHT_FILE_PATH % 8),
+	preload(_LIGHT_FILE_PATH % 9),
+	preload(_LIGHT_FILE_PATH % 10),
+	preload(_LIGHT_FILE_PATH % 11),
+	preload(_LIGHT_FILE_PATH % 12),
+	preload(_LIGHT_FILE_PATH % 13),
+	preload(_LIGHT_FILE_PATH % 14),
+	preload(_LIGHT_FILE_PATH % 15),
 ]
 
 var powered: bool:

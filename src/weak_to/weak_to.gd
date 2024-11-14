@@ -1,6 +1,5 @@
 extends Node
 
-
 signal damaged_by(source: DamageSource)
 signal damage_taken
 

@@ -1,6 +1,5 @@
 extends Controller
 
-
 @export var controller_1: Controller
 @export var controller_2: Controller
 

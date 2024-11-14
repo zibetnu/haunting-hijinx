@@ -1,7 +1,6 @@
 class_name Summon
 extends Node
 
-
 signal area_count_changed(area_count: int)
 signal charge_percentage_changed(value: float)
 signal summon_charged
@@ -34,8 +33,12 @@ var charge := 0:
 
 var max_charge: int:
 	get:
-		return (charge_time
-				* ProjectSettings.get_setting("physics/common/physics_ticks_per_second"))
+		return (
+				charge_time
+				* ProjectSettings.get_setting(
+						"physics/common/physics_ticks_per_second"
+				)
+		)
 
 
 func _ready() -> void:

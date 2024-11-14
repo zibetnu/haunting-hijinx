@@ -1,6 +1,5 @@
 extends Node
 
-
 signal damaged_by_amount(damage_amount: int)
 
 

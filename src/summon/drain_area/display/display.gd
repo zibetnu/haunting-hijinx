@@ -1,6 +1,5 @@
 extends Node2D
 
-
 signal idle_started
 signal active_started
 

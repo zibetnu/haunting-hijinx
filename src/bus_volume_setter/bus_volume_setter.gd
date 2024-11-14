@@ -1,14 +1,15 @@
 extends Node
 
-
 signal volume_db_changed(volume_db: float)
 signal volume_linear_changed(volume_linear: float)
 
 @export var bus_name: StringName
 @export var volume_db: float:
-	get = get_volume_db, set = set_volume_db
+	get = get_volume_db,
+	set = set_volume_db
 @export var volume_linear: float:
-	get = get_volume_linear, set = set_volume_linear
+	get = get_volume_linear,
+	set = set_volume_linear
 
 
 func get_volume_db() -> float:

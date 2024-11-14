@@ -1,6 +1,5 @@
 extends Area2D
 
-
 signal first_node_entered
 signal last_node_exited
 signal nodes_touched(count: int)

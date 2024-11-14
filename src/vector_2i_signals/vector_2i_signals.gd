@@ -1,6 +1,5 @@
 extends Node
 
-
 signal vector_changed(value: Vector2i)
 signal vector_x_changed(value: int)
 signal vector_y_changed(value: int)
@@ -9,10 +8,12 @@ signal vector_y_changed(value: int)
 	set = set_vector
 
 @export var vector_x: int:
-	get = get_vector_x, set = set_vector_x
+	get = get_vector_x,
+	set = set_vector_x
 
 @export var vector_y: int:
-	get = get_vector_y, set = set_vector_y
+	get = get_vector_y,
+	set = set_vector_y
 
 
 func get_vector_x() -> int:
@@ -36,4 +37,3 @@ func set_vector_x(value: int) -> void:
 
 func set_vector_y(value: int) -> void:
 	vector.y = value
-

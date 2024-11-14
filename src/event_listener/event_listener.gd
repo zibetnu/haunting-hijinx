@@ -1,7 +1,6 @@
 extends Node
 
-
-signal listened_event_received()
+signal listened_event_received
 
 @export var listen_for_event: StringName
 

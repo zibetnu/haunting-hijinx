@@ -1,6 +1,5 @@
 extends Sprite2D
 
-
 const COSTUME_GROUP = &"hunter_costumes"
 const PALETTE_PARAMETER = &"new_palette"
 const HFRAME_COUNT = 16
@@ -55,7 +54,8 @@ func set_costume_rotation(value: float) -> void:
 	costume_rotation = value
 	var x_frame: int = roundi(remap(
 			_normalize_rotation(costume_rotation),
-			MIN_ROTATION, TAU, 0, HFRAME_COUNT
+			MIN_ROTATION, TAU,
+			0, HFRAME_COUNT
 	))
 	x_frame %= HFRAME_COUNT
 	legs.frame_coords.x = x_frame
@@ -99,8 +99,10 @@ func _normalize_rotation(value: float) -> float:
 	return reduced_rotation
 
 
-func _get_first_partial_match(player: AnimationPlayer,
-							  animation_name: String) -> String:
+func _get_first_partial_match(
+		player: AnimationPlayer,
+		animation_name: String
+) -> String:
 	for animation_key in player.get_animation_list():
 		if not animation_name in animation_key:
 			continue

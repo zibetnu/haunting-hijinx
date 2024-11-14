@@ -1,7 +1,6 @@
 extends Control
 ## Pulses for every whole second less than [param low_threshold], including 0.
 
-
 @export var timer: Timer
 @export var low_threshold := 4
 

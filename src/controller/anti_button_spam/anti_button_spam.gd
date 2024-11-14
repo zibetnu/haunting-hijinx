@@ -1,6 +1,5 @@
 extends Controller
 
-
 @export var controller: Controller
 @export var max_changes_per_second := 8
 

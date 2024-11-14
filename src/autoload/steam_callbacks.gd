@@ -1,6 +1,5 @@
 extends Node
 
-
 const APP_ID_PATH = "application/config/steam_app_id"
 
 

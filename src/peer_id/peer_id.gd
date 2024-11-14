@@ -1,9 +1,8 @@
 extends Node
 
-
 signal changed(id: int)
-signal changed_to_local()
-signal changed_to_remote()
+signal changed_to_local
+signal changed_to_remote
 
 @export var id := 1:
 	set = set_id

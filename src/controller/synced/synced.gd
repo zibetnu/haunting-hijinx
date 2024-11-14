@@ -1,7 +1,6 @@
 class_name SyncedController
 extends Controller
 
-
 # Use the first byte of _input_bits to store booleans.
 enum BitFlags {
 	BUTTON_1 = 1 << 0,
@@ -9,8 +8,8 @@ enum BitFlags {
 }
 
 # Use 3 bytes each to store the angle and length of the move and look vectors.
-const ANGLE_MULTIPLIER = (2.0**16 - 1) / 360
-const LENGTH_MULTIPLIER = 2**8 - 1
+const ANGLE_MULTIPLIER = (2.0 ** 16 - 1) / 360
+const LENGTH_MULTIPLIER = 2 ** 8 - 1
 const LOOK_OFFSET = 8
 const MOVE_OFFSET = 32
 const VECTOR_MASK = 0xff_ff_ff
@@ -65,11 +64,15 @@ func _serialize_vector(vector: Vector2) -> int:
 
 
 func _unserialize_vector(serialized_vector: int) -> Vector2:
-	var unserialized_degrees = float(serialized_vector & 0xff_ff) / ANGLE_MULTIPLIER
+	var unserialized_degrees = (
+			float(serialized_vector & 0xff_ff) / ANGLE_MULTIPLIER
+	)
 	if unserialized_degrees > 180:
 		unserialized_degrees -= 360
 
-	var unserialized_length := float(((serialized_vector & 0xff_00_00) >> 16)) / LENGTH_MULTIPLIER
+	var unserialized_length := (
+			float((serialized_vector & 0xff_00_00) >> 16) / LENGTH_MULTIPLIER
+	)
 	var unserialized_vector := Vector2(unserialized_length, 0)
 
 	return unserialized_vector.rotated(deg_to_rad(unserialized_degrees))

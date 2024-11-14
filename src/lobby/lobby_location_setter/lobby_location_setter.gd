@@ -1,6 +1,5 @@
 extends Node
 
-
 const AUTOLOAD_PATH := ^"/root/PeerData"
 const LOBBY_PROPERTY := &"lobby_id"
 const LOCATION_KEY := "location"

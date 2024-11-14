@@ -1,6 +1,5 @@
 extends Control
 
-
 const OPEN_MENU_ACTION = &"open_menu"
 
 @export var focus_first: Button

@@ -1,6 +1,5 @@
 extends Node
 
-
 signal pause_detected
 signal unpause_detected
 

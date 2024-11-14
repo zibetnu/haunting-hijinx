@@ -1,8 +1,7 @@
 extends Node
 
-
-signal hidden()
-signal shown()
+signal hidden
+signal shown
 signal visibility_changed(visible: bool)
 
 @export var canvas_item: CanvasItem:

@@ -8,7 +8,9 @@ func _process(_delta: float) -> void:
 
 
 func _unhandled_input(_event: InputEvent) -> void:
-	move_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	move_vector = Input.get_vector(
+			"move_left", "move_right", "move_up", "move_down"
+	)
 	_look_at_mouse_if_visible()
 	button_1 = Input.is_action_pressed("button_1")
 	button_2 = Input.is_action_pressed("button_2")
@@ -17,7 +19,9 @@ func _unhandled_input(_event: InputEvent) -> void:
 
 
 func force_handle_input() -> void:
-	move_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	move_vector = Input.get_vector(
+			"move_left", "move_right", "move_up", "move_down"
+	)
 	_look_at_mouse_if_visible()
 	button_1 = Input.is_action_pressed("button_1")
 	button_2 = Input.is_action_pressed("button_2")
@@ -26,8 +30,8 @@ func force_handle_input() -> void:
 
 func _is_mouse_visible() -> bool:
 	return not Input.get_mouse_mode() in [
-			Input.MOUSE_MODE_CONFINED_HIDDEN,
-			Input.MOUSE_MODE_HIDDEN
+		Input.MOUSE_MODE_CONFINED_HIDDEN,
+		Input.MOUSE_MODE_HIDDEN
 	]
 
 

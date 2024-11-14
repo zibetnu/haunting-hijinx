@@ -1,6 +1,5 @@
 extends Node
 
-
 signal is_true_set
 
 @export var group: StringName

@@ -1,6 +1,5 @@
 extends Node
 
-
 signal attempt_failed
 signal attempt_succeeded
 

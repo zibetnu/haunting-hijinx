@@ -1,6 +1,5 @@
 extends Node
 
-
 signal relay_initialized
 
 const RELAY_WAIT_LOOP_SEC := 1.0
@@ -8,6 +7,7 @@ const RELAY_WAIT_LOOP_SEC := 1.0
 @export var initialize_on_ready := true
 
 var _is_initialized := false
+
 
 func _ready() -> void:
 	Steam.relay_network_status.connect(_on_relay_network_status)
@@ -20,7 +20,10 @@ func _ready() -> void:
 # waiting for the relay to be ready.
 func initialize_relay() -> void:
 	Steam.initRelayNetworkAccess()
-	while Steam.getRelayNetworkStatus() != Steam.NETWORKING_AVAILABILITY_CURRENT:
+	while (
+			Steam.getRelayNetworkStatus()
+			!= Steam.NETWORKING_AVAILABILITY_CURRENT
+	):
 		await get_tree().create_timer(RELAY_WAIT_LOOP_SEC).timeout
 
 	if _is_initialized:

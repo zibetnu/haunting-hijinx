@@ -1,6 +1,5 @@
 extends Node
 
-
 signal loaded(value: Variant)
 signal load_failed
 signal saved

@@ -1,6 +1,5 @@
 extends Control
 
-
 const _CAMERA_PATH = ^"%Camera2D"
 const _NAME_LABEL_PATH = ^"%NameLabel"
 const _PLAYER_GROUP = &"players"
@@ -51,5 +50,7 @@ func _spectate_player_at_index() -> void:
 		if camera:
 			camera.enabled = player == _players[spectate_index]
 
-	var label: Label = _players[spectate_index].get_node_or_null(_NAME_LABEL_PATH)
+	var label: Label = _players[spectate_index].get_node_or_null(
+			_NAME_LABEL_PATH
+	)
 	_spectating_label.text = label.text if label else _UNKNOWN_NAME

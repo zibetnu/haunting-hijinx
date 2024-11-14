@@ -1,6 +1,5 @@
 extends Area2D
 
-
 signal acquired
 signal destroyed
 

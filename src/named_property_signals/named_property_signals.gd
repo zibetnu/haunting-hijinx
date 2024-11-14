@@ -1,6 +1,5 @@
 extends Node
 
-
 signal property_changed(property: StringName, value: Variant)
 
 @export var emit_on_ready := false

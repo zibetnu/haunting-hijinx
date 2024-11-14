@@ -1,6 +1,5 @@
 extends Node
 
-
 @export var min_pitch_scale: float = 0.8
 @export var max_pitch_scale: float = 1.2
 

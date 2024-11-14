@@ -1,6 +1,5 @@
 extends Node2D
 
-
 signal grabbed_target
 signal dropped_target
 

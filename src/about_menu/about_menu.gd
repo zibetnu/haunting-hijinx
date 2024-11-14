@@ -1,6 +1,5 @@
 extends Control
 
-
 const CANCEL_ACTION = &"ui_cancel"
 
 @onready var back: Button = %Back

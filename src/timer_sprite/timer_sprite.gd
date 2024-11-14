@@ -1,6 +1,5 @@
 extends Node2D
 
-
 const MINUTE = 60
 const TEN = 10
 

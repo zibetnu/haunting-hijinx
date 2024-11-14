@@ -1,12 +1,11 @@
 extends Node2D
 
-
 const MAX_BATTERY_SPAWN_ATTEMPTS = 100
 
 @export var battery_scene: PackedScene
 @export var spawn_area_top_left: Node2D
 @export var spawn_area_bottom_right: Node2D
-@export var spawn_root : Node2D
+@export var spawn_root: Node2D
 
 var _batteries_spawned := 0
 
@@ -15,8 +14,14 @@ var _batteries_spawned := 0
 
 func _get_random_battery_position() -> Vector2:
 	return Vector2(
-			randf_range(spawn_area_top_left.position.x, spawn_area_bottom_right.position.x),
-			randf_range(spawn_area_top_left.position.y, spawn_area_bottom_right.position.y)
+			randf_range(
+					spawn_area_top_left.position.x,
+					spawn_area_bottom_right.position.x
+			),
+			randf_range(
+					spawn_area_top_left.position.y,
+					spawn_area_bottom_right.position.y
+			)
 	)
 
 
@@ -46,7 +51,10 @@ func _on_timer_timeout() -> void:
 	var instance = battery_scene.instantiate()
 	var instance_position := _get_random_battery_position()
 	var i := 0
-	while i < MAX_BATTERY_SPAWN_ATTEMPTS and not _is_position_clear(instance_position):
+	while (
+			i < MAX_BATTERY_SPAWN_ATTEMPTS
+			and not _is_position_clear(instance_position)
+	):
 		instance_position = _get_random_battery_position()
 		i += 1
 

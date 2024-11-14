@@ -1,7 +1,6 @@
 class_name CountingSpawner
 extends MultiplayerSpawner
 
-
 # Signal for when all scenes from the server have been spawned. This
 # is useful for things that need to wait until those scenes are spawned.
 signal all_scenes_spawned

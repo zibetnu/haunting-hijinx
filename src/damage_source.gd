@@ -1,7 +1,6 @@
 class_name DamageSource
 extends Resource
 
-
 enum Type {
 	DARK,
 	LIGHT,

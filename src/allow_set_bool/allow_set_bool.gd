@@ -1,6 +1,5 @@
 extends Node
 
-
 @export var is_allowed := false:
 	set = set_is_allowed
 

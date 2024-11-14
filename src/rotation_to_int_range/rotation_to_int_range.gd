@@ -1,6 +1,5 @@
 extends Node
 
-
 signal range_value_changed(range_value: int)
 
 const _MIN_RANGE_SIZE = 1

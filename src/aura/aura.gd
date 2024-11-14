@@ -1,6 +1,5 @@
 extends Area2D
 
-
 @export var intensity := 1
 
 
