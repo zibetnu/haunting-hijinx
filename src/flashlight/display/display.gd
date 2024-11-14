@@ -6,24 +6,8 @@ const PITCH_RANGE = 0.1
 const POWERED_PITCH = 1.0
 const UNPOWERED_PITCH = 0.8
 const _LIGHT_FILE_PATH := "res://assets/flashlight/light_%s.png"
-const _LIGHT_TEXTURES: Array[CompressedTexture2D] = [
-	null,
-	preload(_LIGHT_FILE_PATH % 1),
-	preload(_LIGHT_FILE_PATH % 2),
-	preload(_LIGHT_FILE_PATH % 3),
-	preload(_LIGHT_FILE_PATH % 4),
-	preload(_LIGHT_FILE_PATH % 5),
-	preload(_LIGHT_FILE_PATH % 6),
-	preload(_LIGHT_FILE_PATH % 7),
-	preload(_LIGHT_FILE_PATH % 8),
-	preload(_LIGHT_FILE_PATH % 9),
-	preload(_LIGHT_FILE_PATH % 10),
-	preload(_LIGHT_FILE_PATH % 11),
-	preload(_LIGHT_FILE_PATH % 12),
-	preload(_LIGHT_FILE_PATH % 13),
-	preload(_LIGHT_FILE_PATH % 14),
-	preload(_LIGHT_FILE_PATH % 15),
-]
+
+@export var light_textures: Array[CompressedTexture2D] = []
 
 var powered: bool:
 	set(value):
@@ -53,9 +37,9 @@ var flashlight_rotation: float:
 
 var light_texture_index: int:
 	set(value):
-		light_texture_index = clampi(value, 0, _LIGHT_TEXTURES.size() - 1)
-		$RotationNode/Light/FloorLight.texture = _LIGHT_TEXTURES[light_texture_index]
-		$RotationNode/Light/WallLight.texture = _LIGHT_TEXTURES[light_texture_index]
+		light_texture_index = clampi(value, 0, light_textures.size() - 1)
+		$RotationNode/Light/FloorLight.texture = light_textures[light_texture_index]
+		$RotationNode/Light/WallLight.texture = light_textures[light_texture_index]
 
 @onready var _beam := $RotationNode2/Beam
 @onready var _click: AudioStreamPlayer2D = $Click

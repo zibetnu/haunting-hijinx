@@ -1,9 +1,26 @@
-[gd_scene load_steps=9 format=3 uid="uid://c7qmrgohocqfx"]
+[gd_scene load_steps=25 format=3 uid="uid://c7qmrgohocqfx"]
 
 [ext_resource type="Script" path="res://src/flashlight/display/display.gd" id="1_rfbrn"]
+[ext_resource type="Texture2D" uid="uid://b5o6s164tla1b" path="res://assets/flashlight/light_1.png" id="2_j0apu"]
 [ext_resource type="Texture2D" uid="uid://do78peki3jtm" path="res://assets/flashlight/body.png" id="2_lt2gs"]
 [ext_resource type="AudioStream" uid="uid://bdauwuj37f6qm" path="res://assets/flashlight/click.wav" id="2_sji0g"]
 [ext_resource type="PackedScene" uid="uid://dk7dsekk0sapx" path="res://src/rotation_to_int_range/rotation_to_int_range.tscn" id="3_dgpk2"]
+[ext_resource type="Texture2D" uid="uid://b756l5fmdw2mg" path="res://assets/flashlight/light_2.png" id="3_f5bum"]
+[ext_resource type="Texture2D" uid="uid://b8f0n1o35alf4" path="res://assets/flashlight/light_3.png" id="4_55y3x"]
+[ext_resource type="Texture2D" uid="uid://co1pyi0n8vice" path="res://assets/flashlight/light_4.png" id="5_uowjd"]
+[ext_resource type="Texture2D" uid="uid://dlql3ltt7bo40" path="res://assets/flashlight/light_5.png" id="6_eb7ne"]
+[ext_resource type="Texture2D" uid="uid://b40gcxmw0oik" path="res://assets/flashlight/light_6.png" id="7_w6nnq"]
+[ext_resource type="Texture2D" uid="uid://cbeicwg5dbkkb" path="res://assets/flashlight/light_7.png" id="8_bblat"]
+[ext_resource type="Texture2D" uid="uid://x5h6ial5f7cj" path="res://assets/flashlight/light_8.png" id="9_ocny7"]
+[ext_resource type="Texture2D" uid="uid://f2xk6j7d1xqy" path="res://assets/flashlight/light_9.png" id="10_xtryr"]
+[ext_resource type="Texture2D" uid="uid://d0oljwjdvod1q" path="res://assets/flashlight/light_10.png" id="11_yvefh"]
+[ext_resource type="Texture2D" uid="uid://pxarnvppjcw7" path="res://assets/flashlight/light_11.png" id="12_uqlia"]
+[ext_resource type="Texture2D" uid="uid://dki7fq0kdwqgx" path="res://assets/flashlight/light_12.png" id="13_3c23l"]
+[ext_resource type="Texture2D" uid="uid://c7i1fk6ffwo5m" path="res://assets/flashlight/light_13.png" id="14_pbdd6"]
+[ext_resource type="Texture2D" uid="uid://dkj0fs683k0sr" path="res://assets/flashlight/light_14.png" id="15_q2eh0"]
+[ext_resource type="Texture2D" uid="uid://hxh3xs22ni1r" path="res://assets/flashlight/light_15.png" id="16_nt746"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_84rfy"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jmwf3"]
 properties/0/path = NodePath("RotationNode2/Beam:polygon")
@@ -34,6 +51,7 @@ light_mode = 1
 [node name="Display" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_rfbrn")
+light_textures = Array[CompressedTexture2D]([SubResource("CompressedTexture2D_84rfy"), ExtResource("2_j0apu"), ExtResource("3_f5bum"), ExtResource("4_55y3x"), ExtResource("5_uowjd"), ExtResource("6_eb7ne"), ExtResource("7_w6nnq"), ExtResource("8_bblat"), ExtResource("9_ocny7"), ExtResource("10_xtryr"), ExtResource("11_yvefh"), ExtResource("12_uqlia"), ExtResource("13_3c23l"), ExtResource("14_pbdd6"), ExtResource("15_q2eh0"), ExtResource("16_nt746")])
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_jmwf3")
