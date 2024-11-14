@@ -14,10 +14,10 @@ func _ready() -> void:
 
 
 func change_scene_to_packed(packed_scene: PackedScene) -> void:
-	remove_scene()
 	if not multiplayer.is_server():
 		return
 
+	remove_scene()
 	scene_spawner.add_child(packed_scene.instantiate(), true)
 	get_tree().set_pause(false)
 
