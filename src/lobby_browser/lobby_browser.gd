@@ -9,6 +9,10 @@ const DISABLE_WHILE_NOT_REFRESHING = false
 const REFRESHING_TEXT = "Refreshing..."
 const DISABLE_WHILE_REFRESHING = true
 
+const ID_KEY = "id"
+const LOBBY_KEY = "lobby"
+const PRIVATE_LOBBY_ID = 0
+
 const NAME_KEY = "name"
 const TYPE_KEY = "type"
 
@@ -66,6 +70,7 @@ func refresh() -> void:
 			Steam.LOBBY_DISTANCE_FILTER_WORLDWIDE
 	)
 	Steam.requestLobbyList()
+	_get_friend_lobby_ids().map(Steam.requestLobbyData)
 
 
 func _add_summary_for(lobby_id: int) -> void:
@@ -75,6 +80,31 @@ func _add_summary_for(lobby_id: int) -> void:
 			func() -> void: join_lobby_requested.emit(lobby_id)
 	)
 	summary_container.add_child(summary)
+
+
+func _get_friend_lobby_ids() -> Array[int]:
+	var friend_lobby_ids: Array[int] = []
+	for friend_index in range(Steam.getFriendCount()):
+		var friend_steam_id: int = Steam.getFriendByIndex(
+				friend_index, Steam.FRIEND_FLAG_IMMEDIATE
+		)
+		var game_info: Dictionary = Steam.getFriendGamePlayed(friend_steam_id)
+		if game_info.is_empty():
+			continue
+
+		if game_info[ID_KEY] != Steam.getAppID():
+			continue
+
+		var lobby_id: Variant = game_info[LOBBY_KEY]
+		if not lobby_id is int:
+			continue
+
+		if lobby_id == PRIVATE_LOBBY_ID:
+			continue
+
+		friend_lobby_ids.append(lobby_id)
+
+	return friend_lobby_ids
 
 
 func _get_lobby_ids_without_summaries(lobby_ids: Array[int]) -> Array[int]:
@@ -121,6 +151,12 @@ func _on_lobby_joined() -> void:
 func _on_lobby_match_list(untyped_lobby_ids: Array) -> void:
 	var lobby_ids: Array[int] = []
 	lobby_ids.assign(untyped_lobby_ids)
+	for lobby_id in _get_friend_lobby_ids():
+		if lobby_id in lobby_ids:
+			continue
+
+		lobby_ids.append(lobby_id)
+
 	lobby_ids.filter(Steam.isLobby)
 	lobby_ids.filter(
 			func(lobby_id: int) -> bool:
