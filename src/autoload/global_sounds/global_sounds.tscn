@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://ch5nu02vso40r"]
+[gd_scene load_steps=7 format=3 uid="uid://ch5nu02vso40r"]
 
 [ext_resource type="PackedScene" uid="uid://0fbqpsh8pbhf" path="res://src/autoload/global_sounds/button_sounds/button_sounds.tscn" id="1_m4lnm"]
 [ext_resource type="PackedScene" uid="uid://b6edrvqnuo5bq" path="res://src/autoload/global_sounds/drain_area_sounds/drain_area_sounds.tscn" id="2_bcr66"]
 [ext_resource type="PackedScene" uid="uid://cxc7da7e8jxu1" path="res://src/autoload/global_sounds/slider_sounds/slider_sounds.tscn" id="2_wk4fe"]
 [ext_resource type="PackedScene" uid="uid://bvrn6ky085d6r" path="res://src/autoload/global_sounds/main_theme/main_theme.tscn" id="3_umvfy"]
+[ext_resource type="PackedScene" uid="uid://beclheud7fmo4" path="res://src/config_handler/config_handler.tscn" id="5_yj1co"]
+[ext_resource type="PackedScene" uid="uid://c4pe2q3xrfk36" path="res://src/bus_volume_setter/bus_volume_setter.tscn" id="6_g6s6e"]
 
 [node name="GlobalSounds" type="Node"]
 
@@ -14,3 +16,31 @@
 [node name="MainTheme" parent="." instance=ExtResource("3_umvfy")]
 
 [node name="RangeSounds" parent="." instance=ExtResource("2_wk4fe")]
+
+[node name="MasterBusConfig" parent="." instance=ExtResource("5_yj1co")]
+section = "audio"
+key = "master"
+
+[node name="BusVolumeSetter" parent="MasterBusConfig" instance=ExtResource("6_g6s6e")]
+bus_name = &"Master"
+
+[node name="MusicBusConfig" parent="." instance=ExtResource("5_yj1co")]
+section = "audio"
+key = "music"
+
+[node name="BusVolumeSetter" parent="MusicBusConfig" instance=ExtResource("6_g6s6e")]
+bus_name = &"Music"
+
+[node name="EffectsBusConfig" parent="." instance=ExtResource("5_yj1co")]
+section = "audio"
+key = "effects"
+
+[node name="BusVolumeSetter" parent="EffectsBusConfig" instance=ExtResource("6_g6s6e")]
+bus_name = &"Effects"
+
+[connection signal="loaded" from="MasterBusConfig" to="MasterBusConfig/BusVolumeSetter" method="set_volume_linear"]
+[connection signal="ready" from="MasterBusConfig" to="MasterBusConfig" method="load_value"]
+[connection signal="loaded" from="MusicBusConfig" to="MusicBusConfig/BusVolumeSetter" method="set_volume_linear"]
+[connection signal="ready" from="MusicBusConfig" to="MusicBusConfig" method="load_value"]
+[connection signal="loaded" from="EffectsBusConfig" to="EffectsBusConfig/BusVolumeSetter" method="set_volume_linear"]
+[connection signal="ready" from="EffectsBusConfig" to="EffectsBusConfig" method="load_value"]
