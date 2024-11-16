@@ -4,6 +4,9 @@
 
 An open-source remake of a classic minigame from Nintendo Land. Supports online multiplayer for 2-5 players.
 
+> [!IMPORTANT]
+> Non-Steam multiplayer is currently unsupported.
+
 ## Haunt a Spooky Mansion
 
 Concealed by shadow, you will seek to outwit the ghost hunters and make them faint. A single touch is all it takes, but beware their searing lights! You must be clever if you are to catch the fiends off guard.
