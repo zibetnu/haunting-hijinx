@@ -74,6 +74,7 @@ text = "Name"
 [node name="Type" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
 text = "Type"
 
 [node name="Players" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer/Header"]
