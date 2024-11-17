@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://chog7qk0d8wy7"]
-
-[ext_resource type="Script" path="res://src/timer_label/timer_label.gd" id="1_u1jf4"]
-
-[node name="TimerLabel" type="Label"]
-offset_right = 32.0
-offset_bottom = 16.0
-text = "0:00"
-script = ExtResource("1_u1jf4")

@@ -1,15 +1,13 @@
 class_name Summon
 extends Node
 
-
 signal area_count_changed(area_count: int)
 signal charge_percentage_changed(value: float)
 signal summon_charged
 signal summon_charging
 signal summoned
 
-const DrainArea := preload("res://src/summon/drain_area/drain_area.tscn")
-
+@export var drain_area: PackedScene
 @export var charge_time := 4.0
 @export var charging := false:
 	set(value):
@@ -34,8 +32,12 @@ var charge := 0:
 
 var max_charge: int:
 	get:
-		return (charge_time
-				* ProjectSettings.get_setting("physics/common/physics_ticks_per_second"))
+		return (
+				charge_time
+				* ProjectSettings.get_setting(
+						"physics/common/physics_ticks_per_second"
+				)
+		)
 
 
 func _ready() -> void:
@@ -52,7 +54,7 @@ func set_charging(value: bool) -> void:
 
 func spawn_scenes() -> void:
 	for node in get_tree().get_nodes_in_group(target_group):
-		var instance := DrainArea.instantiate()
+		var instance := drain_area.instantiate()
 		instance.position = node.position
 		instance.tree_entered.connect(func(): area_count += 1)
 		instance.tree_exited.connect(func(): area_count -= 1)

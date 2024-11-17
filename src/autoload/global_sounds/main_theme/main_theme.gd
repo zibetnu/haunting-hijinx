@@ -1,6 +1,5 @@
 extends Node
 
-
 const LOOP_POSITION = 19.79
 
 @export var scene_names: Array[StringName]

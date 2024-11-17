@@ -1,7 +1,6 @@
 class_name LobbySummary
 extends Control
 
-
 signal join_pressed
 
 const GOOD_COLOR = Color.GREEN
@@ -46,7 +45,7 @@ var player_limit := 0:
 
 func _to_string() -> String:
 	return "Lobby %s \n\tName: %s\n\tType: %s\n\tPlayers: %s\n\tPing: %s" % [
-			lobby_id, lobby_name, lobby_type, player_count_label.text, ping
+		lobby_id, lobby_name, lobby_type, player_count_label.text, ping
 	]
 
 

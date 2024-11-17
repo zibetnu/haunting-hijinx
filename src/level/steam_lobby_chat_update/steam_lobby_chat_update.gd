@@ -14,12 +14,17 @@ func _on_lobby_chat_update(
 	if chat_state & Steam.CHAT_MEMBER_STATE_CHANGE_ENTERED:
 		return
 
-	var steam_multiplayer_peer := multiplayer.multiplayer_peer as SteamMultiplayerPeer
+	var steam_multiplayer_peer := (
+			multiplayer.multiplayer_peer as SteamMultiplayerPeer
+	)
 	if not steam_multiplayer_peer:
 		return
 
 	for peer_id in multiplayer.get_peers():
-		if steam_multiplayer_peer.get_steam64_from_peer_id(peer_id) != changed_id:
+		if (
+				steam_multiplayer_peer.get_steam64_from_peer_id(peer_id)
+				!= changed_id
+		):
 			continue
 
 		# Workaround to promptly get rid of a player when Steam is aware they

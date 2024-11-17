@@ -1,6 +1,5 @@
 extends Area2D
 
-
 signal battery_died
 signal battery_undied
 signal battery_lowed
@@ -14,7 +13,9 @@ signal powered_off
 signal powered_on
 signal powered_on_attempted
 
-const CAST_LENGTHS: Array[int] = [0, 4, 5, 6, 7, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48]
+const CAST_LENGTHS: Array[int] = [
+	0, 4, 5, 6, 7, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48
+]
 const CAST_LONG_MAX_INDEX = 15
 const CAST_LONG_MIN_INDEX = 5
 const CAST_SHORT_MAX_INDEX = 4
@@ -55,8 +56,10 @@ const CAST_SHORT_MAX_INDEX = 4
 @export var damage_weak_to := DamageSource.Type.DARK
 
 @export_group("Turning", "turning")
-@export_range(0, 720, 0.1, "or_greater", "radians_as_degrees") var turning_speed_sec := 2 * PI
-@export_range(-360, 360, 0.1, "radians_as_degrees") var turning_target_rotation: float:
+@export_range(0, 720, 0.1, "or_greater", "radians_as_degrees")
+var turning_speed_sec := 2 * PI
+@export_range(-360, 360, 0.1, "radians_as_degrees")
+var turning_target_rotation: float:
 	get:
 		return target_rotation
 
@@ -169,12 +172,16 @@ func _emit_collision_points() -> void:
 	for raycast: RepeatRayCast2D in _repeat_raycasts:
 		if raycast.is_colliding():
 			collision_points.append(
-					raycast.to_local(raycast.get_collision_point()).rotated(raycast.rotation)
+					raycast.to_local(raycast.get_collision_point()).rotated(
+							raycast.rotation
+					)
 			)
 
 		else:
 			collision_points.append(
-					(raycast.position + raycast.target_position).rotated(raycast.rotation)
+					(raycast.position + raycast.target_position).rotated(
+							raycast.rotation
+					)
 			)
 
 	collision_points_changed.emit(collision_points)
@@ -184,7 +191,9 @@ func _update_cast_length() -> void:
 	var index := 0
 	if is_battery_low:
 		index = (ceil(
-				CAST_SHORT_MAX_INDEX * battery_percentage / battery_low_percentage
+				CAST_SHORT_MAX_INDEX
+				* battery_percentage
+				/ battery_low_percentage
 		))
 
 	else:

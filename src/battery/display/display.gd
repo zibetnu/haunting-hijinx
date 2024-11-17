@@ -1,6 +1,5 @@
 extends Node2D
 
-
 signal spawned
 signal destroyed
 

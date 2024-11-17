@@ -1,6 +1,5 @@
 extends Node
 
-
 signal lobby_name_on_ready(lobby_name: String)
 
 const AUTOLOAD_PATH = ^"/root/PeerData"

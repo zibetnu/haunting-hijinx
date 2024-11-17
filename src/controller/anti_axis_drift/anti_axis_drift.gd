@@ -1,6 +1,5 @@
 extends Controller
 
-
 @export var controller: Controller
 @export var x_deadzone := 0.03
 @export var y_deadzone := 0.03

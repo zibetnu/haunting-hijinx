@@ -3,7 +3,6 @@ extends Node
 ##
 ## Useful as a way of alerting a player without using visuals.
 
-
 ## Each value is the number of heartbeats per minute associated with the key.
 enum HeartRate {
 	NORMAL = 20,

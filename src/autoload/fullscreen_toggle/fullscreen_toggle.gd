@@ -1,6 +1,5 @@
 extends Node
 
-
 signal window_mode_requested(window_mode: DisplayServer.WindowMode)
 
 const ACTION = "toggle_fullscreen"

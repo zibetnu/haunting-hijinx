@@ -1,7 +1,6 @@
 # TODO: refactor separate lobby setter scenes to be one scene.
 extends Node
 
-
 signal lobby_type_on_ready(lobby_type: Steam.LobbyType)
 
 const AUTOLOAD_PATH = ^"/root/PeerData"
@@ -51,9 +50,9 @@ func set_lobby_type(value: Steam.LobbyType) -> void:
 
 	Steam.setLobbyType(lobby_id, value)
 	Steam.setLobbyData(
-		lobby_id,
-		TYPE_KEY,
-		TYPES_TO_STRINGS.get(value) as String
+			lobby_id,
+			TYPE_KEY,
+			TYPES_TO_STRINGS.get(value) as String
 	)
 
 

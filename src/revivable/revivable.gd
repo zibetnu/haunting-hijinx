@@ -1,6 +1,5 @@
 extends Node
 
-
 signal progress_percentage_changed(value: float)
 signal revived
 
@@ -14,8 +13,12 @@ signal revived
 
 var max_progress: int:
 	get:
-		return (revive_time
-				* ProjectSettings.get_setting("physics/common/physics_ticks_per_second"))
+		return (
+				revive_time
+				* ProjectSettings.get_setting(
+						"physics/common/physics_ticks_per_second"
+				)
+		)
 
 var progress := 0:
 	set(value):
@@ -59,7 +62,7 @@ func take_damage(source: DamageSource) -> void:
 
 
 func _apply_enabled() -> void:
-		set_physics_process(enabled)
-		if not enabled:
-			_can_progress = false
-			progress = 0
+	set_physics_process(enabled)
+	if not enabled:
+		_can_progress = false
+		progress = 0

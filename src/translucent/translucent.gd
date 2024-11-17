@@ -1,6 +1,5 @@
 extends Node
 
-
 @export var target: CanvasItem
 @export var enabled := false:
 	set(value):

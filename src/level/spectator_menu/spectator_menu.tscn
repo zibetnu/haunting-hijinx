@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/level/spectator_menu/spectator_menu.gd" id="1_yqk1i"]
 
-[node name="SpectatorMenu" type="MarginContainer" groups=["cutscene_sync"]]
+[node name="SpectatorMenu" type="MarginContainer"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0

@@ -1,7 +1,6 @@
 class_name RepeatRayCast2D
 extends Node2D
 
-
 @export var enabled := true:
 	set(value):
 		enabled = value
@@ -26,7 +25,9 @@ extends Node2D
 
 		collision_mask = value
 		_ray_cast_2d.collision_mask = collision_mask
-		_repeat_ray_cast_2d.collision_mask = collision_mask | repeat_collision_mask
+		_repeat_ray_cast_2d.collision_mask = (
+				collision_mask | repeat_collision_mask
+		)
 
 ## The repeating ray's collision mask. Only objects in at least one collision
 ## layer enabled in the mask will be detected.
@@ -36,7 +37,9 @@ extends Node2D
 			await ready
 
 		repeat_collision_mask = value
-		_repeat_ray_cast_2d.collision_mask = collision_mask | repeat_collision_mask
+		_repeat_ray_cast_2d.collision_mask = (
+				collision_mask | repeat_collision_mask
+		)
 
 @export var hit_from_inside := false:
 	set(value):

@@ -1,7 +1,6 @@
 class_name Controller
 extends Node2D
 
-
 signal button_1_changed(button_1: bool)
 signal button_1_pressed
 signal button_1_released
@@ -107,6 +106,6 @@ func force_handle_input() -> void:
 
 func is_action_pressed(action: StringName) -> bool:
 	return {
-			"button_1": button_1,
-			"button_2": button_2
+		"button_1": button_1,
+		"button_2": button_2
 	}.get(action, false)

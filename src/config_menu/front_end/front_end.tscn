@@ -39,13 +39,11 @@ custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 alignment = 1
-item_count = 3
+item_count = 2
 popup/item_0/text = "Windowed"
 popup/item_0/id = 0
-popup/item_1/text = "Fullscreen"
-popup/item_1/id = 3
-popup/item_2/text = "Exclusive Fullscreen"
-popup/item_2/id = 4
+popup/item_1/text = "Exclusive Fullscreen"
+popup/item_1/id = 4
 script = ExtResource("1_fsl6f")
 
 [node name="Brightness" type="HBoxContainer" parent="VBoxContainer/TabContainer/Display"]

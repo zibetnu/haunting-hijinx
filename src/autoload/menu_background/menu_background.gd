@@ -1,10 +1,9 @@
 extends CanvasItem
 
-
 @export var scene_names: Array[StringName]
 
 var _scenes_present := 0:
-	set=_set_scenes_present
+	set = _set_scenes_present
 
 
 func _ready() -> void:

@@ -1,9 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://gxh15sde0me5"]
+[gd_scene load_steps=16 format=3 uid="uid://gxh15sde0me5"]
 
 [ext_resource type="Script" path="res://src/level/level.gd" id="1_el04s"]
 [ext_resource type="PackedScene" uid="uid://vl432076bm8p" path="res://src/level/steam_lobby_chat_update/steam_lobby_chat_update.tscn" id="2_acesl"]
 [ext_resource type="PackedScene" uid="uid://grxm3658ukjj" path="res://src/battery_spawner/battery_spawner.tscn" id="2_d8ks1"]
+[ext_resource type="PackedScene" uid="uid://8qaswvkeb8qd" path="res://src/ghost/ghost.tscn" id="2_ree31"]
+[ext_resource type="PackedScene" uid="uid://ccvsw508kh4ot" path="res://src/hunter/hunter.tscn" id="3_l6nvs"]
 [ext_resource type="PackedScene" uid="uid://7wne64wo1epb" path="res://src/counting_spawner/counting_spawner.tscn" id="3_xxci0"]
+[ext_resource type="PackedScene" uid="uid://dppcbgbcx0b0t" path="res://src/level/spectator_menu/spectator_menu.tscn" id="4_q6wo4"]
 [ext_resource type="PackedScene" uid="uid://ojjy8keargbf" path="res://src/ping_label/ping_label.tscn" id="5_ijd43"]
 [ext_resource type="PackedScene" uid="uid://qdsau1mq5mj1" path="res://src/countdown/countdown.tscn" id="7_qv3yx"]
 [ext_resource type="PackedScene" uid="uid://mqch0psyq7vp" path="res://src/timer_sprite/ghost_timer_sprite.tscn" id="8_1aado"]
@@ -27,6 +30,9 @@ properties/2/replication_mode = 2
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_el04s")
+ghost = ExtResource("2_ree31")
+hunter = ExtResource("3_l6nvs")
+spectator_menu = ExtResource("4_q6wo4")
 
 [node name="MatchTimer" type="Timer" parent="."]
 wait_time = 300.0

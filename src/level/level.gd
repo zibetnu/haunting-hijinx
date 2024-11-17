@@ -1,12 +1,10 @@
 extends Node2D
 
-
-const Ghost = preload("res://src/ghost/ghost.tscn")
-const Hunter = preload("res://src/hunter/hunter.tscn")
-const SpectatorMenu = preload("res://src/level/spectator_menu/spectator_menu.tscn")
-
+@export var ghost: PackedScene
 @export var ghost_spawn_point: Node2D
+@export var hunter: PackedScene
 @export var hunter_spawn_points: Array[Node2D] = []
+@export var spectator_menu: PackedScene
 
 var _ghosts_spawned := 0
 var _hunters_spawned := 0
@@ -39,12 +37,12 @@ func _exit_tree() -> void:
 func add_player(id: int) -> void:
 	var instance: Node2D = null
 	if id == PeerData.ghost_peer:
-		instance = Ghost.instantiate()
+		instance = ghost.instantiate()
 		instance.position = ghost_spawn_point.position
 		_ghosts_spawned += 1
 
 	else:
-		instance = Hunter.instantiate()
+		instance = hunter.instantiate()
 		instance.position = hunter_spawn_points[
 				_hunters_spawned % hunter_spawn_points.size()
 		].position
@@ -54,7 +52,9 @@ func add_player(id: int) -> void:
 	instance.name += str(id)
 	$SpawnRoot.add_child(instance, true)
 	instance.get_node("PeerID").id = id
-	instance.get_node("IgnoreCanvasModulate/FollowPlayer/NameLabel").text = PeerData.peer_names[id]
+	instance.get_node("IgnoreCanvasModulate/FollowPlayer/NameLabel").text = (
+			PeerData.peer_names[id]
+	)
 	get_tree().call_group("ghost_peer_ids", "set_id", PeerData.ghost_peer)
 
 
@@ -128,7 +128,7 @@ func _on_counting_spawner_all_scenes_spawned() -> void:
 	):
 		return
 
-	$CanvasLayer.add_child(SpectatorMenu.instantiate())
+	$CanvasLayer.add_child(spectator_menu.instantiate())
 
 
 func _on_group_bool_ready(group_bool: Node) -> void:
@@ -147,11 +147,11 @@ func _on_player_death_state_changed() -> void:
 		return
 
 	var is_dead := func(node: Node):
-			return (
-					node.get("is_true")
-					or node.owner == null
-					or node.owner.is_queued_for_deletion()
-			)
+		return (
+				node.get("is_true")
+				or node.owner == null
+				or node.owner.is_queued_for_deletion()
+		)
 
 	if get_tree().get_nodes_in_group("ghost_is_deads").all(is_dead):
 		_end_match("Hunters win!")

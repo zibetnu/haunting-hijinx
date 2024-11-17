@@ -1,6 +1,5 @@
 extends Area2D
 
-
 signal active_ended
 signal active_started
 

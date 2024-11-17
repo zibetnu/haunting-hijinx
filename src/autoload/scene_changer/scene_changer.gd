@@ -1,6 +1,5 @@
 extends Node
 
-
 @export var lobby: PackedScene
 @export var lobby_browser: PackedScene
 @export var main_menu: PackedScene

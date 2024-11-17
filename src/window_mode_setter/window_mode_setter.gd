@@ -1,6 +1,5 @@
 extends Node
 
-
 signal window_mode_changed(window_mode: DisplayServer.WindowMode)
 
 const _WINDOWS_DISPLAY_SERVER_NAME = "Windows"

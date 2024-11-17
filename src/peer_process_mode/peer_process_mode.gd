@@ -1,6 +1,5 @@
 extends Node
 
-
 signal process_mode_updated(mode: Node.ProcessMode)
 
 @export_group("Peer ID")
@@ -33,7 +32,10 @@ func set_secondary_peer_id(id: int) -> void:
 
 func _update_process_mode() -> void:
 	var local_id := multiplayer.get_unique_id()
-	if local_id == primary_peer_id or (secondary_include and local_id == secondary_peer_id):
+	if (
+			local_id == primary_peer_id
+			or (secondary_include and local_id == secondary_peer_id)
+	):
 		process_mode_updated.emit(peer_process_active_mode)
 
 	else:

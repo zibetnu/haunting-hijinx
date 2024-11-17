@@ -1,6 +1,5 @@
 extends Node
 
-
 signal darkened_color_changed(darkened_color: Color)
 
 const _MIN_DARKEN = 0.0
@@ -14,7 +13,8 @@ const _STEP = 0.1
 	set = set_darken_amount
 
 var darkened_color: Color:
-	get = get_darkened_color, set = _set_darkened_color
+	get = get_darkened_color,
+	set = _set_darkened_color
 
 
 func get_darkened_color() -> Color:

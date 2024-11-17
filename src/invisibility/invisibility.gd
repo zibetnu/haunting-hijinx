@@ -1,6 +1,5 @@
 extends Node
 
-
 signal visibility_changed(value: bool)
 
 @export var local_peer_id: int = 1:

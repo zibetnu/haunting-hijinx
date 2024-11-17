@@ -1,6 +1,5 @@
 extends Node
 
-
 @export var group: StringName
 @export var method: StringName
 

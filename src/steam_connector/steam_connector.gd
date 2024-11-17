@@ -1,6 +1,5 @@
 extends Node
 
-
 signal connection_closed
 signal create_lobby_failed
 signal join_lobby_failed
@@ -69,7 +68,11 @@ func set_connect_steam_signals(value: bool) -> void:
 
 
 func _init_lobby_data(lobby_id: int) -> void:
-	Steam.setLobbyData(lobby_id, LOBBY_NAME_KEY, LOBBY_NAME_FORMAT % Steam.getPersonaName())
+	Steam.setLobbyData(
+			lobby_id,
+			LOBBY_NAME_KEY,
+			LOBBY_NAME_FORMAT % Steam.getPersonaName()
+	)
 	Steam.setLobbyData(lobby_id, LOBBY_TYPE_KEY, LOBBY_TYPE_NAME)
 
 
@@ -87,11 +90,11 @@ func _on_lobby_created(result: Steam.Result, lobby_id: int) -> void:
 
 
 func _on_lobby_joined(
-			lobby_id: int,
-			_permissions: int,
-			_locked: bool,
-			response: Steam.ChatRoomEnterResponse
-	) -> void:
+		lobby_id: int,
+		_permissions: int,
+		_locked: bool,
+		response: Steam.ChatRoomEnterResponse
+) -> void:
 	if response != Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
 		join_lobby_failed.emit()
 		return

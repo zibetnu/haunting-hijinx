@@ -1,6 +1,5 @@
 extends Node
 
-
 signal client_created
 signal connection_closed
 signal server_created

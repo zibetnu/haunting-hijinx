@@ -1,6 +1,5 @@
 extends Control
 
-
 const CLOSE_CONNECTION_ACTION = &"ui_cancel"
 const MIN_PARTICIPANTS = 1
 const PLAYER_TYPE_METHOD = &"set_player_type"

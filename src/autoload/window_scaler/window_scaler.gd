@@ -110,7 +110,6 @@ class WindowSignals:
 	## the viewport size has changed.
 	signal window_size_changed
 
-
 	func _notification(what: int) -> void:
 		if what == NOTIFICATION_WM_SIZE_CHANGED:
 			window_size_changed.emit()

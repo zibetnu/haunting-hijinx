@@ -1,7 +1,6 @@
 extends OptionButton
 ## An Optionbutton with additional id-focused functionality.
 
-
 signal item_id_focused(id: int)
 signal item_id_selected(id: int)
 

@@ -1,8 +1,13 @@
 extends PanelContainer
 
-
 signal player_name_changed(value: String)
 signal player_type_changed(value: PlayerType)
+
+enum PlayerType {
+	HUNTER = 0,
+	GHOST = 1,
+	SPECTATOR = 2,
+}
 
 const AUTOLOAD_NAMES_PROPERTY := &"peer_names"
 const AUTOLOAD_PATH := ^"/root/PeerData"
@@ -10,12 +15,6 @@ const CARD_GROUP = &"player_cards"
 const GROUP_METHOD = &"auto_set_player_type"
 const MAX_GHOSTS = 1
 const MAX_HUNTERS = 4
-
-enum PlayerType {
-	HUNTER = 0,
-	GHOST = 1,
-	SPECTATOR = 2,
-}
 
 @export var input_authority := 1:
 	set(value):
@@ -54,7 +53,9 @@ func auto_set_player_type(caller: Node) -> void:
 	var cards: Array[Node] = get_tree().get_nodes_in_group(CARD_GROUP)
 	var player_types: Array[PlayerType] = []
 	player_types.assign(
-		cards.map(func(card: Node) -> PlayerType: return card.get("player_type"))
+		cards.map(
+				func(card: Node) -> PlayerType: return card.get("player_type")
+		)
 	)
 
 	var ghost_count: int = player_types.count(PlayerType.GHOST)

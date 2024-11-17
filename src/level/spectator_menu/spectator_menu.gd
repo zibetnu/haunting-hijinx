@@ -1,6 +1,5 @@
 extends Control
 
-
 const _CAMERA_PATH = ^"%Camera2D"
 const _NAME_LABEL_PATH = ^"%NameLabel"
 const _PLAYER_GROUP = &"players"
@@ -42,17 +41,6 @@ func _on_right_button_pressed() -> void:
 	spectate_index += 1
 
 
-func _on_cutscene_ended(_cutscene_name: String) -> void:
-	_left_button.disabled = false
-	_right_button.disabled = false
-	_spectate_player_at_index()
-
-
-func _on_cutscene_started(_cutscene_name: String) -> void:
-	_left_button.disabled = true
-	_right_button.disabled = true
-
-
 func _spectate_player_at_index() -> void:
 	if _players.is_empty():
 		return
@@ -62,5 +50,7 @@ func _spectate_player_at_index() -> void:
 		if camera:
 			camera.enabled = player == _players[spectate_index]
 
-	var label: Label = _players[spectate_index].get_node_or_null(_NAME_LABEL_PATH)
+	var label: Label = _players[spectate_index].get_node_or_null(
+			_NAME_LABEL_PATH
+	)
 	_spectating_label.text = label.text if label else _UNKNOWN_NAME

@@ -1,7 +1,6 @@
 class_name Alert
 extends Control
 
-
 enum AlertLevel {
 	NONE,
 	LOW,
@@ -22,7 +21,7 @@ func set_alert_level(value: AlertLevel) -> void:
 
 func set_alert_level_from_int(value: int) -> void:
 	if value <= 0:
-			alert_level = AlertLevel.NONE
+		alert_level = AlertLevel.NONE
 
 	elif value == 1:
 		alert_level = AlertLevel.LOW

@@ -1,8 +1,5 @@
 extends Node
 
-
-const MAX_PARTICIPANTS = 5
-
 signal ghost_peer_changed(id: int)
 signal peer_name_changed(id: int)
 signal peer_participation_changed(id: int)
@@ -12,6 +9,8 @@ enum PeerType {
 	GHOST = 1,
 	SPECTATOR = 2,
 }
+
+const MAX_PARTICIPANTS = 5
 
 @export var ghost_peer := 1:
 	set(value):

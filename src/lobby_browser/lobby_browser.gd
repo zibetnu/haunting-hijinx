@@ -1,6 +1,5 @@
 extends Control
 
-
 signal join_lobby_requested(lobby_id: int)
 signal refreshed
 
@@ -63,7 +62,9 @@ func notify(message: String) -> void:
 func refresh() -> void:
 	refresh_button.disabled = DISABLE_WHILE_REFRESHING
 	refresh_button.text = REFRESHING_TEXT
-	Steam.addRequestLobbyListDistanceFilter(Steam.LOBBY_DISTANCE_FILTER_WORLDWIDE)
+	Steam.addRequestLobbyListDistanceFilter(
+			Steam.LOBBY_DISTANCE_FILTER_WORLDWIDE
+	)
 	Steam.requestLobbyList()
 
 
