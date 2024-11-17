@@ -129,14 +129,14 @@ dialog_autowrap = true
 
 [node name="LobbyTypeHelp" type="AcceptDialog" parent="."]
 transparent_bg = true
-size = Vector2i(294, 212)
+size = Vector2i(294, 231)
 borderless = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LobbyTypeHelp"]
 offset_left = 7.0
 offset_top = 7.0
 offset_right = 287.0
-offset_bottom = 163.0
+offset_bottom = 182.0
 
 [node name="Private" type="MarginContainer" parent="LobbyTypeHelp/VBoxContainer"]
 layout_mode = 2
@@ -157,7 +157,7 @@ layout_mode = 2
 [node name="Decription" type="Label" parent="LobbyTypeHelp/VBoxContainer/Private/HBoxContainer"]
 custom_minimum_size = Vector2(208, 0)
 layout_mode = 2
-text = "The only way to join the lobby is from an invite."
+text = "Joinable by invitation only. (Currently not working.)"
 autowrap_mode = 3
 
 [node name="FriendsOnly" type="MarginContainer" parent="LobbyTypeHelp/VBoxContainer"]
@@ -179,7 +179,7 @@ layout_mode = 2
 [node name="Decription" type="Label" parent="LobbyTypeHelp/VBoxContainer/FriendsOnly/HBoxContainer"]
 custom_minimum_size = Vector2(208, 0)
 layout_mode = 2
-text = "Joinable by friends and invitees, but does not show up in the lobby list."
+text = "Joinable by friends and invitees. Visible to friends."
 autowrap_mode = 3
 
 [node name="Public" type="MarginContainer" parent="LobbyTypeHelp/VBoxContainer"]
@@ -201,7 +201,7 @@ layout_mode = 2
 [node name="Decription" type="Label" parent="LobbyTypeHelp/VBoxContainer/Public/HBoxContainer"]
 custom_minimum_size = Vector2(208, 0)
 layout_mode = 2
-text = "Returned by search and visible to friends."
+text = "Joinable by anyone. Visible to anyone."
 autowrap_mode = 3
 
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Leave" to="LeaveConfirmationDialog" method="popup_centered"]
