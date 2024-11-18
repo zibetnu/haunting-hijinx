@@ -74,7 +74,7 @@ light_mask = 32
 position = Vector2(0, -8)
 texture = SubResource("ViewportTexture_nu623")
 script = ExtResource("1_auu5i")
-palette_array = Array[Texture2D]([ExtResource("3_qkyln"), ExtResource("2_28bn5"), ExtResource("6_0168j"), ExtResource("6_8ags0"), ExtResource("7_157kt")])
+palette_array = Array[Texture2D]([ExtResource("3_qkyln"), ExtResource("2_28bn5"), ExtResource("7_157kt"), ExtResource("6_0168j"), ExtResource("6_8ags0")])
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_72euo")
