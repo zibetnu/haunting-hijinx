@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2024-11-17
+
+### Added
+
+- Ability to join lobbies and invite friends to lobbies through your Steam friends list.
+- Ability to find and join friends-only lobbies from the lobby browser.
+- Help popup explaining each lobby type.
+
+### Changed
+
+- Default lobby type is friends only.
+- Default music volume is 40%.
+- Hunter color palettes are now ordered as yellow, green, purple, red, blue.
+- Lobby summary gives more space to the lobby type text.
+- Lots of code is reformatted.
+
+### Fixed
+
+- If 6+ players are in a lobby, swapping a spectator with a hunter will appear to work but actually make both players spectators.
+- Lobby summaries overlap in lobby browser.
+- Broken link for 0.4.0 in this changelog.
+
+### Removed
+
+- Non-exclusive fullscreen, which did not seem to have the expected benefits.
+- Unused assets and code.
+
 ## [0.4.0] - 2024-11-16
 
 ### Added
@@ -82,6 +109,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
+[1.0.0]: https://github.com/zibetnu/haunting-hijinx/compare/0.4.0...1.0.0
 [0.4.0]: https://github.com/zibetnu/haunting-hijinx/compare/0.3.0...0.4.0
 [0.3.0]: https://github.com/zibetnu/haunting-hijinx/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/zibetnu/haunting-hijinx/compare/0.1.0...0.2.0
