@@ -100,6 +100,9 @@ func set_player_name(value: String) -> void:
 
 
 func set_player_type(value: PlayerType) -> void:
+	if value == player_type:
+		return
+
 	player_type = value
 	player_type_changed.emit(player_type)
 	_call_card_group_sequentially()
