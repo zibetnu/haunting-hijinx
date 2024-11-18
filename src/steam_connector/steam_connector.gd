@@ -13,9 +13,9 @@ const PLACEHOLDER_LOBBY_ID = -1
 const LOBBY_NAME_KEY = "name"
 const LOBBY_NAME_FORMAT = "%s Lobby"
 
-const LOBBY_TYPE = Steam.LOBBY_TYPE_PUBLIC
+const LOBBY_TYPE = Steam.LOBBY_TYPE_FRIENDS_ONLY
 const LOBBY_TYPE_KEY = "type"
-const LOBBY_TYPE_NAME = "Public"
+const LOBBY_TYPE_NAME = "Friends Only"
 
 const MAX_MEMBERS = 8
 
