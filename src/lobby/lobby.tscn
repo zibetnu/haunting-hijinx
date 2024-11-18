@@ -79,8 +79,12 @@ size_flags_horizontal = 8
 text = "Type:"
 horizontal_alignment = 2
 
-[node name="LobbyTypeOptionButton" type="OptionButton" parent="HBoxContainer/HostMenu"]
+[node name="LobbyType" type="HBoxContainer" parent="HBoxContainer/HostMenu"]
 layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer/HostMenu/LobbyType"]
+layout_mode = 2
+size_flags_horizontal = 3
 item_count = 3
 popup/item_0/text = "Private"
 popup/item_0/id = 0
@@ -88,6 +92,11 @@ popup/item_1/text = "Friends Only"
 popup/item_1/id = 1
 popup/item_2/text = "Public"
 popup/item_2/id = 2
+
+[node name="Help" type="Button" parent="HBoxContainer/HostMenu/LobbyType"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "?"
 
 [node name="Spacer" type="Control" parent="HBoxContainer/HostMenu"]
 layout_mode = 2
@@ -118,13 +127,91 @@ borderless = true
 dialog_text = "Leave lobby and return to lobby browser?"
 dialog_autowrap = true
 
+[node name="LobbyTypeHelp" type="AcceptDialog" parent="."]
+transparent_bg = true
+size = Vector2i(294, 231)
+borderless = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LobbyTypeHelp"]
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 287.0
+offset_bottom = 182.0
+
+[node name="Private" type="MarginContainer" parent="LobbyTypeHelp/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LobbyTypeHelp/VBoxContainer/Private"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="LobbyTypeHelp/VBoxContainer/Private/HBoxContainer"]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "Private"
+horizontal_alignment = 2
+autowrap_mode = 3
+
+[node name="VSeparator" type="VSeparator" parent="LobbyTypeHelp/VBoxContainer/Private/HBoxContainer"]
+layout_mode = 2
+
+[node name="Decription" type="Label" parent="LobbyTypeHelp/VBoxContainer/Private/HBoxContainer"]
+custom_minimum_size = Vector2(208, 0)
+layout_mode = 2
+text = "Joinable by invitation only. (Currently not working.)"
+autowrap_mode = 3
+
+[node name="FriendsOnly" type="MarginContainer" parent="LobbyTypeHelp/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LobbyTypeHelp/VBoxContainer/FriendsOnly"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="LobbyTypeHelp/VBoxContainer/FriendsOnly/HBoxContainer"]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "Friends Only"
+horizontal_alignment = 2
+autowrap_mode = 3
+
+[node name="VSeparator" type="VSeparator" parent="LobbyTypeHelp/VBoxContainer/FriendsOnly/HBoxContainer"]
+layout_mode = 2
+
+[node name="Decription" type="Label" parent="LobbyTypeHelp/VBoxContainer/FriendsOnly/HBoxContainer"]
+custom_minimum_size = Vector2(208, 0)
+layout_mode = 2
+text = "Joinable by friends and invitees. Visible to friends."
+autowrap_mode = 3
+
+[node name="Public" type="MarginContainer" parent="LobbyTypeHelp/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LobbyTypeHelp/VBoxContainer/Public"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="LobbyTypeHelp/VBoxContainer/Public/HBoxContainer"]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "Public"
+horizontal_alignment = 2
+autowrap_mode = 3
+
+[node name="VSeparator" type="VSeparator" parent="LobbyTypeHelp/VBoxContainer/Public/HBoxContainer"]
+layout_mode = 2
+
+[node name="Decription" type="Label" parent="LobbyTypeHelp/VBoxContainer/Public/HBoxContainer"]
+custom_minimum_size = Vector2(208, 0)
+layout_mode = 2
+text = "Joinable by anyone. Visible to anyone."
+autowrap_mode = 3
+
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Leave" to="LeaveConfirmationDialog" method="popup_centered"]
-[connection signal="focus_exited" from="HBoxContainer/HostMenu/LobbyNameLineEdit" to="HBoxContainer/HostMenu/LobbyTypeOptionButton" method="grab_focus"]
+[connection signal="focus_exited" from="HBoxContainer/HostMenu/LobbyNameLineEdit" to="HBoxContainer/HostMenu/LobbyType/OptionButton" method="grab_focus"]
 [connection signal="text_changed" from="HBoxContainer/HostMenu/LobbyNameLineEdit" to="LobbyNameSetter" method="set_lobby_name"]
-[connection signal="item_selected" from="HBoxContainer/HostMenu/LobbyTypeOptionButton" to="LobbyTypeSetter" method="set_lobby_type"]
+[connection signal="item_selected" from="HBoxContainer/HostMenu/LobbyType/OptionButton" to="LobbyTypeSetter" method="set_lobby_type"]
+[connection signal="pressed" from="HBoxContainer/HostMenu/LobbyType/Help" to="LobbyTypeHelp" method="popup_centered"]
 [connection signal="pressed" from="HBoxContainer/HostMenu/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="connection_closed" from="SteamConnector" to="." method="_on_connection_closed"]
 [connection signal="lobby_name_on_ready" from="LobbyNameSetter" to="HBoxContainer/HostMenu/LobbyNameLineEdit" method="set_text"]
 [connection signal="relay_initialized" from="RelayInitializer" to="LobbyLocationSetter" method="set_lobby_location"]
-[connection signal="lobby_type_on_ready" from="LobbyTypeSetter" to="HBoxContainer/HostMenu/LobbyTypeOptionButton" method="select"]
+[connection signal="lobby_type_on_ready" from="LobbyTypeSetter" to="HBoxContainer/HostMenu/LobbyType/OptionButton" method="select"]
 [connection signal="confirmed" from="LeaveConfirmationDialog" to="SteamConnector" method="close_connection"]
