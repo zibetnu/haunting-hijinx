@@ -121,7 +121,11 @@ func _on_lobby_joined() -> void:
 func _on_lobby_match_list(untyped_lobby_ids: Array) -> void:
 	var lobby_ids: Array[int] = []
 	lobby_ids.assign(untyped_lobby_ids)
-
+	lobby_ids.filter(Steam.isLobby)
+	lobby_ids.filter(
+			func(lobby_id: int) -> bool:
+				return Steam.getLobbyMemberLimit(lobby_id) > 0
+	)
 	for lobby_id in _get_lobby_ids_without_summaries(lobby_ids):
 		_add_summary_for(lobby_id)
 
