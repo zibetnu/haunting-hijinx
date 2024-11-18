@@ -2,31 +2,21 @@
 
 [ext_resource type="Script" path="res://src/lobby_browser/lobby_summary/lobby_summary.gd" id="1_u1an3"]
 
-[node name="LobbySummary" type="Control"]
-custom_minimum_size = Vector2(320, 24)
-layout_mode = 3
-anchors_preset = 10
-anchor_right = 1.0
-grow_horizontal = 2
+[node name="LobbySummary" type="MarginContainer"]
+custom_minimum_size = Vector2(320, 32)
+offset_right = 142.0
+offset_bottom = 32.0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 script = ExtResource("1_u1an3")
 
 [node name="Join" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = 8.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
@@ -48,6 +38,7 @@ text_overrun_behavior = 3
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
 text = "Unknown"
 text_overrun_behavior = 3
 
