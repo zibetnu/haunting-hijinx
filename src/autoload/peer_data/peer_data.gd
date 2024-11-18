@@ -96,7 +96,7 @@ func toggle_participation(id: int) -> void:
 		participants.erase(id)
 		spectators.append(id)
 
-	elif id in spectators and participants.size() < MAX_PARTICIPANTS:
+	elif id in spectators:
 		spectators.erase(id)
 		participants.append(id)
 
