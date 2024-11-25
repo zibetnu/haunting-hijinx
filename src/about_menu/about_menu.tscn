@@ -221,7 +221,13 @@ size_flags_horizontal = 0
 theme_type_variation = &"LabelOutlined"
 text = "Dyl_Snickle"
 
-[node name="Label16" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="16"]
+[node name="Label18" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="16"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_type_variation = &"LabelOutlined"
+text = "Burgandy_Bison77"
+
+[node name="Label16" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="17"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_type_variation = &"LabelOutlined"
