@@ -6,6 +6,9 @@ signal health_percentage_changed(value: float)
 
 @export var health_time := 10
 
+## If true, health can be added or subtracted only once per physics tick.
+@export var once_per_tick := true
+
 var health := max_health:
 	set(value):
 		if health > 0 and value == 0:
@@ -26,10 +29,26 @@ var max_health: int:
 				)
 		)
 
+var _locked := false:
+	set = _set_locked
+
+
+func _physics_process(_delta: float) -> void:
+	_locked = false
+
 
 func add_health(value: int) -> void:
+	if _locked:
+		return
+
 	health += value
+	_locked = once_per_tick
 
 
 func subtract_health(value: int) -> void:
-	health -= value
+	add_health(-value)
+
+
+func _set_locked(value: bool) -> void:
+	_locked = value
+	set_physics_process(_locked)
