@@ -72,6 +72,10 @@ layout_mode = 2
 [node name="Achievement" parent="Credits/VBoxContainer2/MainTheme/HBoxContainer" index="0"]
 text = "Main theme"
 
+[node name="Names" parent="Credits/VBoxContainer2/MainTheme/HBoxContainer" index="2"]
+theme_override_constants/h_separation = 16
+columns = 2
+
 [node name="Label" type="Label" parent="Credits/VBoxContainer2/MainTheme/HBoxContainer/Names" index="0"]
 layout_mode = 2
 theme_type_variation = &"LabelOutlined"
@@ -87,7 +91,17 @@ layout_mode = 2
 theme_type_variation = &"LabelOutlined"
 text = "Fireygamer"
 
-[node name="Label4" type="Label" parent="Credits/VBoxContainer2/MainTheme/HBoxContainer/Names" index="3"]
+[node name="Label5" type="Label" parent="Credits/VBoxContainer2/MainTheme/HBoxContainer/Names" index="3"]
+layout_mode = 2
+theme_type_variation = &"LabelOutlined"
+text = "Sergio Rabello"
+
+[node name="Label6" type="Label" parent="Credits/VBoxContainer2/MainTheme/HBoxContainer/Names" index="4"]
+layout_mode = 2
+theme_type_variation = &"LabelOutlined"
+text = "Mineeli"
+
+[node name="Label4" type="Label" parent="Credits/VBoxContainer2/MainTheme/HBoxContainer/Names" index="5"]
 layout_mode = 2
 theme_type_variation = &"LabelOutlined"
 text = "Stevie John - MPW"
@@ -221,11 +235,22 @@ size_flags_horizontal = 0
 theme_type_variation = &"LabelOutlined"
 text = "Dyl_Snickle"
 
-[node name="Label16" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="16"]
+[node name="Label18" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="16"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_type_variation = &"LabelOutlined"
+text = "Burgandy_Bison77"
+
+[node name="Label16" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="17"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_type_variation = &"LabelOutlined"
 text = "Stew"
+
+[node name="Label19" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="18"]
+layout_mode = 2
+theme_type_variation = &"LabelOutlined"
+text = "Nerd2Death"
 
 [node name="Buttons" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(632, 0)
