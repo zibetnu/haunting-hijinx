@@ -247,6 +247,11 @@ size_flags_horizontal = 0
 theme_type_variation = &"LabelOutlined"
 text = "Stew"
 
+[node name="Label19" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="18"]
+layout_mode = 2
+theme_type_variation = &"LabelOutlined"
+text = "Nerd2Death"
+
 [node name="Buttons" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(632, 0)
 layout_mode = 2
