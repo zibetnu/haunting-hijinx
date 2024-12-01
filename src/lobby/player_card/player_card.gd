@@ -40,11 +40,10 @@ func _ready() -> void:
 	if is_input_authority:
 		name_line_edit.grab_focus()
 
-	auto_set_player_type()
 	set_player_name(str(_get_autoload_peer_name(input_authority)))
 
 
-func auto_set_player_type(caller: Node = null) -> void:
+func auto_set_player_type(caller: Node) -> void:
 	if caller == self:
 		return
 
