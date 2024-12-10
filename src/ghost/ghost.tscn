@@ -155,11 +155,6 @@ emit_on_ready = true
 property_name = &"drain_areas"
 initial_property_value = [0]
 
-[node name="IsMoving" parent="." instance=ExtResource("10_fwp7a")]
-emit_on_ready = true
-property_name = &"is_moving"
-initial_property_value = [false]
-
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("3_wp1tu")
 
@@ -427,6 +422,11 @@ script = ExtResource("6_il0ju")
 to = NodePath("../../Invisibile")
 event = &"invisibility_started"
 
+[node name="IsMoving" parent="." instance=ExtResource("10_fwp7a")]
+emit_on_ready = true
+property_name = &"is_moving"
+initial_property_value = [false]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.99, 0.99)
 shape = SubResource("CircleShape2D_xn3hr")
@@ -572,7 +572,6 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="summon_charging" from="Summon" to="StateChart" method="send_event" binds= [&"summon_charging"]]
 [connection signal="summoned" from="Summon" to="StateChart" method="send_event" binds= [&"summoned"]]
 [connection signal="property_changed" from="Summon/NamedPropertySignals" to="StateChart" method="set_expression_property" flags=3]
-[connection signal="property_changed" from="IsMoving" to="StateChart" method="set_expression_property" flags=3]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="StateChart/Base/Behavior/Dead/IsDead" method="set_true"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="DamageSignals" method="set_monitorable" flags=3 binds= [false]]
@@ -653,6 +652,7 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="Invisibility" method="set_visible" binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="GhostTranslucent" method="disable_translucency"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="Invisibility" method="set_visible" binds= [true]]
+[connection signal="property_changed" from="IsMoving" to="StateChart" method="set_expression_property"]
 [connection signal="button_1_pressed" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_1_pressed"]]
 [connection signal="button_1_released" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_1_released"]]
 [connection signal="button_2_pressed" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_2_pressed"]]
