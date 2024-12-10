@@ -106,6 +106,10 @@ func toggle_participation(id: int) -> void:
 	peer_participation_changed.emit(id)
 
 
+func _is_hunter(id: int) -> bool:
+	return get_peer_type(id) == PeerType.HUNTER
+
+
 func _on_peer_connected(id: int) -> void:
 	if id == 1:  # A new server is starting, so erase old data.
 		erase_data()
@@ -118,9 +122,16 @@ func _on_peer_connected(id: int) -> void:
 		peer_name = peer_names[id]
 
 	set_peer_name.rpc(id, peer_name)
-
-	if participants.size() < MAX_PARTICIPANTS and not match_in_progress:
-		participants.append(id)
-
-	else:
+	if participants.size() >= MAX_PARTICIPANTS:
 		spectators.append(id)
+		return
+
+	if match_in_progress:
+		spectators.append(id)
+		return
+
+	participants.append(id)
+
+	# If there are now too many hunters, make this new peer the ghost.
+	if participants.filter(_is_hunter).size() >= MAX_PARTICIPANTS - 1:
+		ghost_peer = id
