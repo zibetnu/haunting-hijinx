@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=40 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="27_qehgg"]
 [ext_resource type="PackedScene" uid="uid://djs1c1w30m8gp" path="res://src/alert/alert.tscn" id="28_bjj70"]
 [ext_resource type="PackedScene" uid="uid://y03qjvt68tjj" path="res://src/aura_sense/aura_sense.tscn" id="28_dd2t8"]
+[ext_resource type="PackedScene" uid="uid://dp42j74wnvk40" path="res://src/you_pointer/you_pointer.tscn" id="29_h43uq"]
 [ext_resource type="PackedScene" uid="uid://gh0mk0t85f13" path="res://src/battery_alert/battery_alert.tscn" id="31_vp1ot"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="33_a7fw2"]
 [ext_resource type="PackedScene" uid="uid://dsccl51pqvbue" path="res://src/peer_process_mode/peer_process_mode.tscn" id="43_rsnb5"]
@@ -308,6 +309,8 @@ layout_mode = 2
 [node name="BatteryAlert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("31_vp1ot")]
 layout_mode = 2
 
+[node name="YouPointer" parent="IgnoreCanvasModulate/FollowPlayer" instance=ExtResource("29_h43uq")]
+
 [connection signal="dropped" from="." to="CollisionAvoider" method="move_target"]
 [connection signal="changed" from="GhostPeerID" to="GhostPeerID/PeerProcessMode" method="set_secondary_peer_id"]
 [connection signal="changed" from="GhostPeerID" to="GhostPeerID/PeerVisibilityFilter" method="set_secondary_peer_id"]
@@ -319,10 +322,12 @@ layout_mode = 2
 [connection signal="changed" from="PeerID" to="PlayerControllerStack/Synced" method="set_input_authority"]
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="set_peer_id"]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="hide"]
+[connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/YouPointer" method="point"]
 [connection signal="changed_to_local" from="PeerID" to="HeartbeatRumble" method="set_process" binds= [true]]
 [connection signal="changed_to_local" from="PeerID" to="Camera2D" method="set_enabled" binds= [true]]
 [connection signal="changed_to_local" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/AllowSetBool" method="set_is_allowed" binds= [true]]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="show"]
+[connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/YouPointer" method="stop"]
 [connection signal="changed_to_remote" from="PeerID" to="HeartbeatRumble" method="set_process" binds= [false]]
 [connection signal="changed_to_remote" from="PeerID" to="Camera2D" method="set_enabled" binds= [false]]
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/AllowSetBool" method="set_is_allowed" binds= [false]]
