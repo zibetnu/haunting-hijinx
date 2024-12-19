@@ -12,6 +12,8 @@ extends "res://addons/input_prompts/input_prompt.gd"
 ## is set to "Automatic", the prompt automatically adjusts to match the most
 ## recent input device.
 
+@export var skip_events := 0
+
 ## The name of an action registered in the [InputMap].
 var action := "ui_accept":
 	set = _set_action
@@ -57,10 +59,15 @@ func _update_events():
 
 
 func _find_event(list: Array, types: Array):
+	var events_skipped := 0
 	for candidate in list:
 		for type in types:
-			if is_instance_of(candidate, type):
-				return candidate
+			if not is_instance_of(candidate, type):
+				continue
+			if events_skipped < skip_events:
+				events_skipped += 1
+				continue
+			return candidate
 	return null
 
 
