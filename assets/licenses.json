@@ -54,6 +54,30 @@
 			"category": "Addons",
 			"contact": "",
 			"copyright": [
+				"John Pennycook"
+			],
+			"description": "Adds input prompts with support for keyboard/mouse and controllers.",
+			"id": "input-prompts",
+			"licenses": [
+				{
+					"file": "res://addons/input_prompts/LICENSE",
+					"identifier": "MIT",
+					"name": "MIT License",
+					"text": "",
+					"web": ""
+				}
+			],
+			"name": "Input Prompts",
+			"paths": [
+				"res://addons/input_prompts"
+			],
+			"version": "2.3.0",
+			"web": ""
+		},
+		{
+			"category": "Addons",
+			"contact": "",
+			"copyright": [
 				"Iceflower S"
 			],
 			"description": "Manage license and copyright for third party graphics, software or libraries.",

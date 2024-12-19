@@ -29,6 +29,7 @@ FullscreenToggle="res://src/autoload/fullscreen_toggle/fullscreen_toggle.tscn"
 SteamCallbacks="res://src/autoload/steam_callbacks.gd"
 MouseHider="res://src/autoload/mouse_hider.gd"
 WindowScaler="res://src/autoload/window_scaler/window_scaler.tscn"
+PromptManager="*res://addons/input_prompts/input_prompt_manager.gd"
 
 [debug]
 
@@ -47,7 +48,7 @@ window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg", "res://addons/licenses/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg", "res://addons/input_prompts/plugin.cfg", "res://addons/licenses/plugin.cfg")
 
 [filesystem]
 
