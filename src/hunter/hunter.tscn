@@ -386,6 +386,8 @@ layout_mode = 2
 [connection signal="powered_on" from="Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_powered"]]
 [connection signal="powered_on" from="Flashlight/Behavior" to="StateChart/Base/Alive/Movement/Move/Move" method="set_move_speed" binds= [29.6]]
 [connection signal="powered_on_attempted" from="Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead" flags=3]
+[connection signal="powered_off" from="Flashlight/Display" to="PointLight2D" method="set_energy" binds= [0.5]]
+[connection signal="powered_on" from="Flashlight/Display" to="PointLight2D" method="set_energy" binds= [1.0]]
 [connection signal="range_value_changed" from="Flashlight/Display/Body/RotationToIntRange" to="HunterCostume/SubViewport/MaterialParent/FlashlightBack" method="set_frame"]
 [connection signal="range_value_changed" from="Flashlight/Display/Body/RotationToIntRange" to="HunterCostume/SubViewport/MaterialParent/FlashlightFront" method="set_frame"]
 [connection signal="draw" from="HunterCostume/SubViewport/MaterialParent/Arms" to="HunterCostume/SubViewport/MaterialParent/FlashlightBack" method="show"]
