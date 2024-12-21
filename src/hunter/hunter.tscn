@@ -175,7 +175,7 @@ one_shot = true
 
 [node name="Vulnerability" type="Node" parent="StateChart/Base/Alive"]
 script = ExtResource("2_yqkoe")
-initial_state = NodePath("Invulnerable")
+initial_state = NodePath("Vulnerable")
 
 [node name="Invulnerable" type="Node" parent="StateChart/Base/Alive/Vulnerability"]
 script = ExtResource("3_ocdoo")
