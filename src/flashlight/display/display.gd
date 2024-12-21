@@ -1,6 +1,8 @@
 extends Node2D
 
 signal flashlight_rotation_changed(flashlight_rotation: float)
+signal powered_off
+signal powered_on
 
 const PITCH_RANGE = 0.1
 const POWERED_PITCH = 1.0
@@ -18,6 +20,7 @@ var powered: bool:
 		if powered == was_powered:
 			return
 
+		(powered_on if powered else powered_off).emit()
 		if _click.playing:
 			return
 
