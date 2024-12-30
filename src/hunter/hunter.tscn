@@ -127,7 +127,7 @@ script = ExtResource("3_ocdoo")
 
 [node name="Revived" type="Node" parent="StateChart/Base/Dead"]
 script = ExtResource("4_x2w3t")
-to = NodePath("../../Alive")
+to = NodePath("../../Alive/Vulnerability/Invulnerable")
 event = &"revived"
 
 [node name="IsDead" parent="StateChart/Base/Dead" groups=["hunter_is_deads"] instance=ExtResource("9_n4b8t")]
