@@ -117,6 +117,7 @@ unique_name_in_owner = true
 [node name="HeartbeatRumble" parent="." instance=ExtResource("18_jndug")]
 
 [node name="StateChart" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("1_0xkip")
 
 [node name="Base" type="Node" parent="StateChart"]
