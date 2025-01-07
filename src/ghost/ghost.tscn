@@ -477,6 +477,7 @@ weak_to = 1
 [node name="DamageValueSignal" parent="DamageSignals/WeakTo" instance=ExtResource("34_617dy")]
 
 [node name="Health" parent="DamageSignals/WeakTo/DamageValueSignal" instance=ExtResource("38_arcfj")]
+unique_name_in_owner = true
 
 [node name="Grab" type="Area2D" parent="."]
 collision_layer = 0
