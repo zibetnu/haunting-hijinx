@@ -1,6 +1,8 @@
 extends Node
 ## Plays sound for signals emitted by various buttons.
 
+const EXCLUDE_GROUP_NAME = &"exclude_button_sounds"
+
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var signals_to_callables: Dictionary = {
 	&"item_activated": audio_stream_player.play,
@@ -15,6 +17,9 @@ func _enter_tree() -> void:
 
 
 func _on_node_added(node: Node) -> void:
+	if node.is_in_group(EXCLUDE_GROUP_NAME):
+		return
+
 	if not is_node_ready():
 		await ready
 
