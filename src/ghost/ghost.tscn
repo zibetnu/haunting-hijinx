@@ -173,6 +173,11 @@ script = ExtResource("5_6yps6")
 [node name="IsDead" parent="StateChart/Base/Behavior/Dead" groups=["ghost_is_deads"] instance=ExtResource("16_q6wqq")]
 group = &"levels"
 
+[node name="Revived" type="Node" parent="StateChart/Base/Behavior/Dead"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Alive")
+event = &"revived"
+
 [node name="Alive" type="Node" parent="StateChart/Base/Behavior"]
 script = ExtResource("4_74yim")
 initial_state = NodePath("Normal")
@@ -679,6 +684,7 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="damaged_by" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageValueSignal" method="take_damage"]
 [connection signal="damaged_by_amount" from="DamageSignals/WeakTo/DamageValueSignal" to="DamageSignals/WeakTo/DamageValueSignal/Health" method="subtract_health"]
 [connection signal="health_emptied" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="StateChart" method="send_event" binds= [&"died"]]
+[connection signal="health_filled" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="StateChart" method="send_event" binds= [&"revived"]]
 [connection signal="health_percentage_changed" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="set_as_ratio_floored"]
 [connection signal="body_entered" from="Grab" to="Grab/Grabber" method="grab"]
 [connection signal="grabbed_target" from="Grab/Grabber" to="StateChart" method="send_event" binds= [&"grab_started"]]
