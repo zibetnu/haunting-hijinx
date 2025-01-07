@@ -281,6 +281,28 @@
 			"web": "https://freesound.org/s/217498/"
 		},
 		{
+			"category": "Assets",
+			"contact": "",
+			"copyright": [],
+			"description": "",
+			"id": "you_find_a_treasure",
+			"licenses": [
+				{
+					"file": "",
+					"identifier": "CC0",
+					"name": "CC0-1.0",
+					"text": "",
+					"web": "https://creativecommons.org/publicdomain/zero/1.0/"
+				}
+			],
+			"name": "You find a treasure",
+			"paths": [
+				"res://assets/quest_complete.wav"
+			],
+			"version": "",
+			"web": "https://freesound.org/s/632661/"
+		},
+		{
 			"category": "Shaders",
 			"contact": "",
 			"copyright": [
