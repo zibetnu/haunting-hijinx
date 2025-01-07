@@ -44,7 +44,7 @@ const CAST_SHORT_MAX_INDEX = 4
 				power_toggled.emit(powered)
 				powered_off.emit()
 
-		if value and battery == 0:
+		if value and not powered and enabled:
 			powered_on_attempted.emit()
 
 @export_group("Battery", "battery")
