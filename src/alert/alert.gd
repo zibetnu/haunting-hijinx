@@ -1,6 +1,11 @@
 class_name Alert
 extends Control
 
+signal alert_level_changed(alert_level: AlertLevel)
+signal alerted_none
+signal alerted_low
+signal alerted_high
+
 enum AlertLevel {
 	NONE,
 	LOW,
@@ -10,6 +15,17 @@ enum AlertLevel {
 @export var alert_level: AlertLevel:
 	set(value):
 		alert_level = value
+		alert_level_changed.emit(alert_level)
+		match alert_level:
+			AlertLevel.NONE:
+				alerted_none.emit()
+
+			AlertLevel.LOW:
+				alerted_low.emit()
+
+			AlertLevel.HIGH:
+				alerted_high.emit()
+
 		_update_animation()
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
