@@ -1,0 +1,602 @@
+[gd_scene load_steps=66 format=3 uid="uid://02ri1p0jbqdb"]
+
+[ext_resource type="Script" path="res://src/tutorial/tutorial.gd" id="1_c6pgd"]
+[ext_resource type="Script" path="res://src/tutorial/quest/quest.gd" id="2_r5b0f"]
+[ext_resource type="Script" path="res://src/tutorial/quest/composite_quest.gd" id="3_5y0cp"]
+[ext_resource type="AudioStream" uid="uid://fiew3im75jjx" path="res://assets/quest_complete.wav" id="4_n7ygv"]
+[ext_resource type="PackedScene" uid="uid://8qwvhkjp3yja" path="res://src/tutorial/quest/wpm_complete/wpm_complete.tscn" id="5_s13op"]
+[ext_resource type="PackedScene" uid="uid://bu4oleqx87mnw" path="res://src/tutorial/quest/complete_after_delay/complete_after_delay.tscn" id="6_x00k6"]
+[ext_resource type="Script" path="res://src/tutorial/quest/quest_node.gd" id="7_7l8aw"]
+[ext_resource type="PackedScene" uid="uid://ebt35jjk5feh" path="res://src/level/main_floor/tile_maps.tscn" id="8_tynm5"]
+[ext_resource type="PackedScene" uid="uid://b0jfn7wspsy4c" path="res://src/level/level_lighting.tscn" id="9_6lkvk"]
+[ext_resource type="PackedScene" uid="uid://8qaswvkeb8qd" path="res://src/controllable_character/ghost/ghost.tscn" id="10_7dtxw"]
+[ext_resource type="PackedScene" uid="uid://ccvsw508kh4ot" path="res://src/controllable_character/hunter/hunter.tscn" id="11_sbwrr"]
+[ext_resource type="PackedScene" uid="uid://di5qxwdvv5nga" path="res://src/controller/npc_hunter/npc_hunter.tscn" id="12_2andj"]
+[ext_resource type="Texture2D" uid="uid://bntsrcd3hjcex" path="res://addons/input_prompts/icons/generic/left_stick_up.png" id="13_a2dog"]
+[ext_resource type="Script" path="res://addons/input_prompts/action_prompt/action_prompt.gd" id="14_ebkhg"]
+[ext_resource type="Texture2D" uid="uid://cah6r1q5x2lte" path="res://addons/input_prompts/icons/generic/left_stick_left.png" id="15_q5bg3"]
+[ext_resource type="Texture2D" uid="uid://dreirjfpqj40a" path="res://addons/input_prompts/icons/generic/left_stick_down.png" id="16_5uffi"]
+[ext_resource type="Texture2D" uid="uid://c03r3n0nfrjck" path="res://addons/input_prompts/icons/generic/left_stick_right.png" id="17_hqc0v"]
+[ext_resource type="Texture2D" uid="uid://b1e23gj3k1klg" path="res://addons/input_prompts/icons/xbox/a.png" id="18_7225l"]
+[ext_resource type="Texture2D" uid="uid://c6cv5phl3gvvn" path="res://addons/input_prompts/icons/xbox/right_trigger.png" id="19_eratm"]
+[ext_resource type="Texture2D" uid="uid://deib2tqcg5df0" path="res://addons/input_prompts/icons/xbox/x.png" id="20_25ogo"]
+[ext_resource type="Texture2D" uid="uid://dx1u47qkx4in8" path="res://addons/input_prompts/icons/xbox/left_trigger.png" id="21_dold4"]
+[ext_resource type="Texture2D" uid="uid://lx67x2lremab" path="res://addons/input_prompts/icons/xbox/view.png" id="22_dnx2j"]
+[ext_resource type="Texture2D" uid="uid://b6d4bxaob4k6j" path="res://addons/input_prompts/icons/xbox/menu.png" id="23_l3tdd"]
+
+[sub_resource type="Resource" id="Resource_lfxhu"]
+resource_name = "Welcome"
+script = ExtResource("2_r5b0f")
+objective = "Welcome to the [wave amp=15.0 freq=6.0 connected=1][color=#c42430]ghost[/color][/wave] tutorial."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_f0tmj"]
+resource_name = "Move"
+script = ExtResource("2_r5b0f")
+objective = "First, try moving around."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_fx3un"]
+resource_name = "Sprint"
+script = ExtResource("2_r5b0f")
+objective = "Now try sprinting."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_5eatj"]
+resource_name = "Summon"
+script = ExtResource("2_r5b0f")
+objective = "Drain areas deplete batteries. Try summoning one under the hunter by holding summon until the meter is full, then releasing."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_ljdkr"]
+resource_name = "VisibleInfo"
+script = ExtResource("2_r5b0f")
+objective = "You are invisible to hunters when you see yourself as [pulse freq=1.0 color=#ffffff4f ease=-2.0]translucent[/pulse]. You become visible when you sprint, summon, grab, or take damage."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_t00pl"]
+resource_name = "Visible"
+script = ExtResource("2_r5b0f")
+objective = "Try becoming visible by sprinting, summoning,
+grabbing, or taking damage.
+"
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_a7qnb"]
+resource_name = "AlertInfo"
+script = ExtResource("2_r5b0f")
+objective = "Hunters are alerted as you draw near, even if they can't see you. The circles around you show the areas for low and high alerts."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_osr1n"]
+resource_name = "AlertLow"
+script = ExtResource("2_r5b0f")
+objective = "Try moving to put the hunter in low alert."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_3jbmy"]
+resource_name = "AlertHigh"
+script = ExtResource("2_r5b0f")
+objective = "Try moving to put the hunter in high alert."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_7teru"]
+resource_name = "Alert"
+script = ExtResource("3_5y0cp")
+sub_quests = Array[ExtResource("2_r5b0f")]([SubResource("Resource_osr1n"), SubResource("Resource_3jbmy")])
+objective = "Try moving to put the hunter in low and then high alert."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_41785"]
+resource_name = "GrabInfo"
+script = ExtResource("2_r5b0f")
+objective = "Your goal is to make all the hunters faint by grabbing them."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_txx1p"]
+resource_name = "Grab"
+script = ExtResource("2_r5b0f")
+objective = "Try touching the hunter to [shake rate=5.0 level=6 connected=1]grab[/shake] them. After a brief pause, you will move a grabbed hunter for a few seconds and then drop them."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_rhmfh"]
+resource_name = "DamageInfo"
+script = ExtResource("2_r5b0f")
+objective = "Flashlights damage you, stun you, and make you panic.
+You cannot grab a hunter while panicked."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_2a4mi"]
+resource_name = "Damage"
+script = ExtResource("2_r5b0f")
+objective = "Try getting hit by the hunter's flashlight."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_g171c"]
+resource_name = "Complete"
+script = ExtResource("2_r5b0f")
+objective = "[rainbow freq=0.6 sat=0.6 val=1]Ghost tutorial complete. Happy haunting![/rainbow]"
+is_started = false
+is_completed = false
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_jjnm5"]
+device = -1
+axis = 1
+axis_value = -1.0
+
+[sub_resource type="InputEventKey" id="InputEventKey_8222u"]
+device = -1
+physical_keycode = 87
+unicode = 119
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_6w7b1"]
+device = -1
+button_index = 11
+pressed = true
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_q1yah"]
+device = -1
+axis_value = -1.0
+
+[sub_resource type="InputEventKey" id="InputEventKey_bl3mf"]
+device = -1
+physical_keycode = 65
+unicode = 97
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_27uxh"]
+device = -1
+button_index = 13
+pressed = true
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_pkfe2"]
+device = -1
+axis = 1
+axis_value = 1.0
+
+[sub_resource type="InputEventKey" id="InputEventKey_mwsv5"]
+device = -1
+physical_keycode = 83
+unicode = 115
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_7to23"]
+device = -1
+button_index = 12
+pressed = true
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_ohs2s"]
+device = -1
+axis_value = 1.0
+
+[sub_resource type="InputEventKey" id="InputEventKey_8rwh6"]
+device = -1
+physical_keycode = 68
+unicode = 100
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_jdbs1"]
+device = -1
+button_index = 14
+pressed = true
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_e6i2c"]
+device = -1
+pressed = true
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_j1wv1"]
+device = -1
+axis = 5
+axis_value = 1.0
+
+[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_sjwbq"]
+device = -1
+button_mask = 1
+position = Vector2(160, 15)
+global_position = Vector2(164, 58)
+button_index = 1
+pressed = true
+
+[sub_resource type="InputEventKey" id="InputEventKey_layt0"]
+device = -1
+physical_keycode = 4194325
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_7ix7c"]
+device = -1
+button_index = 2
+pressed = true
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_y8x3t"]
+device = -1
+axis = 4
+axis_value = 1.0
+
+[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_cneka"]
+device = -1
+button_mask = 2
+position = Vector2(270, 5)
+global_position = Vector2(274, 48)
+button_index = 2
+pressed = true
+
+[sub_resource type="InputEventKey" id="InputEventKey_41wgd"]
+device = -1
+physical_keycode = 32
+unicode = 32
+
+[sub_resource type="Animation" id="Animation_v2eoj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ekub6"]
+resource_name = "new_animation"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p7i1o"]
+_data = {
+"RESET": SubResource("Animation_v2eoj"),
+"new_animation": SubResource("Animation_ekub6")
+}
+
+[sub_resource type="InputEventKey" id="InputEventKey_555kx"]
+keycode = 4194306
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_fuwwm"]
+device = -1
+button_index = 4
+
+[sub_resource type="InputEventKey" id="InputEventKey_uh3vv"]
+device = -1
+physical_keycode = 4194305
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_0eipb"]
+device = -1
+button_index = 6
+
+[node name="Tutorial" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_c6pgd")
+quests = Array[ExtResource("2_r5b0f")]([SubResource("Resource_lfxhu"), SubResource("Resource_f0tmj"), SubResource("Resource_fx3un"), SubResource("Resource_5eatj"), SubResource("Resource_ljdkr"), SubResource("Resource_t00pl"), SubResource("Resource_a7qnb"), SubResource("Resource_7teru"), SubResource("Resource_41785"), SubResource("Resource_txx1p"), SubResource("Resource_rhmfh"), SubResource("Resource_2a4mi"), SubResource("Resource_g171c")])
+play_complete_sound = Array[ExtResource("2_r5b0f")]([SubResource("Resource_f0tmj"), SubResource("Resource_fx3un"), SubResource("Resource_5eatj"), SubResource("Resource_t00pl"), SubResource("Resource_7teru"), SubResource("Resource_txx1p"), SubResource("Resource_2a4mi")])
+low_alert_quest = SubResource("Resource_osr1n")
+high_alert_quest = SubResource("Resource_3jbmy")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_n7ygv")
+volume_db = -6.0
+bus = &"Effects"
+
+[node name="HunterReviveTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="QuestNodes" type="Node" parent="."]
+
+[node name="Welcome" parent="QuestNodes" instance=ExtResource("5_s13op")]
+quest = SubResource("Resource_lfxhu")
+
+[node name="Move" parent="QuestNodes" instance=ExtResource("6_x00k6")]
+quest = SubResource("Resource_f0tmj")
+
+[node name="Sprint" parent="QuestNodes" instance=ExtResource("6_x00k6")]
+quest = SubResource("Resource_fx3un")
+
+[node name="Summon" type="Node" parent="QuestNodes"]
+script = ExtResource("7_7l8aw")
+quest = SubResource("Resource_5eatj")
+
+[node name="VisibleInfo" parent="QuestNodes" instance=ExtResource("5_s13op")]
+quest = SubResource("Resource_ljdkr")
+
+[node name="Visible" parent="QuestNodes" instance=ExtResource("6_x00k6")]
+quest = SubResource("Resource_t00pl")
+
+[node name="AlertInfo" parent="QuestNodes" instance=ExtResource("5_s13op")]
+quest = SubResource("Resource_a7qnb")
+
+[node name="GrabInfo" parent="QuestNodes" instance=ExtResource("5_s13op")]
+quest = SubResource("Resource_41785")
+
+[node name="Grab" type="Node" parent="QuestNodes"]
+script = ExtResource("7_7l8aw")
+quest = SubResource("Resource_txx1p")
+
+[node name="DamageInfo" parent="QuestNodes" instance=ExtResource("5_s13op")]
+quest = SubResource("Resource_rhmfh")
+
+[node name="Damage" type="Node" parent="QuestNodes"]
+script = ExtResource("7_7l8aw")
+quest = SubResource("Resource_2a4mi")
+
+[node name="TileMaps" parent="." instance=ExtResource("8_tynm5")]
+
+[node name="LevelLighting" parent="." instance=ExtResource("9_6lkvk")]
+
+[node name="Ghost" parent="." instance=ExtResource("10_7dtxw")]
+unique_name_in_owner = true
+position = Vector2(368, 248)
+metadata/_edit_group_ = true
+
+[node name="FollowPlayer" parent="Ghost/IgnoreCanvasModulate" index="0"]
+position = Vector2(368, 248)
+
+[node name="Hunter" parent="." node_paths=PackedStringArray("controller") instance=ExtResource("11_sbwrr")]
+unique_name_in_owner = true
+position = Vector2(368, 128)
+controller = NodePath("NPCHunter")
+metadata/_edit_group_ = true
+
+[node name="NPCHunter" parent="Hunter" node_paths=PackedStringArray("ghost") instance=ExtResource("12_2andj")]
+ghost = NodePath("../../Ghost")
+
+[node name="LimitTopLeft" type="Marker2D" parent="."]
+position = Vector2(0, 6)
+
+[node name="LimitBottomRight" type="Marker2D" parent="."]
+position = Vector2(736, 432)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Controls" type="MarginContainer" parent="CanvasLayer"]
+offset_right = 138.0
+offset_bottom = 98.0
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Controls"]
+self_modulate = Color(1, 1, 1, 0.498039)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Controls/PanelContainer"]
+layout_mode = 2
+
+[node name="Prompts" type="GridContainer" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Move" type="Label" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Move:"
+horizontal_alignment = 2
+
+[node name="MovePrompt" type="GridContainer" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts"]
+layout_mode = 2
+size_flags_vertical = 8
+columns = 3
+
+[node name="LeftSpacer" type="Control" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts/MovePrompt"]
+layout_mode = 2
+
+[node name="MoveUp" type="TextureRect" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("13_a2dog")
+stretch_mode = 5
+script = ExtResource("14_ebkhg")
+action = "move_up"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventJoypadMotion_jjnm5"), SubResource("InputEventKey_8222u"), SubResource("InputEventJoypadButton_6w7b1")])
+
+[node name="RightSpacer" type="Control" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts/MovePrompt"]
+layout_mode = 2
+
+[node name="MoveLeft" type="TextureRect" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("15_q5bg3")
+stretch_mode = 5
+script = ExtResource("14_ebkhg")
+action = "move_left"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventJoypadMotion_q1yah"), SubResource("InputEventKey_bl3mf"), SubResource("InputEventJoypadButton_27uxh")])
+
+[node name="MoveDown" type="TextureRect" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("16_5uffi")
+stretch_mode = 5
+script = ExtResource("14_ebkhg")
+action = "move_down"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventJoypadMotion_pkfe2"), SubResource("InputEventKey_mwsv5"), SubResource("InputEventJoypadButton_7to23")])
+
+[node name="MoveRight" type="TextureRect" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("17_hqc0v")
+stretch_mode = 5
+script = ExtResource("14_ebkhg")
+action = "move_right"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventJoypadMotion_ohs2s"), SubResource("InputEventKey_8rwh6"), SubResource("InputEventJoypadButton_jdbs1")])
+
+[node name="Sprint" type="Label" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Sprint:"
+horizontal_alignment = 2
+
+[node name="Button1Prompt" type="HBoxContainer" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="ActionPrompt" type="TextureRect" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts/Button1Prompt" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("18_7225l")
+stretch_mode = 5
+script = ExtResource("14_ebkhg")
+action = "button_1"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventJoypadButton_e6i2c"), SubResource("InputEventJoypadMotion_j1wv1"), SubResource("InputEventMouseButton_sjwbq"), SubResource("InputEventKey_layt0")])
+
+[node name="Label" type="Label" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts/Button1Prompt"]
+layout_mode = 2
+text = "or"
+
+[node name="ActionPrompt2" type="TextureRect" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts/Button1Prompt" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("19_eratm")
+stretch_mode = 5
+script = ExtResource("14_ebkhg")
+skip_events = 1
+action = "button_1"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventJoypadButton_e6i2c"), SubResource("InputEventJoypadMotion_j1wv1"), SubResource("InputEventMouseButton_sjwbq"), SubResource("InputEventKey_layt0")])
+
+[node name="Summon" type="Label" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Summon:"
+horizontal_alignment = 2
+
+[node name="Button2Prompt" type="HBoxContainer" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="ActionPrompt" type="TextureRect" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts/Button2Prompt" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("20_25ogo")
+stretch_mode = 5
+script = ExtResource("14_ebkhg")
+action = "button_2"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventJoypadButton_7ix7c"), SubResource("InputEventJoypadMotion_y8x3t"), SubResource("InputEventMouseButton_cneka"), SubResource("InputEventKey_41wgd")])
+
+[node name="Label" type="Label" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts/Button2Prompt"]
+layout_mode = 2
+text = "or"
+
+[node name="ActionPrompt2" type="TextureRect" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts/Button2Prompt" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("21_dold4")
+stretch_mode = 5
+script = ExtResource("14_ebkhg")
+skip_events = 1
+action = "button_2"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventJoypadButton_7ix7c"), SubResource("InputEventJoypadMotion_y8x3t"), SubResource("InputEventMouseButton_cneka"), SubResource("InputEventKey_41wgd")])
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -38.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0.498039)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Objective" type="RichTextLabel" parent="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+bbcode_enabled = true
+fit_content = true
+visible_characters_behavior = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer/Objective"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_p7i1o")
+}
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0.498039)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+columns = 2
+
+[node name="SkipPrompt" type="TextureRect" parent="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer2/GridContainer" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("22_dnx2j")
+stretch_mode = 5
+script = ExtResource("14_ebkhg")
+action = "ui_focus_next"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventKey_555kx"), SubResource("InputEventJoypadButton_fuwwm")])
+
+[node name="SkipLabel" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer2/GridContainer"]
+layout_mode = 2
+text = "Skip"
+
+[node name="ExitPrompt" type="TextureRect" parent="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer2/GridContainer" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("23_l3tdd")
+stretch_mode = 5
+script = ExtResource("14_ebkhg")
+action = "open_menu"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventKey_uh3vv"), SubResource("InputEventJoypadButton_0eipb")])
+
+[node name="ExitLabel" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer2/GridContainer"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="camera_limits_applied" from="." to="Ghost/Camera2D/CenterCameraOffset" method="center_camera_offset"]
+[connection signal="timeout" from="HunterReviveTimer" to="." method="revive_hunter"]
+[connection signal="completed" from="QuestNodes/Summon" to="." method="set_auto_recharge" binds= [false]]
+[connection signal="started" from="QuestNodes/Summon" to="." method="set_auto_recharge" binds= [true]]
+[connection signal="started" from="QuestNodes/Grab" to="." method="recharge_all"]
+[connection signal="completed" from="QuestNodes/Damage" to="." method="set_auto_recharge" binds= [false]]
+[connection signal="started" from="QuestNodes/Damage" to="." method="set_auto_recharge" binds= [true]]
+[connection signal="summoned" from="Ghost/Summon" to="QuestNodes/Summon" method="complete"]
+[connection signal="state_entered" from="Ghost/StateChart/Base/Behavior/Dead" to="." method="revive_ghost"]
+[connection signal="state_entered" from="Ghost/StateChart/Base/Animation/Move" to="QuestNodes/Move" method="start"]
+[connection signal="state_exited" from="Ghost/StateChart/Base/Animation/Move" to="QuestNodes/Move" method="stop"]
+[connection signal="state_entered" from="Ghost/StateChart/Base/Animation/Sprint" to="QuestNodes/Move" method="start"]
+[connection signal="state_entered" from="Ghost/StateChart/Base/Animation/Sprint" to="QuestNodes/Sprint" method="start"]
+[connection signal="state_exited" from="Ghost/StateChart/Base/Animation/Sprint" to="QuestNodes/Move" method="stop"]
+[connection signal="state_exited" from="Ghost/StateChart/Base/Animation/Sprint" to="QuestNodes/Sprint" method="stop"]
+[connection signal="state_entered" from="Ghost/StateChart/Base/Animation/Panic" to="QuestNodes/Move" method="start"]
+[connection signal="state_exited" from="Ghost/StateChart/Base/Animation/Panic" to="QuestNodes/Move" method="stop"]
+[connection signal="state_entered" from="Ghost/StateChart/Base/Visibility/Visibile" to="QuestNodes/Visible" method="start"]
+[connection signal="state_exited" from="Ghost/StateChart/Base/Visibility/Visibile" to="QuestNodes/Visible" method="stop"]
+[connection signal="damage_taken" from="Ghost/DamageSignals/WeakTo" to="QuestNodes/Damage" method="complete"]
+[connection signal="dropped" from="Hunter" to="HunterReviveTimer" method="start"]
+[connection signal="dropped" from="Hunter" to="QuestNodes/Grab" method="complete"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer2/GridContainer/SkipPrompt" to="." method="_on_skip_prompt_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer2/GridContainer/ExitPrompt" to="." method="_on_exit_prompt_pressed"]
+
+[editable path="Ghost"]
+[editable path="Ghost/Invisibility"]
+[editable path="Ghost/PlayerControllerStack"]

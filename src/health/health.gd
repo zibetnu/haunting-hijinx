@@ -1,3 +1,4 @@
+class_name Health
 extends Node
 
 signal health_emptied

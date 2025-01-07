@@ -1,3 +1,4 @@
+class_name Battery
 extends Area2D
 
 signal acquired
