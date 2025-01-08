@@ -1,3 +1,4 @@
+class_name Move
 extends Node
 
 @export var character: CharacterBody2D
