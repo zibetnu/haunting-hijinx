@@ -1,10 +1,10 @@
 [gd_scene load_steps=21 format=3 uid="uid://ctn825io87i34"]
 
 [ext_resource type="AnimationLibrary" uid="uid://fs3jht0ivdhm" path="res://src/animation_libaries/canvas_item.tres" id="1_7b0n7"]
-[ext_resource type="Script" path="res://src/hunter/costume/hunter_costume.gd" id="1_auu5i"]
+[ext_resource type="Script" path="res://src/controllable_character/hunter/costume/hunter_costume.gd" id="1_auu5i"]
 [ext_resource type="Texture2D" uid="uid://vae6e0eh7xge" path="res://assets/hunter/palettes/green.png" id="2_28bn5"]
 [ext_resource type="AnimationLibrary" uid="uid://krtfia4oqseg" path="res://src/animation_libaries/sprite.tres" id="2_jv5mw"]
-[ext_resource type="AnimationLibrary" uid="uid://bss842gjvgyiu" path="res://src/hunter/costume/hunter_costume.tres" id="2_wvtms"]
+[ext_resource type="AnimationLibrary" uid="uid://bss842gjvgyiu" path="res://src/controllable_character/hunter/costume/hunter_costume.tres" id="2_wvtms"]
 [ext_resource type="Texture2D" uid="uid://b1r4xdhw8pco3" path="res://assets/hunter/palettes/yellow.png" id="3_qkyln"]
 [ext_resource type="Texture2D" uid="uid://4l3a8ifjlff5" path="res://assets/hunter/palettes/blue.png" id="6_8ags0"]
 [ext_resource type="Texture2D" uid="uid://biqdpl1yys2eh" path="res://assets/hunter/palettes/red.png" id="6_0168j"]
@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cncgj1kxmgybg" path="res://assets/hunter/torso.png" id="7_l744e"]
 [ext_resource type="Texture2D" uid="uid://c6jxona5mctlp" path="res://assets/hunter/dead.png" id="8_8f8lf"]
 [ext_resource type="Texture2D" uid="uid://blnr62by4pipw" path="res://assets/hunter/arms.png" id="8_or3nn"]
-[ext_resource type="Shader" path="res://src/hunter/costume/palette_swap.gdshader" id="9_1ykwp"]
+[ext_resource type="Shader" path="res://src/controllable_character/hunter/costume/palette_swap.gdshader" id="9_1ykwp"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_nu623"]
 viewport_path = NodePath("SubViewport")
