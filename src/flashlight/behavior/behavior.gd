@@ -1,3 +1,4 @@
+class_name FlashlightBehavior
 extends Area2D
 
 signal battery_died
