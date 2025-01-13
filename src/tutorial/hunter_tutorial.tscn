@@ -110,7 +110,7 @@ is_completed = false
 [sub_resource type="Resource" id="Resource_0chku"]
 resource_name = "Teamwork2"
 script = ExtResource("2_ramkp")
-objective = "Teamwork is essential, but there is no in-game way to talk (yet). Try using a voice chat for the best experience."
+objective = "Teamwork is essential, but there is no in-game way to talk (yet). [pulse freq=2.0 color=#ffffff7f ease=-2.0]Try using a voice chat for the best experience.[/pulse]"
 is_started = false
 is_completed = false
 
