@@ -96,8 +96,7 @@ is_completed = false
 [sub_resource type="Resource" id="Resource_7jipr"]
 resource_name = "Battery"
 script = ExtResource("2_ramkp")
-objective = "A battery spawns at a random location for each hunter in need.
-Try picking one up to recharge your flashlight."
+objective = "A battery spawns at a random location for each hunter in need. Try picking one up to recharge your flashlight."
 is_started = false
 is_completed = false
 
