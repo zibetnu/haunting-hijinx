@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=55 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="2_bh3m0"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/move/move.tscn" id="18_5mhrn"]
 [ext_resource type="PackedScene" uid="uid://bfhqyxu3iuptm" path="res://src/event_listener/event_listener.tscn" id="18_870ie"]
 [ext_resource type="PackedScene" uid="uid://bkuic22finfse" path="res://src/controller/player_controller_stack.tscn" id="19_swqdr"]
+[ext_resource type="Script" path="res://src/centered_camera.gd" id="20_c63bs"]
 [ext_resource type="PackedScene" uid="uid://klrwcohuhynk" path="res://src/ghost/costume/ghost_costume.tscn" id="25_s3y3d"]
 [ext_resource type="Texture2D" uid="uid://d6ydfogp5pkh" path="res://assets/ghost/aura_outlines.png" id="26_lh4y1"]
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="29_1sq8w"]
@@ -440,6 +441,7 @@ limit_left = 0
 limit_top = 0
 limit_right = 6400
 limit_bottom = 6400
+script = ExtResource("20_c63bs")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Camera2D"]
 replication_config = SubResource("SceneReplicationConfig_bqubs")
