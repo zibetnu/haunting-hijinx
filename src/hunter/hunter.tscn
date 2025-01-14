@@ -337,6 +337,7 @@ layout_mode = 2
 [connection signal="state_entered" from="StateChart/Base/Dead" to="StateChart/Base/Dead/IsDead" method="set_true"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="DamageSignals/Revivable" method="enable"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" method="show"]
+[connection signal="state_entered" from="StateChart/Base/Dead" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_none"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="." method="set_z_index" binds= [-1]]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="Flashlight/Behavior" method="set_enabled" binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="HunterCostume" method="play" binds= ["dead"]]
