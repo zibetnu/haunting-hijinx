@@ -1,3 +1,4 @@
+class_name Grabber
 extends Node2D
 
 signal grabbed_target
