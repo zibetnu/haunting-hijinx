@@ -1,18 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cis3vfoj3ussh"]
+[gd_scene load_steps=6 format=3 uid="uid://cis3vfoj3ussh"]
 
 [ext_resource type="PackedScene" uid="uid://c6ql67s5oafpr" path="res://src/visibility_signals/visibility_signals.tscn" id="1_4ptx7"]
 [ext_resource type="Script" path="res://src/menus/tutorial_select/tutorial_select.gd" id="1_h2iyi"]
 [ext_resource type="PackedScene" uid="uid://klrwcohuhynk" path="res://src/controllable_character/ghost/costume/ghost_costume.tscn" id="1_xu1af"]
 [ext_resource type="PackedScene" uid="uid://ctn825io87i34" path="res://src/controllable_character/hunter/costume/hunter_costume.tscn" id="3_eyaac"]
-[ext_resource type="Shader" path="res://src/controllable_character/hunter/costume/palette_swap.gdshader" id="4_7drrb"]
-[ext_resource type="Texture2D" uid="uid://b1r4xdhw8pco3" path="res://assets/hunter/palettes/yellow.png" id="5_37ntb"]
-[ext_resource type="Texture2D" uid="uid://cbev4n3hmsa8" path="res://assets/flashlight/body_front.png" id="7_wocvn"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_o82uw"]
-resource_local_to_scene = true
-shader = ExtResource("4_7drrb")
-shader_parameter/old_palette = ExtResource("5_37ntb")
-shader_parameter/new_palette = ExtResource("5_37ntb")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ifthm"]
 viewport_path = NodePath("SubViewport")
@@ -81,16 +72,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="HunterCostume" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Hunter" instance=ExtResource("3_eyaac")]
-material = SubResource("ShaderMaterial_o82uw")
 position = Vector2(32, 36)
 texture = SubResource("ViewportTexture_ifthm")
 costume_rotation = 3.14159
-
-[node name="BodyFront" type="Sprite2D" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Hunter/HunterCostume"]
-show_behind_parent = true
-texture = ExtResource("7_wocvn")
-hframes = 32
-frame = 16
 
 [node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Hunter"]
 custom_minimum_size = Vector2(48, 24)
