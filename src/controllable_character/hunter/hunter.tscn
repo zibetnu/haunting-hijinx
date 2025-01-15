@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=40 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -18,10 +18,6 @@
 [ext_resource type="PackedScene" uid="uid://mt548ar3ll4w" path="res://src/heartbeat_rumble/heartbeat_rumble.tscn" id="18_jndug"]
 [ext_resource type="PackedScene" uid="uid://doo22pvhedm4n" path="res://src/collision_avoider/collision_avoider.tscn" id="18_rtxip"]
 [ext_resource type="PackedScene" uid="uid://ctn825io87i34" path="res://src/controllable_character/hunter/costume/hunter_costume.tscn" id="19_c0d8f"]
-[ext_resource type="Texture2D" uid="uid://cve418b7kooru" path="res://assets/flashlight/body_back.png" id="20_g6qtr"]
-[ext_resource type="Texture2D" uid="uid://cbev4n3hmsa8" path="res://assets/flashlight/body_front.png" id="21_pbkwq"]
-[ext_resource type="Shader" path="res://src/controllable_character/hunter/costume/palette_swap.gdshader" id="21_v1tqt"]
-[ext_resource type="Texture2D" uid="uid://b1r4xdhw8pco3" path="res://assets/hunter/palettes/yellow.png" id="22_vv7rm"]
 [ext_resource type="PackedScene" uid="uid://b4i2arqquha56" path="res://src/revivable/revivable.tscn" id="23_d234k"]
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/floored_texture_progress_bar/floored_texture_progress_bar.tscn" id="24_qych1"]
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="27_qehgg"]
@@ -79,12 +75,6 @@ radius = 12.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_shnpn"]
 viewport_path = NodePath("SubViewport")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_p6wcf"]
-resource_local_to_scene = true
-shader = ExtResource("21_v1tqt")
-shader_parameter/old_palette = ExtResource("22_vv7rm")
-shader_parameter/new_palette = ExtResource("22_vv7rm")
 
 [sub_resource type="Gradient" id="Gradient_tkh6d"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -265,17 +255,6 @@ visible = false
 y_sort_enabled = true
 texture = SubResource("ViewportTexture_shnpn")
 
-[node name="MaterialParent" parent="HunterCostume/SubViewport" index="0"]
-material = SubResource("ShaderMaterial_p6wcf")
-
-[node name="FlashlightBack" type="Sprite2D" parent="HunterCostume/SubViewport/MaterialParent" index="1"]
-texture = ExtResource("20_g6qtr")
-hframes = 32
-
-[node name="FlashlightFront" type="Sprite2D" parent="HunterCostume/SubViewport/MaterialParent" index="3"]
-texture = ExtResource("21_pbkwq")
-hframes = 32
-
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.5
 range_item_cull_mask = 33
@@ -404,15 +383,10 @@ layout_mode = 2
 [connection signal="powered_on" from="Flashlight/Display" to="PointLight2D" method="set_energy" binds= [1.0]]
 [connection signal="range_value_changed" from="Flashlight/Display/Body/RotationToIntRange" to="HunterCostume/SubViewport/MaterialParent/FlashlightBack" method="set_frame"]
 [connection signal="range_value_changed" from="Flashlight/Display/Body/RotationToIntRange" to="HunterCostume/SubViewport/MaterialParent/FlashlightFront" method="set_frame"]
-[connection signal="draw" from="HunterCostume/SubViewport/MaterialParent/Arms" to="HunterCostume/SubViewport/MaterialParent/FlashlightBack" method="show"]
-[connection signal="draw" from="HunterCostume/SubViewport/MaterialParent/Arms" to="HunterCostume/SubViewport/MaterialParent/FlashlightFront" method="show"]
-[connection signal="draw" from="HunterCostume/SubViewport/MaterialParent/Dead" to="HunterCostume/SubViewport/MaterialParent/FlashlightBack" method="hide"]
-[connection signal="draw" from="HunterCostume/SubViewport/MaterialParent/Dead" to="HunterCostume/SubViewport/MaterialParent/FlashlightFront" method="hide"]
 
 [editable path="HeartbeatRumble"]
 [editable path="PlayerControllerStack"]
 [editable path="Flashlight"]
 [editable path="Flashlight/Display"]
-[editable path="HunterCostume"]
 [editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert"]
 [editable path="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert"]

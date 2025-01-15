@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ctn825io87i34"]
+[gd_scene load_steps=23 format=3 uid="uid://ctn825io87i34"]
 
 [ext_resource type="AnimationLibrary" uid="uid://fs3jht0ivdhm" path="res://src/animation_libaries/canvas_item.tres" id="1_7b0n7"]
 [ext_resource type="Script" path="res://src/controllable_character/hunter/costume/hunter_costume.gd" id="1_auu5i"]
@@ -14,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://c6jxona5mctlp" path="res://assets/hunter/dead.png" id="8_8f8lf"]
 [ext_resource type="Texture2D" uid="uid://blnr62by4pipw" path="res://assets/hunter/arms.png" id="8_or3nn"]
 [ext_resource type="Shader" path="res://src/controllable_character/hunter/costume/palette_swap.gdshader" id="9_1ykwp"]
+[ext_resource type="Texture2D" uid="uid://cve418b7kooru" path="res://assets/flashlight/body_back.png" id="12_kxaue"]
+[ext_resource type="Texture2D" uid="uid://cbev4n3hmsa8" path="res://assets/flashlight/body_front.png" id="14_22sun"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_nu623"]
 viewport_path = NodePath("SubViewport")
@@ -116,11 +118,21 @@ texture = ExtResource("6_wc0vr")
 hframes = 16
 vframes = 5
 
+[node name="FlashlightBack" type="Sprite2D" parent="SubViewport/MaterialParent"]
+unique_name_in_owner = true
+texture = ExtResource("12_kxaue")
+hframes = 32
+
 [node name="Torso" type="Sprite2D" parent="SubViewport/MaterialParent"]
 unique_name_in_owner = true
 use_parent_material = true
 texture = ExtResource("7_l744e")
 hframes = 16
+
+[node name="FlashlightFront" type="Sprite2D" parent="SubViewport/MaterialParent"]
+unique_name_in_owner = true
+texture = ExtResource("14_22sun")
+hframes = 32
 
 [node name="Arms" type="Sprite2D" parent="SubViewport/MaterialParent"]
 unique_name_in_owner = true

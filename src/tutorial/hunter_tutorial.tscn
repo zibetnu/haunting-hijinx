@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://dguyyy188ihbi"]
+[gd_scene load_steps=70 format=3 uid="uid://dguyyy188ihbi"]
 
 [ext_resource type="Script" path="res://src/tutorial/hunter_tutorial.gd" id="1_je78l"]
 [ext_resource type="Script" path="res://src/tutorial/quest/quest.gd" id="2_ramkp"]
@@ -139,15 +139,6 @@ shader = ExtResource("14_gh7j3")
 shader_parameter/old_palette = ExtResource("15_rsck6")
 shader_parameter/new_palette = ExtResource("15_rsck6")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_shnpn"]
-viewport_path = NodePath("SubViewport")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_n7mlw"]
-resource_local_to_scene = true
-shader = ExtResource("14_gh7j3")
-shader_parameter/old_palette = ExtResource("15_rsck6")
-shader_parameter/new_palette = ExtResource("15_rsck6")
-
 [sub_resource type="Resource" id="Resource_wagh2"]
 resource_local_to_scene = true
 resource_name = "IsMoving"
@@ -161,15 +152,6 @@ script = ExtResource("13_315kw")
 guard = SubResource("Resource_wagh2")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jhhgj"]
-resource_local_to_scene = true
-shader = ExtResource("14_gh7j3")
-shader_parameter/old_palette = ExtResource("15_rsck6")
-shader_parameter/new_palette = ExtResource("15_rsck6")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_04tky"]
-viewport_path = NodePath("SubViewport")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dj26d"]
 resource_local_to_scene = true
 shader = ExtResource("14_gh7j3")
 shader_parameter/old_palette = ExtResource("15_rsck6")
@@ -412,10 +394,6 @@ guard = SubResource("Resource_8x80x")
 
 [node name="HunterCostume" parent="Hunter" index="13"]
 material = SubResource("ShaderMaterial_p6wcf")
-texture = SubResource("ViewportTexture_shnpn")
-
-[node name="MaterialParent" parent="Hunter/HunterCostume/SubViewport" index="0"]
-material = SubResource("ShaderMaterial_n7mlw")
 
 [node name="FollowPlayer" parent="Hunter/IgnoreCanvasModulate" index="0"]
 position = Vector2(368, 248)
@@ -433,10 +411,6 @@ guard = SubResource("Resource_cypnc")
 
 [node name="HunterCostume" parent="NPCHunter" index="13"]
 material = SubResource("ShaderMaterial_jhhgj")
-texture = SubResource("ViewportTexture_04tky")
-
-[node name="MaterialParent" parent="NPCHunter/HunterCostume/SubViewport" index="0"]
-material = SubResource("ShaderMaterial_dj26d")
 
 [node name="FollowPlayer" parent="NPCHunter/IgnoreCanvasModulate" index="0"]
 position = Vector2(136, 127)
@@ -665,7 +639,6 @@ events = Array[InputEvent]([SubResource("InputEventJoypadButton_usg1n"), SubReso
 [editable path="Hunter/PlayerControllerStack"]
 [editable path="Hunter/Flashlight"]
 [editable path="Hunter/Flashlight/Display"]
-[editable path="Hunter/HunterCostume"]
 [editable path="Hunter/IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert"]
 [editable path="Hunter/IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert"]
 [editable path="NPCHunter"]
@@ -673,6 +646,5 @@ events = Array[InputEvent]([SubResource("InputEventJoypadButton_usg1n"), SubReso
 [editable path="NPCHunter/PlayerControllerStack"]
 [editable path="NPCHunter/Flashlight"]
 [editable path="NPCHunter/Flashlight/Display"]
-[editable path="NPCHunter/HunterCostume"]
 [editable path="NPCHunter/IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert"]
 [editable path="NPCHunter/IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert"]

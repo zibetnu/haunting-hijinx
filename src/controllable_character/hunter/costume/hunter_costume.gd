@@ -31,8 +31,14 @@ const MIN_ROTATION = 0.0
 @onready var hunter: AnimationPlayer = $Hunter
 @onready var material_parent: Node2D = %MaterialParent
 @onready var legs: Sprite2D = %Legs
-@onready var torso: Sprite2D = %Torso
 @onready var arms: Sprite2D = %Arms
+@onready var rotation_sprites: Array[Sprite2D] = [
+	legs,
+	%FlashlightBack,
+	%Torso,
+	%FlashlightFront,
+	arms,
+]
 
 
 func _ready() -> void:
@@ -55,15 +61,14 @@ func set_costume_rotation(value: float) -> void:
 	if not is_node_ready():
 		await ready
 
-	var x_frame: int = roundi(remap(
-			_normalize_rotation(costume_rotation),
-			MIN_ROTATION, TAU,
-			0, HFRAME_COUNT
-	))
-	x_frame %= HFRAME_COUNT
-	legs.frame_coords.x = x_frame
-	torso.frame_coords.x = x_frame
-	arms.frame_coords.x = x_frame
+	for sprite in rotation_sprites:
+		var x_frame: int = roundi(remap(
+				_normalize_rotation(costume_rotation),
+				MIN_ROTATION, TAU,
+				0, sprite.hframes
+		))
+		x_frame %= sprite.hframes
+		sprite.frame_coords.x = x_frame
 
 
 func set_palette_index(value: int) -> void:
