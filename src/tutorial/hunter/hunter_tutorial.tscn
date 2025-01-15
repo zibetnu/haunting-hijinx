@@ -1,0 +1,323 @@
+[gd_scene load_steps=36 format=3 uid="uid://dguyyy188ihbi"]
+
+[ext_resource type="PackedScene" uid="uid://c64tx6254qrlp" path="res://src/tutorial/tutorial.tscn" id="1_c5qxs"]
+[ext_resource type="Script" path="res://src/tutorial/hunter/hunter_tutorial.gd" id="2_v1ay4"]
+[ext_resource type="PackedScene" uid="uid://8qwvhkjp3yja" path="res://src/tutorial/quest/wpm_complete/wpm_complete.tscn" id="3_0femm"]
+[ext_resource type="Script" path="res://src/tutorial/quest/quest.gd" id="3_ea8sw"]
+[ext_resource type="PackedScene" uid="uid://bu4oleqx87mnw" path="res://src/tutorial/quest/complete_after_delay/complete_after_delay.tscn" id="4_dj2kv"]
+[ext_resource type="Script" path="res://src/tutorial/quest/composite_quest.gd" id="4_e5msw"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="4_mx0qj"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/not_guard.gd" id="5_h1wiw"]
+[ext_resource type="Script" path="res://src/tutorial/quest/quest_node.gd" id="5_sx67b"]
+[ext_resource type="Shader" path="res://src/hunter/costume/palette_swap.gdshader" id="6_6k6h6"]
+[ext_resource type="PackedScene" uid="uid://c5r0sjcdbsrog" path="res://src/controller/npc_ghost/npc_ghost.tscn" id="6_n7jug"]
+[ext_resource type="Texture2D" uid="uid://b1r4xdhw8pco3" path="res://assets/hunter/palettes/yellow.png" id="7_k04wc"]
+[ext_resource type="PackedScene" uid="uid://ccvsw508kh4ot" path="res://src/hunter/hunter.tscn" id="7_smdw1"]
+[ext_resource type="PackedScene" uid="uid://di5qxwdvv5nga" path="res://src/controller/npc_hunter/npc_hunter.tscn" id="8_40hbx"]
+[ext_resource type="PackedScene" uid="uid://grxm3658ukjj" path="res://src/battery_spawner/battery_spawner.tscn" id="13_g4mwu"]
+
+[sub_resource type="Resource" id="Resource_7jipr"]
+resource_name = "Battery"
+script = ExtResource("3_ea8sw")
+objective = "A battery spawns at a random location for each hunter in need.
+Try picking one up to recharge your flashlight."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_26eav"]
+resource_name = "Welcome"
+script = ExtResource("3_ea8sw")
+objective = "Welcome to the [color=#ffeb57]hunter[/color] tutorial."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_f0tmj"]
+resource_name = "Move"
+script = ExtResource("3_ea8sw")
+objective = "First, try moving around."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_y74n0"]
+resource_name = "Light"
+script = ExtResource("3_ea8sw")
+objective = "Now try powering on your light.
+You move slower while it is powered."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_hsvyu"]
+resource_name = "AlertInfo"
+script = ExtResource("3_ea8sw")
+objective = "You are alerted when the ghost is near, even if you can't see it. The [wave amp=20.0 freq=5.0 connected=0][color=#ff0040]...[/color][/wave] above your head is for low alert; the [pulse freq=4.0 color=#571c27 ease=-2.0][color=#ff0040]![/color][/pulse] is high alert.
+"
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_blp0j"]
+resource_name = "AlertLow"
+script = ExtResource("3_ea8sw")
+objective = "Try moving to put yourself in low (...) alert."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_huau8"]
+resource_name = "AlertHigh"
+script = ExtResource("3_ea8sw")
+objective = "Try moving to put yourself in high (!) alert."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_pl133"]
+resource_name = "Alert"
+script = ExtResource("4_e5msw")
+sub_quests = Array[ExtResource("3_ea8sw")]([SubResource("Resource_blp0j"), SubResource("Resource_huau8")])
+objective = "Try moving to put yourself in both low ([wave amp=20.0 freq=5.0 connected=0][color=#ff0040]...[/color][/wave]) and high ([pulse freq=4.0 color=#571c27 ease=-2.0][color=#ff0040]![/color][/pulse]) alert."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_04vwp"]
+resource_name = "Damage"
+script = ExtResource("3_ea8sw")
+objective = "Your goal is to kill the ghost by shining your light on it. Try using your alert to find the ghost, then hit it with your light."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_s3q2n"]
+resource_name = "Summon"
+script = ExtResource("3_ea8sw")
+objective = "The ghost can summon drain areas to deplete your battery and destroy all batteries on the map. Try getting hit by one."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_6hkcd"]
+resource_name = "Revive"
+script = ExtResource("3_ea8sw")
+objective = "A hunter faints when the ghost grabs them. Try shining your light on the downed hunter to fill their revive meter and revive them."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_0chku"]
+resource_name = "Teamwork2"
+script = ExtResource("3_ea8sw")
+objective = "Teamwork is essential, but there is no in-game way to talk (yet). [pulse freq=2.0 color=#ffffff7f ease=-2.0]Try using a voice chat for the best experience.[/pulse]"
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_yqccr"]
+resource_name = "Complete"
+script = ExtResource("3_ea8sw")
+objective = "[rainbow freq=0.6 sat=0.6 val=1]Tutorial complete. Happy hunting![/rainbow]"
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_kpksu"]
+resource_local_to_scene = true
+resource_name = "IsMoving"
+script = ExtResource("4_mx0qj")
+expression = "is_moving"
+
+[sub_resource type="Resource" id="Resource_gy72a"]
+resource_local_to_scene = true
+resource_name = "Not"
+script = ExtResource("5_h1wiw")
+guard = SubResource("Resource_kpksu")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_psybu"]
+resource_local_to_scene = true
+shader = ExtResource("6_6k6h6")
+shader_parameter/old_palette = ExtResource("7_k04wc")
+shader_parameter/new_palette = ExtResource("7_k04wc")
+
+[sub_resource type="Resource" id="Resource_wr3rf"]
+resource_local_to_scene = true
+resource_name = "IsMoving"
+script = ExtResource("4_mx0qj")
+expression = "is_moving"
+
+[sub_resource type="Resource" id="Resource_wagh2"]
+resource_local_to_scene = true
+resource_name = "IsMoving"
+script = ExtResource("4_mx0qj")
+expression = "is_moving"
+
+[sub_resource type="Resource" id="Resource_j56l6"]
+resource_local_to_scene = true
+resource_name = "Not"
+script = ExtResource("5_h1wiw")
+guard = SubResource("Resource_wagh2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3hpvg"]
+resource_local_to_scene = true
+shader = ExtResource("6_6k6h6")
+shader_parameter/old_palette = ExtResource("7_k04wc")
+shader_parameter/new_palette = ExtResource("7_k04wc")
+
+[node name="Tutorial" instance=ExtResource("1_c5qxs")]
+script = ExtResource("2_v1ay4")
+battery_quest = SubResource("Resource_7jipr")
+quests = Array[ExtResource("3_ea8sw")]([SubResource("Resource_26eav"), SubResource("Resource_f0tmj"), SubResource("Resource_y74n0"), SubResource("Resource_hsvyu"), SubResource("Resource_pl133"), SubResource("Resource_04vwp"), SubResource("Resource_s3q2n"), SubResource("Resource_7jipr"), SubResource("Resource_6hkcd"), SubResource("Resource_0chku"), SubResource("Resource_yqccr")])
+play_complete_sound = Array[ExtResource("3_ea8sw")]([SubResource("Resource_f0tmj"), SubResource("Resource_y74n0"), SubResource("Resource_pl133"), SubResource("Resource_04vwp"), SubResource("Resource_s3q2n"), SubResource("Resource_7jipr"), SubResource("Resource_6hkcd")])
+
+[node name="Welcome" parent="QuestNodes" index="0" instance=ExtResource("3_0femm")]
+quest = SubResource("Resource_26eav")
+
+[node name="Move" parent="QuestNodes" index="1" instance=ExtResource("4_dj2kv")]
+quest = SubResource("Resource_f0tmj")
+
+[node name="Light" parent="QuestNodes" index="2" instance=ExtResource("4_dj2kv")]
+quest = SubResource("Resource_y74n0")
+
+[node name="AlertInfo" parent="QuestNodes" index="3" instance=ExtResource("3_0femm")]
+quest = SubResource("Resource_hsvyu")
+
+[node name="AlertLow" type="Node" parent="QuestNodes" index="4"]
+script = ExtResource("5_sx67b")
+quest = SubResource("Resource_blp0j")
+
+[node name="AlertHigh" type="Node" parent="QuestNodes" index="5"]
+script = ExtResource("5_sx67b")
+quest = SubResource("Resource_huau8")
+
+[node name="Damage" type="Node" parent="QuestNodes" index="6"]
+script = ExtResource("5_sx67b")
+quest = SubResource("Resource_04vwp")
+
+[node name="Summon" type="Node" parent="QuestNodes" index="7"]
+script = ExtResource("5_sx67b")
+quest = SubResource("Resource_s3q2n")
+
+[node name="RetryTimer" type="Timer" parent="QuestNodes/Summon" index="0"]
+wait_time = 7.0
+one_shot = true
+
+[node name="Battery" type="Node" parent="QuestNodes" index="8"]
+script = ExtResource("5_sx67b")
+quest = SubResource("Resource_7jipr")
+
+[node name="Revive" type="Node" parent="QuestNodes" index="9"]
+script = ExtResource("5_sx67b")
+quest = SubResource("Resource_6hkcd")
+
+[node name="Teamwork" parent="QuestNodes" index="10" instance=ExtResource("3_0femm")]
+quest = SubResource("Resource_0chku")
+
+[node name="Sprint" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts" index="2"]
+text = "Light:"
+
+[node name="Summon" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts" index="4"]
+visible = false
+
+[node name="Button2Prompt" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts" index="5"]
+visible = false
+
+[node name="Ghost" parent="." index="8" node_paths=PackedStringArray("controller")]
+position = Vector2(368, 128)
+controller = NodePath("NPCGhost")
+
+[node name="FollowPlayer" parent="Ghost/IgnoreCanvasModulate" index="0"]
+position = Vector2(368, 128)
+
+[node name="NPCGhost" parent="Ghost" index="19" instance=ExtResource("6_n7jug")]
+
+[node name="Hunter" parent="." index="9"]
+position = Vector2(368, 248)
+
+[node name="IsMoving" parent="Hunter/StateChart/Base/Alive/Movement/Idle" index="0"]
+guard = SubResource("Resource_kpksu")
+
+[node name="IsNotMoving" parent="Hunter/StateChart/Base/Alive/Movement/Move" index="0"]
+guard = SubResource("Resource_gy72a")
+
+[node name="MaterialParent" parent="Hunter/HunterCostume/CanvasGroup" index="0"]
+material = SubResource("ShaderMaterial_psybu")
+
+[node name="FollowPlayer" parent="Hunter/IgnoreCanvasModulate" index="0"]
+position = Vector2(368, 248)
+
+[node name="BatterySpawner" parent="." index="10" node_paths=PackedStringArray("spawn_area_top_left", "spawn_area_bottom_right", "spawn_root") instance=ExtResource("13_g4mwu")]
+spawn_area_top_left = NodePath("../LimitTopLeft")
+spawn_area_bottom_right = NodePath("../LimitBottomRight")
+spawn_root = NodePath("..")
+
+[node name="NPCHunter" parent="." index="11" node_paths=PackedStringArray("controller") instance=ExtResource("7_smdw1")]
+position = Vector2(136, 127)
+controller = NodePath("NPCHunter")
+metadata/_edit_group_ = true
+
+[node name="IsMoving" parent="NPCHunter/StateChart/Base/Alive/Movement/Idle" index="0"]
+guard = SubResource("Resource_wr3rf")
+
+[node name="IsNotMoving" parent="NPCHunter/StateChart/Base/Alive/Movement/Move" index="0"]
+guard = SubResource("Resource_j56l6")
+
+[node name="MaterialParent" parent="NPCHunter/HunterCostume/CanvasGroup" index="0"]
+material = SubResource("ShaderMaterial_3hpvg")
+
+[node name="FollowPlayer" parent="NPCHunter/IgnoreCanvasModulate" index="0"]
+position = Vector2(136, 127)
+
+[node name="NPCHunter" parent="NPCHunter" index="17" node_paths=PackedStringArray("ghost") instance=ExtResource("8_40hbx")]
+ghost = NodePath("../../Ghost")
+
+[connection signal="camera_limits_applied" from="." to="Ghost/Camera2D" method="center"]
+[connection signal="camera_limits_applied" from="." to="Hunter/Camera2D" method="center"]
+[connection signal="camera_limits_applied" from="." to="NPCHunter/Camera2D" method="center"]
+[connection signal="completed" from="QuestNodes/Damage" to="Ghost/NPCGhost" method="set_sprint" binds= [true]]
+[connection signal="started" from="QuestNodes/Damage" to="Ghost" method="hide"]
+[connection signal="started" from="QuestNodes/Damage" to="Ghost" method="set_position" binds= [Vector2(192, 288)]]
+[connection signal="started" from="QuestNodes/Damage" to="Ghost/NPCGhost" method="set_sprint" binds= [false]]
+[connection signal="completed" from="QuestNodes/Summon" to="QuestNodes/Summon/RetryTimer" method="stop"]
+[connection signal="completed" from="QuestNodes/Summon" to="Ghost/NPCGhost" method="set_sprint" binds= [true]]
+[connection signal="completed" from="QuestNodes/Summon" to="Ghost/NPCGhost" method="set_summon" binds= [false]]
+[connection signal="started" from="QuestNodes/Summon" to="Ghost" method="set_position" binds= [Vector2(368, 128)]]
+[connection signal="started" from="QuestNodes/Summon" to="Ghost/NPCGhost" method="set_sprint" binds= [false]]
+[connection signal="started" from="QuestNodes/Summon" to="Ghost/NPCGhost" method="set_summon" binds= [true]]
+[connection signal="timeout" from="QuestNodes/Summon/RetryTimer" to="Ghost/NPCGhost" method="set_summon" binds= [true]]
+[connection signal="completed" from="QuestNodes/Battery" to="Hunter/StateChart/Base/Dead/Revived" method="set_block_signals" binds= [false]]
+[connection signal="started" from="QuestNodes/Battery" to="Hunter/StateChart/Base/Dead/Revived" method="set_block_signals" binds= [true]]
+[connection signal="started" from="QuestNodes/Revive" to="Ghost" method="set_position" binds= [Vector2(112, 127)]]
+[connection signal="ready" from="Ghost" to="Ghost/NPCGhost" method="set_sprint" flags=3 binds= [true]]
+[connection signal="summon_charged" from="Ghost/Summon" to="Ghost/NPCGhost" method="set_summon" binds= [false]]
+[connection signal="summoned" from="Ghost/Summon" to="QuestNodes/Summon/RetryTimer" method="start"]
+[connection signal="state_entered" from="Ghost/StateChart/Base/Behavior/Dead" to="." method="revive_ghost"]
+[connection signal="state_entered" from="Ghost/StateChart/Base/Animation/Move" to="QuestNodes/Move" method="start"]
+[connection signal="state_exited" from="Ghost/StateChart/Base/Animation/Move" to="QuestNodes/Move" method="stop"]
+[connection signal="state_entered" from="Ghost/StateChart/Base/Animation/Sprint" to="QuestNodes/Move" method="start"]
+[connection signal="state_entered" from="Ghost/StateChart/Base/Animation/Sprint" to="QuestNodes/Light" method="start"]
+[connection signal="state_exited" from="Ghost/StateChart/Base/Animation/Sprint" to="QuestNodes/Move" method="stop"]
+[connection signal="state_exited" from="Ghost/StateChart/Base/Animation/Sprint" to="QuestNodes/Light" method="stop"]
+[connection signal="state_entered" from="Ghost/StateChart/Base/Animation/Panic" to="QuestNodes/Move" method="start"]
+[connection signal="state_exited" from="Ghost/StateChart/Base/Animation/Panic" to="QuestNodes/Move" method="stop"]
+[connection signal="damage_taken" from="Ghost/DamageSignals/WeakTo" to="QuestNodes/Damage" method="complete"]
+[connection signal="dropped" from="Hunter" to="HunterReviveTimer" method="start"]
+[connection signal="state_entered" from="Hunter/StateChart/Base/Alive/Movement/Move" to="QuestNodes/Move" method="start"]
+[connection signal="state_exited" from="Hunter/StateChart/Base/Alive/Movement/Move" to="QuestNodes/Move" method="stop"]
+[connection signal="damage_taken" from="Hunter/Flashlight/Behavior" to="QuestNodes/Summon" method="complete"]
+[connection signal="powered_off" from="Hunter/Flashlight/Behavior" to="QuestNodes/Light" method="stop"]
+[connection signal="powered_on" from="Hunter/Flashlight/Behavior" to="QuestNodes/Light" method="start"]
+[connection signal="alerted_high" from="Hunter/IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" to="QuestNodes/AlertHigh" method="complete"]
+[connection signal="alerted_low" from="Hunter/IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" to="QuestNodes/AlertLow" method="complete"]
+[connection signal="battery_spawned" from="BatterySpawner" to="." method="_on_battery_spawned"]
+[connection signal="dropped" from="NPCHunter" to="Ghost" method="set_position" binds= [Vector2(368, 128)]]
+[connection signal="revived" from="NPCHunter/DamageSignals/Revivable" to="QuestNodes/Revive" method="complete"]
+
+[editable path="Ghost"]
+[editable path="Ghost/Invisibility"]
+[editable path="Ghost/PlayerControllerStack"]
+[editable path="Hunter"]
+[editable path="Hunter/HeartbeatRumble"]
+[editable path="Hunter/PlayerControllerStack"]
+[editable path="Hunter/Flashlight"]
+[editable path="Hunter/Flashlight/Display"]
+[editable path="Hunter/HunterCostume"]
+[editable path="Hunter/IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert"]
+[editable path="Hunter/IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert"]
+[editable path="NPCHunter"]
+[editable path="NPCHunter/HeartbeatRumble"]
+[editable path="NPCHunter/PlayerControllerStack"]
+[editable path="NPCHunter/Flashlight"]
+[editable path="NPCHunter/Flashlight/Display"]
+[editable path="NPCHunter/HunterCostume"]
+[editable path="NPCHunter/IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert"]
+[editable path="NPCHunter/IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert"]
