@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://dguyyy188ihbi"]
+[gd_scene load_steps=66 format=3 uid="uid://dguyyy188ihbi"]
 
 [ext_resource type="Script" path="res://src/tutorial/hunter_tutorial.gd" id="1_je78l"]
 [ext_resource type="Script" path="res://src/tutorial/quest/quest.gd" id="2_ramkp"]
@@ -15,10 +15,8 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="12_gu26q"]
 [ext_resource type="Texture2D" uid="uid://bntsrcd3hjcex" path="res://addons/input_prompts/icons/generic/left_stick_up.png" id="13_8ur2y"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/not_guard.gd" id="13_315kw"]
-[ext_resource type="Shader" path="res://src/controllable_character/hunter/costume/palette_swap.gdshader" id="14_gh7j3"]
 [ext_resource type="Script" path="res://addons/input_prompts/action_prompt/action_prompt.gd" id="14_tiear"]
 [ext_resource type="Texture2D" uid="uid://cah6r1q5x2lte" path="res://addons/input_prompts/icons/generic/left_stick_left.png" id="15_c3yoy"]
-[ext_resource type="Texture2D" uid="uid://b1r4xdhw8pco3" path="res://assets/hunter/palettes/yellow.png" id="15_rsck6"]
 [ext_resource type="Texture2D" uid="uid://dreirjfpqj40a" path="res://addons/input_prompts/icons/generic/left_stick_down.png" id="16_barx2"]
 [ext_resource type="Texture2D" uid="uid://c03r3n0nfrjck" path="res://addons/input_prompts/icons/generic/left_stick_right.png" id="17_lrdtm"]
 [ext_resource type="Texture2D" uid="uid://b1e23gj3k1klg" path="res://addons/input_prompts/icons/xbox/a.png" id="18_cgqsn"]
@@ -133,12 +131,6 @@ resource_name = "Not"
 script = ExtResource("13_315kw")
 guard = SubResource("Resource_2ojdm")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_p6wcf"]
-resource_local_to_scene = true
-shader = ExtResource("14_gh7j3")
-shader_parameter/old_palette = ExtResource("15_rsck6")
-shader_parameter/new_palette = ExtResource("15_rsck6")
-
 [sub_resource type="Resource" id="Resource_wagh2"]
 resource_local_to_scene = true
 resource_name = "IsMoving"
@@ -150,12 +142,6 @@ resource_local_to_scene = true
 resource_name = "Not"
 script = ExtResource("13_315kw")
 guard = SubResource("Resource_wagh2")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jhhgj"]
-resource_local_to_scene = true
-shader = ExtResource("14_gh7j3")
-shader_parameter/old_palette = ExtResource("15_rsck6")
-shader_parameter/new_palette = ExtResource("15_rsck6")
 
 [sub_resource type="Animation" id="Animation_v2eoj"]
 length = 0.001
@@ -392,9 +378,6 @@ guard = SubResource("Resource_2ojdm")
 [node name="IsNotMoving" parent="Hunter/StateChart/Base/Alive/Movement/Move" index="0"]
 guard = SubResource("Resource_8x80x")
 
-[node name="HunterCostume" parent="Hunter" index="13"]
-material = SubResource("ShaderMaterial_p6wcf")
-
 [node name="FollowPlayer" parent="Hunter/IgnoreCanvasModulate" index="0"]
 position = Vector2(368, 248)
 
@@ -408,9 +391,6 @@ guard = SubResource("Resource_wagh2")
 
 [node name="IsNotMoving" parent="NPCHunter/StateChart/Base/Alive/Movement/Move" index="0"]
 guard = SubResource("Resource_cypnc")
-
-[node name="HunterCostume" parent="NPCHunter" index="13"]
-material = SubResource("ShaderMaterial_jhhgj")
 
 [node name="FollowPlayer" parent="NPCHunter/IgnoreCanvasModulate" index="0"]
 position = Vector2(136, 127)
@@ -589,6 +569,9 @@ action = "button_1"
 icon = 0
 events = Array[InputEvent]([SubResource("InputEventJoypadButton_usg1n"), SubResource("InputEventJoypadMotion_qysvs"), SubResource("InputEventMouseButton_u3amk"), SubResource("InputEventKey_p31jx")])
 
+[connection signal="camera_limits_applied" from="." to="Ghost/Camera2D" method="center"]
+[connection signal="camera_limits_applied" from="." to="Hunter/Camera2D" method="center"]
+[connection signal="camera_limits_applied" from="." to="NPCHunter/Camera2D" method="center"]
 [connection signal="timeout" from="HunterReviveTimer" to="." method="revive_hunter"]
 [connection signal="completed" from="QuestNodes/Damage" to="Ghost/NPCGhost" method="set_sprint" binds= [true]]
 [connection signal="started" from="QuestNodes/Damage" to="Ghost" method="hide"]

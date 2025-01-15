@@ -571,7 +571,7 @@ events = Array[InputEvent]([SubResource("InputEventKey_uh3vv"), SubResource("Inp
 layout_mode = 2
 text = "Exit"
 
-[connection signal="camera_limits_applied" from="." to="Ghost/Camera2D/CenterCameraOffset" method="center_camera_offset"]
+[connection signal="camera_limits_applied" from="." to="Ghost/Camera2D" method="center"]
 [connection signal="timeout" from="HunterReviveTimer" to="." method="revive_hunter"]
 [connection signal="completed" from="QuestNodes/Summon" to="." method="set_auto_recharge" binds= [false]]
 [connection signal="started" from="QuestNodes/Summon" to="." method="set_auto_recharge" binds= [true]]
