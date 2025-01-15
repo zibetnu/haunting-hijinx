@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://dguyyy188ihbi"]
+[gd_scene load_steps=74 format=3 uid="uid://dguyyy188ihbi"]
 
 [ext_resource type="Script" path="res://src/tutorial/hunter_tutorial.gd" id="1_je78l"]
 [ext_resource type="Script" path="res://src/tutorial/quest/quest.gd" id="2_ramkp"]
@@ -139,6 +139,15 @@ shader = ExtResource("14_gh7j3")
 shader_parameter/old_palette = ExtResource("15_rsck6")
 shader_parameter/new_palette = ExtResource("15_rsck6")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_shnpn"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n7mlw"]
+resource_local_to_scene = true
+shader = ExtResource("14_gh7j3")
+shader_parameter/old_palette = ExtResource("15_rsck6")
+shader_parameter/new_palette = ExtResource("15_rsck6")
+
 [sub_resource type="Resource" id="Resource_wagh2"]
 resource_local_to_scene = true
 resource_name = "IsMoving"
@@ -157,84 +166,14 @@ shader = ExtResource("14_gh7j3")
 shader_parameter/old_palette = ExtResource("15_rsck6")
 shader_parameter/new_palette = ExtResource("15_rsck6")
 
-[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_8nrhq"]
-device = -1
-axis = 1
-axis_value = -1.0
+[sub_resource type="ViewportTexture" id="ViewportTexture_04tky"]
+viewport_path = NodePath("SubViewport")
 
-[sub_resource type="InputEventKey" id="InputEventKey_r2seu"]
-device = -1
-physical_keycode = 87
-unicode = 119
-
-[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_3mcyu"]
-device = -1
-button_index = 11
-pressed = true
-
-[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_gqlhn"]
-device = -1
-axis_value = -1.0
-
-[sub_resource type="InputEventKey" id="InputEventKey_2pkc3"]
-device = -1
-physical_keycode = 65
-unicode = 97
-
-[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_v4kfq"]
-device = -1
-button_index = 13
-pressed = true
-
-[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_thsdk"]
-device = -1
-axis = 1
-axis_value = 1.0
-
-[sub_resource type="InputEventKey" id="InputEventKey_ghuub"]
-device = -1
-physical_keycode = 83
-unicode = 115
-
-[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_7b6mm"]
-device = -1
-button_index = 12
-pressed = true
-
-[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_44khh"]
-device = -1
-axis_value = 1.0
-
-[sub_resource type="InputEventKey" id="InputEventKey_m874y"]
-device = -1
-physical_keycode = 68
-unicode = 100
-
-[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_ok305"]
-device = -1
-button_index = 14
-pressed = true
-
-[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_gfssw"]
-device = -1
-pressed = true
-
-[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_e6j1c"]
-device = -1
-axis = 5
-axis_value = 1.0
-
-[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_7cnxn"]
-device = -1
-button_mask = 1
-position = Vector2(160, 15)
-global_position = Vector2(164, 58)
-button_index = 1
-pressed = true
-
-[sub_resource type="InputEventKey" id="InputEventKey_ym4p7"]
-device = -1
-physical_keycode = 4194325
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dj26d"]
+resource_local_to_scene = true
+shader = ExtResource("14_gh7j3")
+shader_parameter/old_palette = ExtResource("15_rsck6")
+shader_parameter/new_palette = ExtResource("15_rsck6")
 
 [sub_resource type="Animation" id="Animation_v2eoj"]
 length = 0.001
@@ -273,20 +212,99 @@ _data = {
 "new_animation": SubResource("Animation_ekub6")
 }
 
-[sub_resource type="InputEventKey" id="InputEventKey_rllbr"]
+[sub_resource type="InputEventKey" id="InputEventKey_jh708"]
 keycode = 4194306
 
-[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_by4me"]
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_b1exy"]
 device = -1
 button_index = 4
 
-[sub_resource type="InputEventKey" id="InputEventKey_worx4"]
+[sub_resource type="InputEventKey" id="InputEventKey_vomy8"]
 device = -1
 physical_keycode = 4194305
 
-[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_kev7w"]
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_87qbe"]
 device = -1
 button_index = 6
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_ee2bs"]
+device = -1
+axis = 1
+axis_value = -1.0
+
+[sub_resource type="InputEventKey" id="InputEventKey_wu4ke"]
+device = -1
+physical_keycode = 87
+unicode = 119
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_0yykn"]
+device = -1
+button_index = 11
+pressed = true
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_rm2g2"]
+device = -1
+axis_value = -1.0
+
+[sub_resource type="InputEventKey" id="InputEventKey_tvm6i"]
+device = -1
+physical_keycode = 65
+unicode = 97
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_i5dyj"]
+device = -1
+button_index = 13
+pressed = true
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_qxwe2"]
+device = -1
+axis = 1
+axis_value = 1.0
+
+[sub_resource type="InputEventKey" id="InputEventKey_gipqu"]
+device = -1
+physical_keycode = 83
+unicode = 115
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_iedfo"]
+device = -1
+button_index = 12
+pressed = true
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_cpx5n"]
+device = -1
+axis_value = 1.0
+
+[sub_resource type="InputEventKey" id="InputEventKey_ic4bf"]
+device = -1
+physical_keycode = 68
+unicode = 100
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_yl73a"]
+device = -1
+button_index = 14
+pressed = true
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_usg1n"]
+device = -1
+pressed = true
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_qysvs"]
+device = -1
+axis = 5
+axis_value = 1.0
+
+[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_u3amk"]
+device = -1
+button_mask = 1
+position = Vector2(160, 15)
+global_position = Vector2(164, 58)
+button_index = 1
+pressed = true
+
+[sub_resource type="InputEventKey" id="InputEventKey_p31jx"]
+device = -1
+physical_keycode = 4194325
 
 [node name="Tutorial" type="Node2D"]
 y_sort_enabled = true
@@ -394,6 +412,10 @@ guard = SubResource("Resource_8x80x")
 
 [node name="HunterCostume" parent="Hunter" index="13"]
 material = SubResource("ShaderMaterial_p6wcf")
+texture = SubResource("ViewportTexture_shnpn")
+
+[node name="MaterialParent" parent="Hunter/HunterCostume/SubViewport" index="0"]
+material = SubResource("ShaderMaterial_n7mlw")
 
 [node name="FollowPlayer" parent="Hunter/IgnoreCanvasModulate" index="0"]
 position = Vector2(368, 248)
@@ -411,6 +433,10 @@ guard = SubResource("Resource_cypnc")
 
 [node name="HunterCostume" parent="NPCHunter" index="13"]
 material = SubResource("ShaderMaterial_jhhgj")
+texture = SubResource("ViewportTexture_04tky")
+
+[node name="MaterialParent" parent="NPCHunter/HunterCostume/SubViewport" index="0"]
+material = SubResource("ShaderMaterial_dj26d")
 
 [node name="FollowPlayer" parent="NPCHunter/IgnoreCanvasModulate" index="0"]
 position = Vector2(136, 127)
@@ -421,118 +447,20 @@ ghost = NodePath("../../Ghost")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
 
-[node name="Controls" type="MarginContainer" parent="CanvasLayer"]
-offset_right = 130.0
-offset_bottom = 78.0
-
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Controls"]
-self_modulate = Color(1, 1, 1, 0.498039)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Controls/PanelContainer"]
-layout_mode = 2
-
-[node name="Prompts" type="GridContainer" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer"]
-layout_mode = 2
-columns = 2
-
-[node name="Move" type="Label" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts"]
-layout_mode = 2
-size_flags_vertical = 8
-text = "Move:"
-horizontal_alignment = 2
-
-[node name="MovePrompt" type="GridContainer" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts"]
-layout_mode = 2
-size_flags_vertical = 8
-columns = 3
-
-[node name="LeftSpacer" type="Control" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts/MovePrompt"]
-layout_mode = 2
-
-[node name="MoveUp" type="TextureRect" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_button_sounds"]]
-layout_mode = 2
-texture = ExtResource("13_8ur2y")
-stretch_mode = 5
-script = ExtResource("14_tiear")
-action = "move_up"
-icon = 0
-events = Array[InputEvent]([SubResource("InputEventJoypadMotion_8nrhq"), SubResource("InputEventKey_r2seu"), SubResource("InputEventJoypadButton_3mcyu")])
-
-[node name="RightSpacer" type="Control" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts/MovePrompt"]
-layout_mode = 2
-
-[node name="MoveLeft" type="TextureRect" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_button_sounds"]]
-layout_mode = 2
-texture = ExtResource("15_c3yoy")
-stretch_mode = 5
-script = ExtResource("14_tiear")
-action = "move_left"
-icon = 0
-events = Array[InputEvent]([SubResource("InputEventJoypadMotion_gqlhn"), SubResource("InputEventKey_2pkc3"), SubResource("InputEventJoypadButton_v4kfq")])
-
-[node name="MoveDown" type="TextureRect" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_button_sounds"]]
-layout_mode = 2
-texture = ExtResource("16_barx2")
-stretch_mode = 5
-script = ExtResource("14_tiear")
-action = "move_down"
-icon = 0
-events = Array[InputEvent]([SubResource("InputEventJoypadMotion_thsdk"), SubResource("InputEventKey_ghuub"), SubResource("InputEventJoypadButton_7b6mm")])
-
-[node name="MoveRight" type="TextureRect" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_button_sounds"]]
-layout_mode = 2
-texture = ExtResource("17_lrdtm")
-stretch_mode = 5
-script = ExtResource("14_tiear")
-action = "move_right"
-icon = 0
-events = Array[InputEvent]([SubResource("InputEventJoypadMotion_44khh"), SubResource("InputEventKey_m874y"), SubResource("InputEventJoypadButton_ok305")])
-
-[node name="Light" type="Label" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts"]
-layout_mode = 2
-size_flags_vertical = 8
-text = "Light:"
-horizontal_alignment = 2
-
-[node name="Button1Prompt" type="HBoxContainer" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts"]
-layout_mode = 2
-size_flags_vertical = 8
-
-[node name="ActionPrompt" type="TextureRect" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts/Button1Prompt" groups=["exclude_button_sounds"]]
-layout_mode = 2
-texture = ExtResource("18_cgqsn")
-stretch_mode = 5
-script = ExtResource("14_tiear")
-action = "button_1"
-icon = 0
-events = Array[InputEvent]([SubResource("InputEventJoypadButton_gfssw"), SubResource("InputEventJoypadMotion_e6j1c"), SubResource("InputEventMouseButton_7cnxn"), SubResource("InputEventKey_ym4p7")])
-
-[node name="Label" type="Label" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts/Button1Prompt"]
-layout_mode = 2
-text = "or"
-
-[node name="ActionPrompt2" type="TextureRect" parent="CanvasLayer/Controls/PanelContainer/VBoxContainer/Prompts/Button1Prompt" groups=["exclude_button_sounds"]]
-layout_mode = 2
-texture = ExtResource("19_oxr65")
-stretch_mode = 5
-script = ExtResource("14_tiear")
-skip_events = 1
-action = "button_1"
-icon = 0
-events = Array[InputEvent]([SubResource("InputEventJoypadButton_gfssw"), SubResource("InputEventJoypadMotion_e6j1c"), SubResource("InputEventMouseButton_7cnxn"), SubResource("InputEventKey_ym4p7")])
-
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
+custom_minimum_size = Vector2(640, 0)
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_top = -38.0
+offset_left = -65.0
+offset_right = 65.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
 layout_mode = 2
+size_flags_vertical = 8
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/MarginContainer/HBoxContainer"]
 self_modulate = Color(1, 1, 1, 0.498039)
@@ -569,7 +497,7 @@ stretch_mode = 5
 script = ExtResource("14_tiear")
 action = "ui_focus_next"
 icon = 0
-events = Array[InputEvent]([SubResource("InputEventKey_rllbr"), SubResource("InputEventJoypadButton_by4me")])
+events = Array[InputEvent]([SubResource("InputEventKey_jh708"), SubResource("InputEventJoypadButton_b1exy")])
 
 [node name="SkipLabel" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer2/GridContainer"]
 layout_mode = 2
@@ -582,14 +510,111 @@ stretch_mode = 5
 script = ExtResource("14_tiear")
 action = "open_menu"
 icon = 0
-events = Array[InputEvent]([SubResource("InputEventKey_worx4"), SubResource("InputEventJoypadButton_kev7w")])
+events = Array[InputEvent]([SubResource("InputEventKey_vomy8"), SubResource("InputEventJoypadButton_87qbe")])
 
 [node name="ExitLabel" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer2/GridContainer"]
 layout_mode = 2
 text = "Exit"
 
-[connection signal="camera_limits_applied" from="." to="Ghost/Camera2D/CenterCameraOffset" method="center_camera_offset"]
-[connection signal="camera_limits_applied" from="." to="Hunter/Camera2D/CenterCameraOffset" method="center_camera_offset"]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/MarginContainer"]
+self_modulate = Color(1, 1, 1, 0.498039)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Prompts" type="GridContainer" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Move" type="Label" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Move:"
+horizontal_alignment = 2
+
+[node name="MovePrompt" type="GridContainer" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts"]
+layout_mode = 2
+size_flags_vertical = 8
+columns = 3
+
+[node name="LeftSpacer" type="Control" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/MovePrompt"]
+layout_mode = 2
+
+[node name="MoveUp" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("13_8ur2y")
+stretch_mode = 5
+script = ExtResource("14_tiear")
+action = "move_up"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventJoypadMotion_ee2bs"), SubResource("InputEventKey_wu4ke"), SubResource("InputEventJoypadButton_0yykn")])
+
+[node name="RightSpacer" type="Control" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/MovePrompt"]
+layout_mode = 2
+
+[node name="MoveLeft" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("15_c3yoy")
+stretch_mode = 5
+script = ExtResource("14_tiear")
+action = "move_left"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventJoypadMotion_rm2g2"), SubResource("InputEventKey_tvm6i"), SubResource("InputEventJoypadButton_i5dyj")])
+
+[node name="MoveDown" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("16_barx2")
+stretch_mode = 5
+script = ExtResource("14_tiear")
+action = "move_down"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventJoypadMotion_qxwe2"), SubResource("InputEventKey_gipqu"), SubResource("InputEventJoypadButton_iedfo")])
+
+[node name="MoveRight" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("17_lrdtm")
+stretch_mode = 5
+script = ExtResource("14_tiear")
+action = "move_right"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventJoypadMotion_cpx5n"), SubResource("InputEventKey_ic4bf"), SubResource("InputEventJoypadButton_yl73a")])
+
+[node name="Light" type="Label" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Light:"
+horizontal_alignment = 2
+
+[node name="Button1Prompt" type="HBoxContainer" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="ActionPrompt" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/Button1Prompt" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("18_cgqsn")
+stretch_mode = 5
+script = ExtResource("14_tiear")
+action = "button_1"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventJoypadButton_usg1n"), SubResource("InputEventJoypadMotion_qysvs"), SubResource("InputEventMouseButton_u3amk"), SubResource("InputEventKey_p31jx")])
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/Button1Prompt"]
+layout_mode = 2
+text = "or"
+
+[node name="ActionPrompt2" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/Button1Prompt" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("19_oxr65")
+stretch_mode = 5
+script = ExtResource("14_tiear")
+skip_events = 1
+action = "button_1"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventJoypadButton_usg1n"), SubResource("InputEventJoypadMotion_qysvs"), SubResource("InputEventMouseButton_u3amk"), SubResource("InputEventKey_p31jx")])
+
 [connection signal="timeout" from="HunterReviveTimer" to="." method="revive_hunter"]
 [connection signal="completed" from="QuestNodes/Damage" to="Ghost/NPCGhost" method="set_sprint" binds= [true]]
 [connection signal="started" from="QuestNodes/Damage" to="Ghost" method="hide"]
@@ -640,6 +665,7 @@ text = "Exit"
 [editable path="Hunter/PlayerControllerStack"]
 [editable path="Hunter/Flashlight"]
 [editable path="Hunter/Flashlight/Display"]
+[editable path="Hunter/HunterCostume"]
 [editable path="Hunter/IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert"]
 [editable path="Hunter/IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert"]
 [editable path="NPCHunter"]
@@ -647,5 +673,6 @@ text = "Exit"
 [editable path="NPCHunter/PlayerControllerStack"]
 [editable path="NPCHunter/Flashlight"]
 [editable path="NPCHunter/Flashlight/Display"]
+[editable path="NPCHunter/HunterCostume"]
 [editable path="NPCHunter/IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert"]
 [editable path="NPCHunter/IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert"]
