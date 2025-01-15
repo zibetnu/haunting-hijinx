@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=39 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -72,9 +72,6 @@ height = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bscnp"]
 radius = 12.0
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_shnpn"]
-viewport_path = NodePath("SubViewport")
 
 [sub_resource type="Gradient" id="Gradient_tkh6d"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -253,7 +250,6 @@ visible = false
 
 [node name="HunterCostume" parent="." instance=ExtResource("19_c0d8f")]
 y_sort_enabled = true
-texture = SubResource("ViewportTexture_shnpn")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.5
