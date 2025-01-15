@@ -1,5 +1,7 @@
 extends Node2D
 
+signal battery_spawned(battery: Battery)
+
 const MAX_BATTERY_SPAWN_ATTEMPTS = 100
 
 @export var battery_scene: PackedScene
@@ -67,6 +69,7 @@ func _on_timer_timeout() -> void:
 	instance.tree_exited.connect(_on_battery_tree_exited)
 	spawn_root.add_child(instance, true)
 	_batteries_spawned += 1
+	battery_spawned.emit(instance.get_node("Behavior") as Battery)
 
 
 func _on_battery_tree_exited() -> void:
