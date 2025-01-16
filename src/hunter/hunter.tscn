@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=40 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -62,9 +62,6 @@ height = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bscnp"]
 radius = 12.0
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_shnpn"]
-viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p6wcf"]
 resource_local_to_scene = true
@@ -248,16 +245,15 @@ visible = false
 
 [node name="HunterCostume" parent="." instance=ExtResource("19_c0d8f")]
 y_sort_enabled = true
-texture = SubResource("ViewportTexture_shnpn")
 
-[node name="MaterialParent" parent="HunterCostume/SubViewport" index="0"]
+[node name="MaterialParent" parent="HunterCostume/CanvasGroup" index="0"]
 material = SubResource("ShaderMaterial_p6wcf")
 
-[node name="FlashlightBack" type="Sprite2D" parent="HunterCostume/SubViewport/MaterialParent" index="1"]
+[node name="FlashlightBack" type="Sprite2D" parent="HunterCostume/CanvasGroup/MaterialParent" index="1"]
 texture = ExtResource("20_g6qtr")
 hframes = 32
 
-[node name="FlashlightFront" type="Sprite2D" parent="HunterCostume/SubViewport/MaterialParent" index="3"]
+[node name="FlashlightFront" type="Sprite2D" parent="HunterCostume/CanvasGroup/MaterialParent" index="3"]
 texture = ExtResource("21_pbkwq")
 hframes = 32
 
@@ -356,7 +352,7 @@ layout_mode = 2
 [connection signal="state_entered" from="StateChart/Base/Alive/Movement/Move" to="HunterCostume" method="play" binds= ["move"]]
 [connection signal="state_physics_processing" from="StateChart/Base/Alive/Movement/Move" to="StateChart/Base/Alive/Movement/Move/Move" method="manual_physics_process"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Movement/Stun" to="StateChart/Base/Alive/Movement/Stun/StunTimeout" method="start"]
-[connection signal="state_entered" from="StateChart/Base/Alive/Movement/Stun" to="HunterCostume/Effects" method="play" binds= [&"sprite/shake"]]
+[connection signal="state_entered" from="StateChart/Base/Alive/Movement/Stun" to="HunterCostume" method="play_effect" binds= [&"shake"]]
 [connection signal="state_exited" from="StateChart/Base/Alive/Movement/Stun" to="StateChart/Base/Alive/Movement/Stun/StunTimeout" method="stop"]
 [connection signal="state_exited" from="StateChart/Base/Alive/Movement/Stun" to="PlayerControllerStack/Synced" method="force_emit_move_vector_signals"]
 [connection signal="state_exited" from="StateChart/Base/Alive/Movement/Stun" to="HunterCostume/Effects" method="play" binds= [&"RESET"]]
@@ -397,12 +393,12 @@ layout_mode = 2
 [connection signal="powered_on_attempted" from="Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead" flags=3]
 [connection signal="powered_off" from="Flashlight/Display" to="PointLight2D" method="set_energy" binds= [0.5]]
 [connection signal="powered_on" from="Flashlight/Display" to="PointLight2D" method="set_energy" binds= [1.0]]
-[connection signal="range_value_changed" from="Flashlight/Display/Body/RotationToIntRange" to="HunterCostume/SubViewport/MaterialParent/FlashlightBack" method="set_frame"]
-[connection signal="range_value_changed" from="Flashlight/Display/Body/RotationToIntRange" to="HunterCostume/SubViewport/MaterialParent/FlashlightFront" method="set_frame"]
-[connection signal="draw" from="HunterCostume/SubViewport/MaterialParent/Arms" to="HunterCostume/SubViewport/MaterialParent/FlashlightBack" method="show"]
-[connection signal="draw" from="HunterCostume/SubViewport/MaterialParent/Arms" to="HunterCostume/SubViewport/MaterialParent/FlashlightFront" method="show"]
-[connection signal="draw" from="HunterCostume/SubViewport/MaterialParent/Dead" to="HunterCostume/SubViewport/MaterialParent/FlashlightBack" method="hide"]
-[connection signal="draw" from="HunterCostume/SubViewport/MaterialParent/Dead" to="HunterCostume/SubViewport/MaterialParent/FlashlightFront" method="hide"]
+[connection signal="range_value_changed" from="Flashlight/Display/Body/RotationToIntRange" to="HunterCostume/CanvasGroup/MaterialParent/FlashlightBack" method="set_frame"]
+[connection signal="range_value_changed" from="Flashlight/Display/Body/RotationToIntRange" to="HunterCostume/CanvasGroup/MaterialParent/FlashlightFront" method="set_frame"]
+[connection signal="draw" from="HunterCostume/CanvasGroup/MaterialParent/Arms" to="HunterCostume/CanvasGroup/MaterialParent/FlashlightBack" method="show"]
+[connection signal="draw" from="HunterCostume/CanvasGroup/MaterialParent/Arms" to="HunterCostume/CanvasGroup/MaterialParent/FlashlightFront" method="show"]
+[connection signal="draw" from="HunterCostume/CanvasGroup/MaterialParent/Dead" to="HunterCostume/CanvasGroup/MaterialParent/FlashlightBack" method="hide"]
+[connection signal="draw" from="HunterCostume/CanvasGroup/MaterialParent/Dead" to="HunterCostume/CanvasGroup/MaterialParent/FlashlightFront" method="hide"]
 
 [editable path="HeartbeatRumble"]
 [editable path="PlayerControllerStack"]

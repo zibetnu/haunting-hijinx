@@ -1,9 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://ctn825io87i34"]
+[gd_scene load_steps=20 format=3 uid="uid://ctn825io87i34"]
 
 [ext_resource type="AnimationLibrary" uid="uid://fs3jht0ivdhm" path="res://src/animation_libaries/canvas_item.tres" id="1_7b0n7"]
 [ext_resource type="Script" path="res://src/hunter/costume/hunter_costume.gd" id="1_auu5i"]
 [ext_resource type="Texture2D" uid="uid://vae6e0eh7xge" path="res://assets/hunter/palettes/green.png" id="2_28bn5"]
-[ext_resource type="AnimationLibrary" uid="uid://krtfia4oqseg" path="res://src/animation_libaries/sprite.tres" id="2_jv5mw"]
+[ext_resource type="AnimationLibrary" uid="uid://5nvcy2ymwxml" path="res://src/animation_libaries/node_2d.tres" id="2_jv5mw"]
 [ext_resource type="AnimationLibrary" uid="uid://bss842gjvgyiu" path="res://src/hunter/costume/hunter_costume.tres" id="2_wvtms"]
 [ext_resource type="Texture2D" uid="uid://b1r4xdhw8pco3" path="res://assets/hunter/palettes/yellow.png" id="3_qkyln"]
 [ext_resource type="Texture2D" uid="uid://4l3a8ifjlff5" path="res://assets/hunter/palettes/blue.png" id="6_8ags0"]
@@ -14,9 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://c6jxona5mctlp" path="res://assets/hunter/dead.png" id="8_8f8lf"]
 [ext_resource type="Texture2D" uid="uid://blnr62by4pipw" path="res://assets/hunter/arms.png" id="8_or3nn"]
 [ext_resource type="Shader" path="res://src/hunter/costume/palette_swap.gdshader" id="9_1ykwp"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_nu623"]
-viewport_path = NodePath("SubViewport")
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_72euo"]
 properties/0/path = NodePath(".:costume_rotation")
@@ -43,7 +40,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:offset")
+tracks/1/path = NodePath(".:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -69,10 +66,9 @@ shader = ExtResource("9_1ykwp")
 shader_parameter/old_palette = ExtResource("3_qkyln")
 shader_parameter/new_palette = ExtResource("3_qkyln")
 
-[node name="HunterCostume" type="Sprite2D" groups=["hunter_costumes"]]
+[node name="HunterCostume" type="Node2D" groups=["hunter_costumes"]]
 light_mask = 32
 position = Vector2(0, -8)
-texture = SubResource("ViewportTexture_nu623")
 script = ExtResource("1_auu5i")
 palette_array = Array[Texture2D]([ExtResource("3_qkyln"), ExtResource("2_28bn5"), ExtResource("7_157kt"), ExtResource("6_0168j"), ExtResource("6_8ags0")])
 
@@ -80,6 +76,8 @@ palette_array = Array[Texture2D]([ExtResource("3_qkyln"), ExtResource("2_28bn5")
 replication_config = SubResource("SceneReplicationConfig_72euo")
 
 [node name="Effects" type="AnimationPlayer" parent="."]
+editor_description = "The node_2d animations are still called sprite to preserve compatibility with prior 1.x releases."
+root_node = NodePath("../CanvasGroup")
 libraries = {
 "": SubResource("AnimationLibrary_mpegg"),
 "canvas_item": ExtResource("1_7b0n7"),
@@ -97,39 +95,33 @@ libraries = {
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Hunter"]
 replication_config = SubResource("SceneReplicationConfig_cfqbp")
 
-[node name="SubViewport" type="SubViewport" parent="."]
-disable_3d = true
-transparent_bg = true
-snap_2d_transforms_to_pixel = true
-canvas_item_default_texture_filter = 0
-size = Vector2i(32, 32)
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
 
-[node name="MaterialParent" type="Node2D" parent="SubViewport"]
+[node name="MaterialParent" type="Node2D" parent="CanvasGroup"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_35cjm")
-position = Vector2(16, 16)
 
-[node name="Legs" type="Sprite2D" parent="SubViewport/MaterialParent"]
+[node name="Legs" type="Sprite2D" parent="CanvasGroup/MaterialParent"]
 unique_name_in_owner = true
 use_parent_material = true
 texture = ExtResource("6_wc0vr")
 hframes = 16
 vframes = 5
 
-[node name="Torso" type="Sprite2D" parent="SubViewport/MaterialParent"]
+[node name="Torso" type="Sprite2D" parent="CanvasGroup/MaterialParent"]
 unique_name_in_owner = true
 use_parent_material = true
 texture = ExtResource("7_l744e")
 hframes = 16
 
-[node name="Arms" type="Sprite2D" parent="SubViewport/MaterialParent"]
+[node name="Arms" type="Sprite2D" parent="CanvasGroup/MaterialParent"]
 unique_name_in_owner = true
 use_parent_material = true
 texture = ExtResource("8_or3nn")
 hframes = 16
 vframes = 3
 
-[node name="Dead" type="Sprite2D" parent="SubViewport/MaterialParent"]
+[node name="Dead" type="Sprite2D" parent="CanvasGroup/MaterialParent"]
 visible = false
 use_parent_material = true
 position = Vector2(0, 8)
