@@ -303,6 +303,7 @@ texture_progress = ExtResource("33_a7fw2")
 tint_under = Color(1, 1, 1, 0.247059)
 
 [node name="Alert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("28_bjj70")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="BatteryAlert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("31_vp1ot")]
