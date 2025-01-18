@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=44 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -10,7 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://dc3f3sy1vso5f" path="res://src/group_bool/group_bool.tscn" id="9_n4b8t"]
 [ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/move/move.tscn" id="9_rpftm"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="12_y0078"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="13_hrsye"]
 [ext_resource type="PackedScene" uid="uid://bkuic22finfse" path="res://src/controller/player_controller_stack.tscn" id="13_rf2iy"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/not_guard.gd" id="14_7mvdf"]
 [ext_resource type="Script" path="res://src/centered_camera.gd" id="14_5pgcr"]
 [ext_resource type="PackedScene" uid="uid://cy4qrm44icmyy" path="res://src/flashlight/flashlight.tscn" id="15_hljm8"]
 [ext_resource type="PackedScene" uid="uid://mt548ar3ll4w" path="res://src/heartbeat_rumble/heartbeat_rumble.tscn" id="18_jndug"]
@@ -39,6 +41,18 @@ properties/1/path = NodePath(".:z_index")
 properties/1/spawn = true
 properties/1/replication_mode = 2
 
+[sub_resource type="Resource" id="Resource_yfrgd"]
+resource_local_to_scene = true
+resource_name = "IsMoving"
+script = ExtResource("13_hrsye")
+expression = "is_moving"
+
+[sub_resource type="Resource" id="Resource_6tqh6"]
+resource_local_to_scene = true
+resource_name = "Not"
+script = ExtResource("14_7mvdf")
+guard = SubResource("Resource_yfrgd")
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_vawb0"]
 radius = 8.0
 
@@ -63,9 +77,6 @@ height = 24.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_bscnp"]
 radius = 12.0
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_shnpn"]
-viewport_path = NodePath("SubViewport")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p6wcf"]
 resource_local_to_scene = true
 shader = ExtResource("21_v1tqt")
@@ -86,7 +97,7 @@ properties/0/path = NodePath(".:text")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[node name="Hunter" type="CharacterBody2D" groups=["hunters", "players"]]
+[node name="Hunter" type="CharacterBody2D" node_paths=PackedStringArray("controller") groups=["hunters", "players"]]
 collision_layer = 4
 collision_mask = 5
 motion_mode = 1
@@ -94,6 +105,7 @@ wall_min_slide_angle = 0.0174533
 script = ExtResource("1_g8mq7")
 state_alive_layer = 20
 state_invulnerable_layer = 4
+controller = NodePath("PlayerControllerStack/Synced")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_hflh2")
@@ -117,6 +129,7 @@ unique_name_in_owner = true
 [node name="HeartbeatRumble" parent="." instance=ExtResource("18_jndug")]
 
 [node name="StateChart" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("1_0xkip")
 
 [node name="Base" type="Node" parent="StateChart"]
@@ -144,18 +157,18 @@ initial_state = NodePath("Idle")
 [node name="Idle" type="Node" parent="StateChart/Base/Alive/Movement"]
 script = ExtResource("3_ocdoo")
 
-[node name="MoveStarted" type="Node" parent="StateChart/Base/Alive/Movement/Idle"]
+[node name="IsMoving" type="Node" parent="StateChart/Base/Alive/Movement/Idle"]
 script = ExtResource("4_x2w3t")
 to = NodePath("../../Move")
-event = &"move_started"
+guard = SubResource("Resource_yfrgd")
 
 [node name="Move" type="Node" parent="StateChart/Base/Alive/Movement"]
 script = ExtResource("3_ocdoo")
 
-[node name="MoveStopped" type="Node" parent="StateChart/Base/Alive/Movement/Move"]
+[node name="IsNotMoving" type="Node" parent="StateChart/Base/Alive/Movement/Move"]
 script = ExtResource("4_x2w3t")
 to = NodePath("../../Idle")
-event = &"move_stopped"
+guard = SubResource("Resource_6tqh6")
 
 [node name="Move" parent="StateChart/Base/Alive/Movement/Move" node_paths=PackedStringArray("character") instance=ExtResource("9_rpftm")]
 character = NodePath("../../../../../..")
@@ -247,16 +260,15 @@ visible = false
 
 [node name="HunterCostume" parent="." instance=ExtResource("19_c0d8f")]
 y_sort_enabled = true
-texture = SubResource("ViewportTexture_shnpn")
 
-[node name="MaterialParent" parent="HunterCostume/SubViewport" index="0"]
+[node name="MaterialParent" parent="HunterCostume/CanvasGroup" index="0"]
 material = SubResource("ShaderMaterial_p6wcf")
 
-[node name="FlashlightBack" type="Sprite2D" parent="HunterCostume/SubViewport/MaterialParent" index="1"]
+[node name="FlashlightBack" type="Sprite2D" parent="HunterCostume/CanvasGroup/MaterialParent" index="1"]
 texture = ExtResource("20_g6qtr")
 hframes = 32
 
-[node name="FlashlightFront" type="Sprite2D" parent="HunterCostume/SubViewport/MaterialParent" index="3"]
+[node name="FlashlightFront" type="Sprite2D" parent="HunterCostume/CanvasGroup/MaterialParent" index="3"]
 texture = ExtResource("21_pbkwq")
 hframes = 32
 
@@ -306,6 +318,7 @@ texture_progress = ExtResource("33_a7fw2")
 tint_under = Color(1, 1, 1, 0.247059)
 
 [node name="Alert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("28_bjj70")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="BatteryAlert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("31_vp1ot")]
@@ -347,16 +360,15 @@ layout_mode = 2
 [connection signal="state_exited" from="StateChart/Base/Dead" to="DamageSignals/Revivable" method="disable"]
 [connection signal="state_exited" from="StateChart/Base/Dead" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" method="hide"]
 [connection signal="state_exited" from="StateChart/Base/Dead" to="." method="set_z_index" binds= [0]]
-[connection signal="state_entered" from="StateChart/Base/Alive" to="PlayerControllerStack/Synced" method="force_emit_move_vector_signals"]
+[connection signal="taken" from="StateChart/Base/Dead/Revived" to="Flashlight/Behavior" method="set_battery_percentage" binds= [0.75]]
 [connection signal="state_entered" from="StateChart/Base/Alive" to="Flashlight/Behavior" method="set_enabled" binds= [true]]
 [connection signal="state_exited" from="StateChart/Base/Alive" to="Flashlight/Behavior" method="set_enabled" binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Movement/Idle" to="HunterCostume" method="play" binds= ["idle"]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Movement/Move" to="HunterCostume" method="play" binds= ["move"]]
 [connection signal="state_physics_processing" from="StateChart/Base/Alive/Movement/Move" to="StateChart/Base/Alive/Movement/Move/Move" method="manual_physics_process"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Movement/Stun" to="StateChart/Base/Alive/Movement/Stun/StunTimeout" method="start"]
-[connection signal="state_entered" from="StateChart/Base/Alive/Movement/Stun" to="HunterCostume/Effects" method="play" binds= [&"sprite/shake"]]
+[connection signal="state_entered" from="StateChart/Base/Alive/Movement/Stun" to="HunterCostume" method="play_effect" binds= [&"shake"]]
 [connection signal="state_exited" from="StateChart/Base/Alive/Movement/Stun" to="StateChart/Base/Alive/Movement/Stun/StunTimeout" method="stop"]
-[connection signal="state_exited" from="StateChart/Base/Alive/Movement/Stun" to="PlayerControllerStack/Synced" method="force_emit_move_vector_signals"]
 [connection signal="state_exited" from="StateChart/Base/Alive/Movement/Stun" to="HunterCostume/Effects" method="play" binds= [&"RESET"]]
 [connection signal="timeout" from="StateChart/Base/Alive/Movement/Stun/StunTimeout" to="StateChart" method="send_event" binds= [&"stun_ended"]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="." method="enable_invulnerable_collision_layer"]
@@ -365,21 +377,11 @@ layout_mode = 2
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="." method="enable_alive_collision_layer"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="DamageSignals" method="set_monitorable" flags=3 binds= [true]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="HunterCostume/Effects" method="play" binds= [&"RESET"]]
-[connection signal="button_1_changed" from="PlayerControllerStack/Synced" to="Flashlight/Behavior" method="set_powered"]
-[connection signal="button_1_pressed" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_1_pressed"]]
-[connection signal="button_1_released" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_1_released"]]
-[connection signal="button_2_pressed" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_2_pressed"]]
-[connection signal="button_2_released" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_2_released"]]
-[connection signal="look_rotation_changed" from="PlayerControllerStack/Synced" to="Flashlight/Behavior" method="set_target_rotation"]
-[connection signal="move_started" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"move_started"]]
-[connection signal="move_stopped" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"move_stopped"]]
-[connection signal="move_vector_changed" from="PlayerControllerStack/Synced" to="StateChart/Base/Alive/Movement/Move/Move" method="set_move_vector"]
 [connection signal="sensed_intensity_changed" from="AuraSense" to="HeartbeatRumble" method="set_heart_rate_from_index"]
 [connection signal="sensed_intensity_changed" from="AuraSense" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_alert_level_from_int"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/Revivable" method="take_damage"]
 [connection signal="progress_percentage_changed" from="DamageSignals/Revivable" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" method="set_as_ratio_floored"]
 [connection signal="revived" from="DamageSignals/Revivable" to="StateChart" method="send_event" binds= [&"revived"]]
-[connection signal="revived" from="DamageSignals/Revivable" to="Flashlight/Behavior" method="set_battery_percentage" binds= [0.75]]
 [connection signal="battery_died" from="Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead" flags=3]
 [connection signal="battery_died" from="Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"flashlight_battery_died"]]
 [connection signal="battery_lowed" from="Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_low" flags=3]
@@ -396,12 +398,12 @@ layout_mode = 2
 [connection signal="powered_on_attempted" from="Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead" flags=3]
 [connection signal="powered_off" from="Flashlight/Display" to="PointLight2D" method="set_energy" binds= [0.5]]
 [connection signal="powered_on" from="Flashlight/Display" to="PointLight2D" method="set_energy" binds= [1.0]]
-[connection signal="range_value_changed" from="Flashlight/Display/Body/RotationToIntRange" to="HunterCostume/SubViewport/MaterialParent/FlashlightBack" method="set_frame"]
-[connection signal="range_value_changed" from="Flashlight/Display/Body/RotationToIntRange" to="HunterCostume/SubViewport/MaterialParent/FlashlightFront" method="set_frame"]
-[connection signal="draw" from="HunterCostume/SubViewport/MaterialParent/Arms" to="HunterCostume/SubViewport/MaterialParent/FlashlightBack" method="show"]
-[connection signal="draw" from="HunterCostume/SubViewport/MaterialParent/Arms" to="HunterCostume/SubViewport/MaterialParent/FlashlightFront" method="show"]
-[connection signal="draw" from="HunterCostume/SubViewport/MaterialParent/Dead" to="HunterCostume/SubViewport/MaterialParent/FlashlightBack" method="hide"]
-[connection signal="draw" from="HunterCostume/SubViewport/MaterialParent/Dead" to="HunterCostume/SubViewport/MaterialParent/FlashlightFront" method="hide"]
+[connection signal="range_value_changed" from="Flashlight/Display/Body/RotationToIntRange" to="HunterCostume/CanvasGroup/MaterialParent/FlashlightBack" method="set_frame"]
+[connection signal="range_value_changed" from="Flashlight/Display/Body/RotationToIntRange" to="HunterCostume/CanvasGroup/MaterialParent/FlashlightFront" method="set_frame"]
+[connection signal="draw" from="HunterCostume/CanvasGroup/MaterialParent/Arms" to="HunterCostume/CanvasGroup/MaterialParent/FlashlightBack" method="show"]
+[connection signal="draw" from="HunterCostume/CanvasGroup/MaterialParent/Arms" to="HunterCostume/CanvasGroup/MaterialParent/FlashlightFront" method="show"]
+[connection signal="draw" from="HunterCostume/CanvasGroup/MaterialParent/Dead" to="HunterCostume/CanvasGroup/MaterialParent/FlashlightBack" method="hide"]
+[connection signal="draw" from="HunterCostume/CanvasGroup/MaterialParent/Dead" to="HunterCostume/CanvasGroup/MaterialParent/FlashlightFront" method="hide"]
 
 [editable path="HeartbeatRumble"]
 [editable path="PlayerControllerStack"]

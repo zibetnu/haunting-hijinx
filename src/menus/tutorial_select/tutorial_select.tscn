@@ -1,0 +1,114 @@
+[gd_scene load_steps=6 format=3 uid="uid://cis3vfoj3ussh"]
+
+[ext_resource type="PackedScene" uid="uid://c6ql67s5oafpr" path="res://src/visibility_signals/visibility_signals.tscn" id="1_4ptx7"]
+[ext_resource type="Script" path="res://src/menus/tutorial_select/tutorial_select.gd" id="1_h2iyi"]
+[ext_resource type="PackedScene" uid="uid://klrwcohuhynk" path="res://src/ghost/costume/ghost_costume.tscn" id="1_xu1af"]
+[ext_resource type="PackedScene" uid="uid://ctn825io87i34" path="res://src/hunter/costume/hunter_costume.tscn" id="3_eyaac"]
+[ext_resource type="Texture2D" uid="uid://do78peki3jtm" path="res://assets/flashlight/body.png" id="5_avxyi"]
+
+[node name="TutorialSelect" type="MarginContainer" node_paths=PackedStringArray("ghost", "hunter", "back")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h2iyi")
+ghost = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Ghost")
+hunter = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Hunter")
+back = NodePath("HBoxContainer/Back")
+
+[node name="VisibilitySignals" parent="." node_paths=PackedStringArray("canvas_item") instance=ExtResource("1_4ptx7")]
+canvas_item = NodePath("..")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Tutorial"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Ghost" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 78)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GhostCostume" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Ghost" instance=ExtResource("1_xu1af")]
+position = Vector2(32, 32)
+frame = 1
+frame_coord_x = 1
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Ghost"]
+custom_minimum_size = Vector2(48, 24)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Ghost"
+horizontal_alignment = 1
+
+[node name="Hunter" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 78)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HunterCostume" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Hunter" instance=ExtResource("3_eyaac")]
+position = Vector2(32, 36)
+costume_rotation = 3.14159
+
+[node name="Flashlight" type="Sprite2D" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Hunter/HunterCostume"]
+show_behind_parent = true
+texture = ExtResource("5_avxyi")
+hframes = 32
+frame = 16
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Hunter"]
+custom_minimum_size = Vector2(48, 24)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Hunter"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(632, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Back" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Back"
+
+[connection signal="shown" from="VisibilitySignals" to="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Ghost" method="grab_focus"]
+[connection signal="gui_input" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Ghost" to="." method="_on_gui_input"]
+[connection signal="ready" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Ghost/GhostCostume" to="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Ghost/GhostCostume" method="play" binds= ["idle"]]
+[connection signal="gui_input" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Hunter" to="." method="_on_gui_input"]
+[connection signal="ready" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Hunter/HunterCostume" to="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Hunter/HunterCostume" method="play" binds= ["move"]]
+[connection signal="gui_input" from="HBoxContainer/Back" to="." method="_on_gui_input"]

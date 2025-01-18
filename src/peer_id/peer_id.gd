@@ -1,3 +1,4 @@
+class_name PeerID
 extends Node
 
 signal changed(id: int)

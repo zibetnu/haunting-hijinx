@@ -1,6 +1,7 @@
-[gd_scene load_steps=55 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=56 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
+[ext_resource type="Script" path="res://src/ghost/ghost.gd" id="1_utd70"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="2_bh3m0"]
 [ext_resource type="PackedScene" uid="uid://bxooivyeej01k" path="res://src/summon/summon.tscn" id="3_26ncu"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_wp1tu"]
@@ -125,10 +126,12 @@ properties/0/path = NodePath(".:text")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[node name="Ghost" type="CharacterBody2D" groups=["ghosts", "players"]]
+[node name="Ghost" type="CharacterBody2D" node_paths=PackedStringArray("controller") groups=["ghosts", "players"]]
 collision_layer = 8
 motion_mode = 1
 wall_min_slide_angle = 0.0174533
+script = ExtResource("1_utd70")
+controller = NodePath("PlayerControllerStack/Synced")
 
 [node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
 nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grab"), NodePath("../HuntersTouched")]
@@ -172,6 +175,11 @@ script = ExtResource("5_6yps6")
 
 [node name="IsDead" parent="StateChart/Base/Behavior/Dead" groups=["ghost_is_deads"] instance=ExtResource("16_q6wqq")]
 group = &"levels"
+
+[node name="Revived" type="Node" parent="StateChart/Base/Behavior/Dead"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Alive")
+event = &"revived"
 
 [node name="Alive" type="Node" parent="StateChart/Base/Behavior"]
 script = ExtResource("4_74yim")
@@ -424,11 +432,6 @@ script = ExtResource("6_il0ju")
 to = NodePath("../../Invisibile")
 event = &"invisibility_started"
 
-[node name="IsMoving" parent="." instance=ExtResource("10_fwp7a")]
-emit_on_ready = true
-property_name = &"is_moving"
-initial_property_value = [false]
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.99, 0.99)
 shape = SubResource("CircleShape2D_xn3hr")
@@ -472,6 +475,7 @@ weak_to = 1
 [node name="DamageValueSignal" parent="DamageSignals/WeakTo" instance=ExtResource("34_617dy")]
 
 [node name="Health" parent="DamageSignals/WeakTo/DamageValueSignal" instance=ExtResource("38_arcfj")]
+unique_name_in_owner = true
 
 [node name="Grab" type="Area2D" parent="."]
 collision_layer = 0
@@ -585,9 +589,6 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="state_exited" from="StateChart/Base/Behavior/Dead" to="StateChart/Base/Behavior/Dead/IsDead" method="set_false"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Dead" to="DamageSignals" method="set_monitorable" flags=3 binds= [true]]
 [connection signal="event_received" from="StateChart/Base/Behavior/Alive/Normal" to="StateChart/Base/Behavior/Alive/Normal/Damaged" method="receive_event"]
-[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="PlayerControllerStack/Synced" method="force_emit_button_1_signals"]
-[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="PlayerControllerStack/Synced" method="force_emit_move_vector_signals"]
-[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="PlayerControllerStack/Synced" method="force_emit_button_2_signals"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="StateChart" method="send_event" binds= [&"invisibility_started"]]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Normal" to="Grab" method="set_monitoring" flags=3 binds= [true]]
 [connection signal="state_physics_processing" from="StateChart/Base/Behavior/Alive/Normal" to="StateChart/Base/Behavior/Alive/Normal/Move" method="manual_physics_process"]
@@ -659,26 +660,12 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="Invisibility" method="set_visible" binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="GhostTranslucent" method="disable_translucency"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="Invisibility" method="set_visible" binds= [true]]
-[connection signal="property_changed" from="IsMoving" to="StateChart" method="set_expression_property"]
-[connection signal="button_1_pressed" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_1_pressed"]]
-[connection signal="button_1_released" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_1_released"]]
-[connection signal="button_2_pressed" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_2_pressed"]]
-[connection signal="button_2_released" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"button_2_released"]]
-[connection signal="move_rotation_changed" from="PlayerControllerStack/Synced" to="Grab" method="set_rotation"]
-[connection signal="move_rotation_changed" from="PlayerControllerStack/Synced" to="GhostCostume" method="set_costume_rotation"]
-[connection signal="move_started" from="PlayerControllerStack/Synced" to="IsMoving" method="set_property_value" binds= [true]]
-[connection signal="move_started" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"move_started"]]
-[connection signal="move_stopped" from="PlayerControllerStack/Synced" to="IsMoving" method="set_property_value" binds= [false]]
-[connection signal="move_stopped" from="PlayerControllerStack/Synced" to="StateChart" method="send_event" binds= [&"move_stopped"]]
-[connection signal="move_vector_changed" from="PlayerControllerStack/Synced" to="StateChart/Base/Behavior/Alive/Normal/Move" method="set_move_vector"]
-[connection signal="move_vector_changed" from="PlayerControllerStack/Synced" to="StateChart/Base/Behavior/Alive/Sprint/Move" method="set_move_vector"]
-[connection signal="move_vector_changed" from="PlayerControllerStack/Synced" to="StateChart/Base/Behavior/Alive/Panic/Move" method="set_move_vector"]
-[connection signal="move_vector_changed" from="PlayerControllerStack/Synced" to="StateChart/Base/Behavior/Alive/Grab/Move" method="set_move_vector"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
 [connection signal="damage_taken" from="DamageSignals/WeakTo" to="StateChart" method="send_event" binds= [&"damaged"]]
 [connection signal="damaged_by" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/DamageValueSignal" method="take_damage"]
 [connection signal="damaged_by_amount" from="DamageSignals/WeakTo/DamageValueSignal" to="DamageSignals/WeakTo/DamageValueSignal/Health" method="subtract_health"]
 [connection signal="health_emptied" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="StateChart" method="send_event" binds= [&"died"]]
+[connection signal="health_filled" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="StateChart" method="send_event" binds= [&"revived"]]
 [connection signal="health_percentage_changed" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="set_as_ratio_floored"]
 [connection signal="body_entered" from="Grab" to="Grab/Grabber" method="grab"]
 [connection signal="grabbed_target" from="Grab/Grabber" to="StateChart" method="send_event" binds= [&"grab_started"]]

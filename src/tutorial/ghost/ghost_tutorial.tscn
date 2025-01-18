@@ -1,0 +1,197 @@
+[gd_scene load_steps=24 format=3 uid="uid://02ri1p0jbqdb"]
+
+[ext_resource type="Script" path="res://src/tutorial/ghost/ghost_tutorial.gd" id="1_c6pgd"]
+[ext_resource type="PackedScene" uid="uid://c64tx6254qrlp" path="res://src/tutorial/tutorial.tscn" id="1_i6ivc"]
+[ext_resource type="Script" path="res://src/tutorial/quest/quest.gd" id="2_r5b0f"]
+[ext_resource type="Script" path="res://src/tutorial/quest/composite_quest.gd" id="3_5y0cp"]
+[ext_resource type="PackedScene" uid="uid://8qwvhkjp3yja" path="res://src/tutorial/quest/wpm_complete/wpm_complete.tscn" id="5_s13op"]
+[ext_resource type="PackedScene" uid="uid://bu4oleqx87mnw" path="res://src/tutorial/quest/complete_after_delay/complete_after_delay.tscn" id="6_x00k6"]
+[ext_resource type="Script" path="res://src/tutorial/quest/quest_node.gd" id="7_7l8aw"]
+[ext_resource type="PackedScene" uid="uid://di5qxwdvv5nga" path="res://src/controller/npc_hunter/npc_hunter.tscn" id="12_2andj"]
+
+[sub_resource type="Resource" id="Resource_osr1n"]
+resource_name = "AlertLow"
+script = ExtResource("2_r5b0f")
+objective = "Try moving to put the hunter in low alert."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_3jbmy"]
+resource_name = "AlertHigh"
+script = ExtResource("2_r5b0f")
+objective = "Try moving to put the hunter in high alert."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_lfxhu"]
+resource_name = "Welcome"
+script = ExtResource("2_r5b0f")
+objective = "Welcome to the [wave amp=15.0 freq=6.0 connected=1][color=#c42430]ghost[/color][/wave] tutorial."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_f0tmj"]
+resource_name = "Move"
+script = ExtResource("2_r5b0f")
+objective = "First, try moving around."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_fx3un"]
+resource_name = "Sprint"
+script = ExtResource("2_r5b0f")
+objective = "Now try sprinting."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_5eatj"]
+resource_name = "Summon"
+script = ExtResource("2_r5b0f")
+objective = "Drain areas deplete batteries. Try summoning one under the hunter by holding summon until the meter is full, then releasing."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_ljdkr"]
+resource_name = "VisibleInfo"
+script = ExtResource("2_r5b0f")
+objective = "You are invisible to hunters when you see yourself as [pulse freq=1.0 color=#ffffff4f ease=-2.0]translucent[/pulse]. You become visible when you sprint, summon, grab, or take damage."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_t00pl"]
+resource_name = "Visible"
+script = ExtResource("2_r5b0f")
+objective = "Try becoming visible by sprinting, summoning,
+grabbing, or taking damage.
+"
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_a7qnb"]
+resource_name = "AlertInfo"
+script = ExtResource("2_r5b0f")
+objective = "Hunters are alerted as you draw near, even if they can't see you. The circles around you show the areas for low and high alerts."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_7teru"]
+resource_name = "Alert"
+script = ExtResource("3_5y0cp")
+sub_quests = Array[ExtResource("2_r5b0f")]([SubResource("Resource_osr1n"), SubResource("Resource_3jbmy")])
+objective = "Try moving to put the hunter in low and then high alert."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_41785"]
+resource_name = "GrabInfo"
+script = ExtResource("2_r5b0f")
+objective = "Your goal is to make all the hunters faint by grabbing them."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_txx1p"]
+resource_name = "Grab"
+script = ExtResource("2_r5b0f")
+objective = "Try touching the hunter to [shake rate=5.0 level=6 connected=1]grab[/shake] them. After a brief pause, you will move a grabbed hunter for a few seconds and then drop them."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_rhmfh"]
+resource_name = "DamageInfo"
+script = ExtResource("2_r5b0f")
+objective = "Flashlights damage you, stun you, and make you panic.
+You cannot grab a hunter while panicked."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_2a4mi"]
+resource_name = "Damage"
+script = ExtResource("2_r5b0f")
+objective = "Try getting hit by the hunter's flashlight."
+is_started = false
+is_completed = false
+
+[sub_resource type="Resource" id="Resource_g171c"]
+resource_name = "Complete"
+script = ExtResource("2_r5b0f")
+objective = "[rainbow freq=0.6 sat=0.6 val=1]Ghost tutorial complete. Happy haunting![/rainbow]"
+is_started = false
+is_completed = false
+
+[node name="Tutorial" instance=ExtResource("1_i6ivc")]
+script = ExtResource("1_c6pgd")
+low_alert_quest = SubResource("Resource_osr1n")
+high_alert_quest = SubResource("Resource_3jbmy")
+quests = Array[ExtResource("2_r5b0f")]([SubResource("Resource_lfxhu"), SubResource("Resource_f0tmj"), SubResource("Resource_fx3un"), SubResource("Resource_5eatj"), SubResource("Resource_ljdkr"), SubResource("Resource_t00pl"), SubResource("Resource_a7qnb"), SubResource("Resource_7teru"), SubResource("Resource_41785"), SubResource("Resource_txx1p"), SubResource("Resource_rhmfh"), SubResource("Resource_2a4mi"), SubResource("Resource_g171c")])
+play_complete_sound = Array[ExtResource("2_r5b0f")]([SubResource("Resource_f0tmj"), SubResource("Resource_fx3un"), SubResource("Resource_5eatj"), SubResource("Resource_t00pl"), SubResource("Resource_7teru"), SubResource("Resource_txx1p"), SubResource("Resource_2a4mi")])
+
+[node name="Welcome" parent="QuestNodes" index="0" instance=ExtResource("5_s13op")]
+quest = SubResource("Resource_lfxhu")
+
+[node name="Move" parent="QuestNodes" index="1" instance=ExtResource("6_x00k6")]
+quest = SubResource("Resource_f0tmj")
+
+[node name="Sprint" parent="QuestNodes" index="2" instance=ExtResource("6_x00k6")]
+quest = SubResource("Resource_fx3un")
+
+[node name="Summon" type="Node" parent="QuestNodes" index="3"]
+script = ExtResource("7_7l8aw")
+quest = SubResource("Resource_5eatj")
+
+[node name="VisibleInfo" parent="QuestNodes" index="4" instance=ExtResource("5_s13op")]
+quest = SubResource("Resource_ljdkr")
+
+[node name="Visible" parent="QuestNodes" index="5" instance=ExtResource("6_x00k6")]
+quest = SubResource("Resource_t00pl")
+
+[node name="AlertInfo" parent="QuestNodes" index="6" instance=ExtResource("5_s13op")]
+quest = SubResource("Resource_a7qnb")
+
+[node name="GrabInfo" parent="QuestNodes" index="7" instance=ExtResource("5_s13op")]
+quest = SubResource("Resource_41785")
+
+[node name="Grab" type="Node" parent="QuestNodes" index="8"]
+script = ExtResource("7_7l8aw")
+quest = SubResource("Resource_txx1p")
+
+[node name="DamageInfo" parent="QuestNodes" index="9" instance=ExtResource("5_s13op")]
+quest = SubResource("Resource_rhmfh")
+
+[node name="Damage" type="Node" parent="QuestNodes" index="10"]
+script = ExtResource("7_7l8aw")
+quest = SubResource("Resource_2a4mi")
+
+[node name="FollowPlayer" parent="Ghost/IgnoreCanvasModulate" index="0"]
+position = Vector2(368, 248)
+
+[node name="Hunter" parent="." index="9" node_paths=PackedStringArray("controller")]
+controller = NodePath("NPCHunter")
+
+[node name="NPCHunter" parent="Hunter" index="17" node_paths=PackedStringArray("ghost") instance=ExtResource("12_2andj")]
+ghost = NodePath("../../Ghost")
+
+[connection signal="camera_limits_applied" from="." to="Ghost/Camera2D" method="center"]
+[connection signal="completed" from="QuestNodes/Summon" to="." method="set_auto_recharge" binds= [false]]
+[connection signal="started" from="QuestNodes/Summon" to="." method="set_auto_recharge" binds= [true]]
+[connection signal="started" from="QuestNodes/Grab" to="." method="recharge_all"]
+[connection signal="completed" from="QuestNodes/Damage" to="." method="set_auto_recharge" binds= [false]]
+[connection signal="started" from="QuestNodes/Damage" to="." method="set_auto_recharge" binds= [true]]
+[connection signal="summoned" from="Ghost/Summon" to="QuestNodes/Summon" method="complete"]
+[connection signal="state_entered" from="Ghost/StateChart/Base/Behavior/Dead" to="." method="revive_ghost"]
+[connection signal="state_entered" from="Ghost/StateChart/Base/Animation/Move" to="QuestNodes/Move" method="start"]
+[connection signal="state_exited" from="Ghost/StateChart/Base/Animation/Move" to="QuestNodes/Move" method="stop"]
+[connection signal="state_entered" from="Ghost/StateChart/Base/Animation/Sprint" to="QuestNodes/Move" method="start"]
+[connection signal="state_entered" from="Ghost/StateChart/Base/Animation/Sprint" to="QuestNodes/Sprint" method="start"]
+[connection signal="state_exited" from="Ghost/StateChart/Base/Animation/Sprint" to="QuestNodes/Move" method="stop"]
+[connection signal="state_exited" from="Ghost/StateChart/Base/Animation/Sprint" to="QuestNodes/Sprint" method="stop"]
+[connection signal="state_entered" from="Ghost/StateChart/Base/Animation/Panic" to="QuestNodes/Move" method="start"]
+[connection signal="state_exited" from="Ghost/StateChart/Base/Animation/Panic" to="QuestNodes/Move" method="stop"]
+[connection signal="state_entered" from="Ghost/StateChart/Base/Visibility/Visibile" to="QuestNodes/Visible" method="start"]
+[connection signal="state_exited" from="Ghost/StateChart/Base/Visibility/Visibile" to="QuestNodes/Visible" method="stop"]
+[connection signal="damage_taken" from="Ghost/DamageSignals/WeakTo" to="QuestNodes/Damage" method="complete"]
+[connection signal="dropped" from="Hunter" to="HunterReviveTimer" method="start"]
+[connection signal="dropped" from="Hunter" to="QuestNodes/Grab" method="complete"]
+
+[editable path="Ghost"]
+[editable path="Ghost/Invisibility"]
+[editable path="Ghost/PlayerControllerStack"]

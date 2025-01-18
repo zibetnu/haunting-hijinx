@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Node2D
 
 const COSTUME_GROUP = &"hunter_costumes"
 const PALETTE_PARAMETER = &"new_palette"
@@ -52,6 +52,9 @@ func play_effect(value: String) -> void:
 
 func set_costume_rotation(value: float) -> void:
 	costume_rotation = value
+	if not is_node_ready():
+		await ready
+
 	var x_frame: int = roundi(remap(
 			_normalize_rotation(costume_rotation),
 			MIN_ROTATION, TAU,

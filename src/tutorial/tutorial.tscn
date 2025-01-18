@@ -1,0 +1,418 @@
+[gd_scene load_steps=45 format=3 uid="uid://c64tx6254qrlp"]
+
+[ext_resource type="Script" path="res://src/tutorial/tutorial.gd" id="1_031tw"]
+[ext_resource type="AudioStream" uid="uid://fiew3im75jjx" path="res://assets/quest_complete.wav" id="4_dn1cl"]
+[ext_resource type="PackedScene" uid="uid://ebt35jjk5feh" path="res://src/level/main_floor/tile_maps.tscn" id="8_qub2g"]
+[ext_resource type="PackedScene" uid="uid://b0jfn7wspsy4c" path="res://src/level/level_lighting.tscn" id="9_xmgwu"]
+[ext_resource type="Texture2D" uid="uid://bntsrcd3hjcex" path="res://addons/input_prompts/icons/generic/left_stick_up.png" id="13_lobwg"]
+[ext_resource type="Script" path="res://addons/input_prompts/action_prompt/action_prompt.gd" id="14_qs7j1"]
+[ext_resource type="Texture2D" uid="uid://cah6r1q5x2lte" path="res://addons/input_prompts/icons/generic/left_stick_left.png" id="15_alb5o"]
+[ext_resource type="PackedScene" uid="uid://8qaswvkeb8qd" path="res://src/ghost/ghost.tscn" id="16_k10kj"]
+[ext_resource type="Texture2D" uid="uid://dreirjfpqj40a" path="res://addons/input_prompts/icons/generic/left_stick_down.png" id="16_q45ce"]
+[ext_resource type="Texture2D" uid="uid://c03r3n0nfrjck" path="res://addons/input_prompts/icons/generic/left_stick_right.png" id="17_007sg"]
+[ext_resource type="PackedScene" uid="uid://ccvsw508kh4ot" path="res://src/hunter/hunter.tscn" id="17_doxs5"]
+[ext_resource type="Texture2D" uid="uid://b1e23gj3k1klg" path="res://addons/input_prompts/icons/xbox/a.png" id="18_xkse3"]
+[ext_resource type="Texture2D" uid="uid://c6cv5phl3gvvn" path="res://addons/input_prompts/icons/xbox/right_trigger.png" id="19_kko02"]
+[ext_resource type="Texture2D" uid="uid://deib2tqcg5df0" path="res://addons/input_prompts/icons/xbox/x.png" id="20_arquq"]
+[ext_resource type="Texture2D" uid="uid://dx1u47qkx4in8" path="res://addons/input_prompts/icons/xbox/left_trigger.png" id="21_c5mti"]
+[ext_resource type="Texture2D" uid="uid://lx67x2lremab" path="res://addons/input_prompts/icons/xbox/view.png" id="22_q7vh3"]
+[ext_resource type="Texture2D" uid="uid://b6d4bxaob4k6j" path="res://addons/input_prompts/icons/xbox/menu.png" id="23_khlqh"]
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_36fcv"]
+device = -1
+axis = 1
+axis_value = -1.0
+
+[sub_resource type="InputEventKey" id="InputEventKey_igw3r"]
+device = -1
+physical_keycode = 87
+unicode = 119
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_xyo65"]
+device = -1
+button_index = 11
+pressed = true
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_ycevk"]
+device = -1
+axis_value = -1.0
+
+[sub_resource type="InputEventKey" id="InputEventKey_ykw2a"]
+device = -1
+physical_keycode = 65
+unicode = 97
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_m57kw"]
+device = -1
+button_index = 13
+pressed = true
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_3oyw2"]
+device = -1
+axis = 1
+axis_value = 1.0
+
+[sub_resource type="InputEventKey" id="InputEventKey_kn58i"]
+device = -1
+physical_keycode = 83
+unicode = 115
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_pk86m"]
+device = -1
+button_index = 12
+pressed = true
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_hg05f"]
+device = -1
+axis_value = 1.0
+
+[sub_resource type="InputEventKey" id="InputEventKey_yuscm"]
+device = -1
+physical_keycode = 68
+unicode = 100
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_7qlc7"]
+device = -1
+button_index = 14
+pressed = true
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_o4pmi"]
+device = -1
+pressed = true
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_u3pui"]
+device = -1
+axis = 5
+axis_value = 1.0
+
+[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_4edw6"]
+device = -1
+button_mask = 1
+position = Vector2(160, 15)
+global_position = Vector2(164, 58)
+button_index = 1
+pressed = true
+
+[sub_resource type="InputEventKey" id="InputEventKey_4l3ue"]
+device = -1
+physical_keycode = 4194325
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_fq5ar"]
+device = -1
+button_index = 2
+pressed = true
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_v6m0m"]
+device = -1
+axis = 4
+axis_value = 1.0
+
+[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_hj75l"]
+device = -1
+button_mask = 2
+position = Vector2(270, 5)
+global_position = Vector2(274, 48)
+button_index = 2
+pressed = true
+
+[sub_resource type="InputEventKey" id="InputEventKey_p6sgx"]
+device = -1
+physical_keycode = 32
+unicode = 32
+
+[sub_resource type="Animation" id="Animation_v2eoj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ekub6"]
+resource_name = "new_animation"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p7i1o"]
+_data = {
+"RESET": SubResource("Animation_v2eoj"),
+"fade": SubResource("Animation_ekub6")
+}
+
+[sub_resource type="InputEventKey" id="InputEventKey_autma"]
+keycode = 4194306
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_7do58"]
+device = -1
+button_index = 4
+
+[sub_resource type="InputEventKey" id="InputEventKey_j3en1"]
+device = -1
+physical_keycode = 4194305
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_kws6f"]
+device = -1
+button_index = 6
+
+[node name="Tutorial" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_031tw")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_dn1cl")
+volume_db = -6.0
+bus = &"Effects"
+
+[node name="HunterReviveTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="QuestNodes" type="Node" parent="."]
+
+[node name="TileMaps" parent="." instance=ExtResource("8_qub2g")]
+
+[node name="LevelLighting" parent="." instance=ExtResource("9_xmgwu")]
+
+[node name="LimitTopLeft" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 6)
+
+[node name="LimitBottomRight" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(736, 432)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(640, 0)
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -69.0
+offset_right = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/MarginContainer"]
+self_modulate = Color(1, 1, 1, 0.498039)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Prompts" type="GridContainer" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Move" type="Label" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Move:"
+horizontal_alignment = 2
+
+[node name="MovePrompt" type="GridContainer" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts"]
+layout_mode = 2
+size_flags_vertical = 8
+columns = 3
+
+[node name="LeftSpacer" type="Control" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/MovePrompt"]
+layout_mode = 2
+
+[node name="MoveUp" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("13_lobwg")
+stretch_mode = 5
+script = ExtResource("14_qs7j1")
+action = "move_up"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventJoypadMotion_36fcv"), SubResource("InputEventKey_igw3r"), SubResource("InputEventJoypadButton_xyo65")])
+
+[node name="RightSpacer" type="Control" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/MovePrompt"]
+layout_mode = 2
+
+[node name="MoveLeft" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("15_alb5o")
+stretch_mode = 5
+script = ExtResource("14_qs7j1")
+action = "move_left"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventJoypadMotion_ycevk"), SubResource("InputEventKey_ykw2a"), SubResource("InputEventJoypadButton_m57kw")])
+
+[node name="MoveDown" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("16_q45ce")
+stretch_mode = 5
+script = ExtResource("14_qs7j1")
+action = "move_down"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventJoypadMotion_3oyw2"), SubResource("InputEventKey_kn58i"), SubResource("InputEventJoypadButton_pk86m")])
+
+[node name="MoveRight" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("17_007sg")
+stretch_mode = 5
+script = ExtResource("14_qs7j1")
+action = "move_right"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventJoypadMotion_hg05f"), SubResource("InputEventKey_yuscm"), SubResource("InputEventJoypadButton_7qlc7")])
+
+[node name="Sprint" type="Label" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Sprint:"
+horizontal_alignment = 2
+
+[node name="Button1Prompt" type="HBoxContainer" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="ActionPrompt" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/Button1Prompt" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("18_xkse3")
+stretch_mode = 5
+script = ExtResource("14_qs7j1")
+action = "button_1"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventJoypadButton_o4pmi"), SubResource("InputEventJoypadMotion_u3pui"), SubResource("InputEventMouseButton_4edw6"), SubResource("InputEventKey_4l3ue")])
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/Button1Prompt"]
+layout_mode = 2
+text = "or"
+
+[node name="ActionPrompt2" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/Button1Prompt" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("19_kko02")
+stretch_mode = 5
+script = ExtResource("14_qs7j1")
+skip_events = 1
+action = "button_1"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventJoypadButton_o4pmi"), SubResource("InputEventJoypadMotion_u3pui"), SubResource("InputEventMouseButton_4edw6"), SubResource("InputEventKey_4l3ue")])
+
+[node name="Summon" type="Label" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Summon:"
+horizontal_alignment = 2
+
+[node name="Button2Prompt" type="HBoxContainer" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="ActionPrompt" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/Button2Prompt" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("20_arquq")
+stretch_mode = 5
+script = ExtResource("14_qs7j1")
+action = "button_2"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventJoypadButton_fq5ar"), SubResource("InputEventJoypadMotion_v6m0m"), SubResource("InputEventMouseButton_hj75l"), SubResource("InputEventKey_p6sgx")])
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/Button2Prompt"]
+layout_mode = 2
+text = "or"
+
+[node name="ActionPrompt2" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/Button2Prompt" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("21_c5mti")
+stretch_mode = 5
+script = ExtResource("14_qs7j1")
+skip_events = 1
+action = "button_2"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventJoypadButton_fq5ar"), SubResource("InputEventJoypadMotion_v6m0m"), SubResource("InputEventMouseButton_hj75l"), SubResource("InputEventKey_p6sgx")])
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0.498039)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Objective" type="RichTextLabel" parent="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+bbcode_enabled = true
+fit_content = true
+visible_characters_behavior = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer/Objective"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_p7i1o")
+}
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0.498039)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+columns = 2
+
+[node name="SkipPrompt" type="TextureRect" parent="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer2/GridContainer" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("22_q7vh3")
+stretch_mode = 5
+script = ExtResource("14_qs7j1")
+action = "ui_focus_next"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventKey_autma"), SubResource("InputEventJoypadButton_7do58")])
+
+[node name="SkipLabel" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer2/GridContainer"]
+layout_mode = 2
+text = "Skip"
+
+[node name="ExitPrompt" type="TextureRect" parent="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer2/GridContainer" groups=["exclude_button_sounds"]]
+layout_mode = 2
+texture = ExtResource("23_khlqh")
+stretch_mode = 5
+script = ExtResource("14_qs7j1")
+action = "open_menu"
+icon = 0
+events = Array[InputEvent]([SubResource("InputEventKey_j3en1"), SubResource("InputEventJoypadButton_kws6f")])
+
+[node name="ExitLabel" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer2/GridContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="Ghost" parent="." instance=ExtResource("16_k10kj")]
+unique_name_in_owner = true
+position = Vector2(368, 248)
+metadata/_edit_group_ = true
+
+[node name="Hunter" parent="." instance=ExtResource("17_doxs5")]
+unique_name_in_owner = true
+position = Vector2(368, 128)
+metadata/_edit_group_ = true
+
+[connection signal="timeout" from="HunterReviveTimer" to="." method="revive_hunter"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer2/GridContainer/SkipPrompt" to="." method="_on_skip_prompt_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer2/GridContainer/ExitPrompt" to="." method="_on_exit_prompt_pressed"]

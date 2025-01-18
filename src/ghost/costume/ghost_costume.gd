@@ -1,4 +1,5 @@
 @tool  # Allows editor to see results of setting frame_coord_x and y.
+class_name GhostCostume
 extends Sprite2D
 
 const _MIN_FRAME = 0

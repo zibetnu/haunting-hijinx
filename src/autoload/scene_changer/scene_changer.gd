@@ -3,6 +3,8 @@ extends Node
 @export var lobby: PackedScene
 @export var lobby_browser: PackedScene
 @export var main_menu: PackedScene
+@export var ghost_tutorial: PackedScene
+@export var hunter_tutorial: PackedScene
 
 @onready var disconnected_dialog: AcceptDialog = $DisconnectedDialog
 @onready var scene_spawner: MultiplayerSpawner = $SceneSpawner
@@ -32,6 +34,14 @@ func change_to_lobby_browser() -> void:
 
 func change_to_main_menu() -> void:
 	change_scene_to_packed(main_menu)
+
+
+func change_to_ghost_tutorial() -> void:
+	change_scene_to_packed(ghost_tutorial)
+
+
+func change_to_hunter_tutorial() -> void:
+	change_scene_to_packed(hunter_tutorial)
 
 
 func join_lobby(lobby_id: int) -> void:

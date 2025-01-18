@@ -54,6 +54,30 @@
 			"category": "Addons",
 			"contact": "",
 			"copyright": [
+				"John Pennycook"
+			],
+			"description": "Adds input prompts with support for keyboard/mouse and controllers.",
+			"id": "input-prompts",
+			"licenses": [
+				{
+					"file": "res://addons/input_prompts/LICENSE",
+					"identifier": "MIT",
+					"name": "MIT License",
+					"text": "",
+					"web": ""
+				}
+			],
+			"name": "Input Prompts",
+			"paths": [
+				"res://addons/input_prompts"
+			],
+			"version": "2.3.0",
+			"web": ""
+		},
+		{
+			"category": "Addons",
+			"contact": "",
+			"copyright": [
 				"Iceflower S"
 			],
 			"description": "Manage license and copyright for third party graphics, software or libraries.",
@@ -255,6 +279,28 @@
 			],
 			"version": "",
 			"web": "https://freesound.org/s/217498/"
+		},
+		{
+			"category": "Assets",
+			"contact": "",
+			"copyright": [],
+			"description": "",
+			"id": "you_find_a_treasure",
+			"licenses": [
+				{
+					"file": "",
+					"identifier": "CC0",
+					"name": "CC0-1.0",
+					"text": "",
+					"web": "https://creativecommons.org/publicdomain/zero/1.0/"
+				}
+			],
+			"name": "You find a treasure",
+			"paths": [
+				"res://assets/quest_complete.wav"
+			],
+			"version": "",
+			"web": "https://freesound.org/s/632661/"
 		},
 		{
 			"category": "Shaders",
