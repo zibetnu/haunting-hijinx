@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2025-01-17
+
+### Added
+
+- Interactive ghost and hunter tutorials.
+
+### Changed
+
+- Simplified hunter costume rendering to fix issues the old rendering caused in the tutorials. This comes with a small performance benefit and makes animations slightly less delayed.
+- Simplified level centering by using camera offsets instead of moving the entire level. This should look identical in practice but with much less jank behind the scenes.
+- Many other small technical changes needed to make the tutorials work.
+
+### Fixed
+
+- Hunters see battery alerts while fainted.
+
 ## [1.3.1] - 2024-12-29
 
 ### Fixed
@@ -148,6 +164,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
+[1.4.0]: https://github.com/zibetnu/haunting-hijinx/compare/1.3.1...1.4.0
 [1.3.1]: https://github.com/zibetnu/haunting-hijinx/compare/1.3.0...1.3.1
 [1.3.0]: https://github.com/zibetnu/haunting-hijinx/compare/1.2.0...1.3.0
 [1.2.0]: https://github.com/zibetnu/haunting-hijinx/compare/1.1.0...1.2.0
