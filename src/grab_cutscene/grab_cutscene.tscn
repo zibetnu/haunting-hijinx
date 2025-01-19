@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsgx1owl3cxou"]
+[gd_scene load_steps=5 format=3 uid="uid://bsgx1owl3cxou"]
 
 [ext_resource type="Script" path="res://src/grab_cutscene/grab_cutscene.gd" id="1_53wad"]
 [ext_resource type="AudioStream" uid="uid://b450kuirfnnfq" path="res://assets/ghost_grab.wav" id="2_0vh0e"]
+[ext_resource type="PackedScene" uid="uid://dhj7akigo4yvt" path="res://src/grab_cutscene/spotlight/spotlight.tscn" id="3_df6ec"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ujmsm"]
 properties/0/path = NodePath(".:cutscene_in_progress")
@@ -21,7 +22,23 @@ replication_config = SubResource("SceneReplicationConfig_ujmsm")
 
 [node name="Timer" type="Timer" parent="."]
 process_mode = 3
-wait_time = 2.0
 one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Spotlight" parent="CanvasLayer" instance=ExtResource("3_df6ec")]
+unique_name_in_owner = true
+visible = false
+
+[node name="Transition" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [connection signal="timeout" from="Timer" to="." method="end_cutscene"]
