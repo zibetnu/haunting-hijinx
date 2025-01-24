@@ -325,6 +325,30 @@
 			],
 			"version": "",
 			"web": "https://godotshaders.com/shader/circular-waves-2d/"
+		},
+		{
+			"category": "Shaders",
+			"contact": "",
+			"copyright": [
+				"p4rfait "
+			],
+			"description": "",
+			"id": "spotlight_effect",
+			"licenses": [
+				{
+					"file": "",
+					"identifier": "CC0",
+					"name": "CC0-1.0",
+					"text": "",
+					"web": "https://creativecommons.org/publicdomain/zero/1.0/"
+				}
+			],
+			"name": "Spotlight Effect/Transition with Feathering & Position",
+			"paths": [
+				"res://src/grab_cutscene/spotlight/spotlight.gdshader"
+			],
+			"version": "",
+			"web": "https://godotshaders.com/shader/spotlight-effect-transition-with-feathering-position/"
 		}
 	]
 }
