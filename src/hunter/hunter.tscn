@@ -377,6 +377,7 @@ layout_mode = 2
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="." method="enable_alive_collision_layer"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="DamageSignals" method="set_monitorable" flags=3 binds= [true]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="HunterCostume/Effects" method="play" binds= [&"RESET"]]
+[connection signal="delta_synchronized" from="Camera2D/MultiplayerSynchronizer" to="Camera2D" method="center"]
 [connection signal="sensed_intensity_changed" from="AuraSense" to="HeartbeatRumble" method="set_heart_rate_from_index"]
 [connection signal="sensed_intensity_changed" from="AuraSense" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_alert_level_from_int"]
 [connection signal="damaged_by" from="DamageSignals" to="DamageSignals/Revivable" method="take_damage"]
