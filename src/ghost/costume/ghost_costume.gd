@@ -12,7 +12,6 @@ const _MIN_ROTATION = 0.0
 	get = get_frame_coord_y,
 	set = set_frame_coord_y
 
-@onready var effects: AnimationPlayer = $Effects
 @onready var ghost: AnimationPlayer = $Ghost
 
 
