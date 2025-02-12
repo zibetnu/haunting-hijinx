@@ -118,12 +118,7 @@ func _tween_zoom(camera: CenteredCamera) -> void:
 			ZOOM_TIME
 	)
 	tween.tween_interval(HOLD_TIME)
-	tween.tween_method(
-			camera.set_zoom_centered,
-			ZOOM_END,
-			ZOOM_START,
-			ZOOM_TIME
-	)
+	tween.tween_callback(camera.set_zoom.bind(ZOOM_START))
 
 
 func _on_cutscene_started() -> void:
