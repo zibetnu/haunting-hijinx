@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=45 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -94,6 +94,11 @@ fill_to = Vector2(0.5, 0)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_isui6"]
 properties/0/path = NodePath(".:text")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_sv7vo"]
+properties/0/path = NodePath(".:visible")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
@@ -301,11 +306,15 @@ horizontal_alignment = 1
 replication_config = SubResource("SceneReplicationConfig_isui6")
 
 [node name="NotificationContainer" type="HBoxContainer" parent="IgnoreCanvasModulate/FollowPlayer"]
+unique_name_in_owner = true
 offset_left = -32.0
 offset_top = -42.0
 offset_right = 32.0
 offset_bottom = -26.0
 alignment = 1
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer"]
+replication_config = SubResource("SceneReplicationConfig_sv7vo")
 
 [node name="ReviveBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("24_qych1")]
 visible = false
