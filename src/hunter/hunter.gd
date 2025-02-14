@@ -36,6 +36,7 @@ func on_grabbed() -> void:
 
 
 func on_dropped() -> void:
+	z_index = -1
 	dropped.emit()
 
 
