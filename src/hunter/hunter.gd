@@ -12,6 +12,7 @@ const IS_MOVING = &"is_moving"
 
 @onready var flashlight: Flashlight = $Flashlight/Behavior
 @onready var move: Move = $StateChart/Base/Alive/Movement/Move/Move
+@onready var notification_container: HBoxContainer = %NotificationContainer
 @onready var state_chart: StateChart = $StateChart
 
 
@@ -32,10 +33,12 @@ func enable_invulnerable_collision_layer() -> void:
 
 
 func on_grabbed() -> void:
+	notification_container.hide()
 	state_chart.send_event(GRABBED_EVENT)
 
 
 func on_dropped() -> void:
+	notification_container.show()
 	z_index = -1
 	dropped.emit()
 
