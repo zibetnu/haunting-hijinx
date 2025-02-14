@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2025-02-14
+
+### Added
+
+- Ghost grab animation.
+
+### Changed
+
+- A grabbed hunter's alerts are hidden during the grab cutscene to reduce visual clutter.
+
+### Fixed
+
+- Spotlight appears stretched on different aspect ratios unless the game window is resized after the level has loaded.
+
+### Removed
+
+- Gradual zooming out only present in the ghost's perspective of the grab cutscene. Now the ghost and hunters see the same thing.
+
 ## [1.6.0] - 2025-02-03
 
 ### Changed
@@ -180,6 +198,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
+[1.7.0]: https://github.com/zibetnu/haunting-hijinx/compare/1.6.0...1.7.0
 [1.6.0]: https://github.com/zibetnu/haunting-hijinx/compare/1.5.0...1.6.0
 [1.5.0]: https://github.com/zibetnu/haunting-hijinx/compare/1.4.0...1.5.0
 [1.4.0]: https://github.com/zibetnu/haunting-hijinx/compare/1.3.1...1.4.0
