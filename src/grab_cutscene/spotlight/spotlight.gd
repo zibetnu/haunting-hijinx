@@ -20,6 +20,7 @@ const HEIGHT_PARAMETER = &"screen_height"
 
 func _ready() -> void:
 	_window.size_changed.connect(_on_window_size_changed)
+	_on_window_size_changed()
 
 
 func set_focus_on(value: CanvasItem) -> void:

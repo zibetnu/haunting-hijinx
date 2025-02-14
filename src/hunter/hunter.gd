@@ -39,6 +39,7 @@ func on_grabbed() -> void:
 
 func on_dropped() -> void:
 	notification_container.show()
+	z_index = -1
 	dropped.emit()
 
 
