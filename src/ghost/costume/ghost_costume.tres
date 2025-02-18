@@ -14,24 +14,22 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
-tracks/1/type = "method"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Effects")
+tracks/1/path = NodePath(".:frame_coord_x")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["RESET", -1, 1.0, false],
-"method": &"play"
-}]
+"update": 1,
+"values": [0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Stun:playing")
+tracks/2/path = NodePath(".:lock_rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -40,22 +38,20 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
-tracks/3/type = "value"
+tracks/3/type = "animation"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath(".:frame_coord_x")
+tracks/3/path = NodePath("Effects")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
+"clips": PackedStringArray("RESET"),
+"times": PackedFloat32Array(0)
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath(".:lock_rotation")
+tracks/4/path = NodePath("Stun:playing")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -79,31 +75,27 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
-tracks/1/type = "method"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Effects")
+tracks/1/path = NodePath(".:lock_rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["RESET", -1, 1.0, false],
-"method": &"play"
-}]
+"update": 1,
+"values": [false]
 }
-tracks/2/type = "value"
+tracks/2/type = "animation"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:lock_rotation")
+tracks/2/path = NodePath("Effects")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"clips": PackedStringArray("RESET"),
+"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="Animation" id="Animation_i1m0d"]
@@ -150,31 +142,27 @@ tracks/0/keys = {
 "update": 1,
 "values": [0, 1, 2, 1]
 }
-tracks/1/type = "method"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Effects")
+tracks/1/path = NodePath(".:lock_rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["RESET", -1, 1.0, false],
-"method": &"play"
-}]
+"update": 1,
+"values": [false]
 }
-tracks/2/type = "value"
+tracks/2/type = "animation"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:lock_rotation")
+tracks/2/path = NodePath("Effects")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"clips": PackedStringArray("RESET"),
+"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="Animation" id="Animation_7d02g"]
@@ -193,31 +181,27 @@ tracks/0/keys = {
 "update": 1,
 "values": [0, 1, 2, 1]
 }
-tracks/1/type = "method"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Effects")
+tracks/1/path = NodePath(".:lock_rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["RESET", -1, 1.0, false],
-"method": &"play"
-}]
+"update": 1,
+"values": [false]
 }
-tracks/2/type = "value"
+tracks/2/type = "animation"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:lock_rotation")
+tracks/2/path = NodePath("Effects")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"clips": PackedStringArray("RESET"),
+"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="Animation" id="Animation_hgars"]
@@ -235,31 +219,27 @@ tracks/0/keys = {
 "update": 1,
 "values": [0, 1]
 }
-tracks/1/type = "method"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Effects")
+tracks/1/path = NodePath(".:lock_rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["canvas_item/pulse", -1, 1.0, false],
-"method": &"play"
-}]
+"update": 1,
+"values": [false]
 }
-tracks/2/type = "value"
+tracks/2/type = "animation"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:lock_rotation")
+tracks/2/path = NodePath("Effects")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"clips": PackedStringArray("canvas_item/pulse"),
+"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="Animation" id="Animation_hs0th"]
@@ -278,31 +258,27 @@ tracks/0/keys = {
 "update": 1,
 "values": [3, 4, 5, 4]
 }
-tracks/1/type = "method"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Effects")
+tracks/1/path = NodePath(".:lock_rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["RESET", -1, 1.0, false],
-"method": &"play"
-}]
+"update": 1,
+"values": [false]
 }
-tracks/2/type = "value"
+tracks/2/type = "animation"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:lock_rotation")
+tracks/2/path = NodePath("Effects")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"clips": PackedStringArray("RESET"),
+"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="Animation" id="Animation_rlge5"]
@@ -319,43 +295,39 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
-tracks/1/type = "method"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Effects")
+tracks/1/path = NodePath(".:lock_rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["sprite/shake", -1, 1.0, false],
-"method": &"play"
-}]
+"update": 1,
+"values": [false]
 }
-tracks/2/type = "value"
+tracks/2/type = "animation"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Stun:playing")
+tracks/2/path = NodePath("Effects")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"clips": PackedStringArray("sprite/shake"),
+"times": PackedFloat32Array(0.001)
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath(".:lock_rotation")
+tracks/3/path = NodePath("Stun:playing")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_louju"]
@@ -374,43 +346,39 @@ tracks/0/keys = {
 "update": 1,
 "values": [10]
 }
-tracks/1/type = "method"
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Effects")
+tracks/1/path = NodePath(".:frame_coord_x")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": ["RESET", -1, 1.0, false],
-"method": &"play"
-}]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:frame_coord_x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.0625, 0.125, 0.1875, 0.25, 0.3125, 0.375, 0.4375),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:lock_rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:lock_rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/3/type = "animation"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Effects")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": PackedStringArray("RESET"),
+"times": PackedFloat32Array(0)
 }
 
 [resource]
