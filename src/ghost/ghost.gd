@@ -11,6 +11,7 @@ const IS_MOVING = &"is_moving"
 @onready var move_normal: Move = $StateChart/Base/Behavior/Alive/Normal/Move
 @onready var move_panic: Move = $StateChart/Base/Behavior/Alive/Panic/Move
 @onready var move_sprint: Move = $StateChart/Base/Behavior/Alive/Sprint/Move
+@onready var move_summon_release: Move = $StateChart/Base/Behavior/Alive/SummonRelease/Move
 
 @onready var state_chart: StateChart = $StateChart
 @onready var normal: AtomicState = $StateChart/Base/Behavior/Alive/Normal
@@ -46,6 +47,7 @@ func _get_pairs() -> Array[Pair]:
 		p.new(c.move_vector_changed, move_panic.set_move_vector),
 		p.new(c.move_vector_changed, move_normal.set_move_vector),
 		p.new(c.move_vector_changed, move_sprint.set_move_vector),
+		p.new(c.move_vector_changed, move_summon_release.set_move_vector),
 		p.new(normal.state_entered, c.force_emit_button_1_signals),
 		p.new(normal.state_entered, c.force_emit_button_2_signals),
 		p.new(normal.state_entered, c.force_emit_move_vector_signals),
