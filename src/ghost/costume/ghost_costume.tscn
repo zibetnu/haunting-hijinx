@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://klrwcohuhynk"]
+[gd_scene load_steps=12 format=3 uid="uid://klrwcohuhynk"]
 
 [ext_resource type="Script" path="res://src/ghost/costume/ghost_costume.gd" id="1_giptv"]
 [ext_resource type="Texture2D" uid="uid://cqklbgsp8hsst" path="res://assets/ghost/ghost.png" id="1_su5en"]
@@ -6,6 +6,9 @@
 [ext_resource type="AnimationLibrary" uid="uid://krtfia4oqseg" path="res://src/animation_libaries/sprite.tres" id="4_httx6"]
 [ext_resource type="AnimationLibrary" uid="uid://cpgm7lkqrgqbv" path="res://src/ghost/costume/ghost_costume.tres" id="5_tqb6x"]
 [ext_resource type="AudioStream" uid="uid://brjvbwuqm27ud" path="res://assets/ghost/ghost_stun.wav" id="6_0krtw"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v324n"]
+light_mode = 1
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_euls0"]
 properties/0/path = NodePath(".:frame_coord_x")
@@ -49,17 +52,23 @@ properties/0/path = NodePath(".:current_animation")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[node name="GhostCostume" type="Sprite2D"]
+[node name="GhostCostume" type="Node2D"]
 position = Vector2(0, -10)
+script = ExtResource("1_giptv")
+
+[node name="ParentOffset" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParentOffset"]
+material = SubResource("CanvasItemMaterial_v324n")
 texture = ExtResource("1_su5en")
 hframes = 8
 vframes = 16
-script = ExtResource("1_giptv")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_euls0")
 
 [node name="Effects" type="AnimationPlayer" parent="."]
+root_node = NodePath("../ParentOffset/Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_mpegg"),
 "canvas_item": ExtResource("3_fxyvi"),
