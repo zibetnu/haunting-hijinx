@@ -731,7 +731,7 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="health_filled" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="StateChart" method="send_event" binds= [&"revived"]]
 [connection signal="health_percentage_changed" from="DamageSignals/WeakTo/DamageValueSignal/Health" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="set_as_ratio_floored"]
 [connection signal="body_entered" from="Grab" to="Grab/Grabber" method="grab"]
-[connection signal="grabbed_target" from="Grab/Grabber" to="StateChart" method="send_event" binds= [&"grab_started"]]
+[connection signal="grabbed_target" from="Grab/Grabber" to="." method="_on_grabber_grabbed_target"]
 [connection signal="first_node_entered" from="HuntersTouched" to="StateChart" method="send_event" binds= [&"hunters_touched"]]
 [connection signal="last_node_exited" from="HuntersTouched" to="StateChart" method="send_event" binds= [&"no_hunters_touched"]]
 

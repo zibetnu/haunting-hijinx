@@ -1,7 +1,7 @@
 class_name Grabber
 extends Node2D
 
-signal grabbed_target
+signal grabbed_target(from_global_position: Vector2)
 signal dropped_target
 
 const GRABBED_METHOD = &"on_grabbed"
@@ -18,11 +18,12 @@ func grab(target: Node2D) -> void:
 	if prior_target != null:
 		drop()
 
+	var grabbed_from: Vector2 = target.global_position
 	remote_transform_2d.remote_path = target.get_path()
 	if target.has_method(GRABBED_METHOD):
 		target.call(GRABBED_METHOD)
 
-	grabbed_target.emit()
+	grabbed_target.emit(grabbed_from)
 
 
 func drop() -> void:

@@ -54,3 +54,8 @@ func _get_pairs() -> Array[Pair]:
 		p.new(normal.state_entered, c.force_emit_move_vector_signals),
 		p.new(sprint.state_entered, c.force_emit_move_vector_signals),
 	]
+
+
+func _on_grabber_grabbed_target(from_global_position: Vector2) -> void:
+	controller.move_rotation_changed.emit(get_angle_to(from_global_position))
+	state_chart.send_event(&"grab_started")
