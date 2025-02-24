@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=55 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
 [ext_resource type="Script" path="res://src/ghost/ghost.gd" id="1_utd70"]
@@ -109,9 +109,6 @@ radius = 96.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_o7ptf"]
 radius = 17.0
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4kpbo"]
-light_mode = 1
-
 [sub_resource type="Gradient" id="Gradient_a05sb"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
@@ -205,6 +202,11 @@ script = ExtResource("6_il0ju")
 to = NodePath("../Stun")
 event = &"stunned"
 
+[node name="Summoned" type="Node" parent="StateChart/Base/Behavior/Alive"]
+script = ExtResource("6_il0ju")
+to = NodePath("../SummonRelease")
+event = &"summoned"
+
 [node name="Normal" type="Node" parent="StateChart/Base/Behavior/Alive"]
 script = ExtResource("5_6yps6")
 
@@ -292,13 +294,24 @@ script = ExtResource("6_il0ju")
 to = NodePath("../../Normal")
 event = &"button_2_released"
 
-[node name="Summoned" type="Node" parent="StateChart/Base/Behavior/Alive/Summon"]
-script = ExtResource("6_il0ju")
-to = NodePath("../../Normal")
-event = &"summoned"
-
 [node name="Damaged" parent="StateChart/Base/Behavior/Alive/Summon" instance=ExtResource("18_870ie")]
 listen_for_event = &"damaged"
+
+[node name="SummonRelease" type="Node" parent="StateChart/Base/Behavior/Alive"]
+script = ExtResource("5_6yps6")
+
+[node name="Damaged" parent="StateChart/Base/Behavior/Alive/SummonRelease" instance=ExtResource("18_870ie")]
+listen_for_event = &"damaged"
+
+[node name="Move" parent="StateChart/Base/Behavior/Alive/SummonRelease" node_paths=PackedStringArray("character") instance=ExtResource("18_5mhrn")]
+character = NodePath("../../../../../..")
+move_speed = 122.36
+manual_process = true
+
+[node name="ReleaseFinished" type="Node" parent="StateChart/Base/Behavior/Alive/SummonRelease"]
+script = ExtResource("6_il0ju")
+to = NodePath("../../Normal")
+delay_seconds = 1.0
 
 [node name="Stun" type="Node" parent="StateChart/Base/Behavior/Alive"]
 script = ExtResource("5_6yps6")
@@ -406,6 +419,16 @@ script = ExtResource("6_il0ju")
 to = NodePath("../Summon")
 event = &"summon_charging"
 
+[node name="SummonCharged" type="Node" parent="StateChart/Base/Animation"]
+script = ExtResource("6_il0ju")
+to = NodePath("../SummonHold")
+event = &"summon_charged"
+
+[node name="Summoned" type="Node" parent="StateChart/Base/Animation"]
+script = ExtResource("6_il0ju")
+to = NodePath("../SummonRelease")
+event = &"summoned"
+
 [node name="Dead" type="Node" parent="StateChart/Base/Animation"]
 script = ExtResource("5_6yps6")
 
@@ -419,6 +442,12 @@ script = ExtResource("5_6yps6")
 script = ExtResource("5_6yps6")
 
 [node name="Summon" type="Node" parent="StateChart/Base/Animation"]
+script = ExtResource("5_6yps6")
+
+[node name="SummonHold" type="Node" parent="StateChart/Base/Animation"]
+script = ExtResource("5_6yps6")
+
+[node name="SummonRelease" type="Node" parent="StateChart/Base/Animation"]
 script = ExtResource("5_6yps6")
 
 [node name="Stun" type="Node" parent="StateChart/Base/Animation"]
@@ -523,7 +552,6 @@ shape = SubResource("CircleShape2D_o7ptf")
 
 [node name="GhostCostume" parent="." instance=ExtResource("25_s3y3d")]
 process_mode = 3
-material = SubResource("CanvasItemMaterial_4kpbo")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(0.768917, 0.141176, 0.188067, 1)
@@ -605,6 +633,7 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="visibility_changed" from="Invisibility" to="IgnoreCanvasModulate" method="set_visible"]
 [connection signal="area_count_changed" from="Summon" to="Summon/NamedPropertySignals" method="set_property_value"]
 [connection signal="charge_percentage_changed" from="Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="set_as_ratio_floored"]
+[connection signal="summon_charged" from="Summon" to="StateChart" method="send_event" binds= [&"summon_charged"]]
 [connection signal="summon_charging" from="Summon" to="StateChart" method="send_event" binds= [&"summon_charging"]]
 [connection signal="summoned" from="Summon" to="StateChart" method="send_event" binds= [&"summoned"]]
 [connection signal="property_changed" from="Summon/NamedPropertySignals" to="StateChart" method="set_expression_property" flags=3]
@@ -631,7 +660,12 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="stop_charging"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="release_charge"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="hide"]
+[connection signal="taken" from="StateChart/Base/Behavior/Alive/Summon/Button2Released" to="Summon" method="release_charge"]
 [connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/Summon/Damaged" to="StateChart" method="send_event" binds= [&"stunned"]]
+[connection signal="event_received" from="StateChart/Base/Behavior/Alive/SummonRelease" to="StateChart/Base/Behavior/Alive/SummonRelease/Damaged" method="receive_event"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/SummonRelease" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
+[connection signal="state_physics_processing" from="StateChart/Base/Behavior/Alive/SummonRelease" to="StateChart/Base/Behavior/Alive/SummonRelease/Move" method="manual_physics_process"]
+[connection signal="listened_event_received" from="StateChart/Base/Behavior/Alive/SummonRelease/Damaged" to="StateChart" method="send_event" binds= [&"stunned"]]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Stun" to="StateChart/Base/Behavior/Alive/Stun/PanicTimeout" method="start"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Stun" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="show"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Stun" to="Grab" method="set_monitoring" flags=3 binds= [false]]
@@ -679,6 +713,8 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="state_entered" from="StateChart/Base/Animation/Move" to="GhostCostume" method="play" binds= ["move"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Sprint" to="GhostCostume" method="play" binds= ["sprint"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Summon" to="GhostCostume" method="play" binds= ["summon"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/SummonHold" to="GhostCostume" method="play" binds= ["summon_charged"]]
+[connection signal="state_entered" from="StateChart/Base/Animation/SummonRelease" to="GhostCostume" method="play" binds= ["summon_transition_to_released"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Stun" to="GhostCostume" method="play" binds= [&"stun"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Panic" to="GhostCostume" method="play" binds= [&"panic"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Grab" to="GhostCostume" method="play" binds= ["grab"]]
