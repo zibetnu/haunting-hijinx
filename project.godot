@@ -54,6 +54,13 @@ enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg", "res://a
 
 import/blender/enabled=false
 
+[gdunit4]
+
+ui/toolbar/run_overall=true
+templates/testsuite/GDScript="class_name ${suite_class_name}
+extends GdUnitTestSuite
+"
+
 [gui]
 
 theme/custom="res://src/theme/theme.tres"
