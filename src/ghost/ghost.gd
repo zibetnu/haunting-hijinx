@@ -15,6 +15,7 @@ const IS_MOVING = &"is_moving"
 
 @onready var state_chart: StateChart = $StateChart
 @onready var normal: AtomicState = $StateChart/Base/Behavior/Alive/Normal
+@onready var sprint: AtomicState = $StateChart/Base/Behavior/Alive/Sprint
 
 
 func _ready() -> void:
@@ -51,4 +52,5 @@ func _get_pairs() -> Array[Pair]:
 		p.new(normal.state_entered, c.force_emit_button_1_signals),
 		p.new(normal.state_entered, c.force_emit_button_2_signals),
 		p.new(normal.state_entered, c.force_emit_move_vector_signals),
+		p.new(sprint.state_entered, c.force_emit_move_vector_signals),
 	]
