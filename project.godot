@@ -48,11 +48,18 @@ window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg", "res://addons/input_prompts/plugin.cfg", "res://addons/licenses/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg", "res://addons/input_prompts/plugin.cfg", "res://addons/licenses/plugin.cfg", "res://addons/gdUnit4/plugin.cfg")
 
 [filesystem]
 
 import/blender/enabled=false
+
+[gdunit4]
+
+ui/toolbar/run_overall=true
+templates/testsuite/GDScript="class_name ${suite_class_name}
+extends GdUnitTestSuite
+"
 
 [gui]
 

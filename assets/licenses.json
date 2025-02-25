@@ -4,6 +4,30 @@
 			"category": "Addons",
 			"contact": "",
 			"copyright": [
+				"Mike Schulze"
+			],
+			"description": "Unit Testing Framework for Godot Scripts",
+			"id": "",
+			"licenses": [
+				{
+					"file": "res://addons/gdUnit4/LICENSE",
+					"identifier": "MIT",
+					"name": "MIT License",
+					"text": "",
+					"web": ""
+				}
+			],
+			"name": "gdUnit4",
+			"paths": [
+				"res://addons/gdUnit4"
+			],
+			"version": "4.5.0",
+			"web": ""
+		},
+		{
+			"category": "Addons",
+			"contact": "",
+			"copyright": [
 				"Jan Thomä",
 				"Contributors"
 			],
