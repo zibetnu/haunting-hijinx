@@ -138,7 +138,7 @@ timer = NodePath("../../../MatchTimer")
 
 [node name="SpectatorTimerSprite" parent="CanvasLayer/TimerSprites" node_paths=PackedStringArray("timer") instance=ExtResource("10_4jcdm")]
 unique_name_in_owner = true
-position = Vector2(19, 7)
+position = Vector2(19, 11)
 timer = NodePath("../../../MatchTimer")
 
 [node name="LevelLighting" parent="." instance=ExtResource("9_35o1b")]
