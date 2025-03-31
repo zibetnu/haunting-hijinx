@@ -11,7 +11,7 @@ script = ExtResource("1_scuh3")
 texture = ExtResource("2_qfuk4")
 
 [node name="MinuteOnes" type="Sprite2D" parent="."]
-position = Vector2(-9, -1)
+position = Vector2(-8, -1)
 texture = ExtResource("3_mvw2x")
 hframes = 10
 
@@ -21,6 +21,6 @@ texture = ExtResource("3_mvw2x")
 hframes = 10
 
 [node name="SecondOnes" type="Sprite2D" parent="."]
-position = Vector2(9, -1)
+position = Vector2(8, -1)
 texture = ExtResource("3_mvw2x")
 hframes = 10
