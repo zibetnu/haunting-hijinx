@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/zibetnu/haunting-hijinx/blob/main/assets/logo.png"/>
+  <img src="https://github.com/zibetnu/haunting-hijinx/blob/main/assets/logo.svg">
 </p>
 
 An open-source remake of a classic minigame from Nintendo Land. Supports online multiplayer for 2-5 players.
