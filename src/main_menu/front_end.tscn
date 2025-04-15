@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://50ijwh32vu0w"]
 
-[ext_resource type="Texture2D" uid="uid://c2f3ky3uiujc6" path="res://assets/logo.png" id="1_phtwv"]
+[ext_resource type="Texture2D" uid="uid://b5yhpnq1rjwdj" path="res://assets/logo.svg" id="1_phtwv"]
 
 [node name="FrontEnd" type="MarginContainer"]
 anchors_preset = 13
