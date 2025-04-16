@@ -219,6 +219,28 @@
 			"contact": "",
 			"copyright": [],
 			"description": "",
+			"id": "",
+			"licenses": [
+				{
+					"file": "",
+					"identifier": "CC0",
+					"name": "CC0-1.0",
+					"text": "",
+					"web": "https://creativecommons.org/publicdomain/zero/1.0/"
+				}
+			],
+			"name": "Input Prompts Pixel 16×",
+			"paths": [
+				"res://addons/input_prompts/icons"
+			],
+			"version": "",
+			"web": "https://kenney.nl/assets/input-prompts-pixel-16"
+		},
+		{
+			"category": "Assets",
+			"contact": "",
+			"copyright": [],
+			"description": "",
 			"id": "menu_selection_click",
 			"licenses": [
 				{
