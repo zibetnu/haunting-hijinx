@@ -6,7 +6,10 @@ signal saved
 signal save_failed
 signal staged_value_changed(staged_value: Variant)
 
-const PATH_SETTING_NAME = "application/config/config_path"
+const PATH = "user://settings.cfg"
+
+static var _config_file: ConfigFile:
+	get = _get_config_file
 
 @export var section: String
 @export var key: String
@@ -15,22 +18,18 @@ const PATH_SETTING_NAME = "application/config/config_path"
 var staged_value: Variant:
 	set = set_staged_value
 
-@onready var _path := ProjectSettings.get_setting(PATH_SETTING_NAME) as String
-
 
 func load_value() -> void:
-	var config_file: ConfigFile = _get_existing_config_file()
-	if not config_file.has_section_key(section, key):
+	if not _config_file.has_section_key(section, key):
 		load_failed.emit()
 		return
 
-	loaded.emit(config_file.get_value(section, key))
+	loaded.emit(_config_file.get_value(section, key))
 
 
 func save_value(value: Variant = staged_value) -> void:
-	var config_file: ConfigFile = _get_existing_config_file()
-	config_file.set_value(section, key, value)
-	var error: Error = config_file.save(_path)
+	_config_file.set_value(section, key, value)
+	var error: Error = _config_file.save(PATH)
 	if error != OK:
 		save_failed.emit()
 		return
@@ -46,7 +45,9 @@ func set_staged_value(value: Variant) -> void:
 	staged_value_changed.emit(staged_value)
 
 
-func _get_existing_config_file() -> ConfigFile:
-	var config_file := ConfigFile.new()
-	config_file.load(_path)
-	return config_file
+static func _get_config_file() -> ConfigFile:
+	if _config_file == null:
+		_config_file = ConfigFile.new()
+		_config_file.load(PATH)
+
+	return _config_file
