@@ -17,7 +17,6 @@ boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://assets/made_with_godot.png"
 boot_splash/use_filter=false
 config/steam_app_id=2499500
-config/config_path="user://settings.cfg"
 
 [autoload]
 
