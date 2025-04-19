@@ -8,6 +8,10 @@
 
 config_version=5
 
+[addons]
+
+git_describe/describe_setting_path="application/config/version"
+
 [application]
 
 config/name="Haunting Hijinx"
