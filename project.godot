@@ -47,7 +47,7 @@ window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg", "res://addons/input_prompts/plugin.cfg", "res://addons/licenses/plugin.cfg", "res://addons/gdUnit4/plugin.cfg")
+enabled=PackedStringArray("res://addons/gdUnit4/plugin.cfg", "res://addons/git_describe/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg", "res://addons/input_prompts/plugin.cfg", "res://addons/licenses/plugin.cfg")
 
 [filesystem]
 
