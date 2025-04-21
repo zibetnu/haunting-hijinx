@@ -1,3 +1,4 @@
+class_name ConfigHandler
 extends Node
 
 signal loaded(value: Variant)
