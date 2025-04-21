@@ -1,3 +1,4 @@
+class_name OptionButtonID
 extends OptionButton
 ## An Optionbutton with additional id-focused functionality.
 
