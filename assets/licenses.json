@@ -28,6 +28,30 @@
 			"category": "Addons",
 			"contact": "",
 			"copyright": [
+				"Joseph Michael Ware (zibetnu)"
+			],
+			"description": "Seamlessly display in-game versions based on your Git tags.",
+			"id": "",
+			"licenses": [
+				{
+					"file": "res://addons/git_describe/LICENSE",
+					"identifier": "MIT",
+					"name": "MIT License",
+					"text": "",
+					"web": ""
+				}
+			],
+			"name": "Godot Git Describe",
+			"paths": [
+				"res://addons/git_describe"
+			],
+			"version": "0.4.0",
+			"web": ""
+		},
+		{
+			"category": "Addons",
+			"contact": "",
+			"copyright": [
 				"Jan Thomä",
 				"Contributors"
 			],

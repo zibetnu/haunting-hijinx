@@ -8,6 +8,10 @@
 
 config_version=5
 
+[addons]
+
+git_describe/describe_setting_path="application/config/version"
+
 [application]
 
 config/name="Haunting Hijinx"
@@ -48,7 +52,7 @@ window/vsync/vsync_mode=2
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg", "res://addons/input_prompts/plugin.cfg", "res://addons/licenses/plugin.cfg", "res://addons/gdUnit4/plugin.cfg")
+enabled=PackedStringArray("res://addons/gdUnit4/plugin.cfg", "res://addons/git_describe/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg", "res://addons/input_prompts/plugin.cfg", "res://addons/licenses/plugin.cfg")
 
 [filesystem]
 

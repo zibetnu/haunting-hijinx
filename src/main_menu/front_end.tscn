@@ -1,19 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://50ijwh32vu0w"]
+[gd_scene load_steps=3 format=3 uid="uid://50ijwh32vu0w"]
 
 [ext_resource type="Texture2D" uid="uid://b5yhpnq1rjwdj" path="res://assets/logo.svg" id="1_phtwv"]
+[ext_resource type="Script" path="res://addons/git_describe/label/git_describe_label.gd" id="2_e4f6o"]
 
 [node name="FrontEnd" type="MarginContainer"]
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -84.0
-offset_right = 84.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -34,10 +33,12 @@ layout_mode = 2
 
 [node name="Settings" type="Button" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Settings"
 
 [node name="Tutorial" type="Button" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Tutorial"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
@@ -52,3 +53,10 @@ text = "About"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Quit"
+
+[node name="GitDescribeLabel" type="Label" parent="."]
+modulate = Color(0.497474, 0.497474, 0.497474, 1)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+script = ExtResource("2_e4f6o")
