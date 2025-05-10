@@ -4,11 +4,7 @@ signal min_value_changed(min_value: int)
 signal max_value_changed(max_value: int)
 signal scale_multiplier_changed(scale_multiplier: int)
 
-const BASE_DPI = 100
 const MIN_SCALE_MULTIPLIER = 1
-const SCALE_SIZE_MODULUS = 2
-const WIDTH_SETTING = "display/window/size/viewport_width"
-const HEIGHT_SETTING = "display/window/size/viewport_height"
 
 @export var auto_set_limits := true:
 	set = set_auto_set_limits
@@ -22,8 +18,8 @@ const HEIGHT_SETTING = "display/window/size/viewport_height"
 	set = set_scale_multiplier
 
 var base_size := Vector2i(
-		ProjectSettings.get(WIDTH_SETTING) as int,
-		ProjectSettings.get(HEIGHT_SETTING) as int
+		ProjectSettings.get("display/window/size/viewport_width") as int,
+		ProjectSettings.get("display/window/size/viewport_height") as int
 )
 
 @onready var window: Window = get_window()
@@ -42,7 +38,7 @@ func add_window_script() -> void:
 
 func refresh_content_scale_size() -> void:
 	var new_content_scale_size: Vector2i = window.size / scale_multiplier
-	new_content_scale_size -= new_content_scale_size % SCALE_SIZE_MODULUS
+	new_content_scale_size -= new_content_scale_size % 2
 	if window.content_scale_size == new_content_scale_size:
 		return
 
@@ -90,6 +86,7 @@ func _on_window_size_changed() -> void:
 
 
 func _update_min_value() -> void:
+	const BASE_DPI = 100
 	@warning_ignore("integer_division")  # Decimal part should be discarded.
 	min_value = DisplayServer.screen_get_dpi() / BASE_DPI
 
