@@ -15,6 +15,12 @@ func _ready() -> void:
 	vsync_config_handler.load_value()
 
 
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_PREDELETE:
+			vsync_config_handler.queue_free()
+
+
 func _on_vsync_option_id_selected(mode: DisplayServer.VSyncMode) -> void:
 	DisplayServer.window_set_vsync_mode(mode)
 	vsync_config_handler.save_value(mode)
