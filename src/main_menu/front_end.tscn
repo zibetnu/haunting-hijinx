@@ -49,7 +49,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "About"
 
-[node name="Quit" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Quit" type="Button" parent="VBoxContainer/HBoxContainer" groups=["exclude_interface_sounds"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Quit"

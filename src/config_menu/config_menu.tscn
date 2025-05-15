@@ -1,14 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://cmta6hi75dnwf"]
+[gd_scene load_steps=7 format=3 uid="uid://cmta6hi75dnwf"]
 
 [ext_resource type="Script" path="res://src/config_menu/config_menu.gd" id="1_f68c2"]
 [ext_resource type="PackedScene" uid="uid://beclheud7fmo4" path="res://src/config_handler/config_handler.tscn" id="1_h62ve"]
 [ext_resource type="PackedScene" uid="uid://m41j0s7lbwbr" path="res://src/window_mode_setter/window_mode_setter.tscn" id="2_vstoa"]
 [ext_resource type="PackedScene" uid="uid://l85mp1rghtu0" path="res://src/connect_group/connect_group.tscn" id="3_ld5e3"]
 [ext_resource type="PackedScene" uid="uid://c4pe2q3xrfk36" path="res://src/bus_volume_setter/bus_volume_setter.tscn" id="4_5dgk7"]
-[ext_resource type="PackedScene" uid="uid://c6ql67s5oafpr" path="res://src/visibility_signals/visibility_signals.tscn" id="5_vn0qk"]
 [ext_resource type="Script" path="res://src/config_menu/option_button_id.gd" id="6_u7oav"]
 
-[node name="ConfigMenu" type="Control"]
+[node name="ConfigMenu" type="Control" node_paths=PackedStringArray("first_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,6 +15,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_f68c2")
+first_button = NodePath("FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/OptionButton")
 
 [node name="BackEnd" type="Node" parent="."]
 
@@ -75,9 +75,6 @@ bus_name = &"Effects"
 wait_time = 0.5
 one_shot = true
 
-[node name="VisibilitySignals" parent="BackEnd" node_paths=PackedStringArray("canvas_item") instance=ExtResource("5_vn0qk")]
-canvas_item = NodePath("../..")
-
 [node name="SaveTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
@@ -99,6 +96,7 @@ grow_vertical = 0
 layout_mode = 2
 
 [node name="TabContainer" type="TabContainer" parent="FrontEnd/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 size_flags_vertical = 10
@@ -276,6 +274,7 @@ layout_mode = 2
 layout_mode = 2
 text = "Back"
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="load_failed" from="BackEnd/WindowModeConfig" to="FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/OptionButton" method="select_id" binds= [4]]
 [connection signal="loaded" from="BackEnd/WindowModeConfig" to="FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/OptionButton" method="select_id"]
 [connection signal="ready" from="BackEnd/WindowModeConfig" to="BackEnd/WindowModeConfig" method="load_value"]
@@ -305,8 +304,6 @@ text = "Back"
 [connection signal="staged_value_changed" from="BackEnd/EffectsBusConfig" to="BackEnd/EffectsBusConfig/SaveTimer" method="start" unbinds=1]
 [connection signal="volume_linear_changed" from="BackEnd/EffectsBusConfig/BusVolumeSetter" to="BackEnd/EffectsBusConfig" method="set_staged_value"]
 [connection signal="timeout" from="BackEnd/EffectsBusConfig/SaveTimer" to="BackEnd/EffectsBusConfig" method="save_value"]
-[connection signal="shown" from="BackEnd/VisibilitySignals" to="FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/OptionButton" method="grab_focus" flags=3]
-[connection signal="shown" from="BackEnd/VisibilitySignals" to="FrontEnd/VBoxContainer/TabContainer" method="set_current_tab" binds= [0]]
 [connection signal="timeout" from="SaveTimer" to="." method="_on_save_timer_timeout"]
 [connection signal="item_id_selected" from="FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/OptionButton" to="BackEnd/WindowModeSetter" method="set_window_mode"]
 [connection signal="item_id_selected" from="FrontEnd/VBoxContainer/TabContainer/Display/VSync/VSyncOption" to="." method="_on_vsync_option_id_selected"]

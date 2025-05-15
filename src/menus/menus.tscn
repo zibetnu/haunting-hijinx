@@ -8,7 +8,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_67gcq"]
 
-[node name="Menus" type="TabContainer"]
+[node name="Menus" type="TabContainer" groups=["exclude_interface_sounds"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
