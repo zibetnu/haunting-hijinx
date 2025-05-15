@@ -3,6 +3,7 @@ extends Node
 var button_press: AudioStreamPlayer = new_audio_stream_player()
 var slider_change: AudioStreamPlayer = new_audio_stream_player()
 var signals_to_callables: Dictionary = {
+	&"confirmed": button_press.play,
 	&"item_activated": button_press.play,
 	&"pressed": button_press.play,
 	&"pressed_sound_requested": button_press.play,
