@@ -60,6 +60,9 @@ func _enter_tree():
 		ProjectSettings.save()
 
 
+func _disable_plugin():
+	remove_autoload_singleton("PromptManager")
+
+
 func _exit_tree():
 	remove_inspector_plugin(inspector_plugin)
-	remove_autoload_singleton("PromptManager")
