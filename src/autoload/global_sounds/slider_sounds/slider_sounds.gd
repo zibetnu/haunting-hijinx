@@ -27,6 +27,9 @@ func _play_pitched(pitch_scale: float) -> void:
 
 
 func _on_node_added(node: Node) -> void:
+	if node.owner == null:
+		return
+
 	if not node is Slider:
 		return
 

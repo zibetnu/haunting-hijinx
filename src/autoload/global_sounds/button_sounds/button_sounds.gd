@@ -17,6 +17,9 @@ func _enter_tree() -> void:
 
 
 func _on_node_added(node: Node) -> void:
+	if node.owner == null:
+		return
+
 	if node.is_in_group(EXCLUDE_GROUP_NAME):
 		return
 
