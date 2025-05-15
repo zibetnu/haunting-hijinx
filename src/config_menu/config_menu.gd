@@ -9,6 +9,7 @@ var vsync_config_handler := ConfigHandler.new()
 
 @onready var save_timer: Timer = %SaveTimer
 @onready var vsync_option: OptionButtonID = %VSyncOption
+@onready var scale_container: PanelContainer = %ScaleContainer
 @onready var min_scale: Label = %MinScale
 @onready var max_scale: Label = %MaxScale
 @onready var scale_slider: HSlider = %ScaleSlider
@@ -42,6 +43,10 @@ func init_scale_slider() -> void:
 	var min_value: int = WindowScaler.min_value
 	min_scale.text = str(min_value)
 	scale_slider.min_value = min_value
+
+	if min_value >= max_value:
+		scale_container.hide()
+		return
 
 	var value: float = GameConfig.get_value(
 			DISPLAY_SECTION,
