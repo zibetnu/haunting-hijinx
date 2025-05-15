@@ -35,13 +35,15 @@ func init_vsync_option() -> void:
 
 
 func init_scale_slider() -> void:
+	const LABEL_TEXT_TEMPLATE = "%sx"
+
 	var max_value: int = WindowScaler.max_value
-	max_scale.text = str(max_value)
+	max_scale.text = LABEL_TEXT_TEMPLATE % max_value
 	scale_slider.max_value = max_value
 	scale_slider.tick_count = max_value
 
 	var min_value: int = WindowScaler.min_value
-	min_scale.text = str(min_value)
+	min_scale.text = LABEL_TEXT_TEMPLATE % min_value
 	scale_slider.min_value = min_value
 
 	if min_value >= max_value:
