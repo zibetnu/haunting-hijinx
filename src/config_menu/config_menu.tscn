@@ -175,29 +175,29 @@ tick_count = 6
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="FrontEnd/VBoxContainer/TabContainer/Display/Scale"]
+[node name="VBoxContainer" type="VBoxContainer" parent="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="FrontEnd/VBoxContainer/TabContainer/Display/Scale/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="MinScale" type="Label" parent="FrontEnd/VBoxContainer/TabContainer/Display/Scale/VBoxContainer/HBoxContainer"]
+[node name="MinScale" type="Label" parent="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "1x"
 
-[node name="Label" type="Label" parent="FrontEnd/VBoxContainer/TabContainer/Display/Scale/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Scale"
 horizontal_alignment = 1
 
-[node name="MaxScale" type="Label" parent="FrontEnd/VBoxContainer/TabContainer/Display/Scale/VBoxContainer/HBoxContainer"]
+[node name="MaxScale" type="Label" parent="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "3x"
 
-[node name="ScaleSlider" type="HSlider" parent="FrontEnd/VBoxContainer/TabContainer/Display/Scale/VBoxContainer"]
+[node name="ScaleSlider" type="HSlider" parent="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
@@ -207,7 +207,7 @@ max_value = 3.0
 value = 1.0
 tick_count = 3
 
-[node name="ScaleDebounce" type="Timer" parent="FrontEnd/VBoxContainer/TabContainer/Display/Scale/VBoxContainer/ScaleSlider"]
+[node name="ScaleDebounce" type="Timer" parent="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer/ScaleSlider"]
 wait_time = 0.5
 one_shot = true
 
@@ -311,8 +311,8 @@ text = "Back"
 [connection signal="item_id_selected" from="FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/OptionButton" to="BackEnd/WindowModeSetter" method="set_window_mode"]
 [connection signal="item_id_selected" from="FrontEnd/VBoxContainer/TabContainer/Display/VSync/VSyncOption" to="." method="_on_vsync_option_id_selected"]
 [connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Display/Brightness/HSlider" to="BackEnd/BrightnessConfig" method="set_staged_value"]
-[connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Display/Scale/VBoxContainer/ScaleSlider" to="FrontEnd/VBoxContainer/TabContainer/Display/Scale/VBoxContainer/ScaleSlider/ScaleDebounce" method="start" unbinds=1]
-[connection signal="timeout" from="FrontEnd/VBoxContainer/TabContainer/Display/Scale/VBoxContainer/ScaleSlider/ScaleDebounce" to="." method="_on_scale_debounce_timeout"]
+[connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer/ScaleSlider" to="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer/ScaleSlider/ScaleDebounce" method="start" unbinds=1]
+[connection signal="timeout" from="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer/ScaleSlider/ScaleDebounce" to="." method="_on_scale_debounce_timeout"]
 [connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Audio/Master/HSlider" to="BackEnd/MasterBusConfig/BusVolumeSetter" method="set_volume_linear"]
 [connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Audio/Music/HSlider" to="BackEnd/MusicBusConfig/BusVolumeSetter" method="set_volume_linear"]
 [connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Audio/Effects/HSlider" to="BackEnd/EffectsBusConfig/BusVolumeSetter" method="set_volume_linear"]
