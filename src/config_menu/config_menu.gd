@@ -38,6 +38,9 @@ func init_vsync_option() -> void:
 
 
 func init_scale_slider() -> void:
+	# Prevent button sound when setting initial values.
+	scale_slider.set_block_signals(true)
+
 	const LABEL_TEXT_TEMPLATE = "%sx"
 
 	var max_value: int = WindowScaler.max_value
@@ -53,12 +56,12 @@ func init_scale_slider() -> void:
 		scale_container.hide()
 		return
 
-	var value: float = GameConfig.get_value(
+	scale_slider.value = GameConfig.get_value(
 			DISPLAY_SECTION,
 			SCALE_KEY,
 			max_value
 	)
-	scale_slider.set_value_no_signal(value)
+	scale_slider.set_block_signals(false)
 
 	_on_scale_debounce_timeout()
 
