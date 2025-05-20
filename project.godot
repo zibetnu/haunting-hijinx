@@ -25,6 +25,7 @@ config/steam_app_id=2499500
 [autoload]
 
 GlobalSounds="res://src/autoload/global_sounds/global_sounds.tscn"
+InterfaceSounds="res://src/autoload/interface_sounds.gd"
 PeerData="*res://src/autoload/peer_data/peer_data.tscn"
 MenuBackground="res://src/autoload/menu_background/menu_background.tscn"
 SceneChanger="*res://src/autoload/scene_changer/scene_changer.tscn"

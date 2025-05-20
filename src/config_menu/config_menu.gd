@@ -5,9 +5,12 @@ extends Control
 const DISPLAY_SECTION = "display"
 const SCALE_KEY = "scale"
 
+@export var first_button: Button
+
 var vsync_config_handler := ConfigHandler.new()
 
 @onready var save_timer: Timer = %SaveTimer
+@onready var tab_container: TabContainer = %TabContainer
 @onready var vsync_option: OptionButtonID = %VSyncOption
 @onready var scale_container: PanelContainer = %ScaleContainer
 @onready var min_scale: Label = %MinScale
@@ -35,6 +38,9 @@ func init_vsync_option() -> void:
 
 
 func init_scale_slider() -> void:
+	# Prevent button sound when setting initial values.
+	scale_slider.set_block_signals(true)
+
 	const LABEL_TEXT_TEMPLATE = "%sx"
 
 	var max_value: int = WindowScaler.max_value
@@ -50,12 +56,12 @@ func init_scale_slider() -> void:
 		scale_container.hide()
 		return
 
-	var value: float = GameConfig.get_value(
+	scale_slider.value = GameConfig.get_value(
 			DISPLAY_SECTION,
 			SCALE_KEY,
 			max_value
 	)
-	scale_slider.set_value_no_signal(value)
+	scale_slider.set_block_signals(false)
 
 	_on_scale_debounce_timeout()
 
@@ -69,6 +75,18 @@ func _on_scale_debounce_timeout() -> void:
 	WindowScaler.scale_multiplier = int(value)
 	GameConfig.set_value(DISPLAY_SECTION, SCALE_KEY, value)
 	save_timer.start()
+
+
+func _on_visibility_changed() -> void:
+	if not visible:
+		return
+
+	# Prevent button sound when setting initial tab.
+	tab_container.set_block_signals(true)
+	tab_container.set_current_tab(0)
+	tab_container.set_block_signals(false)
+
+	first_button.grab_focus()
 
 
 func _on_vsync_option_id_selected(mode: DisplayServer.VSyncMode) -> void:

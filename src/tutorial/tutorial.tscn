@@ -240,7 +240,7 @@ columns = 3
 [node name="LeftSpacer" type="Control" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/MovePrompt"]
 layout_mode = 2
 
-[node name="MoveUp" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_button_sounds"]]
+[node name="MoveUp" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_interface_sounds"]]
 layout_mode = 2
 texture = ExtResource("13_lobwg")
 stretch_mode = 5
@@ -252,7 +252,7 @@ events = Array[InputEvent]([SubResource("InputEventJoypadMotion_36fcv"), SubReso
 [node name="RightSpacer" type="Control" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/MovePrompt"]
 layout_mode = 2
 
-[node name="MoveLeft" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_button_sounds"]]
+[node name="MoveLeft" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_interface_sounds"]]
 layout_mode = 2
 texture = ExtResource("15_alb5o")
 stretch_mode = 5
@@ -261,7 +261,7 @@ action = "move_left"
 icon = 0
 events = Array[InputEvent]([SubResource("InputEventJoypadMotion_ycevk"), SubResource("InputEventKey_ykw2a"), SubResource("InputEventJoypadButton_m57kw")])
 
-[node name="MoveDown" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_button_sounds"]]
+[node name="MoveDown" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_interface_sounds"]]
 layout_mode = 2
 texture = ExtResource("16_q45ce")
 stretch_mode = 5
@@ -270,7 +270,7 @@ action = "move_down"
 icon = 0
 events = Array[InputEvent]([SubResource("InputEventJoypadMotion_3oyw2"), SubResource("InputEventKey_kn58i"), SubResource("InputEventJoypadButton_pk86m")])
 
-[node name="MoveRight" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_button_sounds"]]
+[node name="MoveRight" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/MovePrompt" groups=["exclude_interface_sounds"]]
 layout_mode = 2
 texture = ExtResource("17_007sg")
 stretch_mode = 5
@@ -289,7 +289,7 @@ horizontal_alignment = 2
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="ActionPrompt" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/Button1Prompt" groups=["exclude_button_sounds"]]
+[node name="ActionPrompt" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/Button1Prompt" groups=["exclude_interface_sounds"]]
 layout_mode = 2
 texture = ExtResource("18_xkse3")
 stretch_mode = 5
@@ -302,7 +302,7 @@ events = Array[InputEvent]([SubResource("InputEventJoypadButton_o4pmi"), SubReso
 layout_mode = 2
 text = "or"
 
-[node name="ActionPrompt2" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/Button1Prompt" groups=["exclude_button_sounds"]]
+[node name="ActionPrompt2" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/Button1Prompt" groups=["exclude_interface_sounds"]]
 layout_mode = 2
 texture = ExtResource("19_kko02")
 stretch_mode = 5
@@ -322,7 +322,7 @@ horizontal_alignment = 2
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="ActionPrompt" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/Button2Prompt" groups=["exclude_button_sounds"]]
+[node name="ActionPrompt" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/Button2Prompt" groups=["exclude_interface_sounds"]]
 layout_mode = 2
 texture = ExtResource("20_arquq")
 stretch_mode = 5
@@ -335,7 +335,7 @@ events = Array[InputEvent]([SubResource("InputEventJoypadButton_fq5ar"), SubReso
 layout_mode = 2
 text = "or"
 
-[node name="ActionPrompt2" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/Button2Prompt" groups=["exclude_button_sounds"]]
+[node name="ActionPrompt2" type="TextureRect" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts/Button2Prompt" groups=["exclude_interface_sounds"]]
 layout_mode = 2
 texture = ExtResource("21_c5mti")
 stretch_mode = 5
@@ -377,7 +377,7 @@ layout_mode = 2
 layout_mode = 2
 columns = 2
 
-[node name="SkipPrompt" type="TextureRect" parent="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer2/GridContainer" groups=["exclude_button_sounds"]]
+[node name="SkipPrompt" type="TextureRect" parent="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer2/GridContainer" groups=["exclude_interface_sounds"]]
 layout_mode = 2
 texture = ExtResource("22_q7vh3")
 stretch_mode = 5
@@ -390,7 +390,7 @@ events = Array[InputEvent]([SubResource("InputEventKey_autma"), SubResource("Inp
 layout_mode = 2
 text = "Skip"
 
-[node name="ExitPrompt" type="TextureRect" parent="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer2/GridContainer" groups=["exclude_button_sounds"]]
+[node name="ExitPrompt" type="TextureRect" parent="CanvasLayer/MarginContainer/HBoxContainer/PanelContainer2/GridContainer" groups=["exclude_interface_sounds"]]
 layout_mode = 2
 texture = ExtResource("23_khlqh")
 stretch_mode = 5
