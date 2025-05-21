@@ -52,10 +52,6 @@ func init_scale_slider() -> void:
 	min_scale.text = LABEL_TEXT_TEMPLATE % min_value
 	scale_slider.min_value = min_value
 
-	if min_value >= max_value:
-		scale_container.hide()
-		return
-
 	scale_slider.value = GameConfig.get_value(
 			DISPLAY_SECTION,
 			SCALE_KEY,
@@ -63,6 +59,7 @@ func init_scale_slider() -> void:
 	)
 	scale_slider.set_block_signals(false)
 
+	scale_container.visible = min_value < max_value
 	_on_scale_debounce_timeout()
 
 
