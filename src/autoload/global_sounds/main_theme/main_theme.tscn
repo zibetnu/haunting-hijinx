@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bvrn6ky085d6r"]
 
 [ext_resource type="Script" path="res://src/autoload/global_sounds/main_theme/main_theme.gd" id="1_w23dk"]
-[ext_resource type="AudioStream" uid="uid://bdm27dwyhj8tw" path="res://assets/main_theme.wav" id="2_ybjuy"]
+[ext_resource type="AudioStream" uid="uid://bgidic5ar2an6" path="res://assets/main_theme.ogg" id="2_ybjuy"]
 
 [node name="MainTheme" type="Node"]
 script = ExtResource("1_w23dk")
