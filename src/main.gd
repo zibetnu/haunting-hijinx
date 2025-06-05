@@ -10,6 +10,9 @@ const PLACEHOLDER_LOBBY_ID = -1
 
 
 func _ready() -> void:
+	for bus_index in AudioServer.bus_count:
+		init_bus_volume(bus_index)
+
 	var lobby_id: int = get_lobby_id_from_arguments()
 	if lobby_id == PLACEHOLDER_LOBBY_ID:
 		SceneChanger.change_scene_to_packed(start_scene)
@@ -37,3 +40,15 @@ func get_lobby_id_from_arguments() -> int:
 		return PLACEHOLDER_LOBBY_ID
 
 	return lobby_id
+
+
+func init_bus_volume(bus_index: int) -> void:
+	var bus_volume_linear: float = GameConfig.get_value(
+			"audio",
+			AudioServer.get_bus_name(bus_index).to_snake_case(),
+			-1.0
+	)
+	if bus_volume_linear < 0.0:
+		return
+
+	AudioServer.set_bus_volume_db(bus_index, linear_to_db(bus_volume_linear))
