@@ -20,7 +20,6 @@ config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/use_filter=false
 boot_splash/image="res://assets/made_with_godot.png"
-config/steam_app_id=2499500
 
 [autoload]
 
@@ -30,7 +29,6 @@ PeerData="*res://src/autoload/peer_data/peer_data.tscn"
 MenuBackground="res://src/autoload/menu_background/menu_background.tscn"
 SceneChanger="*res://src/autoload/scene_changer/scene_changer.tscn"
 FullscreenToggle="res://src/autoload/fullscreen_toggle/fullscreen_toggle.tscn"
-SteamCallbacks="res://src/autoload/steam_callbacks.gd"
 MouseHider="res://src/autoload/mouse_hider.gd"
 WindowScaler="*res://src/autoload/window_scaler/window_scaler.tscn"
 PromptManager="*res://addons/input_prompts/input_prompt_manager.gd"
@@ -208,3 +206,8 @@ renderer/rendering_method="mobile"
 limits/opengl/max_renderable_lights=64
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 2d/snap/snap_2d_transforms_to_pixel=true
+
+[steam]
+
+initialization/app_id=2499500
+initialization/embed_callbacks=true
