@@ -13,17 +13,16 @@ const WINDOW_MODE_KEY = "window_mode"
 @export var first_button: Button
 
 @onready var save_timer: Timer = %SaveTimer
-@onready var tab_container: TabContainer = %TabContainer
 @onready var window_mode_option: OptionButtonID = %WindowModeOption
 @onready var vsync_option: OptionButtonID = %VSyncOption
 @onready var scale_container: PanelContainer = %ScaleContainer
 @onready var min_scale: Label = %MinScale
 @onready var max_scale: Label = %MaxScale
-@onready var brightness_slider: HSlider = %BrightnessSlider
-@onready var scale_slider: HSlider = %ScaleSlider
-@onready var master_bus_slider: HSlider = %MasterBusSlider
-@onready var music_bus_slider: HSlider = %MusicBusSlider
-@onready var effects_bus_slider: HSlider = %EffectsBusSlider
+@onready var brightness_slider: Slider = %BrightnessSlider
+@onready var scale_slider: Slider = %ScaleSlider
+@onready var master_bus_slider: Slider = %MasterBusSlider
+@onready var music_bus_slider: Slider = %MusicBusSlider
+@onready var effects_bus_slider: Slider = %EffectsBusSlider
 
 
 func _ready() -> void:
@@ -113,11 +112,6 @@ func _on_window_mode_selected(value: DisplayServer.WindowMode) -> void:
 func _on_visibility_changed() -> void:
 	if not visible:
 		return
-
-	# Prevent button sound when setting initial tab.
-	tab_container.set_block_signals(true)
-	tab_container.set_current_tab(0)
-	tab_container.set_block_signals(false)
 
 	first_button.grab_focus()
 
