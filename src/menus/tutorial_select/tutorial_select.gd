@@ -6,10 +6,16 @@ const CANCEL_ACTION = &"ui_cancel"
 @export var hunter: Button
 @export var back: Button
 
+@onready var ghost_costume: GhostCostume = %GhostCostume
+@onready var hunter_costume: HunterCostume = %HunterCostume
+
 
 func _ready() -> void:
 	ghost.pressed.connect(SceneChanger.change_to_ghost_tutorial)
+	ghost_costume.frame_coord_x = 1
+	ghost_costume.play("idle")
 	hunter.pressed.connect(SceneChanger.change_to_hunter_tutorial)
+	hunter_costume.play("move")
 
 
 func _on_gui_input(event: InputEvent) -> void:
