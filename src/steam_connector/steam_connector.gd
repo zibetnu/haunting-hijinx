@@ -83,7 +83,7 @@ func _on_lobby_created(result: Steam.Result, lobby_id: int) -> void:
 		return
 
 	var peer := SteamMultiplayerPeer.new()
-	peer.create_host(0, [])
+	peer.create_host(0)
 	multiplayer.multiplayer_peer = peer
 	_set_autoload_property(LOBBY_ID_PROPERTY, lobby_id)
 	_init_lobby_data(lobby_id)
@@ -106,7 +106,7 @@ func _on_lobby_joined(
 		return
 
 	var peer := SteamMultiplayerPeer.new()
-	peer.create_client(lobby_owner_steam_id, 0, [])
+	peer.create_client(lobby_owner_steam_id, 0)
 	multiplayer.multiplayer_peer = peer
 	_set_autoload_property(LOBBY_ID_PROPERTY, lobby_id)
 	lobby_joined.emit()
