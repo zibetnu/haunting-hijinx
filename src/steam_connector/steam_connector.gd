@@ -1,3 +1,4 @@
+class_name SteamConnector
 extends Node
 
 signal connection_closed
