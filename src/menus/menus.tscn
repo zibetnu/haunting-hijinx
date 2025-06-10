@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://bnoti7vnd7pk7"]
+[gd_scene load_steps=9 format=3 uid="uid://bnoti7vnd7pk7"]
 
+[ext_resource type="Script" uid="uid://cuni11kdbk1kn" path="res://src/menus/menus.gd" id="1_kv08v"]
 [ext_resource type="PackedScene" uid="uid://civfmojof07gs" path="res://src/main_menu/main_menu.tscn" id="1_yg0vw"]
 [ext_resource type="PackedScene" uid="uid://cmta6hi75dnwf" path="res://src/config_menu/config_menu.tscn" id="2_ypteh"]
 [ext_resource type="PackedScene" uid="uid://chr26ux2vsrxq" path="res://src/license_menu/license_menu.tscn" id="3_503pn"]
 [ext_resource type="PackedScene" uid="uid://c4t7474tk0tok" path="res://src/about_menu/about_menu.tscn" id="3_bdgwc"]
 [ext_resource type="PackedScene" uid="uid://cis3vfoj3ussh" path="res://src/menus/tutorial_select/tutorial_select.tscn" id="5_lbit3"]
+[ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="7_jio01"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_67gcq"]
 
@@ -17,6 +19,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_67gcq")
 current_tab = 0
 tabs_visible = false
+script = ExtResource("1_kv08v")
 
 [node name="MainMenu" parent="." instance=ExtResource("1_yg0vw")]
 layout_mode = 2
@@ -41,6 +44,8 @@ metadata/_tab_index = 3
 visible = false
 layout_mode = 2
 metadata/_tab_index = 4
+
+[node name="SteamConnector" parent="." instance=ExtResource("7_jio01")]
 
 [connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/HBoxContainer2/Settings" to="." method="set_current_tab" binds= [1]]
 [connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/HBoxContainer2/Tutorial" to="." method="set_current_tab" binds= [4]]
