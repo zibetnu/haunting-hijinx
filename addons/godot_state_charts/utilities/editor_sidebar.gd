@@ -36,7 +36,7 @@ func _repaint():
 		
 	# we can add transitions to all states
 	var can_add_transitions = \
-		_selected_node is State
+		_selected_node is StateChartState
 		
 	_add_section.visible = can_add_states or can_add_transitions
 	_no_options_label.visible = not (can_add_states or can_add_transitions)
@@ -93,14 +93,6 @@ func _on_history_state_pressed():
 
 func _on_transition_pressed():
 	_create_node(Transition, "Transition")
-
-
-func _on_animation_tree_state_pressed():
-	_create_node(AnimationTreeState, "AnimationTreeState")
-
-
-func _on_animation_player_state_pressed():
-	_create_node(AnimationPlayerState, "AnimationPlayerState")
 
 
 func _on_toggle_sidebar_button_pressed():

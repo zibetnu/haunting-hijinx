@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bcwkugn6v3oy7"]
 
-[ext_resource type="Script" uid="uid://biglc3awastsl" path="res://addons/godot_state_charts/utilities/state_chart_debugger.gd" id="1_i74os"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/utilities/state_chart_debugger.gd" id="1_i74os"]
 
 [node name="StateChartDebugger" type="MarginContainer"]
 anchors_preset = 15
@@ -9,6 +9,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_i74os")
+maximum_lines = 50
 
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 2

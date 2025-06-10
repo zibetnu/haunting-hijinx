@@ -52,10 +52,9 @@
 			"category": "Addons",
 			"contact": "",
 			"copyright": [
-				"Jan Thomä",
-				"Contributors"
+				"Jan Thomä"
 			],
-			"description": "A simple, yet powerful state charts library for Godot",
+			"description": "A state charts extension for Godot 4.",
 			"id": "godot_state_charts",
 			"licenses": [
 				{
@@ -70,7 +69,7 @@
 			"paths": [
 				"res://addons/godot_state_charts"
 			],
-			"version": "0.13.2",
+			"version": "0.21.5",
 			"web": ""
 		},
 		{
