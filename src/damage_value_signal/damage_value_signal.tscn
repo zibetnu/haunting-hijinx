@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d4gb1ksm22wvh"]
 
-[ext_resource type="Script" path="res://src/damage_value_signal/damage_value_signal.gd" id="1_6hdvi"]
+[ext_resource type="Script" uid="uid://bnoc148enqenw" path="res://src/damage_value_signal/damage_value_signal.gd" id="1_6hdvi"]
 
 [node name="DamageValueSignal" type="Node"]
 script = ExtResource("1_6hdvi")

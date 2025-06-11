@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cis3vfoj3ussh"]
 
 [ext_resource type="PackedScene" uid="uid://c6ql67s5oafpr" path="res://src/visibility_signals/visibility_signals.tscn" id="1_4ptx7"]
-[ext_resource type="Script" path="res://src/menus/tutorial_select/tutorial_select.gd" id="1_h2iyi"]
+[ext_resource type="Script" uid="uid://cekehm7hjicvv" path="res://src/menus/tutorial_select/tutorial_select.gd" id="1_h2iyi"]
 [ext_resource type="PackedScene" uid="uid://klrwcohuhynk" path="res://src/ghost/costume/ghost_costume.tscn" id="1_xu1af"]
 [ext_resource type="PackedScene" uid="uid://ctn825io87i34" path="res://src/hunter/costume/hunter_costume.tscn" id="3_eyaac"]
 [ext_resource type="Texture2D" uid="uid://do78peki3jtm" path="res://assets/flashlight/body.png" id="5_avxyi"]

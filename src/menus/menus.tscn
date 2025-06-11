@@ -15,26 +15,32 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_67gcq")
+current_tab = 0
 tabs_visible = false
 
 [node name="MainMenu" parent="." instance=ExtResource("1_yg0vw")]
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="ConfigMenu" parent="." instance=ExtResource("2_ypteh")]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="AboutMenu" parent="." instance=ExtResource("3_bdgwc")]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 2
 
 [node name="LicenseMenu" parent="." instance=ExtResource("3_503pn")]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 3
 
 [node name="TutorialSelect" parent="." instance=ExtResource("5_lbit3")]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 4
 
 [connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/HBoxContainer2/Settings" to="." method="set_current_tab" binds= [1]]
 [connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/HBoxContainer2/Tutorial" to="." method="set_current_tab" binds= [4]]

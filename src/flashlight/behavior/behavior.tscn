@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://dyev6t6l5ykdp"]
 
 [ext_resource type="PackedScene" uid="uid://c3u6qxrt3jkm8" path="res://src/repeat_ray_cast_2d/repeat_ray_cast_2d.tscn" id="1_mmhtb"]
-[ext_resource type="Script" path="res://src/flashlight/behavior/behavior.gd" id="1_n0bsl"]
-[ext_resource type="Script" path="res://src/damage_source.gd" id="2_goaws"]
+[ext_resource type="Script" uid="uid://dihi3g8kefyn1" path="res://src/flashlight/behavior/behavior.gd" id="1_n0bsl"]
+[ext_resource type="Script" uid="uid://dv6rumgim8vd0" path="res://src/damage_source.gd" id="2_goaws"]
 
 [sub_resource type="Resource" id="Resource_t266a"]
 script = ExtResource("2_goaws")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dppcbgbcx0b0t"]
 
-[ext_resource type="Script" path="res://src/level/spectator_menu/spectator_menu.gd" id="1_yqk1i"]
+[ext_resource type="Script" uid="uid://ba82cn8653e7c" path="res://src/level/spectator_menu/spectator_menu.gd" id="1_yqk1i"]
 
 [node name="SpectatorMenu" type="MarginContainer"]
 anchors_preset = 7

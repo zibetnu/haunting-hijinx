@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://c7qmrgohocqfx"]
 
-[ext_resource type="Script" path="res://src/flashlight/display/display.gd" id="1_rfbrn"]
+[ext_resource type="Script" uid="uid://bb2txhj2iyjib" path="res://src/flashlight/display/display.gd" id="1_rfbrn"]
 [ext_resource type="Texture2D" uid="uid://b5o6s164tla1b" path="res://assets/flashlight/light_1.png" id="2_j0apu"]
 [ext_resource type="Texture2D" uid="uid://do78peki3jtm" path="res://assets/flashlight/body.png" id="2_lt2gs"]
 [ext_resource type="AudioStream" uid="uid://bdauwuj37f6qm" path="res://assets/flashlight/click.wav" id="2_sji0g"]

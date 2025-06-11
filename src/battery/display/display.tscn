@@ -1,6 +1,6 @@
 [gd_scene load_steps=29 format=3 uid="uid://uuq811gwpafg"]
 
-[ext_resource type="Script" path="res://src/battery/display/display.gd" id="1_8ur3x"]
+[ext_resource type="Script" uid="uid://cniuccwrxwey0" path="res://src/battery/display/display.gd" id="1_8ur3x"]
 [ext_resource type="AudioStream" uid="uid://g5tcldah12p3" path="res://assets/battery/battery_spawn.wav" id="2_nf8f5"]
 [ext_resource type="Texture2D" uid="uid://cd3rx7bfbifcx" path="res://assets/battery/body.png" id="3_88tfj"]
 [ext_resource type="Texture2D" uid="uid://dsbo4dsjwwxip" path="res://assets/battery/decorations.png" id="4_1mlfi"]
@@ -196,10 +196,10 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xkrf1"]
 _data = {
-"RESET": SubResource("Animation_yccv2"),
-"bob": SubResource("Animation_nfhv7"),
-"destroy": SubResource("Animation_0qiit"),
-"spawn": SubResource("Animation_ge5ei")
+&"RESET": SubResource("Animation_yccv2"),
+&"bob": SubResource("Animation_nfhv7"),
+&"destroy": SubResource("Animation_0qiit"),
+&"spawn": SubResource("Animation_ge5ei")
 }
 
 [sub_resource type="Gradient" id="Gradient_mfklc"]
@@ -339,7 +339,7 @@ replication_config = SubResource("SceneReplicationConfig_6p6fl")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_xkrf1")
+&"": SubResource("AnimationLibrary_xkrf1")
 }
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

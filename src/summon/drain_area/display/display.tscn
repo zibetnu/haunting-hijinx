@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://jnvo3fkujlu4"]
 
-[ext_resource type="Script" path="res://src/summon/drain_area/display/display.gd" id="1_l5xdp"]
+[ext_resource type="Script" uid="uid://dck1j3w8j8oot" path="res://src/summon/drain_area/display/display.gd" id="1_l5xdp"]
 [ext_resource type="Material" uid="uid://bbhp34kya5qm8" path="res://src/summon/drain_area/drain_area.tres" id="2_vfq63"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8mo38"]
@@ -204,10 +204,10 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_44ojd"]
 _data = {
-"RESET": SubResource("Animation_rrukf"),
-"active": SubResource("Animation_5y1l5"),
-"collided": SubResource("Animation_groy4"),
-"idle": SubResource("Animation_s4jar")
+&"RESET": SubResource("Animation_rrukf"),
+&"active": SubResource("Animation_5y1l5"),
+&"collided": SubResource("Animation_groy4"),
+&"idle": SubResource("Animation_s4jar")
 }
 
 [node name="Display" type="Node2D" groups=["drain_area_displays"]]
@@ -233,5 +233,5 @@ mouse_filter = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Waves"]
 libraries = {
-"": SubResource("AnimationLibrary_44ojd")
+&"": SubResource("AnimationLibrary_44ojd")
 }

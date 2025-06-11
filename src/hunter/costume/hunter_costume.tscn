@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://ctn825io87i34"]
 
 [ext_resource type="AnimationLibrary" uid="uid://fs3jht0ivdhm" path="res://src/animation_libaries/canvas_item.tres" id="1_7b0n7"]
-[ext_resource type="Script" path="res://src/hunter/costume/hunter_costume.gd" id="1_auu5i"]
+[ext_resource type="Script" uid="uid://bluoe5hijvv6l" path="res://src/hunter/costume/hunter_costume.gd" id="1_auu5i"]
 [ext_resource type="Texture2D" uid="uid://vae6e0eh7xge" path="res://assets/hunter/palettes/green.png" id="2_28bn5"]
 [ext_resource type="AnimationLibrary" uid="uid://5nvcy2ymwxml" path="res://src/animation_libaries/node_2d.tres" id="2_jv5mw"]
 [ext_resource type="AnimationLibrary" uid="uid://bss842gjvgyiu" path="res://src/hunter/costume/hunter_costume.tres" id="2_wvtms"]
@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cncgj1kxmgybg" path="res://assets/hunter/torso.png" id="7_l744e"]
 [ext_resource type="Texture2D" uid="uid://c6jxona5mctlp" path="res://assets/hunter/dead.png" id="8_8f8lf"]
 [ext_resource type="Texture2D" uid="uid://blnr62by4pipw" path="res://assets/hunter/arms.png" id="8_or3nn"]
-[ext_resource type="Shader" path="res://src/hunter/costume/palette_swap.gdshader" id="9_1ykwp"]
+[ext_resource type="Shader" uid="uid://d2i6fyt1j8hb8" path="res://src/hunter/costume/palette_swap.gdshader" id="9_1ykwp"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_72euo"]
 properties/0/path = NodePath(".:costume_rotation")
@@ -52,7 +52,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mpegg"]
 _data = {
-"RESET": SubResource("Animation_74m6x")
+&"RESET": SubResource("Animation_74m6x")
 }
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_cfqbp"]
@@ -79,9 +79,9 @@ replication_config = SubResource("SceneReplicationConfig_72euo")
 editor_description = "The node_2d animations are still called sprite to preserve compatibility with prior 1.x releases."
 root_node = NodePath("../CanvasGroup")
 libraries = {
-"": SubResource("AnimationLibrary_mpegg"),
-"canvas_item": ExtResource("1_7b0n7"),
-"sprite": ExtResource("2_jv5mw")
+&"": SubResource("AnimationLibrary_mpegg"),
+&"canvas_item": ExtResource("1_7b0n7"),
+&"sprite": ExtResource("2_jv5mw")
 }
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Effects"]
@@ -89,7 +89,7 @@ replication_config = SubResource("SceneReplicationConfig_cfqbp")
 
 [node name="Hunter" type="AnimationPlayer" parent="."]
 libraries = {
-"": ExtResource("2_wvtms")
+&"": ExtResource("2_wvtms")
 }
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Hunter"]

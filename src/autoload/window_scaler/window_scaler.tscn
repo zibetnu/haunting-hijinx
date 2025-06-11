@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bi8dcrcfp5mb3"]
 
-[ext_resource type="Script" path="res://src/autoload/window_scaler/window_scaler.gd" id="1_41y8o"]
+[ext_resource type="Script" uid="uid://hvpuk32ih81g" path="res://src/autoload/window_scaler/window_scaler.gd" id="1_41y8o"]
 
 [node name="WindowScaler" type="Node"]
 script = ExtResource("1_41y8o")

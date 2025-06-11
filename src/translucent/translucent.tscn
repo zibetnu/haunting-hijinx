@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ca2ymkyj3cv7e"]
 
-[ext_resource type="Script" path="res://src/translucent/translucent.gd" id="1_rdtpw"]
+[ext_resource type="Script" uid="uid://bdc7icbhm1nfw" path="res://src/translucent/translucent.gd" id="1_rdtpw"]
 
 [node name="Translucent" type="Node"]
 script = ExtResource("1_rdtpw")

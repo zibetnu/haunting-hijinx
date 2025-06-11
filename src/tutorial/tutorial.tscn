@@ -1,11 +1,11 @@
 [gd_scene load_steps=45 format=3 uid="uid://c64tx6254qrlp"]
 
-[ext_resource type="Script" path="res://src/tutorial/tutorial.gd" id="1_031tw"]
+[ext_resource type="Script" uid="uid://cut35p48ypmdm" path="res://src/tutorial/tutorial.gd" id="1_031tw"]
 [ext_resource type="AudioStream" uid="uid://fiew3im75jjx" path="res://assets/quest_complete.wav" id="4_dn1cl"]
 [ext_resource type="PackedScene" uid="uid://ebt35jjk5feh" path="res://src/level/main_floor/tile_maps.tscn" id="8_qub2g"]
 [ext_resource type="PackedScene" uid="uid://b0jfn7wspsy4c" path="res://src/level/level_lighting.tscn" id="9_xmgwu"]
 [ext_resource type="Texture2D" uid="uid://bntsrcd3hjcex" path="res://addons/input_prompts/icons/generic/left_stick_up.png" id="13_lobwg"]
-[ext_resource type="Script" path="res://addons/input_prompts/action_prompt/action_prompt.gd" id="14_qs7j1"]
+[ext_resource type="Script" uid="uid://ejiqf8s1mork" path="res://addons/input_prompts/action_prompt/action_prompt.gd" id="14_qs7j1"]
 [ext_resource type="Texture2D" uid="uid://cah6r1q5x2lte" path="res://addons/input_prompts/icons/generic/left_stick_left.png" id="15_alb5o"]
 [ext_resource type="PackedScene" uid="uid://8qaswvkeb8qd" path="res://src/ghost/ghost.tscn" id="16_k10kj"]
 [ext_resource type="Texture2D" uid="uid://dreirjfpqj40a" path="res://addons/input_prompts/icons/generic/left_stick_down.png" id="16_q45ce"]

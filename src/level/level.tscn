@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://gxh15sde0me5"]
 
-[ext_resource type="Script" path="res://src/level/level.gd" id="1_el04s"]
+[ext_resource type="Script" uid="uid://cg0rykk30xiip" path="res://src/level/level.gd" id="1_el04s"]
 [ext_resource type="PackedScene" uid="uid://vl432076bm8p" path="res://src/level/steam_lobby_chat_update/steam_lobby_chat_update.tscn" id="2_acesl"]
 [ext_resource type="PackedScene" uid="uid://grxm3658ukjj" path="res://src/battery_spawner/battery_spawner.tscn" id="2_d8ks1"]
 [ext_resource type="PackedScene" uid="uid://8qaswvkeb8qd" path="res://src/ghost/ghost.tscn" id="2_ree31"]
@@ -55,7 +55,7 @@ position = Vector2(640, 360)
 y_sort_enabled = true
 
 [node name="CountingSpawner" parent="." instance=ExtResource("3_xxci0")]
-_spawnable_scenes = PackedStringArray("res://src/ghost/ghost.tscn", "res://src/hunter/hunter.tscn", "res://src/summon/drain_area/drain_area.tscn", "res://src/battery/battery.tscn")
+_spawnable_scenes = PackedStringArray("uid://8qaswvkeb8qd", "uid://ccvsw508kh4ot", "uid://cscnk1bc8v66d", "uid://bw11rdhjv3j62")
 spawn_path = NodePath("../SpawnRoot")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

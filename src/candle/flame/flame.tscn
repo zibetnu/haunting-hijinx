@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://sk7k142ijsc7"]
 
 [ext_resource type="Texture2D" uid="uid://bwecne3kh8e4i" path="res://assets/candle/flame.png" id="1_ujmh6"]
-[ext_resource type="Script" path="res://src/candle/flame/flame.gd" id="2_l1fv8"]
+[ext_resource type="Script" uid="uid://bvgod7miakpcm" path="res://src/candle/flame/flame.gd" id="2_l1fv8"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_iwwh5"]
 light_mode = 1
@@ -64,8 +64,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pfeov"]
 _data = {
-"RESET": SubResource("Animation_oyn6q"),
-"candle": SubResource("Animation_p82no")
+&"RESET": SubResource("Animation_oyn6q"),
+&"candle": SubResource("Animation_p82no")
 }
 
 [node name="Flame" type="Sprite2D"]
@@ -76,6 +76,6 @@ script = ExtResource("2_l1fv8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_pfeov")
+&"": SubResource("AnimationLibrary_pfeov")
 }
 speed_scale = 0.8

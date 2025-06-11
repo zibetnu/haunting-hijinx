@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://cmta6hi75dnwf"]
 
-[ext_resource type="Script" path="res://src/config_menu/config_menu.gd" id="1_f68c2"]
+[ext_resource type="Script" uid="uid://clqt2cqnfreut" path="res://src/config_menu/config_menu.gd" id="1_f68c2"]
 [ext_resource type="PackedScene" uid="uid://beclheud7fmo4" path="res://src/config_handler/config_handler.tscn" id="1_h62ve"]
 [ext_resource type="PackedScene" uid="uid://m41j0s7lbwbr" path="res://src/window_mode_setter/window_mode_setter.tscn" id="2_vstoa"]
 [ext_resource type="PackedScene" uid="uid://l85mp1rghtu0" path="res://src/connect_group/connect_group.tscn" id="3_ld5e3"]
 [ext_resource type="PackedScene" uid="uid://c4pe2q3xrfk36" path="res://src/bus_volume_setter/bus_volume_setter.tscn" id="4_5dgk7"]
-[ext_resource type="Script" path="res://src/config_menu/option_button_id.gd" id="6_u7oav"]
+[ext_resource type="Script" uid="uid://cyi51j6dwvuvx" path="res://src/config_menu/option_button_id.gd" id="6_u7oav"]
 
 [node name="ConfigMenu" type="Control" node_paths=PackedStringArray("first_button")]
 layout_mode = 3
@@ -100,10 +100,12 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 size_flags_vertical = 10
+current_tab = 0
 use_hidden_tabs_for_min_size = true
 
 [node name="Display" type="VBoxContainer" parent="FrontEnd/VBoxContainer/TabContainer"]
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="WindowMode" type="HBoxContainer" parent="FrontEnd/VBoxContainer/TabContainer/Display"]
 layout_mode = 2
@@ -212,6 +214,7 @@ one_shot = true
 [node name="Audio" type="VBoxContainer" parent="FrontEnd/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="Master" type="HBoxContainer" parent="FrontEnd/VBoxContainer/TabContainer/Audio"]
 layout_mode = 2

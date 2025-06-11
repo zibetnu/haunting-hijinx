@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cqm0n7qh031ao"]
 
-[ext_resource type="Script" path="res://src/call_group/call_group.gd" id="1_603ep"]
+[ext_resource type="Script" uid="uid://b31fmbgh5mke8" path="res://src/call_group/call_group.gd" id="1_603ep"]
 
 [node name="CallGroup" type="Node"]
 script = ExtResource("1_603ep")

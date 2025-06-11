@@ -1,12 +1,12 @@
 [gd_scene load_steps=24 format=3 uid="uid://02ri1p0jbqdb"]
 
-[ext_resource type="Script" path="res://src/tutorial/ghost/ghost_tutorial.gd" id="1_c6pgd"]
+[ext_resource type="Script" uid="uid://cxtv2k5y1qsv7" path="res://src/tutorial/ghost/ghost_tutorial.gd" id="1_c6pgd"]
 [ext_resource type="PackedScene" uid="uid://c64tx6254qrlp" path="res://src/tutorial/tutorial.tscn" id="1_i6ivc"]
-[ext_resource type="Script" path="res://src/tutorial/quest/quest.gd" id="2_r5b0f"]
-[ext_resource type="Script" path="res://src/tutorial/quest/composite_quest.gd" id="3_5y0cp"]
+[ext_resource type="Script" uid="uid://bcveuhp3crl7q" path="res://src/tutorial/quest/quest.gd" id="2_r5b0f"]
+[ext_resource type="Script" uid="uid://b6ajv1ch780ws" path="res://src/tutorial/quest/composite_quest.gd" id="3_5y0cp"]
 [ext_resource type="PackedScene" uid="uid://8qwvhkjp3yja" path="res://src/tutorial/quest/wpm_complete/wpm_complete.tscn" id="5_s13op"]
 [ext_resource type="PackedScene" uid="uid://bu4oleqx87mnw" path="res://src/tutorial/quest/complete_after_delay/complete_after_delay.tscn" id="6_x00k6"]
-[ext_resource type="Script" path="res://src/tutorial/quest/quest_node.gd" id="7_7l8aw"]
+[ext_resource type="Script" uid="uid://bghayfahpoh8d" path="res://src/tutorial/quest/quest_node.gd" id="7_7l8aw"]
 [ext_resource type="PackedScene" uid="uid://di5qxwdvv5nga" path="res://src/controller/npc_hunter/npc_hunter.tscn" id="12_2andj"]
 
 [sub_resource type="Resource" id="Resource_osr1n"]

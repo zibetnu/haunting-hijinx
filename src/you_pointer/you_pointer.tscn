@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dp42j74wnvk40"]
 
-[ext_resource type="Script" path="res://src/you_pointer/you_pointer.gd" id="1_dyp5i"]
+[ext_resource type="Script" uid="uid://d06oo4wq73x2i" path="res://src/you_pointer/you_pointer.gd" id="1_dyp5i"]
 [ext_resource type="Texture2D" uid="uid://18wt7n7q8jsa" path="res://assets/you_pointer.png" id="1_py0mn"]
 
 [sub_resource type="Animation" id="Animation_30v7r"]
@@ -321,10 +321,10 @@ tracks/6/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xx7yw"]
 _data = {
-"RESET": SubResource("Animation_30v7r"),
-"fade": SubResource("Animation_6frtk"),
-"point_down": SubResource("Animation_bkf5n"),
-"point_up": SubResource("Animation_i4kjf")
+&"RESET": SubResource("Animation_30v7r"),
+&"fade": SubResource("Animation_6frtk"),
+&"point_down": SubResource("Animation_bkf5n"),
+&"point_up": SubResource("Animation_i4kjf")
 }
 
 [node name="YouPointer" type="Node2D"]
@@ -347,9 +347,9 @@ texture = ExtResource("1_py0mn")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_xx7yw")
+&"": SubResource("AnimationLibrary_xx7yw")
 }
-blend_times = [&"point_up", &"fade", 1.0, &"point_down", &"fade", 1.0]
+blend_times = [&"point_down", &"fade", 1.0, &"point_up", &"fade", 1.0]
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0

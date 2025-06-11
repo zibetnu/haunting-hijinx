@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://doo22pvhedm4n"]
 
-[ext_resource type="Script" path="res://src/collision_avoider/collision_avoider.gd" id="1_xexpo"]
+[ext_resource type="Script" uid="uid://bb256613jk7ew" path="res://src/collision_avoider/collision_avoider.gd" id="1_xexpo"]
 
 [node name="CollisionAvoider" type="Node2D"]
 script = ExtResource("1_xexpo")

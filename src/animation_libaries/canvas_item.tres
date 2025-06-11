@@ -50,7 +50,7 @@ tracks/0/keys = {
 
 [resource]
 _data = {
-"RESET": SubResource("Animation_cd0hv"),
-"flash": SubResource("Animation_tvi17"),
-"pulse": SubResource("Animation_kr3qi")
+&"RESET": SubResource("Animation_cd0hv"),
+&"flash": SubResource("Animation_tvi17"),
+&"pulse": SubResource("Animation_kr3qi")
 }

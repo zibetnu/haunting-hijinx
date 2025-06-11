@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cjrktrabkeadi"]
 
-[ext_resource type="Script" path="res://addons/licenses/internal/licenses_dialog.gd" id="1_0s46i"]
+[ext_resource type="Script" uid="uid://4cjolyov71ey" path="res://addons/licenses/internal/licenses_dialog.gd" id="1_0s46i"]
 [ext_resource type="PackedScene" uid="uid://dfj2mhwrs1oss" path="res://addons/licenses/internal/licenses.tscn" id="1_f3ql8"]
 
 [node name="license_dialog" type="Window"]

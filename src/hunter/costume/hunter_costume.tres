@@ -318,8 +318,8 @@ tracks/6/keys = {
 
 [resource]
 _data = {
-"RESET": SubResource("Animation_f2uv7"),
-"dead": SubResource("Animation_av60y"),
-"idle": SubResource("Animation_7184n"),
-"move": SubResource("Animation_13nm0")
+&"RESET": SubResource("Animation_f2uv7"),
+&"dead": SubResource("Animation_av60y"),
+&"idle": SubResource("Animation_7184n"),
+&"move": SubResource("Animation_13nm0")
 }

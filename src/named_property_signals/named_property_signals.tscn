@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dhavwobkg4v8o"]
 
-[ext_resource type="Script" path="res://src/named_property_signals/named_property_signals.gd" id="1_ln35r"]
+[ext_resource type="Script" uid="uid://b3juh164vmrl7" path="res://src/named_property_signals/named_property_signals.gd" id="1_ln35r"]
 
 [node name="NamedPropertySignals" type="Node"]
 script = ExtResource("1_ln35r")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c4pe2q3xrfk36"]
 
-[ext_resource type="Script" path="res://src/bus_volume_setter/bus_volume_setter.gd" id="1_t73gq"]
+[ext_resource type="Script" uid="uid://do0lvd0ibqrs4" path="res://src/bus_volume_setter/bus_volume_setter.gd" id="1_t73gq"]
 
 [node name="BusVolumeSetter" type="Node"]
 script = ExtResource("1_t73gq")

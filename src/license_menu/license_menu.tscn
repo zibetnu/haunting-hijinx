@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://chr26ux2vsrxq"]
 
-[ext_resource type="Script" path="res://src/license_menu/license_menu.gd" id="1_gdao5"]
+[ext_resource type="Script" uid="uid://dva15pnfy3mhy" path="res://src/license_menu/license_menu.gd" id="1_gdao5"]
 [ext_resource type="PackedScene" uid="uid://c6ql67s5oafpr" path="res://src/visibility_signals/visibility_signals.tscn" id="2_wvjk2"]
 
 [node name="LicenseMenu" type="MarginContainer" node_paths=PackedStringArray("tree", "back", "component_name", "version", "description", "contact", "contact_container", "web", "web_container", "paths", "paths_container", "license_name", "license_text")]

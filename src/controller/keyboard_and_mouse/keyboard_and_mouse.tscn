@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://3hkpcs75ade2"]
 
-[ext_resource type="Script" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.gd" id="1_vscdr"]
+[ext_resource type="Script" uid="uid://c5eyup3e2mklx" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.gd" id="1_vscdr"]
 
 [node name="KeyboardAndMouse" type="Node2D"]
 script = ExtResource("1_vscdr")

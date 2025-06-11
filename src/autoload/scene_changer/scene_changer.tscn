@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cmhqty6g1sgls"]
 
-[ext_resource type="Script" path="res://src/autoload/scene_changer/scene_changer.gd" id="1_6yofi"]
+[ext_resource type="Script" uid="uid://ceqnnjhsbwq74" path="res://src/autoload/scene_changer/scene_changer.gd" id="1_6yofi"]
 [ext_resource type="PackedScene" uid="uid://df63fi5u7xpjt" path="res://src/lobby/lobby.tscn" id="2_nsjnt"]
 [ext_resource type="PackedScene" uid="uid://crqc4k74es8j6" path="res://src/lobby_browser/lobby_browser.tscn" id="3_gctsf"]
 [ext_resource type="PackedScene" uid="uid://bnoti7vnd7pk7" path="res://src/menus/menus.tscn" id="4_rfgbt"]
@@ -27,7 +27,7 @@ wait_time = 3.0
 one_shot = true
 
 [node name="SceneSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://src/level/main_floor/main_floor.tscn", "res://src/lobby/lobby.tscn")
+_spawnable_scenes = PackedStringArray("uid://2uclu3gf4iyj", "uid://df63fi5u7xpjt")
 spawn_path = NodePath(".")
 spawn_limit = 1
 

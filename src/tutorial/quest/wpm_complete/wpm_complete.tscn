@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://8qwvhkjp3yja"]
 
-[ext_resource type="Script" path="res://src/tutorial/quest/wpm_complete/wpm_complete.gd" id="1_21bjj"]
+[ext_resource type="Script" uid="uid://demcvnjovxdts" path="res://src/tutorial/quest/wpm_complete/wpm_complete.gd" id="1_21bjj"]
 
 [node name="WPMComplete" type="Node"]
 script = ExtResource("1_21bjj")

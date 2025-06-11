@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://dfj2mhwrs1oss"]
 
-[ext_resource type="Script" path="res://addons/licenses/internal/component_detail_tree.gd" id="1"]
-[ext_resource type="Script" path="res://addons/licenses/internal/components_tree.gd" id="2"]
-[ext_resource type="Script" path="res://addons/licenses/internal/toolbar.gd" id="2_a8iu8"]
-[ext_resource type="Script" path="res://addons/licenses/internal/licenses.gd" id="3"]
+[ext_resource type="Script" uid="uid://26sysknkji2w" path="res://addons/licenses/internal/component_detail_tree.gd" id="1"]
+[ext_resource type="Script" uid="uid://2em6ckkmst53" path="res://addons/licenses/internal/components_tree.gd" id="2"]
+[ext_resource type="Script" uid="uid://bwfxurof1evbh" path="res://addons/licenses/internal/toolbar.gd" id="2_a8iu8"]
+[ext_resource type="Script" uid="uid://cm6umghibnsub" path="res://addons/licenses/internal/licenses.gd" id="3"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5cx7n"]
 

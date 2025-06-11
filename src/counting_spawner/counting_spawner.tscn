@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://7wne64wo1epb"]
 
-[ext_resource type="Script" path="res://src/counting_spawner/counting_spawner.gd" id="1_igehq"]
+[ext_resource type="Script" uid="uid://dw4locfko266n" path="res://src/counting_spawner/counting_spawner.gd" id="1_igehq"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_sonio"]
 properties/0/path = NodePath(".:spawned_count_server")

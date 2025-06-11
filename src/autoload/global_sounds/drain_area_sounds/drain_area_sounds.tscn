@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b6edrvqnuo5bq"]
 
-[ext_resource type="Script" path="res://src/autoload/global_sounds/drain_area_sounds/drain_area_sounds.gd" id="1_d6g5b"]
+[ext_resource type="Script" uid="uid://d4ekq1u6wdtrl" path="res://src/autoload/global_sounds/drain_area_sounds/drain_area_sounds.gd" id="1_d6g5b"]
 [ext_resource type="AudioStream" uid="uid://dxxau04d4csjj" path="res://assets/drain_area_spawn.wav" id="2_o3774"]
 [ext_resource type="AudioStream" uid="uid://c0o317ei77vfn" path="res://assets/drain_area_activate.wav" id="3_jl703"]
 

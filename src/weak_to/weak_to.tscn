@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cpvs73t8l3h88"]
 
-[ext_resource type="Script" path="res://src/weak_to/weak_to.gd" id="1_sa56c"]
+[ext_resource type="Script" uid="uid://bpdek7e5l8khf" path="res://src/weak_to/weak_to.gd" id="1_sa56c"]
 
 [node name="WeakTo" type="Node"]
 script = ExtResource("1_sa56c")

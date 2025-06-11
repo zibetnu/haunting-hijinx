@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://drxvuet3qhe60"]
 
-[ext_resource type="Script" path="res://src/invisibility/invisibility.gd" id="1_mdh47"]
+[ext_resource type="Script" uid="uid://bqjt3wj8sl2ss" path="res://src/invisibility/invisibility.gd" id="1_mdh47"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_qgrd7"]
 properties/0/path = NodePath(".:local_peer_id")

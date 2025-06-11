@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bj8n2x3jkcbgs"]
 
-[ext_resource type="Script" path="res://src/relay_initializer/relay_initializer.gd" id="1_1g7gu"]
+[ext_resource type="Script" uid="uid://kx6a5yr3aak0" path="res://src/relay_initializer/relay_initializer.gd" id="1_1g7gu"]
 
 [node name="RelayInitializer" type="Node"]
 script = ExtResource("1_1g7gu")
