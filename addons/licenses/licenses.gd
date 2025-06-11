@@ -1,11 +1,11 @@
 extends RefCounted
-# TODO:  DO NOT USE THE CLASS NAME, it will be removed later
-class_name __LicenseManager
 
 const Component := preload("res://addons/licenses/component.gd")
 
-const DATA_FILE: String = "plugins/licenses/data_file"
-const JSON_INDENT = "\t"
+## @deprecated: Use `CFG_KEY_DATA_FILE` instead.
+const DATA_FILE: String = CFG_KEY_DATA_FILE
+const CFG_KEY_DATA_FILE: String = "plugins/licenses/data_file"
+const CFG_KEY_INDENTATION: String = "plugins/licenses/indentation"
 
 static func compare_components_ascending(lhs: Component, rhs: Component) -> bool:
     var lhs_cat_lower: String = lhs.category.to_lower()
@@ -52,7 +52,7 @@ static func get_engine_components() -> Array[Component]:
         if eg_comp != null:
             engine_components.append(eg_comp)
 
-    engine_components.sort_custom(__LicenseManager.compare_components_ascending)
+    engine_components.sort_custom(compare_components_ascending)
     return engine_components
 
 static func get_required_engine_components() -> Array[Component]:
@@ -63,17 +63,18 @@ static func get_required_engine_components() -> Array[Component]:
         if eg_comp != null:
             engine_components.append(eg_comp)
 
-    engine_components.sort_custom(__LicenseManager.compare_components_ascending)
+    engine_components.sort_custom(compare_components_ascending)
     return engine_components
 
-static func save(components: Array[Component], file_path: String) -> int:
+static func save(components: Array[Component], file_path: String, indent: String = "") -> Error:
     var file: FileAccess = FileAccess.open(file_path, FileAccess.WRITE)
     if file == null:
         return FileAccess.get_open_error()
-    var raw: Array = []
+    var raw: Array[Dictionary] = []
     for component: Component in components:
         raw.append(component.serialize())
-    file.store_line(JSON.stringify({"components": raw}, JSON_INDENT))
+    if !file.store_line(JSON.stringify({"components": raw}, indent)):
+        return file.get_error()
     file = null
     return OK
 
@@ -109,10 +110,10 @@ static func load(file_path: String) -> LoadResult:
     return LoadResult.new(components)
 
 static func set_license_data_filepath(path: String) -> void:
-    ProjectSettings.set_setting(DATA_FILE, path)
+    ProjectSettings.set_setting(CFG_KEY_DATA_FILE, path)
 
 static func get_license_data_filepath() -> String:
     # does not work due to https://github.com/godotengine/godot/issues/56598
-    if ProjectSettings.has_setting(DATA_FILE):
-        return ProjectSettings.get_setting(DATA_FILE)
+    if ProjectSettings.has_setting(CFG_KEY_DATA_FILE):
+        return ProjectSettings.get_setting(CFG_KEY_DATA_FILE)
     return "res://licenses.json"

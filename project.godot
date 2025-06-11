@@ -198,6 +198,7 @@ open_menu={
 [plugins]
 
 licenses/data_file="res://assets/licenses.json"
+licenses/indentation=2
 
 [rendering]
 

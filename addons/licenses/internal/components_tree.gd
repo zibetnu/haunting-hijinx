@@ -2,7 +2,7 @@
 extends Tree
 
 const Component := preload("res://addons/licenses/component.gd")
-const ComponentsContainer := preload("res://addons/licenses/internal/components_container.gd")
+const LicensesInterface := preload("res://addons/licenses/internal/plugin/licenses_interface.gd")
 const Licenses := preload("res://addons/licenses/licenses.gd")
 
 const _BTN_ID_REMOVE: int = 2
@@ -13,13 +13,13 @@ signal component_add(comp: Component)
 
 var show_readonly_components: bool = false:
     set = set_show_readonly_components
-var _components: ComponentsContainer
+var _li: LicensesInterface
 ## cached value
 var _readonly_components: Array[Component] = []
 var _item_menu: PopupMenu
 
 func set_show_readonly_components(show_: bool) -> void:
-    var sel_comp: Component = self._get_selected_component()
+    var sel_comp: Component = self._get_component_from_item(self.get_selected())
     show_readonly_components = show_
     if show_:
         self._readonly_components = Licenses.get_required_engine_components()
@@ -32,13 +32,11 @@ func set_show_readonly_components(show_: bool) -> void:
         else:
             self.reload(sel_comp)
 
-func set_components(comp: ComponentsContainer) -> void:
-    self._components = comp
-    self.reload()
-
 func _ready() -> void:
     self._create_item_menu()
     self.gui_input.connect(self._on_gui_input)
+    self._li = LicensesInterface.get_interface()
+    self.reload()
 
 func reload(scroll_to: Component = null) -> void:
     self.clear()
@@ -51,18 +49,18 @@ func reload(scroll_to: Component = null) -> void:
     # count current added custom components
     var idx: int = 0
 
-    while idx < self._components.count() || readonly_idx < len(self._readonly_components):
+    while idx < self._li.count() || readonly_idx < len(self._readonly_components):
         var component: Component = null
         var cur_idx: int = 0
         var cmp: bool = false
         # compare readonly items with editable, to determine which one to show first
-        if idx < self._components.count() && readonly_idx < len(self._readonly_components):
-            cmp = Licenses.compare_components_ascending(self._components.get_at(idx), self._readonly_components[readonly_idx])
+        if idx < self._li.count() && readonly_idx < len(self._readonly_components):
+            cmp = Licenses.compare_components_ascending(self._li.get_at(idx), self._readonly_components[readonly_idx])
         if readonly_idx >= len(self._readonly_components) || cmp:
-            component = self._components.get_at(idx)
+            component = self._li.get_at(idx)
             cur_idx = idx
             idx = idx + 1
-        elif idx >= self._components.count() || not cmp:
+        elif idx >= self._li.count() || not cmp:
             component = self._readonly_components[readonly_idx]
             cur_idx = readonly_idx
             readonly_idx = readonly_idx + 1
@@ -72,6 +70,15 @@ func reload(scroll_to: Component = null) -> void:
         if scroll_to != null && component == scroll_to:
             self.scroll_to_item(item)
             item.select(0)
+
+func select_component(comp: Component) -> void:
+    var tree_item: TreeItem = self.get_root().get_next_in_tree()
+    while tree_item != null:
+        if tree_item.has_meta("idx") && comp == self._li.get_at(tree_item.get_meta("idx")):
+            tree_item.select(0)
+            self.scroll_to_item(tree_item)
+            break
+        tree_item = tree_item.get_next_in_tree()
 
 func _create_item_menu() -> void:
     self._item_menu = PopupMenu.new()
@@ -134,15 +141,15 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 
     return item
 
-func _drop_data(at_position: Vector2, data: Variant) -> void:
+func _drop_data(at_position: Vector2, _data: Variant) -> void:
     var to_item: TreeItem = self.get_item_at_position(at_position)
     var category = to_item.get_meta("category")
-    var cur_component: Component = self._get_selected_component()
+    var cur_component: Component = self._get_component_from_item(self.get_selected())
     if cur_component.category == category:
         return
     cur_component.category = category
-    self._components.sort_custom(Licenses.compare_components_ascending)
-    self._components.emit_changed()
+    self._li.sort_custom(Licenses.compare_components_ascending)
+    self._li.emit_components_changed()
 
 func _notification(what: int):
     if what == NOTIFICATION_DRAG_END:
@@ -153,36 +160,33 @@ func _notification(what: int):
                 item.clear_custom_color(0)
             item = item.get_next()
 
-func _get_selected_component() -> Component:
-    var item: TreeItem = self.get_selected()
+## if item is null or has not meta "idx" return null
+func _get_component_from_item(item: TreeItem) -> Component:
     if item == null || !item.has_meta("idx"):
         return null
-    var component: Component = null
     if item.get_meta("readonly") as bool:
-        component = self._readonly_components[item.get_meta("idx")]
-    else:
-        component = self._components.get_at(item.get_meta("idx") as int)
-    return component
+        return self._readonly_components[item.get_meta("idx")]
+    return self._li.get_at(item.get_meta("idx") as int)
 
 func _on_item_selected() -> void:
-    self.component_selected.emit(self._get_selected_component())
+    self.component_selected.emit(self._get_component_from_item(self.get_selected()))
 
 func _on_button_clicked(item: TreeItem, column: int, id: int, mouse_button_idx: int) -> void:
     match id:
         _BTN_ID_REMOVE:
-            self.component_remove.emit(self._get_selected_component())
+            self.component_remove.emit(self._get_component_from_item(item))
 
 func _on_item_edited() -> void:
     var category_item: TreeItem = self.get_edited()
     var old_category: String = category_item.get_meta("category")
     var new_category: String = category_item.get_text(0)
     category_item.set_meta("category", new_category)
-    for component: Component in self._components.components():
+    for component: Component in self._li.components():
         if component.category == old_category:
             component.category = new_category
 
-    self._components.sort_custom(Licenses.compare_components_ascending)
-    self._components.emit_changed()
+    self._li.sort_custom(Licenses.compare_components_ascending)
+    self._li.emit_components_changed()
 
 func _on_gui_input(event: InputEvent) -> void:
     if !((event is InputEventMouseButton) && (event as InputEventMouseButton).pressed && (event as InputEventMouseButton).button_index == MOUSE_BUTTON_RIGHT):
@@ -195,7 +199,7 @@ func _on_gui_input(event: InputEvent) -> void:
     self._item_menu.popup_on_parent(Rect2(self.get_local_mouse_position() + Vector2(9, self._item_menu.size.y + 3), self._item_menu.size))
 
 func _on_item_menu_pressed(btn_idx: int) -> void:
-    var comp: Component = self._get_selected_component()
+    var comp: Component = self._get_component_from_item(self.get_selected())
     match btn_idx:
         0:
             var new_comp: Component = comp.duplicate()
