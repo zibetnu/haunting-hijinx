@@ -16,6 +16,8 @@ git_describe/describe_setting_path="application/config/version"
 
 config/name="Haunting Hijinx"
 run/main_scene="res://src/main.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="haunting_hijinx"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/use_filter=false
