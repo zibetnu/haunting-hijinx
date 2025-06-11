@@ -7,7 +7,7 @@ signal saved
 signal save_failed
 signal staged_value_changed(staged_value: Variant)
 
-const PATH = "user://settings.cfg"
+static var path: String = GameConfig.get_config_dir().path_join("settings.cfg")
 
 static var _config_file: ConfigFile:
 	get = _get_config_file
@@ -30,7 +30,7 @@ func load_value() -> void:
 
 func save_value(value: Variant = staged_value) -> void:
 	_config_file.set_value(section, key, value)
-	var error: Error = _config_file.save(PATH)
+	var error: Error = _config_file.save(path)
 	if error != OK:
 		save_failed.emit()
 		return
@@ -49,6 +49,6 @@ func set_staged_value(value: Variant) -> void:
 static func _get_config_file() -> ConfigFile:
 	if _config_file == null:
 		_config_file = ConfigFile.new()
-		_config_file.load(PATH)
+		_config_file.load(path)
 
 	return _config_file
