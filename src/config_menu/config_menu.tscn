@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cmta6hi75dnwf"]
+[gd_scene load_steps=6 format=3 uid="uid://cmta6hi75dnwf"]
 
 [ext_resource type="Script" uid="uid://clqt2cqnfreut" path="res://src/config_menu/config_menu.gd" id="1_f68c2"]
 [ext_resource type="PackedScene" uid="uid://beclheud7fmo4" path="res://src/config_handler/config_handler.tscn" id="1_h62ve"]
-[ext_resource type="PackedScene" uid="uid://m41j0s7lbwbr" path="res://src/window_mode_setter/window_mode_setter.tscn" id="2_vstoa"]
 [ext_resource type="PackedScene" uid="uid://l85mp1rghtu0" path="res://src/connect_group/connect_group.tscn" id="3_ld5e3"]
 [ext_resource type="PackedScene" uid="uid://c4pe2q3xrfk36" path="res://src/bus_volume_setter/bus_volume_setter.tscn" id="4_5dgk7"]
 [ext_resource type="Script" uid="uid://cyi51j6dwvuvx" path="res://src/config_menu/option_button_id.gd" id="6_u7oav"]
@@ -23,8 +22,6 @@ first_button = NodePath("FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/
 editor_description = "Defaults to 4 (exclusive fullscreen)."
 section = "display"
 key = "window_mode"
-
-[node name="WindowModeSetter" parent="BackEnd" instance=ExtResource("2_vstoa")]
 
 [node name="BrightnessConfig" parent="BackEnd" instance=ExtResource("1_h62ve")]
 editor_description = "Defaults to 0.126."
@@ -281,7 +278,6 @@ text = "Back"
 [connection signal="load_failed" from="BackEnd/WindowModeConfig" to="FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/OptionButton" method="select_id" binds= [4]]
 [connection signal="loaded" from="BackEnd/WindowModeConfig" to="FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/OptionButton" method="select_id"]
 [connection signal="ready" from="BackEnd/WindowModeConfig" to="BackEnd/WindowModeConfig" method="load_value"]
-[connection signal="window_mode_changed" from="BackEnd/WindowModeSetter" to="BackEnd/WindowModeConfig" method="save_value"]
 [connection signal="load_failed" from="BackEnd/BrightnessConfig" to="FrontEnd/VBoxContainer/TabContainer/Display/Brightness/HSlider" method="set_value_no_signal" binds= [0.126]]
 [connection signal="loaded" from="BackEnd/BrightnessConfig" to="FrontEnd/VBoxContainer/TabContainer/Display/Brightness/HSlider" method="set_value_no_signal"]
 [connection signal="ready" from="BackEnd/BrightnessConfig" to="BackEnd/BrightnessConfig" method="load_value"]
@@ -307,7 +303,8 @@ text = "Back"
 [connection signal="volume_linear_changed" from="BackEnd/EffectsBusConfig/BusVolumeSetter" to="BackEnd/EffectsBusConfig" method="set_staged_value"]
 [connection signal="timeout" from="BackEnd/EffectsBusConfig/SaveTimer" to="BackEnd/EffectsBusConfig" method="save_value"]
 [connection signal="timeout" from="SaveTimer" to="." method="_on_save_timer_timeout"]
-[connection signal="item_id_selected" from="FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/OptionButton" to="BackEnd/WindowModeSetter" method="set_window_mode"]
+[connection signal="item_id_selected" from="FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/OptionButton" to="." method="_on_window_mode_selected"]
+[connection signal="item_id_selected" from="FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/OptionButton" to="BackEnd/WindowModeConfig" method="save_value"]
 [connection signal="item_id_selected" from="FrontEnd/VBoxContainer/TabContainer/Display/VSync/VSyncOption" to="." method="_on_vsync_option_id_selected"]
 [connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Display/Brightness/HSlider" to="BackEnd/BrightnessConfig" method="set_staged_value"]
 [connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer/ScaleSlider" to="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer/ScaleSlider/ScaleDebounce" method="start" unbinds=1]

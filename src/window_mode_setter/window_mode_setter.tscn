@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://m41j0s7lbwbr"]
-
-[ext_resource type="Script" uid="uid://bfrcjbq4joinj" path="res://src/window_mode_setter/window_mode_setter.gd" id="1_n1jwc"]
-
-[node name="WindowModeSetter" type="Node"]
-script = ExtResource("1_n1jwc")

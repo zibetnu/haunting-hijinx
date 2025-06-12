@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://btqnfps722xj7"]
+[gd_scene load_steps=4 format=3 uid="uid://btqnfps722xj7"]
 
 [ext_resource type="Script" uid="uid://cng8vw1cl4j30" path="res://src/autoload/fullscreen_toggle/fullscreen_toggle.gd" id="1_38b55"]
 [ext_resource type="PackedScene" uid="uid://cqm0n7qh031ao" path="res://src/call_group/call_group.tscn" id="2_4nkos"]
 [ext_resource type="PackedScene" uid="uid://beclheud7fmo4" path="res://src/config_handler/config_handler.tscn" id="2_yopfo"]
-[ext_resource type="PackedScene" uid="uid://m41j0s7lbwbr" path="res://src/window_mode_setter/window_mode_setter.tscn" id="3_3b2w7"]
 
 [node name="FullscreenToggle" type="Node"]
 process_mode = 3
@@ -19,11 +18,7 @@ editor_description = "Window mode defaults to exclusive fullscreen (4) if Config
 section = "display"
 key = "window_mode"
 
-[node name="WindowModeSetter" parent="." instance=ExtResource("3_3b2w7")]
-
-[connection signal="window_mode_requested" from="." to="WindowModeSetter" method="set_window_mode"]
-[connection signal="load_failed" from="ConfigHandler" to="WindowModeSetter" method="set_window_mode" binds= [4]]
-[connection signal="loaded" from="ConfigHandler" to="WindowModeSetter" method="set_window_mode"]
-[connection signal="ready" from="ConfigHandler" to="ConfigHandler" method="load_value"]
 [connection signal="saved" from="ConfigHandler" to="CallGroup" method="call_group"]
-[connection signal="window_mode_changed" from="WindowModeSetter" to="ConfigHandler" method="save_value"]
+[connection signal="load_failed" from="ConfigHandler" to="." method="_on_config_handler_load_failed"]
+[connection signal="loaded" from="ConfigHandler" to="." method="_on_config_handler_loaded"]
+[connection signal="ready" from="ConfigHandler" to="ConfigHandler" method="load_value"]

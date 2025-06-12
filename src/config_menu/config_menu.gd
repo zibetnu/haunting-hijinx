@@ -74,6 +74,10 @@ func _on_scale_debounce_timeout() -> void:
 	save_timer.start()
 
 
+func _on_window_mode_selected(value: DisplayServer.WindowMode) -> void:
+	DisplayServer.window_set_mode(value)
+
+
 func _on_visibility_changed() -> void:
 	if not visible:
 		return
