@@ -294,7 +294,6 @@ text = "Back"
 [connection signal="staged_value_changed" from="BackEnd/MasterBusConfig" to="BackEnd/MasterBusConfig/SaveTimer" method="start" unbinds=1]
 [connection signal="volume_linear_changed" from="BackEnd/MasterBusConfig/BusVolumeSetter" to="BackEnd/MasterBusConfig" method="set_staged_value"]
 [connection signal="timeout" from="BackEnd/MasterBusConfig/SaveTimer" to="BackEnd/MasterBusConfig" method="save_value"]
-[connection signal="load_failed" from="BackEnd/MusicBusConfig" to="FrontEnd/VBoxContainer/TabContainer/Audio/Music/HSlider" method="set_value" binds= [0.4]]
 [connection signal="loaded" from="BackEnd/MusicBusConfig" to="BackEnd/MusicBusConfig/BusVolumeSetter" method="set_volume_linear"]
 [connection signal="loaded" from="BackEnd/MusicBusConfig" to="FrontEnd/VBoxContainer/TabContainer/Audio/Music/HSlider" method="set_value_no_signal"]
 [connection signal="ready" from="BackEnd/MusicBusConfig" to="BackEnd/MusicBusConfig" method="load_value"]
