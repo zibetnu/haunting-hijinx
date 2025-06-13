@@ -31,8 +31,8 @@ key = "brightness"
 [node name="ConnectGroup" parent="BackEnd/BrightnessConfig" node_paths=PackedStringArray("source") instance=ExtResource("3_ld5e3")]
 source = NodePath("..")
 source_signal = &"staged_value_changed"
-receiver_group = &"color_darken_signals"
-receiver_method = &"set_inverted_darken_amount"
+receiver_group = &"level_lighting"
+receiver_method = &"set_brightness"
 
 [node name="SaveTimer" type="Timer" parent="BackEnd/BrightnessConfig"]
 wait_time = 0.5

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bgjkyfnmrd7e0" path="res://src/autoload/menu_background/menu_background.gd" id="1_7v3o7"]
 [ext_resource type="PackedScene" uid="uid://ebt35jjk5feh" path="res://src/level/main_floor/tile_maps.tscn" id="2_ma24s"]
-[ext_resource type="PackedScene" uid="uid://b0jfn7wspsy4c" path="res://src/level/level_lighting.tscn" id="7_ebbh2"]
+[ext_resource type="PackedScene" uid="uid://b0jfn7wspsy4c" path="res://src/level/lighting/level_lighting.tscn" id="7_ebbh2"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_eduse"]
 viewport_path = NodePath("TextureRect/SubViewport")
