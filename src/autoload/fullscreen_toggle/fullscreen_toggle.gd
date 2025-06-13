@@ -1,10 +1,19 @@
 extends Node
 
 const ACTION = "toggle_fullscreen"
+const SECTION = "display"
+const KEY = "window_mode"
 const FULLSCREEN_MODE = DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
 const WINDOWED_MODE = DisplayServer.WINDOW_MODE_WINDOWED
 
-@onready var config_handler: ConfigHandler = $ConfigHandler
+
+func _ready() -> void:
+	var saved: DisplayServer.WindowMode = GameConfig.get_value(
+			SECTION,
+			KEY,
+			FULLSCREEN_MODE
+	)
+	DisplayServer.window_set_mode(saved)
 
 
 func _input(event: InputEvent) -> void:
@@ -17,13 +26,15 @@ func _input(event: InputEvent) -> void:
 	else:
 		DisplayServer.window_set_mode(FULLSCREEN_MODE)
 
-	config_handler.save_value(DisplayServer.window_get_mode())
-	get_tree().call_group(&"window_mode_config_handlers", &"load_value")
+	GameConfig.set_value(
+			SECTION,
+			KEY,
+			DisplayServer.window_get_mode()
+	)
+	GameConfig.save()
 
-
-func _on_config_handler_loaded(value: Variant) -> void:
-	DisplayServer.window_set_mode(value as int)
-
-
-func _on_config_handler_load_failed() -> void:
-	DisplayServer.window_set_mode(FULLSCREEN_MODE)
+	var config_menu: ConfigMenu = get_tree().get_first_node_in_group(
+			&"config_menu"
+	)
+	if config_menu != null:
+		config_menu.init_window_mode_option()

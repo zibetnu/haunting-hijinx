@@ -1,3 +1,4 @@
+class_name ConnectGroup
 extends Node
 
 @export var source: Node

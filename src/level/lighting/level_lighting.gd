@@ -9,17 +9,14 @@ const MAX = 1.0
 	set = set_brightness
 
 @onready var canvas_modulate: CanvasModulate = $CanvasModulate
-@onready var config_handler: ConfigHandler = $ConfigHandler
 
 
 func _ready() -> void:
-	config_handler.load_value()
+	set_brightness(
+			GameConfig.get_value("display", "brightness", 0.126) as float
+	)
 
 
 func set_brightness(value: float) -> void:
 	brightness = clampf(value, MIN, MAX)
 	canvas_modulate.color = base_color.darkened(MAX - brightness)
-
-
-func _on_config_handler_loaded(value: Variant) -> void:
-	set_brightness(value as float)

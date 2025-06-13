@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0jfn7wspsy4c"]
+[gd_scene load_steps=2 format=3 uid="uid://b0jfn7wspsy4c"]
 
 [ext_resource type="Script" uid="uid://btk5cqh8kqnm1" path="res://src/level/lighting/level_lighting.gd" id="1_fl45x"]
-[ext_resource type="PackedScene" uid="uid://beclheud7fmo4" path="res://src/config_handler/config_handler.tscn" id="2_gqh4r"]
 
 [node name="LevelLighting" type="Node2D" groups=["level_lighting"]]
 script = ExtResource("1_fl45x")
@@ -13,10 +12,3 @@ height = 0.3
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.126, 0.126, 0.126, 1)
-
-[node name="ConfigHandler" parent="." instance=ExtResource("2_gqh4r")]
-section = "display"
-key = "brightness"
-
-[connection signal="loaded" from="ConfigHandler" to="." method="_on_config_handler_loaded"]
-[connection signal="ready" from="ConfigHandler" to="ConfigHandler" method="load_value"]

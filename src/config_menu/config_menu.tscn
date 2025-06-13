@@ -1,12 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmta6hi75dnwf"]
+[gd_scene load_steps=5 format=3 uid="uid://cmta6hi75dnwf"]
 
 [ext_resource type="Script" uid="uid://clqt2cqnfreut" path="res://src/config_menu/config_menu.gd" id="1_f68c2"]
-[ext_resource type="PackedScene" uid="uid://beclheud7fmo4" path="res://src/config_handler/config_handler.tscn" id="1_h62ve"]
 [ext_resource type="PackedScene" uid="uid://l85mp1rghtu0" path="res://src/connect_group/connect_group.tscn" id="3_ld5e3"]
 [ext_resource type="PackedScene" uid="uid://c4pe2q3xrfk36" path="res://src/bus_volume_setter/bus_volume_setter.tscn" id="4_5dgk7"]
 [ext_resource type="Script" uid="uid://cyi51j6dwvuvx" path="res://src/config_menu/option_button_id.gd" id="6_u7oav"]
 
-[node name="ConfigMenu" type="Control" node_paths=PackedStringArray("first_button")]
+[node name="ConfigMenu" type="Control" node_paths=PackedStringArray("first_button") groups=["config_menu"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,63 +13,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_f68c2")
-first_button = NodePath("FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/OptionButton")
+first_button = NodePath("FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/WindowModeOption")
 
 [node name="BackEnd" type="Node" parent="."]
 
-[node name="WindowModeConfig" parent="BackEnd" groups=["window_mode_config_handlers"] instance=ExtResource("1_h62ve")]
-editor_description = "Defaults to 4 (exclusive fullscreen)."
-section = "display"
-key = "window_mode"
-
-[node name="BrightnessConfig" parent="BackEnd" instance=ExtResource("1_h62ve")]
-editor_description = "Defaults to 0.126."
-section = "display"
-key = "brightness"
-
-[node name="ConnectGroup" parent="BackEnd/BrightnessConfig" node_paths=PackedStringArray("source") instance=ExtResource("3_ld5e3")]
-source = NodePath("..")
-source_signal = &"staged_value_changed"
+[node name="BrightnessConnectGroup" parent="BackEnd" node_paths=PackedStringArray("source") instance=ExtResource("3_ld5e3")]
+source = NodePath("../../FrontEnd/VBoxContainer/TabContainer/Display/Brightness/BrightnessSlider")
+source_signal = &"value_changed"
 receiver_group = &"level_lighting"
 receiver_method = &"set_brightness"
 
-[node name="SaveTimer" type="Timer" parent="BackEnd/BrightnessConfig"]
-wait_time = 0.5
-one_shot = true
-
-[node name="MasterBusConfig" parent="BackEnd" instance=ExtResource("1_h62ve")]
-section = "audio"
-key = "master"
-
-[node name="BusVolumeSetter" parent="BackEnd/MasterBusConfig" instance=ExtResource("4_5dgk7")]
+[node name="MasterBusVolumeSetter" parent="BackEnd" instance=ExtResource("4_5dgk7")]
 bus_name = &"Master"
 
-[node name="SaveTimer" type="Timer" parent="BackEnd/MasterBusConfig"]
-wait_time = 0.5
-one_shot = true
-
-[node name="MusicBusConfig" parent="BackEnd" instance=ExtResource("1_h62ve")]
-editor_description = "Defaults to 0.4."
-section = "audio"
-key = "music"
-
-[node name="BusVolumeSetter" parent="BackEnd/MusicBusConfig" instance=ExtResource("4_5dgk7")]
+[node name="MusicBusVolumeSetter" parent="BackEnd" instance=ExtResource("4_5dgk7")]
 bus_name = &"Music"
 
-[node name="SaveTimer" type="Timer" parent="BackEnd/MusicBusConfig"]
-wait_time = 0.5
-one_shot = true
-
-[node name="EffectsBusConfig" parent="BackEnd" instance=ExtResource("1_h62ve")]
-section = "audio"
-key = "effects"
-
-[node name="BusVolumeSetter" parent="BackEnd/EffectsBusConfig" instance=ExtResource("4_5dgk7")]
+[node name="EffectsBusVolumeSetter" parent="BackEnd" instance=ExtResource("4_5dgk7")]
 bus_name = &"Effects"
-
-[node name="SaveTimer" type="Timer" parent="BackEnd/EffectsBusConfig"]
-wait_time = 0.5
-one_shot = true
 
 [node name="SaveTimer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -112,7 +72,8 @@ layout_mode = 2
 size_flags_horizontal = 2
 text = "Window Mode"
 
-[node name="OptionButton" type="OptionButton" parent="FrontEnd/VBoxContainer/TabContainer/Display/WindowMode"]
+[node name="WindowModeOption" type="OptionButton" parent="FrontEnd/VBoxContainer/TabContainer/Display/WindowMode"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -157,7 +118,8 @@ layout_mode = 2
 size_flags_horizontal = 2
 text = "Brightness"
 
-[node name="HSlider" type="HSlider" parent="FrontEnd/VBoxContainer/TabContainer/Display/Brightness"]
+[node name="BrightnessSlider" type="HSlider" parent="FrontEnd/VBoxContainer/TabContainer/Display/Brightness"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -221,7 +183,8 @@ layout_mode = 2
 size_flags_horizontal = 2
 text = "Master"
 
-[node name="HSlider" type="HSlider" parent="FrontEnd/VBoxContainer/TabContainer/Audio/Master"]
+[node name="MasterBusSlider" type="HSlider" parent="FrontEnd/VBoxContainer/TabContainer/Audio/Master"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -239,7 +202,8 @@ layout_mode = 2
 size_flags_horizontal = 2
 text = "Music"
 
-[node name="HSlider" type="HSlider" parent="FrontEnd/VBoxContainer/TabContainer/Audio/Music"]
+[node name="MusicBusSlider" type="HSlider" parent="FrontEnd/VBoxContainer/TabContainer/Audio/Music"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -257,7 +221,8 @@ layout_mode = 2
 size_flags_horizontal = 2
 text = "Effects"
 
-[node name="HSlider" type="HSlider" parent="FrontEnd/VBoxContainer/TabContainer/Audio/Effects"]
+[node name="EffectsBusSlider" type="HSlider" parent="FrontEnd/VBoxContainer/TabContainer/Audio/Effects"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -275,40 +240,12 @@ layout_mode = 2
 text = "Back"
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="load_failed" from="BackEnd/WindowModeConfig" to="FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/OptionButton" method="select_id" binds= [4]]
-[connection signal="loaded" from="BackEnd/WindowModeConfig" to="FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/OptionButton" method="select_id"]
-[connection signal="ready" from="BackEnd/WindowModeConfig" to="BackEnd/WindowModeConfig" method="load_value"]
-[connection signal="load_failed" from="BackEnd/BrightnessConfig" to="FrontEnd/VBoxContainer/TabContainer/Display/Brightness/HSlider" method="set_value_no_signal" binds= [0.126]]
-[connection signal="loaded" from="BackEnd/BrightnessConfig" to="FrontEnd/VBoxContainer/TabContainer/Display/Brightness/HSlider" method="set_value_no_signal"]
-[connection signal="ready" from="BackEnd/BrightnessConfig" to="BackEnd/BrightnessConfig" method="load_value"]
-[connection signal="staged_value_changed" from="BackEnd/BrightnessConfig" to="BackEnd/BrightnessConfig/SaveTimer" method="start" unbinds=1]
-[connection signal="ready" from="BackEnd/BrightnessConfig/ConnectGroup" to="BackEnd/BrightnessConfig/ConnectGroup" method="connect_group"]
-[connection signal="timeout" from="BackEnd/BrightnessConfig/SaveTimer" to="BackEnd/BrightnessConfig" method="save_value"]
-[connection signal="loaded" from="BackEnd/MasterBusConfig" to="BackEnd/MasterBusConfig/BusVolumeSetter" method="set_volume_linear"]
-[connection signal="loaded" from="BackEnd/MasterBusConfig" to="FrontEnd/VBoxContainer/TabContainer/Audio/Master/HSlider" method="set_value_no_signal"]
-[connection signal="ready" from="BackEnd/MasterBusConfig" to="BackEnd/MasterBusConfig" method="load_value"]
-[connection signal="staged_value_changed" from="BackEnd/MasterBusConfig" to="BackEnd/MasterBusConfig/SaveTimer" method="start" unbinds=1]
-[connection signal="volume_linear_changed" from="BackEnd/MasterBusConfig/BusVolumeSetter" to="BackEnd/MasterBusConfig" method="set_staged_value"]
-[connection signal="timeout" from="BackEnd/MasterBusConfig/SaveTimer" to="BackEnd/MasterBusConfig" method="save_value"]
-[connection signal="loaded" from="BackEnd/MusicBusConfig" to="BackEnd/MusicBusConfig/BusVolumeSetter" method="set_volume_linear"]
-[connection signal="loaded" from="BackEnd/MusicBusConfig" to="FrontEnd/VBoxContainer/TabContainer/Audio/Music/HSlider" method="set_value_no_signal"]
-[connection signal="ready" from="BackEnd/MusicBusConfig" to="BackEnd/MusicBusConfig" method="load_value"]
-[connection signal="staged_value_changed" from="BackEnd/MusicBusConfig" to="BackEnd/MusicBusConfig/SaveTimer" method="start" unbinds=1]
-[connection signal="volume_linear_changed" from="BackEnd/MusicBusConfig/BusVolumeSetter" to="BackEnd/MusicBusConfig" method="set_staged_value"]
-[connection signal="timeout" from="BackEnd/MusicBusConfig/SaveTimer" to="BackEnd/MusicBusConfig" method="save_value"]
-[connection signal="loaded" from="BackEnd/EffectsBusConfig" to="BackEnd/EffectsBusConfig/BusVolumeSetter" method="set_volume_linear"]
-[connection signal="loaded" from="BackEnd/EffectsBusConfig" to="FrontEnd/VBoxContainer/TabContainer/Audio/Effects/HSlider" method="set_value_no_signal"]
-[connection signal="ready" from="BackEnd/EffectsBusConfig" to="BackEnd/EffectsBusConfig" method="load_value"]
-[connection signal="staged_value_changed" from="BackEnd/EffectsBusConfig" to="BackEnd/EffectsBusConfig/SaveTimer" method="start" unbinds=1]
-[connection signal="volume_linear_changed" from="BackEnd/EffectsBusConfig/BusVolumeSetter" to="BackEnd/EffectsBusConfig" method="set_staged_value"]
-[connection signal="timeout" from="BackEnd/EffectsBusConfig/SaveTimer" to="BackEnd/EffectsBusConfig" method="save_value"]
+[connection signal="ready" from="BackEnd/BrightnessConnectGroup" to="BackEnd/BrightnessConnectGroup" method="connect_group"]
 [connection signal="timeout" from="SaveTimer" to="." method="_on_save_timer_timeout"]
-[connection signal="item_id_selected" from="FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/OptionButton" to="." method="_on_window_mode_selected"]
-[connection signal="item_id_selected" from="FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/OptionButton" to="BackEnd/WindowModeConfig" method="save_value"]
+[connection signal="item_id_selected" from="FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/WindowModeOption" to="." method="_on_window_mode_selected"]
 [connection signal="item_id_selected" from="FrontEnd/VBoxContainer/TabContainer/Display/VSync/VSyncOption" to="." method="_on_vsync_option_id_selected"]
-[connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Display/Brightness/HSlider" to="BackEnd/BrightnessConfig" method="set_staged_value"]
 [connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer/ScaleSlider" to="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer/ScaleSlider/ScaleDebounce" method="start" unbinds=1]
 [connection signal="timeout" from="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer/ScaleSlider/ScaleDebounce" to="." method="_on_scale_debounce_timeout"]
-[connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Audio/Master/HSlider" to="BackEnd/MasterBusConfig/BusVolumeSetter" method="set_volume_linear"]
-[connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Audio/Music/HSlider" to="BackEnd/MusicBusConfig/BusVolumeSetter" method="set_volume_linear"]
-[connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Audio/Effects/HSlider" to="BackEnd/EffectsBusConfig/BusVolumeSetter" method="set_volume_linear"]
+[connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Audio/Master/MasterBusSlider" to="BackEnd/MasterBusVolumeSetter" method="set_volume_linear"]
+[connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Audio/Music/MusicBusSlider" to="BackEnd/MusicBusVolumeSetter" method="set_volume_linear"]
+[connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Audio/Effects/EffectsBusSlider" to="BackEnd/EffectsBusVolumeSetter" method="set_volume_linear"]

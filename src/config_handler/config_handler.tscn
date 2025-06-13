@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://beclheud7fmo4"]
-
-[ext_resource type="Script" uid="uid://bh5kf1mhdle3w" path="res://src/config_handler/config_handler.gd" id="1_xx0vl"]
-
-[node name="ConfigHandler" type="Node"]
-script = ExtResource("1_xx0vl")
