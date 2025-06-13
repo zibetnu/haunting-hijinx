@@ -18,6 +18,7 @@ func _input(event: InputEvent) -> void:
 		DisplayServer.window_set_mode(FULLSCREEN_MODE)
 
 	config_handler.save_value(DisplayServer.window_get_mode())
+	get_tree().call_group(&"window_mode_config_handlers", &"load_value")
 
 
 func _on_config_handler_loaded(value: Variant) -> void:
