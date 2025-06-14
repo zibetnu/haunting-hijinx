@@ -10,8 +10,6 @@ enum PlayerType {
 	SPECTATOR = 2,
 }
 
-const AUTOLOAD_NAMES_PROPERTY := &"peer_names"
-const AUTOLOAD_PATH := ^"/root/PeerData"
 const CARD_GROUP = &"player_cards"
 const GROUP_METHOD = &"auto_set_player_type"
 const MAX_GHOSTS = 1
@@ -41,7 +39,7 @@ func _ready() -> void:
 	if is_input_authority:
 		name_line_edit.grab_focus()
 
-	set_player_name(str(_get_autoload_peer_name(input_authority)))
+	set_player_name(str(PeerData.peer_names.get(input_authority)))
 
 
 func auto_set_player_type(caller: Node) -> void:
@@ -112,18 +110,6 @@ func set_player_type(value: PlayerType) -> void:
 func _call_card_group_sequentially() -> void:
 	for card: Node in get_tree().get_nodes_in_group(CARD_GROUP):
 		card.call(GROUP_METHOD, self)
-
-
-func _get_autoload_peer_name(id: int) -> Variant:
-	var autoload := get_node_or_null(AUTOLOAD_PATH)
-	if not autoload:
-		return null
-
-	var peer_names = autoload.get(AUTOLOAD_NAMES_PROPERTY)
-	if not peer_names is Dictionary:
-		return null
-
-	return peer_names.get(id)
 
 
 func _on_participation_toggle_pressed() -> void:
