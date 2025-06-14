@@ -11,7 +11,7 @@ const MAX_BATTERY_SPAWN_ATTEMPTS = 100
 
 var _batteries_spawned := 0
 
-@onready var _position_checker := $PositionChecker
+@onready var _position_checker: ShapeCast2D = $PositionChecker
 
 
 func _get_random_battery_position() -> Vector2:
@@ -37,7 +37,7 @@ func _on_timer_timeout() -> void:
 	if not multiplayer.is_server():
 		return
 
-	var batteries_needed = 0
+	var batteries_needed := 0
 	for flashlight in get_tree().get_nodes_in_group("flashlights"):
 		if not flashlight.get("enabled"):
 			continue
@@ -50,7 +50,7 @@ func _on_timer_timeout() -> void:
 	if _batteries_spawned >= batteries_needed:
 		return
 
-	var instance = battery_scene.instantiate()
+	var instance: Node2D = battery_scene.instantiate()
 	var instance_position := _get_random_battery_position()
 	var i := 0
 	while (
