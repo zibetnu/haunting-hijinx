@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=54 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
 [ext_resource type="Script" uid="uid://cuaxeqnmf5etx" path="res://src/ghost/ghost.gd" id="1_utd70"]
@@ -30,7 +30,6 @@
 [ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_i4s33"]
 [ext_resource type="PackedScene" uid="uid://dp42j74wnvk40" path="res://src/you_pointer/you_pointer.tscn" id="33_t258g"]
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/floored_texture_progress_bar/floored_texture_progress_bar.tscn" id="35_5xob5"]
-[ext_resource type="PackedScene" uid="uid://cpvs73t8l3h88" path="res://src/weak_to/weak_to.tscn" id="35_u2g7w"]
 [ext_resource type="PackedScene" uid="uid://dq7ts6lhskwyn" path="res://src/nodes_touched/nodes_touched.tscn" id="35_yndqj"]
 [ext_resource type="PackedScene" uid="uid://dpwfunjqyfike" path="res://src/health/health.tscn" id="38_arcfj"]
 [ext_resource type="PackedScene" uid="uid://oe321ygxttbo" path="res://src/grabber/grabber.tscn" id="38_ydesf"]
@@ -550,14 +549,12 @@ shape = SubResource("CircleShape2D_m31g4")
 [node name="DamageSignals" parent="." instance=ExtResource("29_1sq8w")]
 collision_layer = 8
 collision_mask = 0
+weak_to = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageSignals"]
 shape = SubResource("CircleShape2D_xn3hr")
 
-[node name="WeakTo" parent="DamageSignals" instance=ExtResource("35_u2g7w")]
-weak_to = 1
-
-[node name="Health" parent="DamageSignals/WeakTo" instance=ExtResource("38_arcfj")]
+[node name="Health" parent="DamageSignals" instance=ExtResource("38_arcfj")]
 unique_name_in_owner = true
 
 [node name="Grab" type="Area2D" parent="."]
@@ -754,12 +751,11 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="GhostTranslucent" method="disable_translucency"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="Invisibility" method="set_visible" binds= [true]]
 [connection signal="delta_synchronized" from="Camera2D/MultiplayerSynchronizer" to="Camera2D" method="center"]
-[connection signal="damaged_by" from="DamageSignals" to="DamageSignals/WeakTo" method="take_damage"]
-[connection signal="damage_taken" from="DamageSignals/WeakTo" to="StateChart" method="send_event" binds= [&"damaged"]]
-[connection signal="damaged_by_amount" from="DamageSignals/WeakTo" to="DamageSignals/WeakTo/Health" method="subtract_health"]
-[connection signal="health_emptied" from="DamageSignals/WeakTo/Health" to="StateChart" method="send_event" binds= [&"died"]]
-[connection signal="health_filled" from="DamageSignals/WeakTo/Health" to="StateChart" method="send_event" binds= [&"revived"]]
-[connection signal="health_percentage_changed" from="DamageSignals/WeakTo/Health" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="set_as_ratio_floored"]
+[connection signal="damage_taken" from="DamageSignals" to="StateChart" method="send_event" binds= [&"damaged"]]
+[connection signal="damaged_by_amount" from="DamageSignals" to="DamageSignals/Health" method="subtract_health"]
+[connection signal="health_emptied" from="DamageSignals/Health" to="StateChart" method="send_event" binds= [&"died"]]
+[connection signal="health_filled" from="DamageSignals/Health" to="StateChart" method="send_event" binds= [&"revived"]]
+[connection signal="health_percentage_changed" from="DamageSignals/Health" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="set_as_ratio_floored"]
 [connection signal="body_entered" from="Grab" to="Grab/Grabber" method="grab"]
 [connection signal="grabbed_target" from="Grab/Grabber" to="StateChart" method="send_event" binds= [&"grab_started"]]
 [connection signal="first_node_entered" from="HuntersTouched" to="StateChart" method="send_event" binds= [&"hunters_touched"]]

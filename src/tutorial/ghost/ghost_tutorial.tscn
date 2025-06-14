@@ -188,7 +188,7 @@ ghost = NodePath("../../Ghost")
 [connection signal="state_exited" from="Ghost/StateChart/Base/Animation/Panic" to="QuestNodes/Move" method="stop"]
 [connection signal="state_entered" from="Ghost/StateChart/Base/Visibility/Visibile" to="QuestNodes/Visible" method="start"]
 [connection signal="state_exited" from="Ghost/StateChart/Base/Visibility/Visibile" to="QuestNodes/Visible" method="stop"]
-[connection signal="damage_taken" from="Ghost/DamageSignals/WeakTo" to="QuestNodes/Damage" method="complete"]
+[connection signal="damage_taken" from="Ghost/DamageSignals" to="QuestNodes/Damage" method="complete"]
 [connection signal="dropped" from="Hunter" to="HunterReviveTimer" method="start"]
 [connection signal="dropped" from="Hunter" to="QuestNodes/Grab" method="complete"]
 
