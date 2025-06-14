@@ -1,3 +1,4 @@
+class_name AuraSense
 extends Area2D
 
 signal sensed_intensity_changed(intensity: int)
