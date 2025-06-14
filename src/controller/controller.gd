@@ -101,7 +101,7 @@ func force_emit_button_2_signals() -> void:
 
 
 func force_handle_input() -> void:
-	pass
+	input_handled.emit()
 
 
 func is_action_pressed(action: StringName) -> bool:
