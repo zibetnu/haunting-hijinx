@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://l85mp1rghtu0"]
-
-[ext_resource type="Script" uid="uid://gre1xm47cwo" path="res://src/connect_group/connect_group.gd" id="1_sacwr"]
-
-[node name="ConnectGroup" type="Node"]
-script = ExtResource("1_sacwr")

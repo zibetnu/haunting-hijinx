@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmta6hi75dnwf"]
+[gd_scene load_steps=4 format=3 uid="uid://cmta6hi75dnwf"]
 
 [ext_resource type="Script" uid="uid://clqt2cqnfreut" path="res://src/config_menu/config_menu.gd" id="1_f68c2"]
-[ext_resource type="PackedScene" uid="uid://l85mp1rghtu0" path="res://src/connect_group/connect_group.tscn" id="3_ld5e3"]
 [ext_resource type="PackedScene" uid="uid://c4pe2q3xrfk36" path="res://src/bus_volume_setter/bus_volume_setter.tscn" id="4_5dgk7"]
 [ext_resource type="Script" uid="uid://cyi51j6dwvuvx" path="res://src/config_menu/option_button_id.gd" id="6_u7oav"]
 
@@ -16,12 +15,6 @@ script = ExtResource("1_f68c2")
 first_button = NodePath("FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/WindowModeOption")
 
 [node name="BackEnd" type="Node" parent="."]
-
-[node name="BrightnessConnectGroup" parent="BackEnd" node_paths=PackedStringArray("source") instance=ExtResource("3_ld5e3")]
-source = NodePath("../../FrontEnd/VBoxContainer/TabContainer/Display/Brightness/BrightnessSlider")
-source_signal = &"value_changed"
-receiver_group = &"level_lighting"
-receiver_method = &"set_brightness"
 
 [node name="MasterBusVolumeSetter" parent="BackEnd" instance=ExtResource("4_5dgk7")]
 bus_name = &"Master"
@@ -240,10 +233,10 @@ layout_mode = 2
 text = "Back"
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="ready" from="BackEnd/BrightnessConnectGroup" to="BackEnd/BrightnessConnectGroup" method="connect_group"]
 [connection signal="timeout" from="SaveTimer" to="." method="_on_save_timer_timeout"]
 [connection signal="item_id_selected" from="FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/WindowModeOption" to="." method="_on_window_mode_selected"]
 [connection signal="item_id_selected" from="FrontEnd/VBoxContainer/TabContainer/Display/VSync/VSyncOption" to="." method="_on_vsync_option_id_selected"]
+[connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Display/Brightness/BrightnessSlider" to="." method="_on_brightness_slider_value_changed"]
 [connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer/ScaleSlider" to="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer/ScaleSlider/ScaleDebounce" method="start" unbinds=1]
 [connection signal="timeout" from="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer/ScaleSlider/ScaleDebounce" to="." method="_on_scale_debounce_timeout"]
 [connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Audio/Master/MasterBusSlider" to="BackEnd/MasterBusVolumeSetter" method="set_volume_linear"]

@@ -128,6 +128,10 @@ func _on_vsync_option_id_selected(mode: DisplayServer.VSyncMode) -> void:
 	save_timer.start()
 
 
+func _on_brightness_slider_value_changed(value: float) -> void:
+	get_tree().call_group(&"level_lighting", &"set_brightness", value)
+
+
 func _on_slider_value_changed(value: float, section: String, key: String) -> void:
 	GameConfig.set_value(section, key, value)
 	save_timer.start()
