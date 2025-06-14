@@ -108,6 +108,9 @@ func _end_match(message: String) -> void:
 	set_process_mode.call_deferred(Node.PROCESS_MODE_DISABLED)
 
 	await get_tree().create_timer(3).timeout
+	# https://github.com/godotengine/godot/issues/77643
+	@warning_ignore("unsafe_method_access")
+	@warning_ignore("unsafe_property_access")
 	SceneChanger.change_scene_to_packed(SceneChanger.lobby)
 
 

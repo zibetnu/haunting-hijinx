@@ -54,6 +54,8 @@ func add_card(id: int) -> void:
 
 
 func _on_connection_closed() -> void:
+	# https://github.com/godotengine/godot/issues/77643
+	@warning_ignore("unsafe_method_access")
 	SceneChanger.change_to_lobby_browser()
 
 
@@ -75,4 +77,6 @@ func _on_peer_participation_changed(_id: int) -> void:
 
 
 func _on_start_button_pressed() -> void:
+	# https://github.com/godotengine/godot/issues/77643
+	@warning_ignore("unsafe_method_access")
 	SceneChanger.change_scene_to_packed(level)
