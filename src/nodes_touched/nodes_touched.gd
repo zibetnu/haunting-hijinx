@@ -6,7 +6,7 @@ signal nodes_touched(count: int)
 
 @export var count_group: StringName
 
-var _nodes_touched = 0:
+var _nodes_touched := 0:
 	set(value):
 		if _nodes_touched == 0 and value > 0:
 			first_node_entered.emit()
