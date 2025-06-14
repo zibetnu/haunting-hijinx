@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://btqnfps722xj7"]
-
-[ext_resource type="Script" uid="uid://cng8vw1cl4j30" path="res://src/autoload/fullscreen_toggle/fullscreen_toggle.gd" id="1_38b55"]
-
-[node name="FullscreenToggle" type="Node"]
-process_mode = 3
-script = ExtResource("1_38b55")
