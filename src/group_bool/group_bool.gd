@@ -1,3 +1,4 @@
+class_name GroupBool
 extends Node
 
 signal is_true_set
