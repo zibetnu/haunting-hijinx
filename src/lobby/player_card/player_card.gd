@@ -1,3 +1,4 @@
+class_name PlayerCard
 extends PanelContainer
 
 signal player_name_changed(value: String)
