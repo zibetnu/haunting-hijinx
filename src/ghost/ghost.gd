@@ -4,6 +4,9 @@ const IS_MOVING = &"is_moving"
 const RESTART_DURING_PANIC_TIME = 1.33
 
 var is_panicked := false
+var is_translucent := true:
+	set = set_is_translucent
+
 var stunnable := true:
 	set = set_stunnable
 
@@ -64,6 +67,11 @@ func _get_pairs() -> Array[Pair]:
 	]
 
 
+func set_is_translucent(value: bool) -> void:
+	is_translucent = value
+	modulate.a = 0.5 if is_translucent else 1.0
+
+
 func set_stunnable(value: bool) -> void:
 	stunnable = value
 
@@ -92,6 +100,10 @@ func _on_hunters_touched_last_node_exited() -> void:
 	visible_timer.paused = false
 
 
+func _on_invisibile_state_entered() -> void:
+	is_translucent = true
+
+
 func _on_panic_event_received(event: StringName) -> void:
 	if event != &"damaged":
 		return
@@ -114,3 +126,7 @@ func _on_panic_state_exited() -> void:
 	is_panicked = false
 	end_timer.stop()
 	visible_timer.stop()
+
+
+func _on_visibile_state_entered() -> void:
+	is_translucent = false

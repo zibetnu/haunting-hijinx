@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=51 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
 [ext_resource type="Script" uid="uid://cuaxeqnmf5etx" path="res://src/ghost/ghost.gd" id="1_utd70"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://drxvuet3qhe60" path="res://src/invisibility/invisibility.tscn" id="5_gosxk"]
 [ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="6_3dmdv"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="6_il0ju"]
-[ext_resource type="PackedScene" uid="uid://ca2ymkyj3cv7e" path="res://src/translucent/translucent.tscn" id="7_bmx85"]
 [ext_resource type="PackedScene" uid="uid://dhavwobkg4v8o" path="res://src/named_property_signals/named_property_signals.tscn" id="10_fwp7a"]
 [ext_resource type="Script" uid="uid://le5w1cm0ul8p" path="res://addons/godot_state_charts/expression_guard.gd" id="13_56q65"]
 [ext_resource type="PackedScene" uid="uid://ctcjena4x8kr0" path="res://src/aura/aura.tscn" id="13_e27lr"]
@@ -34,15 +33,13 @@
 [ext_resource type="PackedScene" uid="uid://oe321ygxttbo" path="res://src/grabber/grabber.tscn" id="38_ydesf"]
 [ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="40_1b387"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_q3imy"]
-properties/0/path = NodePath(".:enabled")
-properties/0/spawn = true
-properties/0/replication_mode = 2
-
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hsnve"]
 properties/0/path = NodePath("..:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
+properties/1/path = NodePath("..:is_translucent")
+properties/1/spawn = true
+properties/1/replication_mode = 2
 
 [sub_resource type="Resource" id="Resource_knfa0"]
 script = ExtResource("13_56q65")
@@ -135,12 +132,6 @@ nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../Collisio
 
 [node name="PeerID" parent="." groups=["ghost_peer_ids"] instance=ExtResource("2_bh3m0")]
 unique_name_in_owner = true
-
-[node name="GhostTranslucent" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_bmx85")]
-target = NodePath("..")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="GhostTranslucent"]
-replication_config = SubResource("SceneReplicationConfig_q3imy")
 
 [node name="Invisibility" parent="." instance=ExtResource("5_gosxk")]
 
@@ -700,9 +691,9 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="state_entered" from="StateChart/Base/Animation/Stun" to="GhostCostume" method="play" binds= [&"stun"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Panic" to="GhostCostume" method="play" binds= [&"panic"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Grab" to="GhostCostume" method="play" binds= ["grab"]]
-[connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="GhostTranslucent" method="enable_translucency"]
+[connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="." method="_on_invisibile_state_entered"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="Invisibility" method="set_visible" binds= [false]]
-[connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="GhostTranslucent" method="disable_translucency"]
+[connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="." method="_on_visibile_state_entered"]
 [connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="Invisibility" method="set_visible" binds= [true]]
 [connection signal="delta_synchronized" from="Camera2D/MultiplayerSynchronizer" to="Camera2D" method="center"]
 [connection signal="damage_taken" from="DamageSignals" to="." method="_on_damage_taken"]
