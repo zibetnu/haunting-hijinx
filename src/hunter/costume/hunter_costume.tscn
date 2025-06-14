@@ -76,12 +76,11 @@ palette_array = Array[Texture2D]([ExtResource("3_qkyln"), ExtResource("2_28bn5")
 replication_config = SubResource("SceneReplicationConfig_72euo")
 
 [node name="Effects" type="AnimationPlayer" parent="."]
-editor_description = "The node_2d animations are still called sprite to preserve compatibility with prior 1.x releases."
 root_node = NodePath("../CanvasGroup")
 libraries = {
 &"": SubResource("AnimationLibrary_mpegg"),
 &"canvas_item": ExtResource("1_7b0n7"),
-&"sprite": ExtResource("2_jv5mw")
+&"node_2d": ExtResource("2_jv5mw")
 }
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Effects"]
