@@ -22,9 +22,8 @@ var _players: Array[Node]:
 	get:
 		return get_tree().get_nodes_in_group(_PLAYER_GROUP)
 
-@onready var _left_button := %LeftButton
-@onready var _right_button := %RightButton
-@onready var _spectating_label := %SpectatingLabel
+@onready var _right_button: Button = %RightButton
+@onready var _spectating_label: Label = %SpectatingLabel
 
 
 func _ready() -> void:
