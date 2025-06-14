@@ -1,5 +1,6 @@
 extends Node
 
+signal damaged_by_amount(damage_amount: int)
 signal damaged_by(source: DamageSource)
 signal damage_taken
 
@@ -11,4 +12,5 @@ func take_damage(source: DamageSource) -> void:
 		return
 
 	damaged_by.emit(source)
+	damaged_by_amount.emit(source.damage_amount)
 	damage_taken.emit()
