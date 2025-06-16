@@ -3,10 +3,6 @@ extends Node
 
 signal lobby_type_on_ready(lobby_type: Steam.LobbyType)
 
-const AUTOLOAD_PATH = ^"/root/PeerData"
-const LOBBY_ID_PROPERTY = &"lobby_id"
-const UNKNOWN_LOBBY_ID = -1
-
 const TYPE_KEY = "type"
 const TYPES_TO_STRINGS = {
 	Steam.LOBBY_TYPE_PRIVATE: "Private",
@@ -18,7 +14,7 @@ const TYPES_TO_STRINGS = {
 
 const DEFAULT_LOBBY_TYPE = Steam.LOBBY_TYPE_PRIVATE
 
-@onready var lobby_id: int = _get_autoload_lobby_id()
+@onready var lobby_id: int = PeerData.lobby_id
 
 
 func _ready() -> void:
@@ -54,15 +50,3 @@ func set_lobby_type(value: Steam.LobbyType) -> void:
 			TYPE_KEY,
 			TYPES_TO_STRINGS.get(value) as String
 	)
-
-
-func _get_autoload_lobby_id() -> int:
-	var autoload := get_node_or_null(AUTOLOAD_PATH)
-	if autoload == null:
-		return UNKNOWN_LOBBY_ID
-
-	var value: Variant = autoload.get(LOBBY_ID_PROPERTY)
-	if not value is int:
-		return UNKNOWN_LOBBY_ID
-
-	return value as int
