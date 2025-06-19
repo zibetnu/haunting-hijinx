@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dxxau04d4csjj"
-path="res://.godot/imported/drain_area_spawn.wav-05dc861a3c4104ea7f28cdd1e3a361a3.sample"
+path="res://.godot/imported/spawn.wav-d6990319f5dc6f6cb71099a22e24a57d.sample"
 
 [deps]
 
-source_file="res://assets/drain_area_spawn.wav"
-dest_files=["res://.godot/imported/drain_area_spawn.wav-05dc861a3c4104ea7f28cdd1e3a361a3.sample"]
+source_file="res://assets/drain_area/spawn.wav"
+dest_files=["res://.godot/imported/spawn.wav-d6990319f5dc6f6cb71099a22e24a57d.sample"]
 
 [params]
 

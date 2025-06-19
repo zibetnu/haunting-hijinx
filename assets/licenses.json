@@ -186,7 +186,7 @@
 			],
 			"name": "CymbalHit11.wav",
 			"paths": [
-				"res://assets/drain_area_spawn.wav"
+				"res://assets/drain_area/spawn.wav"
 			],
 			"version": "",
 			"web": "https://freesound.org/s/315623/"
@@ -210,7 +210,7 @@
 			],
 			"name": "Ghostgasp (Quick, Eerie Breath)",
 			"paths": [
-				"res://assets/ghost/ghost_stun.wav"
+				"res://assets/ghost/stun.wav"
 			],
 			"version": "",
 			"web": "https://freesound.org/s/720420/"
@@ -300,7 +300,7 @@
 			],
 			"name": "Modern DOS",
 			"paths": [
-				"res://assets/modern_dos_8x16.ttf"
+				"res://assets/theme/modern_dos_8x16.ttf"
 			],
 			"version": "20190101.02",
 			"web": "https://notabug.org/HarvettFox96/ttf-moderndos"
@@ -322,7 +322,7 @@
 			],
 			"name": "ridecrash [stereo][2496]",
 			"paths": [
-				"res://assets/drain_area_activate.wav"
+				"res://assets/drain_area/activate.wav"
 			],
 			"version": "",
 			"web": "https://freesound.org/s/724953/"

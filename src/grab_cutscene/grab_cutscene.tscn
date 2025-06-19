@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bsgx1owl3cxou"]
 
 [ext_resource type="Script" uid="uid://dg8m5h2bsvdb3" path="res://src/grab_cutscene/grab_cutscene.gd" id="1_53wad"]
-[ext_resource type="AudioStream" uid="uid://b450kuirfnnfq" path="res://assets/ghost_grab.wav" id="2_0vh0e"]
+[ext_resource type="AudioStream" uid="uid://b450kuirfnnfq" path="res://assets/ghost/grab.wav" id="2_0vh0e"]
 [ext_resource type="PackedScene" uid="uid://dhj7akigo4yvt" path="res://src/grab_cutscene/spotlight/spotlight.tscn" id="3_df6ec"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ujmsm"]

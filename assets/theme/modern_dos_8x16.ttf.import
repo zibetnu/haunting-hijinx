@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cmyudnfjlpktv"
-path="res://.godot/imported/modern_dos_8x16.ttf-67ca61a9660b01141718e295466a8412.fontdata"
+path="res://.godot/imported/modern_dos_8x16.ttf-115e254af42c7de51789d24f981e0ec4.fontdata"
 
 [deps]
 
-source_file="res://assets/modern_dos_8x16.ttf"
-dest_files=["res://.godot/imported/modern_dos_8x16.ttf-67ca61a9660b01141718e295466a8412.fontdata"]
+source_file="res://assets/theme/modern_dos_8x16.ttf"
+dest_files=["res://.godot/imported/modern_dos_8x16.ttf-115e254af42c7de51789d24f981e0ec4.fontdata"]
 
 [params]
 

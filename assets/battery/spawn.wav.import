@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://b450kuirfnnfq"
-path="res://.godot/imported/ghost_grab.wav-91083d53a44e593a643c53090a3a0f73.sample"
+uid="uid://g5tcldah12p3"
+path="res://.godot/imported/spawn.wav-86d7810477da4f8313901d1b4f61d9ea.sample"
 
 [deps]
 
-source_file="res://assets/ghost_grab.wav"
-dest_files=["res://.godot/imported/ghost_grab.wav-91083d53a44e593a643c53090a3a0f73.sample"]
+source_file="res://assets/battery/spawn.wav"
+dest_files=["res://.godot/imported/spawn.wav-86d7810477da4f8313901d1b4f61d9ea.sample"]
 
 [params]
 

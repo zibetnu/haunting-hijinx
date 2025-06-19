@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://brjvbwuqm27ud"
-path="res://.godot/imported/ghost_stun.wav-090f0076d4b57e566c2f8655bd33c720.sample"
+path="res://.godot/imported/stun.wav-4ecad94000d4cfab28a495f26cdba148.sample"
 
 [deps]
 
-source_file="res://assets/ghost/ghost_stun.wav"
-dest_files=["res://.godot/imported/ghost_stun.wav-090f0076d4b57e566c2f8655bd33c720.sample"]
+source_file="res://assets/ghost/stun.wav"
+dest_files=["res://.godot/imported/stun.wav-4ecad94000d4cfab28a495f26cdba148.sample"]
 
 [params]
 
