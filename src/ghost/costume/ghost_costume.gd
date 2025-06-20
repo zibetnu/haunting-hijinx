@@ -2,11 +2,6 @@
 class_name GhostCostume
 extends Node2D
 
-const SOUTH_FRAME_COORD_X = 2
-
-const _MIN_FRAME = 0
-const _MIN_ROTATION = 0.0
-
 @export var frame_coord_x: int:
 	get = get_frame_coord_x,
 	set = set_frame_coord_x
@@ -38,8 +33,8 @@ func set_costume_rotation(value: float) -> void:
 
 	frame_coord_x = roundi(remap(
 			fposmod(value, TAU),
-			_MIN_ROTATION, TAU,
-			_MIN_FRAME, sprite.hframes
+			0.0, TAU,
+			0, sprite.hframes
 	)) % sprite.hframes
 
 
@@ -48,7 +43,7 @@ func set_frame_coord_x(value: int) -> void:
 	if not is_node_ready():
 		await ready
 
-	sprite.frame_coords.x = clamp(value, _MIN_FRAME, sprite.hframes - 1)
+	sprite.frame_coords.x = clamp(value, 0, sprite.hframes - 1)
 
 
 func set_frame_coord_y(value: int) -> void:
@@ -56,10 +51,11 @@ func set_frame_coord_y(value: int) -> void:
 	if not is_node_ready():
 		await ready
 
-	sprite.frame_coords.y = clamp(value, _MIN_FRAME, sprite.vframes - 1)
+	sprite.frame_coords.y = clamp(value, 0, sprite.vframes - 1)
 
 
 func set_lock_rotation(value: bool) -> void:
+	const SOUTH_FRAME_COORD_X = 2
 	var was_locked: bool = lock_rotation
 	lock_rotation = value
 	if was_locked and not lock_rotation:
