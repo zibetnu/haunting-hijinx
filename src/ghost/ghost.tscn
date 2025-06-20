@@ -543,6 +543,7 @@ shape = SubResource("CircleShape2D_o7ptf")
 
 [node name="GhostCostume" parent="." instance=ExtResource("25_s3y3d")]
 process_mode = 3
+position = Vector2(0, -10)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(0.768917, 0.141176, 0.188067, 1)

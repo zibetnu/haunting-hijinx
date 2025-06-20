@@ -53,7 +53,6 @@ properties/0/spawn = true
 properties/0/replication_mode = 2
 
 [node name="GhostCostume" type="Node2D"]
-position = Vector2(0, -10)
 script = ExtResource("1_giptv")
 
 [node name="ParentOffset" type="Node2D" parent="."]
