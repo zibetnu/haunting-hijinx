@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ry5cc3txtp3k"
-path="res://.godot/imported/tick.png-b3690acc15e8cf582c38e2616ff167e1.ctex"
+uid="uid://bv3f7tuji1u4q"
+path="res://.godot/imported/grabber_area.png-8efccef317df283991c3f6933fb47fe0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/theme/tick.png"
-dest_files=["res://.godot/imported/tick.png-b3690acc15e8cf582c38e2616ff167e1.ctex"]
+source_file="res://assets/theme/h_slider/grabber_area.png"
+dest_files=["res://.godot/imported/grabber_area.png-8efccef317df283991c3f6933fb47fe0.ctex"]
 
 [params]
 
