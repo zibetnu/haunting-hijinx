@@ -13,6 +13,7 @@ extends Node2D
 
 @onready var ghost: AnimationPlayer = $Ghost
 @onready var sprite: Sprite2D = $ParentOffset/Sprite2D
+@onready var summon: AudioStreamPlayer2D = $Summon
 
 
 func get_frame_coord_x() -> int:
@@ -70,3 +71,11 @@ func _get_first_partial_match(
 			return animation_key
 
 	return ""
+
+
+func _on_ghost_current_animation_changed(animation_name: String) -> void:
+	if animation_name == "summon":
+		summon.play()
+
+	else:
+		summon.stop()
