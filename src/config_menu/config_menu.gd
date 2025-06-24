@@ -12,6 +12,7 @@ const WINDOW_MODE_KEY = "window_mode"
 
 @export var first_button: Button
 
+@onready var back: Button = %Back
 @onready var save_timer: Timer = %SaveTimer
 @onready var window_mode_option: OptionButtonID = %WindowModeOption
 @onready var vsync_option: OptionButtonID = %VSyncOption
@@ -33,6 +34,11 @@ func _ready() -> void:
 	init_slider(master_bus_slider, AUDIO_SECTION, MASTER_KEY, 1.0)
 	init_slider(music_bus_slider, AUDIO_SECTION, "music", 1.0)
 	init_slider(effects_bus_slider, AUDIO_SECTION, "effects", 1.0)
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed(&"ui_cancel"):
+		back.pressed.emit()
 
 
 func init_window_mode_option() -> void:
