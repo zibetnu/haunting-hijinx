@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=40 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
 [ext_resource type="Script" uid="uid://cuaxeqnmf5etx" path="res://src/ghost/ghost.gd" id="1_utd70"]
@@ -14,11 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dhavwobkg4v8o" path="res://src/named_property_signals/named_property_signals.tscn" id="10_fwp7a"]
 [ext_resource type="Script" uid="uid://le5w1cm0ul8p" path="res://addons/godot_state_charts/expression_guard.gd" id="13_56q65"]
 [ext_resource type="PackedScene" uid="uid://ctcjena4x8kr0" path="res://src/aura/aura.tscn" id="13_e27lr"]
-[ext_resource type="Script" uid="uid://bambbrd2wupx0" path="res://addons/godot_state_charts/state_is_active_guard.gd" id="15_06fas"]
-[ext_resource type="Script" uid="uid://c6l0181f4ytps" path="res://addons/godot_state_charts/guard.gd" id="16_lu5xd"]
-[ext_resource type="Script" uid="uid://dgd4i8hrrxfvm" path="res://addons/godot_state_charts/not_guard.gd" id="16_op1sb"]
 [ext_resource type="PackedScene" uid="uid://dc3f3sy1vso5f" path="res://src/group_bool/group_bool.tscn" id="16_q6wqq"]
-[ext_resource type="Script" uid="uid://bxprlw40wl0c3" path="res://addons/godot_state_charts/all_of_guard.gd" id="17_uy2va"]
 [ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/move/move.tscn" id="18_5mhrn"]
 [ext_resource type="PackedScene" uid="uid://bkuic22finfse" path="res://src/controller/player_controller_stack.tscn" id="19_swqdr"]
 [ext_resource type="Script" uid="uid://14gt37bewi6t" path="res://src/centered_camera.gd" id="20_c63bs"]
@@ -45,38 +41,9 @@ properties/1/replication_mode = 2
 script = ExtResource("13_56q65")
 expression = "drain_areas == 0"
 
-[sub_resource type="Resource" id="Resource_pbfjq"]
-script = ExtResource("15_06fas")
-state = NodePath("../../../../Animation/Move")
-
-[sub_resource type="Resource" id="Resource_x3471"]
-script = ExtResource("16_op1sb")
-guard = SubResource("Resource_pbfjq")
-
-[sub_resource type="Resource" id="Resource_7d6y2"]
-script = ExtResource("13_56q65")
-expression = "is_moving
-"
-
-[sub_resource type="Resource" id="Resource_g6dcg"]
-script = ExtResource("17_uy2va")
-guards = Array[ExtResource("16_lu5xd")]([SubResource("Resource_x3471"), SubResource("Resource_7d6y2")])
-
 [sub_resource type="Resource" id="Resource_0r4f3"]
 script = ExtResource("13_56q65")
 expression = "drain_areas == 0"
-
-[sub_resource type="Resource" id="Resource_bfudb"]
-script = ExtResource("15_06fas")
-state = NodePath("../../../../Animation/Sprint")
-
-[sub_resource type="Resource" id="Resource_q05yo"]
-script = ExtResource("16_op1sb")
-guard = SubResource("Resource_bfudb")
-
-[sub_resource type="Resource" id="Resource_xghid"]
-script = ExtResource("17_uy2va")
-guards = Array[ExtResource("16_lu5xd")]([SubResource("Resource_q05yo"), SubResource("Resource_7d6y2")])
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xn3hr"]
 radius = 16.0
@@ -230,12 +197,6 @@ to = NodePath("../../../../Animation/Idle")
 event = &"move_stopped"
 delay_in_seconds = "0.0"
 
-[node name="IsMoving" type="Node" parent="StateChart/Base/Behavior/Alive/Normal"]
-script = ExtResource("6_il0ju")
-to = NodePath("../../../../Animation/Move")
-guard = SubResource("Resource_g6dcg")
-delay_in_seconds = "0.0"
-
 [node name="Move" parent="StateChart/Base/Behavior/Alive/Normal" node_paths=PackedStringArray("character") instance=ExtResource("18_5mhrn")]
 character = NodePath("../../../../../..")
 move_speed = 92.0
@@ -267,12 +228,6 @@ delay_in_seconds = "0.0"
 script = ExtResource("6_il0ju")
 to = NodePath("../../../../Animation/Idle")
 event = &"move_stopped"
-delay_in_seconds = "0.0"
-
-[node name="IsMoving" type="Node" parent="StateChart/Base/Behavior/Alive/Sprint"]
-script = ExtResource("6_il0ju")
-to = NodePath("../../../../Animation/Sprint")
-guard = SubResource("Resource_xghid")
 delay_in_seconds = "0.0"
 
 [node name="Move" parent="StateChart/Base/Behavior/Alive/Sprint" node_paths=PackedStringArray("character") instance=ExtResource("18_5mhrn")]
