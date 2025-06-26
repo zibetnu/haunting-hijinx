@@ -52,14 +52,9 @@ func _get_pairs() -> Array[Pair]:
 
 	var p := Pair
 	var c: Controller = controller
-	var event: Callable = state_chart.send_event
 	var property: Callable = state_chart.set_expression_property
 	return [
 		p.new(c.button_1_changed, flashlight.set_powered),
-		p.new(c.button_1_pressed, event.bind("button_1_pressed")),
-		p.new(c.button_1_released, event.bind("button_1_released")),
-		p.new(c.button_2_pressed, event.bind("button_2_pressed")),
-		p.new(c.button_2_released, event.bind("button_2_released")),
 		p.new(c.look_rotation_changed, flashlight.set_target_rotation),
 		p.new(c.move_started, property.bind(IS_MOVING, true)),
 		p.new(c.move_stopped, property.bind(IS_MOVING, false)),
