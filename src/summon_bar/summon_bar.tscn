@@ -1,0 +1,98 @@
+[gd_scene load_steps=13 format=3 uid="uid://c2p8hmv11uyfp"]
+
+[ext_resource type="Texture2D" uid="uid://d0drf2s2vq61b" path="res://assets/summon_bar/under.png" id="1_3hgrj"]
+[ext_resource type="Script" uid="uid://b87jg4dik718j" path="res://src/summon_bar/summon_bar.gd" id="1_3kflu"]
+[ext_resource type="Texture2D" uid="uid://diajuhxh601hj" path="res://assets/summon_bar/progress.png" id="2_ea5tr"]
+[ext_resource type="Texture2D" uid="uid://baqkswqugf3pc" path="res://assets/summon_bar/complete.png" id="4_t3cad"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3cad"]
+atlas = ExtResource("4_t3cad")
+region = Rect2(144, 0, 36, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kflu"]
+atlas = ExtResource("4_t3cad")
+region = Rect2(108, 0, 36, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvbde"]
+atlas = ExtResource("4_t3cad")
+region = Rect2(0, 0, 36, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17k2a"]
+atlas = ExtResource("4_t3cad")
+region = Rect2(36, 0, 36, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8isj"]
+atlas = ExtResource("4_t3cad")
+region = Rect2(72, 0, 36, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j28ve"]
+atlas = ExtResource("4_t3cad")
+region = Rect2(108, 0, 36, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bdugm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3cad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3kflu")
+}],
+"loop": true,
+"name": &"complete",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fvbde")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_17k2a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8isj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j28ve")
+}],
+"loop": false,
+"name": &"partial_complete",
+"speed": 0.0
+}]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_3kflu"]
+properties/0/path = NodePath(".:visible")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[node name="SummonBar" type="Control"]
+custom_minimum_size = Vector2(36, 18)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 36.0
+offset_bottom = 18.0
+script = ExtResource("1_3kflu")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_right = 36.0
+offset_bottom = 18.0
+fill_mode = 4
+radial_initial_angle = 270.0
+radial_fill_degrees = 180.0
+radial_center_offset = Vector2(0, 9)
+texture_under = ExtResource("1_3hgrj")
+texture_progress = ExtResource("2_ea5tr")
+
+[node name="CompletedHighlight" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_bdugm")
+animation = &"partial_complete"
+centered = false
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+delta_interval = 0.167
+replication_config = SubResource("SceneReplicationConfig_3kflu")
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="value_changed" from="TextureProgressBar" to="." method="_on_bar_value_changed"]
