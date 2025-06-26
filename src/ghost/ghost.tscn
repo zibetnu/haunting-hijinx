@@ -661,9 +661,7 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="body_entered" from="Grab" to="Grab/Grabber" method="grab"]
 [connection signal="grabbed_target" from="Grab/Grabber" to="StateChart" method="send_event" binds= [&"grab_started"]]
 [connection signal="first_node_entered" from="HuntersTouched" to="." method="_on_hunters_touched_first_node_entered"]
-[connection signal="first_node_entered" from="HuntersTouched" to="StateChart" method="send_event" binds= [&"hunters_touched"]]
 [connection signal="last_node_exited" from="HuntersTouched" to="." method="_on_hunters_touched_last_node_exited"]
-[connection signal="last_node_exited" from="HuntersTouched" to="StateChart" method="send_event" binds= [&"no_hunters_touched"]]
 
 [editable path="Invisibility"]
 [editable path="PlayerControllerStack"]
