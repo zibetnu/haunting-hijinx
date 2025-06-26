@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene load_steps=41 format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
 [ext_resource type="Script" uid="uid://cuaxeqnmf5etx" path="res://src/ghost/ghost.gd" id="1_utd70"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://14gt37bewi6t" path="res://src/centered_camera.gd" id="20_c63bs"]
 [ext_resource type="PackedScene" uid="uid://klrwcohuhynk" path="res://src/ghost/costume/ghost_costume.tscn" id="25_s3y3d"]
 [ext_resource type="Texture2D" uid="uid://d6ydfogp5pkh" path="res://assets/ghost/aura_outlines.png" id="26_lh4y1"]
+[ext_resource type="Script" uid="uid://4fgkeu5l16ll" path="res://src/hit_sounds.gd" id="28_xrbot"]
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="29_1sq8w"]
 [ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_i4s33"]
 [ext_resource type="PackedScene" uid="uid://dp42j74wnvk40" path="res://src/you_pointer/you_pointer.tscn" id="33_t258g"]
@@ -69,6 +70,11 @@ radius = 96.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o7ptf"]
 radius = 17.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_xrbot"]
+properties/0/path = NodePath(".:enabled")
+properties/0/spawn = true
+properties/0/replication_mode = 2
 
 [sub_resource type="Gradient" id="Gradient_a05sb"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -496,6 +502,16 @@ shape = SubResource("CircleShape2D_o7ptf")
 [node name="GhostCostume" parent="." instance=ExtResource("25_s3y3d")]
 process_mode = 3
 position = Vector2(0, -10)
+
+[node name="HitSounds" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+volume_db = -2.0
+bus = &"Effects"
+script = ExtResource("28_xrbot")
+metadata/_custom_type_script = "uid://4fgkeu5l16ll"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="HitSounds"]
+replication_config = SubResource("SceneReplicationConfig_xrbot")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(0.768917, 0.141176, 0.188067, 1)
