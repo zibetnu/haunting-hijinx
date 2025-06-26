@@ -31,11 +31,10 @@ func set_costume_rotation(value: float) -> void:
 	if lock_rotation:
 		return
 
-	frame_coord_x = roundi(remap(
-			fposmod(value, TAU),
-			0.0, TAU,
-			0, sprite.hframes
-	)) % sprite.hframes
+	frame_coord_x = posmod(
+			roundi(value / TAU * sprite.hframes),
+			sprite.hframes
+	)
 
 
 func set_frame_coord_x(value: int) -> void:
