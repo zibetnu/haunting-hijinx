@@ -523,6 +523,7 @@ height = 16.0
 remote_path = NodePath("../IgnoreCanvasModulate/FollowPlayer")
 
 [node name="IgnoreCanvasModulate" type="CanvasLayer" parent="."]
+layer = 2
 follow_viewport_enabled = true
 
 [node name="FollowPlayer" type="Node2D" parent="IgnoreCanvasModulate"]
