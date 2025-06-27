@@ -18,7 +18,7 @@ position = Vector2(8, -12)
 texture = ExtResource("5_e3wtp")
 
 [node name="Flame" parent="." instance=ExtResource("4_fq7hg")]
-position = Vector2(8, -18)
+position = Vector2(8, -17)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(8, -5)
