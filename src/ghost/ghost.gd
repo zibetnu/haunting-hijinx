@@ -3,10 +3,10 @@ extends ControllableCharacter
 const IS_MOVING = &"is_moving"
 const RESTART_DURING_PANIC_TIME = 1.33
 
-var is_panicked := false
-var is_translucent := true:
-	set = set_is_translucent
+var is_hidden_from_hunters := true:
+	set = set_is_hidden_from_hunters
 
+var is_panicked := false
 var stunnable := true:
 	set = set_stunnable
 
@@ -14,6 +14,9 @@ var stunnable := true:
 @onready var grab_area: Area2D = $Grab
 @onready var grabber: Grabber = $Grab/Grabber
 @onready var hit_sounds: HitSounds = %HitSounds
+@onready var ignore_canvas_modulate: CanvasLayer = %IgnoreCanvasModulate
+@onready var peer_id_node: PeerID = %PeerID
+@onready var position_synchronizer: MultiplayerSynchronizer = $PositionSynchronizer
 @onready var summon: Summon = %Summon
 @onready var summon_bar: SummonBar = %SummonBar
 
@@ -32,6 +35,7 @@ var stunnable := true:
 
 
 func _ready() -> void:
+	position_synchronizer.add_visibility_filter(_visibility_filter)
 	state_chart.set_expression_property(IS_MOVING, false)
 
 
@@ -68,13 +72,23 @@ func _get_pairs() -> Array[Pair]:
 	]
 
 
-func set_is_translucent(value: bool) -> void:
-	is_translucent = value
-	modulate.a = 0.5 if is_translucent else 1.0
+@rpc("authority", "call_local", "reliable")
+func set_is_hidden_from_hunters(value: bool) -> void:
+	is_hidden_from_hunters = value
+	modulate.a = 0.5 if is_hidden_from_hunters else 1.0
+	if multiplayer.get_unique_id() != peer_id_node.id:
+		visible = not is_hidden_from_hunters
+		ignore_canvas_modulate.visible = visible
 
 
 func set_stunnable(value: bool) -> void:
 	stunnable = value
+
+
+@rpc("authority", "call_remote", "reliable")
+func sync_and_unhide(new_position: Vector2) -> void:
+	position = new_position
+	is_hidden_from_hunters = false
 
 
 func _on_damage_taken() -> void:
@@ -113,7 +127,10 @@ func _on_hunters_touched_last_node_exited() -> void:
 
 
 func _on_invisibile_state_entered() -> void:
-	is_translucent = true
+	if not multiplayer.is_server():
+		return
+
+	set_is_hidden_from_hunters.rpc(true)
 
 
 func _on_panic_event_received(event: StringName) -> void:
@@ -161,4 +178,12 @@ func _on_summon_stopped() -> void:
 
 
 func _on_visibile_state_entered() -> void:
-	is_translucent = false
+	is_hidden_from_hunters = false
+	if not multiplayer.is_server():
+		return
+
+	sync_and_unhide.rpc(position)
+
+
+func _visibility_filter(peer_id: int) -> bool:
+	return (not is_hidden_from_hunters) or peer_id == peer_id_node.id
