@@ -128,5 +128,9 @@ func _on_panic_state_exited() -> void:
 	visible_timer.stop()
 
 
+func _on_summon_area_count_changed(area_count: int) -> void:
+	state_chart.set_expression_property(&"drain_areas", area_count)
+
+
 func _on_visibile_state_entered() -> void:
 	is_translucent = false
