@@ -74,8 +74,9 @@ func _get_first_partial_match(
 
 
 func _on_ghost_current_animation_changed(animation_name: String) -> void:
-	if animation_name == "summon":
+	const SUMMON_NAME = "summon"
+	if animation_name == SUMMON_NAME:
 		summon.play()
 
-	else:
+	elif SUMMON_NAME not in animation_name:
 		summon.stop()
