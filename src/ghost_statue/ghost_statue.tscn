@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://qvu7pdftkg8y"]
+[gd_scene load_steps=11 format=3 uid="uid://qvu7pdftkg8y"]
 
 [ext_resource type="Texture2D" uid="uid://bcud6153v4cd5" path="res://assets/statue/base/diffuse.png" id="1_nkf4o"]
 [ext_resource type="Texture2D" uid="uid://chw30io6tbvqx" path="res://assets/statue/base/normal.png" id="2_c6hu8"]
@@ -9,6 +9,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ob8gk"]
 size = Vector2(32, 32)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_griun"]
+polygon = PackedVector2Array(-16, 13, -13, 16, 13, 16, 16, 13, 16, -13, 13, -16, -13, -16, -16, -13)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_kqstq"]
 diffuse_texture = ExtResource("1_nkf4o")
@@ -23,18 +26,19 @@ specular_texture = ExtResource("6_w2v7l")
 specular_shininess = 0.5
 
 [node name="GhostStatue" type="StaticBody2D"]
-position = Vector2(0, -5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_ob8gk")
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_griun")
+
 [node name="Base" type="Sprite2D" parent="."]
-light_mask = 16
-z_index = -1
+light_mask = 2
+position = Vector2(0, -2)
 texture = SubResource("CanvasTexture_kqstq")
 
 [node name="Ghost" type="Sprite2D" parent="."]
-light_mask = 16
-position = Vector2(0, -10)
+light_mask = 2
+position = Vector2(0, -12)
 texture = SubResource("CanvasTexture_xixck")
