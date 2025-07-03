@@ -51,7 +51,6 @@ func _get_pairs() -> Array[Pair]:
 		p.new(c.button_1_released, event.bind("button_1_released")),
 		p.new(c.button_2_pressed, event.bind("button_2_pressed")),
 		p.new(c.button_2_released, event.bind("button_2_released")),
-		p.new(c.move_rotation_changed, grab_area.set_rotation),
 		p.new(c.move_rotation_changed, ghost_costume.set_costume_rotation),
 		p.new(c.move_started, event.bind("move_started")),
 		p.new(c.move_started, property.bind(IS_MOVING, true)),
@@ -83,6 +82,10 @@ func _on_damage_taken() -> void:
 		state_chart.send_event(&"stunned")
 
 
+func _on_grab_state_physics_processing(_delta: float) -> void:
+	grab_area.rotation = ghost_costume.costume_rotation
+
+
 func _on_hunters_touched_first_node_entered() -> void:
 	if not is_panicked:
 		return
@@ -90,6 +93,13 @@ func _on_hunters_touched_first_node_entered() -> void:
 	end_timer.paused = true
 	visible_timer.paused = true
 	state_chart.send_event(&"invisibility_ended")
+
+
+func _on_grabber_grabbed_target(from_global_position: Vector2) -> void:
+	var angle: float = global_position.angle_to_point(from_global_position)
+	grab_area.rotation = angle
+	ghost_costume.set_costume_rotation(angle)
+	state_chart.send_event(&"grab_started")
 
 
 func _on_hunters_touched_last_node_exited() -> void:

@@ -646,6 +646,7 @@ size_flags_vertical = 8
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Grab" to="Grab" method="set_monitoring" flags=3 binds= [false]]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Grab" to="StateChart/Base/Behavior/Alive/Grab/EndTimer" method="stop"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Grab" to="Grab/Grabber" method="drop"]
+[connection signal="state_physics_processing" from="StateChart/Base/Behavior/Alive/Grab" to="." method="_on_grab_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Base/Behavior/Alive/Grab" to="StateChart/Base/Behavior/Alive/Grab/Move" method="manual_physics_process"]
 [connection signal="timeout" from="StateChart/Base/Behavior/Alive/Grab/EndTimer" to="StateChart" method="send_event" binds= [&"grab_ended"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Dead" to="GhostCostume" method="play" binds= ["dead"]]
@@ -670,7 +671,7 @@ size_flags_vertical = 8
 [connection signal="health_filled" from="DamageSignals/Health" to="StateChart" method="send_event" binds= [&"revived"]]
 [connection signal="health_percentage_changed" from="DamageSignals/Health" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="set_as_ratio_floored"]
 [connection signal="body_entered" from="Grab" to="Grab/Grabber" method="grab"]
-[connection signal="grabbed_target" from="Grab/Grabber" to="StateChart" method="send_event" binds= [&"grab_started"]]
+[connection signal="grabbed_target" from="Grab/Grabber" to="." method="_on_grabber_grabbed_target"]
 [connection signal="first_node_entered" from="HuntersTouched" to="." method="_on_hunters_touched_first_node_entered"]
 [connection signal="last_node_exited" from="HuntersTouched" to="." method="_on_hunters_touched_last_node_exited"]
 
