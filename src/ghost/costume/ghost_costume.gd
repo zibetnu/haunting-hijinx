@@ -2,6 +2,10 @@
 class_name GhostCostume
 extends Node2D
 
+@export_range(-360.0, 360.0, 0.6, "radians_as_degrees")
+var costume_rotation: float:
+	set = set_costume_rotation
+
 @export var frame_coord_x: int:
 	get = get_frame_coord_x,
 	set = set_frame_coord_x
@@ -29,13 +33,14 @@ func play(value: String) -> void:
 
 
 func set_costume_rotation(value: float) -> void:
+	costume_rotation = value
 	if lock_rotation:
 		return
 
-	frame_coord_x = posmod(
-			roundi(value / TAU * sprite.hframes),
-			sprite.hframes
-	)
+	if not is_node_ready():
+		return
+
+	_update_frame_coord_x()
 
 
 func set_frame_coord_x(value: int) -> void:
@@ -55,11 +60,10 @@ func set_frame_coord_y(value: int) -> void:
 
 
 func set_lock_rotation(value: bool) -> void:
-	const SOUTH_FRAME_COORD_X = 2
 	var was_locked: bool = lock_rotation
 	lock_rotation = value
 	if was_locked and not lock_rotation:
-		frame_coord_x = SOUTH_FRAME_COORD_X
+		costume_rotation = Vector2.DOWN.angle()
 
 
 func _get_first_partial_match(
@@ -80,3 +84,10 @@ func _on_ghost_current_animation_changed(animation_name: String) -> void:
 
 	elif SUMMON_NAME not in animation_name:
 		summon.stop()
+
+
+func _update_frame_coord_x() -> void:
+	frame_coord_x = posmod(
+			roundi(costume_rotation / TAU * sprite.hframes),
+			sprite.hframes
+	)
