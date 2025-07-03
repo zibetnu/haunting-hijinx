@@ -218,7 +218,7 @@ controller = NodePath("NPCGhost")
 [node name="FollowPlayer" parent="Ghost/IgnoreCanvasModulate" index="0"]
 position = Vector2(368, 128)
 
-[node name="NPCGhost" parent="Ghost" index="19" instance=ExtResource("6_n7jug")]
+[node name="NPCGhost" parent="Ghost" index="18" instance=ExtResource("6_n7jug")]
 
 [node name="Hunter" parent="." index="9"]
 position = Vector2(368, 248)
