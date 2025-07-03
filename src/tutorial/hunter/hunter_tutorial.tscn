@@ -164,12 +164,15 @@ quest = SubResource("Resource_26eav")
 
 [node name="Move" parent="QuestNodes" index="1" instance=ExtResource("4_dj2kv")]
 quest = SubResource("Resource_f0tmj")
+delay = 0.5
 
 [node name="Light" parent="QuestNodes" index="2" instance=ExtResource("4_dj2kv")]
 quest = SubResource("Resource_y74n0")
+delay = 0.5
 
 [node name="AlertInfo" parent="QuestNodes" index="3" instance=ExtResource("3_0femm")]
 quest = SubResource("Resource_hsvyu")
+words_per_minute = 300.0
 
 [node name="AlertLow" type="Node" parent="QuestNodes" index="4"]
 script = ExtResource("5_sx67b")

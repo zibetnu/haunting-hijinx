@@ -130,9 +130,11 @@ quest = SubResource("Resource_lfxhu")
 
 [node name="Move" parent="QuestNodes" index="1" instance=ExtResource("6_x00k6")]
 quest = SubResource("Resource_f0tmj")
+delay = 0.5
 
 [node name="Sprint" parent="QuestNodes" index="2" instance=ExtResource("6_x00k6")]
 quest = SubResource("Resource_fx3un")
+delay = 0.5
 
 [node name="Summon" type="Node" parent="QuestNodes" index="3"]
 script = ExtResource("7_7l8aw")
@@ -140,12 +142,15 @@ quest = SubResource("Resource_5eatj")
 
 [node name="VisibleInfo" parent="QuestNodes" index="4" instance=ExtResource("5_s13op")]
 quest = SubResource("Resource_ljdkr")
+words_per_minute = 250.0
 
 [node name="Visible" parent="QuestNodes" index="5" instance=ExtResource("6_x00k6")]
 quest = SubResource("Resource_t00pl")
+delay = 0.5
 
 [node name="AlertInfo" parent="QuestNodes" index="6" instance=ExtResource("5_s13op")]
 quest = SubResource("Resource_a7qnb")
+words_per_minute = 300.0
 
 [node name="GrabInfo" parent="QuestNodes" index="7" instance=ExtResource("5_s13op")]
 quest = SubResource("Resource_41785")
@@ -156,6 +161,7 @@ quest = SubResource("Resource_txx1p")
 
 [node name="DamageInfo" parent="QuestNodes" index="9" instance=ExtResource("5_s13op")]
 quest = SubResource("Resource_rhmfh")
+words_per_minute = 250.0
 
 [node name="Damage" type="Node" parent="QuestNodes" index="10"]
 script = ExtResource("7_7l8aw")
