@@ -121,7 +121,7 @@ func _physics_process(delta: float) -> void:
 	if not powered:
 		return
 
-	var colliders := []
+	var colliders: Array[Object] = []
 	for repeat_raycast: RepeatRayCast2D in _repeat_raycasts:
 		colliders.append_array(repeat_raycast.get_colliders())
 
@@ -152,7 +152,7 @@ func take_damage(source: DamageSource) -> void:
 		damage_taken.emit()
 
 
-func _damage_colliders(colliders: Array) -> void:
+func _damage_colliders(colliders: Array[Object]) -> void:
 	var processed_colliders := []
 	for collider in colliders:
 		if collider == null:
@@ -165,7 +165,7 @@ func _damage_colliders(colliders: Array) -> void:
 		if not collider.has_method("take_damage"):
 			continue
 
-		collider.take_damage(damage_deals)
+		collider.call(&"take_damage", damage_deals)
 
 
 func _emit_collision_points() -> void:

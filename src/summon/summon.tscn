@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bxooivyeej01k"]
 
-[ext_resource type="Script" path="res://src/summon/summon.gd" id="1_4gkkd"]
+[ext_resource type="Script" uid="uid://dmhs6tvasjgjg" path="res://src/summon/summon.gd" id="1_4gkkd"]
 [ext_resource type="PackedScene" uid="uid://cscnk1bc8v66d" path="res://src/summon/drain_area/drain_area.tscn" id="2_dai7v"]
 
 [node name="Summon" type="Node"]

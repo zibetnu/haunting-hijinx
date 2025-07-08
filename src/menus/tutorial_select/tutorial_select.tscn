@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cis3vfoj3ussh"]
 
 [ext_resource type="PackedScene" uid="uid://c6ql67s5oafpr" path="res://src/visibility_signals/visibility_signals.tscn" id="1_4ptx7"]
-[ext_resource type="Script" path="res://src/menus/tutorial_select/tutorial_select.gd" id="1_h2iyi"]
+[ext_resource type="Script" uid="uid://cekehm7hjicvv" path="res://src/menus/tutorial_select/tutorial_select.gd" id="1_h2iyi"]
 [ext_resource type="PackedScene" uid="uid://klrwcohuhynk" path="res://src/ghost/costume/ghost_costume.tscn" id="1_xu1af"]
 [ext_resource type="PackedScene" uid="uid://ctn825io87i34" path="res://src/hunter/costume/hunter_costume.tscn" id="3_eyaac"]
 [ext_resource type="Texture2D" uid="uid://do78peki3jtm" path="res://assets/flashlight/body.png" id="5_avxyi"]
@@ -44,9 +44,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="GhostCostume" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Ghost" instance=ExtResource("1_xu1af")]
+unique_name_in_owner = true
 position = Vector2(32, 32)
-frame = 1
-frame_coord_x = 1
 
 [node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Ghost"]
 custom_minimum_size = Vector2(48, 24)
@@ -70,6 +69,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="HunterCostume" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Hunter" instance=ExtResource("3_eyaac")]
+unique_name_in_owner = true
 position = Vector2(32, 36)
 costume_rotation = 3.14159
 
@@ -108,7 +108,5 @@ text = "Back"
 
 [connection signal="shown" from="VisibilitySignals" to="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Ghost" method="grab_focus"]
 [connection signal="gui_input" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Ghost" to="." method="_on_gui_input"]
-[connection signal="ready" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Ghost/GhostCostume" to="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Ghost/GhostCostume" method="play" binds= ["idle"]]
 [connection signal="gui_input" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Hunter" to="." method="_on_gui_input"]
-[connection signal="ready" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Hunter/HunterCostume" to="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Hunter/HunterCostume" method="play" binds= ["move"]]
 [connection signal="gui_input" from="HBoxContainer/Back" to="." method="_on_gui_input"]

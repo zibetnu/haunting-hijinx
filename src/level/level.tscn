@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://gxh15sde0me5"]
 
-[ext_resource type="Script" path="res://src/level/level.gd" id="1_el04s"]
+[ext_resource type="Script" uid="uid://cg0rykk30xiip" path="res://src/level/level.gd" id="1_el04s"]
 [ext_resource type="PackedScene" uid="uid://vl432076bm8p" path="res://src/level/steam_lobby_chat_update/steam_lobby_chat_update.tscn" id="2_acesl"]
 [ext_resource type="PackedScene" uid="uid://grxm3658ukjj" path="res://src/battery_spawner/battery_spawner.tscn" id="2_d8ks1"]
 [ext_resource type="PackedScene" uid="uid://8qaswvkeb8qd" path="res://src/ghost/ghost.tscn" id="2_ree31"]
@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://qdsau1mq5mj1" path="res://src/countdown/countdown.tscn" id="7_qv3yx"]
 [ext_resource type="PackedScene" uid="uid://mqch0psyq7vp" path="res://src/timer_sprite/ghost_timer_sprite.tscn" id="8_1aado"]
 [ext_resource type="PackedScene" uid="uid://kshsc10g60hy" path="res://src/match_menu/match_menu.tscn" id="8_v81sd"]
-[ext_resource type="PackedScene" uid="uid://b0jfn7wspsy4c" path="res://src/level/level_lighting.tscn" id="9_35o1b"]
+[ext_resource type="PackedScene" uid="uid://b0jfn7wspsy4c" path="res://src/level/lighting/level_lighting.tscn" id="9_35o1b"]
 [ext_resource type="PackedScene" uid="uid://t58d7k6o6dox" path="res://src/timer_sprite/hunter_timer_sprite.tscn" id="9_dajyl"]
 [ext_resource type="PackedScene" uid="uid://dppt0dsngt68c" path="res://src/timer_sprite/spectator_timer_sprite.tscn" id="10_4jcdm"]
 
@@ -35,6 +35,7 @@ hunter = ExtResource("3_l6nvs")
 spectator_menu = ExtResource("4_q6wo4")
 
 [node name="MatchTimer" type="Timer" parent="."]
+unique_name_in_owner = true
 wait_time = 300.0
 one_shot = true
 autostart = true
@@ -55,7 +56,7 @@ position = Vector2(640, 360)
 y_sort_enabled = true
 
 [node name="CountingSpawner" parent="." instance=ExtResource("3_xxci0")]
-_spawnable_scenes = PackedStringArray("res://src/ghost/ghost.tscn", "res://src/hunter/hunter.tscn", "res://src/summon/drain_area/drain_area.tscn", "res://src/battery/battery.tscn")
+_spawnable_scenes = PackedStringArray("uid://8qaswvkeb8qd", "uid://ccvsw508kh4ot", "uid://cscnk1bc8v66d", "uid://bw11rdhjv3j62")
 spawn_path = NodePath("../SpawnRoot")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

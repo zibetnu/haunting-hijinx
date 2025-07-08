@@ -6,3 +6,6 @@
 
 # Project-specific ignores
 build/
+
+# GdUnit4-specific ignores
+GdUnitRunner.cfg

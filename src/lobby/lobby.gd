@@ -35,7 +35,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func add_card(id: int) -> void:
-	var card: Node = player_card.instantiate()
+	var card: PlayerCard = player_card.instantiate()
 	card.name += str(id)
 	card.input_authority = id
 	card.player_name_changed.connect(
@@ -54,6 +54,8 @@ func add_card(id: int) -> void:
 
 
 func _on_connection_closed() -> void:
+	# https://github.com/godotengine/godot/issues/77643
+	@warning_ignore("unsafe_method_access")
 	SceneChanger.change_to_lobby_browser()
 
 
@@ -62,7 +64,7 @@ func _on_peer_connected(id: int) -> void:
 
 
 func _on_peer_disconnected(id: int) -> void:
-	for card in cards.get_children():
+	for card: PlayerCard in cards.get_children():
 		if card.input_authority == id:
 			card.queue_free()
 
@@ -75,4 +77,6 @@ func _on_peer_participation_changed(_id: int) -> void:
 
 
 func _on_start_button_pressed() -> void:
+	# https://github.com/godotengine/godot/issues/77643
+	@warning_ignore("unsafe_method_access")
 	SceneChanger.change_scene_to_packed(level)

@@ -7,8 +7,6 @@ var readonly: bool = false
 class License:
     extends RefCounted
 
-    const URL_FORMAT_STRING = "[url]%s[/url]"
-
     var name: String
     var identifier: String
     ## Use either license_text or license_file
@@ -44,9 +42,9 @@ class License:
             return text
 
         if not web.is_empty():
-            return URL_FORMAT_STRING % web
+            return "[url]%s[/url]" % web
 
-        return "License text not available."
+        return "License text not available. (Could not load file)"
 
     func serialize() -> Dictionary:
         return {
@@ -66,7 +64,7 @@ class License:
         return self
 
     func duplicate():
-        var dup = new()
+        var dup: License = new()
         dup.name = self.name
         dup.identifier = self.identifier
         dup.text = self.text
@@ -96,7 +94,7 @@ var web: String
 var paths: PackedStringArray = []
 var licenses: Array[License] = []
 
-func _get_property_list() -> Array:
+func _get_property_list() -> Array[Dictionary]:
     return [
         {
             "name": "paths",
@@ -112,8 +110,7 @@ func _get_property_list() -> Array:
         {
             "name": "licenses",
             "type": TYPE_ARRAY,
-            # https://github.com/godotengine/godot/issues/80526
-            "constructor": func(): return License.new(),
+            "constructor": func() -> License: return License.new(),
         },
     ]
 

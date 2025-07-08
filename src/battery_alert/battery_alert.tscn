@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://gh0mk0t85f13"]
 
-[ext_resource type="Script" path="res://src/battery_alert/battery_alert.gd" id="1_el1mj"]
+[ext_resource type="Script" uid="uid://xmdepibwpljk" path="res://src/battery_alert/battery_alert.gd" id="1_el1mj"]
 [ext_resource type="Texture2D" uid="uid://bbdxx5dlm74uq" path="res://assets/battery_indicator.png" id="1_hgi5l"]
 [ext_resource type="PackedScene" uid="uid://y5w40m6pqbvt" path="res://src/allow_set_bool/allow_set_bool.tscn" id="3_n74hd"]
 
@@ -94,9 +94,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7a73r"]
 _data = {
-"RESET": SubResource("Animation_8y2ww"),
-"battery_dead": SubResource("Animation_mag7c"),
-"battery_low": SubResource("Animation_fm20k")
+&"RESET": SubResource("Animation_8y2ww"),
+&"battery_dead": SubResource("Animation_mag7c"),
+&"battery_low": SubResource("Animation_fm20k")
 }
 
 [node name="BatteryAlert" type="Control"]
@@ -119,7 +119,7 @@ hframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_7a73r")
+&"": SubResource("AnimationLibrary_7a73r")
 }
 
 [node name="Timer" type="Timer" parent="."]

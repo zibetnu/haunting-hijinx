@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cbv2ondm7xhnv"]
 
-[ext_resource type="Script" path="res://src/controller/synced/synced.gd" id="1_c5045"]
+[ext_resource type="Script" uid="uid://dlmhfixvmu6yt" path="res://src/controller/synced/synced.gd" id="1_c5045"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_s4b3h"]
 properties/0/path = NodePath(".:input_authority")

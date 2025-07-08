@@ -1,11 +1,22 @@
 extends ControllableCharacter
 
 const IS_MOVING = &"is_moving"
+const RESTART_DURING_PANIC_TIME = 1.33
+
+var is_panicked := false
+var is_translucent := true:
+	set = set_is_translucent
+
+var stunnable := true:
+	set = set_stunnable
 
 @onready var ghost_costume: GhostCostume = $GhostCostume
 
 @onready var grab_area: Area2D = $Grab
 @onready var grabber: Grabber = $Grab/Grabber
+
+@onready var end_timer: Timer = $StateChart/Base/Behavior/Alive/Panic/EndTimer
+@onready var visible_timer: Timer = $StateChart/Base/Behavior/Alive/Panic/VisibleTimer
 
 @onready var move_grab: Move = $StateChart/Base/Behavior/Alive/Grab/Move
 @onready var move_normal: Move = $StateChart/Base/Behavior/Alive/Normal/Move
@@ -54,3 +65,72 @@ func _get_pairs() -> Array[Pair]:
 		p.new(normal.state_entered, c.force_emit_move_vector_signals),
 		p.new(sprint.state_entered, c.force_emit_move_vector_signals),
 	]
+
+
+func set_is_translucent(value: bool) -> void:
+	is_translucent = value
+	modulate.a = 0.5 if is_translucent else 1.0
+
+
+func set_stunnable(value: bool) -> void:
+	stunnable = value
+
+
+func _on_damage_taken() -> void:
+	if stunnable:
+		state_chart.send_event(&"stunned")
+
+
+func _on_hunters_touched_first_node_entered() -> void:
+	if not is_panicked:
+		return
+
+	end_timer.paused = true
+	visible_timer.paused = true
+	state_chart.send_event(&"invisibility_ended")
+
+
+func _on_hunters_touched_last_node_exited() -> void:
+	if not is_panicked:
+		return
+
+	end_timer.start(RESTART_DURING_PANIC_TIME)
+	end_timer.paused = false
+	visible_timer.start()
+	visible_timer.paused = false
+
+
+func _on_invisibile_state_entered() -> void:
+	is_translucent = true
+
+
+func _on_panic_event_received(event: StringName) -> void:
+	if event != &"damaged":
+		return
+
+	if end_timer.time_left < RESTART_DURING_PANIC_TIME:
+		end_timer.start(RESTART_DURING_PANIC_TIME)
+
+	visible_timer.start()
+
+
+func _on_panic_state_entered() -> void:
+	is_panicked = true
+	end_timer.start()
+	end_timer.paused = false
+	visible_timer.start()
+	visible_timer.paused = false
+
+
+func _on_panic_state_exited() -> void:
+	is_panicked = false
+	end_timer.stop()
+	visible_timer.stop()
+
+
+func _on_summon_area_count_changed(area_count: int) -> void:
+	state_chart.set_expression_property(&"drain_areas", area_count)
+
+
+func _on_visibile_state_entered() -> void:
+	is_translucent = false

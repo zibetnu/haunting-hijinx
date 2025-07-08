@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://50ijwh32vu0w"]
 
 [ext_resource type="Texture2D" uid="uid://b5yhpnq1rjwdj" path="res://assets/logo.svg" id="1_phtwv"]
-[ext_resource type="Script" path="res://addons/git_describe/label/git_describe_label.gd" id="2_e4f6o"]
+[ext_resource type="Script" uid="uid://cwjb3x45e2r4k" path="res://addons/git_describe/label/git_describe_label.gd" id="2_e4f6o"]
 
 [node name="FrontEnd" type="MarginContainer"]
 anchors_preset = 15
@@ -60,3 +60,5 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 script = ExtResource("2_e4f6o")
+setting_name = "addons/git_describe/describe_setting_path"
+default_value = "application/config/git_describe"

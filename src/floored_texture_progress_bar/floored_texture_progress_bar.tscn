@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d15idq0ucnvek"]
 
-[ext_resource type="Script" path="res://src/floored_texture_progress_bar/floored_texture_progress_bar.gd" id="1_gu2ld"]
+[ext_resource type="Script" uid="uid://b1ydder1pweyr" path="res://src/floored_texture_progress_bar/floored_texture_progress_bar.gd" id="1_gu2ld"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_3vvq2"]
 properties/0/path = NodePath(".:min_value")

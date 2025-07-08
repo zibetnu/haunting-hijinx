@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://c7qmrgohocqfx"]
 
-[ext_resource type="Script" path="res://src/flashlight/display/display.gd" id="1_rfbrn"]
+[ext_resource type="Script" uid="uid://bb2txhj2iyjib" path="res://src/flashlight/display/display.gd" id="1_rfbrn"]
 [ext_resource type="Texture2D" uid="uid://b5o6s164tla1b" path="res://assets/flashlight/light_1.png" id="2_j0apu"]
 [ext_resource type="Texture2D" uid="uid://do78peki3jtm" path="res://assets/flashlight/body.png" id="2_lt2gs"]
 [ext_resource type="AudioStream" uid="uid://bdauwuj37f6qm" path="res://assets/flashlight/click.wav" id="2_sji0g"]
@@ -63,22 +63,26 @@ hframes = 32
 range_size = 32
 
 [node name="RotationNode" type="RemoteTransform2D" parent="."]
+unique_name_in_owner = true
 remote_path = NodePath("../RotationNode2")
 update_position = false
 update_scale = false
 
 [node name="Light" type="Node2D" parent="RotationNode"]
+unique_name_in_owner = true
 visible = false
 position = Vector2(16, 0)
 
 [node name="FloorLight" type="PointLight2D" parent="RotationNode/Light"]
+unique_name_in_owner = true
 shadow_enabled = true
-shadow_item_cull_mask = 18
+shadow_item_cull_mask = 3
 offset = Vector2(48, 0)
 height = 32.0
 
 [node name="WallLight" type="PointLight2D" parent="RotationNode/Light"]
-range_item_cull_mask = 26
+unique_name_in_owner = true
+range_item_cull_mask = 2
 shadow_enabled = true
 shadow_item_cull_mask = 4
 offset = Vector2(48, 0)
@@ -100,6 +104,7 @@ unique_name_in_owner = true
 position = Vector2(0, 2)
 
 [node name="Beam" type="Polygon2D" parent="RotationNode2"]
+unique_name_in_owner = true
 material = SubResource("CanvasItemMaterial_lnymb")
 position = Vector2(16, 0)
 

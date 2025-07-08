@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://w68cagofxelw"]
 
-[ext_resource type="Script" path="res://src/controller/anti_button_spam/anti_button_spam.gd" id="1_44g47"]
+[ext_resource type="Script" uid="uid://bp6qg6hn7ptax" path="res://src/controller/anti_button_spam/anti_button_spam.gd" id="1_44g47"]
 
 [node name="AntiButtonSpam" type="Node2D"]
 script = ExtResource("1_44g47")

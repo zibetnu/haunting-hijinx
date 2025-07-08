@@ -1,3 +1,4 @@
+class_name HunterCostume
 extends Node2D
 
 const COSTUME_GROUP = &"hunter_costumes"

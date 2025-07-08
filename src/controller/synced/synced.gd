@@ -48,12 +48,9 @@ func set_input_authority(id: int) -> void:
 
 
 func _serialize_vector(vector: Vector2) -> int:
-	var serialized_angle = rad_to_deg(vector.angle())
-	if serialized_angle < 0:
-		serialized_angle += 360
-
-	serialized_angle = roundi(serialized_angle * ANGLE_MULTIPLIER)
-
+	var serialized_angle := roundi(
+			rad_to_deg(fposmod(vector.angle(), TAU) * ANGLE_MULTIPLIER)
+	)
 	var serialized_length := roundi(vector.length() * LENGTH_MULTIPLIER)
 
 	var serialized_vector := 0
@@ -64,7 +61,7 @@ func _serialize_vector(vector: Vector2) -> int:
 
 
 func _unserialize_vector(serialized_vector: int) -> Vector2:
-	var unserialized_degrees = (
+	var unserialized_degrees: float = (
 			float(serialized_vector & 0xff_ff) / ANGLE_MULTIPLIER
 	)
 	if unserialized_degrees > 180:
@@ -82,7 +79,7 @@ func _on_controller_input_handled() -> void:
 	if not $InputSynchronizer.is_multiplayer_authority():
 		return
 
-	var new_input_bits = 0
+	var new_input_bits := 0
 	if controller.button_1:
 		new_input_bits |= BitFlags.BUTTON_1
 

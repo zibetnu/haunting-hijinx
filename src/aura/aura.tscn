@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ctcjena4x8kr0"]
 
-[ext_resource type="Script" path="res://src/aura/aura.gd" id="1_itduv"]
+[ext_resource type="Script" uid="uid://ccpfrak6yl0l" path="res://src/aura/aura.gd" id="1_itduv"]
 
 [node name="Aura" type="Area2D"]
 collision_layer = 0

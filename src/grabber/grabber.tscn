@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://oe321ygxttbo"]
 
-[ext_resource type="Script" path="res://src/grabber/grabber.gd" id="1_vf0yw"]
+[ext_resource type="Script" uid="uid://feyfp0ew6bce" path="res://src/grabber/grabber.gd" id="1_vf0yw"]
 
 [node name="Grabber" type="Node2D"]
 script = ExtResource("1_vf0yw")

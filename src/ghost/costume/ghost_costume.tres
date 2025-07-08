@@ -684,16 +684,16 @@ tracks/5/keys = {
 
 [resource]
 _data = {
-"RESET": SubResource("Animation_mofay"),
-"dead": SubResource("Animation_vaeld"),
-"grab": SubResource("Animation_i1m0d"),
-"idle": SubResource("Animation_l5jyq"),
-"move": SubResource("Animation_7d02g"),
-"panic": SubResource("Animation_hgars"),
-"sprint": SubResource("Animation_hs0th"),
-"stun": SubResource("Animation_rlge5"),
-"summon": SubResource("Animation_louju"),
-"summon_charged": SubResource("Animation_np326"),
-"summon_released": SubResource("Animation_ihip0"),
-"summon_transition_to_released": SubResource("Animation_og7o4")
+&"RESET": SubResource("Animation_mofay"),
+&"dead": SubResource("Animation_vaeld"),
+&"grab": SubResource("Animation_i1m0d"),
+&"idle": SubResource("Animation_l5jyq"),
+&"move": SubResource("Animation_7d02g"),
+&"panic": SubResource("Animation_hgars"),
+&"sprint": SubResource("Animation_hs0th"),
+&"stun": SubResource("Animation_rlge5"),
+&"summon": SubResource("Animation_louju"),
+&"summon_charged": SubResource("Animation_np326"),
+&"summon_released": SubResource("Animation_ihip0"),
+&"summon_transition_to_released": SubResource("Animation_og7o4")
 }

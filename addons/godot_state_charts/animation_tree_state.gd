@@ -37,8 +37,8 @@ func _ready():
 		push_error("The animation tree is invalid. This node will not work.")
 
 
-func _state_enter(expect_transition:bool = false):
-	super._state_enter()
+func _state_enter(transition_target:StateChartState):
+	super._state_enter(transition_target)
 
 	if not is_instance_valid(_animation_tree_state_machine):
 		return
@@ -53,6 +53,7 @@ func _state_enter(expect_transition:bool = false):
 
 func _get_configuration_warnings():
 	var warnings = super._get_configuration_warnings()
+	warnings.append("This node is deprecated and will be removed in a future version.")
 
 	if animation_tree.is_empty():
 		warnings.append("No animation tree is set.")

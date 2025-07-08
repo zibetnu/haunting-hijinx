@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://mt548ar3ll4w"]
 
-[ext_resource type="Script" path="res://src/heartbeat_rumble/heartbeat_rumble.gd" id="1_kpvxc"]
+[ext_resource type="Script" uid="uid://ccwnml6lqe2ep" path="res://src/heartbeat_rumble/heartbeat_rumble.gd" id="1_kpvxc"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_m27d7"]
 properties/0/path = NodePath(".:heart_rate")

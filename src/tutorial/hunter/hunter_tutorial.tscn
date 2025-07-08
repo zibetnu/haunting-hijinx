@@ -1,15 +1,15 @@
 [gd_scene load_steps=36 format=3 uid="uid://dguyyy188ihbi"]
 
 [ext_resource type="PackedScene" uid="uid://c64tx6254qrlp" path="res://src/tutorial/tutorial.tscn" id="1_c5qxs"]
-[ext_resource type="Script" path="res://src/tutorial/hunter/hunter_tutorial.gd" id="2_v1ay4"]
+[ext_resource type="Script" uid="uid://c34s5yn38nab1" path="res://src/tutorial/hunter/hunter_tutorial.gd" id="2_v1ay4"]
 [ext_resource type="PackedScene" uid="uid://8qwvhkjp3yja" path="res://src/tutorial/quest/wpm_complete/wpm_complete.tscn" id="3_0femm"]
-[ext_resource type="Script" path="res://src/tutorial/quest/quest.gd" id="3_ea8sw"]
+[ext_resource type="Script" uid="uid://bcveuhp3crl7q" path="res://src/tutorial/quest/quest.gd" id="3_ea8sw"]
 [ext_resource type="PackedScene" uid="uid://bu4oleqx87mnw" path="res://src/tutorial/quest/complete_after_delay/complete_after_delay.tscn" id="4_dj2kv"]
-[ext_resource type="Script" path="res://src/tutorial/quest/composite_quest.gd" id="4_e5msw"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="4_mx0qj"]
-[ext_resource type="Script" path="res://addons/godot_state_charts/not_guard.gd" id="5_h1wiw"]
-[ext_resource type="Script" path="res://src/tutorial/quest/quest_node.gd" id="5_sx67b"]
-[ext_resource type="Shader" path="res://src/hunter/costume/palette_swap.gdshader" id="6_6k6h6"]
+[ext_resource type="Script" uid="uid://b6ajv1ch780ws" path="res://src/tutorial/quest/composite_quest.gd" id="4_e5msw"]
+[ext_resource type="Script" uid="uid://le5w1cm0ul8p" path="res://addons/godot_state_charts/expression_guard.gd" id="4_mx0qj"]
+[ext_resource type="Script" uid="uid://dgd4i8hrrxfvm" path="res://addons/godot_state_charts/not_guard.gd" id="5_h1wiw"]
+[ext_resource type="Script" uid="uid://bghayfahpoh8d" path="res://src/tutorial/quest/quest_node.gd" id="5_sx67b"]
+[ext_resource type="Shader" uid="uid://d2i6fyt1j8hb8" path="res://src/hunter/costume/palette_swap.gdshader" id="6_6k6h6"]
 [ext_resource type="PackedScene" uid="uid://c5r0sjcdbsrog" path="res://src/controller/npc_ghost/npc_ghost.tscn" id="6_n7jug"]
 [ext_resource type="Texture2D" uid="uid://b1r4xdhw8pco3" path="res://assets/hunter/palettes/yellow.png" id="7_k04wc"]
 [ext_resource type="PackedScene" uid="uid://ccvsw508kh4ot" path="res://src/hunter/hunter.tscn" id="7_smdw1"]
@@ -218,7 +218,7 @@ controller = NodePath("NPCGhost")
 [node name="FollowPlayer" parent="Ghost/IgnoreCanvasModulate" index="0"]
 position = Vector2(368, 128)
 
-[node name="NPCGhost" parent="Ghost" index="19" instance=ExtResource("6_n7jug")]
+[node name="NPCGhost" parent="Ghost" index="18" instance=ExtResource("6_n7jug")]
 
 [node name="Hunter" parent="." index="9"]
 position = Vector2(368, 248)
@@ -289,7 +289,7 @@ ghost = NodePath("../../Ghost")
 [connection signal="state_exited" from="Ghost/StateChart/Base/Animation/Sprint" to="QuestNodes/Light" method="stop"]
 [connection signal="state_entered" from="Ghost/StateChart/Base/Animation/Panic" to="QuestNodes/Move" method="start"]
 [connection signal="state_exited" from="Ghost/StateChart/Base/Animation/Panic" to="QuestNodes/Move" method="stop"]
-[connection signal="damage_taken" from="Ghost/DamageSignals/WeakTo" to="QuestNodes/Damage" method="complete"]
+[connection signal="damage_taken" from="Ghost/DamageSignals" to="QuestNodes/Damage" method="complete"]
 [connection signal="dropped" from="Hunter" to="HunterReviveTimer" method="start"]
 [connection signal="state_entered" from="Hunter/StateChart/Base/Alive/Movement/Move" to="QuestNodes/Move" method="start"]
 [connection signal="state_exited" from="Hunter/StateChart/Base/Alive/Movement/Move" to="QuestNodes/Move" method="stop"]

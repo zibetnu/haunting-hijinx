@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bapt74v2o7kig"]
 
-[ext_resource type="Script" path="res://src/lobby/player_card/player_card.gd" id="1_aanr4"]
+[ext_resource type="Script" uid="uid://c8sgxvqprf8f" path="res://src/lobby/player_card/player_card.gd" id="1_aanr4"]
 [ext_resource type="Texture2D" uid="uid://c4ybyyfobhm40" path="res://assets/player_card_icons.png" id="2_77ty2"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wemvv"]

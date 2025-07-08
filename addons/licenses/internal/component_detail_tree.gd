@@ -12,7 +12,7 @@ enum BUTTON_ID {
 }
 
 @export var _nothing_selected_note: CenterContainer
-var _component: Component :
+var _component: Component:
     set = set_component,
     get = get_component
 var handlers: Array[GDScript] = []
@@ -29,8 +29,17 @@ func get_component() -> Component:
     return _component
 
 func _init() -> void:
-    self.set_column_custom_minimum_width(0, 152)
     self.set_column_expand(0, false)
+    var min_width: float = \
+        self.get_theme_font(&"font").get_string_size("Identifier", 0, -1, self.get_theme_font_size(&"font_size")).x \
+        + self.get_theme_constant(&"inner_item_margin_left") \
+        + self.get_theme_constant(&"inner_item_margin_right") \
+        + self.get_theme_constant(&"item_margin") \
+        # around 2x arrow and one button size
+        + 3 * self.get_theme_icon(&"arrow").get_size().x
+    # add 5% space to be safe
+    min_width = 1.05 * min_width
+    self.set_column_custom_minimum_width(0, min_width)
     self.set_column_clip_content(1, true)
 
 func reload() -> void:
@@ -69,7 +78,7 @@ func _on_item_edited(item: TreeItem = null) -> void:
         item = self.get_edited()
     var handler = item.get_meta("handler")
     handler.edited()
-    var parent = item.get_parent()
+    var parent: TreeItem = item.get_parent()
     if parent != null:
         parent.get_meta("handler").child_edited(item)
 

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0jfn7wspsy4c"]
+
+[ext_resource type="Script" uid="uid://btk5cqh8kqnm1" path="res://src/level/lighting/level_lighting.gd" id="1_fl45x"]
+
+[node name="LevelLighting" type="Node2D" groups=["level_lighting"]]
+script = ExtResource("1_fl45x")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+rotation = 0.785398
+energy = 0.07
+height = 0.3
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.126, 0.126, 0.126, 1)

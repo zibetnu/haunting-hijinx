@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://grxm3658ukjj"]
 
-[ext_resource type="Script" path="res://src/battery_spawner/battery_spawner.gd" id="1_ygxh4"]
+[ext_resource type="Script" uid="uid://dueomf76jj4ru" path="res://src/battery_spawner/battery_spawner.gd" id="1_ygxh4"]
 [ext_resource type="PackedScene" uid="uid://bw11rdhjv3j62" path="res://src/battery/battery.tscn" id="2_5j1gl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_repyt"]

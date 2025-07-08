@@ -1,3 +1,4 @@
+class_name AuraSense
 extends Area2D
 
 signal sensed_intensity_changed(intensity: int)
@@ -12,31 +13,26 @@ var sensed_intensity: int:
 		sensed_intensity = value
 		sensed_intensity_changed.emit(value)
 
-var _sensed_auras: Array[Node] = []
+var _sensed_auras: Array[Aura] = []
 
 
-func add_aura(source: Node) -> void:
-	if not "intensity" in source:
-		return
-
-	if source in _sensed_auras:
-		return
-
+func add_aura(source: Aura) -> void:
 	_sensed_auras.append(source)
 	_update_sensed_intensity()
 
 
-func remove_aura(source: Node) -> void:
-	if not source in _sensed_auras:
-		return
-
+func remove_aura(source: Aura) -> void:
 	_sensed_auras.erase(source)
 	_update_sensed_intensity()
 
 
+func _intensity_sort(a: Aura, b: Aura) -> bool:
+	return a.intensity > b.intensity
+
+
 func _update_sensed_intensity() -> void:
 	if active and _sensed_auras.size() > 0:
-		_sensed_auras.sort_custom(func(a, b): return a.intensity > b.intensity)
+		_sensed_auras.sort_custom(_intensity_sort)
 		sensed_intensity = _sensed_auras[0].intensity
 
 	else:

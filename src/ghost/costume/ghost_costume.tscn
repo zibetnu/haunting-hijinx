@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=3 uid="uid://klrwcohuhynk"]
 
-[ext_resource type="Script" path="res://src/ghost/costume/ghost_costume.gd" id="1_giptv"]
+[ext_resource type="Script" uid="uid://bvlwhsfa3nnbg" path="res://src/ghost/costume/ghost_costume.gd" id="1_giptv"]
 [ext_resource type="Texture2D" uid="uid://cqklbgsp8hsst" path="res://assets/ghost/ghost.png" id="1_su5en"]
 [ext_resource type="AnimationLibrary" uid="uid://fs3jht0ivdhm" path="res://src/animation_libaries/canvas_item.tres" id="3_fxyvi"]
 [ext_resource type="AnimationLibrary" uid="uid://krtfia4oqseg" path="res://src/animation_libaries/sprite.tres" id="4_httx6"]
 [ext_resource type="AnimationLibrary" uid="uid://cpgm7lkqrgqbv" path="res://src/ghost/costume/ghost_costume.tres" id="5_tqb6x"]
-[ext_resource type="AudioStream" uid="uid://brjvbwuqm27ud" path="res://assets/ghost/ghost_stun.wav" id="6_0krtw"]
+[ext_resource type="AudioStream" uid="uid://brjvbwuqm27ud" path="res://assets/ghost/stun.wav" id="6_0krtw"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v324n"]
 light_mode = 1
@@ -44,7 +44,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mpegg"]
 _data = {
-"RESET": SubResource("Animation_74m6x")
+&"RESET": SubResource("Animation_74m6x")
 }
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ucqbf"]
@@ -53,7 +53,6 @@ properties/0/spawn = true
 properties/0/replication_mode = 2
 
 [node name="GhostCostume" type="Node2D"]
-position = Vector2(0, -10)
 script = ExtResource("1_giptv")
 
 [node name="ParentOffset" type="Node2D" parent="."]
@@ -70,14 +69,14 @@ replication_config = SubResource("SceneReplicationConfig_euls0")
 [node name="Effects" type="AnimationPlayer" parent="."]
 root_node = NodePath("../ParentOffset/Sprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_mpegg"),
-"canvas_item": ExtResource("3_fxyvi"),
-"sprite": ExtResource("4_httx6")
+&"": SubResource("AnimationLibrary_mpegg"),
+&"canvas_item": ExtResource("3_fxyvi"),
+&"sprite": ExtResource("4_httx6")
 }
 
 [node name="Ghost" type="AnimationPlayer" parent="."]
 libraries = {
-"": ExtResource("5_tqb6x")
+&"": ExtResource("5_tqb6x")
 }
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Ghost"]

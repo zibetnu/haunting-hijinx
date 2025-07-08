@@ -13,7 +13,7 @@ grow_vertical = 2
 
 [node name="BackEnd" parent="." instance=ExtResource("1_hhg0o")]
 
-[node name="VisibilitySignals" parent="BackEnd" index="3" node_paths=PackedStringArray("canvas_item")]
+[node name="VisibilitySignals" parent="BackEnd" index="2" node_paths=PackedStringArray("canvas_item")]
 canvas_item = NodePath("../..")
 
 [node name="FrontEnd" parent="." instance=ExtResource("2_hib2w")]

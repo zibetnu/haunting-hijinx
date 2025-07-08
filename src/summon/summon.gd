@@ -53,11 +53,11 @@ func set_charging(value: bool) -> void:
 
 
 func spawn_scenes() -> void:
-	for node in get_tree().get_nodes_in_group(target_group):
-		var instance := drain_area.instantiate()
+	for node: Node2D in get_tree().get_nodes_in_group(target_group):
+		var instance: Node2D = drain_area.instantiate()
 		instance.position = node.position
-		instance.tree_entered.connect(func(): area_count += 1)
-		instance.tree_exited.connect(func(): area_count -= 1)
+		instance.tree_entered.connect(func() -> void: area_count += 1)
+		instance.tree_exited.connect(func() -> void: area_count -= 1)
 		owner.add_sibling(instance, true)
 
 	summoned.emit()

@@ -1,8 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dtev64q8rmhnn"]
 
 [ext_resource type="PackedScene" uid="uid://56f6sbrp31ud" path="res://src/call_attempter/call_attempter.tscn" id="1_456mq"]
-[ext_resource type="Script" path="res://src/main_menu/back_end/quit.gd" id="2_8f0is"]
-[ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="3_2cfin"]
+[ext_resource type="Script" uid="uid://dph72y1dypqm2" path="res://src/main_menu/back_end/quit.gd" id="2_8f0is"]
 [ext_resource type="PackedScene" uid="uid://c6ql67s5oafpr" path="res://src/visibility_signals/visibility_signals.tscn" id="3_5odw1"]
 
 [node name="BackEnd" type="Node"]
@@ -14,9 +13,4 @@ method = &"change_to_lobby_browser"
 [node name="Quit" type="Node" parent="."]
 script = ExtResource("2_8f0is")
 
-[node name="SteamConnector" parent="." instance=ExtResource("3_2cfin")]
-connect_steam_signals = false
-
 [node name="VisibilitySignals" parent="." instance=ExtResource("3_5odw1")]
-
-[connection signal="shown" from="VisibilitySignals" to="SteamConnector" method="close_connection"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c5r0sjcdbsrog"]
 
-[ext_resource type="Script" path="res://src/controller/npc_ghost/npc_ghost.gd" id="1_fsdsq"]
+[ext_resource type="Script" uid="uid://cy8cwlvvlve2a" path="res://src/controller/npc_ghost/npc_ghost.gd" id="1_fsdsq"]
 
 [node name="NPCGhost" type="Node2D"]
 script = ExtResource("1_fsdsq")

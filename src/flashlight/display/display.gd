@@ -32,25 +32,34 @@ var powered: bool:
 
 var flashlight_rotation: float:
 	get:
-		return $RotationNode.rotation
+		return _rotation_node.rotation
 
 	set(value):
-		$RotationNode.rotation = value
+		_rotation_node.rotation = value
 		flashlight_rotation_changed.emit(flashlight_rotation)
 
 var light_texture_index: int:
 	set(value):
 		light_texture_index = clampi(value, 0, light_textures.size() - 1)
-		$RotationNode/Light/FloorLight.texture = light_textures[light_texture_index]
-		$RotationNode/Light/WallLight.texture = light_textures[light_texture_index]
+		_floor_light.texture = light_textures[light_texture_index]
+		_wall_light.texture = light_textures[light_texture_index]
 
-@onready var _beam := $RotationNode2/Beam
+@onready var _beam: Polygon2D = %Beam
+@onready var _beam_start_bottom: Marker2D = %BeamStartBottom
+@onready var _beam_start_top: Marker2D = %BeamStartTop
+@onready var _beam_start_positions: Array[Vector2] = [
+	_beam_start_bottom.position,
+	_beam_start_top.position
+]
 @onready var _click: AudioStreamPlayer2D = $Click
-@onready var _light := $RotationNode/Light
+@onready var _floor_light: PointLight2D = %FloorLight
+@onready var _light: Node2D = %Light
+@onready var _rotation_node: RemoteTransform2D = %RotationNode
+@onready var _wall_light: PointLight2D = %WallLight
 
 
 func set_collision_points(value: Array) -> void:
-	_beam.polygon = [%BeamStartBottom.position, %BeamStartTop.position] + value
+	_beam.polygon = _beam_start_positions + value
 
 
 func set_powered(value: bool) -> void:

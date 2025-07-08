@@ -9,12 +9,16 @@ extends Node2D
 var _ghosts_spawned := 0
 var _hunters_spawned := 0
 
+@onready var end_label: Label = %EndLabel
 @onready var ghost_timer_sprite: Node2D = %GhostTimerSprite
 @onready var hunter_timer_sprite: Node2D = %HunterTimerSprite
+@onready var limit_bottom_right: Marker2D = $CameraLimits/BottomRight
+@onready var limit_top_left: Marker2D = $CameraLimits/TopLeft
+@onready var match_timer: Timer = %MatchTimer
 @onready var spectator_timer_sprite: Node2D = %SpectatorTimerSprite
 
 
-func _ready():
+func _ready() -> void:
 	show_matching_timer_sprite()
 
 	if not multiplayer.is_server():
@@ -24,7 +28,7 @@ func _ready():
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(remove_player)
 
-	for peer_id in PeerData.participants:
+	for peer_id: int in PeerData.participants:
 		add_player(peer_id)
 
 
@@ -46,19 +50,30 @@ func add_player(id: int) -> void:
 		].position
 		_hunters_spawned += 1
 
-	_set_camera_limits(instance.get_node("Camera2D"))
+	var camera: Camera2D = instance.get_node_or_null(^"%Camera2D")
+	if camera != null:
+		_set_camera_limits(camera)
+
 	instance.name += str(id)
 	$SpawnRoot.add_child(instance, true)
-	instance.get_node("PeerID").id = id
-	instance.get_node("IgnoreCanvasModulate/FollowPlayer/NameLabel").text = (
-			PeerData.peer_names[id]
-	)
+	var peer_id: PeerID = instance.get_node_or_null(^"%PeerID")
+	if peer_id != null:
+		peer_id.id = id
+
+	var name_label: Label = instance.get_node_or_null(^"%NameLabel")
+	if name_label != null:
+		name_label.text = PeerData.peer_names[id]
+
 	get_tree().call_group("ghost_peer_ids", "set_id", PeerData.ghost_peer)
 
 
 func remove_player(id: int) -> void:
 	for player in get_tree().get_nodes_in_group("players"):
-		if player.get_node("PeerID").id != id:
+		var peer_id: PeerID = player.get_node_or_null(^"%PeerID")
+		if peer_id == null:
+			continue
+
+		if peer_id.id != id:
 			continue
 
 		if player.is_in_group("ghosts"):
@@ -86,13 +101,16 @@ func _end_match(message: String) -> void:
 	if not multiplayer.is_server():
 		return
 
-	%EndLabel.text = message
-	%EndLabel.visible = true
+	end_label.text = message
+	end_label.visible = true
 
 	# Force level to stay paused even if scene tree is not paused.
 	set_process_mode.call_deferred(Node.PROCESS_MODE_DISABLED)
 
 	await get_tree().create_timer(3).timeout
+	# https://github.com/godotengine/godot/issues/77643
+	@warning_ignore("unsafe_method_access")
+	@warning_ignore("unsafe_property_access")
 	SceneChanger.change_scene_to_packed(SceneChanger.lobby)
 
 
@@ -101,17 +119,15 @@ func _on_counting_spawner_all_scenes_spawned() -> void:
 		return
 
 	if $CanvasLayer.get_children().any(
-			func(node): return node.name == "SpectatorMenu"
+			func(node: Node) -> bool: return node.name == "SpectatorMenu"
 	):
 		return
 
 	$CanvasLayer.add_child(spectator_menu.instantiate())
 
 
-func _on_group_bool_ready(group_bool: Node) -> void:
-	if group_bool.has_signal("is_true_set"):
-		group_bool.is_true_set.connect(_on_player_death_state_changed)
-
+func _on_group_bool_ready(group_bool: GroupBool) -> void:
+	group_bool.is_true_set.connect(_on_player_death_state_changed)
 	group_bool.tree_exiting.connect(_on_player_death_state_changed)
 
 
@@ -123,7 +139,7 @@ func _on_player_death_state_changed() -> void:
 	if not multiplayer.is_server():
 		return
 
-	var is_dead := func(node: Node):
+	var is_dead := func(node: Node) -> bool:
 		return (
 				node.get("is_true")
 				or node.owner == null
@@ -141,16 +157,16 @@ func _on_peer_connected(id: int) -> void:
 	if not is_inside_tree():
 		return
 
-	_sync_timer.rpc_id(id, $MatchTimer.time_left)
+	_sync_timer.rpc_id(id, match_timer.time_left)
 
 
 func _set_camera_limits(camera: Camera2D) -> void:
-	camera.limit_left = $CameraLimits/TopLeft.position.x
-	camera.limit_top = $CameraLimits/TopLeft.position.y
-	camera.limit_right = $CameraLimits/BottomRight.position.x
-	camera.limit_bottom = $CameraLimits/BottomRight.position.y
+	camera.limit_left = roundi(limit_top_left.position.x)
+	camera.limit_top = roundi(limit_top_left.position.y)
+	camera.limit_right = roundi(limit_bottom_right.position.x)
+	camera.limit_bottom = roundi(limit_bottom_right.position.y)
 
 
 @rpc("reliable")
 func _sync_timer(time_left: float) -> void:
-	$MatchTimer.start(time_left)
+	match_timer.start(time_left)

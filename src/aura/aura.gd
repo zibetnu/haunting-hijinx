@@ -1,16 +1,23 @@
+class_name Aura
 extends Area2D
 
 @export var intensity := 1
 
 
 func _on_entered(node: Node) -> void:
-	if node.has_method("add_aura"):
-		node.add_aura(self)
+	var aura_sense := node as AuraSense
+	if aura_sense == null:
+		return
+
+	aura_sense.add_aura(self)
 
 
 func _on_exited(node: Node) -> void:
-	if node.has_method("remove_aura"):
-		node.remove_aura(self)
+	var aura_sense := node as AuraSense
+	if aura_sense == null:
+		return
+
+	aura_sense.remove_aura(self)
 
 
 func _on_area_entered(area: Area2D) -> void:
