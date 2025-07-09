@@ -11,6 +11,7 @@ var stunnable := true:
 	set = set_stunnable
 
 @onready var ghost_costume: GhostCostume = $GhostCostume
+@onready var hit_sounds: HitSounds = %HitSounds
 
 @onready var grab_area: Area2D = $Grab
 @onready var grabber: Grabber = $Grab/Grabber
@@ -112,6 +113,8 @@ func _on_panic_event_received(event: StringName) -> void:
 		end_timer.start(RESTART_DURING_PANIC_TIME)
 
 	visible_timer.start()
+	hit_sounds.enabled = true
+	hit_sounds.start_disable_timer()
 
 
 func _on_panic_state_entered() -> void:
@@ -126,6 +129,7 @@ func _on_panic_state_exited() -> void:
 	is_panicked = false
 	end_timer.stop()
 	visible_timer.stop()
+	hit_sounds.reset()
 
 
 func _on_summon_area_count_changed(area_count: int) -> void:
