@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=26 format=3 uid="uid://k2680qtkyab6"]
+[gd_resource type="Theme" load_steps=29 format=3 uid="uid://k2680qtkyab6"]
 
 [ext_resource type="FontFile" uid="uid://cmyudnfjlpktv" path="res://assets/theme/modern_dos_8x16.ttf" id="1_kj04y"]
 [ext_resource type="StyleBox" uid="uid://jj64njhm1d1i" path="res://src/theme/button_style_box/disabled.tres" id="1_reryu"]
@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://ccnt6xf5wfbru" path="res://assets/theme/grabber/highlight.png" id="8_4k5fq"]
 [ext_resource type="StyleBox" uid="uid://c4dluklj5xsoq" path="res://src/theme/panel_style_box.tres" id="9_3p1nt"]
 [ext_resource type="StyleBox" uid="uid://cqr517uebyp5l" path="res://src/theme/grabber_area.tres" id="9_bp31u"]
-[ext_resource type="Texture2D" uid="uid://ry5cc3txtp3k" path="res://assets/theme/tick.png" id="9_ude6r"]
+[ext_resource type="Texture2D" uid="uid://ry5cc3txtp3k" path="res://assets/theme/h_slider/tick.png" id="9_ude6r"]
 [ext_resource type="StyleBox" uid="uid://cs18g45r1ofpg" path="res://src/theme/slider.tres" id="10_uwbet"]
 [ext_resource type="Texture2D" uid="uid://bbcb76q404fw6" path="res://assets/theme/arrow.png" id="12_pu2tr"]
 [ext_resource type="StyleBox" uid="uid://5gsgqi5vc6ra" path="res://src/theme/tab_style_box/disabled.tres" id="13_jy2fp"]
@@ -22,6 +22,9 @@
 [ext_resource type="Texture2D" uid="uid://c8to53nfcjw4s" path="res://assets/theme/radio/disabled.png" id="15_q5kya"]
 [ext_resource type="StyleBox" uid="uid://dfayfm7g4qbgy" path="res://src/theme/tab_style_box/select.tres" id="16_jbexi"]
 [ext_resource type="StyleBox" uid="uid://bpbnwfxmkkmmc" path="res://src/theme/tab_style_box/unselect.tres" id="17_dx43s"]
+[ext_resource type="Texture2D" uid="uid://cd3pob5kkeehl" path="res://assets/theme/v_slider/tick.png" id="22_5ti8i"]
+[ext_resource type="StyleBox" uid="uid://d3gsnha4f2qj6" path="res://src/theme/v_grabber_area.tres" id="22_wnqcw"]
+[ext_resource type="StyleBox" uid="uid://dvwdbjn13ofxc" path="res://src/theme/v_slider.tres" id="23_vv3j2"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_1ql8x"]
 color = Color(1, 1, 1, 1)
@@ -93,3 +96,10 @@ Tree/styles/selected = SubResource("StyleBoxEmpty_k4gs8")
 Tree/styles/selected_focus = ExtResource("2_bggbf")
 VSeparator/constants/separation = 0
 VSeparator/styles/separator = SubResource("StyleBoxLine_3jjtl")
+VSlider/icons/grabber = ExtResource("6_17eta")
+VSlider/icons/grabber_disabled = ExtResource("7_rjcc0")
+VSlider/icons/grabber_highlight = ExtResource("8_4k5fq")
+VSlider/icons/tick = ExtResource("22_5ti8i")
+VSlider/styles/grabber_area = ExtResource("22_wnqcw")
+VSlider/styles/grabber_area_highlight = ExtResource("22_wnqcw")
+VSlider/styles/slider = ExtResource("23_vv3j2")

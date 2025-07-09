@@ -4,15 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://c4pe2q3xrfk36" path="res://src/bus_volume_setter/bus_volume_setter.tscn" id="4_5dgk7"]
 [ext_resource type="Script" uid="uid://cyi51j6dwvuvx" path="res://src/config_menu/option_button_id.gd" id="6_u7oav"]
 
-[node name="ConfigMenu" type="Control" node_paths=PackedStringArray("first_button") groups=["config_menu"]]
-layout_mode = 3
+[node name="ConfigMenu" type="MarginContainer" node_paths=PackedStringArray("first_button") groups=["config_menu"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_f68c2")
-first_button = NodePath("FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/WindowModeOption")
+first_button = NodePath("HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/WindowModeOption")
 
 [node name="BackEnd" type="Node" parent="."]
 
@@ -29,47 +28,62 @@ bus_name = &"Effects"
 unique_name_in_owner = true
 one_shot = true
 
-[node name="FrontEnd" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -164.0
-offset_top = -138.0
-offset_right = 164.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="FrontEnd"]
-layout_mode = 2
-
-[node name="TabContainer" type="TabContainer" parent="FrontEnd/VBoxContainer"]
+[node name="Back" type="Button" parent="."]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
-size_flags_vertical = 10
-current_tab = 0
-use_hidden_tabs_for_min_size = true
+size_flags_horizontal = 0
+size_flags_vertical = 8
+focus_neighbor_top = NodePath("../HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/WindowModeOption")
+focus_neighbor_right = NodePath("../HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/WindowModeOption")
+focus_next = NodePath("../HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/WindowModeOption")
+text = "Back"
 
-[node name="Display" type="VBoxContainer" parent="FrontEnd/VBoxContainer/TabContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
-metadata/_tab_index = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
 
-[node name="WindowMode" type="HBoxContainer" parent="FrontEnd/VBoxContainer/TabContainer/Display"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="FrontEnd/VBoxContainer/TabContainer/Display/WindowMode"]
+[node name="DisplayOptionButtons" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 2
-text = "Window Mode"
 
-[node name="WindowModeOption" type="OptionButton" parent="FrontEnd/VBoxContainer/TabContainer/Display/WindowMode"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer"]
+layout_mode = 2
+
+[node name="Labels" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="WindowMode" type="Label" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Labels"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "Window"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="VSync" type="Label" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Labels"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "VSync"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="WindowModeOption" type="OptionButton" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
-size_flags_horizontal = 10
+focus_neighbor_left = NodePath("../../../../../../../Back")
+focus_neighbor_right = NodePath("../../../../../../Master/VBoxContainer/MasterBusSlider")
+focus_neighbor_bottom = NodePath("../VSyncOption")
+focus_next = NodePath("../VSyncOption")
+focus_previous = NodePath("../../../../../../../Back")
 alignment = 1
 item_count = 2
 popup/item_0/text = "Windowed"
@@ -78,19 +92,15 @@ popup/item_1/text = "Fullscreen"
 popup/item_1/id = 4
 script = ExtResource("6_u7oav")
 
-[node name="VSync" type="HBoxContainer" parent="FrontEnd/VBoxContainer/TabContainer/Display"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="FrontEnd/VBoxContainer/TabContainer/Display/VSync"]
-layout_mode = 2
-size_flags_horizontal = 2
-text = "VSync"
-
-[node name="VSyncOption" type="OptionButton" parent="FrontEnd/VBoxContainer/TabContainer/Display/VSync"]
+[node name="VSyncOption" type="OptionButton" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
-size_flags_horizontal = 10
+focus_neighbor_left = NodePath("../../../../../../../Back")
+focus_neighbor_top = NodePath("../WindowModeOption")
+focus_neighbor_right = NodePath("../../../../../../Master/VBoxContainer/MasterBusSlider")
+focus_neighbor_bottom = NodePath("../../../../../Brightness/VBoxContainer/BrightnessSlider")
+focus_next = NodePath("../../../../../Brightness/VBoxContainer/BrightnessSlider")
+focus_previous = NodePath("../WindowModeOption")
 alignment = 1
 item_count = 4
 popup/item_0/text = "Disabled"
@@ -103,142 +113,167 @@ popup/item_3/text = "Mailbox"
 popup/item_3/id = 3
 script = ExtResource("6_u7oav")
 
-[node name="Brightness" type="HBoxContainer" parent="FrontEnd/VBoxContainer/TabContainer/Display"]
+[node name="Brightness" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="FrontEnd/VBoxContainer/TabContainer/Display/Brightness"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/Brightness"]
 layout_mode = 2
-size_flags_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/Brightness/VBoxContainer"]
+layout_mode = 2
+
+[node name="MinBrightness" type="Label" parent="HBoxContainer/VBoxContainer/Brightness/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "0%"
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/Brightness/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Brightness"
+horizontal_alignment = 1
 
-[node name="BrightnessSlider" type="HSlider" parent="FrontEnd/VBoxContainer/TabContainer/Display/Brightness"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(192, 0)
+[node name="MaxBrightness" type="Label" parent="HBoxContainer/VBoxContainer/Brightness/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 10
+text = "100%"
+
+[node name="BrightnessSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/Brightness/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 size_flags_vertical = 1
+focus_neighbor_left = NodePath("../../../../../Back")
+focus_neighbor_top = NodePath("../../../DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/VSyncOption")
+focus_neighbor_right = NodePath("../../../../Master/VBoxContainer/MasterBusSlider")
+focus_neighbor_bottom = NodePath("../../../ScaleContainer/VBoxContainer/ScaleSlider")
+focus_next = NodePath("../../../ScaleContainer/VBoxContainer/ScaleSlider")
+focus_previous = NodePath("../../../DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/VSyncOption")
 min_value = 0.063
 max_value = 0.378
 step = 0.063
 value = 0.126
 tick_count = 6
 
-[node name="ScaleContainer" type="PanelContainer" parent="FrontEnd/VBoxContainer/TabContainer/Display"]
+[node name="ScaleContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScaleContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="MinScale" type="Label" parent="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer/HBoxContainer"]
+[node name="MinScale" type="Label" parent="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "1x"
 
-[node name="Label" type="Label" parent="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Scale"
 horizontal_alignment = 1
 
-[node name="MaxScale" type="Label" parent="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer/HBoxContainer"]
+[node name="MaxScale" type="Label" parent="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "3x"
 
-[node name="ScaleSlider" type="HSlider" parent="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer"]
+[node name="ScaleSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
-size_flags_vertical = 1
+focus_neighbor_left = NodePath("../../../../../Back")
+focus_neighbor_top = NodePath("../../../Brightness/VBoxContainer/BrightnessSlider")
+focus_neighbor_right = NodePath("../../../../Master/VBoxContainer/MasterBusSlider")
+focus_neighbor_bottom = NodePath("../../../../Master/VBoxContainer/MasterBusSlider")
+focus_next = NodePath("../../../../Master/VBoxContainer/MasterBusSlider")
+focus_previous = NodePath("../../../Brightness/VBoxContainer/BrightnessSlider")
 min_value = 1.0
 max_value = 3.0
 value = 1.0
 tick_count = 3
 
-[node name="ScaleDebounce" type="Timer" parent="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer/ScaleSlider"]
+[node name="ScaleDebounce" type="Timer" parent="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer/ScaleSlider"]
 wait_time = 0.5
 one_shot = true
 
-[node name="Audio" type="VBoxContainer" parent="FrontEnd/VBoxContainer/TabContainer"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 1
-
-[node name="Master" type="HBoxContainer" parent="FrontEnd/VBoxContainer/TabContainer/Audio"]
+[node name="Master" type="PanelContainer" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="FrontEnd/VBoxContainer/TabContainer/Audio/Master"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Master"]
 layout_mode = 2
-size_flags_horizontal = 2
-text = "Master"
 
-[node name="MasterBusSlider" type="HSlider" parent="FrontEnd/VBoxContainer/TabContainer/Audio/Master"]
+[node name="Label" type="Label" parent="HBoxContainer/Master/VBoxContainer"]
+layout_mode = 2
+text = "All"
+
+[node name="MasterBusSlider" type="VSlider" parent="HBoxContainer/Master/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 1
+size_flags_horizontal = 1
+size_flags_vertical = 3
+focus_neighbor_left = NodePath("../../../VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/WindowModeOption")
+focus_neighbor_right = NodePath("../../../Music/VBoxContainer/MusicBusSlider")
+focus_next = NodePath("../../../Music/VBoxContainer/MusicBusSlider")
+focus_previous = NodePath("../../../VBoxContainer/ScaleContainer/VBoxContainer/ScaleSlider")
 max_value = 1.0
 step = 0.2
 value = 1.0
 tick_count = 6
 
-[node name="Music" type="HBoxContainer" parent="FrontEnd/VBoxContainer/TabContainer/Audio"]
+[node name="Music" type="PanelContainer" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="FrontEnd/VBoxContainer/TabContainer/Audio/Music"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Music"]
 layout_mode = 2
-size_flags_horizontal = 2
-text = "Music"
 
-[node name="MusicBusSlider" type="HSlider" parent="FrontEnd/VBoxContainer/TabContainer/Audio/Music"]
+[node name="Label" type="Label" parent="HBoxContainer/Music/VBoxContainer"]
+layout_mode = 2
+text = "OST"
+
+[node name="MusicBusSlider" type="VSlider" parent="HBoxContainer/Music/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 1
+size_flags_horizontal = 1
+size_flags_vertical = 3
+focus_neighbor_left = NodePath("../../../Master/VBoxContainer/MasterBusSlider")
+focus_neighbor_right = NodePath("../../../Effects/VBoxContainer/EffectsBusSlider")
+focus_next = NodePath("../../../Effects/VBoxContainer/EffectsBusSlider")
+focus_previous = NodePath("../../../Master/VBoxContainer/MasterBusSlider")
 max_value = 1.0
 step = 0.2
 value = 1.0
 tick_count = 6
 
-[node name="Effects" type="HBoxContainer" parent="FrontEnd/VBoxContainer/TabContainer/Audio"]
+[node name="Effects" type="PanelContainer" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="FrontEnd/VBoxContainer/TabContainer/Audio/Effects"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Effects"]
 layout_mode = 2
-size_flags_horizontal = 2
-text = "Effects"
 
-[node name="EffectsBusSlider" type="HSlider" parent="FrontEnd/VBoxContainer/TabContainer/Audio/Effects"]
+[node name="Label" type="Label" parent="HBoxContainer/Effects/VBoxContainer"]
+layout_mode = 2
+text = "SFX"
+
+[node name="EffectsBusSlider" type="VSlider" parent="HBoxContainer/Effects/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
-size_flags_horizontal = 10
-size_flags_vertical = 1
+size_flags_horizontal = 1
+size_flags_vertical = 3
+focus_neighbor_top = NodePath("../../../Music/VBoxContainer/MusicBusSlider")
+focus_previous = NodePath("../../../Music/VBoxContainer/MusicBusSlider")
 max_value = 1.0
 step = 0.2
 value = 1.0
 tick_count = 6
-
-[node name="HBoxContainer" type="HBoxContainer" parent="FrontEnd/VBoxContainer"]
-layout_mode = 2
-
-[node name="Back" type="Button" parent="FrontEnd/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Back"
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="timeout" from="SaveTimer" to="." method="_on_save_timer_timeout"]
-[connection signal="item_id_selected" from="FrontEnd/VBoxContainer/TabContainer/Display/WindowMode/WindowModeOption" to="." method="_on_window_mode_selected"]
-[connection signal="item_id_selected" from="FrontEnd/VBoxContainer/TabContainer/Display/VSync/VSyncOption" to="." method="_on_vsync_option_id_selected"]
-[connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Display/Brightness/BrightnessSlider" to="." method="_on_brightness_slider_value_changed"]
-[connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer/ScaleSlider" to="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer/ScaleSlider/ScaleDebounce" method="start" unbinds=1]
-[connection signal="timeout" from="FrontEnd/VBoxContainer/TabContainer/Display/ScaleContainer/VBoxContainer/ScaleSlider/ScaleDebounce" to="." method="_on_scale_debounce_timeout"]
-[connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Audio/Master/MasterBusSlider" to="BackEnd/MasterBusVolumeSetter" method="set_volume_linear"]
-[connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Audio/Music/MusicBusSlider" to="BackEnd/MusicBusVolumeSetter" method="set_volume_linear"]
-[connection signal="value_changed" from="FrontEnd/VBoxContainer/TabContainer/Audio/Effects/EffectsBusSlider" to="BackEnd/EffectsBusVolumeSetter" method="set_volume_linear"]
+[connection signal="item_id_selected" from="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/WindowModeOption" to="." method="_on_window_mode_selected"]
+[connection signal="item_id_selected" from="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/VSyncOption" to="." method="_on_vsync_option_id_selected"]
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer/Brightness/VBoxContainer/BrightnessSlider" to="." method="_on_brightness_slider_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer/ScaleSlider" to="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer/ScaleSlider/ScaleDebounce" method="start" unbinds=1]
+[connection signal="timeout" from="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer/ScaleSlider/ScaleDebounce" to="." method="_on_scale_debounce_timeout"]
+[connection signal="value_changed" from="HBoxContainer/Master/VBoxContainer/MasterBusSlider" to="BackEnd/MasterBusVolumeSetter" method="set_volume_linear"]
+[connection signal="value_changed" from="HBoxContainer/Music/VBoxContainer/MusicBusSlider" to="BackEnd/MusicBusVolumeSetter" method="set_volume_linear"]
+[connection signal="value_changed" from="HBoxContainer/Effects/VBoxContainer/EffectsBusSlider" to="BackEnd/EffectsBusVolumeSetter" method="set_volume_linear"]

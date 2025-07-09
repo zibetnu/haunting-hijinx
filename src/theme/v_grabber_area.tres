@@ -1,0 +1,14 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://d3gsnha4f2qj6"]
+
+[ext_resource type="Texture2D" uid="uid://cxtuvj1hj0rus" path="res://assets/theme/v_slider/grabber_area.png" id="1_rpmvp"]
+
+[resource]
+texture = ExtResource("1_rpmvp")
+texture_margin_left = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 18.0
+expand_margin_left = 2.0
+expand_margin_right = 6.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(0, 0, 12, 19)
