@@ -21,7 +21,7 @@
 			"paths": [
 				"res://addons/gdUnit4"
 			],
-			"version": "5.0.4",
+			"version": "5.0.5",
 			"web": ""
 		},
 		{
@@ -45,7 +45,7 @@
 			"paths": [
 				"res://addons/git_describe"
 			],
-			"version": "0.6.0",
+			"version": "0.7.0",
 			"web": ""
 		},
 		{
@@ -69,7 +69,7 @@
 			"paths": [
 				"res://addons/godot_state_charts"
 			],
-			"version": "0.21.5",
+			"version": "0.22.0",
 			"web": ""
 		},
 		{
