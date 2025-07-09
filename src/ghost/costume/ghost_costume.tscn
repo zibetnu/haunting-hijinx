@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://klrwcohuhynk"]
+[gd_scene load_steps=13 format=3 uid="uid://klrwcohuhynk"]
 
 [ext_resource type="Script" uid="uid://bvlwhsfa3nnbg" path="res://src/ghost/costume/ghost_costume.gd" id="1_giptv"]
 [ext_resource type="Texture2D" uid="uid://cqklbgsp8hsst" path="res://assets/ghost/ghost.png" id="1_su5en"]
@@ -6,6 +6,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://krtfia4oqseg" path="res://src/animation_libaries/sprite.tres" id="4_httx6"]
 [ext_resource type="AnimationLibrary" uid="uid://cpgm7lkqrgqbv" path="res://src/ghost/costume/ghost_costume.tres" id="5_tqb6x"]
 [ext_resource type="AudioStream" uid="uid://brjvbwuqm27ud" path="res://assets/ghost/stun.wav" id="6_0krtw"]
+[ext_resource type="AudioStream" uid="uid://l50x1w3i6ljw" path="res://assets/ghost/summon.wav" id="7_mjexl"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v324n"]
 light_mode = 1
@@ -85,3 +86,9 @@ replication_config = SubResource("SceneReplicationConfig_ucqbf")
 [node name="Stun" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_0krtw")
 bus = &"Effects"
+
+[node name="Summon" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_mjexl")
+bus = &"Effects"
+
+[connection signal="current_animation_changed" from="Ghost" to="." method="_on_ghost_current_animation_changed"]

@@ -332,6 +332,28 @@
 			"contact": "",
 			"copyright": [],
 			"description": "",
+			"id": "",
+			"licenses": [
+				{
+					"file": "",
+					"identifier": "CC0",
+					"name": "CC0-1.0",
+					"text": "",
+					"web": "https://creativecommons.org/publicdomain/zero/1.0/"
+				}
+			],
+			"name": "Scary Strings Crescendo Fast 2",
+			"paths": [
+				"res://assets/ghost/summon.wav"
+			],
+			"version": "",
+			"web": "https://freesound.org/s/684802/"
+		},
+		{
+			"category": "Assets",
+			"contact": "",
+			"copyright": [],
+			"description": "",
 			"id": "switch",
 			"licenses": [
 				{
