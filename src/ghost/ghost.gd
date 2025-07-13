@@ -11,10 +11,11 @@ var stunnable := true:
 	set = set_stunnable
 
 @onready var ghost_costume: GhostCostume = $GhostCostume
-@onready var hit_sounds: HitSounds = %HitSounds
-
 @onready var grab_area: Area2D = $Grab
 @onready var grabber: Grabber = $Grab/Grabber
+@onready var hit_sounds: HitSounds = %HitSounds
+@onready var summon: Summon = %Summon
+@onready var summon_bar: SummonBar = %SummonBar
 
 @onready var end_timer: Timer = $StateChart/Base/Behavior/Alive/Panic/EndTimer
 @onready var visible_timer: Timer = $StateChart/Base/Behavior/Alive/Panic/VisibleTimer
@@ -134,6 +135,19 @@ func _on_panic_state_exited() -> void:
 
 func _on_summon_area_count_changed(area_count: int) -> void:
 	state_chart.set_expression_property(&"drain_areas", area_count)
+
+
+func _on_summon_charged() -> void:
+	state_chart.send_event(&"summon_charged")
+
+
+func _on_summon_started() -> void:
+	state_chart.send_event(&"summon_charging")
+	summon_bar.start(summon.charge_time)
+
+
+func _on_summon_stopped() -> void:
+	summon_bar.stop()
 
 
 func _on_visibile_state_entered() -> void:

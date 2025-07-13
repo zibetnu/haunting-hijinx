@@ -281,7 +281,7 @@ ghost = NodePath("../../Ghost")
 [connection signal="started" from="QuestNodes/Battery" to="Hunter/StateChart/Base/Dead/Revived" method="set_block_signals" binds= [true]]
 [connection signal="started" from="QuestNodes/Revive" to="Ghost" method="set_position" binds= [Vector2(112, 127)]]
 [connection signal="ready" from="Ghost" to="Ghost/NPCGhost" method="set_sprint" flags=3 binds= [true]]
-[connection signal="summon_charged" from="Ghost/Summon" to="Ghost/NPCGhost" method="set_summon" binds= [false]]
+[connection signal="charged" from="Ghost/Summon" to="Ghost/NPCGhost" method="set_summon" binds= [false]]
 [connection signal="summoned" from="Ghost/Summon" to="QuestNodes/Summon/RetryTimer" method="start"]
 [connection signal="state_entered" from="Ghost/StateChart/Base/Behavior/Dead" to="." method="revive_ghost"]
 [connection signal="state_entered" from="Ghost/StateChart/Base/Animation/Move" to="QuestNodes/Move" method="start"]

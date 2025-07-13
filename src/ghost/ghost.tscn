@@ -19,9 +19,9 @@
 [ext_resource type="Script" uid="uid://14gt37bewi6t" path="res://src/centered_camera.gd" id="20_c63bs"]
 [ext_resource type="PackedScene" uid="uid://klrwcohuhynk" path="res://src/ghost/costume/ghost_costume.tscn" id="25_s3y3d"]
 [ext_resource type="Texture2D" uid="uid://d6ydfogp5pkh" path="res://assets/ghost/aura_outlines.png" id="26_lh4y1"]
+[ext_resource type="PackedScene" uid="uid://c2p8hmv11uyfp" path="res://src/summon_bar/summon_bar.tscn" id="27_ss5od"]
 [ext_resource type="Script" uid="uid://4fgkeu5l16ll" path="res://src/hit_sounds.gd" id="28_xrbot"]
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="29_1sq8w"]
-[ext_resource type="Texture2D" uid="uid://e3ujjltguycf" path="res://assets/progress_bar.png" id="29_i4s33"]
 [ext_resource type="PackedScene" uid="uid://dp42j74wnvk40" path="res://src/you_pointer/you_pointer.tscn" id="33_t258g"]
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/floored_texture_progress_bar/floored_texture_progress_bar.tscn" id="35_5xob5"]
 [ext_resource type="PackedScene" uid="uid://dq7ts6lhskwyn" path="res://src/nodes_touched/nodes_touched.tscn" id="35_yndqj"]
@@ -111,6 +111,7 @@ unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_hsnve")
 
 [node name="Summon" parent="." instance=ExtResource("3_26ncu")]
+unique_name_in_owner = true
 target_group = &"hunters"
 
 [node name="StateChart" type="Node" parent="."]
@@ -523,6 +524,7 @@ height = 16.0
 remote_path = NodePath("../IgnoreCanvasModulate/FollowPlayer")
 
 [node name="IgnoreCanvasModulate" type="CanvasLayer" parent="."]
+layer = 2
 follow_viewport_enabled = true
 
 [node name="FollowPlayer" type="Node2D" parent="IgnoreCanvasModulate"]
@@ -562,14 +564,11 @@ texture_under = ExtResource("40_1b387")
 texture_progress = ExtResource("40_1b387")
 tint_under = Color(1, 1, 1, 0.247059)
 
-[node name="SummonBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("35_5xob5")]
+[node name="SummonBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("27_ss5od")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_vertical = 8
-max_value = 24.0
-texture_under = ExtResource("29_i4s33")
-texture_progress = ExtResource("29_i4s33")
-tint_under = Color(1, 1, 1, 0.247059)
 
 [node name="YouPointer" parent="IgnoreCanvasModulate/FollowPlayer" instance=ExtResource("33_t258g")]
 
@@ -592,9 +591,9 @@ tint_under = Color(1, 1, 1, 0.247059)
 [connection signal="visibility_changed" from="Invisibility" to="." method="set_visible"]
 [connection signal="visibility_changed" from="Invisibility" to="IgnoreCanvasModulate" method="set_visible"]
 [connection signal="area_count_changed" from="Summon" to="." method="_on_summon_area_count_changed"]
-[connection signal="charge_percentage_changed" from="Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="set_as_ratio_floored"]
-[connection signal="summon_charged" from="Summon" to="StateChart" method="send_event" binds= [&"summon_charged"]]
-[connection signal="summon_charging" from="Summon" to="StateChart" method="send_event" binds= [&"summon_charging"]]
+[connection signal="charged" from="Summon" to="." method="_on_summon_charged"]
+[connection signal="started" from="Summon" to="." method="_on_summon_started"]
+[connection signal="stopped" from="Summon" to="." method="_on_summon_stopped"]
 [connection signal="summoned" from="Summon" to="StateChart" method="send_event" binds= [&"summoned"]]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="StateChart/Base/Behavior/Dead/IsDead" method="set_true"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
