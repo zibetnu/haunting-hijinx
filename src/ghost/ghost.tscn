@@ -111,6 +111,7 @@ unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_hsnve")
 
 [node name="Summon" parent="." instance=ExtResource("3_26ncu")]
+unique_name_in_owner = true
 target_group = &"hunters"
 
 [node name="StateChart" type="Node" parent="."]
@@ -564,6 +565,7 @@ texture_progress = ExtResource("40_1b387")
 tint_under = Color(1, 1, 1, 0.247059)
 
 [node name="SummonBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("27_ss5od")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_vertical = 8
@@ -589,9 +591,9 @@ size_flags_vertical = 8
 [connection signal="visibility_changed" from="Invisibility" to="." method="set_visible"]
 [connection signal="visibility_changed" from="Invisibility" to="IgnoreCanvasModulate" method="set_visible"]
 [connection signal="area_count_changed" from="Summon" to="." method="_on_summon_area_count_changed"]
-[connection signal="charge_percentage_changed" from="Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="set_as_ratio"]
-[connection signal="summon_charged" from="Summon" to="StateChart" method="send_event" binds= [&"summon_charged"]]
-[connection signal="summon_charging" from="Summon" to="StateChart" method="send_event" binds= [&"summon_charging"]]
+[connection signal="charged" from="Summon" to="." method="_on_summon_charged"]
+[connection signal="started" from="Summon" to="." method="_on_summon_started"]
+[connection signal="stopped" from="Summon" to="." method="_on_summon_stopped"]
 [connection signal="summoned" from="Summon" to="StateChart" method="send_event" binds= [&"summoned"]]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="StateChart/Base/Behavior/Dead/IsDead" method="set_true"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]

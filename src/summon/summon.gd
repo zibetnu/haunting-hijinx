@@ -2,20 +2,13 @@ class_name Summon
 extends Node
 
 signal area_count_changed(area_count: int)
-signal charge_percentage_changed(value: float)
-signal summon_charged
-signal summon_charging
+signal charged
+signal started
+signal stopped
 signal summoned
 
 @export var drain_area: PackedScene
 @export var charge_time := 4.0
-@export var charging := false:
-	set(value):
-		charging = value
-		set_physics_process(charging)
-		if charging:
-			summon_charging.emit()
-
 @export var target_group: StringName
 
 var area_count := 0:
@@ -26,9 +19,8 @@ var area_count := 0:
 var charge := 0:
 	set(value):
 		charge = clampi(value, 0, max_charge)
-		charge_percentage_changed.emit(charge / float(max_charge))
 		if charge == max_charge:
-			summon_charged.emit()
+			charged.emit()
 
 var max_charge: int:
 	get:
@@ -41,15 +33,7 @@ var max_charge: int:
 
 
 func _ready() -> void:
-	set_physics_process(charging)
-
-
-func clear_charge() -> void:
-	charge = 0
-
-
-func set_charging(value: bool) -> void:
-	charging = value
+	set_physics_process(false)
 
 
 func spawn_scenes() -> void:
@@ -67,15 +51,19 @@ func release_charge() -> void:
 	if charge == max_charge:
 		spawn_scenes()
 
-	charge = 0
+	stop_charging()
 
 
 func start_charging() -> void:
-	charging = true
+	charge = 0
+	set_physics_process(true)
+	started.emit()
 
 
 func stop_charging() -> void:
-	charging = false
+	set_physics_process(false)
+	charge = 0
+	stopped.emit()
 
 
 func _physics_process(_delta: float) -> void:

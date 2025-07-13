@@ -44,6 +44,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_fvbde")
 }, {
 "duration": 1.0,
@@ -56,7 +59,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_j28ve")
 }],
 "loop": false,
-"name": &"partial_complete",
+"name": &"partial",
 "speed": 0.0
 }]
 
@@ -85,14 +88,9 @@ texture_under = ExtResource("1_3hgrj")
 texture_progress = ExtResource("2_ea5tr")
 
 [node name="CompletedHighlight" type="AnimatedSprite2D" parent="."]
-visible = false
 sprite_frames = SubResource("SpriteFrames_bdugm")
-animation = &"partial_complete"
+animation = &"partial"
 centered = false
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-delta_interval = 0.167
 replication_config = SubResource("SceneReplicationConfig_3kflu")
-
-[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="value_changed" from="TextureProgressBar" to="." method="_on_bar_value_changed"]
