@@ -32,6 +32,11 @@ func _physics_process(delta: float) -> void:
 		set_physics_process(false)
 		return
 
+	# Prefer clockwise rotation when flipping around.
+	const BIAS = 0.001
+	if PI - BIAS < absf(angle_difference(costume_rotation, target_rotation)):
+		costume_rotation += BIAS
+
 	costume_rotation =  rotate_toward(
 			costume_rotation,
 			target_rotation,
