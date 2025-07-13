@@ -2,9 +2,16 @@
 class_name GhostCostume
 extends Node2D
 
+@export_range(0.0, 1440.0, 0.6, "radians_as_degrees")
+var rotation_speed: float = 2 * TAU
+
 @export_range(-360.0, 360.0, 0.6, "radians_as_degrees")
 var costume_rotation: float:
 	set = set_costume_rotation
+
+@export_range(-360.0, 360.0, 0.6, "radians_as_degrees")
+var target_rotation: float:
+	set = set_target_rotation
 
 @export var frame_coord_x: int:
 	get = get_frame_coord_x,
@@ -18,6 +25,21 @@ var costume_rotation: float:
 @onready var ghost: AnimationPlayer = $Ghost
 @onready var sprite: Sprite2D = $ParentOffset/Sprite2D
 @onready var summon: AudioStreamPlayer2D = $Summon
+
+
+func _physics_process(delta: float) -> void:
+	if lock_rotation:
+		set_physics_process(false)
+		return
+
+	costume_rotation =  rotate_toward(
+			costume_rotation,
+			target_rotation,
+			rotation_speed * delta
+	)
+	set_physics_process(
+			not is_equal_approx(costume_rotation, target_rotation)
+	)
 
 
 func get_frame_coord_x() -> int:
@@ -64,6 +86,19 @@ func set_lock_rotation(value: bool) -> void:
 	lock_rotation = value
 	if was_locked and not lock_rotation:
 		costume_rotation = Vector2.DOWN.angle()
+
+	set_physics_process(not lock_rotation)
+
+
+func set_target_rotation(value: float) -> void:
+	target_rotation = value
+	if lock_rotation:
+		return
+
+	if is_equal_approx(costume_rotation, target_rotation):
+		return
+
+	set_physics_process(true)
 
 
 func _get_first_partial_match(
