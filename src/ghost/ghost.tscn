@@ -587,7 +587,7 @@ size_flags_vertical = 8
 [connection signal="charged" from="Summon" to="." method="_on_summon_charged"]
 [connection signal="started" from="Summon" to="." method="_on_summon_started"]
 [connection signal="stopped" from="Summon" to="." method="_on_summon_stopped"]
-[connection signal="summoned" from="Summon" to="StateChart" method="send_event" binds= [&"summoned"]]
+[connection signal="summoned" from="Summon" to="." method="_on_summon_summoned"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="StateChart/Base/Behavior/Dead/IsDead" method="set_true"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Dead" to="DamageSignals" method="set_monitorable" flags=3 binds= [false]]

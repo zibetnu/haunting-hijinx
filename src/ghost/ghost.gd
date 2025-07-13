@@ -178,6 +178,13 @@ func _on_summon_stopped() -> void:
 	summon_bar.stop()
 
 
+func _on_summon_summoned() -> void:
+	var down: float = Vector2.DOWN.angle()
+	ghost_costume.set_target_rotation(down)
+	ghost_costume.set_costume_rotation(down)
+	state_chart.send_event(&"summoned")
+
+
 func _on_visibile_state_entered() -> void:
 	is_hidden_from_hunters = false
 	if not multiplayer.is_server():
