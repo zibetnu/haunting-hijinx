@@ -10,7 +10,7 @@ This project adheres to an adapted form of [Semantic Versioning](https://semver.
 
 ## [2.0.0] - 2025-07-14
 
-## Added
+### Added
 
 - Ascending notes that play while the ghost takes damage.
 - Summon progress sound.
