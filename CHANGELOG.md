@@ -8,6 +8,26 @@ This project adheres to an adapted form of [Semantic Versioning](https://semver.
 2. MINOR version when you add backward-compatible functionality.
 3. PATCH version when you make backward-compatible bug fixes.
 
+## [2.0.0] - 2025-07-14
+
+## Added
+
+- Ascending notes that play while the ghost takes damage.
+- Summon progress sound.
+
+### Changed
+
+- Overhauled summon progress bar.
+- Overhauled settings menu.
+- Ghost now rotates gradually when changing direction.
+- Ghost now rotates to face a hunter it grabbed.
+- Improved performance by updating engine and plugins. This breaks compatibility with 1.x releases.
+- Sped up the slower tutorial text.
+- Reduced music volume so its slider is more in line with the others.
+- Moved cache and configuration files to new locations.
+- Reduced game install size.
+- Cleaned up lots of code.
+
 ## [1.11.1] - 2025-05-21
 
 ### Fixed
@@ -257,6 +277,7 @@ This project adheres to an adapted form of [Semantic Versioning](https://semver.
 
 - Initial release.
 
+[2.0.0]: https://github.com/zibetnu/haunting-hijinx/compare/1.11.1...2.0.0
 [1.11.1]: https://github.com/zibetnu/haunting-hijinx/compare/1.11.0...1.11.1
 [1.11.0]: https://github.com/zibetnu/haunting-hijinx/compare/1.10.0...1.11.0
 [1.10.0]: https://github.com/zibetnu/haunting-hijinx/compare/1.9.0...1.10.0
