@@ -12,7 +12,7 @@
 light_mode = 1
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_euls0"]
-properties/0/path = NodePath(".:frame_coord_x")
+properties/0/path = NodePath(".:target_rotation")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
@@ -65,6 +65,7 @@ hframes = 8
 vframes = 16
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_interval = 0.125
 replication_config = SubResource("SceneReplicationConfig_euls0")
 
 [node name="Effects" type="AnimationPlayer" parent="."]
