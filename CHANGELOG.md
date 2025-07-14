@@ -1,9 +1,12 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+All notable changes to this project will be documented in this file, which is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+This project adheres to an adapted form of [Semantic Versioning](https://semver.org/spec/v2.0.0.html). Given a version number MAJOR.MINOR.PATCH, increment the:
+
+1. MAJOR version when you make incompatible netcode changes.
+2. MINOR version when you add backward-compatible functionality.
+3. PATCH version when you make backward-compatible bug fixes.
 
 ## [1.11.1] - 2025-05-21
 
