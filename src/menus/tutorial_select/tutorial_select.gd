@@ -17,7 +17,6 @@ func _ready() -> void:
 	@warning_ignore("unsafe_property_access")
 	ghost.pressed.connect(SceneChanger.change_to_ghost_tutorial)
 
-	ghost_costume.frame_coord_x = 1
 	ghost_costume.play("idle")
 
 	@warning_ignore("unsafe_call_argument")
