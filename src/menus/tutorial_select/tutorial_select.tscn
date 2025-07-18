@@ -46,6 +46,9 @@ size_flags_horizontal = 3
 [node name="GhostCostume" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Ghost" instance=ExtResource("1_xu1af")]
 unique_name_in_owner = true
 position = Vector2(32, 32)
+rotation_speed = 0.0
+costume_rotation = 0.785398
+target_rotation = 0.785398
 
 [node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Ghost"]
 custom_minimum_size = Vector2(48, 24)
