@@ -122,16 +122,17 @@ layout_mode = 2
 
 [node name="MinBrightness" type="Label" parent="HBoxContainer/VBoxContainer/Brightness/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 2
 text = "0%"
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/Brightness/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
 text = "Brightness"
 horizontal_alignment = 1
 
 [node name="MaxBrightness" type="Label" parent="HBoxContainer/VBoxContainer/Brightness/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 10
 text = "100%"
 
 [node name="BrightnessSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/Brightness/VBoxContainer"]
@@ -163,17 +164,18 @@ layout_mode = 2
 [node name="MinScale" type="Label" parent="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 2
 text = "1x"
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
 text = "Scale"
 horizontal_alignment = 1
 
 [node name="MaxScale" type="Label" parent="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 10
 text = "3x"
 
 [node name="ScaleSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer"]
@@ -196,6 +198,7 @@ wait_time = 0.5
 one_shot = true
 
 [node name="Master" type="PanelContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(37, 0)
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Master"]
@@ -204,6 +207,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="HBoxContainer/Master/VBoxContainer"]
 layout_mode = 2
 text = "All"
+horizontal_alignment = 1
 
 [node name="MasterBusSlider" type="VSlider" parent="HBoxContainer/Master/VBoxContainer"]
 unique_name_in_owner = true
@@ -220,6 +224,7 @@ value = 1.0
 tick_count = 6
 
 [node name="Music" type="PanelContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(37, 0)
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Music"]
@@ -228,6 +233,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="HBoxContainer/Music/VBoxContainer"]
 layout_mode = 2
 text = "OST"
+horizontal_alignment = 1
 
 [node name="MusicBusSlider" type="VSlider" parent="HBoxContainer/Music/VBoxContainer"]
 unique_name_in_owner = true
@@ -244,6 +250,7 @@ value = 1.0
 tick_count = 6
 
 [node name="Effects" type="PanelContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(37, 0)
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Effects"]
@@ -252,6 +259,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="HBoxContainer/Effects/VBoxContainer"]
 layout_mode = 2
 text = "SFX"
+horizontal_alignment = 1
 
 [node name="EffectsBusSlider" type="VSlider" parent="HBoxContainer/Effects/VBoxContainer"]
 unique_name_in_owner = true

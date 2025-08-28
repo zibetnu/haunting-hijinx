@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dhj7akigo4yvt"]
 
 [ext_resource type="Script" uid="uid://deupi50ok221p" path="res://src/grab_cutscene/spotlight/spotlight.gd" id="1_nr3uf"]
-[ext_resource type="Shader" uid="uid://c8ctirn3fjqht" path="res://src/grab_cutscene/spotlight/spotlight.gdshader" id="2_1gsg5"]
+[ext_resource type="Shader" uid="uid://c8ctirn3fjqht" path="res://addons/shaders/spotlight.gdshader" id="2_1gsg5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6ktvh"]
 shader = ExtResource("2_1gsg5")

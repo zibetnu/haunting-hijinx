@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cncgj1kxmgybg" path="res://assets/hunter/torso.png" id="7_l744e"]
 [ext_resource type="Texture2D" uid="uid://c6jxona5mctlp" path="res://assets/hunter/dead.png" id="8_8f8lf"]
 [ext_resource type="Texture2D" uid="uid://blnr62by4pipw" path="res://assets/hunter/arms.png" id="8_or3nn"]
-[ext_resource type="Shader" uid="uid://d2i6fyt1j8hb8" path="res://src/hunter/costume/palette_swap.gdshader" id="9_1ykwp"]
+[ext_resource type="Shader" uid="uid://d2i6fyt1j8hb8" path="res://addons/shaders/palette_swap.gdshader" id="9_1ykwp"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_72euo"]
 properties/0/path = NodePath(".:costume_rotation")
