@@ -1,7 +1,5 @@
 class_name LobbySummary
-extends Control
-
-signal join_pressed
+extends BaseButton
 
 const GOOD_COLOR = Color.GREEN
 const OKAY_COLOR = Color.ORANGE
@@ -58,7 +56,3 @@ func _update_ping_label_color() -> void:
 
 	else:
 		ping_label.modulate = BAD_COLOR
-
-
-func _on_join_pressed() -> void:
-	join_pressed.emit()

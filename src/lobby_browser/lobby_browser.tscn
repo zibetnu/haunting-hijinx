@@ -64,38 +64,37 @@ text = "Low ping"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="Header" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Header" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/MarginContainer"]
+[node name="Spacer" type="Control" parent="HBoxContainer/VBoxContainer/Header"]
+custom_minimum_size = Vector2(4, 0)
 layout_mode = 2
 
-[node name="LeftSpacer" type="Control" parent="HBoxContainer/VBoxContainer/MarginContainer/Header"]
-layout_mode = 2
-
-[node name="Name" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer/Header"]
+[node name="Name" type="Label" parent="HBoxContainer/VBoxContainer/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
+size_flags_stretch_ratio = 4.0
 text = "Name"
 
-[node name="Type" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer/Header"]
+[node name="Type" type="Label" parent="HBoxContainer/VBoxContainer/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 text = "Type"
 
-[node name="Players" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer/Header"]
+[node name="Players" type="Label" parent="HBoxContainer/VBoxContainer/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Players"
 
-[node name="Ping" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer/Header"]
+[node name="Ping" type="Label" parent="HBoxContainer/VBoxContainer/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Ping"
 
-[node name="RightSpacer" type="Control" parent="HBoxContainer/VBoxContainer/MarginContainer/Header"]
+[node name="Spacer2" type="Control" parent="HBoxContainer/VBoxContainer/Header"]
+custom_minimum_size = Vector2(4, 0)
 layout_mode = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer"]
@@ -114,7 +113,7 @@ size_flags_vertical = 3
 [node name="JoiningWindow" type="Window" parent="."]
 unique_name_in_owner = true
 transparent_bg = true
-size = Vector2i(94, 30)
+size = Vector2i(70, 30)
 visible = false
 transient = true
 exclusive = true
@@ -122,12 +121,17 @@ unresizable = true
 borderless = true
 
 [node name="PanelContainer" type="PanelContainer" parent="JoiningWindow"]
-offset_right = 94.0
-offset_bottom = 30.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Label" type="Label" parent="JoiningWindow/PanelContainer"]
 layout_mode = 2
 text = "Joining..."
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="NotifyDialog" type="AcceptDialog" parent="."]
 unique_name_in_owner = true

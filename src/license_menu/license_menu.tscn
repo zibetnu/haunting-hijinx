@@ -66,18 +66,19 @@ layout_mode = 2
 
 [node name="ComponentName" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
-theme_type_variation = &"LabelBig"
 horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="Version" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
+theme_type_variation = &"LabelCompact"
 horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="Description" type="RichTextLabel" parent="HBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_type_variation = &"RichTextLabelSmall"
 fit_content = true
 scroll_active = false
 
@@ -88,15 +89,17 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Label" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer/ContactContainer"]
-custom_minimum_size = Vector2(72, 0)
+custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 size_flags_vertical = 0
+theme_type_variation = &"LabelSmall"
 text = "Contact: "
 horizontal_alignment = 2
 
 [node name="Contact" type="RichTextLabel" parent="HBoxContainer/PanelContainer/VBoxContainer/ContactContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_type_variation = &"RichTextLabelSmall"
 fit_content = true
 scroll_active = false
 
@@ -104,15 +107,17 @@ scroll_active = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer/WebContainer"]
-custom_minimum_size = Vector2(72, 0)
+custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 size_flags_vertical = 0
+theme_type_variation = &"LabelSmall"
 text = "Web: "
 horizontal_alignment = 2
 
 [node name="Web" type="RichTextLabel" parent="HBoxContainer/PanelContainer/VBoxContainer/WebContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_type_variation = &"RichTextLabelSmall"
 bbcode_enabled = true
 fit_content = true
 scroll_active = false
@@ -121,15 +126,17 @@ scroll_active = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer/PathsContainer"]
-custom_minimum_size = Vector2(72, 0)
+custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 size_flags_vertical = 0
+theme_type_variation = &"LabelSmall"
 text = "Files: "
 horizontal_alignment = 2
 
 [node name="Paths" type="RichTextLabel" parent="HBoxContainer/PanelContainer/VBoxContainer/PathsContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_type_variation = &"RichTextLabelSmall"
 bbcode_enabled = true
 fit_content = true
 scroll_active = false
@@ -138,15 +145,17 @@ scroll_active = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer/LicenseNameContainer"]
-custom_minimum_size = Vector2(72, 0)
+custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 size_flags_vertical = 0
+theme_type_variation = &"LabelSmall"
 text = "License: "
 horizontal_alignment = 2
 
 [node name="LicenseName" type="RichTextLabel" parent="HBoxContainer/PanelContainer/VBoxContainer/LicenseNameContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_type_variation = &"RichTextLabelSmall"
 fit_content = true
 scroll_active = false
 
@@ -157,6 +166,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 2
+theme_type_variation = &"RichTextLabelCompact"
 bbcode_enabled = true
 
 [connection signal="shown" from="VisibilitySignals" to="." method="focus_tree"]

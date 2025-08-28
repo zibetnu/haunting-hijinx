@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4t7474tk0tok"]
+[gd_scene load_steps=8 format=3 uid="uid://c4t7474tk0tok"]
 
 [ext_resource type="PackedScene" uid="uid://c6ql67s5oafpr" path="res://src/visibility_signals/visibility_signals.tscn" id="1_ytmu0"]
 [ext_resource type="PackedScene" uid="uid://dloh4qhadewj" path="res://src/about_menu/major_credit.tscn" id="2_t1g6x"]
 [ext_resource type="PackedScene" uid="uid://c10ej4vwbr3uy" path="res://src/about_menu/credit.tscn" id="3_8ivxx"]
+[ext_resource type="Material" uid="uid://b55fo71d58ijs" path="res://src/theme/font_outline.tres" id="3_pgyhl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pgyhl"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_7bdp8"]
 action = &"ui_cancel"
@@ -21,20 +24,31 @@ grow_vertical = 2
 canvas_item = NodePath("..")
 
 [node name="Credits" type="HBoxContainer" parent="."]
+material = ExtResource("3_pgyhl")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Credits"]
+use_parent_material = true
 layout_mode = 2
 
 [node name="Zibetnu" parent="Credits/VBoxContainer" instance=ExtResource("2_t1g6x")]
+use_parent_material = true
 layout_mode = 2
 
+[node name="VBoxContainer" parent="Credits/VBoxContainer/Zibetnu" index="0"]
+use_parent_material = true
+
 [node name="Name" parent="Credits/VBoxContainer/Zibetnu/VBoxContainer" index="0"]
+use_parent_material = true
 text = "zibetnu"
 
+[node name="HSeparator" parent="Credits/VBoxContainer/Zibetnu/VBoxContainer" index="1"]
+use_parent_material = true
+
 [node name="Achievements" parent="Credits/VBoxContainer/Zibetnu/VBoxContainer" index="2"]
+use_parent_material = true
 text = "Code
 Environment art
 Character concept art
@@ -43,12 +57,21 @@ Steam capsule art
 Project management"
 
 [node name="MagicPencilAnimations" parent="Credits/VBoxContainer" instance=ExtResource("2_t1g6x")]
+use_parent_material = true
 layout_mode = 2
 
+[node name="VBoxContainer" parent="Credits/VBoxContainer/MagicPencilAnimations" index="0"]
+use_parent_material = true
+
 [node name="Name" parent="Credits/VBoxContainer/MagicPencilAnimations/VBoxContainer" index="0"]
+use_parent_material = true
 text = "Magic Pencil Animations"
 
+[node name="HSeparator" parent="Credits/VBoxContainer/MagicPencilAnimations/VBoxContainer" index="1"]
+use_parent_material = true
+
 [node name="Achievements" parent="Credits/VBoxContainer/MagicPencilAnimations/VBoxContainer" index="2"]
+use_parent_material = true
 text = "Character art & animations
 Project funding
 Gameplay nitpicker
@@ -56,204 +79,275 @@ Character concept art
 Timer & countdown art"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Credits"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="GrabSound" parent="Credits/VBoxContainer2" instance=ExtResource("3_8ivxx")]
+use_parent_material = true
 layout_mode = 2
+
+[node name="HBoxContainer" parent="Credits/VBoxContainer2/GrabSound" index="0"]
+use_parent_material = true
 
 [node name="Achievement" parent="Credits/VBoxContainer2/GrabSound/HBoxContainer" index="0"]
+use_parent_material = true
 text = "Grab sound"
 
+[node name="VSeparator" parent="Credits/VBoxContainer2/GrabSound/HBoxContainer" index="1"]
+use_parent_material = true
+
+[node name="Names" parent="Credits/VBoxContainer2/GrabSound/HBoxContainer" index="2"]
+use_parent_material = true
+
 [node name="Label" type="Label" parent="Credits/VBoxContainer2/GrabSound/HBoxContainer/Names" index="0"]
+use_parent_material = true
 layout_mode = 2
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Crysest"
 
 [node name="MainTheme" parent="Credits/VBoxContainer2" instance=ExtResource("3_8ivxx")]
+use_parent_material = true
 layout_mode = 2
 
+[node name="HBoxContainer" parent="Credits/VBoxContainer2/MainTheme" index="0"]
+use_parent_material = true
+
 [node name="Achievement" parent="Credits/VBoxContainer2/MainTheme/HBoxContainer" index="0"]
+use_parent_material = true
 text = "Main theme"
 
+[node name="VSeparator" parent="Credits/VBoxContainer2/MainTheme/HBoxContainer" index="1"]
+use_parent_material = true
+
 [node name="Names" parent="Credits/VBoxContainer2/MainTheme/HBoxContainer" index="2"]
+use_parent_material = true
 theme_override_constants/h_separation = 16
 columns = 2
 
 [node name="Label" type="Label" parent="Credits/VBoxContainer2/MainTheme/HBoxContainer/Names" index="0"]
+use_parent_material = true
 layout_mode = 2
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Gigerbits"
 
 [node name="Label2" type="Label" parent="Credits/VBoxContainer2/MainTheme/HBoxContainer/Names" index="1"]
+use_parent_material = true
 layout_mode = 2
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Phaidros706"
 
 [node name="Label3" type="Label" parent="Credits/VBoxContainer2/MainTheme/HBoxContainer/Names" index="2"]
+use_parent_material = true
 layout_mode = 2
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Fireygamer"
 
 [node name="Label5" type="Label" parent="Credits/VBoxContainer2/MainTheme/HBoxContainer/Names" index="3"]
+use_parent_material = true
 layout_mode = 2
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Sergio Rabello"
 
 [node name="Label6" type="Label" parent="Credits/VBoxContainer2/MainTheme/HBoxContainer/Names" index="4"]
+use_parent_material = true
 layout_mode = 2
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Mineeli"
 
 [node name="Label4" type="Label" parent="Credits/VBoxContainer2/MainTheme/HBoxContainer/Names" index="5"]
+use_parent_material = true
 layout_mode = 2
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Stevie John - MPW"
 
 [node name="Trailers" parent="Credits/VBoxContainer2" instance=ExtResource("3_8ivxx")]
+use_parent_material = true
 layout_mode = 2
+
+[node name="HBoxContainer" parent="Credits/VBoxContainer2/Trailers" index="0"]
+use_parent_material = true
 
 [node name="Achievement" parent="Credits/VBoxContainer2/Trailers/HBoxContainer" index="0"]
+material = SubResource("ShaderMaterial_pgyhl")
+use_parent_material = true
 text = "Trailers"
 
+[node name="VSeparator" parent="Credits/VBoxContainer2/Trailers/HBoxContainer" index="1"]
+use_parent_material = true
+
+[node name="Names" parent="Credits/VBoxContainer2/Trailers/HBoxContainer" index="2"]
+use_parent_material = true
+
 [node name="Label" type="Label" parent="Credits/VBoxContainer2/Trailers/HBoxContainer/Names" index="0"]
+use_parent_material = true
 layout_mode = 2
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Fireygamer"
 
 [node name="Label2" type="Label" parent="Credits/VBoxContainer2/Trailers/HBoxContainer/Names" index="1"]
+use_parent_material = true
 layout_mode = 2
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "KnightGamer"
 
 [node name="Label3" type="Label" parent="Credits/VBoxContainer2/Trailers/HBoxContainer/Names" index="2"]
+use_parent_material = true
 layout_mode = 2
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Magic Pencil Works"
 
 [node name="PlaytestingAndFeedback" parent="Credits/VBoxContainer2" instance=ExtResource("3_8ivxx")]
+use_parent_material = true
 layout_mode = 2
 
+[node name="HBoxContainer" parent="Credits/VBoxContainer2/PlaytestingAndFeedback" index="0"]
+use_parent_material = true
+
 [node name="Achievement" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer" index="0"]
+use_parent_material = true
 text = "Playtesting
 & feedback"
 
+[node name="VSeparator" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer" index="1"]
+use_parent_material = true
+
 [node name="Names" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer" index="2"]
+use_parent_material = true
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 0
 columns = 2
 
 [node name="Label" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="0"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Stevie John - MPW"
 
 [node name="Label2" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="1"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Fireygamer"
 
 [node name="Label3" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="2"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Bebojo"
 
 [node name="Label4" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="3"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Crysest"
 
 [node name="Label5" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="4"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "KnightGamer"
 
 [node name="Label6" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="5"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "J.M. Smucker"
 
 [node name="Label7" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="6"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Tsecohenital_JNK"
 
 [node name="Label8" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="7"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Sushi"
 
 [node name="Label9" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="8"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Phaidros706"
 
 [node name="Label10" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="9"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Big Boss"
 
 [node name="Label11" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="10"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Gigerbits"
 
 [node name="Label12" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="11"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "CathyisSleepy"
 
 [node name="Label13" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="12"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Fr0inlav3n"
 
 [node name="Label17" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="13"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Paul Black"
 
 [node name="Label14" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="14"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Bibliodewangus"
 
 [node name="Label15" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="15"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Dyl_Snickle"
 
 [node name="Label18" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="16"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Burgandy_Bison77"
 
 [node name="Label16" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="17"]
+use_parent_material = true
 layout_mode = 2
 size_flags_horizontal = 0
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Stew"
 
 [node name="Label19" type="Label" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer/Names" index="18"]
+use_parent_material = true
 layout_mode = 2
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Nerd2Death"
 
 [node name="Buttons" type="HBoxContainer" parent="."]

@@ -2,59 +2,66 @@
 
 [ext_resource type="Script" uid="uid://cwbf3552giq40" path="res://src/lobby_browser/lobby_summary/lobby_summary.gd" id="1_u1an3"]
 
-[node name="LobbySummary" type="MarginContainer"]
+[node name="LobbySummary" type="Button"]
 custom_minimum_size = Vector2(320, 32)
-offset_right = 142.0
+offset_right = 320.0
 offset_bottom = 32.0
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
 script = ExtResource("1_u1an3")
 
-[node name="Join" type="Button" parent="."]
-layout_mode = 2
-
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="LeftSpacer" type="Control" parent="MarginContainer/HBoxContainer"]
-layout_mode = 2
-
 [node name="LobbyName" type="Label" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
-text = "Unknown"
+size_flags_vertical = 1
+size_flags_stretch_ratio = 4.0
+text = "Unknown Lobby"
+vertical_alignment = 1
 text_overrun_behavior = 3
 
 [node name="LobbyType" type="Label" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 1
 size_flags_stretch_ratio = 2.0
+theme_type_variation = &"LabelSmall"
 text = "Unknown"
-text_overrun_behavior = 3
+vertical_alignment = 1
+clip_text = true
 
 [node name="PlayerCount" type="Label" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Unknown"
+size_flags_vertical = 1
+theme_type_variation = &"LabelSmall"
+text = "#/#"
+vertical_alignment = 1
+clip_text = true
 
 [node name="Ping" type="Label" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Unknown"
-
-[node name="RightSpacer" type="Control" parent="MarginContainer/HBoxContainer"]
-layout_mode = 2
-
-[connection signal="pressed" from="Join" to="." method="_on_join_pressed"]
+size_flags_vertical = 1
+theme_type_variation = &"LabelSmall"
+text = "## ms"
+vertical_alignment = 1
+clip_text = true

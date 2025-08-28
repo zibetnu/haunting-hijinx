@@ -17,7 +17,7 @@ hunter_tutorial = ExtResource("6_dqbtk")
 
 [node name="DisconnectedDialog" type="AcceptDialog" parent="."]
 transparent_bg = true
-size = Vector2i(216, 100)
+size = Vector2i(203, 72)
 borderless = true
 dialog_text = "Disconnected from server."
 

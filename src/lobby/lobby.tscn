@@ -127,76 +127,81 @@ dialog_autowrap = true
 
 [node name="LobbyTypeHelp" type="AcceptDialog" parent="."]
 transparent_bg = true
-size = Vector2i(294, 231)
+size = Vector2i(332, 181)
 borderless = true
+ok_button_text = "Close"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LobbyTypeHelp"]
+[node name="MarginContainer" type="MarginContainer" parent="LobbyTypeHelp"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 7.0
 offset_top = 7.0
-offset_right = 287.0
-offset_bottom = 182.0
+offset_right = -7.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
 
-[node name="Private" type="MarginContainer" parent="LobbyTypeHelp/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="LobbyTypeHelp/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Private" type="HBoxContainer" parent="LobbyTypeHelp/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="LobbyTypeHelp/VBoxContainer/Private"]
-layout_mode = 2
-
-[node name="Name" type="Label" parent="LobbyTypeHelp/VBoxContainer/Private/HBoxContainer"]
-custom_minimum_size = Vector2(56, 0)
+[node name="Name" type="Label" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/Private"]
+custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 text = "Private"
 horizontal_alignment = 2
 autowrap_mode = 3
 
-[node name="VSeparator" type="VSeparator" parent="LobbyTypeHelp/VBoxContainer/Private/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/Private"]
 layout_mode = 2
 
-[node name="Description" type="Label" parent="LobbyTypeHelp/VBoxContainer/Private/HBoxContainer"]
+[node name="Description" type="Label" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/Private"]
 custom_minimum_size = Vector2(208, 0)
 layout_mode = 2
 text = "Joinable by invitation only. (Currently not working.)"
 autowrap_mode = 3
 
-[node name="FriendsOnly" type="MarginContainer" parent="LobbyTypeHelp/VBoxContainer"]
+[node name="FriendsOnly" type="HBoxContainer" parent="LobbyTypeHelp/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="LobbyTypeHelp/VBoxContainer/FriendsOnly"]
-layout_mode = 2
-
-[node name="Name" type="Label" parent="LobbyTypeHelp/VBoxContainer/FriendsOnly/HBoxContainer"]
-custom_minimum_size = Vector2(56, 0)
+[node name="Name" type="Label" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/FriendsOnly"]
+custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 text = "Friends Only"
 horizontal_alignment = 2
-autowrap_mode = 3
 
-[node name="VSeparator" type="VSeparator" parent="LobbyTypeHelp/VBoxContainer/FriendsOnly/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/FriendsOnly"]
 layout_mode = 2
 
-[node name="Description" type="Label" parent="LobbyTypeHelp/VBoxContainer/FriendsOnly/HBoxContainer"]
+[node name="Description" type="Label" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/FriendsOnly"]
 custom_minimum_size = Vector2(208, 0)
 layout_mode = 2
 text = "Joinable by friends and invitees. Visible to friends."
 autowrap_mode = 3
 
-[node name="Public" type="MarginContainer" parent="LobbyTypeHelp/VBoxContainer"]
+[node name="Public" type="HBoxContainer" parent="LobbyTypeHelp/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="LobbyTypeHelp/VBoxContainer/Public"]
-layout_mode = 2
-
-[node name="Name" type="Label" parent="LobbyTypeHelp/VBoxContainer/Public/HBoxContainer"]
-custom_minimum_size = Vector2(56, 0)
+[node name="Name" type="Label" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/Public"]
+custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 text = "Public"
 horizontal_alignment = 2
 autowrap_mode = 3
 
-[node name="VSeparator" type="VSeparator" parent="LobbyTypeHelp/VBoxContainer/Public/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/Public"]
 layout_mode = 2
 
-[node name="Description" type="Label" parent="LobbyTypeHelp/VBoxContainer/Public/HBoxContainer"]
+[node name="Description" type="Label" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/Public"]
 custom_minimum_size = Vector2(208, 0)
 layout_mode = 2
 text = "Joinable by anyone. Visible to anyone."

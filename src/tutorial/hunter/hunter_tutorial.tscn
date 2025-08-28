@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://le5w1cm0ul8p" path="res://addons/godot_state_charts/expression_guard.gd" id="4_mx0qj"]
 [ext_resource type="Script" uid="uid://dgd4i8hrrxfvm" path="res://addons/godot_state_charts/not_guard.gd" id="5_h1wiw"]
 [ext_resource type="Script" uid="uid://bghayfahpoh8d" path="res://src/tutorial/quest/quest_node.gd" id="5_sx67b"]
-[ext_resource type="Shader" uid="uid://d2i6fyt1j8hb8" path="res://src/hunter/costume/palette_swap.gdshader" id="6_6k6h6"]
+[ext_resource type="Shader" uid="uid://d2i6fyt1j8hb8" path="res://addons/shaders/palette_swap.gdshader" id="6_6k6h6"]
 [ext_resource type="PackedScene" uid="uid://c5r0sjcdbsrog" path="res://src/controller/npc_ghost/npc_ghost.tscn" id="6_n7jug"]
 [ext_resource type="Texture2D" uid="uid://b1r4xdhw8pco3" path="res://assets/hunter/palettes/yellow.png" id="7_k04wc"]
 [ext_resource type="PackedScene" uid="uid://ccvsw508kh4ot" path="res://src/hunter/hunter.tscn" id="7_smdw1"]
@@ -19,15 +19,14 @@
 [sub_resource type="Resource" id="Resource_7jipr"]
 resource_name = "Battery"
 script = ExtResource("3_ea8sw")
-objective = "A battery spawns at a random location for each hunter in need.
-Try picking one up to recharge your flashlight."
+objective = "A battery spawns at a random location for each hunter in need. Try picking one up to recharge your flashlight."
 is_started = false
 is_completed = false
 
 [sub_resource type="Resource" id="Resource_26eav"]
 resource_name = "Welcome"
 script = ExtResource("3_ea8sw")
-objective = "Welcome to the [color=#ffeb57]hunter[/color] tutorial."
+objective = "Welcome to the [pulse freq=2.0 color=#ffeb57 ease=-2.0]hunter[/pulse] tutorial."
 is_started = false
 is_completed = false
 
@@ -41,8 +40,7 @@ is_completed = false
 [sub_resource type="Resource" id="Resource_y74n0"]
 resource_name = "Light"
 script = ExtResource("3_ea8sw")
-objective = "Now try powering on your light.
-You move slower while it is powered."
+objective = "Now try powering on your light. You move slower while it is powered."
 is_started = false
 is_completed = false
 
