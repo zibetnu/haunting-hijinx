@@ -7,6 +7,7 @@ on:
     paths:
       - "project.godot"
       - "**.gd"
+      - "**.gdshader"
       - "**.*res"
       - "**.*scn"
 
