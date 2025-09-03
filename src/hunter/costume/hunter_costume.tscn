@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ctn825io87i34"]
+[gd_scene load_steps=21 format=3 uid="uid://ctn825io87i34"]
 
 [ext_resource type="AnimationLibrary" uid="uid://fs3jht0ivdhm" path="res://src/animation_libaries/canvas_item.tres" id="1_7b0n7"]
 [ext_resource type="Script" uid="uid://bluoe5hijvv6l" path="res://src/hunter/costume/hunter_costume.gd" id="1_auu5i"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://c6jxona5mctlp" path="res://assets/hunter/dead.png" id="8_8f8lf"]
 [ext_resource type="Texture2D" uid="uid://blnr62by4pipw" path="res://assets/hunter/arms.png" id="8_or3nn"]
 [ext_resource type="Shader" uid="uid://d2i6fyt1j8hb8" path="res://src/hunter/costume/palette_swap.gdshader" id="9_1ykwp"]
+[ext_resource type="Texture2D" uid="uid://df1deb6rjs1kc" path="res://assets/hunter/palettes/placeholder.png" id="11_nwp4d"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_72euo"]
 properties/0/path = NodePath(".:costume_rotation")
@@ -63,7 +64,7 @@ properties/0/replication_mode = 2
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_35cjm"]
 resource_local_to_scene = true
 shader = ExtResource("9_1ykwp")
-shader_parameter/old_palette = ExtResource("3_qkyln")
+shader_parameter/old_palette = ExtResource("11_nwp4d")
 shader_parameter/new_palette = ExtResource("3_qkyln")
 
 [node name="HunterCostume" type="Node2D" groups=["hunter_costumes"]]
