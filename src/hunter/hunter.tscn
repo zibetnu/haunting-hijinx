@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=46 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://b1r4xdhw8pco3" path="res://assets/hunter/palettes/yellow.png" id="22_vv7rm"]
 [ext_resource type="PackedScene" uid="uid://b4i2arqquha56" path="res://src/revivable/revivable.tscn" id="23_d234k"]
 [ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/floored_texture_progress_bar/floored_texture_progress_bar.tscn" id="24_qych1"]
+[ext_resource type="Texture2D" uid="uid://df1deb6rjs1kc" path="res://assets/hunter/palettes/placeholder.png" id="26_l4hq6"]
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="27_qehgg"]
 [ext_resource type="PackedScene" uid="uid://djs1c1w30m8gp" path="res://src/alert/alert.tscn" id="28_bjj70"]
 [ext_resource type="PackedScene" uid="uid://y03qjvt68tjj" path="res://src/aura_sense/aura_sense.tscn" id="28_dd2t8"]
@@ -77,10 +78,10 @@ height = 24.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_bscnp"]
 radius = 12.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_p6wcf"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_plsr1"]
 resource_local_to_scene = true
 shader = ExtResource("21_v1tqt")
-shader_parameter/old_palette = ExtResource("22_vv7rm")
+shader_parameter/old_palette = ExtResource("26_l4hq6")
 shader_parameter/new_palette = ExtResource("22_vv7rm")
 
 [sub_resource type="Gradient" id="Gradient_tkh6d"]
@@ -274,7 +275,7 @@ visible = false
 y_sort_enabled = true
 
 [node name="MaterialParent" parent="HunterCostume/CanvasGroup" index="0"]
-material = SubResource("ShaderMaterial_p6wcf")
+material = SubResource("ShaderMaterial_plsr1")
 
 [node name="FlashlightBack" type="Sprite2D" parent="HunterCostume/CanvasGroup/MaterialParent" index="1"]
 texture = ExtResource("20_g6qtr")

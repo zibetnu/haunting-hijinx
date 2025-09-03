@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dguyyy188ihbi"]
+[gd_scene load_steps=37 format=3 uid="uid://dguyyy188ihbi"]
 
 [ext_resource type="PackedScene" uid="uid://c64tx6254qrlp" path="res://src/tutorial/tutorial.tscn" id="1_c5qxs"]
 [ext_resource type="Script" uid="uid://c34s5yn38nab1" path="res://src/tutorial/hunter/hunter_tutorial.gd" id="2_v1ay4"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://ccvsw508kh4ot" path="res://src/hunter/hunter.tscn" id="7_smdw1"]
 [ext_resource type="PackedScene" uid="uid://di5qxwdvv5nga" path="res://src/controller/npc_hunter/npc_hunter.tscn" id="8_40hbx"]
 [ext_resource type="PackedScene" uid="uid://grxm3658ukjj" path="res://src/battery_spawner/battery_spawner.tscn" id="13_g4mwu"]
+[ext_resource type="Texture2D" uid="uid://df1deb6rjs1kc" path="res://assets/hunter/palettes/placeholder.png" id="13_k4uj5"]
 
 [sub_resource type="Resource" id="Resource_7jipr"]
 resource_name = "Battery"
@@ -126,7 +127,7 @@ guard = SubResource("Resource_kpksu")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_psybu"]
 resource_local_to_scene = true
 shader = ExtResource("6_6k6h6")
-shader_parameter/old_palette = ExtResource("7_k04wc")
+shader_parameter/old_palette = ExtResource("13_k4uj5")
 shader_parameter/new_palette = ExtResource("7_k04wc")
 
 [sub_resource type="Resource" id="Resource_wr3rf"]
@@ -150,7 +151,7 @@ guard = SubResource("Resource_wagh2")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3hpvg"]
 resource_local_to_scene = true
 shader = ExtResource("6_6k6h6")
-shader_parameter/old_palette = ExtResource("7_k04wc")
+shader_parameter/old_palette = ExtResource("13_k4uj5")
 shader_parameter/new_palette = ExtResource("7_k04wc")
 
 [node name="Tutorial" instance=ExtResource("1_c5qxs")]
@@ -218,10 +219,10 @@ visible = false
 position = Vector2(368, 128)
 controller = NodePath("NPCGhost")
 
+[node name="NPCGhost" parent="Ghost" index="18" instance=ExtResource("6_n7jug")]
+
 [node name="FollowPlayer" parent="Ghost/IgnoreCanvasModulate" index="0"]
 position = Vector2(368, 128)
-
-[node name="NPCGhost" parent="Ghost" index="18" instance=ExtResource("6_n7jug")]
 
 [node name="Hunter" parent="." index="9"]
 position = Vector2(368, 248)
