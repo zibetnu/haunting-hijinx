@@ -98,7 +98,7 @@ func _physics_process(_delta: float) -> void:
 
 
 ## Returns all of the objects that the repeating ray intersects, up to and
-## including the first object that the non-repeating ray insersects.
+## including the first object that the non-repeating ray intersects.
 func get_colliders() -> Array[Object]:
 	return _colliders
 

@@ -1,19 +1,26 @@
-name: GdUnit4 Tests
-on: [pull_request, merge_group]
+name: 🧪 GdUnit4 Tests
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - "project.godot"
+      - "**.gd"
+      - "**.*res"
+      - "**.*scn"
 
 jobs:
-  test:
+  gdunit4-tests:
     runs-on: ubuntu-latest
     permissions:
       actions: write
       checks: write
-      contents: write
-      pull-requests: write
       statuses: write
-
     steps:
-      - uses: actions/checkout@v4
-      - uses: MikeSchulze/gdunit4-action@v1
+      - uses: actions/checkout@v5
+      - name: GdUnit4 tests
+        uses: MikeSchulze/gdunit4-action@v1
         with:
-          godot-version: '4.4.1'
-          paths: 'res://test'
+          godot-version: 4.4.1
+          paths: res://test
