@@ -407,29 +407,29 @@ script = ExtResource("5_6yps6")
 
 [node name="Visibility" type="Node" parent="StateChart/Base"]
 script = ExtResource("4_74yim")
-initial_state = NodePath("Invisibile")
+initial_state = NodePath("Invisible")
 
-[node name="Invisibile" type="Node" parent="StateChart/Base/Visibility"]
+[node name="Invisible" type="Node" parent="StateChart/Base/Visibility"]
 script = ExtResource("5_6yps6")
 
-[node name="InvisibilityEnded" type="Node" parent="StateChart/Base/Visibility/Invisibile"]
+[node name="InvisibilityEnded" type="Node" parent="StateChart/Base/Visibility/Invisible"]
 script = ExtResource("6_il0ju")
-to = NodePath("../../Visibile")
+to = NodePath("../../Visible")
 event = &"invisibility_ended"
 delay_in_seconds = "0.0"
 
-[node name="Damaged" type="Node" parent="StateChart/Base/Visibility/Invisibile"]
+[node name="Damaged" type="Node" parent="StateChart/Base/Visibility/Invisible"]
 script = ExtResource("6_il0ju")
-to = NodePath("../../Visibile")
+to = NodePath("../../Visible")
 event = &"damaged"
 delay_in_seconds = "0.0"
 
-[node name="Visibile" type="Node" parent="StateChart/Base/Visibility"]
+[node name="Visible" type="Node" parent="StateChart/Base/Visibility"]
 script = ExtResource("5_6yps6")
 
-[node name="InvisibilityStarted" type="Node" parent="StateChart/Base/Visibility/Visibile"]
+[node name="InvisibilityStarted" type="Node" parent="StateChart/Base/Visibility/Visible"]
 script = ExtResource("6_il0ju")
-to = NodePath("../../Invisibile")
+to = NodePath("../../Invisible")
 event = &"invisibility_started"
 delay_in_seconds = "0.0"
 
@@ -652,8 +652,8 @@ size_flags_vertical = 8
 [connection signal="state_entered" from="StateChart/Base/Animation/Stun" to="GhostCostume" method="play" binds= [&"stun"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Panic" to="GhostCostume" method="play" binds= [&"panic"]]
 [connection signal="state_entered" from="StateChart/Base/Animation/Grab" to="GhostCostume" method="play" binds= ["grab"]]
-[connection signal="state_entered" from="StateChart/Base/Visibility/Invisibile" to="." method="_on_invisibile_state_entered"]
-[connection signal="state_entered" from="StateChart/Base/Visibility/Visibile" to="." method="_on_visibile_state_entered"]
+[connection signal="state_entered" from="StateChart/Base/Visibility/Invisible" to="." method="_on_invisibile_state_entered"]
+[connection signal="state_entered" from="StateChart/Base/Visibility/Visible" to="." method="_on_visibile_state_entered"]
 [connection signal="delta_synchronized" from="Camera2D/MultiplayerSynchronizer" to="Camera2D" method="center"]
 [connection signal="damage_taken" from="DamageSignals" to="." method="_on_damage_taken"]
 [connection signal="damage_taken" from="DamageSignals" to="StateChart" method="send_event" binds= [&"damaged"]]

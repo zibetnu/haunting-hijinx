@@ -154,7 +154,7 @@ autowrap_mode = 3
 [node name="VSeparator" type="VSeparator" parent="LobbyTypeHelp/VBoxContainer/Private/HBoxContainer"]
 layout_mode = 2
 
-[node name="Decription" type="Label" parent="LobbyTypeHelp/VBoxContainer/Private/HBoxContainer"]
+[node name="Description" type="Label" parent="LobbyTypeHelp/VBoxContainer/Private/HBoxContainer"]
 custom_minimum_size = Vector2(208, 0)
 layout_mode = 2
 text = "Joinable by invitation only. (Currently not working.)"
@@ -176,7 +176,7 @@ autowrap_mode = 3
 [node name="VSeparator" type="VSeparator" parent="LobbyTypeHelp/VBoxContainer/FriendsOnly/HBoxContainer"]
 layout_mode = 2
 
-[node name="Decription" type="Label" parent="LobbyTypeHelp/VBoxContainer/FriendsOnly/HBoxContainer"]
+[node name="Description" type="Label" parent="LobbyTypeHelp/VBoxContainer/FriendsOnly/HBoxContainer"]
 custom_minimum_size = Vector2(208, 0)
 layout_mode = 2
 text = "Joinable by friends and invitees. Visible to friends."
@@ -198,7 +198,7 @@ autowrap_mode = 3
 [node name="VSeparator" type="VSeparator" parent="LobbyTypeHelp/VBoxContainer/Public/HBoxContainer"]
 layout_mode = 2
 
-[node name="Decription" type="Label" parent="LobbyTypeHelp/VBoxContainer/Public/HBoxContainer"]
+[node name="Description" type="Label" parent="LobbyTypeHelp/VBoxContainer/Public/HBoxContainer"]
 custom_minimum_size = Vector2(208, 0)
 layout_mode = 2
 text = "Joinable by anyone. Visible to anyone."
