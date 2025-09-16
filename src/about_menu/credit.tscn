@@ -9,7 +9,6 @@ layout_mode = 2
 custom_minimum_size = Vector2(88, 0)
 layout_mode = 2
 size_flags_horizontal = 8
-theme_type_variation = &"LabelOutlined"
 text = "Achievement"
 horizontal_alignment = 2
 

@@ -61,8 +61,7 @@ is_completed = false
 [sub_resource type="Resource" id="Resource_t00pl"]
 resource_name = "Visible"
 script = ExtResource("2_r5b0f")
-objective = "Try becoming visible by sprinting, summoning,
-grabbing, or taking damage.
+objective = "Try becoming visible by sprinting, summoning, grabbing, or taking damage.
 "
 is_started = false
 is_completed = false
@@ -99,8 +98,7 @@ is_completed = false
 [sub_resource type="Resource" id="Resource_rhmfh"]
 resource_name = "DamageInfo"
 script = ExtResource("2_r5b0f")
-objective = "Flashlights damage you, stun you, and make you panic.
-You cannot grab a hunter while panicked."
+objective = "Flashlights damage you, stun you, and make you panic. You cannot grab a hunter while panicked."
 is_started = false
 is_completed = false
 

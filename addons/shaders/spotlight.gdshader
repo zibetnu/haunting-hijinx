@@ -1,7 +1,6 @@
 shader_type canvas_item;
 render_mode unshaded;
-// Taken from
-// https://godotshaders.com/shader/spotlight-effect-transition-with-feathering-position/
+// Taken from https://godotshaders.com/shader/spotlight-effect-transition-with-feathering-position/
 
 uniform float circle_size = 0.5;
 uniform float feather = 0.05;

@@ -537,8 +537,10 @@ offset_left = -84.0
 offset_top = 8.0
 offset_right = 84.0
 offset_bottom = 34.0
+theme_type_variation = &"LabelCompact"
 text = "peer name"
 horizontal_alignment = 1
+autowrap_mode = 1
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="IgnoreCanvasModulate/FollowPlayer/NameLabel"]
 replication_config = SubResource("SceneReplicationConfig_rfelf")

@@ -76,7 +76,7 @@ func refresh() -> void:
 func _add_summary_for(lobby_id: int) -> void:
 	var summary: LobbySummary = lobby_summary_scene.instantiate()
 	summary.lobby_id = lobby_id
-	summary.join_pressed.connect(
+	summary.pressed.connect(
 			func() -> void: join_lobby_requested.emit(lobby_id)
 	)
 	summary_container.add_child(summary)

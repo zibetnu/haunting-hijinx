@@ -1,6 +1,5 @@
-[gd_resource type="Theme" load_steps=29 format=3 uid="uid://k2680qtkyab6"]
+[gd_resource type="Theme" load_steps=31 format=3 uid="uid://k2680qtkyab6"]
 
-[ext_resource type="FontFile" uid="uid://cmyudnfjlpktv" path="res://assets/theme/modern_dos_8x16.ttf" id="1_kj04y"]
 [ext_resource type="StyleBox" uid="uid://jj64njhm1d1i" path="res://src/theme/button_style_box/disabled.tres" id="1_reryu"]
 [ext_resource type="StyleBox" uid="uid://bvcimthgdycfr" path="res://src/theme/button_style_box/focus.tres" id="2_bggbf"]
 [ext_resource type="StyleBox" uid="uid://c2nr3hgck48wu" path="res://src/theme/button_style_box/hover.tres" id="3_rj728"]
@@ -14,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://ry5cc3txtp3k" path="res://assets/theme/h_slider/tick.png" id="9_ude6r"]
 [ext_resource type="StyleBox" uid="uid://cs18g45r1ofpg" path="res://src/theme/slider.tres" id="10_uwbet"]
 [ext_resource type="Texture2D" uid="uid://bbcb76q404fw6" path="res://assets/theme/arrow.png" id="12_pu2tr"]
+[ext_resource type="FontFile" uid="uid://dtecvyq20xqu6" path="res://assets/theme/aseprite.otf" id="13_ectha"]
+[ext_resource type="FontFile" uid="uid://ugepkmqqowmq" path="res://assets/theme/ari_w9500.otf" id="13_fmcx7"]
 [ext_resource type="StyleBox" uid="uid://5gsgqi5vc6ra" path="res://src/theme/tab_style_box/disabled.tres" id="13_jy2fp"]
 [ext_resource type="Texture2D" uid="uid://dse46nrpcj0a" path="res://assets/theme/radio/checked.png" id="13_wn5s0"]
 [ext_resource type="StyleBox" uid="uid://b2ldkwr83fi68" path="res://src/theme/tab_style_box/focus.tres" id="14_0p2kk"]
@@ -25,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://cd3pob5kkeehl" path="res://assets/theme/v_slider/tick.png" id="22_5ti8i"]
 [ext_resource type="StyleBox" uid="uid://d3gsnha4f2qj6" path="res://src/theme/v_grabber_area.tres" id="22_wnqcw"]
 [ext_resource type="StyleBox" uid="uid://dvwdbjn13ofxc" path="res://src/theme/v_slider.tres" id="23_vv3j2"]
+[ext_resource type="FontFile" uid="uid://ku7p7chq2hxx" path="res://assets/theme/modern_dos_8x16.otf" id="27_ectha"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_1ql8x"]
 color = Color(1, 1, 1, 1)
@@ -36,7 +38,7 @@ color = Color(1, 1, 1, 1)
 vertical = true
 
 [resource]
-default_font = ExtResource("1_kj04y")
+default_font = ExtResource("27_ectha")
 AcceptDialog/styles/panel = ExtResource("9_3p1nt")
 Button/styles/disabled = ExtResource("1_reryu")
 Button/styles/focus = ExtResource("2_bggbf")
@@ -54,12 +56,13 @@ HSlider/styles/grabber_area_highlight = ExtResource("9_bp31u")
 HSlider/styles/slider = ExtResource("10_uwbet")
 LabelBig/base_type = &"Label"
 LabelBig/font_sizes/font_size = 32
-LabelBigOutlined/base_type = &"LabelBig"
-LabelBigOutlined/colors/font_outline_color = Color(0, 0, 0, 1)
-LabelBigOutlined/constants/outline_size = 4
-LabelOutlined/base_type = &"Label"
-LabelOutlined/colors/font_outline_color = Color(0, 0, 0, 1)
-LabelOutlined/constants/outline_size = 4
+LabelCompact/base_type = &"Label"
+LabelCompact/constants/line_spacing = 2
+LabelCompact/font_sizes/font_size = 8
+LabelCompact/fonts/font = ExtResource("13_ectha")
+LabelSmall/base_type = &"Label"
+LabelSmall/font_sizes/font_size = 11
+LabelSmall/fonts/font = ExtResource("13_fmcx7")
 LineEdit/styles/focus = ExtResource("2_bggbf")
 LineEdit/styles/normal = ExtResource("4_6ch3r")
 LineEdit/styles/read_only = ExtResource("1_reryu")
@@ -79,6 +82,13 @@ PopupMenu/icons/radio_unchecked = ExtResource("14_k5srh")
 PopupMenu/icons/radio_unchecked_disabled = ExtResource("15_q5kya")
 PopupMenu/styles/hover = ExtResource("2_bggbf")
 PopupMenu/styles/panel = ExtResource("9_3p1nt")
+RichTextLabelCompact/base_type = &"RichTextLabel"
+RichTextLabelCompact/constants/line_separation = 2
+RichTextLabelCompact/font_sizes/normal_font_size = 8
+RichTextLabelCompact/fonts/normal_font = ExtResource("13_ectha")
+RichTextLabelSmall/base_type = &"RichTextLabel"
+RichTextLabelSmall/font_sizes/normal_font_size = 11
+RichTextLabelSmall/fonts/normal_font = ExtResource("13_fmcx7")
 TabContainer/styles/panel = ExtResource("9_3p1nt")
 TabContainer/styles/tab_disabled = ExtResource("13_jy2fp")
 TabContainer/styles/tab_focus = ExtResource("14_0p2kk")
@@ -87,9 +97,12 @@ TabContainer/styles/tab_selected = ExtResource("16_jbexi")
 TabContainer/styles/tab_unselected = ExtResource("17_dx43s")
 Tree/constants/draw_guides = 0
 Tree/constants/h_separation = 0
-Tree/constants/inner_item_margin_left = 4
+Tree/constants/inner_item_margin_left = 2
+Tree/constants/inner_item_margin_right = 2
 Tree/constants/item_margin = 8
 Tree/constants/v_separation = 0
+Tree/font_sizes/font_size = 11
+Tree/fonts/font = ExtResource("13_fmcx7")
 Tree/styles/focus = ExtResource("2_bggbf")
 Tree/styles/panel = ExtResource("9_3p1nt")
 Tree/styles/selected = SubResource("StyleBoxEmpty_k4gs8")

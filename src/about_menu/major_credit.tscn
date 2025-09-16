@@ -9,7 +9,6 @@ layout_mode = 2
 
 [node name="Name" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_type_variation = &"LabelOutlined"
 text = "Name"
 horizontal_alignment = 1
 
@@ -18,5 +17,5 @@ layout_mode = 2
 
 [node name="Achievements" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_type_variation = &"LabelOutlined"
+theme_type_variation = &"LabelSmall"
 text = "Achievement"
