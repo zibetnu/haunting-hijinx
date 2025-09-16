@@ -1,13 +1,8 @@
 extends Control
 
-const CLOSE_CONNECTION_ACTION = &"ui_cancel"
-const MIN_PARTICIPANTS = 1
-const PLAYER_TYPE_METHOD = &"set_player_type"
-const PLAYER_TYPE_SIGNAL = &"player_type_changed"
-const TOGGLE_BUTTON_PATH = ^"%ParticipationToggle"
+const PLAYER_CARD_SCENE = preload("uid://bapt74v2o7kig")
 
 @export var level: PackedScene
-@export var player_card: PackedScene
 
 @onready var cards: VBoxContainer = %Cards
 @onready var host_menu: GridContainer = %HostMenu
@@ -18,7 +13,6 @@ const TOGGLE_BUTTON_PATH = ^"%ParticipationToggle"
 func _ready() -> void:
 	host_menu.visible = multiplayer.is_server()
 
-	# Only the server needs to spawn the players.
 	if not multiplayer.is_server():
 		return
 
@@ -30,26 +24,22 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed(CLOSE_CONNECTION_ACTION):
-		leave.pressed.emit()  # Act as though leave button was pressed.
+	if event.is_action_pressed(&"ui_cancel"):
+		leave.pressed.emit()
 
 
 func add_card(id: int) -> void:
-	var card: PlayerCard = player_card.instantiate()
+	var card: PlayerCard = PLAYER_CARD_SCENE.instantiate()
 	card.name += str(id)
 	card.input_authority = id
 	card.player_name_changed.connect(
 			func(value: String) -> void: PeerData.set_peer_name(id, value)
 	)
-	if card.has_signal(PLAYER_TYPE_SIGNAL):
-		card.connect(
-				PLAYER_TYPE_SIGNAL,
-				func(value: int)-> void: PeerData.set_peer_type(id, value)
-		)
+	card.player_type_changed.connect(
+			func(value: int)-> void: PeerData.set_peer_type(id, value)
+	)
 	cards.add_child(card, true)
-	if card.has_method(PLAYER_TYPE_METHOD):
-		card.call(PLAYER_TYPE_METHOD, PeerData.get_peer_type(id))
-
+	card.set_player_type(PeerData.get_peer_type(id) as PlayerCard.PlayerType)
 	_on_peer_participation_changed(id)
 
 
@@ -73,7 +63,7 @@ func _on_peer_participation_changed(_id: int) -> void:
 	if not multiplayer.is_server():
 		return
 
-	start_button.disabled = PeerData.participants.size() < MIN_PARTICIPANTS
+	start_button.disabled = PeerData.participants.size() < 1
 
 
 func _on_start_button_pressed() -> void:
