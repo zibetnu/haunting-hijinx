@@ -120,3 +120,36 @@ func _set_text_keep_caret_column(text: String) -> void:
 	var caret_column: int = name_line_edit.caret_column
 	name_line_edit.text = text
 	name_line_edit.caret_column = caret_column
+
+
+func _on_name_line_edit_gui_input(event: InputEvent) -> void:
+	if not event.is_action_pressed(&"ui_accept"):
+		return
+
+	if not name_line_edit.editable:
+		return
+
+	if name_line_edit.is_editing():
+		return
+
+	if not Steam.isSteamInBigPictureMode():
+		return
+
+	Steam.gamepad_text_input_dismissed.connect(
+			_on_gamepad_text_input_dismissed,
+			CONNECT_ONE_SHOT
+	)
+	Steam.showGamepadTextInput(
+			Steam.GAMEPAD_TEXT_INPUT_MODE_NORMAL,
+			Steam.GAMEPAD_TEXT_INPUT_LINE_MODE_SINGLE_LINE,
+			"Set your player name",
+			name_line_edit.max_length,
+			name_line_edit.text
+	)
+
+
+func _on_gamepad_text_input_dismissed(submitted: bool, text: String, _app_id: int) -> void:
+	if not submitted:
+		return
+
+	name_line_edit.text = text
