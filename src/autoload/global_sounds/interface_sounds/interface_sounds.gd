@@ -1,41 +1,30 @@
+class_name InterfaceSounds
 extends Node
 
-var button_press: AudioStreamPlayer = new_audio_stream_player()
-var slider_change: AudioStreamPlayer = new_audio_stream_player()
-var signals_to_callables: Dictionary = {
-	&"confirmed": button_press.play,
-	&"item_activated": button_press.play,
-	&"pressed": button_press.play,
-	&"pressed_sound_requested": button_press.play,
-	&"tab_selected": func (_tab: int) -> void: button_press.play(),
+@onready var button_pressed: AudioStreamPlayer = $ButtonPressed
+@onready var slider_changed: AudioStreamPlayer = $SliderChanged
+@onready var signals_to_callables: Dictionary = {
+	&"confirmed": button_pressed.play,
+	&"item_activated": button_pressed.play,
+	&"pressed": button_pressed.play,
+	&"pressed_sound_requested": button_pressed.play,
+	&"tab_selected": func (_tab: int) -> void: button_pressed.play(),
 }
-
-
-func _init() -> void:
-	add_child(button_press)
-	add_child(slider_change)
 
 
 func _enter_tree() -> void:
 	get_tree().node_added.connect(_on_node_added)
 
 
-func new_audio_stream_player() -> AudioStreamPlayer:
-	var player := AudioStreamPlayer.new()
-	player.bus = "Effects"
-	player.stream = preload("uid://dyxlv1xko7tdx")  # Button press sound.
-	return player
-
-
 func play_for_slider(slider: Slider) -> void:
-	slider_change.pitch_scale = remap(
+	slider_changed.pitch_scale = remap(
 			slider.value,
 			slider.min_value,
 			slider.max_value,
 			0.8,
 			1.2
 	)
-	slider_change.play()
+	slider_changed.play()
 
 
 func _on_node_added(node: Node) -> void:

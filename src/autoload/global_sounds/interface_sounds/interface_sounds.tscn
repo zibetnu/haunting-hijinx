@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcq7qypnxyc4g"]
+
+[ext_resource type="Script" uid="uid://jlxwwh68heff" path="res://src/autoload/global_sounds/interface_sounds/interface_sounds.gd" id="1_1i848"]
+[ext_resource type="AudioStream" uid="uid://dyxlv1xko7tdx" path="res://assets/button_press.wav" id="2_0s2a5"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xdec1"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("2_0s2a5")
+
+[node name="InterfaceSounds" type="Node"]
+script = ExtResource("1_1i848")
+
+[node name="ButtonPressed" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_xdec1")
+
+[node name="SliderChanged" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_0s2a5")
