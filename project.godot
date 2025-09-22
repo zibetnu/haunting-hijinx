@@ -63,6 +63,7 @@ ui/toolbar/run_overall=true
 templates/testsuite/GDScript="class_name ${suite_class_name}
 extends GdUnitTestSuite
 "
+settings/common/update_notification_enabled=false
 
 [gui]
 
