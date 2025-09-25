@@ -1,12 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://ebt35jjk5feh"]
+[gd_scene load_steps=6 format=4 uid="uid://ebt35jjk5feh"]
 
 [ext_resource type="TileSet" uid="uid://26wcy33gmwrh" path="res://src/tile_sets/main_floor.tres" id="1_xdc2a"]
 [ext_resource type="PackedScene" uid="uid://b6sumweqwhyet" path="res://src/candle/candelabra.tscn" id="2_aj4ei"]
 [ext_resource type="PackedScene" uid="uid://cai8ypa3j3wip" path="res://src/stairs/stairs.tscn" id="3_xx6r1"]
 [ext_resource type="PackedScene" uid="uid://ciga14osg5c77" path="res://src/candle/candle.tscn" id="4_axieh"]
 [ext_resource type="PackedScene" uid="uid://qvu7pdftkg8y" path="res://src/ghost_statue/ghost_statue.tscn" id="5_xw0fw"]
-[ext_resource type="PackedScene" uid="uid://cttcme7ghj4se" path="res://src/candle/candle_right.tscn" id="6_wawpe"]
-[ext_resource type="PackedScene" uid="uid://m057ftqicl1u" path="res://src/candle/candle_left.tscn" id="7_72xov"]
 
 [node name="TileMaps" type="Node2D"]
 y_sort_enabled = true
@@ -80,24 +78,6 @@ position = Vector2(272, 239)
 
 [node name="GhostStatue2" parent="Props" instance=ExtResource("5_xw0fw")]
 position = Vector2(192, 47)
-
-[node name="_Node2D_18512" parent="Props" instance=ExtResource("4_axieh")]
-position = Vector2(648, 32)
-
-[node name="_Node2D_18513" parent="Props" instance=ExtResource("6_wawpe")]
-position = Vector2(120, 288)
-
-[node name="_Node2D_18514" parent="Props" instance=ExtResource("6_wawpe")]
-position = Vector2(8, 352)
-
-[node name="_Node2D_18515" parent="Props" instance=ExtResource("6_wawpe")]
-position = Vector2(8, 112)
-
-[node name="_Node2D_18516" parent="Props" instance=ExtResource("7_72xov")]
-position = Vector2(728, 352)
-
-[node name="_Node2D_18517" parent="Props" instance=ExtResource("6_wawpe")]
-position = Vector2(72, 240)
 
 [editable path="Props/Candle"]
 [editable path="Props/Candle2"]
