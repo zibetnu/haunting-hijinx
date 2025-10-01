@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=31 format=3 uid="uid://k2680qtkyab6"]
+[gd_resource type="Theme" load_steps=33 format=3 uid="uid://k2680qtkyab6"]
 
 [ext_resource type="StyleBox" uid="uid://jj64njhm1d1i" path="res://src/theme/button_style_box/disabled.tres" id="1_reryu"]
 [ext_resource type="StyleBox" uid="uid://bvcimthgdycfr" path="res://src/theme/button_style_box/focus.tres" id="2_bggbf"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://dac0goplbncmm" path="res://assets/theme/radio/unchecked.png" id="14_k5srh"]
 [ext_resource type="StyleBox" uid="uid://bltvixfutkkcf" path="res://src/theme/tab_style_box/hover.tres" id="15_3a3nu"]
 [ext_resource type="Texture2D" uid="uid://c8to53nfcjw4s" path="res://assets/theme/radio/disabled.png" id="15_q5kya"]
+[ext_resource type="Texture2D" uid="uid://df1jgb4x1shvj" path="res://assets/theme/button_style_box/focus.png" id="15_tngg4"]
 [ext_resource type="StyleBox" uid="uid://dfayfm7g4qbgy" path="res://src/theme/tab_style_box/select.tres" id="16_jbexi"]
 [ext_resource type="StyleBox" uid="uid://bpbnwfxmkkmmc" path="res://src/theme/tab_style_box/unselect.tres" id="17_dx43s"]
 [ext_resource type="Texture2D" uid="uid://cd3pob5kkeehl" path="res://assets/theme/v_slider/tick.png" id="22_5ti8i"]
@@ -30,6 +31,20 @@
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_1ql8x"]
 color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tngg4"]
+texture = ExtResource("15_tngg4")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+draw_center = false
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k4gs8"]
 
@@ -82,6 +97,7 @@ PopupMenu/icons/radio_unchecked = ExtResource("14_k5srh")
 PopupMenu/icons/radio_unchecked_disabled = ExtResource("15_q5kya")
 PopupMenu/styles/hover = ExtResource("2_bggbf")
 PopupMenu/styles/panel = ExtResource("9_3p1nt")
+RichTextLabel/styles/focus = SubResource("StyleBoxTexture_tngg4")
 RichTextLabelCompact/base_type = &"RichTextLabel"
 RichTextLabelCompact/constants/line_separation = 2
 RichTextLabelCompact/font_sizes/normal_font_size = 8

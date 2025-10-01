@@ -30,6 +30,8 @@ const URL_FORMAT_STRING = "[url]%s[/url]"
 var category_cache: Dictionary
 var licenses: Array[Component] = []
 
+@onready var text_scroll_bar: ScrollBar = license_text.get_v_scroll_bar()
+
 
 func _ready() -> void:
 	license_text.gui_input.connect(_on_license_text_gui_input)
@@ -112,6 +114,7 @@ func set_component(component: Component) -> void:
 
 	license_name.clear()
 	license_text.clear()
+	text_scroll_bar.ratio = 0.0
 	for index in range(len(component.licenses)):
 		var license: Component.License = component.licenses[index]
 		if index > 0:
@@ -144,6 +147,14 @@ func _on_license_text_gui_input(event: InputEvent) -> void:
 		pressed_sound_requested.emit()
 		tree.grab_focus()
 		accept_event()
+
+	elif event.is_action_pressed(&"ui_up"):
+		text_scroll_bar.value -= text_scroll_bar.page
+		license_text.accept_event()
+
+	elif event.is_action_pressed(&"ui_down"):
+		text_scroll_bar.value += text_scroll_bar.page
+		license_text.accept_event()
 
 
 func _on_meta_clicked(meta: Variant) -> void:
