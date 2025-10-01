@@ -11,6 +11,7 @@ var quadrants: Array[Quadrant] = [
 
 
 func _ready() -> void:
+	get_tree().node_added.connect(_on_node_added)
 	set_process(ignore_until_next_frame)
 
 
@@ -46,6 +47,14 @@ func _input(event: InputEvent) -> void:
 func set_ignore_until_next_frame(value: bool) -> void:
 	ignore_until_next_frame = value
 	set_process(ignore_until_next_frame)
+
+
+func _on_node_added(node: Node) -> void:
+	var window := node as Window
+	if window == null:
+		return
+
+	window.window_input.connect(_input)
 
 
 class Quadrant extends RefCounted:
