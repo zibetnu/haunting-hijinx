@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://crqc4k74es8j6"]
+[gd_scene load_steps=8 format=3 uid="uid://crqc4k74es8j6"]
 
 [ext_resource type="Script" uid="uid://uefw2b6v137q" path="res://src/lobby_browser/lobby_browser.gd" id="1_wpwcv"]
 [ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="2_dwt65"]
 [ext_resource type="PackedScene" uid="uid://dmoov6v60pobv" path="res://src/lobby_browser/lobby_summary/lobby_summary.tscn" id="2_tlwtl"]
 [ext_resource type="PackedScene" uid="uid://bj8n2x3jkcbgs" path="res://src/relay_initializer/relay_initializer.tscn" id="3_w7k6n"]
 [ext_resource type="PackedScene" uid="uid://c6ql67s5oafpr" path="res://src/visibility_signals/visibility_signals.tscn" id="5_shjsd"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_7bdp8"]
+action = &"ui_cancel"
+
+[sub_resource type="Shortcut" id="Shortcut_dj2jg"]
+events = [SubResource("InputEventAction_7bdp8")]
 
 [node name="LobbyBrowser" type="MarginContainer"]
 custom_minimum_size = Vector2(640, 0)
@@ -26,8 +32,10 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="Back" type="Button" parent="HBoxContainer/LeftMenu"]
+[node name="Back" type="Button" parent="HBoxContainer/LeftMenu" node_paths=PackedStringArray("shortcut_context")]
 layout_mode = 2
+shortcut_context = NodePath("..")
+shortcut = SubResource("Shortcut_dj2jg")
 text = "Back"
 
 [node name="Refresh" type="Button" parent="HBoxContainer/LeftMenu"]

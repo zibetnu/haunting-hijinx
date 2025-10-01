@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmta6hi75dnwf"]
+[gd_scene load_steps=6 format=3 uid="uid://cmta6hi75dnwf"]
 
 [ext_resource type="Script" uid="uid://clqt2cqnfreut" path="res://src/config_menu/config_menu.gd" id="1_f68c2"]
 [ext_resource type="PackedScene" uid="uid://c4pe2q3xrfk36" path="res://src/bus_volume_setter/bus_volume_setter.tscn" id="4_5dgk7"]
 [ext_resource type="Script" uid="uid://cyi51j6dwvuvx" path="res://src/config_menu/option_button_id.gd" id="6_u7oav"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_fucmx"]
+action = &"ui_cancel"
+
+[sub_resource type="Shortcut" id="Shortcut_b3uno"]
+events = [SubResource("InputEventAction_fucmx")]
 
 [node name="ConfigMenu" type="MarginContainer" node_paths=PackedStringArray("first_button") groups=["config_menu"]]
 anchors_preset = 15
@@ -28,7 +34,7 @@ bus_name = &"Effects"
 unique_name_in_owner = true
 one_shot = true
 
-[node name="Back" type="Button" parent="."]
+[node name="Back" type="Button" parent="." node_paths=PackedStringArray("shortcut_context")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -36,6 +42,8 @@ size_flags_vertical = 8
 focus_neighbor_top = NodePath("../HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/WindowModeOption")
 focus_neighbor_right = NodePath("../HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/WindowModeOption")
 focus_next = NodePath("../HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/WindowModeOption")
+shortcut_context = NodePath("..")
+shortcut = SubResource("Shortcut_b3uno")
 text = "Back"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]

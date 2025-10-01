@@ -36,11 +36,6 @@ func _ready() -> void:
 	init_slider(effects_bus_slider, AUDIO_SECTION, "effects", 1.0)
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"ui_cancel"):
-		back.pressed.emit()
-
-
 func init_window_mode_option() -> void:
 	var saved: int = GameConfig.get_value(
 			DISPLAY_SECTION,

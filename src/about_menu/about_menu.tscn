@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4t7474tk0tok"]
+[gd_scene load_steps=6 format=3 uid="uid://c4t7474tk0tok"]
 
-[ext_resource type="Script" uid="uid://c6ykadg6pk11w" path="res://src/about_menu/about_menu.gd" id="1_ua0lb"]
 [ext_resource type="PackedScene" uid="uid://c6ql67s5oafpr" path="res://src/visibility_signals/visibility_signals.tscn" id="1_ytmu0"]
 [ext_resource type="PackedScene" uid="uid://dloh4qhadewj" path="res://src/about_menu/major_credit.tscn" id="2_t1g6x"]
 [ext_resource type="PackedScene" uid="uid://c10ej4vwbr3uy" path="res://src/about_menu/credit.tscn" id="3_8ivxx"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_7bdp8"]
+action = &"ui_cancel"
+
+[sub_resource type="Shortcut" id="Shortcut_egiyj"]
+events = [SubResource("InputEventAction_7bdp8")]
 
 [node name="AboutMenu" type="MarginContainer"]
 anchors_preset = 15
@@ -11,7 +16,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ua0lb")
 
 [node name="VisibilitySignals" parent="." node_paths=PackedStringArray("canvas_item") instance=ExtResource("1_ytmu0")]
 canvas_item = NodePath("..")
@@ -258,9 +262,11 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="Back" type="Button" parent="Buttons"]
+[node name="Back" type="Button" parent="Buttons" node_paths=PackedStringArray("shortcut_context")]
 unique_name_in_owner = true
 layout_mode = 2
+shortcut_context = NodePath("../..")
+shortcut = SubResource("Shortcut_egiyj")
 text = "Back"
 
 [node name="Licenses" type="Button" parent="Buttons"]

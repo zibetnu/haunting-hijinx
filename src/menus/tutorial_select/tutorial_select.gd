@@ -25,9 +25,3 @@ func _ready() -> void:
 	hunter.pressed.connect(SceneChanger.change_to_hunter_tutorial)
 
 	hunter_costume.play("move")
-
-
-func _on_gui_input(event: InputEvent) -> void:
-	if event.is_action_pressed(CANCEL_ACTION):
-		back.pressed.emit()
-		accept_event()

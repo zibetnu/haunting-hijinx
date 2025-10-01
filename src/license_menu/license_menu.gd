@@ -15,7 +15,6 @@ const TREE_COLUMN_CLIP_CONTENT = true
 const URL_FORMAT_STRING = "[url]%s[/url]"
 
 @export var tree: Tree
-@export var back: Button
 @export var component_name: Label
 @export var version: Label
 @export var description: RichTextLabel
@@ -33,10 +32,8 @@ var licenses: Array[Component] = []
 
 
 func _ready() -> void:
-	back.gui_input.connect(_on_cancelable_gui_input)
 	license_text.gui_input.connect(_on_license_text_gui_input)
 	license_text.meta_clicked.connect(_on_meta_clicked)
-	tree.gui_input.connect(_on_cancelable_gui_input)
 	tree.item_activated.connect(_on_item_activated)
 	tree.item_selected.connect(_on_item_selected)
 	tree.set_column_clip_content(TREE_ITEM_COLUMN, TREE_COLUMN_CLIP_CONTENT)
@@ -146,12 +143,8 @@ func _on_license_text_gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed(CANCEL_ACTION):
 		pressed_sound_requested.emit()
 		tree.grab_focus()
+		accept_event()
 
 
 func _on_meta_clicked(meta: Variant) -> void:
 	OS.shell_open(str(meta))  # Open url in default browser.
-
-
-func _on_cancelable_gui_input(event: InputEvent) -> void:
-	if event.is_action_pressed(CANCEL_ACTION):
-		back.pressed.emit()  # Act as though back button was pressed.

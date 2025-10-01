@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://cis3vfoj3ussh"]
+[gd_scene load_steps=8 format=3 uid="uid://cis3vfoj3ussh"]
 
 [ext_resource type="PackedScene" uid="uid://c6ql67s5oafpr" path="res://src/visibility_signals/visibility_signals.tscn" id="1_4ptx7"]
 [ext_resource type="Script" uid="uid://cekehm7hjicvv" path="res://src/menus/tutorial_select/tutorial_select.gd" id="1_h2iyi"]
 [ext_resource type="PackedScene" uid="uid://klrwcohuhynk" path="res://src/ghost/costume/ghost_costume.tscn" id="1_xu1af"]
 [ext_resource type="PackedScene" uid="uid://ctn825io87i34" path="res://src/hunter/costume/hunter_costume.tscn" id="3_eyaac"]
 [ext_resource type="Texture2D" uid="uid://do78peki3jtm" path="res://assets/flashlight/body.png" id="5_avxyi"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_7bdp8"]
+action = &"ui_cancel"
+
+[sub_resource type="Shortcut" id="Shortcut_wx7d7"]
+events = [SubResource("InputEventAction_7bdp8")]
 
 [node name="TutorialSelect" type="MarginContainer" node_paths=PackedStringArray("ghost", "hunter", "back")]
 anchors_preset = 15
@@ -104,9 +110,11 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="Back" type="Button" parent="HBoxContainer"]
+[node name="Back" type="Button" parent="HBoxContainer" node_paths=PackedStringArray("shortcut_context")]
 unique_name_in_owner = true
 layout_mode = 2
+shortcut_context = NodePath("../..")
+shortcut = SubResource("Shortcut_wx7d7")
 text = "Back"
 
 [connection signal="shown" from="VisibilitySignals" to="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Ghost" method="grab_focus"]
