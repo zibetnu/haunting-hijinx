@@ -8,6 +8,30 @@ This project adheres to an adapted form of [Semantic Versioning](https://semver.
 2. MINOR version when you add backward-compatible functionality.
 3. PATCH version when you make backward-compatible bug fixes.
 
+## [2.1.0] - 2025-10-01
+
+### Added
+
+- Two new fonts for use where smaller text is helpful.
+- Virtual keyboard popup for text input in Steam big picture mode.
+- Random pitch changes to button sounds.
+- Static checks to help ensure code quality.
+
+### Changed
+
+- Significantly improved gamepad menu navigation.
+- Converted main font from monospace to variable.
+- Slightly adjusted hunter sprite suit highlights.
+
+### Fixed
+
+- Some candles have overlapping duplicates.
+- Ghost faces wrong way on tutorial select screen.
+
+### Removed
+
+- Option for mailbox VSync.
+
 ## [2.0.0] - 2025-07-14
 
 ### Added
@@ -277,6 +301,7 @@ This project adheres to an adapted form of [Semantic Versioning](https://semver.
 
 - Initial release.
 
+[2.1.0]: https://github.com/zibetnu/haunting-hijinx/compare/2.0.0...2.1.0
 [2.0.0]: https://github.com/zibetnu/haunting-hijinx/compare/1.11.1...2.0.0
 [1.11.1]: https://github.com/zibetnu/haunting-hijinx/compare/1.11.0...1.11.1
 [1.11.0]: https://github.com/zibetnu/haunting-hijinx/compare/1.10.0...1.11.0
