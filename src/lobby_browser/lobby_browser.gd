@@ -34,12 +34,21 @@ const MAIN_MENU_METHOD = &"change_to_main_menu"
 @onready var summary_container: VBoxContainer = %LobbySummaries
 @onready var notify_dialog: AcceptDialog = %NotifyDialog
 @onready var refresh_button: Button = %Refresh
+@onready var init_steam: Button = %InitSteam
+@onready var steam_connector: SteamConnector = $SteamConnector
 
 
 func _ready() -> void:
 	Steam.lobby_match_list.connect(_on_lobby_match_list)
 	# Free self and let server load lobby.
 	multiplayer.connected_to_server.connect(queue_free)
+	steam_connector.close_connection.call_deferred()
+	refresh_button.grab_focus()
+	if OS.has_feature("editor"):
+		init_steam.show()
+
+	else:
+		init_steam_relay()
 
 
 func call_scene_changer_method(method: StringName) -> void:
@@ -57,6 +66,24 @@ func go_back() -> void:
 	call_scene_changer_method(MAIN_MENU_METHOD)
 
 
+func init_steam_relay() -> void:
+	Steam.steamInitEx()
+	Steam.initRelayNetworkAccess()
+
+
+func is_relay_ready(action: String) -> bool:
+	var result: Dictionary = Steam.get_steam_init_result()
+	if result.get("status", 1) != 0:
+		print("Initialize Steam before %s" % action)
+		return false
+
+	if Steam.getRelayNetworkStatus() != Steam.NETWORKING_AVAILABILITY_CURRENT:
+		print("Wait for relay to initialize")
+		return false
+
+	return true
+
+
 func notify(message: String) -> void:
 	notify_dialog.dialog_text = message
 	notify_dialog.popup_centered()
@@ -64,6 +91,9 @@ func notify(message: String) -> void:
 
 
 func refresh() -> void:
+	if not is_relay_ready("refreshing lobby list"):
+		return
+
 	refresh_button.disabled = DISABLE_WHILE_REFRESHING
 	refresh_button.text = REFRESHING_TEXT
 	Steam.addRequestLobbyListDistanceFilter(
@@ -134,6 +164,10 @@ func _set_ping_for(summary: LobbySummary) -> void:
 	summary.ping = ping
 
 
+func _on_init_steam_pressed() -> void:
+	init_steam_relay()
+
+
 func _on_lobby_created() -> void:
 	# Set up host's player like any other.
 	multiplayer.peer_connected.emit(multiplayer.get_unique_id())
@@ -180,3 +214,10 @@ func _on_lobby_match_list(untyped_lobby_ids: Array) -> void:
 	refresh_button.disabled = DISABLE_WHILE_NOT_REFRESHING
 	refresh_button.text = REFRESH_TEXT
 	refreshed.emit()
+
+
+func _on_create_lobby_pressed() -> void:
+	if not is_relay_ready("creating lobby"):
+		return
+
+	steam_connector.create_lobby()

@@ -12,7 +12,13 @@ const PLACEHOLDER_LOBBY_ID = -1
 func _ready() -> void:
 	# Ensure that data is only shared between clients when necessary.
 	(multiplayer as SceneMultiplayer).server_relay = false
-	Steam.steamInitEx()
+
+	if OS.has_feature("editor"):
+		print("Steam not initialized")
+
+	else:
+		Steam.steamInitEx()
+
 	for bus_index in AudioServer.bus_count:
 		init_bus_volume(bus_index)
 

@@ -1,10 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://crqc4k74es8j6"]
+[gd_scene load_steps=6 format=3 uid="uid://crqc4k74es8j6"]
 
 [ext_resource type="Script" uid="uid://uefw2b6v137q" path="res://src/lobby_browser/lobby_browser.gd" id="1_wpwcv"]
 [ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="2_dwt65"]
 [ext_resource type="PackedScene" uid="uid://dmoov6v60pobv" path="res://src/lobby_browser/lobby_summary/lobby_summary.tscn" id="2_tlwtl"]
-[ext_resource type="PackedScene" uid="uid://bj8n2x3jkcbgs" path="res://src/relay_initializer/relay_initializer.tscn" id="3_w7k6n"]
-[ext_resource type="PackedScene" uid="uid://c6ql67s5oafpr" path="res://src/visibility_signals/visibility_signals.tscn" id="5_shjsd"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_7bdp8"]
 action = &"ui_cancel"
@@ -30,13 +28,19 @@ layout_mode = 2
 
 [node name="LeftMenu" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 8
+alignment = 2
 
 [node name="Back" type="Button" parent="HBoxContainer/LeftMenu" node_paths=PackedStringArray("shortcut_context")]
 layout_mode = 2
 shortcut_context = NodePath("..")
 shortcut = SubResource("Shortcut_dj2jg")
 text = "Back"
+
+[node name="InitSteam" type="Button" parent="HBoxContainer/LeftMenu"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Init Steam"
 
 [node name="Refresh" type="Button" parent="HBoxContainer/LeftMenu"]
 unique_name_in_owner = true
@@ -143,28 +147,15 @@ borderless = true
 wait_time = 30.0
 autostart = true
 
-[node name="RelayInitializer" parent="." instance=ExtResource("3_w7k6n")]
-initialize_on_ready = false
-
 [node name="SteamConnector" parent="." instance=ExtResource("2_dwt65")]
 
-[node name="VisibilitySignals" parent="." node_paths=PackedStringArray("canvas_item") instance=ExtResource("5_shjsd")]
-editor_description = "Calls close_connection on shown to make sure that Steam doesn't think this player is still in a lobby."
-canvas_item = NodePath("..")
-
 [connection signal="join_lobby_requested" from="." to="SteamConnector" method="join_lobby"]
-[connection signal="ready" from="." to="RelayInitializer" method="initialize_relay"]
 [connection signal="refreshed" from="." to="RefreshTimer" method="start"]
 [connection signal="pressed" from="HBoxContainer/LeftMenu/Back" to="." method="go_back"]
+[connection signal="pressed" from="HBoxContainer/LeftMenu/InitSteam" to="." method="_on_init_steam_pressed"]
 [connection signal="pressed" from="HBoxContainer/LeftMenu/Refresh" to="." method="refresh"]
-[connection signal="pressed" from="HBoxContainer/LeftMenu/CreateLobby" to="SteamConnector" method="create_lobby"]
+[connection signal="pressed" from="HBoxContainer/LeftMenu/CreateLobby" to="." method="_on_create_lobby_pressed"]
 [connection signal="about_to_popup" from="NotifyDialog" to="JoiningWindow" method="hide"]
 [connection signal="timeout" from="RefreshTimer" to="." method="refresh"]
-[connection signal="relay_initialized" from="RelayInitializer" to="." method="refresh"]
-[connection signal="create_lobby_failed" from="SteamConnector" to="." method="notify" binds= ["Failed to create lobby."]]
-[connection signal="join_lobby_failed" from="SteamConnector" to="." method="notify" binds= ["Failed to join lobby."]]
 [connection signal="lobby_created" from="SteamConnector" to="." method="_on_lobby_created"]
 [connection signal="lobby_joined" from="SteamConnector" to="." method="_on_lobby_joined"]
-[connection signal="shown" from="VisibilitySignals" to="." method="refresh" flags=3]
-[connection signal="shown" from="VisibilitySignals" to="HBoxContainer/LeftMenu/Refresh" method="grab_focus" flags=3]
-[connection signal="shown" from="VisibilitySignals" to="SteamConnector" method="close_connection" flags=3]
