@@ -47,14 +47,19 @@ func _update_events():
 	# In the Editor, InputMap reflects Editor settings
 	# Read the list of actions from ProjectSettings instead
 	# TODO: Find a cleaner way to cast these values
-	var tmp: Array = []
+	var updated_events: Array[InputEvent] = []
 	if Engine.is_editor_hint():
-		tmp = ProjectSettings.get_setting("input/" + action)["events"]
+		updated_events.assign(
+			ProjectSettings.get_setting("input/" + action)["events"] as Array
+		)
 	else:
-		tmp = InputMap.action_get_events(action)
-	events = []
-	for ev in tmp:
-		events.append(ev)
+		updated_events = InputMap.action_get_events(action)
+	for i in range(updated_events.size()):
+		for event in events:
+			if event.to_string() == updated_events[i].to_string():
+				updated_events[i] = event
+				break
+	events = updated_events
 	update_configuration_warnings()
 
 
