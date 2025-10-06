@@ -11,9 +11,8 @@ const PLAYER_CARD_SCENE = preload("uid://bapt74v2o7kig")
 
 
 func _ready() -> void:
-	host_menu.visible = multiplayer.is_server()
-
 	if not multiplayer.is_server():
+		host_menu.queue_free()
 		return
 
 	multiplayer.peer_connected.connect(_on_peer_connected)
