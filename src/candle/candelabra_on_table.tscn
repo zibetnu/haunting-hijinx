@@ -1,0 +1,44 @@
+[gd_scene load_steps=9 format=3 uid="uid://ct4851h4l56am"]
+
+[ext_resource type="PackedScene" uid="uid://b6sumweqwhyet" path="res://src/candle/candelabra.tscn" id="1_7afli"]
+[ext_resource type="Texture2D" uid="uid://c1roq1mo8jeki" path="res://assets/tile_sets/main_floor/nightstand/diffuse.png" id="1_cfd47"]
+[ext_resource type="Texture2D" uid="uid://cc7nv73dpx8km" path="res://assets/tile_sets/main_floor/nightstand/normal.png" id="2_2xyty"]
+[ext_resource type="Texture2D" uid="uid://des554onxdkvj" path="res://assets/tile_sets/main_floor/nightstand/specular.png" id="3_pqmaq"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7a3f7"]
+polygon = PackedVector2Array(-7, 8, -6, 8, -6, 7, 22, 7, 22, 8, 23, 8, 23, 6, 24, 6, 24, -8, -8, -8, -8, 6, -7, 6)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_tx6ah"]
+diffuse_texture = ExtResource("1_cfd47")
+normal_texture = ExtResource("2_2xyty")
+specular_texture = ExtResource("3_pqmaq")
+specular_shininess = 0.5
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_psy1r"]
+texture = SubResource("CanvasTexture_tx6ah")
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(-8, 8)
+0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_7a3f7")
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 24, -8, 24, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_kwvjk"]
+occlusion_layer_0/light_mask = 2
+occlusion_layer_1/light_mask = 4
+physics_layer_0/collision_layer = 1
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Carpet"
+terrain_set_0/terrain_0/color = Color(1, 1, 1, 1)
+terrain_set_0/terrain_1/name = "Wall Tops"
+terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
+sources/4 = SubResource("TileSetAtlasSource_psy1r")
+
+[node name="CandelabraOnTable" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(-8, -8)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0)
+tile_set = SubResource("TileSet_kwvjk")
+
+[node name="Candelabra" parent="." instance=ExtResource("1_7afli")]
+position = Vector2(8, -7)

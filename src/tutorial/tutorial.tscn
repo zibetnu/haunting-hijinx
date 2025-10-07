@@ -1,6 +1,7 @@
-[gd_scene load_steps=45 format=3 uid="uid://c64tx6254qrlp"]
+[gd_scene load_steps=46 format=3 uid="uid://c64tx6254qrlp"]
 
 [ext_resource type="Script" uid="uid://cut35p48ypmdm" path="res://src/tutorial/tutorial.gd" id="1_031tw"]
+[ext_resource type="Resource" uid="uid://cwctpupci2uiq" path="res://src/levels/main_floor.tres" id="2_igwx6"]
 [ext_resource type="AudioStream" uid="uid://fiew3im75jjx" path="res://assets/quest_complete.wav" id="4_dn1cl"]
 [ext_resource type="PackedScene" uid="uid://ebt35jjk5feh" path="res://src/level/main_floor/tile_maps.tscn" id="8_qub2g"]
 [ext_resource type="PackedScene" uid="uid://b0jfn7wspsy4c" path="res://src/level/lighting/level_lighting.tscn" id="9_xmgwu"]
@@ -175,6 +176,7 @@ button_index = 6
 [node name="Tutorial" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_031tw")
+level = ExtResource("2_igwx6")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_dn1cl")
@@ -187,17 +189,9 @@ one_shot = true
 
 [node name="QuestNodes" type="Node" parent="."]
 
-[node name="TileMaps" parent="." instance=ExtResource("8_qub2g")]
+[node name="LevelTileMapLayers" parent="." instance=ExtResource("8_qub2g")]
 
 [node name="LevelLighting" parent="." instance=ExtResource("9_xmgwu")]
-
-[node name="LimitTopLeft" type="Marker2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(0, 6)
-
-[node name="LimitBottomRight" type="Marker2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(736, 432)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2

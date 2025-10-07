@@ -15,13 +15,17 @@ func _ready() -> void:
 	Steam.join_requested.connect(_on_join_requested)
 
 
-func change_scene_to_packed(packed_scene: PackedScene) -> void:
+func change_scene_to_node(node: Node) -> void:
 	if not multiplayer.is_server():
 		return
 
 	remove_scene()
-	scene_spawner.add_child(packed_scene.instantiate(), true)
+	scene_spawner.add_child(node, true)
 	get_tree().set_pause(false)
+
+
+func change_scene_to_packed(packed_scene: PackedScene) -> void:
+	change_scene_to_node(packed_scene.instantiate())
 
 
 func change_to_lobby() -> void:
@@ -42,6 +46,12 @@ func change_to_ghost_tutorial() -> void:
 
 func change_to_hunter_tutorial() -> void:
 	change_scene_to_packed(hunter_tutorial)
+
+
+func change_to_level(level: Level) -> void:
+	var level_player: LevelPlayer = preload("uid://2uclu3gf4iyj").instantiate()
+	level_player.level = level
+	change_scene_to_node(level_player)
 
 
 func join_lobby(lobby_id: int) -> void:

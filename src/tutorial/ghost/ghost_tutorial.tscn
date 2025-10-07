@@ -168,7 +168,7 @@ quest = SubResource("Resource_2a4mi")
 [node name="FollowPlayer" parent="Ghost/IgnoreCanvasModulate" index="0"]
 position = Vector2(368, 248)
 
-[node name="Hunter" parent="." index="9" node_paths=PackedStringArray("controller")]
+[node name="Hunter" parent="." index="12" node_paths=PackedStringArray("controller")]
 controller = NodePath("NPCHunter")
 
 [node name="NPCHunter" parent="Hunter" index="17" node_paths=PackedStringArray("ghost") instance=ExtResource("12_2andj")]
@@ -197,5 +197,4 @@ ghost = NodePath("../../Ghost")
 [connection signal="dropped" from="Hunter" to="QuestNodes/Grab" method="complete"]
 
 [editable path="Ghost"]
-[editable path="Ghost/Invisibility"]
 [editable path="Ghost/PlayerControllerStack"]

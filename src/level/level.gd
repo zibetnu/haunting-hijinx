@@ -1,28 +1,34 @@
+class_name LevelPlayer
 extends Node2D
 
+@export var level: Level
 @export var ghost: PackedScene
-@export var ghost_spawn_point: Node2D
 @export var hunter: PackedScene
-@export var hunter_spawn_points: Array[Node2D] = []
 @export var spectator_menu: PackedScene
 
 var _ghosts_spawned := 0
 var _hunters_spawned := 0
 
+@onready var battery_spawner: BatterySpawner = $BatterySpawner
+@onready var level_tile_map_layers: LevelTileMapLayers = $LevelTileMapLayers
 @onready var end_label: Label = %EndLabel
 @onready var ghost_timer_sprite: Node2D = %GhostTimerSprite
 @onready var hunter_timer_sprite: Node2D = %HunterTimerSprite
-@onready var limit_bottom_right: Marker2D = $CameraLimits/BottomRight
-@onready var limit_top_left: Marker2D = $CameraLimits/TopLeft
 @onready var match_timer: Timer = %MatchTimer
 @onready var spectator_timer_sprite: Node2D = %SpectatorTimerSprite
 
 
 func _ready() -> void:
 	show_matching_timer_sprite()
+	if level == null:
+		level = PeerData.get_selected_level()
 
+	level_tile_map_layers.level = level
 	if not multiplayer.is_server():
 		return
+
+	battery_spawner.limit_bottom_right = level.limit_bottom_right
+	battery_spawner.limit_top_left = level.limit_top_left
 
 	PeerData.match_in_progress = true
 	multiplayer.peer_connected.connect(_on_peer_connected)
@@ -40,14 +46,14 @@ func add_player(id: int) -> void:
 	var instance: Node2D = null
 	if id == PeerData.ghost_peer:
 		instance = ghost.instantiate()
-		instance.position = ghost_spawn_point.position
+		instance.position = level.ghost_spawn_point
 		_ghosts_spawned += 1
 
 	else:
 		instance = hunter.instantiate()
-		instance.position = hunter_spawn_points[
-				_hunters_spawned % hunter_spawn_points.size()
-		].position
+		instance.position = level.hunter_spawn_points[
+				_hunters_spawned % level.hunter_spawn_points.size()
+		]
 		_hunters_spawned += 1
 
 	var camera: Camera2D = instance.get_node_or_null(^"%Camera2D")
@@ -161,10 +167,10 @@ func _on_peer_connected(id: int) -> void:
 
 
 func _set_camera_limits(camera: Camera2D) -> void:
-	camera.limit_left = roundi(limit_top_left.position.x)
-	camera.limit_top = roundi(limit_top_left.position.y)
-	camera.limit_right = roundi(limit_bottom_right.position.x)
-	camera.limit_bottom = roundi(limit_bottom_right.position.y)
+	camera.limit_left = level.limit_top_left.x
+	camera.limit_top = level.limit_top_left.y
+	camera.limit_right = level.limit_bottom_right.x
+	camera.limit_bottom = level.limit_bottom_right.y
 
 
 @rpc("reliable")

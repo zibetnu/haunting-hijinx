@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bk7jg2kp46edm"]
+[gd_scene load_steps=5 format=3 uid="uid://bk7jg2kp46edm"]
 
 [ext_resource type="Script" uid="uid://bgaqiseha8j7i" path="res://src/autoload/peer_data/peer_data.gd" id="1_txong"]
+[ext_resource type="Script" uid="uid://bqesso14v403r" path="res://src/levels/level.gd" id="2_ciavg"]
+[ext_resource type="Resource" uid="uid://cwctpupci2uiq" path="res://src/levels/main_floor.tres" id="3_47uvv"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ev2t0"]
 properties/0/path = NodePath(".:ghost_peer")
@@ -15,9 +17,13 @@ properties/2/replication_mode = 2
 properties/3/path = NodePath(".:spectators")
 properties/3/spawn = true
 properties/3/replication_mode = 2
+properties/4/path = NodePath(".:levels_selected_index")
+properties/4/spawn = true
+properties/4/replication_mode = 2
 
 [node name="PeerData" type="Node"]
 script = ExtResource("1_txong")
+levels = Array[ExtResource("2_ciavg")]([ExtResource("3_47uvv")])
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ev2t0")

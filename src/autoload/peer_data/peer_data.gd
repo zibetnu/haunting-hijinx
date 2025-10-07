@@ -24,6 +24,10 @@ const MAX_PARTICIPANTS = 5
 @export var peer_names := {}
 @export var spectators := []
 
+@export_group("Levels", "levels")
+@export var levels: Array[Level]
+@export var levels_selected_index: int
+
 var lobby_id := -1
 var match_in_progress := false
 
@@ -32,6 +36,10 @@ func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(erase_data_for_peer)
 	multiplayer.server_disconnected.connect(erase_data)
+
+
+func get_selected_level() -> Level:
+	return levels[levels_selected_index]
 
 
 func erase_data() -> void:

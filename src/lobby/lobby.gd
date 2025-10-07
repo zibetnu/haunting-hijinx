@@ -2,11 +2,10 @@ extends Control
 
 const PLAYER_CARD_SCENE = preload("uid://bapt74v2o7kig")
 
-@export var level: PackedScene
-
 @onready var cards: VBoxContainer = %Cards
-@onready var host_menu: GridContainer = %HostMenu
 @onready var leave: Button = %Leave
+@onready var host_menu: GridContainer = %HostMenu
+@onready var level_select: OptionButton = %LevelSelect
 @onready var start_button: Button = %StartButton
 
 
@@ -15,6 +14,10 @@ func _ready() -> void:
 		host_menu.queue_free()
 		return
 
+	for level in PeerData.levels:
+		level_select.add_item(level.resource_name)
+
+	level_select.select(PeerData.levels_selected_index)
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	PeerData.peer_participation_changed.connect(_on_peer_participation_changed)
@@ -68,7 +71,11 @@ func _on_peer_participation_changed(_id: int) -> void:
 	start_button.disabled = PeerData.participants.size() < 1
 
 
+func _on_level_select_item_selected(index: int) -> void:
+	PeerData.levels_selected_index = index
+
+
 func _on_start_button_pressed() -> void:
 	# https://github.com/godotengine/godot/issues/77643
 	@warning_ignore("unsafe_method_access")
-	SceneChanger.change_scene_to_packed(level)
+	SceneChanger.change_to_level(PeerData.get_selected_level())

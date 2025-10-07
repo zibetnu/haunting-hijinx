@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://df63fi5u7xpjt"]
+[gd_scene load_steps=9 format=3 uid="uid://df63fi5u7xpjt"]
 
 [ext_resource type="Script" uid="uid://1jew7wsxqctm" path="res://src/lobby/lobby.gd" id="1_g8t6r"]
-[ext_resource type="PackedScene" uid="uid://2uclu3gf4iyj" path="res://src/level/main_floor/main_floor.tscn" id="2_px70m"]
 [ext_resource type="Script" uid="uid://gpvk6gsxhdvu" path="res://src/steam_gamepad_line_edit.gd" id="3_qpyai"]
 [ext_resource type="PackedScene" uid="uid://y52o5l4t82oi" path="res://src/lobby/lobby_location_setter/lobby_location_setter.tscn" id="6_mojxj"]
 [ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="6_qmxdg"]
@@ -21,7 +20,6 @@ offset_right = 90.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g8t6r")
-level = ExtResource("2_px70m")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -99,6 +97,17 @@ popup/item_2/id = 2
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 text = "?"
+
+[node name="LevelLabel" type="Label" parent="HBoxContainer/HostMenu"]
+layout_mode = 2
+text = "Level:"
+horizontal_alignment = 2
+
+[node name="LevelSelect" type="OptionButton" parent="HBoxContainer/HostMenu"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Spacer" type="Control" parent="HBoxContainer/HostMenu"]
 layout_mode = 2
@@ -216,6 +225,7 @@ autowrap_mode = 3
 [connection signal="text_changed" from="HBoxContainer/HostMenu/LobbyNameLineEdit" to="LobbyNameSetter" method="set_lobby_name"]
 [connection signal="item_selected" from="HBoxContainer/HostMenu/LobbyType/OptionButton" to="LobbyTypeSetter" method="set_lobby_type"]
 [connection signal="pressed" from="HBoxContainer/HostMenu/LobbyType/Help" to="LobbyTypeHelp" method="popup_centered"]
+[connection signal="item_selected" from="HBoxContainer/HostMenu/LevelSelect" to="." method="_on_level_select_item_selected"]
 [connection signal="pressed" from="HBoxContainer/HostMenu/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="connection_closed" from="SteamConnector" to="." method="_on_connection_closed"]
 [connection signal="lobby_name_on_ready" from="LobbyNameSetter" to="HBoxContainer/HostMenu/LobbyNameLineEdit" method="set_text"]

@@ -88,6 +88,7 @@ one_shot = true
 replication_config = SubResource("SceneReplicationConfig_nqrkp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, -8)
 shape = SubResource("RectangleShape2D_ob8gk")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -96,25 +97,27 @@ collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(8, -8)
 shape = SubResource("RectangleShape2D_ysqp5")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(8, -8)
 occluder = SubResource("OccluderPolygon2D_griun")
 
 [node name="Base" type="Sprite2D" parent="."]
 light_mask = 6
-position = Vector2(0, -2)
+position = Vector2(8, -10)
 texture = SubResource("CanvasTexture_kqstq")
 
 [node name="Ghost" type="Sprite2D" parent="."]
 light_mask = 6
-position = Vector2(0, -12)
+position = Vector2(8, -20)
 texture = SubResource("CanvasTexture_xixck")
 
 [node name="Eyes" type="AnimatedSprite2D" parent="."]
 visible = false
 material = SubResource("CanvasItemMaterial_nqrkp")
-position = Vector2(0, -19)
+position = Vector2(8, -27)
 sprite_frames = SubResource("SpriteFrames_4nn87")
 animation = &"show"
 

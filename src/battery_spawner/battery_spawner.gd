@@ -1,3 +1,4 @@
+class_name BatterySpawner
 extends Node2D
 
 signal battery_spawned(battery: Battery)
@@ -5,9 +6,11 @@ signal battery_spawned(battery: Battery)
 const MAX_BATTERY_SPAWN_ATTEMPTS = 100
 
 @export var battery_scene: PackedScene
-@export var spawn_area_top_left: Node2D
-@export var spawn_area_bottom_right: Node2D
 @export var spawn_root: Node2D
+
+@export_group("Spawn Limits", "limit")
+@export var limit_top_left: Vector2i
+@export var limit_bottom_right: Vector2i
 
 var _batteries_spawned := 0
 
@@ -16,14 +19,8 @@ var _batteries_spawned := 0
 
 func _get_random_battery_position() -> Vector2:
 	return Vector2(
-			randf_range(
-					spawn_area_top_left.position.x,
-					spawn_area_bottom_right.position.x
-			),
-			randf_range(
-					spawn_area_top_left.position.y,
-					spawn_area_bottom_right.position.y
-			)
+			randf_range(limit_top_left.x, limit_bottom_right.x),
+			randf_range(limit_top_left.y, limit_bottom_right.y)
 	)
 
 

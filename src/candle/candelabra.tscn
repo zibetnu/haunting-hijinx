@@ -19,35 +19,35 @@ fill_to = Vector2(0.5, 0)
 
 [node name="Arms" type="Sprite2D" parent="."]
 light_mask = 2
-position = Vector2(16, -21)
+position = Vector2(0, -7)
 texture = ExtResource("1_kr3k5")
 
 [node name="Base" type="Sprite2D" parent="."]
 light_mask = 2
-position = Vector2(8, -23)
+position = Vector2(-8, -9)
 texture = ExtResource("2_4cw5o")
 
 [node name="Base2" type="Sprite2D" parent="."]
 light_mask = 2
-position = Vector2(16, -25)
+position = Vector2(0, -11)
 texture = ExtResource("2_4cw5o")
 
 [node name="Base3" type="Sprite2D" parent="."]
 light_mask = 2
-position = Vector2(24, -23)
+position = Vector2(8, -9)
 texture = ExtResource("2_4cw5o")
 
 [node name="Flame" parent="." instance=ExtResource("3_ukd4a")]
-position = Vector2(8, -28)
+position = Vector2(-8, -14)
 
 [node name="Flame2" parent="." instance=ExtResource("3_ukd4a")]
-position = Vector2(16, -30)
+position = Vector2(0, -16)
 
 [node name="Flame3" parent="." instance=ExtResource("3_ukd4a")]
-position = Vector2(24, -28)
+position = Vector2(8, -14)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(16, -17)
+position = Vector2(0, -3)
 color = Color(0, 0.804089, 0.976547, 1)
 range_item_cull_mask = 11
 texture = SubResource("GradientTexture2D_ueinb")

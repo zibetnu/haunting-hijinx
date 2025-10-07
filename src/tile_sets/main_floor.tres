@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=37 format=3 uid="uid://26wcy33gmwrh"]
+[gd_resource type="TileSet" load_steps=40 format=3 uid="uid://26wcy33gmwrh"]
 
 [ext_resource type="Texture2D" uid="uid://dk8xes2m52as5" path="res://assets/tile_sets/main_floor/diffuse.png" id="1_1vodu"]
 [ext_resource type="Texture2D" uid="uid://e5tc842y66xv" path="res://assets/tile_sets/main_floor/normal.png" id="1_xaonm"]
@@ -8,7 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://m057ftqicl1u" path="res://src/candle/candle_left.tscn" id="5_cyv2r"]
 [ext_resource type="Texture2D" uid="uid://dhdp0bpx7lbgv" path="res://assets/tile_sets/main_floor/door_frame/diffuse.png" id="6_7bbi3"]
 [ext_resource type="Texture2D" uid="uid://bpv8wamoqowa8" path="res://assets/tile_sets/main_floor/door_frame/normal.png" id="7_1bls3"]
+[ext_resource type="PackedScene" uid="uid://qvu7pdftkg8y" path="res://src/ghost_statue/ghost_statue.tscn" id="7_o8opu"]
 [ext_resource type="Texture2D" uid="uid://c1x3pqrgptrwl" path="res://assets/tile_sets/main_floor/door_frame/specular.png" id="8_534ie"]
+[ext_resource type="PackedScene" uid="uid://ct4851h4l56am" path="res://src/candle/candelabra_on_table.tscn" id="8_i7vh6"]
+[ext_resource type="PackedScene" uid="uid://cai8ypa3j3wip" path="res://src/stairs/stairs.tscn" id="9_igbqk"]
 [ext_resource type="Texture2D" uid="uid://thcgdmvvhkcb" path="res://assets/tile_sets/main_floor/dining_room_rug/diffuse.png" id="9_myh5c"]
 [ext_resource type="Texture2D" uid="uid://djhb584fvcwjb" path="res://assets/tile_sets/main_floor/dining_room_rug/normal.png" id="10_cfei0"]
 [ext_resource type="Texture2D" uid="uid://drxul81n4fplp" path="res://assets/tile_sets/main_floor/dining_room_rug/specular.png" id="11_b6g4j"]
@@ -1038,10 +1041,13 @@ texture = SubResource("CanvasTexture_62uv1")
 6:0/0 = 0
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_lkygb"]
-resource_name = "candles"
+resource_name = "scenes"
 scenes/1/scene = ExtResource("3_cs81d")
 scenes/2/scene = ExtResource("4_ureo8")
 scenes/3/scene = ExtResource("5_cyv2r")
+scenes/4/scene = ExtResource("7_o8opu")
+scenes/5/scene = ExtResource("8_i7vh6")
+scenes/6/scene = ExtResource("9_igbqk")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_kwlxp"]
 diffuse_texture = ExtResource("6_7bbi3")

@@ -16,6 +16,7 @@ const NAME_PATH = ^"%NameLabel"
 const PEER_ID_PATH = ^"%PeerID"
 const STATE_CHART_PATH = ^"%StateChart"
 
+@export var level: Level
 @export var quests: Array[Quest] = []
 @export var play_complete_sound: Array[Quest] = []
 
@@ -34,12 +35,12 @@ var _quests: Array[Quest] = []
 @onready var flashlights: Array[Flashlight] = []
 @onready var ghost: CharacterBody2D = %Ghost
 @onready var hunter: CharacterBody2D = %Hunter
-@onready var limit_top_left: Marker2D = %LimitTopLeft
-@onready var limit_bottom_right: Marker2D = %LimitBottomRight
 @onready var objective: RichTextLabel = %Objective
+@onready var level_tile_map_layers: LevelTileMapLayers = $LevelTileMapLayers
 
 
 func _ready() -> void:
+	level_tile_map_layers.level = level
 	_apply_camera_limits(ghost)
 	_apply_camera_limits(hunter)
 
@@ -124,10 +125,10 @@ func _apply_camera_limits(camera_parent: Node) -> void:
 	if camera == null:
 		return
 
-	camera.limit_left = roundi(limit_top_left.position.x)
-	camera.limit_right = roundi(limit_bottom_right.position.x)
-	camera.limit_top = roundi(limit_top_left.position.y)
-	camera.limit_bottom = roundi(limit_bottom_right.position.y)
+	camera.limit_left = level.limit_top_left.x
+	camera.limit_right = level.limit_bottom_right.x
+	camera.limit_top = level.limit_top_left.y
+	camera.limit_bottom = level.limit_bottom_right.y
 	camera_limits_applied.emit()
 
 
