@@ -13,6 +13,8 @@ script = ExtResource("1_1i848")
 
 [node name="ButtonPressed" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_xdec1")
+bus = &"Effects"
 
 [node name="SliderChanged" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_0s2a5")
+bus = &"Effects"
