@@ -8,6 +8,16 @@ This project adheres to an adapted form of [Semantic Versioning](https://semver.
 2. MINOR version when you add backward-compatible functionality.
 3. PATCH version when you make backward-compatible bug fixes.
 
+## [2.1.1] - 2025-10-08
+
+### Fixed
+
+- Crash when a battery despawns while a flashlight is shining on it.
+- Focus can be lost by clients in lobby.
+- Inconsistent button content margins.
+- Interface sounds play on master bus instead of effects bus.
+- Most text is a light gray instead of pure white.
+
 ## [2.1.0] - 2025-10-01
 
 ### Added
@@ -301,6 +311,7 @@ This project adheres to an adapted form of [Semantic Versioning](https://semver.
 
 - Initial release.
 
+[2.1.1]: https://github.com/zibetnu/haunting-hijinx/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/zibetnu/haunting-hijinx/compare/2.0.0...2.1.0
 [2.0.0]: https://github.com/zibetnu/haunting-hijinx/compare/1.11.1...2.0.0
 [1.11.1]: https://github.com/zibetnu/haunting-hijinx/compare/1.11.0...1.11.1
