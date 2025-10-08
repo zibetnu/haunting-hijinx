@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dx1t1e0ahb3xa" path="res://assets/tile_sets/main_floor/stairs/railing/diffuse.png" id="4_ulyuo"]
 [ext_resource type="Texture2D" uid="uid://c4mrxyxsbvowu" path="res://assets/tile_sets/main_floor/stairs/railing/normal.png" id="5_nxgy0"]
 [ext_resource type="Texture2D" uid="uid://cv1pj4m3tp1ap" path="res://assets/tile_sets/main_floor/stairs/railing/specular.png" id="6_k0w34"]
-[ext_resource type="PackedScene" uid="uid://ciga14osg5c77" path="res://src/candle/candle.tscn" id="7_kk03b"]
+[ext_resource type="PackedScene" uid="uid://ciga14osg5c77" path="res://src/level_tile_map_layers/scene_tiles/candle/candle.tscn" id="7_kk03b"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_5x5y2"]
 diffuse_texture = ExtResource("1_657q0")

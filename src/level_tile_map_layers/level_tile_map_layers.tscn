@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ebt35jjk5feh"]
+[gd_scene load_steps=4 format=3 uid="uid://ebt35jjk5feh"]
 
-[ext_resource type="Script" uid="uid://c1onfhkarb3pr" path="res://src/level/main_floor/level_tile_map_layers.gd" id="1_h25yc"]
-[ext_resource type="TileSet" uid="uid://26wcy33gmwrh" path="res://src/tile_sets/main_floor.tres" id="3_cokuq"]
+[ext_resource type="Script" uid="uid://c1onfhkarb3pr" path="res://src/level_tile_map_layers/level_tile_map_layers.gd" id="1_h25yc"]
+[ext_resource type="TileSet" uid="uid://26wcy33gmwrh" path="res://src/level_tile_map_layers/level_tile_set.tres" id="3_cokuq"]
+[ext_resource type="PackedScene" uid="uid://b0jfn7wspsy4c" path="res://src/level_tile_map_layers/lighting/level_lighting.tscn" id="3_ydqia"]
 
 [node name="LevelTileMapLayers" type="Node2D"]
 y_sort_enabled = true
@@ -40,3 +41,5 @@ light_mask = 6
 y_sort_enabled = true
 tile_set = ExtResource("3_cokuq")
 navigation_enabled = false
+
+[node name="LevelLighting" parent="." instance=ExtResource("3_ydqia")]

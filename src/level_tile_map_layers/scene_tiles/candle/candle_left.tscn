@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://m057ftqicl1u"]
 
-[ext_resource type="Texture2D" uid="uid://btftmi3k8807f" path="res://src/candle/arm_side_texture.tres" id="1_swbdo"]
-[ext_resource type="Texture2D" uid="uid://jv4efllfhfwn" path="res://src/candle/base_texture.tres" id="3_j7uau"]
-[ext_resource type="PackedScene" uid="uid://sk7k142ijsc7" path="res://src/candle/flame/flame.tscn" id="4_sdrgr"]
-[ext_resource type="Texture2D" uid="uid://g6hr1h2v2mvu" path="res://src/candle/candle_light_texture.tres" id="6_eek8d"]
+[ext_resource type="Texture2D" uid="uid://btftmi3k8807f" path="res://src/level_tile_map_layers/scene_tiles/candle/arm_side_texture.tres" id="1_swbdo"]
+[ext_resource type="Texture2D" uid="uid://jv4efllfhfwn" path="res://src/level_tile_map_layers/scene_tiles/candle/base_texture.tres" id="3_j7uau"]
+[ext_resource type="PackedScene" uid="uid://sk7k142ijsc7" path="res://src/level_tile_map_layers/scene_tiles/candle/flame/flame.tscn" id="4_sdrgr"]
+[ext_resource type="Texture2D" uid="uid://g6hr1h2v2mvu" path="res://src/level_tile_map_layers/scene_tiles/candle/candle_light_texture.tres" id="6_eek8d"]
 
 [node name="Candle" type="Node2D"]
 position = Vector2(0, 8)

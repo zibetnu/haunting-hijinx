@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bk7jg2kp46edm"]
 
 [ext_resource type="Script" uid="uid://bgaqiseha8j7i" path="res://src/autoload/peer_data/peer_data.gd" id="1_txong"]
-[ext_resource type="Script" uid="uid://bqesso14v403r" path="res://src/levels/level.gd" id="2_ciavg"]
-[ext_resource type="Resource" uid="uid://cwctpupci2uiq" path="res://src/levels/main_floor.tres" id="3_47uvv"]
+[ext_resource type="Script" uid="uid://bqesso14v403r" path="res://src/level/level.gd" id="2_ciavg"]
+[ext_resource type="Resource" uid="uid://cwctpupci2uiq" path="res://src/level/main_floor.tres" id="3_47uvv"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ev2t0"]
 properties/0/path = NodePath(".:ghost_peer")

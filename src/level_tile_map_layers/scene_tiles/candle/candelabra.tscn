@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://b6sumweqwhyet"]
 
-[ext_resource type="Texture2D" uid="uid://cu1bvhbtfg" path="res://src/candle/candelabra_arms_texture.tres" id="1_kr3k5"]
-[ext_resource type="Texture2D" uid="uid://jv4efllfhfwn" path="res://src/candle/base_texture.tres" id="2_4cw5o"]
-[ext_resource type="PackedScene" uid="uid://sk7k142ijsc7" path="res://src/candle/flame/flame.tscn" id="3_ukd4a"]
+[ext_resource type="Texture2D" uid="uid://cu1bvhbtfg" path="res://src/level_tile_map_layers/scene_tiles/candle/candelabra_arms_texture.tres" id="1_kr3k5"]
+[ext_resource type="Texture2D" uid="uid://jv4efllfhfwn" path="res://src/level_tile_map_layers/scene_tiles/candle/base_texture.tres" id="2_4cw5o"]
+[ext_resource type="PackedScene" uid="uid://sk7k142ijsc7" path="res://src/level_tile_map_layers/scene_tiles/candle/flame/flame.tscn" id="3_ukd4a"]
 
 [sub_resource type="Gradient" id="Gradient_mfklc"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)

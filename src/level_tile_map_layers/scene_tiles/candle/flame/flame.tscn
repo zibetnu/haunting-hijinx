@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://sk7k142ijsc7"]
 
 [ext_resource type="Texture2D" uid="uid://bwecne3kh8e4i" path="res://assets/candle/flame.png" id="1_ujmh6"]
-[ext_resource type="Script" uid="uid://bvgod7miakpcm" path="res://src/candle/flame/flame.gd" id="2_l1fv8"]
+[ext_resource type="Script" uid="uid://bvgod7miakpcm" path="res://src/level_tile_map_layers/scene_tiles/candle/flame/flame.gd" id="2_l1fv8"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_iwwh5"]
 light_mode = 1

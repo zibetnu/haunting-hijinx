@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Level" load_steps=2 format=4 uid="uid://cwctpupci2uiq"]
 
-[ext_resource type="Script" uid="uid://bqesso14v403r" path="res://src/levels/level.gd" id="1_d8sjr"]
+[ext_resource type="Script" uid="uid://bqesso14v403r" path="res://src/level/level.gd" id="1_d8sjr"]
 
 [resource]
 resource_name = "Main Floor"

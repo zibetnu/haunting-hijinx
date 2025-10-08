@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="6_qmxdg"]
 [ext_resource type="PackedScene" uid="uid://lgxoth4h2cd0" path="res://src/lobby/lobby_name_setter/lobby_name_setter.tscn" id="7_7ee1f"]
 [ext_resource type="PackedScene" uid="uid://bj8n2x3jkcbgs" path="res://src/relay_initializer/relay_initializer.tscn" id="8_tfeyi"]
-[ext_resource type="PackedScene" uid="uid://vl432076bm8p" path="res://src/level/steam_lobby_chat_update/steam_lobby_chat_update.tscn" id="9_tuqyh"]
+[ext_resource type="PackedScene" uid="uid://vl432076bm8p" path="res://src/level_player/steam_lobby_chat_update/steam_lobby_chat_update.tscn" id="9_tuqyh"]
 [ext_resource type="PackedScene" uid="uid://bv616iqaq6lgw" path="res://src/lobby_type_setter/lobby_type_setter.tscn" id="10_gp772"]
 
 [node name="Lobby" type="MarginContainer"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://ct4851h4l56am"]
 
-[ext_resource type="PackedScene" uid="uid://b6sumweqwhyet" path="res://src/candle/candelabra.tscn" id="1_7afli"]
+[ext_resource type="PackedScene" uid="uid://b6sumweqwhyet" path="res://src/level_tile_map_layers/scene_tiles/candle/candelabra.tscn" id="1_7afli"]
 [ext_resource type="Texture2D" uid="uid://c1roq1mo8jeki" path="res://assets/tile_sets/main_floor/nightstand/diffuse.png" id="1_cfd47"]
 [ext_resource type="Texture2D" uid="uid://cc7nv73dpx8km" path="res://assets/tile_sets/main_floor/nightstand/normal.png" id="2_2xyty"]
 [ext_resource type="Texture2D" uid="uid://des554onxdkvj" path="res://assets/tile_sets/main_floor/nightstand/specular.png" id="3_pqmaq"]

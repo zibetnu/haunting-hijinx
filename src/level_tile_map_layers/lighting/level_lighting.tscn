@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b0jfn7wspsy4c"]
 
-[ext_resource type="Script" uid="uid://btk5cqh8kqnm1" path="res://src/level/lighting/level_lighting.gd" id="1_fl45x"]
+[ext_resource type="Script" uid="uid://btk5cqh8kqnm1" path="res://src/level_tile_map_layers/lighting/level_lighting.gd" id="1_fl45x"]
 
 [node name="LevelLighting" type="Node2D" groups=["level_lighting"]]
 script = ExtResource("1_fl45x")
