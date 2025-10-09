@@ -125,10 +125,10 @@ func _apply_camera_limits(camera_parent: Node) -> void:
 	if camera == null:
 		return
 
-	camera.limit_left = level.limit_top_left.x
-	camera.limit_right = level.limit_bottom_right.x
-	camera.limit_top = level.limit_top_left.y
-	camera.limit_bottom = level.limit_bottom_right.y
+	camera.limit_left = roundi(level.limit_top_left.x)
+	camera.limit_top = roundi(level.limit_top_left.y)
+	camera.limit_right = roundi(level.limit_bottom_right.x)
+	camera.limit_bottom = roundi(level.limit_bottom_right.y)
 	camera_limits_applied.emit()
 
 

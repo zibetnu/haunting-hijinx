@@ -5,8 +5,8 @@ extends Resource
 @export var hunter_spawn_points: Array[Vector2]
 
 @export_group("Camera Limits", "limit")
-@export var limit_top_left: Vector2i
-@export var limit_bottom_right: Vector2i
+@export var limit_top_left: Vector2
+@export var limit_bottom_right: Vector2
 
 @export_storage var floor_data: PackedByteArray
 @export_storage var wall_data: PackedByteArray
