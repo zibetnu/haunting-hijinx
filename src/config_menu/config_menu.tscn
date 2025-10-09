@@ -44,6 +44,7 @@ focus_neighbor_right = NodePath("../HBoxContainer/VBoxContainer/DisplayOptionBut
 focus_next = NodePath("../HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/WindowModeOption")
 shortcut_context = NodePath("..")
 shortcut = SubResource("Shortcut_b3uno")
+shortcut_in_tooltip = false
 text = "Back"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]

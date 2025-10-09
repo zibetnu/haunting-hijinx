@@ -55,6 +55,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 shortcut_context = NodePath("../..")
 shortcut = SubResource("Shortcut_8x1nc")
+shortcut_in_tooltip = false
 text = "Back"
 
 [node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]

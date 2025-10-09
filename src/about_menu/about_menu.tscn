@@ -361,6 +361,7 @@ unique_name_in_owner = true
 layout_mode = 2
 shortcut_context = NodePath("../..")
 shortcut = SubResource("Shortcut_egiyj")
+shortcut_in_tooltip = false
 text = "Back"
 
 [node name="Licenses" type="Button" parent="Buttons"]

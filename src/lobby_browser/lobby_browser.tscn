@@ -34,6 +34,7 @@ alignment = 2
 layout_mode = 2
 shortcut_context = NodePath("..")
 shortcut = SubResource("Shortcut_dj2jg")
+shortcut_in_tooltip = false
 text = "Back"
 
 [node name="InitSteam" type="Button" parent="HBoxContainer/LeftMenu"]
