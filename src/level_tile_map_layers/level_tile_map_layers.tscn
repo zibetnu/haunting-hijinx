@@ -7,6 +7,10 @@
 [node name="LevelTileMapLayers" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_h25yc")
+metadata/_edit_lock_ = true
+
+[node name="LevelLighting" parent="." instance=ExtResource("3_ydqia")]
+metadata/_edit_lock_ = true
 
 [node name="FloorLayer" type="TileMapLayer" parent="."]
 z_index = -2
@@ -14,12 +18,14 @@ tile_set = ExtResource("3_cokuq")
 occlusion_enabled = false
 collision_enabled = false
 navigation_enabled = false
+metadata/_edit_lock_ = true
 
 [node name="WallLayer" type="TileMapLayer" parent="."]
 light_mask = 6
 z_index = -1
 tile_set = ExtResource("3_cokuq")
 navigation_enabled = false
+metadata/_edit_lock_ = true
 
 [node name="WallTopLayer" type="TileMapLayer" parent="."]
 light_mask = 4
@@ -27,6 +33,7 @@ y_sort_enabled = true
 tile_set = ExtResource("3_cokuq")
 collision_enabled = false
 navigation_enabled = false
+metadata/_edit_lock_ = true
 
 [node name="WallCapLayer" type="TileMapLayer" parent="."]
 light_mask = 6
@@ -35,11 +42,119 @@ tile_set = ExtResource("3_cokuq")
 occlusion_enabled = false
 collision_enabled = false
 navigation_enabled = false
+metadata/_edit_lock_ = true
 
 [node name="PropLayer" type="TileMapLayer" parent="."]
 light_mask = 6
 y_sort_enabled = true
 tile_set = ExtResource("3_cokuq")
 navigation_enabled = false
+metadata/_edit_lock_ = true
 
-[node name="LevelLighting" parent="." instance=ExtResource("3_ydqia")]
+[node name="EditorNodes" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="GhostSpawnMarker" type="Marker2D" parent="EditorNodes"]
+unique_name_in_owner = true
+gizmo_extents = 16.0
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="EditorNodes/GhostSpawnMarker"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -7.0
+offset_right = 22.0
+grow_vertical = 0
+theme_type_variation = &"LabelCompact"
+text = "Ghost"
+
+[node name="HunterSpawnMarker" type="Marker2D" parent="EditorNodes"]
+unique_name_in_owner = true
+gizmo_extents = 8.0
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="EditorNodes/HunterSpawnMarker"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -7.0
+offset_right = 22.0
+grow_vertical = 0
+theme_type_variation = &"LabelCompact"
+text = "Hunter 1"
+
+[node name="HunterSpawnMarker2" type="Marker2D" parent="EditorNodes"]
+unique_name_in_owner = true
+gizmo_extents = 8.0
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="EditorNodes/HunterSpawnMarker2"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -7.0
+offset_right = 22.0
+grow_vertical = 0
+theme_type_variation = &"LabelCompact"
+text = "Hunter 2"
+
+[node name="HunterSpawnMarker3" type="Marker2D" parent="EditorNodes"]
+unique_name_in_owner = true
+gizmo_extents = 8.0
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="EditorNodes/HunterSpawnMarker3"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -7.0
+offset_right = 22.0
+grow_vertical = 0
+theme_type_variation = &"LabelCompact"
+text = "Hunter 3"
+
+[node name="HunterSpawnMarker4" type="Marker2D" parent="EditorNodes"]
+unique_name_in_owner = true
+gizmo_extents = 8.0
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="EditorNodes/HunterSpawnMarker4"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -7.0
+offset_right = 22.0
+grow_vertical = 0
+theme_type_variation = &"LabelCompact"
+text = "Hunter 4"
+
+[node name="CameraLimitTopLeft" type="Marker2D" parent="EditorNodes"]
+unique_name_in_owner = true
+gizmo_extents = 8.0
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="EditorNodes/CameraLimitTopLeft"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -7.0
+offset_right = 22.0
+grow_vertical = 0
+theme_type_variation = &"LabelCompact"
+text = "Top-left camera limit"
+
+[node name="CameraLimitBottomRight" type="Marker2D" parent="EditorNodes"]
+unique_name_in_owner = true
+gizmo_extents = 8.0
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="EditorNodes/CameraLimitBottomRight"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -7.0
+offset_right = 22.0
+grow_vertical = 0
+theme_type_variation = &"LabelCompact"
+text = "Bottom-right camera limit"
