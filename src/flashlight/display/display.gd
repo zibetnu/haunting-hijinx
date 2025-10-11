@@ -55,6 +55,8 @@ var light_texture_index: int:
 @onready var _floor_light: PointLight2D = %FloorLight
 @onready var _light: Node2D = %Light
 @onready var _rotation_node: RemoteTransform2D = %RotationNode
+@onready var _sparks: GPUParticles2D = $Sparks
+@onready var _spark_audio: AudioStreamPlayer2D = $SparkAudio
 @onready var _wall_light: PointLight2D = %WallLight
 
 
@@ -72,3 +74,12 @@ func set_flashlight_rotation(value: float) -> void:
 
 func set_light_texture_index(value: int) -> void:
 	light_texture_index = value
+
+
+@rpc("authority", "call_remote", "reliable")
+func spark() -> void:
+	if multiplayer.is_server():
+		spark.rpc()
+
+	_sparks.restart()
+	_spark_audio.play()

@@ -24,6 +24,7 @@ texture = SubResource("CanvasTexture_tx6ah")
 
 [sub_resource type="TileSet" id="TileSet_kwvjk"]
 occlusion_layer_0/light_mask = 2
+occlusion_layer_0/sdf_collision = true
 occlusion_layer_1/light_mask = 4
 physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 0

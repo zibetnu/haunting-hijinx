@@ -5,6 +5,28 @@
 			"contact": "",
 			"copyright": [],
 			"description": "",
+			"id": "",
+			"licenses": [
+				{
+					"file": "",
+					"identifier": "",
+					"name": "CC0 1.0",
+					"text": "",
+					"web": "https://creativecommons.org/publicdomain/zero/1.0/"
+				}
+			],
+			"name": "combo electricity.wav",
+			"paths": [
+				"res://assets/flashlight/spark.wav"
+			],
+			"version": "",
+			"web": "https://freesound.org/s/683637/"
+		},
+		{
+			"category": "Assets",
+			"contact": "",
+			"copyright": [],
+			"description": "",
 			"id": "cymbal_hit",
 			"licenses": [
 				{

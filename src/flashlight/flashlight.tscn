@@ -12,5 +12,6 @@ y_sort_enabled = true
 
 [connection signal="cast_length_index_changed" from="Behavior" to="Display" method="set_light_texture_index" flags=3]
 [connection signal="collision_points_changed" from="Behavior" to="Display" method="set_collision_points" flags=3]
+[connection signal="damage_taken" from="Behavior" to="Display" method="spark"]
 [connection signal="flashlight_rotation_changed" from="Behavior" to="Display" method="set_flashlight_rotation" flags=3]
 [connection signal="power_toggled" from="Behavior" to="Display" method="set_powered" flags=3]

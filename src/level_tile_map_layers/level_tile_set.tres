@@ -1238,6 +1238,7 @@ texture = SubResource("CanvasTexture_k646r")
 [resource]
 resource_name = "Level Tile Set"
 occlusion_layer_0/light_mask = 2
+occlusion_layer_0/sdf_collision = true
 occlusion_layer_1/light_mask = 4
 physics_layer_0/collision_layer = 1
 physics_layer_1/collision_layer = 64

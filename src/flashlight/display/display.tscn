@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c7qmrgohocqfx"]
+[gd_scene load_steps=28 format=3 uid="uid://c7qmrgohocqfx"]
 
 [ext_resource type="Script" uid="uid://bb2txhj2iyjib" path="res://src/flashlight/display/display.gd" id="1_rfbrn"]
 [ext_resource type="Texture2D" uid="uid://b5o6s164tla1b" path="res://assets/flashlight/light_1.png" id="2_j0apu"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://c7i1fk6ffwo5m" path="res://assets/flashlight/light_13.png" id="14_pbdd6"]
 [ext_resource type="Texture2D" uid="uid://dkj0fs683k0sr" path="res://assets/flashlight/light_14.png" id="15_q2eh0"]
 [ext_resource type="Texture2D" uid="uid://hxh3xs22ni1r" path="res://assets/flashlight/light_15.png" id="16_nt746"]
+[ext_resource type="AudioStream" uid="uid://clbv1nyarexb2" path="res://assets/flashlight/spark.wav" id="18_jtca3"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_84rfy"]
 
@@ -39,6 +40,28 @@ properties/3/replication_mode = 2
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lnymb"]
 light_mode = 1
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gtxdj"]
+light_mode = 1
+
+[sub_resource type="Curve" id="Curve_gtxdj"]
+_data = [Vector2(0, 0.5), 0.0, 5.38548, 0, 0, Vector2(0.8, 0), 0.654329, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
+
+[sub_resource type="CurveTexture" id="CurveTexture_jtca3"]
+curve = SubResource("Curve_gtxdj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gtxdj"]
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 128.0
+initial_velocity_max = 128.0
+gravity = Vector3(0, 98, 0)
+alpha_curve = SubResource("CurveTexture_jtca3")
+collision_mode = 1
+collision_friction = 0.5
+collision_bounce = 0.5
+
 [node name="Display" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_rfbrn")
@@ -50,6 +73,11 @@ replication_config = SubResource("SceneReplicationConfig_jmwf3")
 [node name="Click" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_sji0g")
 volume_db = -9.1
+bus = &"Effects"
+
+[node name="SparkAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_jtca3")
+volume_db = -6.0
 bus = &"Effects"
 
 [node name="Body" type="Sprite2D" parent="."]
@@ -107,6 +135,25 @@ position = Vector2(0, 2)
 unique_name_in_owner = true
 material = SubResource("CanvasItemMaterial_lnymb")
 position = Vector2(16, 0)
+
+[node name="SparksPosition" type="RemoteTransform2D" parent="RotationNode2"]
+position = Vector2(12, 0)
+remote_path = NodePath("../../Sparks")
+update_rotation = false
+update_scale = false
+
+[node name="Sparks" type="GPUParticles2D" parent="."]
+light_mask = 31
+material = SubResource("CanvasItemMaterial_gtxdj")
+position = Vector2(12, -8)
+emitting = false
+one_shot = true
+explosiveness = 1.0
+trail_enabled = true
+trail_lifetime = 0.1
+trail_sections = 2
+trail_section_subdivisions = 1
+process_material = SubResource("ParticleProcessMaterial_gtxdj")
 
 [connection signal="flashlight_rotation_changed" from="." to="Body/RotationToIntRange" method="set_range_value_from_rotation"]
 [connection signal="range_value_changed" from="Body/RotationToIntRange" to="Body" method="set_frame"]
