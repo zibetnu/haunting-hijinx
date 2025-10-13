@@ -85,6 +85,7 @@ region_enabled = true
 region_rect = Rect2(147, 50, 7, 4)
 
 [node name="Railing" type="Sprite2D" parent="Node2D"]
+light_mask = 2
 texture = SubResource("CanvasTexture_7qijg")
 offset = Vector2(0, -15)
 region_rect = Rect2(0, 0, 128, 86)
