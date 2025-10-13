@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=40 format=3 uid="uid://26wcy33gmwrh"]
+[gd_resource type="TileSet" load_steps=45 format=3 uid="uid://26wcy33gmwrh"]
 
 [ext_resource type="Texture2D" uid="uid://dk8xes2m52as5" path="res://assets/tile_sets/main_floor/diffuse.png" id="1_1vodu"]
 [ext_resource type="Texture2D" uid="uid://e5tc842y66xv" path="res://assets/tile_sets/main_floor/normal.png" id="1_xaonm"]
@@ -18,6 +18,9 @@
 [ext_resource type="Texture2D" uid="uid://c1roq1mo8jeki" path="res://assets/tile_sets/main_floor/nightstand/diffuse.png" id="12_5fcq7"]
 [ext_resource type="Texture2D" uid="uid://cc7nv73dpx8km" path="res://assets/tile_sets/main_floor/nightstand/normal.png" id="13_u0jlu"]
 [ext_resource type="Texture2D" uid="uid://des554onxdkvj" path="res://assets/tile_sets/main_floor/nightstand/specular.png" id="14_swigs"]
+[ext_resource type="Texture2D" uid="uid://bbww2xhf7aoef" path="res://assets/tile_sets/the_basement/stone_brick_floor/diffuse.png" id="19_xgq6e"]
+[ext_resource type="Texture2D" uid="uid://v4hk4o842qvi" path="res://assets/tile_sets/the_basement/stone_brick_floor/normal.png" id="20_5632m"]
+[ext_resource type="Texture2D" uid="uid://d4avhfqchjlyr" path="res://assets/tile_sets/the_basement/stone_brick_floor/specular.png" id="21_njwl1"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1bcvr"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -1107,6 +1110,16 @@ texture = SubResource("CanvasTexture_tx6ah")
 0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_7a3f7")
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 24, -8, 24, 8, -8, 8)
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_1yfca"]
+diffuse_texture = ExtResource("19_xgq6e")
+normal_texture = ExtResource("20_5632m")
+specular_texture = ExtResource("21_njwl1")
+specular_shininess = 0.5
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gwdxv"]
+texture = SubResource("CanvasTexture_1yfca")
+0:0/0 = 0
+
 [resource]
 resource_name = "Level Tile Set"
 occlusion_layer_0/light_mask = 2
@@ -1122,3 +1135,4 @@ sources/1 = SubResource("TileSetScenesCollectionSource_lkygb")
 sources/2 = SubResource("TileSetAtlasSource_lt0jx")
 sources/3 = SubResource("TileSetAtlasSource_ltyj1")
 sources/4 = SubResource("TileSetAtlasSource_c7kpv")
+sources/5 = SubResource("TileSetAtlasSource_gwdxv")
