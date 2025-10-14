@@ -1,14 +1,24 @@
-[gd_scene load_steps=11 format=3 uid="uid://qvu7pdftkg8y"]
+[gd_scene load_steps=21 format=3 uid="uid://qvu7pdftkg8y"]
 
 [ext_resource type="Texture2D" uid="uid://bcud6153v4cd5" path="res://assets/statue/base/diffuse.png" id="1_nkf4o"]
+[ext_resource type="Script" uid="uid://xlr88m70s384" path="res://src/ghost_statue/ghost_statue.gd" id="1_nqrkp"]
 [ext_resource type="Texture2D" uid="uid://chw30io6tbvqx" path="res://assets/statue/base/normal.png" id="2_c6hu8"]
 [ext_resource type="Texture2D" uid="uid://sfy2hreb7xxo" path="res://assets/statue/base/specular.png" id="3_hd512"]
 [ext_resource type="Texture2D" uid="uid://cbnm4xrkfeutt" path="res://assets/statue/ghost/diffuse.png" id="4_mtkty"]
 [ext_resource type="Texture2D" uid="uid://dp4kwc7cfkiem" path="res://assets/statue/ghost/normal.png" id="5_prf3r"]
 [ext_resource type="Texture2D" uid="uid://0wk0eimjy2gc" path="res://assets/statue/ghost/specular.png" id="6_w2v7l"]
+[ext_resource type="Texture2D" uid="uid://bdwcoust5p0ke" path="res://assets/statue/statue_eyes.png" id="7_ig066"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nqrkp"]
+properties/0/path = NodePath("Eyes:offset")
+properties/0/spawn = false
+properties/0/replication_mode = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ob8gk"]
 size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ysqp5"]
+size = Vector2(64, 64)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_griun"]
 polygon = PackedVector2Array(-16, 13, -13, 16, 13, 16, 16, 13, 16, -13, 13, -16, -13, -16, -16, -13)
@@ -25,10 +35,68 @@ normal_texture = ExtResource("5_prf3r")
 specular_texture = ExtResource("6_w2v7l")
 specular_shininess = 0.5
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nqrkp"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqrkp"]
+atlas = ExtResource("7_ig066")
+region = Rect2(0, 0, 6, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ysqp5"]
+atlas = ExtResource("7_ig066")
+region = Rect2(6, 0, 6, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48rh0"]
+atlas = ExtResource("7_ig066")
+region = Rect2(12, 0, 6, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11dxq"]
+atlas = ExtResource("7_ig066")
+region = Rect2(18, 0, 6, 2)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4nn87"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqrkp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ysqp5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48rh0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11dxq")
+}],
+"loop": false,
+"name": &"show",
+"speed": 12.0
+}]
+
 [node name="GhostStatue" type="StaticBody2D"]
+script = ExtResource("1_nqrkp")
+
+[node name="LookTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_nqrkp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ob8gk")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_ysqp5")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_griun")
@@ -42,3 +110,12 @@ texture = SubResource("CanvasTexture_kqstq")
 light_mask = 2
 position = Vector2(0, -12)
 texture = SubResource("CanvasTexture_xixck")
+
+[node name="Eyes" type="AnimatedSprite2D" parent="."]
+visible = false
+material = SubResource("CanvasItemMaterial_nqrkp")
+position = Vector2(0, -19)
+sprite_frames = SubResource("SpriteFrames_4nn87")
+animation = &"show"
+
+[connection signal="animation_finished" from="Eyes" to="." method="_on_eyes_animation_finished"]
