@@ -98,6 +98,7 @@ occluder = SubResource("OccluderPolygon2D_griun")
 
 [node name="Base" type="Sprite2D" parent="."]
 light_mask = 6
+z_index = -1
 position = Vector2(8, -10)
 texture = SubResource("CanvasTexture_kqstq")
 
