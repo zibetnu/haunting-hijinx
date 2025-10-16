@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://qvu7pdftkg8y"]
+[gd_scene load_steps=20 format=3 uid="uid://qvu7pdftkg8y"]
 
 [ext_resource type="Texture2D" uid="uid://bcud6153v4cd5" path="res://assets/statue/base/diffuse.png" id="1_nkf4o"]
 [ext_resource type="Script" uid="uid://xlr88m70s384" path="res://src/level_tile_map_layers/scene_tiles/ghost_statue.gd" id="1_nqrkp"]
@@ -8,11 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://dp4kwc7cfkiem" path="res://assets/statue/ghost/normal.png" id="5_prf3r"]
 [ext_resource type="Texture2D" uid="uid://0wk0eimjy2gc" path="res://assets/statue/ghost/specular.png" id="6_w2v7l"]
 [ext_resource type="Texture2D" uid="uid://bdwcoust5p0ke" path="res://assets/statue/statue_eyes.png" id="7_ig066"]
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nqrkp"]
-properties/0/path = NodePath("Eyes:offset")
-properties/0/spawn = false
-properties/0/replication_mode = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ob8gk"]
 size = Vector2(32, 32)
@@ -83,9 +78,6 @@ script = ExtResource("1_nqrkp")
 [node name="LookTimer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_nqrkp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8, -8)
