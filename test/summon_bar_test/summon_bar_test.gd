@@ -9,6 +9,8 @@ var _bar: TextureProgressBar
 var _highlight: AnimatedSprite2D
 var _get_animation_speed: Callable
 
+@warning_ignore_start("redundant_await")
+
 
 func before_test() -> void:
 	_runner = scene_runner("uid://c2p8hmv11uyfp")

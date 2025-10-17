@@ -21,94 +21,68 @@
 resource_name = "Battery"
 script = ExtResource("3_ea8sw")
 objective = "A battery spawns at a random location for each hunter in need. Try picking one up to recharge your flashlight."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_26eav"]
 resource_name = "Welcome"
 script = ExtResource("3_ea8sw")
 objective = "Welcome to the [pulse freq=2.0 color=#ffeb57 ease=-2.0]hunter[/pulse] tutorial."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_f0tmj"]
 resource_name = "Move"
 script = ExtResource("3_ea8sw")
 objective = "First, try moving around."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_y74n0"]
 resource_name = "Light"
 script = ExtResource("3_ea8sw")
 objective = "Now try powering on your light. You move slower while it is powered."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_hsvyu"]
 resource_name = "AlertInfo"
 script = ExtResource("3_ea8sw")
 objective = "You are alerted when the ghost is near, even if you can't see it. The [wave amp=20.0 freq=5.0 connected=0][color=#ff0040]...[/color][/wave] above your head is for low alert; the [pulse freq=4.0 color=#571c27 ease=-2.0][color=#ff0040]![/color][/pulse] is high alert.
 "
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_blp0j"]
 resource_name = "AlertLow"
 script = ExtResource("3_ea8sw")
 objective = "Try moving to put yourself in low (...) alert."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_huau8"]
 resource_name = "AlertHigh"
 script = ExtResource("3_ea8sw")
 objective = "Try moving to put yourself in high (!) alert."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_pl133"]
 resource_name = "Alert"
 script = ExtResource("4_e5msw")
 sub_quests = Array[ExtResource("3_ea8sw")]([SubResource("Resource_blp0j"), SubResource("Resource_huau8")])
 objective = "Try moving to put yourself in both low ([wave amp=20.0 freq=5.0 connected=0][color=#ff0040]...[/color][/wave]) and high ([pulse freq=4.0 color=#571c27 ease=-2.0][color=#ff0040]![/color][/pulse]) alert."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_04vwp"]
 resource_name = "Damage"
 script = ExtResource("3_ea8sw")
 objective = "Your goal is to kill the ghost by shining your light on it. Try using your alert to find the ghost, then hit it with your light."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_s3q2n"]
 resource_name = "Summon"
 script = ExtResource("3_ea8sw")
 objective = "The ghost can summon drain areas to deplete your battery and destroy all batteries on the map. Try getting hit by one."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_6hkcd"]
 resource_name = "Revive"
 script = ExtResource("3_ea8sw")
 objective = "A hunter faints when the ghost grabs them. Try shining your light on the downed hunter to fill their revive meter and revive them."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_0chku"]
 resource_name = "Teamwork2"
 script = ExtResource("3_ea8sw")
 objective = "Teamwork is essential, but there is no in-game way to talk (yet). [pulse freq=2.0 color=#ffffff7f ease=-2.0]Try using a voice chat for the best experience.[/pulse]"
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_yqccr"]
 resource_name = "Complete"
 script = ExtResource("3_ea8sw")
 objective = "[rainbow freq=0.6 sat=0.6 val=1]Tutorial complete. Happy hunting![/rainbow]"
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_wr3rf"]
 resource_local_to_scene = true
@@ -236,7 +210,7 @@ visible = false
 [node name="Button2Prompt" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts" index="5"]
 visible = false
 
-[node name="Ghost" parent="." index="13" node_paths=PackedStringArray("controller")]
+[node name="Ghost" parent="." index="5" node_paths=PackedStringArray("controller")]
 position = Vector2(368, 128)
 controller = NodePath("NPCGhost")
 
@@ -245,7 +219,7 @@ controller = NodePath("NPCGhost")
 [node name="FollowPlayer" parent="Ghost/IgnoreCanvasModulate" index="0"]
 position = Vector2(368, 128)
 
-[node name="Hunter" parent="." index="14"]
+[node name="Hunter" parent="." index="6"]
 position = Vector2(368, 248)
 
 [node name="IsMoving" parent="Hunter/StateChart/Base/Alive/Movement/Idle" index="0"]

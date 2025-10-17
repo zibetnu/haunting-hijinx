@@ -3,6 +3,8 @@ extends GdUnitTestSuite
 
 var _runner: GdUnitSceneRunner
 
+@warning_ignore_start("redundant_await")
+
 
 func before_test() -> void:
 	_runner = scene_runner("uid://cis3vfoj3ussh")

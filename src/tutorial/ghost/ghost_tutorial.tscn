@@ -13,108 +13,78 @@
 resource_name = "AlertLow"
 script = ExtResource("2_r5b0f")
 objective = "Try moving to put the hunter in low alert."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_3jbmy"]
 resource_name = "AlertHigh"
 script = ExtResource("2_r5b0f")
 objective = "Try moving to put the hunter in high alert."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_lfxhu"]
 resource_name = "Welcome"
 script = ExtResource("2_r5b0f")
 objective = "Welcome to the [wave amp=15.0 freq=6.0 connected=1][color=#c42430]ghost[/color][/wave] tutorial."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_f0tmj"]
 resource_name = "Move"
 script = ExtResource("2_r5b0f")
 objective = "First, try moving around."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_fx3un"]
 resource_name = "Sprint"
 script = ExtResource("2_r5b0f")
 objective = "Now try sprinting."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_5eatj"]
 resource_name = "Summon"
 script = ExtResource("2_r5b0f")
 objective = "Drain areas deplete batteries. Try summoning one under the hunter by holding summon until the meter is full, then releasing."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_ljdkr"]
 resource_name = "VisibleInfo"
 script = ExtResource("2_r5b0f")
 objective = "You are invisible to hunters when you see yourself as [pulse freq=1.0 color=#ffffff4f ease=-2.0]translucent[/pulse]. You become visible when you sprint, summon, grab, or take damage."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_t00pl"]
 resource_name = "Visible"
 script = ExtResource("2_r5b0f")
 objective = "Try becoming visible by sprinting, summoning, grabbing, or taking damage.
 "
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_a7qnb"]
 resource_name = "AlertInfo"
 script = ExtResource("2_r5b0f")
 objective = "Hunters are alerted as you draw near, even if they can't see you. The circles around you show the areas for low and high alerts."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_7teru"]
 resource_name = "Alert"
 script = ExtResource("3_5y0cp")
 sub_quests = Array[ExtResource("2_r5b0f")]([SubResource("Resource_osr1n"), SubResource("Resource_3jbmy")])
 objective = "Try moving to put the hunter in low and then high alert."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_41785"]
 resource_name = "GrabInfo"
 script = ExtResource("2_r5b0f")
 objective = "Your goal is to make all the hunters faint by grabbing them."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_txx1p"]
 resource_name = "Grab"
 script = ExtResource("2_r5b0f")
 objective = "Try touching the hunter to [shake rate=5.0 level=6 connected=1]grab[/shake] them. After a brief pause, you will move a grabbed hunter for a few seconds and then drop them."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_rhmfh"]
 resource_name = "DamageInfo"
 script = ExtResource("2_r5b0f")
 objective = "Flashlights damage you, stun you, and make you panic. You cannot grab a hunter while panicked."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_2a4mi"]
 resource_name = "Damage"
 script = ExtResource("2_r5b0f")
 objective = "Try getting hit by the hunter's flashlight."
-is_started = false
-is_completed = false
 
 [sub_resource type="Resource" id="Resource_g171c"]
 resource_name = "Complete"
 script = ExtResource("2_r5b0f")
 objective = "[rainbow freq=0.6 sat=0.6 val=1]Ghost tutorial complete. Happy haunting![/rainbow]"
-is_started = false
-is_completed = false
 
 [node name="Tutorial" instance=ExtResource("1_i6ivc")]
 script = ExtResource("1_c6pgd")
@@ -168,7 +138,7 @@ quest = SubResource("Resource_2a4mi")
 [node name="FollowPlayer" parent="Ghost/IgnoreCanvasModulate" index="0"]
 position = Vector2(368, 248)
 
-[node name="Hunter" parent="." index="12" node_paths=PackedStringArray("controller")]
+[node name="Hunter" parent="." index="6" node_paths=PackedStringArray("controller")]
 controller = NodePath("NPCHunter")
 
 [node name="NPCHunter" parent="Hunter" index="17" node_paths=PackedStringArray("ghost") instance=ExtResource("12_2andj")]

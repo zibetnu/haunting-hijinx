@@ -10,6 +10,8 @@ const MOVE_RIGHT = "move_right"
 const GHOST_COSTUME = "GhostCostume"
 const IDLE = "idle"
 
+@warning_ignore_start("redundant_await")
+
 
 func test_sprint_idle() -> void:
 	var runner: GdUnitSceneRunner = scene_runner(SCENE_PATH)
