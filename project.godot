@@ -255,6 +255,7 @@ joypad_ui_down={
 2d_physics/layer_4="spectral players"
 2d_physics/layer_5="grabbables"
 2d_physics/layer_6="revivables"
+2d_physics/layer_7="conveyor_belts"
 
 [plugins]
 

@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=45 format=3 uid="uid://26wcy33gmwrh"]
+[gd_resource type="TileSet" load_steps=50 format=3 uid="uid://26wcy33gmwrh"]
 
 [ext_resource type="Texture2D" uid="uid://dk8xes2m52as5" path="res://assets/tile_sets/main_floor/diffuse.png" id="1_1vodu"]
 [ext_resource type="Texture2D" uid="uid://e5tc842y66xv" path="res://assets/tile_sets/main_floor/normal.png" id="1_xaonm"]
@@ -21,6 +21,9 @@
 [ext_resource type="Texture2D" uid="uid://bbww2xhf7aoef" path="res://assets/tile_sets/the_basement/stone_brick_floor/diffuse.png" id="19_xgq6e"]
 [ext_resource type="Texture2D" uid="uid://v4hk4o842qvi" path="res://assets/tile_sets/the_basement/stone_brick_floor/normal.png" id="20_5632m"]
 [ext_resource type="Texture2D" uid="uid://d4avhfqchjlyr" path="res://assets/tile_sets/the_basement/stone_brick_floor/specular.png" id="21_njwl1"]
+[ext_resource type="Texture2D" uid="uid://bmv27pgmqxr2w" path="res://assets/tile_sets/research_lab/conveyor_belt/diffuse.png" id="22_1yfca"]
+[ext_resource type="Texture2D" uid="uid://c72b2xrrf1jlh" path="res://assets/tile_sets/research_lab/conveyor_belt/normal.png" id="23_gwdxv"]
+[ext_resource type="Texture2D" uid="uid://cll234opcg2gi" path="res://assets/tile_sets/research_lab/conveyor_belt/specular.png" id="24_hl20t"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1bcvr"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -1120,19 +1123,114 @@ specular_shininess = 0.5
 texture = SubResource("CanvasTexture_1yfca")
 0:0/0 = 0
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_saam1"]
+diffuse_texture = ExtResource("22_1yfca")
+normal_texture = ExtResource("23_gwdxv")
+specular_texture = ExtResource("24_hl20t")
+specular_shininess = 0.6
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o5fyh"]
+texture = SubResource("CanvasTexture_saam1")
+0:0/next_alternative_id = 2
+0:0/animation_speed = 30.0
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/animation_frame_4/duration = 1.0
+0:0/animation_frame_5/duration = 1.0
+0:0/animation_frame_6/duration = 1.0
+0:0/animation_frame_7/duration = 1.0
+0:0/animation_frame_8/duration = 1.0
+0:0/animation_frame_9/duration = 1.0
+0:0/animation_frame_10/duration = 1.0
+0:0/animation_frame_11/duration = 1.0
+0:0/animation_frame_12/duration = 1.0
+0:0/animation_frame_13/duration = 1.0
+0:0/animation_frame_14/duration = 1.0
+0:0/animation_frame_15/duration = 1.0
+0:0/0 = 0
+0:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/custom_data_0 = Vector2(-30, 0)
+0:1/animation_speed = 30.0
+0:1/animation_frame_0/duration = 1.0
+0:1/animation_frame_1/duration = 1.0
+0:1/animation_frame_2/duration = 1.0
+0:1/animation_frame_3/duration = 1.0
+0:1/animation_frame_4/duration = 1.0
+0:1/animation_frame_5/duration = 1.0
+0:1/animation_frame_6/duration = 1.0
+0:1/animation_frame_7/duration = 1.0
+0:1/animation_frame_8/duration = 1.0
+0:1/animation_frame_9/duration = 1.0
+0:1/animation_frame_10/duration = 1.0
+0:1/animation_frame_11/duration = 1.0
+0:1/animation_frame_12/duration = 1.0
+0:1/animation_frame_13/duration = 1.0
+0:1/animation_frame_14/duration = 1.0
+0:1/animation_frame_15/duration = 1.0
+0:1/0 = 0
+0:1/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0/custom_data_0 = Vector2(30, 0)
+0:2/animation_speed = 30.0
+0:2/animation_frame_0/duration = 1.0
+0:2/animation_frame_1/duration = 1.0
+0:2/animation_frame_2/duration = 1.0
+0:2/animation_frame_3/duration = 1.0
+0:2/animation_frame_4/duration = 1.0
+0:2/animation_frame_5/duration = 1.0
+0:2/animation_frame_6/duration = 1.0
+0:2/animation_frame_7/duration = 1.0
+0:2/animation_frame_8/duration = 1.0
+0:2/animation_frame_9/duration = 1.0
+0:2/animation_frame_10/duration = 1.0
+0:2/animation_frame_11/duration = 1.0
+0:2/animation_frame_12/duration = 1.0
+0:2/animation_frame_13/duration = 1.0
+0:2/animation_frame_14/duration = 1.0
+0:2/animation_frame_15/duration = 1.0
+0:2/0 = 0
+0:2/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/0/custom_data_0 = Vector2(0, -30)
+0:3/animation_speed = 30.0
+0:3/animation_frame_0/duration = 1.0
+0:3/animation_frame_1/duration = 1.0
+0:3/animation_frame_2/duration = 1.0
+0:3/animation_frame_3/duration = 1.0
+0:3/animation_frame_4/duration = 1.0
+0:3/animation_frame_5/duration = 1.0
+0:3/animation_frame_6/duration = 1.0
+0:3/animation_frame_7/duration = 1.0
+0:3/animation_frame_8/duration = 1.0
+0:3/animation_frame_9/duration = 1.0
+0:3/animation_frame_10/duration = 1.0
+0:3/animation_frame_11/duration = 1.0
+0:3/animation_frame_12/duration = 1.0
+0:3/animation_frame_13/duration = 1.0
+0:3/animation_frame_14/duration = 1.0
+0:3/animation_frame_15/duration = 1.0
+0:3/0 = 0
+0:3/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:3/0/custom_data_0 = Vector2(0, 30)
+
 [resource]
 resource_name = "Level Tile Set"
 occlusion_layer_0/light_mask = 2
 occlusion_layer_1/light_mask = 4
 physics_layer_0/collision_layer = 1
+physics_layer_1/collision_layer = 64
+physics_layer_1/collision_mask = 0
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Carpet"
 terrain_set_0/terrain_0/color = Color(1, 1, 1, 1)
 terrain_set_0/terrain_1/name = "Wall Tops"
 terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
+custom_data_layer_0/name = "linear_velocity"
+custom_data_layer_0/type = 5
 sources/0 = SubResource("TileSetAtlasSource_5yopg")
 sources/1 = SubResource("TileSetScenesCollectionSource_lkygb")
 sources/2 = SubResource("TileSetAtlasSource_lt0jx")
 sources/3 = SubResource("TileSetAtlasSource_ltyj1")
 sources/4 = SubResource("TileSetAtlasSource_c7kpv")
 sources/5 = SubResource("TileSetAtlasSource_gwdxv")
+sources/6 = SubResource("TileSetAtlasSource_o5fyh")

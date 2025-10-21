@@ -16,7 +16,6 @@ metadata/_edit_lock_ = true
 z_index = -2
 tile_set = ExtResource("3_cokuq")
 occlusion_enabled = false
-collision_enabled = false
 navigation_enabled = false
 metadata/_edit_lock_ = true
 
