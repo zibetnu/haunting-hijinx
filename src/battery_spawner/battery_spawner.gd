@@ -50,7 +50,7 @@ func _on_timer_timeout() -> void:
 	if _batteries_spawned >= batteries_needed:
 		return
 
-	var instance: Node2D = battery_scene.instantiate()
+	var instance: Battery = battery_scene.instantiate()
 	var instance_position := _get_random_battery_position()
 	var i := 0
 	while (
@@ -69,7 +69,7 @@ func _on_timer_timeout() -> void:
 	instance.tree_exited.connect(_on_battery_tree_exited)
 	spawn_root.add_child(instance, true)
 	_batteries_spawned += 1
-	battery_spawned.emit(instance.get_node("Behavior") as Battery)
+	battery_spawned.emit(instance)
 
 
 func _on_battery_tree_exited() -> void:
