@@ -23,6 +23,10 @@ boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/use_filter=false
 boot_splash/image="res://assets/made_with_godot.png"
 
+[audio]
+
+buses/default_bus_layout="res://src/default_bus_layout.tres"
+
 [autoload]
 
 GlobalSounds="res://src/autoload/global_sounds/global_sounds.tscn"
