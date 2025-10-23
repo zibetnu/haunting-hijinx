@@ -136,6 +136,9 @@ unique_name_in_owner = true
 [node name="StateChart" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("1_0xkip")
+initial_expression_properties = {
+&"is_moving": false
+}
 
 [node name="Base" type="Node" parent="StateChart"]
 script = ExtResource("2_yqkoe")

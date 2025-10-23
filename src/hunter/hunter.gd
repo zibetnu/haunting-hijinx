@@ -3,7 +3,6 @@ extends ControllableCharacter
 signal dropped
 
 const GRABBED_EVENT = &"died"
-const IS_MOVING = &"is_moving"
 
 @export var move_speed: float = 74.0
 @export var slowed_move_speed: float = 29.6
@@ -22,9 +21,6 @@ const IS_MOVING = &"is_moving"
 func _ready() -> void:
 	if not multiplayer.is_server():
 		set_physics_process(false)
-		return
-
-	state_chart.set_expression_property(IS_MOVING, false)
 
 
 func _physics_process(_delta: float) -> void:
@@ -90,6 +86,7 @@ func _get_pairs() -> Array[Pair]:
 	var p := Pair
 	var c: Controller = controller
 	var property: Callable = state_chart.set_expression_property
+	const IS_MOVING = &"is_moving"
 	return [
 		p.new(c.button_1_changed, flashlight.set_powered),
 		p.new(c.look_rotation_changed, flashlight.set_target_rotation),
