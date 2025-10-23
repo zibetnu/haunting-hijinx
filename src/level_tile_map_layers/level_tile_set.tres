@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=50 format=3 uid="uid://26wcy33gmwrh"]
+[gd_resource type="TileSet" load_steps=55 format=3 uid="uid://26wcy33gmwrh"]
 
 [ext_resource type="Texture2D" uid="uid://dk8xes2m52as5" path="res://assets/tile_sets/main_floor/diffuse.png" id="1_1vodu"]
 [ext_resource type="Texture2D" uid="uid://e5tc842y66xv" path="res://assets/tile_sets/main_floor/normal.png" id="1_xaonm"]
@@ -24,6 +24,9 @@
 [ext_resource type="Texture2D" uid="uid://bmv27pgmqxr2w" path="res://assets/tile_sets/research_lab/conveyor_belt/diffuse.png" id="22_1yfca"]
 [ext_resource type="Texture2D" uid="uid://c72b2xrrf1jlh" path="res://assets/tile_sets/research_lab/conveyor_belt/normal.png" id="23_gwdxv"]
 [ext_resource type="Texture2D" uid="uid://cll234opcg2gi" path="res://assets/tile_sets/research_lab/conveyor_belt/specular.png" id="24_hl20t"]
+[ext_resource type="Texture2D" uid="uid://n8nrbqquy41v" path="res://assets/tile_sets/research_lab/diffuse.png" id="25_saam1"]
+[ext_resource type="Texture2D" uid="uid://ce8m1p1lh1fjl" path="res://assets/tile_sets/research_lab/normal.png" id="26_o5fyh"]
+[ext_resource type="Texture2D" uid="uid://bwyl4i181mbm8" path="res://assets/tile_sets/research_lab/specular.png" id="27_prtyo"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1bcvr"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -1213,6 +1216,25 @@ texture = SubResource("CanvasTexture_saam1")
 0:3/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 0:3/0/custom_data_0 = Vector2(0, 30)
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_k646r"]
+diffuse_texture = ExtResource("25_saam1")
+normal_texture = ExtResource("26_o5fyh")
+specular_texture = ExtResource("27_prtyo")
+specular_shininess = 0.5
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xvdsc"]
+texture = SubResource("CanvasTexture_k646r")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+2:1/0 = 0
+1:1/0 = 0
+0:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+
 [resource]
 resource_name = "Level Tile Set"
 occlusion_layer_0/light_mask = 2
@@ -1234,3 +1256,4 @@ sources/3 = SubResource("TileSetAtlasSource_ltyj1")
 sources/4 = SubResource("TileSetAtlasSource_c7kpv")
 sources/5 = SubResource("TileSetAtlasSource_gwdxv")
 sources/6 = SubResource("TileSetAtlasSource_o5fyh")
+sources/7 = SubResource("TileSetAtlasSource_xvdsc")
