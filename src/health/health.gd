@@ -30,12 +30,11 @@ var max_health: int:
 				)
 		)
 
-var _locked := false:
-	set = _set_locked
+var _locked := false
 
 
-func _physics_process(_delta: float) -> void:
-	_locked = false
+func _ready() -> void:
+	get_tree().physics_frame.connect(func () -> void: _locked = false)
 
 
 func add_health(value: int) -> void:
@@ -48,8 +47,3 @@ func add_health(value: int) -> void:
 
 func subtract_health(value: int) -> void:
 	add_health(-value)
-
-
-func _set_locked(value: bool) -> void:
-	_locked = value
-	set_physics_process(_locked)
