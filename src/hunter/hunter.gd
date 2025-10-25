@@ -1,3 +1,4 @@
+class_name Hunter
 extends ControllableCharacter
 
 signal dropped
@@ -6,10 +7,18 @@ const GRABBED_EVENT = &"died"
 
 @export var move_speed: float = 74.0
 @export var slowed_move_speed: float = 29.6
-@export_group("State Collision", "state")
-@export_flags_2d_physics var state_alive_layer: int
-@export_flags_2d_physics var state_dead_layer: int
-@export_flags_2d_physics var state_invulnerable_layer: int
+
+@export_group("Alive Collision", "alive")
+@export_flags_2d_physics var alive_layer: int
+@export_flags_2d_physics var alive_mask: int
+
+@export_group("Dead Collision", "dead")
+@export_flags_2d_physics var dead_layer: int
+@export_flags_2d_physics var dead_mask: int
+
+@export_group("Invulnerable Collision", "invulnerable")
+@export_flags_2d_physics var invulnerable_layer: int
+@export_flags_2d_physics var invulnerable_mask: int
 
 @onready var flashlight: Flashlight = $Flashlight/Behavior
 @onready var notification_container: HBoxContainer = %NotificationContainer
@@ -33,16 +42,19 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 
-func enable_alive_collision_layer() -> void:
-	collision_layer = state_alive_layer
+func enable_alive_collision() -> void:
+	collision_layer = alive_layer
+	collision_mask = alive_mask
 
 
-func enable_dead_collision_layer() -> void:
-	collision_layer = state_dead_layer
+func enable_dead_collision() -> void:
+	collision_layer = dead_layer
+	collision_mask = dead_mask
 
 
-func enable_invulnerable_collision_layer() -> void:
-	collision_layer = state_invulnerable_layer
+func enable_invulnerable_collision() -> void:
+	collision_layer = invulnerable_layer
+	collision_mask = invulnerable_mask
 
 
 func on_grabbed() -> void:

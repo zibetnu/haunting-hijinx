@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo35ift2bygh0"]
+
+[ext_resource type="PackedScene" uid="uid://ccvsw508kh4ot" path="res://src/hunter/hunter.tscn" id="1_3emkj"]
+[ext_resource type="Script" uid="uid://coqk5a0ajnvrq" path="res://src/controller/controller.gd" id="2_58xc6"]
+
+[node name="PushDeadHunter" type="Node2D"]
+
+[node name="Hunter" parent="." node_paths=PackedStringArray("controller") instance=ExtResource("1_3emkj")]
+controller = NodePath("Controller")
+metadata/_edit_group_ = true
+
+[node name="Controller" type="Node2D" parent="Hunter"]
+script = ExtResource("2_58xc6")
+metadata/_custom_type_script = "uid://coqk5a0ajnvrq"
+
+[node name="Hunter2" parent="." node_paths=PackedStringArray("controller") instance=ExtResource("1_3emkj")]
+position = Vector2(16, 1)
+controller = NodePath("Controller2")
+metadata/_edit_group_ = true
+
+[node name="Controller2" type="Node2D" parent="Hunter2"]
+position = Vector2(-16, 0)
+script = ExtResource("2_58xc6")
+metadata/_custom_type_script = "uid://coqk5a0ajnvrq"

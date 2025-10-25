@@ -108,8 +108,11 @@ collision_mask = 5
 motion_mode = 1
 wall_min_slide_angle = 0.0174533
 script = ExtResource("1_g8mq7")
-state_alive_layer = 20
-state_invulnerable_layer = 4
+alive_layer = 20
+alive_mask = 5
+dead_mask = 1
+invulnerable_layer = 4
+invulnerable_mask = 5
 controller = NodePath("PlayerControllerStack/Synced")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
@@ -371,7 +374,7 @@ layout_mode = 2
 [connection signal="changed_to_remote" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/AllowSetBool" method="set_is_allowed" binds= [false]]
 [connection signal="filter_ready" from="PeerID/PeerVisibilityFilter" to="HeartbeatRumble/MultiplayerSynchronizer" method="add_visibility_filter"]
 [connection signal="filter_ready" from="PeerID/PeerVisibilityFilter" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert/MultiplayerSynchronizer" method="add_visibility_filter"]
-[connection signal="state_entered" from="StateChart/Base/Dead" to="." method="enable_dead_collision_layer"]
+[connection signal="state_entered" from="StateChart/Base/Dead" to="." method="enable_dead_collision"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="StateChart/Base/Dead/IsDead" method="set_true"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="DamageSignals/Revivable" method="enable"]
 [connection signal="state_entered" from="StateChart/Base/Dead" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/ReviveBar" method="show"]
@@ -392,10 +395,10 @@ layout_mode = 2
 [connection signal="state_exited" from="StateChart/Base/Alive/Movement/Stun" to="StateChart/Base/Alive/Movement/Stun/StunTimeout" method="stop"]
 [connection signal="state_exited" from="StateChart/Base/Alive/Movement/Stun" to="HunterCostume/Effects" method="play" binds= [&"RESET"]]
 [connection signal="timeout" from="StateChart/Base/Alive/Movement/Stun/StunTimeout" to="StateChart" method="send_event" binds= [&"stun_ended"]]
-[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="." method="enable_invulnerable_collision_layer"]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="." method="enable_invulnerable_collision"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="DamageSignals" method="set_monitorable" flags=3 binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Invulnerable" to="HunterCostume/Effects" method="play" binds= [&"canvas_item/flash"]]
-[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="." method="enable_alive_collision_layer"]
+[connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="." method="enable_alive_collision"]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="DamageSignals" method="set_monitorable" flags=3 binds= [true]]
 [connection signal="state_entered" from="StateChart/Base/Alive/Vulnerability/Vulnerable" to="HunterCostume/Effects" method="play" binds= [&"RESET"]]
 [connection signal="delta_synchronized" from="Camera2D/MultiplayerSynchronizer" to="Camera2D" method="center"]
