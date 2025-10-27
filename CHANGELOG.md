@@ -8,6 +8,19 @@ This project adheres to an adapted form of [Semantic Versioning](https://semver.
 2. MINOR version when you add backward-compatible functionality.
 3. PATCH version when you make backward-compatible bug fixes.
 
+## [2.2.0] - 2025-10-27
+
+### Added
+
+- Ghost statue easter egg.
+
+### Fixed
+
+- Cases where the ghost has double health.
+- Battery decorations are off by a pixel.
+- Focus loss when a focused player card is removed.
+- Needless tooltips appear when mouse hovers over certain buttons.
+
 ## [2.1.1] - 2025-10-08
 
 ### Fixed
@@ -311,6 +324,7 @@ This project adheres to an adapted form of [Semantic Versioning](https://semver.
 
 - Initial release.
 
+[2.2.0]: https://github.com/zibetnu/haunting-hijinx/compare/2.1.1...2.2.0
 [2.1.1]: https://github.com/zibetnu/haunting-hijinx/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/zibetnu/haunting-hijinx/compare/2.0.0...2.1.0
 [2.0.0]: https://github.com/zibetnu/haunting-hijinx/compare/1.11.1...2.0.0
