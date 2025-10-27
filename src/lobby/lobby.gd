@@ -57,6 +57,9 @@ func _on_peer_disconnected(id: int) -> void:
 		if card.input_authority == id:
 			card.queue_free()
 
+	if get_viewport().gui_get_focus_owner().owner.is_queued_for_deletion():
+		leave.grab_focus()
+
 
 func _on_peer_participation_changed(_id: int) -> void:
 	if not multiplayer.is_server():
