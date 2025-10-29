@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bapt74v2o7kig"]
+[gd_scene load_steps=9 format=3 uid="uid://bapt74v2o7kig"]
 
 [ext_resource type="Script" uid="uid://c8sgxvqprf8f" path="res://src/lobby/player_card/player_card.gd" id="1_aanr4"]
 [ext_resource type="Texture2D" uid="uid://c4ybyyfobhm40" path="res://assets/player_card_icons.png" id="2_77ty2"]
+[ext_resource type="Script" uid="uid://gpvk6gsxhdvu" path="res://src/steam_gamepad_line_edit.gd" id="3_r16ke"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wemvv"]
 properties/0/path = NodePath(".:input_authority")
@@ -70,6 +71,9 @@ size_flags_horizontal = 3
 placeholder_text = "player name"
 max_length = 20
 context_menu_enabled = false
+script = ExtResource("3_r16ke")
+description = "Set your player name"
+metadata/_custom_type_script = "uid://gpvk6gsxhdvu"
 
 [node name="DisplayLineEdit" type="LineEdit" parent="HBoxContainer"]
 unique_name_in_owner = true
@@ -89,5 +93,4 @@ replication_config = SubResource("SceneReplicationConfig_onw1q")
 [connection signal="player_type_changed" from="." to="HBoxContainer/CycleType/SubViewport/Sprite2D" method="set_frame"]
 [connection signal="pressed" from="HBoxContainer/CycleType" to="." method="cycle_player_type"]
 [connection signal="focus_exited" from="HBoxContainer/NameLineEdit" to="HBoxContainer/CycleType" method="grab_focus"]
-[connection signal="gui_input" from="HBoxContainer/NameLineEdit" to="." method="_on_name_line_edit_gui_input"]
 [connection signal="text_changed" from="HBoxContainer/NameLineEdit" to="." method="set_player_name"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://df63fi5u7xpjt"]
+[gd_scene load_steps=10 format=3 uid="uid://df63fi5u7xpjt"]
 
 [ext_resource type="Script" uid="uid://1jew7wsxqctm" path="res://src/lobby/lobby.gd" id="1_g8t6r"]
 [ext_resource type="PackedScene" uid="uid://2uclu3gf4iyj" path="res://src/level/main_floor/main_floor.tscn" id="2_px70m"]
+[ext_resource type="Script" uid="uid://gpvk6gsxhdvu" path="res://src/steam_gamepad_line_edit.gd" id="3_qpyai"]
 [ext_resource type="PackedScene" uid="uid://y52o5l4t82oi" path="res://src/lobby/lobby_location_setter/lobby_location_setter.tscn" id="6_mojxj"]
 [ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="6_qmxdg"]
 [ext_resource type="PackedScene" uid="uid://lgxoth4h2cd0" path="res://src/lobby/lobby_name_setter/lobby_name_setter.tscn" id="7_7ee1f"]
@@ -70,6 +71,9 @@ text = "Name:"
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Lobby Name"
+script = ExtResource("3_qpyai")
+description = "Set your lobby's name"
+metadata/_custom_type_script = "uid://gpvk6gsxhdvu"
 
 [node name="LobbyTypeLabel" type="Label" parent="HBoxContainer/HostMenu"]
 layout_mode = 2
