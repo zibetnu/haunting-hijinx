@@ -1234,6 +1234,7 @@ texture = SubResource("CanvasTexture_k646r")
 0:2/0 = 0
 1:2/0 = 0
 2:2/0 = 0
+3:1/0 = 0
 
 [resource]
 resource_name = "Level Tile Set"
