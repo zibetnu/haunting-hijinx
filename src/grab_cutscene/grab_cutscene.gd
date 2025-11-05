@@ -88,7 +88,7 @@ func _tween_restore_cameras() -> void:
 
 
 
-func _tween_spotlight(camera: CenteredCamera) -> void:
+func _tween_spotlight(camera: Camera2D) -> void:
 	spotlight.focus_on = camera
 	spotlight.spotlight_size = SPOTLIGHT_SIZE_START
 	spotlight.show()
@@ -109,16 +109,11 @@ func _tween_spotlight(camera: CenteredCamera) -> void:
 	tween.tween_callback(spotlight.hide)
 
 
-func _tween_zoom(camera: CenteredCamera) -> void:
+func _tween_zoom(camera: Camera2D) -> void:
 	var tween: Tween = _create_tween()
-	tween.tween_method(
-			camera.set_zoom_centered,
-			ZOOM_START,
-			ZOOM_END,
-			ZOOM_TIME
-	)
+	tween.tween_property(camera, ^"zoom", ZOOM_END, ZOOM_TIME)
 	tween.tween_interval(HOLD_TIME)
-	tween.tween_callback(camera.set_zoom_centered.bind(ZOOM_START))
+	tween.tween_callback(camera.set_zoom.bind(ZOOM_START))
 
 
 func _on_cutscene_started() -> void:
@@ -142,7 +137,7 @@ func _focus_cameras_ghost() -> void:
 	if ghost == null:
 		return
 
-	var camera: CenteredCamera = ghost.get_node_or_null(CAMERA_PATH)
+	var camera: Camera2D = ghost.get_node_or_null(CAMERA_PATH)
 	if camera == null:
 		return
 

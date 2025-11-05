@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=46 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="12_y0078"]
 [ext_resource type="Script" uid="uid://le5w1cm0ul8p" path="res://addons/godot_state_charts/expression_guard.gd" id="13_hrsye"]
 [ext_resource type="PackedScene" uid="uid://bkuic22finfse" path="res://src/controller/player_controller_stack.tscn" id="13_rf2iy"]
-[ext_resource type="Script" uid="uid://14gt37bewi6t" path="res://src/centered_camera.gd" id="14_5pgcr"]
 [ext_resource type="Script" uid="uid://dgd4i8hrrxfvm" path="res://addons/godot_state_charts/not_guard.gd" id="14_7mvdf"]
 [ext_resource type="PackedScene" uid="uid://cy4qrm44icmyy" path="res://src/flashlight/flashlight.tscn" id="15_hljm8"]
 [ext_resource type="PackedScene" uid="uid://mt548ar3ll4w" path="res://src/heartbeat_rumble/heartbeat_rumble.tscn" id="18_jndug"]
@@ -239,7 +238,6 @@ limit_left = 0
 limit_top = 0
 limit_right = 6400
 limit_bottom = 6400
-script = ExtResource("14_5pgcr")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Camera2D"]
 replication_config = SubResource("SceneReplicationConfig_2bhal")

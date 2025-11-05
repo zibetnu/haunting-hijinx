@@ -234,9 +234,6 @@ material = SubResource("ShaderMaterial_psybu")
 [node name="FollowPlayer" parent="Hunter/IgnoreCanvasModulate" index="0"]
 position = Vector2(368, 248)
 
-[connection signal="camera_limits_applied" from="." to="Ghost/Camera2D" method="center"]
-[connection signal="camera_limits_applied" from="." to="Hunter/Camera2D" method="center"]
-[connection signal="camera_limits_applied" from="." to="NPCHunter/Camera2D" method="center"]
 [connection signal="completed" from="QuestNodes/Damage" to="Ghost/NPCGhost" method="set_sprint" binds= [true]]
 [connection signal="started" from="QuestNodes/Damage" to="Ghost" method="hide"]
 [connection signal="started" from="QuestNodes/Damage" to="Ghost" method="set_position" binds= [Vector2(192, 288)]]

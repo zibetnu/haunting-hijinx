@@ -144,7 +144,6 @@ controller = NodePath("NPCHunter")
 [node name="NPCHunter" parent="Hunter" index="17" node_paths=PackedStringArray("ghost") instance=ExtResource("12_2andj")]
 ghost = NodePath("../../Ghost")
 
-[connection signal="camera_limits_applied" from="." to="Ghost/Camera2D" method="center"]
 [connection signal="completed" from="QuestNodes/Summon" to="." method="set_auto_recharge" binds= [false]]
 [connection signal="started" from="QuestNodes/Summon" to="." method="set_auto_recharge" binds= [true]]
 [connection signal="started" from="QuestNodes/Grab" to="." method="recharge_all"]

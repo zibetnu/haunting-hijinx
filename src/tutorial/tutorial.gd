@@ -1,8 +1,6 @@
 class_name Tutorial
 extends Node2D
 
-signal camera_limits_applied
-
 const FADE_ANIMATION = &"fade"
 const FLASHLIGHT_GROUP = &"flashlights"
 const NPC_PEER_ID = -1
@@ -129,7 +127,6 @@ func _apply_camera_limits(camera_parent: Node) -> void:
 	camera.limit_top = roundi(level.limit_top_left.y)
 	camera.limit_right = roundi(level.limit_bottom_right.x)
 	camera.limit_bottom = roundi(level.limit_bottom_right.y)
-	camera_limits_applied.emit()
 
 
 func _on_current_quest_completed() -> void:
