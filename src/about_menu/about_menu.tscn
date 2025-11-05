@@ -351,9 +351,7 @@ theme_type_variation = &"LabelSmall"
 text = "Nerd2Death"
 
 [node name="Buttons" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(632, 0)
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 8
 
 [node name="Back" type="Button" parent="Buttons" node_paths=PackedStringArray("shortcut_context")]

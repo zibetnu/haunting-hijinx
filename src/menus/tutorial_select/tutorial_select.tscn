@@ -105,9 +105,7 @@ text = "Hunter"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(632, 0)
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 8
 
 [node name="Back" type="Button" parent="HBoxContainer" node_paths=PackedStringArray("shortcut_context")]
