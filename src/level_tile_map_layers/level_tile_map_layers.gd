@@ -12,6 +12,7 @@ extends Node2D
 @onready var level_lighting: LevelLighting = $LevelLighting
 @onready var layers: Array[TileMapLayer] = [
 	$FloorLayer,
+	$FloorCoveringLayer,
 	$WallLayer,
 	$WallTopLayer,
 	$WallCapLayer,
@@ -63,6 +64,7 @@ func refresh() -> void:
 	camera_limit_bottom_right.position = level.limit_bottom_right
 	var layer_data: Array[PackedByteArray] = [
 		level.floor_data,
+		level.floor_covering_data,
 		level.wall_data,
 		level.wall_top_data,
 		level.wall_cap_data,
@@ -96,6 +98,7 @@ func save_level() -> void:
 
 	var data_properties: Array[StringName] = [
 		&"floor_data",
+		&"floor_covering_data",
 		&"wall_data",
 		&"wall_top_data",
 		&"wall_cap_data",

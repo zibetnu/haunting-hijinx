@@ -9,6 +9,7 @@ extends Resource
 @export var limit_bottom_right: Vector2
 
 @export_storage var floor_data: PackedByteArray
+@export_storage var floor_covering_data: PackedByteArray
 @export_storage var wall_data: PackedByteArray
 @export_storage var wall_top_data: PackedByteArray
 @export_storage var wall_cap_data: PackedByteArray
