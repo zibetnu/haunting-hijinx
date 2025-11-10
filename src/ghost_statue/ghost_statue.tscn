@@ -102,12 +102,12 @@ shape = SubResource("RectangleShape2D_ysqp5")
 occluder = SubResource("OccluderPolygon2D_griun")
 
 [node name="Base" type="Sprite2D" parent="."]
-light_mask = 2
+light_mask = 6
 position = Vector2(0, -2)
 texture = SubResource("CanvasTexture_kqstq")
 
 [node name="Ghost" type="Sprite2D" parent="."]
-light_mask = 2
+light_mask = 6
 position = Vector2(0, -12)
 texture = SubResource("CanvasTexture_xixck")
 
