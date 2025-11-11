@@ -28,12 +28,16 @@ const SCENE_CHANGER_PATH = ^"/root/SceneChanger"
 const LOBBY_METHOD = &"change_to_lobby"
 const MAIN_MENU_METHOD = &"change_to_main_menu"
 
+const LOCAL_PORT = 9999
+
 @export var lobby_summary_scene: PackedScene
 
 @onready var joining_window: Window = %JoiningWindow
 @onready var summary_container: VBoxContainer = %LobbySummaries
 @onready var notify_dialog: AcceptDialog = %NotifyDialog
 @onready var refresh_button: Button = %Refresh
+@onready var host_local: Button = %HostLocal
+@onready var join_local: Button = %JoinLocal
 @onready var init_steam: Button = %InitSteam
 @onready var steam_connector: SteamConnector = $SteamConnector
 
@@ -45,6 +49,8 @@ func _ready() -> void:
 	steam_connector.close_connection.call_deferred()
 	refresh_button.grab_focus()
 	if OS.has_feature("editor"):
+		host_local.show()
+		join_local.show()
 		init_steam.show()
 
 	else:
@@ -221,3 +227,17 @@ func _on_create_lobby_pressed() -> void:
 		return
 
 	steam_connector.create_lobby()
+
+
+func _on_host_local_pressed() -> void:
+	var peer := ENetMultiplayerPeer.new()
+	peer.create_server(LOCAL_PORT)
+	multiplayer.multiplayer_peer = peer
+	_on_lobby_created()
+
+
+func _on_join_local_pressed() -> void:
+	var peer := ENetMultiplayerPeer.new()
+	peer.create_client("localhost", LOCAL_PORT)
+	multiplayer.multiplayer_peer = peer
+	_on_lobby_joined()
