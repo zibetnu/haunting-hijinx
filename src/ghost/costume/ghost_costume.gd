@@ -22,9 +22,20 @@ var target_rotation: float:
 @export var lock_rotation := false:
 	set = set_lock_rotation
 
-@onready var ghost: AnimationPlayer = $Ghost
-@onready var sprite: Sprite2D = $ParentOffset/Sprite2D
+@export_group("Hat", "hat")
+@export var hat_array: Array[GhostHat]
+@export var hat_index: int:
+	set = set_hat_index
+
+@onready var canvas_group: CanvasGroup = $CanvasGroup
+@onready var sprite: Sprite2D = $CanvasGroup/MaterialParent/Sprite2D
+@onready var hat: Sprite2D = %Hat
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var summon: AudioStreamPlayer2D = $Summon
+
+
+func _ready() -> void:
+	_apply_hat_index()
 
 
 func _physics_process(delta: float) -> void:
@@ -56,7 +67,7 @@ func get_frame_coord_y() -> int:
 
 
 func play(value: String) -> void:
-	ghost.play(_get_first_partial_match(ghost, value))
+	animation_player.play(_get_first_partial_match(animation_player, value))
 
 
 func set_costume_rotation(value: float) -> void:
@@ -76,6 +87,13 @@ func set_frame_coord_x(value: int) -> void:
 		await ready
 
 	sprite.frame_coords.x = clamp(value, 0, sprite.hframes - 1)
+	hat.frame_coords.x = sprite.frame_coords.x
+
+
+func set_hat_index(value: int) -> void:
+	hat_index = 0 if hat_array.is_empty() else value % hat_array.size()
+	if is_node_ready():
+		_apply_hat_index()
 
 
 func set_frame_coord_y(value: int) -> void:
@@ -84,6 +102,7 @@ func set_frame_coord_y(value: int) -> void:
 		await ready
 
 	sprite.frame_coords.y = clamp(value, 0, sprite.vframes - 1)
+	hat.frame_coords.y = sprite.frame_coords.y
 
 
 func set_lock_rotation(value: bool) -> void:
@@ -106,6 +125,10 @@ func set_target_rotation(value: float) -> void:
 	set_physics_process(true)
 
 
+func _apply_hat_index() -> void:
+	hat.texture = null if hat_array.is_empty() else hat_array[hat_index].texture
+
+
 func _get_first_partial_match(
 		player: AnimationPlayer,
 		animation_name: String
@@ -117,7 +140,10 @@ func _get_first_partial_match(
 	return ""
 
 
-func _on_ghost_current_animation_changed(animation_name: String) -> void:
+func _on_current_animation_changed(animation_name: String) -> void:
+	canvas_group.modulate = Color.WHITE
+	canvas_group.position = Vector2.ZERO
+
 	const SUMMON_NAME = "summon"
 	if animation_name == SUMMON_NAME:
 		summon.play()

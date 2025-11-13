@@ -19,6 +19,7 @@ var _hunters_spawned := 0
 
 
 func _ready() -> void:
+	PeerData.assign_hunter_palette_indexes()
 	show_matching_timer_sprite()
 	if level == null:
 		level = PeerData.get_selected_level()
@@ -31,7 +32,7 @@ func _ready() -> void:
 	battery_spawner.limit_top_left = level.limit_top_left
 
 	PeerData.match_in_progress = true
-	multiplayer.peer_connected.connect(_on_peer_connected)
+	PeerData.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(remove_player)
 
 	for peer_id: int in PeerData.participants:
@@ -47,6 +48,7 @@ func add_player(id: int) -> void:
 	if id == PeerData.ghost_peer:
 		instance = ghost.instantiate()
 		instance.position = level.ghost_spawn_point
+		instance.set(&"hat_index", PeerData.peer_ghost_hats[id])
 		_ghosts_spawned += 1
 
 	else:
@@ -54,6 +56,7 @@ func add_player(id: int) -> void:
 		instance.position = level.hunter_spawn_points[
 				_hunters_spawned % level.hunter_spawn_points.size()
 		]
+		instance.set(&"hat_index", PeerData.peer_hunter_hats[id])
 		_hunters_spawned += 1
 
 	var camera: Camera2D = instance.get_node_or_null(^"%Camera2D")
@@ -69,6 +72,13 @@ func add_player(id: int) -> void:
 	var name_label: Label = instance.get_node_or_null(^"%NameLabel")
 	if name_label != null:
 		name_label.text = PeerData.peer_names[id]
+
+	if instance is Ghost:
+		(instance as Ghost).ghost_costume.hat_index = PeerData.peer_ghost_hats[id]
+
+	elif instance is Hunter:
+		(instance as Hunter).costume.hat_index = PeerData.peer_hunter_hats[id]
+		(instance as Hunter).costume.palette_index = PeerData.hunter_palette_indexes[id]
 
 	get_tree().call_group("ghost_peer_ids", "set_id", PeerData.ghost_peer)
 

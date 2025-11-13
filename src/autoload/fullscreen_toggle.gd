@@ -31,7 +31,6 @@ func _input(event: InputEvent) -> void:
 			KEY,
 			DisplayServer.window_get_mode()
 	)
-	GameConfig.save()
 
 	var config_menu: ConfigMenu = get_tree().get_first_node_in_group(
 			&"config_menu"

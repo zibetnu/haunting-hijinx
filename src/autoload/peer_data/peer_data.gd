@@ -1,5 +1,6 @@
 extends Node
 
+signal peer_connected(id: int)
 signal ghost_peer_changed(id: int)
 signal peer_name_changed(id: int)
 signal peer_participation_changed(id: int)
@@ -17,10 +18,7 @@ const MAX_PARTICIPANTS = 5
 		ghost_peer = value
 		ghost_peer_changed.emit(value)
 
-# participants and spectators are not typed as Array[int] due to
-# a bug that prevents a MultiplayerSynchronizer from syncing them.
-# See https://github.com/godotengine/godot/issues/74391.
-@export var participants := []
+@export var participants: Array[int] = []
 @export var peer_names := {}
 @export var spectators := []
 
@@ -28,14 +26,82 @@ const MAX_PARTICIPANTS = 5
 @export var levels: Array[Level]
 @export var levels_selected_index: int
 
+var peer_ghost_hats: Dictionary[int, int]
+var peer_hunter_hats: Dictionary[int, int]
+var hunter_palette_indexes: Dictionary[int, int]
+var hunter_palette_preferences: Dictionary[int, Array]
 var lobby_id := -1
 var match_in_progress := false
 
 
 func _ready() -> void:
-	multiplayer.peer_connected.connect(_on_peer_connected)
+	multiplayer.connected_to_server.connect(_on_connected_to_server)
 	multiplayer.peer_disconnected.connect(erase_data_for_peer)
 	multiplayer.server_disconnected.connect(erase_data)
+
+
+# TODO: lots of cleanup.
+func assign_hunter_palette_indexes() -> void:
+	hunter_palette_indexes.clear()
+
+	var hunters: Array[int]
+	hunters.assign(participants.filter(_is_hunter))
+	hunters.resize(5)
+
+	var best_score: int = 2^63
+	var best_permutation: Array[int]
+	for permutation in get_permutations(hunters):
+		var score: int = get_score(permutation)
+		if score >= best_score:
+			continue
+
+		best_score = score
+		best_permutation.assign(permutation)
+		if best_score == 0:
+			break
+
+	for peer_id in best_permutation:
+		hunter_palette_indexes[peer_id] = best_permutation.find(peer_id)
+
+
+
+# https://www.quickperm.org
+func get_permutations(array: Array) -> Array[Array]:
+	var permutations: Array[Array] = [array.duplicate()]
+
+	var n: int = array.size()
+	var p: Array[int]
+	for i in range(n + 1):
+		p.append(i)
+
+	var i: int = 1
+	while i < n:
+		p[i] -= 1
+		var j: int = p[i] if i % 2 != 0 else 0
+
+		var temp: int = array[j]
+		array[j] = array[i]
+		array[i] = temp
+
+		permutations.append(array.duplicate())
+		i = 1
+		while p[i] == 0:
+			p[i] = i
+			i += 1
+
+	return permutations
+
+
+func get_score(array: Array) -> int:
+	var score: int = 0
+	for i in array.size():
+		if array[i] not in hunter_palette_preferences:
+			continue
+
+		var preference_index: int = hunter_palette_preferences[array[i]].find(i)
+		score += preference_index
+
+	return score
 
 
 func get_selected_level() -> Level:
@@ -114,32 +180,43 @@ func toggle_participation(id: int) -> void:
 	peer_participation_changed.emit(id)
 
 
-func _is_hunter(id: int) -> bool:
-	return get_peer_type(id) == PeerType.HUNTER
+@rpc("any_peer", "call_remote", "reliable")
+func request_init(customization: Dictionary[String, Variant] = {}) -> void:
+	init_peer(multiplayer.get_remote_sender_id(), customization)
 
 
-func _on_peer_connected(id: int) -> void:
-	if id == 1:  # A new server is starting, so erase old data.
-		erase_data()
-
+func init_peer(id: int, customization: Dictionary[String, Variant] = {}) -> void:
 	if not multiplayer.is_server():
 		return
 
-	var peer_name := "Player %s" % str(id)
-	if peer_names.has(id):
+	peer_ghost_hats[id] = customization.get("ghost_hat", 0)
+	peer_hunter_hats[id] = customization.get("hunter_hat", 0)
+	hunter_palette_preferences[id] = customization.get("hunter_colors", [])
+
+	var peer_name: String = customization.get("default_name", "")
+	if peer_name.is_empty():
+		peer_name = "Player %s" % str(id)
+
+	elif peer_names.has(id):
 		peer_name = peer_names[id]
 
 	set_peer_name.rpc(id, peer_name)
-	if participants.size() >= MAX_PARTICIPANTS:
+	if participants.size() >= MAX_PARTICIPANTS or match_in_progress:
 		spectators.append(id)
-		return
 
-	if match_in_progress:
-		spectators.append(id)
-		return
-
-	participants.append(id)
+	else:
+		participants.append(id)
 
 	# If there are now too many hunters, make this new peer the ghost.
 	if participants.filter(_is_hunter).size() >= MAX_PARTICIPANTS - 1:
 		ghost_peer = id
+
+	peer_connected.emit(id)
+
+
+func _is_hunter(id: int) -> bool:
+	return get_peer_type(id) == PeerType.HUNTER
+
+
+func _on_connected_to_server() -> void:
+	request_init.rpc(GameConfig.customization.get_as_dict())

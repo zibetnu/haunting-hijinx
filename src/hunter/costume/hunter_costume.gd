@@ -6,6 +6,11 @@ const PALETTE_PARAMETER = &"new_palette"
 const HFRAME_COUNT = 16
 const MIN_ROTATION = 0.0
 
+@export_group("Hat", "hat")
+@export var hat_array: Array[HunterHat]
+@export var hat_index: int:
+	set = set_hat_index
+
 @export_group("Costume", "costume")
 @export var costume_current_animation: String:
 	set = play
@@ -34,6 +39,8 @@ const MIN_ROTATION = 0.0
 @onready var legs: Sprite2D = %Legs
 @onready var torso: Sprite2D = %Torso
 @onready var arms: Sprite2D = %Arms
+@onready var idle_no_flashlight: Sprite2D = %IdleNoFlashlight
+@onready var hat: Sprite2D = %Hat
 
 
 func _ready() -> void:
@@ -62,9 +69,14 @@ func set_costume_rotation(value: float) -> void:
 			0, HFRAME_COUNT
 	))
 	x_frame %= HFRAME_COUNT
-	legs.frame_coords.x = x_frame
-	torso.frame_coords.x = x_frame
-	arms.frame_coords.x = x_frame
+	for sprite: Sprite2D in [legs, torso, arms, hat, idle_no_flashlight]:
+		sprite.frame_coords.x = x_frame
+
+
+func set_hat_index(value: int) -> void:
+	hat_index = 0 if hat_array.is_empty() else value % hat_array.size()
+	if is_node_ready():
+		_apply_hat_index()
 
 
 func set_palette_index(value: int) -> void:
@@ -77,6 +89,7 @@ func set_palette_index(value: int) -> void:
 			PALETTE_PARAMETER,
 			palette_array[palette_index]
 	)
+	_apply_hat_index()
 
 
 func set_palette_index_from_group_index() -> void:
@@ -93,6 +106,22 @@ func set_y_frame_legs(value: int) -> void:
 	var clamped_value: int = clampi(value, 0, legs.vframes - 1)
 	y_frame_legs = clamped_value
 	legs.frame_coords.y = clamped_value
+
+
+func _apply_hat_index() -> void:
+	var hat_data: HunterHat = hat_array[hat_index]
+	hat.texture = null if hat_array.is_empty() else hat_data.texture
+
+	var hat_material := hat.material as ShaderMaterial
+	hat_material.set_shader_parameter(&"old_palette", hat_data.default_palette)
+	if hat_data.palette_array.is_empty():
+		hat_material.set_shader_parameter(&"new_palette", hat_data.default_palette)
+
+	else:
+		hat_material.set_shader_parameter(
+				&"new_palette",
+				hat_data.palette_array[palette_index % hat_data.palette_array.size()]
+		)
 
 
 func _normalize_rotation(value: float) -> float:

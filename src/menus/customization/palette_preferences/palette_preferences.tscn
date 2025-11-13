@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://cqbmc2dond7lm"]
+
+[ext_resource type="Script" uid="uid://ottrclpwmo8a" path="res://src/menus/customization/palette_preferences/palette_preferences.gd" id="1_xo756"]
+[ext_resource type="Script" uid="uid://c0naylnves2yd" path="res://addons/ReorderableContainer/reorderable_hbox.gd" id="2_b0bbb"]
+[ext_resource type="Texture2D" uid="uid://b1r4xdhw8pco3" path="res://assets/hunter/palettes/yellow.png" id="5_r7n65"]
+[ext_resource type="Texture2D" uid="uid://vae6e0eh7xge" path="res://assets/hunter/palettes/green.png" id="7_70v8q"]
+[ext_resource type="Texture2D" uid="uid://cu33mq4g4e6ly" path="res://assets/hunter/palettes/purple.png" id="8_70v8q"]
+[ext_resource type="Texture2D" uid="uid://biqdpl1yys2eh" path="res://assets/hunter/palettes/red.png" id="9_ilmqd"]
+[ext_resource type="Texture2D" uid="uid://4l3a8ifjlff5" path="res://assets/hunter/palettes/blue.png" id="10_2nelx"]
+
+[node name="PalettePreferences" type="HBoxContainer"]
+offset_right = 132.0
+offset_bottom = 32.0
+script = ExtResource("1_xo756")
+palettes = Array[Texture2D]([ExtResource("5_r7n65"), ExtResource("7_70v8q"), ExtResource("8_70v8q"), ExtResource("9_ilmqd"), ExtResource("10_2nelx")])
+
+[node name="Left" type="Button" parent="."]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Right")
+text = "<"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"LabelCompact"
+text = "Preferred Palettes"
+horizontal_alignment = 1
+
+[node name="ButtonContainer" type="Container" parent="VBoxContainer"]
+unique_name_in_owner = true
+process_mode = 1
+custom_minimum_size = Vector2(96, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("2_b0bbb")
+hold_duration = 0.2
+separation = 4
+metadata/_custom_type_script = "uid://c0naylnves2yd"
+
+[node name="Right" type="Button" parent="."]
+layout_mode = 2
+focus_neighbor_right = NodePath("../Left")
+text = ">"
+
+[connection signal="pressed" from="Left" to="." method="_on_left_pressed"]
+[connection signal="reordered" from="VBoxContainer/ButtonContainer" to="." method="_on_button_container_reordered"]
+[connection signal="sort_children" from="VBoxContainer/ButtonContainer" to="VBoxContainer/ButtonContainer" method="_on_sort_children"]
+[connection signal="pressed" from="Right" to="." method="_on_right_pressed"]

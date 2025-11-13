@@ -1,0 +1,142 @@
+[gd_scene load_steps=10 format=3 uid="uid://dmp2ru73exiia"]
+
+[ext_resource type="Script" uid="uid://b7xl0dnpmtgkm" path="res://src/menus/customization/customization.gd" id="1_1ehsn"]
+[ext_resource type="PackedScene" uid="uid://klrwcohuhynk" path="res://src/ghost/costume/ghost_costume.tscn" id="1_4w6db"]
+[ext_resource type="PackedScene" uid="uid://cw03ukqdd3ko5" path="res://src/menus/customization/spin_box/customization_spin_box.tscn" id="1_535l6"]
+[ext_resource type="PackedScene" uid="uid://ctn825io87i34" path="res://src/hunter/costume/hunter_costume.tscn" id="2_iu7ym"]
+[ext_resource type="Texture2D" uid="uid://cve418b7kooru" path="res://assets/flashlight/body_back.png" id="3_1ehsn"]
+[ext_resource type="PackedScene" uid="uid://cqbmc2dond7lm" path="res://src/menus/customization/palette_preferences/palette_preferences.tscn" id="3_lotg5"]
+[ext_resource type="Texture2D" uid="uid://cbev4n3hmsa8" path="res://assets/flashlight/body_front.png" id="4_lotg5"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_1ehsn"]
+action = &"ui_cancel"
+
+[sub_resource type="Shortcut" id="Shortcut_lotg5"]
+events = [SubResource("InputEventAction_1ehsn")]
+
+[node name="Customization" type="MarginContainer" node_paths=PackedStringArray("first_button")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1ehsn")
+first_button = NodePath("HBoxContainer/VBoxContainer/Back")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TabContainer" type="TabContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+tab_alignment = 1
+current_tab = 0
+clip_tabs = false
+use_hidden_tabs_for_min_size = true
+
+[node name="Ghost" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="GhostHatSpinBox" parent="HBoxContainer/VBoxContainer/TabContainer/Ghost" instance=ExtResource("1_535l6")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 16)
+layout_mode = 2
+option_name = "Hat"
+
+[node name="Hunter" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="HunterHatSpinBox" parent="HBoxContainer/VBoxContainer/TabContainer/Hunter" instance=ExtResource("1_535l6")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 16)
+layout_mode = 2
+option_name = "Hat"
+
+[node name="HunterPalettePreferences" parent="HBoxContainer/VBoxContainer/TabContainer/Hunter" instance=ExtResource("3_lotg5")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Back" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+shortcut = SubResource("Shortcut_lotg5")
+shortcut_in_tooltip = false
+text = "Back"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"LabelCompact"
+text = "Default Player Name"
+horizontal_alignment = 1
+
+[node name="DefaultName" type="LineEdit" parent="HBoxContainer/VBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Enter name here..."
+alignment = 1
+max_length = 20
+context_menu_enabled = false
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(168, 168)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="HBoxContainer/VBoxContainer2/CenterContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="GhostCostume" parent="HBoxContainer/VBoxContainer2/CenterContainer/Control" instance=ExtResource("1_4w6db")]
+unique_name_in_owner = true
+position = Vector2(0, -40)
+scale = Vector2(4, 4)
+costume_rotation = 1.5707963267948966
+target_rotation = 1.5707963267948966
+
+[node name="HunterCostume" parent="HBoxContainer/VBoxContainer2/CenterContainer/Control" instance=ExtResource("2_iu7ym")]
+unique_name_in_owner = true
+visible = false
+y_sort_enabled = true
+position = Vector2(0, 0)
+scale = Vector2(4, 4)
+costume_rotation = 1.5707963267948966
+palette_auto_set = false
+
+[node name="FlashlightBack" type="Sprite2D" parent="HBoxContainer/VBoxContainer2/CenterContainer/Control/HunterCostume"]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("3_1ehsn")
+hframes = 32
+frame = 8
+
+[node name="FlashlightFront" type="Sprite2D" parent="HBoxContainer/VBoxContainer2/CenterContainer/Control/HunterCostume"]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("4_lotg5")
+hframes = 32
+frame = 8
+
+[node name="Spacer" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="tab_changed" from="HBoxContainer/VBoxContainer/TabContainer" to="." method="_on_tab_container_tab_changed"]
+[connection signal="item_selected" from="HBoxContainer/VBoxContainer/TabContainer/Ghost/GhostHatSpinBox" to="." method="_on_ghost_hat_spin_box_item_selected"]
+[connection signal="item_selected" from="HBoxContainer/VBoxContainer/TabContainer/Hunter/HunterHatSpinBox" to="." method="_on_hunter_hat_spin_box_item_selected"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="text_changed" from="HBoxContainer/VBoxContainer2/VBoxContainer/DefaultName" to="." method="_on_default_name_text_changed"]

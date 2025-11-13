@@ -12,8 +12,6 @@ const WINDOW_MODE_KEY = "window_mode"
 
 @export var first_button: Button
 
-@onready var back: Button = %Back
-@onready var save_timer: Timer = %SaveTimer
 @onready var window_mode_option: OptionButtonID = %WindowModeOption
 @onready var vsync_option: OptionButtonID = %VSyncOption
 @onready var scale_container: PanelContainer = %ScaleContainer
@@ -93,21 +91,15 @@ func init_scale_slider() -> void:
 	_on_scale_debounce_timeout()
 
 
-func _on_save_timer_timeout() -> void:
-	GameConfig.save()
-
-
 func _on_scale_debounce_timeout() -> void:
 	var value: float = scale_slider.value
 	WindowScaler.scale_multiplier = int(value)
 	GameConfig.set_value(DISPLAY_SECTION, SCALE_KEY, value)
-	save_timer.start()
 
 
 func _on_window_mode_selected(value: DisplayServer.WindowMode) -> void:
 	DisplayServer.window_set_mode(value)
 	GameConfig.set_value(DISPLAY_SECTION, WINDOW_MODE_KEY, value)
-	save_timer.start()
 
 
 func _on_visibility_changed() -> void:
@@ -120,7 +112,6 @@ func _on_visibility_changed() -> void:
 func _on_vsync_option_id_selected(mode: DisplayServer.VSyncMode) -> void:
 	DisplayServer.window_set_vsync_mode(mode)
 	GameConfig.set_value(DISPLAY_SECTION, VSYNC_KEY, mode)
-	save_timer.start()
 
 
 func _on_brightness_slider_value_changed(value: float) -> void:
@@ -129,4 +120,3 @@ func _on_brightness_slider_value_changed(value: float) -> void:
 
 func _on_slider_value_changed(value: float, section: String, key: String) -> void:
 	GameConfig.set_value(section, key, value)
-	save_timer.start()

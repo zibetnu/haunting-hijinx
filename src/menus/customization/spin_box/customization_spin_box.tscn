@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://cw03ukqdd3ko5"]
+
+[ext_resource type="Script" uid="uid://qg1ite20qp6d" path="res://src/menus/customization/spin_box/customization_spin_box.gd" id="1_ps04p"]
+
+[node name="CustomizationSpinBox" type="HBoxContainer"]
+offset_right = 158.0
+offset_bottom = 32.0
+script = ExtResource("1_ps04p")
+
+[node name="Left" type="Button" parent="."]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Right")
+focus_neighbor_right = NodePath("../Right")
+text = "<"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OptionNameLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"LabelCompact"
+text = "Option Name"
+horizontal_alignment = 1
+
+[node name="SelectedItemLabel" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+horizontal_alignment = 1
+text_overrun_behavior = 3
+
+[node name="Right" type="Button" parent="."]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Left")
+focus_neighbor_right = NodePath("../Left")
+text = ">"
+
+[connection signal="pressed" from="Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="Right" to="." method="_on_right_pressed"]

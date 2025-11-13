@@ -23,12 +23,12 @@ func test_sprint_idle() -> void:
 	runner.simulate_action_press(MOVE_RIGHT)
 	await runner.await_input_processed()
 
-	assert_str(costume.ghost.current_animation).is_equal("sprint")
+	assert_str(costume.animation_player.current_animation).is_equal("sprint")
 
 	runner.simulate_action_release(MOVE_RIGHT)
 	await runner.await_input_processed()
 
-	assert_str(costume.ghost.current_animation).is_equal(IDLE)
+	assert_str(costume.animation_player.current_animation).is_equal(IDLE)
 
 
 func test_summon_sprint_idle() -> void:
@@ -38,9 +38,9 @@ func test_summon_sprint_idle() -> void:
 	runner.simulate_action_press(BUTTON_2)
 	await runner.await_input_processed()
 
-	assert_str(costume.ghost.current_animation).is_equal("summon")
+	assert_str(costume.animation_player.current_animation).is_equal("summon")
 
 	runner.simulate_action_press(BUTTON_1)
 	await runner.await_input_processed()
 
-	assert_str(costume.ghost.current_animation).is_equal(IDLE)
+	assert_str(costume.animation_player.current_animation).is_equal(IDLE)

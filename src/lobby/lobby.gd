@@ -18,7 +18,7 @@ func _ready() -> void:
 		level_select.add_item(level.resource_name)
 
 	level_select.select(PeerData.levels_selected_index)
-	multiplayer.peer_connected.connect(_on_peer_connected)
+	PeerData.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	PeerData.peer_participation_changed.connect(_on_peer_participation_changed)
 	for peer_id: int in PeerData.participants + PeerData.spectators:

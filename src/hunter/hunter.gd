@@ -20,8 +20,10 @@ const GRABBED_EVENT = &"died"
 @export_flags_2d_physics var invulnerable_layer: int
 @export_flags_2d_physics var invulnerable_mask: int
 
+@onready var costume: HunterCostume = $HunterCostume
 @onready var flashlight: Flashlight = $Flashlight/Behavior
 @onready var notification_container: HBoxContainer = %NotificationContainer
+@onready var peer_id_node: PeerID = %PeerID
 @onready var state_chart: StateChart = $StateChart
 @onready var move_state: AtomicState = $StateChart/Base/Alive/Movement/Move
 @onready var conveyor_cast: ShapeCast2D = $ConveyorCast

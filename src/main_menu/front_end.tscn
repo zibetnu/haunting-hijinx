@@ -28,6 +28,10 @@ stretch_mode = 3
 layout_mode = 2
 text = "Browse Lobbies"
 
+[node name="Customization" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Customization"
+
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 

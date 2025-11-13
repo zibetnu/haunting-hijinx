@@ -175,8 +175,8 @@ func _on_init_steam_pressed() -> void:
 
 
 func _on_lobby_created() -> void:
-	# Set up host's player like any other.
-	multiplayer.peer_connected.emit(multiplayer.get_unique_id())
+	PeerData.erase_data()
+	PeerData.init_peer(1, GameConfig.customization.get_as_dict())
 	call_scene_changer_method(LOBBY_METHOD)
 
 

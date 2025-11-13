@@ -1,0 +1,34 @@
+[gd_scene load_steps=10 format=3 uid="uid://ddoffvjsqum16"]
+
+[ext_resource type="Shader" uid="uid://d2i6fyt1j8hb8" path="res://addons/shaders/palette_swap.gdshader" id="1_b52hh"]
+[ext_resource type="Texture2D" uid="uid://bt8aekaamv1t5" path="res://assets/theme/palette_radio_button.png" id="1_oaw8l"]
+[ext_resource type="Script" uid="uid://jwqvlcfgedu7" path="res://src/menus/customization/palette_preferences/palette_radio_button/palette_radio_button.gd" id="2_4yurd"]
+[ext_resource type="Texture2D" uid="uid://b1r4xdhw8pco3" path="res://assets/hunter/palettes/yellow.png" id="2_b52hh"]
+[ext_resource type="Texture2D" uid="uid://df1deb6rjs1kc" path="res://assets/hunter/palettes/placeholder.png" id="3_qxi6k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l7ah2"]
+resource_local_to_scene = true
+shader = ExtResource("1_b52hh")
+shader_parameter/old_palette = ExtResource("3_qxi6k")
+shader_parameter/new_palette = ExtResource("2_b52hh")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47kbn"]
+atlas = ExtResource("1_oaw8l")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b52hh"]
+atlas = ExtResource("1_oaw8l")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntlgy"]
+atlas = ExtResource("1_oaw8l")
+region = Rect2(32, 0, 16, 16)
+
+[node name="PaletteRadioButton" type="TextureButton"]
+material = SubResource("ShaderMaterial_l7ah2")
+toggle_mode = true
+texture_normal = SubResource("AtlasTexture_47kbn")
+texture_pressed = SubResource("AtlasTexture_b52hh")
+texture_focused = SubResource("AtlasTexture_ntlgy")
+script = ExtResource("2_4yurd")
+palette = ExtResource("2_b52hh")

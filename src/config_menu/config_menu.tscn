@@ -30,19 +30,16 @@ bus_name = &"Music"
 [node name="EffectsBusVolumeSetter" parent="BackEnd" instance=ExtResource("4_5dgk7")]
 bus_name = &"Effects"
 
-[node name="SaveTimer" type="Timer" parent="."]
-unique_name_in_owner = true
-one_shot = true
-
-[node name="Back" type="Button" parent="." node_paths=PackedStringArray("shortcut_context")]
-unique_name_in_owner = true
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
-focus_neighbor_top = NodePath("../HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/WindowModeOption")
-focus_neighbor_right = NodePath("../HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/WindowModeOption")
-focus_next = NodePath("../HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/WindowModeOption")
-shortcut_context = NodePath("..")
+
+[node name="Back" type="Button" parent="VBoxContainer" node_paths=PackedStringArray("shortcut_context")]
+layout_mode = 2
+focus_neighbor_right = NodePath("../../HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/WindowModeOption")
+focus_next = NodePath("../../HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/WindowModeOption")
+shortcut_context = NodePath("../..")
 shortcut = SubResource("Shortcut_b3uno")
 shortcut_in_tooltip = false
 text = "Back"
@@ -88,11 +85,11 @@ size_flags_horizontal = 3
 [node name="WindowModeOption" type="OptionButton" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_left = NodePath("../../../../../../../Back")
+focus_neighbor_left = NodePath("../../../../../../../VBoxContainer/Back")
 focus_neighbor_right = NodePath("../../../../../../Master/VBoxContainer/MasterBusSlider")
 focus_neighbor_bottom = NodePath("../VSyncOption")
 focus_next = NodePath("../VSyncOption")
-focus_previous = NodePath("../../../../../../../Back")
+focus_previous = NodePath("../../../../../../../VBoxContainer/Back")
 alignment = 1
 item_count = 2
 popup/item_0/text = "Windowed"
@@ -104,7 +101,7 @@ script = ExtResource("6_u7oav")
 [node name="VSyncOption" type="OptionButton" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_left = NodePath("../../../../../../../Back")
+focus_neighbor_left = NodePath("../../../../../../../VBoxContainer/Back")
 focus_neighbor_top = NodePath("../WindowModeOption")
 focus_neighbor_right = NodePath("../../../../../../Master/VBoxContainer/MasterBusSlider")
 focus_neighbor_bottom = NodePath("../../../../../Brightness/VBoxContainer/BrightnessSlider")
@@ -148,7 +145,7 @@ text = "100%"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
-focus_neighbor_left = NodePath("../../../../../Back")
+focus_neighbor_left = NodePath("../../../../../VBoxContainer/Back")
 focus_neighbor_top = NodePath("../../../DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/VSyncOption")
 focus_neighbor_right = NodePath("../../../../Master/VBoxContainer/MasterBusSlider")
 focus_neighbor_bottom = NodePath("../../../ScaleContainer/VBoxContainer/ScaleSlider")
@@ -191,7 +188,7 @@ text = "3x"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
-focus_neighbor_left = NodePath("../../../../../Back")
+focus_neighbor_left = NodePath("../../../../../VBoxContainer/Back")
 focus_neighbor_top = NodePath("../../../Brightness/VBoxContainer/BrightnessSlider")
 focus_neighbor_right = NodePath("../../../../Master/VBoxContainer/MasterBusSlider")
 focus_neighbor_bottom = NodePath("../../../../Master/VBoxContainer/MasterBusSlider")
@@ -283,7 +280,6 @@ value = 1.0
 tick_count = 6
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
-[connection signal="timeout" from="SaveTimer" to="." method="_on_save_timer_timeout"]
 [connection signal="item_id_selected" from="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/WindowModeOption" to="." method="_on_window_mode_selected"]
 [connection signal="item_id_selected" from="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/VSyncOption" to="." method="_on_vsync_option_id_selected"]
 [connection signal="value_changed" from="HBoxContainer/VBoxContainer/Brightness/VBoxContainer/BrightnessSlider" to="." method="_on_brightness_slider_value_changed"]

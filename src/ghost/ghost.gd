@@ -1,3 +1,4 @@
+class_name Ghost
 extends ControllableCharacter
 
 const IS_MOVING = &"is_moving"

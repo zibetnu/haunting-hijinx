@@ -571,6 +571,7 @@ size_flags_vertical = 8
 [node name="YouPointer" parent="IgnoreCanvasModulate/FollowPlayer" instance=ExtResource("33_t258g")]
 
 [connection signal="cutscene_ended" from="GrabCutscene" to="StateChart" method="send_event" binds= [&"cutscene_ended"]]
+[connection signal="changed" from="PeerID" to="." method="_on_peer_id_changed"]
 [connection signal="changed" from="PeerID" to="PlayerControllerStack/Synced" method="set_input_authority"]
 [connection signal="changed" from="PeerID" to="IgnoreCanvasModulate/FollowPlayer/NameLabel" method="set_peer_id"]
 [connection signal="changed_to_local" from="PeerID" to="." method="show"]
@@ -608,8 +609,8 @@ size_flags_vertical = 8
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="." method="set_stunnable" binds= [true]]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Summon" to="Grab" method="set_monitoring" flags=3 binds= [true]]
-[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="release_charge"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="stop_charging"]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="Summon" method="release_charge"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Summon" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/SummonBar" method="hide"]
 [connection signal="taken" from="StateChart/Base/Behavior/Alive/Summon/Button2Released" to="Summon" method="release_charge"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/SummonRelease" to="." method="set_stunnable" binds= [true]]

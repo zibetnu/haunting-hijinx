@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bnoti7vnd7pk7"]
+[gd_scene load_steps=10 format=3 uid="uid://bnoti7vnd7pk7"]
 
 [ext_resource type="Script" uid="uid://cuni11kdbk1kn" path="res://src/menus/menus.gd" id="1_kv08v"]
 [ext_resource type="PackedScene" uid="uid://civfmojof07gs" path="res://src/main_menu/main_menu.tscn" id="1_yg0vw"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c4t7474tk0tok" path="res://src/about_menu/about_menu.tscn" id="3_bdgwc"]
 [ext_resource type="PackedScene" uid="uid://cis3vfoj3ussh" path="res://src/menus/tutorial_select/tutorial_select.tscn" id="5_lbit3"]
 [ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="7_jio01"]
+[ext_resource type="PackedScene" uid="uid://dmp2ru73exiia" path="res://src/menus/customization/customization.tscn" id="7_r3bfl"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_67gcq"]
 
@@ -47,16 +48,23 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 
+[node name="Customization" parent="." instance=ExtResource("7_r3bfl")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 5
+
 [node name="SteamConnector" parent="." instance=ExtResource("7_jio01")]
 
+[connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/Customization" to="." method="_on_customization_pressed"]
 [connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/HBoxContainer2/Settings" to="." method="set_current_tab" binds= [1]]
 [connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/HBoxContainer2/Tutorial" to="." method="set_current_tab" binds= [4]]
 [connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/HBoxContainer/About" to="." method="set_current_tab" binds= [2]]
-[connection signal="pressed" from="ConfigMenu/Back" to="." method="set_current_tab" binds= [0]]
+[connection signal="pressed" from="ConfigMenu/VBoxContainer/Back" to="." method="set_current_tab" binds= [0]]
 [connection signal="pressed" from="AboutMenu/Buttons/Back" to="." method="set_current_tab" binds= [0]]
 [connection signal="pressed" from="AboutMenu/Buttons/Licenses" to="." method="set_current_tab" binds= [3]]
 [connection signal="pressed" from="LicenseMenu/HBoxContainer/VBoxContainer/HBoxContainer/Back" to="." method="set_current_tab" binds= [2]]
 [connection signal="pressed" from="TutorialSelect/HBoxContainer/Back" to="." method="set_current_tab" binds= [0]]
+[connection signal="back_pressed" from="Customization" to="." method="_on_customization_back_pressed"]
 
 [editable path="MainMenu"]
 [editable path="MainMenu/BackEnd"]
