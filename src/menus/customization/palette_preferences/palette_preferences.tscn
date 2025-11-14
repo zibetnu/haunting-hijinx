@@ -1,12 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqbmc2dond7lm"]
+[gd_scene load_steps=11 format=3 uid="uid://cqbmc2dond7lm"]
 
 [ext_resource type="Script" uid="uid://ottrclpwmo8a" path="res://src/menus/customization/palette_preferences/palette_preferences.gd" id="1_xo756"]
 [ext_resource type="Script" uid="uid://c0naylnves2yd" path="res://addons/ReorderableContainer/reorderable_hbox.gd" id="2_b0bbb"]
 [ext_resource type="Texture2D" uid="uid://b1r4xdhw8pco3" path="res://assets/hunter/palettes/yellow.png" id="5_r7n65"]
 [ext_resource type="Texture2D" uid="uid://vae6e0eh7xge" path="res://assets/hunter/palettes/green.png" id="7_70v8q"]
+[ext_resource type="Texture2D" uid="uid://c4uu2qix7n45o" path="res://assets/preference_icons.png" id="7_r7n65"]
 [ext_resource type="Texture2D" uid="uid://cu33mq4g4e6ly" path="res://assets/hunter/palettes/purple.png" id="8_70v8q"]
 [ext_resource type="Texture2D" uid="uid://biqdpl1yys2eh" path="res://assets/hunter/palettes/red.png" id="9_ilmqd"]
 [ext_resource type="Texture2D" uid="uid://4l3a8ifjlff5" path="res://assets/hunter/palettes/blue.png" id="10_2nelx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flgft"]
+atlas = ExtResource("7_r7n65")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70v8q"]
+atlas = ExtResource("7_r7n65")
+region = Rect2(8, 0, 8, 8)
 
 [node name="PalettePreferences" type="HBoxContainer"]
 offset_right = 132.0
@@ -30,16 +39,29 @@ theme_type_variation = &"LabelCompact"
 text = "Preferred Palettes"
 horizontal_alignment = 1
 
-[node name="ButtonContainer" type="Container" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_flgft")
+stretch_mode = 3
+
+[node name="ButtonContainer" type="Container" parent="VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 process_mode = 1
 custom_minimum_size = Vector2(96, 16)
 layout_mode = 2
-size_flags_horizontal = 4
 script = ExtResource("2_b0bbb")
 hold_duration = 0.2
 separation = 4
 metadata/_custom_type_script = "uid://c0naylnves2yd"
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_70v8q")
+stretch_mode = 3
 
 [node name="Right" type="Button" parent="."]
 layout_mode = 2
@@ -47,6 +69,6 @@ focus_neighbor_right = NodePath("../Left")
 text = ">"
 
 [connection signal="pressed" from="Left" to="." method="_on_left_pressed"]
-[connection signal="reordered" from="VBoxContainer/ButtonContainer" to="." method="_on_button_container_reordered"]
-[connection signal="sort_children" from="VBoxContainer/ButtonContainer" to="VBoxContainer/ButtonContainer" method="_on_sort_children"]
+[connection signal="reordered" from="VBoxContainer/HBoxContainer/ButtonContainer" to="." method="_on_button_container_reordered"]
+[connection signal="sort_children" from="VBoxContainer/HBoxContainer/ButtonContainer" to="VBoxContainer/HBoxContainer/ButtonContainer" method="_on_sort_children"]
 [connection signal="pressed" from="Right" to="." method="_on_right_pressed"]
