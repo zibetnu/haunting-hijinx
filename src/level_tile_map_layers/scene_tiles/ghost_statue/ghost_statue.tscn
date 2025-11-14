@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://qvu7pdftkg8y"]
 
 [ext_resource type="Texture2D" uid="uid://bcud6153v4cd5" path="res://assets/statue/base/diffuse.png" id="1_nkf4o"]
-[ext_resource type="Script" uid="uid://xlr88m70s384" path="res://src/level_tile_map_layers/scene_tiles/ghost_statue.gd" id="1_nqrkp"]
+[ext_resource type="Script" uid="uid://xlr88m70s384" path="res://src/level_tile_map_layers/scene_tiles/ghost_statue/ghost_statue.gd" id="1_nqrkp"]
 [ext_resource type="Texture2D" uid="uid://chw30io6tbvqx" path="res://assets/statue/base/normal.png" id="2_c6hu8"]
 [ext_resource type="Texture2D" uid="uid://sfy2hreb7xxo" path="res://assets/statue/base/specular.png" id="3_hd512"]
 [ext_resource type="Texture2D" uid="uid://cbnm4xrkfeutt" path="res://assets/statue/ghost/diffuse.png" id="4_mtkty"]

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://pf2rcio7jlj3"]
+
+[ext_resource type="Texture2D" uid="uid://kiaxchjuucyh" path="res://src/level_tile_map_layers/scene_tiles/candle/arm_front_texture.tres" id="1_7xi0r"]
+[ext_resource type="Texture2D" uid="uid://jv4efllfhfwn" path="res://src/level_tile_map_layers/scene_tiles/candle/base_texture.tres" id="2_0siri"]
+[ext_resource type="PackedScene" uid="uid://sk7k142ijsc7" path="res://src/level_tile_map_layers/scene_tiles/candle/flame/flame.tscn" id="3_xkg1s"]
+[ext_resource type="Texture2D" uid="uid://g6hr1h2v2mvu" path="res://src/level_tile_map_layers/scene_tiles/candle/candle_light_texture.tres" id="4_n3a4q"]
+
+[node name="Candle" type="Node2D"]
+position = Vector2(0, 8)
+
+[node name="Arm" type="Sprite2D" parent="."]
+position = Vector2(0, -12)
+texture = ExtResource("1_7xi0r")
+
+[node name="Base" type="Sprite2D" parent="."]
+light_mask = 16
+position = Vector2(0, -12)
+texture = ExtResource("2_0siri")
+
+[node name="Flame" parent="." instance=ExtResource("3_xkg1s")]
+position = Vector2(0, -17)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -5)
+color = Color(0, 0.804089, 0.976547, 1)
+range_item_cull_mask = 11
+texture = ExtResource("4_n3a4q")
+height = 10.0

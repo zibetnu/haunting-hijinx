@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://dgd8wuc6yo56d"]
+
+[ext_resource type="PackedScene" uid="uid://ct4851h4l56am" path="res://src/level_tile_map_layers/scene_tiles/candle/candelabra_on_table.tscn" id="1_lgaq3"]
+[ext_resource type="Texture2D" uid="uid://b5mqnii2wurcj" path="res://assets/tile_sets/foyer/props/diffuse.png" id="2_xwig5"]
+[ext_resource type="Texture2D" uid="uid://0hl5rqvvwuyw" path="res://assets/tile_sets/foyer/props/normal.png" id="3_745hq"]
+[ext_resource type="Texture2D" uid="uid://vjjwc7io6lrr" path="res://assets/tile_sets/foyer/props/specular.png" id="4_m25t7"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_6ek6q"]
+diffuse_texture = ExtResource("2_xwig5")
+normal_texture = ExtResource("3_745hq")
+specular_texture = ExtResource("4_m25t7")
+specular_shininess = 0.6
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cek4d"]
+texture = SubResource("CanvasTexture_6ek6q")
+12:4/size_in_atlas = Vector2i(3, 3)
+12:4/0 = 0
+12:4/0/texture_origin = Vector2i(-16, 16)
+12:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -24, 40, -24, 40, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_sc0wc"]
+resource_name = "Level Tile Set"
+occlusion_layer_0/light_mask = 2
+occlusion_layer_0/sdf_collision = true
+occlusion_layer_1/light_mask = 4
+physics_layer_0/collision_layer = 1
+physics_layer_1/collision_layer = 64
+physics_layer_1/collision_mask = 0
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Carpet"
+terrain_set_0/terrain_0/color = Color(1, 1, 1, 1)
+terrain_set_0/terrain_1/name = "Wall Tops"
+terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
+custom_data_layer_0/name = "linear_velocity"
+custom_data_layer_0/type = 5
+sources/10 = SubResource("TileSetAtlasSource_cek4d")
+
+[node name="CandelabraOnTable" instance=ExtResource("1_lgaq3")]
+
+[node name="TileMapLayer" parent="." index="0"]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 10, 0, 12, 0, 4, 0, 0, 0)
+tile_set = SubResource("TileSet_sc0wc")
+
+[node name="Candelabra" parent="." index="1"]
+position = Vector2(16, -17)
