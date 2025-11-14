@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4avhfqchjlyr"
-path="res://.godot/imported/specular.png-abc91bfcee12b1ed31a3d84ccc03e255.ctex"
+uid="uid://thv7mgxxa4uy"
+path="res://.godot/imported/normal.png-47bd895c859a33160adc665caa2d86aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tile_sets/the_basement/stone_brick_floor/specular.png"
-dest_files=["res://.godot/imported/specular.png-abc91bfcee12b1ed31a3d84ccc03e255.ctex"]
+source_file="res://assets/tile_sets/the_basement/normal.png"
+dest_files=["res://.godot/imported/normal.png-47bd895c859a33160adc665caa2d86aa.ctex"]
 
 [params]
 

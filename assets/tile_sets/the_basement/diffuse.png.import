@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbww2xhf7aoef"
-path="res://.godot/imported/diffuse.png-6426f1d65783fab3ceb2fd042e40dfde.ctex"
+uid="uid://dnv3ohwg48den"
+path="res://.godot/imported/diffuse.png-0879430d3cd1933a3fb71f35eec67454.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tile_sets/the_basement/stone_brick_floor/diffuse.png"
-dest_files=["res://.godot/imported/diffuse.png-6426f1d65783fab3ceb2fd042e40dfde.ctex"]
+source_file="res://assets/tile_sets/the_basement/diffuse.png"
+dest_files=["res://.godot/imported/diffuse.png-0879430d3cd1933a3fb71f35eec67454.ctex"]
 
 [params]
 
