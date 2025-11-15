@@ -1,31 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://bmrvrkyh2t2pf"]
+[gd_scene load_steps=3 format=3 uid="uid://bmrvrkyh2t2pf"]
 
 [ext_resource type="Script" uid="uid://bgjkyfnmrd7e0" path="res://src/autoload/menu_background/menu_background.gd" id="1_7v3o7"]
 [ext_resource type="PackedScene" uid="uid://ebt35jjk5feh" path="res://src/level_tile_map_layers/level_tile_map_layers.tscn" id="2_ma24s"]
-[ext_resource type="Resource" uid="uid://cwctpupci2uiq" path="res://src/level/main_floor.tres" id="3_oumpc"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_eduse"]
-viewport_path = NodePath("TextureRect/SubViewport")
-
-[node name="MenuBackground" type="CenterContainer"]
-visible = false
+[node name="MenuBackground" type="SubViewportContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+stretch = true
 script = ExtResource("1_7v3o7")
 scene_names = Array[StringName]([&"Menus", &"LobbyBrowser", &"Lobby"])
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 2
-texture = SubResource("ViewportTexture_eduse")
-
-[node name="SubViewport" type="SubViewport" parent="TextureRect"]
+[node name="SubViewport" type="SubViewport" parent="."]
 disable_3d = true
 snap_2d_transforms_to_pixel = true
-size = Vector2i(736, 487)
+size = Vector2i(640, 360)
 
-[node name="LevelTileMapLayers" parent="TextureRect/SubViewport" instance=ExtResource("2_ma24s")]
-position = Vector2(0, 38)
-level = ExtResource("3_oumpc")
+[node name="CenterContainer" type="CenterContainer" parent="SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="SubViewport/CenterContainer"]
+layout_mode = 2
+
+[node name="LevelTileMapLayers" parent="SubViewport/CenterContainer/Control" instance=ExtResource("2_ma24s")]
+unique_name_in_owner = true

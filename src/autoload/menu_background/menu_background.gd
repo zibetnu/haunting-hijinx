@@ -2,22 +2,22 @@ extends CanvasItem
 
 @export var scene_names: Array[StringName]
 
-var _scenes_present := 0:
-	set = _set_scenes_present
+@onready var level_layers: LevelTileMapLayers = %LevelTileMapLayers
 
 
 func _ready() -> void:
-	get_tree().node_added.connect(_on_node_added)
+	@warning_ignore("unsafe_method_access", "unsafe_property_access")
+	SceneChanger.scene_changed.connect(_on_scene_changed)
 
 
-func _set_scenes_present(value: int) -> void:
-	_scenes_present = value
-	visible = _scenes_present > 0
+func _on_scene_changed(scene_root: Node) -> void:
+	var level_shown: bool = visible and level_layers.level != null
+	match [level_shown, scene_root.name in scene_names]:
+		[false, true]:
+			level_layers.level = PeerData.levels.pick_random()
+			level_layers.position = level_layers.level.get_limits_center() * -1
+			show()
 
-
-func _on_node_added(node: Node) -> void:
-	if not node.name in scene_names:
-		return
-
-	_scenes_present += 1
-	node.tree_exiting.connect(func() -> void: _scenes_present -= 1)
+		[true, false]:
+			hide()
+			level_layers.level = null

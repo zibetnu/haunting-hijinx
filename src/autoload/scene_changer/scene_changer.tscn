@@ -34,3 +34,4 @@ spawn_limit = 1
 [connection signal="timeout" from="FallbackTimer" to="." method="_main_menu_fallback"]
 [connection signal="child_entered_tree" from="SceneSpawner" to="FallbackTimer" method="stop" unbinds=1]
 [connection signal="child_exiting_tree" from="SceneSpawner" to="FallbackTimer" method="start" unbinds=1]
+[connection signal="spawned" from="SceneSpawner" to="." method="_on_scene_spawner_spawned"]

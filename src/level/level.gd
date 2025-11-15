@@ -14,3 +14,7 @@ extends Resource
 @export_storage var wall_top_data: PackedByteArray
 @export_storage var wall_cap_data: PackedByteArray
 @export_storage var prop_data: PackedByteArray
+
+
+func get_limits_center() -> Vector2:
+	return limit_top_left.lerp(limit_bottom_right, 0.5)

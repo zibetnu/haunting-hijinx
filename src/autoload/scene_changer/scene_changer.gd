@@ -1,5 +1,7 @@
 extends Node
 
+signal scene_changed(root_node: Node)
+
 @export var lobby: PackedScene
 @export var lobby_browser: PackedScene
 @export var main_menu: PackedScene
@@ -22,6 +24,7 @@ func change_scene_to_node(node: Node) -> void:
 	remove_scene()
 	scene_spawner.add_child(node, true)
 	get_tree().set_pause(false)
+	scene_changed.emit(node)
 
 
 func change_scene_to_packed(packed_scene: PackedScene) -> void:
@@ -83,3 +86,7 @@ func _on_server_disconnected() -> void:
 
 func _on_join_requested(lobby_id: int, _steam_id: int) -> void:
 	join_lobby(lobby_id)
+
+
+func _on_scene_spawner_spawned(node: Node) -> void:
+	scene_changed.emit(node)
