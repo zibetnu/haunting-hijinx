@@ -4,6 +4,7 @@ signal peer_connected(id: int)
 signal ghost_peer_changed(id: int)
 signal peer_name_changed(id: int)
 signal peer_participation_changed(id: int)
+signal selected_level_changed(value: Level)
 
 enum PeerType {
 	HUNTER = 0,
@@ -24,7 +25,8 @@ const MAX_PARTICIPANTS = 5
 
 @export_group("Levels", "levels")
 @export var levels: Array[Level]
-@export var levels_selected_index: int
+@export var levels_selected_index: int:
+	set = set_levels_selected_index
 
 var peer_ghost_hats: Dictionary[int, int]
 var peer_hunter_hats: Dictionary[int, int]
@@ -106,6 +108,11 @@ func get_score(array: Array) -> int:
 
 func get_selected_level() -> Level:
 	return levels[levels_selected_index]
+
+
+func set_levels_selected_index(value: int) -> void:
+	levels_selected_index = posmod(value, levels.size())
+	selected_level_changed.emit(get_selected_level())
 
 
 func erase_data() -> void:

@@ -1,7 +1,8 @@
 class_name LevelPlayer
 extends Node2D
 
-@export var level: Level
+@export var level: Level:
+	set = set_level
 @export var ghost: PackedScene
 @export var hunter: PackedScene
 @export var spectator_menu: PackedScene
@@ -19,17 +20,15 @@ var _hunters_spawned := 0
 
 
 func _ready() -> void:
+	PeerData.selected_level_changed.connect(set_level)
 	PeerData.assign_hunter_palette_indexes()
 	show_matching_timer_sprite()
 	if level == null:
 		level = PeerData.get_selected_level()
 
-	level_tile_map_layers.level = level
+	refresh_level()
 	if not multiplayer.is_server():
 		return
-
-	battery_spawner.limit_bottom_right = level.limit_bottom_right
-	battery_spawner.limit_top_left = level.limit_top_left
 
 	PeerData.match_in_progress = true
 	PeerData.peer_connected.connect(_on_peer_connected)
@@ -100,6 +99,21 @@ func remove_player(id: int) -> void:
 
 		player.queue_free()
 		_on_player_death_state_changed()
+
+
+func set_level(value: Level) -> void:
+	level = value
+	if is_node_ready():
+		refresh_level()
+
+
+func refresh_level() -> void:
+	level_tile_map_layers.level = level
+	if level == null:
+		return
+
+	battery_spawner.limit_top_left = level.limit_top_left
+	battery_spawner.limit_bottom_right = level.limit_bottom_right
 
 
 ## Shows timer sprite matching the local peer's type.
