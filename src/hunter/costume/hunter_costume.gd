@@ -59,6 +59,9 @@ func play_effect(value: String) -> void:
 
 
 func set_costume_rotation(value: float) -> void:
+	if costume_rotation == value:
+		return
+
 	costume_rotation = value
 	if not is_node_ready():
 		await ready
