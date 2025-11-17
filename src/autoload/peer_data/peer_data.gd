@@ -30,7 +30,7 @@ const MAX_PARTICIPANTS = 5
 
 var peer_ghost_hats: Dictionary[int, int]
 var peer_hunter_hats: Dictionary[int, int]
-var hunter_palette_indexes: Dictionary[int, int]
+var assigned_hunter_palettes: Dictionary[int, HunterCostume.Palette]
 var hunter_palette_preferences: Dictionary[int, Array]
 var lobby_id := -1
 var match_in_progress := false
@@ -42,59 +42,20 @@ func _ready() -> void:
 	multiplayer.server_disconnected.connect(erase_data)
 
 
-# TODO: lots of cleanup.
-func assign_hunter_palette_indexes() -> void:
-	hunter_palette_indexes.clear()
-
+func assign_hunter_palettes() -> void:
+	assigned_hunter_palettes.clear()
 	var hunters: Array[int]
 	hunters.assign(participants.filter(_is_hunter))
 	hunters.resize(5)
-
-	var best_score: int = 2^63
-	var best_permutation: Array[int]
-	for permutation in get_permutations(hunters):
-		var score: int = get_score(permutation)
-		if score >= best_score:
-			continue
-
-		best_score = score
-		best_permutation.assign(permutation)
-		if best_score == 0:
-			break
-
+	var best_permutation: Array[int] = Permutations.get_best_permutation(
+			hunters,
+			get_compromise_score
+	)
 	for peer_id in best_permutation:
-		hunter_palette_indexes[peer_id] = best_permutation.find(peer_id)
+		assigned_hunter_palettes[peer_id] = best_permutation.find(peer_id) as HunterCostume.Palette
 
 
-
-# https://www.quickperm.org
-func get_permutations(array: Array) -> Array[Array]:
-	var permutations: Array[Array] = [array.duplicate()]
-
-	var n: int = array.size()
-	var p: Array[int]
-	for i in range(n + 1):
-		p.append(i)
-
-	var i: int = 1
-	while i < n:
-		p[i] -= 1
-		var j: int = p[i] if i % 2 != 0 else 0
-
-		var temp: int = array[j]
-		array[j] = array[i]
-		array[i] = temp
-
-		permutations.append(array.duplicate())
-		i = 1
-		while p[i] == 0:
-			p[i] = i
-			i += 1
-
-	return permutations
-
-
-func get_score(array: Array) -> int:
+func get_compromise_score(array: Array) -> int:
 	var score: int = 0
 	for i in array.size():
 		if array[i] not in hunter_palette_preferences:
@@ -198,7 +159,7 @@ func init_peer(id: int, customization: Dictionary[String, Variant] = {}) -> void
 
 	peer_ghost_hats[id] = customization.get("ghost_hat", 0)
 	peer_hunter_hats[id] = customization.get("hunter_hat", 0)
-	hunter_palette_preferences[id] = customization.get("hunter_colors", [])
+	hunter_palette_preferences[id] = customization.get("hunter_palettes", [])
 
 	var peer_name: String = customization.get("default_name", "")
 	if peer_name.is_empty():

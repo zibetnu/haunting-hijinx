@@ -76,6 +76,7 @@ func _on_level_select_item_selected(index: int) -> void:
 
 
 func _on_start_button_pressed() -> void:
+	PeerData.assign_hunter_palettes()
 	# https://github.com/godotengine/godot/issues/77643
 	@warning_ignore("unsafe_method_access")
 	SceneChanger.change_to_level(PeerData.get_selected_level())

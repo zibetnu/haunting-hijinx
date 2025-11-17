@@ -1,10 +1,28 @@
 class_name HunterCostume
 extends Node2D
 
+enum Palette {
+	YELLOW,
+	GREEN,
+	PURPLE,
+	RED,
+	BLUE,
+}
+
 const COSTUME_GROUP = &"hunter_costumes"
 const PALETTE_PARAMETER = &"new_palette"
+const PALETTE_TEXTURES: Dictionary[Palette, Texture2D] = {
+	Palette.YELLOW: preload("uid://b1r4xdhw8pco3"),
+	Palette.GREEN: preload("uid://vae6e0eh7xge"),
+	Palette.PURPLE: preload("uid://cu33mq4g4e6ly"),
+	Palette.RED: preload("uid://biqdpl1yys2eh"),
+	Palette.BLUE: preload("uid://4l3a8ifjlff5"),
+}
 const HFRAME_COUNT = 16
 const MIN_ROTATION = 0.0
+
+@export var palette: Palette:
+	set = set_palette
 
 @export_group("Hat", "hat")
 @export var hat_array: Array[HunterHat]
@@ -20,12 +38,6 @@ const MIN_ROTATION = 0.0
 @export_group("Effects", "effects")
 @export var effects_current_animation: String:
 	set = play_effect
-
-@export_group("Palette", "palette")
-@export var palette_auto_set := true
-@export var palette_index: int:
-	set = set_palette_index
-@export var palette_array: Array[Texture2D]
 
 @export_group("Y Frames", "y_frame")
 @export var y_frame_arms: int:
@@ -44,8 +56,7 @@ const MIN_ROTATION = 0.0
 
 
 func _ready() -> void:
-	if palette_auto_set:
-		set_palette_index_from_group_index()
+	_refresh_palettes()
 
 
 func play(value: String) -> void:
@@ -82,21 +93,10 @@ func set_hat_index(value: int) -> void:
 		_apply_hat_index()
 
 
-func set_palette_index(value: int) -> void:
-	var palette_array_size: int = palette_array.size()
-	palette_index = posmod(value, palette_array_size)
-	if palette_array_size == 0:
-		return
-
-	(material_parent.material as ShaderMaterial).set_shader_parameter(
-			PALETTE_PARAMETER,
-			palette_array[palette_index]
-	)
-	_apply_hat_index()
-
-
-func set_palette_index_from_group_index() -> void:
-	palette_index = get_tree().get_nodes_in_group(COSTUME_GROUP).find(self)
+func set_palette(value: Palette) -> void:
+	palette = value
+	if is_node_ready():
+		_refresh_palettes()
 
 
 func set_y_frame_arms(value: int) -> void:
@@ -123,7 +123,7 @@ func _apply_hat_index() -> void:
 	else:
 		hat_material.set_shader_parameter(
 				&"new_palette",
-				hat_data.palette_array[palette_index % hat_data.palette_array.size()]
+				hat_data.palette_array[palette % hat_data.palette_array.size()]
 		)
 
 
@@ -146,3 +146,11 @@ func _get_first_partial_match(
 		return animation_key
 
 	return ""
+
+
+func _refresh_palettes() -> void:
+	(material_parent.material as ShaderMaterial).set_shader_parameter(
+			PALETTE_PARAMETER,
+			PALETTE_TEXTURES[palette]
+	)
+	_apply_hat_index()

@@ -21,7 +21,6 @@ var _hunters_spawned := 0
 
 func _ready() -> void:
 	PeerData.selected_level_changed.connect(set_level)
-	PeerData.assign_hunter_palette_indexes()
 	show_matching_timer_sprite()
 	if level == null:
 		level = PeerData.get_selected_level()
@@ -77,7 +76,7 @@ func add_player(id: int) -> void:
 
 	elif instance is Hunter:
 		(instance as Hunter).costume.hat_index = PeerData.peer_hunter_hats[id]
-		(instance as Hunter).costume.palette_index = PeerData.hunter_palette_indexes[id]
+		(instance as Hunter).costume.palette = PeerData.assigned_hunter_palettes[id]
 
 	get_tree().call_group("ghost_peer_ids", "set_id", PeerData.ghost_peer)
 

@@ -115,7 +115,6 @@ y_sort_enabled = true
 position = Vector2(0, 0)
 scale = Vector2(4, 4)
 costume_rotation = 1.5707963267948966
-palette_auto_set = false
 
 [node name="FlashlightBack" type="Sprite2D" parent="HBoxContainer/VBoxContainer2/CenterContainer/Control/HunterCostume"]
 unique_name_in_owner = true

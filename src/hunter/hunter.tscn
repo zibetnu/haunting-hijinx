@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene load_steps=44 format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -276,7 +276,6 @@ visible = false
 
 [node name="HunterCostume" parent="." instance=ExtResource("19_c0d8f")]
 y_sort_enabled = true
-palette_auto_set = false
 
 [node name="MaterialParent" parent="HunterCostume/CanvasGroup" index="0"]
 material = SubResource("ShaderMaterial_plsr1")

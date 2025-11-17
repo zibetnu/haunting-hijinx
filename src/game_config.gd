@@ -8,7 +8,7 @@ static var ghost_body: ConfigKey = customization.get_config_key("ghost_body", 0)
 static var ghost_hat: ConfigKey = customization.get_config_key("ghost_hat", 0)
 static var hunter_body: ConfigKey = customization.get_config_key("hunter_body", 0)
 static var hunter_hat: ConfigKey = customization.get_config_key("hunter_hat", 0)
-static var hunter_colors: ConfigKey = customization.get_config_key("hunter_colors", [])
+static var hunter_palettes: ConfigKey = customization.get_config_key("hunter_palettes", [])
 
 static var _file_path: String = _get_config_dir().path_join("settings.cfg")
 

@@ -40,15 +40,15 @@ func init_hunter() -> void:
 	hunter_hat_spin_box.selected = GameConfig.ghost_hat.get_value()
 
 	var preferred_indexes: Array[int]
-	preferred_indexes.assign(GameConfig.hunter_colors.get_value() as Array)
+	preferred_indexes.assign(GameConfig.hunter_palettes.get_value() as Array)
 
 	hunter_palette_preferences.set_preferred_indexes(preferred_indexes)
-	hunter_palette_preferences.preferred_indexes_changed.connect(
-			_on_hunter_preferred_indexes_changed
+	hunter_palette_preferences.preferred_palettes_reordered.connect(
+			_on_hunter_preferred_palettes_reordered
 	)
 
 	set_block_signals(true)
-	hunter_palette_preferences.pressed_palette_index_changed.connect(set_hunter_palette_index)
+	hunter_palette_preferences.pressed_palette_changed.connect(set_hunter_palette)
 	if not preferred_indexes.is_empty():
 		hunter_palette_preferences.pressed_palette_index = preferred_indexes[0]
 
@@ -56,8 +56,8 @@ func init_hunter() -> void:
 	hunter_costume.play("idle_no_flashlight")
 
 
-func set_hunter_palette_index(index: int) -> void:
-	hunter_costume.palette_index = index
+func set_hunter_palette(palette: HunterCostume.Palette) -> void:
+	hunter_costume.palette = palette
 	pressed_sound_requested.emit()
 
 
@@ -95,5 +95,5 @@ func _on_visibility_changed() -> void:
 		first_button.grab_focus()
 
 
-func _on_hunter_preferred_indexes_changed() -> void:
-	GameConfig.hunter_colors.set_value(hunter_palette_preferences.get_preferred_indexes())
+func _on_hunter_preferred_palettes_reordered() -> void:
+	GameConfig.hunter_palettes.set_value(hunter_palette_preferences.get_preferred_indexes())

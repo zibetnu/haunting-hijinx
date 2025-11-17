@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dguyyy188ihbi"]
+[gd_scene load_steps=40 format=3 uid="uid://dguyyy188ihbi"]
 
 [ext_resource type="PackedScene" uid="uid://c64tx6254qrlp" path="res://src/tutorial/tutorial.tscn" id="1_c5qxs"]
 [ext_resource type="Script" uid="uid://c34s5yn38nab1" path="res://src/tutorial/hunter/hunter_tutorial.gd" id="2_v1ay4"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://di5qxwdvv5nga" path="res://src/controller/npc_hunter/npc_hunter.tscn" id="8_40hbx"]
 [ext_resource type="PackedScene" uid="uid://grxm3658ukjj" path="res://src/battery_spawner/battery_spawner.tscn" id="13_g4mwu"]
 [ext_resource type="Texture2D" uid="uid://df1deb6rjs1kc" path="res://assets/hunter/palettes/placeholder.png" id="13_k4uj5"]
+[ext_resource type="Texture2D" uid="uid://7re8oqadq4as" path="res://assets/hunter/party_hat/palettes/green.png" id="14_xh0tf"]
 
 [sub_resource type="Resource" id="Resource_7jipr"]
 resource_name = "Battery"
@@ -84,6 +85,30 @@ resource_name = "Complete"
 script = ExtResource("3_ea8sw")
 objective = "[rainbow freq=0.6 sat=0.6 val=1]Tutorial complete. Happy hunting![/rainbow]"
 
+[sub_resource type="Resource" id="Resource_kpksu"]
+resource_local_to_scene = true
+resource_name = "IsMoving"
+script = ExtResource("4_mx0qj")
+expression = "is_moving"
+
+[sub_resource type="Resource" id="Resource_gy72a"]
+resource_local_to_scene = true
+resource_name = "Not"
+script = ExtResource("5_h1wiw")
+guard = SubResource("Resource_kpksu")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_psybu"]
+resource_local_to_scene = true
+shader = ExtResource("6_6k6h6")
+shader_parameter/old_palette = ExtResource("13_k4uj5")
+shader_parameter/new_palette = ExtResource("7_k04wc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nwmwq"]
+resource_local_to_scene = true
+shader = ExtResource("6_6k6h6")
+shader_parameter/old_palette = ExtResource("14_xh0tf")
+shader_parameter/new_palette = ExtResource("14_xh0tf")
+
 [sub_resource type="Resource" id="Resource_wr3rf"]
 resource_local_to_scene = true
 resource_name = "IsMoving"
@@ -108,23 +133,11 @@ shader = ExtResource("6_6k6h6")
 shader_parameter/old_palette = ExtResource("13_k4uj5")
 shader_parameter/new_palette = ExtResource("7_k04wc")
 
-[sub_resource type="Resource" id="Resource_kpksu"]
-resource_local_to_scene = true
-resource_name = "IsMoving"
-script = ExtResource("4_mx0qj")
-expression = "is_moving"
-
-[sub_resource type="Resource" id="Resource_gy72a"]
-resource_local_to_scene = true
-resource_name = "Not"
-script = ExtResource("5_h1wiw")
-guard = SubResource("Resource_kpksu")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_psybu"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ol48q"]
 resource_local_to_scene = true
 shader = ExtResource("6_6k6h6")
-shader_parameter/old_palette = ExtResource("13_k4uj5")
-shader_parameter/new_palette = ExtResource("7_k04wc")
+shader_parameter/old_palette = ExtResource("14_xh0tf")
+shader_parameter/new_palette = ExtResource("14_xh0tf")
 
 [node name="Tutorial" instance=ExtResource("1_c5qxs")]
 script = ExtResource("2_v1ay4")
@@ -178,29 +191,6 @@ quest = SubResource("Resource_6hkcd")
 [node name="Teamwork" parent="QuestNodes" index="10" instance=ExtResource("3_0femm")]
 quest = SubResource("Resource_0chku")
 
-[node name="BatterySpawner" parent="." index="10" node_paths=PackedStringArray("spawn_root") instance=ExtResource("13_g4mwu")]
-spawn_root = NodePath("..")
-
-[node name="NPCHunter" parent="." index="11" node_paths=PackedStringArray("controller") instance=ExtResource("7_smdw1")]
-position = Vector2(136, 127)
-controller = NodePath("NPCHunter")
-metadata/_edit_group_ = true
-
-[node name="IsMoving" parent="NPCHunter/StateChart/Base/Alive/Movement/Idle" index="0"]
-guard = SubResource("Resource_wr3rf")
-
-[node name="IsNotMoving" parent="NPCHunter/StateChart/Base/Alive/Movement/Move" index="0"]
-guard = SubResource("Resource_j56l6")
-
-[node name="MaterialParent" parent="NPCHunter/HunterCostume/CanvasGroup" index="0"]
-material = SubResource("ShaderMaterial_3hpvg")
-
-[node name="FollowPlayer" parent="NPCHunter/IgnoreCanvasModulate" index="0"]
-position = Vector2(136, 127)
-
-[node name="NPCHunter" parent="NPCHunter" index="17" node_paths=PackedStringArray("ghost") instance=ExtResource("8_40hbx")]
-ghost = NodePath("../../Ghost")
-
 [node name="Sprint" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts" index="2"]
 text = "Light:"
 
@@ -231,26 +221,55 @@ guard = SubResource("Resource_gy72a")
 [node name="MaterialParent" parent="Hunter/HunterCostume/CanvasGroup" index="0"]
 material = SubResource("ShaderMaterial_psybu")
 
+[node name="Hat" parent="Hunter/HunterCostume/CanvasGroup" index="1"]
+material = SubResource("ShaderMaterial_nwmwq")
+
 [node name="FollowPlayer" parent="Hunter/IgnoreCanvasModulate" index="0"]
 position = Vector2(368, 248)
+
+[node name="BatterySpawner" parent="." index="7" node_paths=PackedStringArray("spawn_root") instance=ExtResource("13_g4mwu")]
+spawn_root = NodePath("..")
+
+[node name="NPCHunter" parent="." index="8" node_paths=PackedStringArray("controller") instance=ExtResource("7_smdw1")]
+position = Vector2(136, 127)
+controller = NodePath("NPCHunter")
+metadata/_edit_group_ = true
+
+[node name="IsMoving" parent="NPCHunter/StateChart/Base/Alive/Movement/Idle" index="0"]
+guard = SubResource("Resource_wr3rf")
+
+[node name="IsNotMoving" parent="NPCHunter/StateChart/Base/Alive/Movement/Move" index="0"]
+guard = SubResource("Resource_j56l6")
+
+[node name="HunterCostume" parent="NPCHunter" index="13"]
+palette = 1
+
+[node name="MaterialParent" parent="NPCHunter/HunterCostume/CanvasGroup" index="0"]
+material = SubResource("ShaderMaterial_3hpvg")
+
+[node name="Hat" parent="NPCHunter/HunterCostume/CanvasGroup" index="1"]
+material = SubResource("ShaderMaterial_ol48q")
+
+[node name="FollowPlayer" parent="NPCHunter/IgnoreCanvasModulate" index="0"]
+position = Vector2(136, 127)
+
+[node name="NPCHunter" parent="NPCHunter" index="17" node_paths=PackedStringArray("ghost") instance=ExtResource("8_40hbx")]
+ghost = NodePath("../../Ghost")
 
 [connection signal="completed" from="QuestNodes/Damage" to="Ghost/NPCGhost" method="set_sprint" binds= [true]]
 [connection signal="started" from="QuestNodes/Damage" to="Ghost" method="hide"]
 [connection signal="started" from="QuestNodes/Damage" to="Ghost" method="set_position" binds= [Vector2(192, 288)]]
 [connection signal="started" from="QuestNodes/Damage" to="Ghost/NPCGhost" method="set_sprint" binds= [false]]
 [connection signal="completed" from="QuestNodes/Summon" to="QuestNodes/Summon/RetryTimer" method="stop"]
-[connection signal="completed" from="QuestNodes/Summon" to="Ghost/NPCGhost" method="set_summon" binds= [false]]
 [connection signal="completed" from="QuestNodes/Summon" to="Ghost/NPCGhost" method="set_sprint" binds= [true]]
+[connection signal="completed" from="QuestNodes/Summon" to="Ghost/NPCGhost" method="set_summon" binds= [false]]
 [connection signal="started" from="QuestNodes/Summon" to="Ghost" method="set_position" binds= [Vector2(368, 128)]]
-[connection signal="started" from="QuestNodes/Summon" to="Ghost/NPCGhost" method="set_summon" binds= [true]]
 [connection signal="started" from="QuestNodes/Summon" to="Ghost/NPCGhost" method="set_sprint" binds= [false]]
+[connection signal="started" from="QuestNodes/Summon" to="Ghost/NPCGhost" method="set_summon" binds= [true]]
 [connection signal="timeout" from="QuestNodes/Summon/RetryTimer" to="Ghost/NPCGhost" method="set_summon" binds= [true]]
 [connection signal="completed" from="QuestNodes/Battery" to="Hunter/StateChart/Base/Dead/Revived" method="set_block_signals" binds= [false]]
 [connection signal="started" from="QuestNodes/Battery" to="Hunter/StateChart/Base/Dead/Revived" method="set_block_signals" binds= [true]]
 [connection signal="started" from="QuestNodes/Revive" to="Ghost" method="set_position" binds= [Vector2(112, 127)]]
-[connection signal="battery_spawned" from="BatterySpawner" to="." method="_on_battery_spawned"]
-[connection signal="dropped" from="NPCHunter" to="Ghost" method="set_position" binds= [Vector2(368, 128)]]
-[connection signal="revived" from="NPCHunter/DamageSignals/Revivable" to="QuestNodes/Revive" method="complete"]
 [connection signal="ready" from="Ghost" to="Ghost/NPCGhost" method="set_sprint" flags=3 binds= [true]]
 [connection signal="charged" from="Ghost/Summon" to="Ghost/NPCGhost" method="set_summon" binds= [false]]
 [connection signal="summoned" from="Ghost/Summon" to="QuestNodes/Summon/RetryTimer" method="start"]
@@ -272,15 +291,10 @@ position = Vector2(368, 248)
 [connection signal="powered_on" from="Hunter/Flashlight/Behavior" to="QuestNodes/Light" method="start"]
 [connection signal="alerted_high" from="Hunter/IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" to="QuestNodes/AlertHigh" method="complete"]
 [connection signal="alerted_low" from="Hunter/IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" to="QuestNodes/AlertLow" method="complete"]
+[connection signal="battery_spawned" from="BatterySpawner" to="." method="_on_battery_spawned"]
+[connection signal="dropped" from="NPCHunter" to="Ghost" method="set_position" binds= [Vector2(368, 128)]]
+[connection signal="revived" from="NPCHunter/DamageSignals/Revivable" to="QuestNodes/Revive" method="complete"]
 
-[editable path="NPCHunter"]
-[editable path="NPCHunter/HeartbeatRumble"]
-[editable path="NPCHunter/PlayerControllerStack"]
-[editable path="NPCHunter/Flashlight"]
-[editable path="NPCHunter/Flashlight/Display"]
-[editable path="NPCHunter/HunterCostume"]
-[editable path="NPCHunter/IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert"]
-[editable path="NPCHunter/IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert"]
 [editable path="Ghost"]
 [editable path="Ghost/PlayerControllerStack"]
 [editable path="Hunter"]
@@ -291,3 +305,11 @@ position = Vector2(368, 248)
 [editable path="Hunter/HunterCostume"]
 [editable path="Hunter/IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert"]
 [editable path="Hunter/IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert"]
+[editable path="NPCHunter"]
+[editable path="NPCHunter/HeartbeatRumble"]
+[editable path="NPCHunter/PlayerControllerStack"]
+[editable path="NPCHunter/Flashlight"]
+[editable path="NPCHunter/Flashlight/Display"]
+[editable path="NPCHunter/HunterCostume"]
+[editable path="NPCHunter/IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert"]
+[editable path="NPCHunter/IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert"]

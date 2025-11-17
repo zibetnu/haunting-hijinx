@@ -1,12 +1,12 @@
 class_name PalettePreferences
 extends Control
 
-signal preferred_indexes_changed
-signal pressed_palette_index_changed(index: int)
+signal preferred_palettes_reordered
+signal pressed_palette_changed(index: int)
 
-@export var palettes: Array[Texture2D]
 
 var button_group := ButtonGroup.new()
+var palettes: Array[Texture2D] = HunterCostume.PALETTE_TEXTURES.values()
 var pressed_palette_index: int:
 	set = set_pressed_palette_index
 
@@ -72,7 +72,7 @@ func move_pressed_button_by(value: int) -> void:
 func set_pressed_palette_index(value: int) -> void:
 	pressed_palette_index = posmod(value, palettes.size())
 	get_palette_index_button(pressed_palette_index).set_pressed(true)
-	pressed_palette_index_changed.emit(pressed_palette_index)
+	pressed_palette_changed.emit(pressed_palette_index)
 
 
 func validate_preferred_indexes(preferred_indexes: Array[int]) -> Array[int]:
@@ -115,4 +115,4 @@ func _on_right_pressed() -> void:
 
 
 func _on_button_container_reordered(_from: int, _to: int) -> void:
-	preferred_indexes_changed.emit()
+	preferred_palettes_reordered.emit()
