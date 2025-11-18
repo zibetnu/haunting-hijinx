@@ -443,6 +443,30 @@
 			"category": "Plugins",
 			"contact": "",
 			"copyright": [
+				"FoolLin"
+			],
+			"description": "A container similar to BoxContainer but extended with drag-and-drop style reordering functionality, and auto-scroll functionality when placed under ScrollContainer.",
+			"id": "",
+			"licenses": [
+				{
+					"file": "res://addons/ReorderableContainer/LICENSE",
+					"identifier": "",
+					"name": "MIT License",
+					"text": "",
+					"web": ""
+				}
+			],
+			"name": "ReorderableContainer",
+			"paths": [
+				"res://addons/ReorderableContainer"
+			],
+			"version": "1.2.4",
+			"web": ""
+		},
+		{
+			"category": "Plugins",
+			"contact": "",
+			"copyright": [
 				"Expresso Bits"
 			],
 			"description": "Steam Sockets Multiplayer Peer for Godot 4 via GDExtension.",
