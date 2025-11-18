@@ -13,6 +13,7 @@ This project adheres to an adapted form of [Semantic Versioning](https://semver.
 ### Added
 
 - Ghost statue easter egg.
+- Button to manually initialize Steam when running editor build.
 
 ### Fixed
 
