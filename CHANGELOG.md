@@ -8,6 +8,33 @@ This project adheres to an adapted form of [Semantic Versioning](https://semver.
 2. MINOR version when you add backward-compatible functionality.
 3. PATCH version when you make backward-compatible bug fixes.
 
+## [3.0.0] - 2025-11-18
+
+### Added
+
+- Foyer level.
+- Research lab level.
+- Basement level.
+- Player customization, including default name, hats, and preferred hunter colors.
+- Sparks and sound effect when a hunter is hit by a drain area.
+- Randomized level selection for menu background.
+- Basic level editing tools in `level_tile_map_layers.tscn`.
+- Buttons to host and join locally when running editor build.
+
+### Changed
+
+- Increased contrast for hunter invulnerability animation.
+- Made dead hunter wall avoidance instant instead of gradual.
+- Updated engine and some plugins.
+
+### Fixed
+
+- Gamepad text input not appearing in some cases.
+- Battery spawn animation being interrupted on clients.
+- Inconsistent menu widths.
+- Ghost statue lighting.
+- Missing bullet point in 2.2.0 changelog.
+
 ## [2.2.0] - 2025-10-27
 
 ### Added
@@ -325,6 +352,7 @@ This project adheres to an adapted form of [Semantic Versioning](https://semver.
 
 - Initial release.
 
+[3.0.0]: https://github.com/zibetnu/haunting-hijinx/compare/2.2.0...3.0.0
 [2.2.0]: https://github.com/zibetnu/haunting-hijinx/compare/2.1.1...2.2.0
 [2.1.1]: https://github.com/zibetnu/haunting-hijinx/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/zibetnu/haunting-hijinx/compare/2.0.0...2.1.0
