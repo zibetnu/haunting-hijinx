@@ -150,7 +150,14 @@ func toggle_participation(id: int) -> void:
 
 @rpc("any_peer", "call_remote", "reliable")
 func request_init(customization: Dictionary[String, Variant] = {}) -> void:
-	init_peer(multiplayer.get_remote_sender_id(), customization)
+	var peer_id: int = multiplayer.get_remote_sender_id()
+	if peer_id in participants:
+		return
+
+	if peer_id in spectators:
+		return
+
+	init_peer(peer_id, customization)
 
 
 func init_peer(id: int, customization: Dictionary[String, Variant] = {}) -> void:
