@@ -8,6 +8,14 @@ This project adheres to an adapted form of [Semantic Versioning](https://semver.
 2. MINOR version when you add backward-compatible functionality.
 3. PATCH version when you make backward-compatible bug fixes.
 
+## [3.0.1] - 2025-11-20
+
+### Fixed
+
+- Batteries may spawn out of bounds in foyer level.
+- Server allows peers to initialize multiple times.
+- Missing plugin in license menu.
+
 ## [3.0.0] - 2025-11-18
 
 ### Added
@@ -352,6 +360,7 @@ This project adheres to an adapted form of [Semantic Versioning](https://semver.
 
 - Initial release.
 
+[3.0.1]: https://github.com/zibetnu/haunting-hijinx/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/zibetnu/haunting-hijinx/compare/2.2.0...3.0.0
 [2.2.0]: https://github.com/zibetnu/haunting-hijinx/compare/2.1.1...2.2.0
 [2.1.1]: https://github.com/zibetnu/haunting-hijinx/compare/2.1.0...2.1.1
