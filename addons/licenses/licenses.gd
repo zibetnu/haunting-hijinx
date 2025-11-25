@@ -89,7 +89,7 @@ class LoadResult:
         self.err_msg = err_msg
 
 static func load(file_path: String) -> LoadResult:
-    if not FileAccess.file_exists(file_path):
+    if !FileAccess.file_exists(file_path):
         return LoadResult.new([])
 
     var file: FileAccess = FileAccess.open(file_path, FileAccess.READ)
@@ -100,7 +100,7 @@ static func load(file_path: String) -> LoadResult:
     file = null
     if res != OK:
         return LoadResult.new([], "'%s' could not parse: '%s'" % [file_path, parser.get_error_message()])
-    if not "components" in parser.data:
+    if !parser.data.has("components"):
         return LoadResult.new([], "'%s' does not have a 'components' field" % [file_path])
 
     var components: Array[Component] = []

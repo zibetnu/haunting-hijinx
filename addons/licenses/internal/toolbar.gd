@@ -28,6 +28,9 @@ func _ready() -> void:
     self.add_child(self._menu)
 
     self._add_menu = PopupMenu.new()
+    self._add_plugin_menu = PopupMenu.new()
+    self._add_plugin_menu.id_pressed.connect(self._on_plugin_add_id_pressed)
+    self._add_menu.add_child(self._add_plugin_menu)
     self._create_plugin_menu_items()
     self._create_engine_menu_items()
     self._add_menu.add_item("New Component", 0)
@@ -71,37 +74,54 @@ func _create_engine_menu_items() -> void:
     min_size.y = 280
     self._add_engine_menu.max_size = min_size
 
+class _PluginItem:
+    extends RefCounted
+
+    var name: String
+    var path: String
+
+    func _init(name: String, path: String) -> void:
+        self.name = name
+        self.path = path
+
+## will delete the existing menu and recreate it
 func _create_plugin_menu_items() -> void:
-    self._add_plugin_menu = PopupMenu.new()
-    self._add_plugin_menu.id_pressed.connect(self._on_plugin_add_id_pressed)
-    self._add_menu.add_child(self._add_plugin_menu)
+    self._add_plugin_menu.clear(true)
 
-    var dir: DirAccess = DirAccess.open("res://addons/")
-    if dir == null:
-        return
+    var plugins: Array[_PluginItem] = []
+    for path: String in self._get_plugin_paths("res://addons/"):
+        var cfg: Dictionary = self._get_plugin_config(path)
+        var name: String = cfg.get("plugin", {}).get("name", "")
+        if name == "":
+            push_warning("Plugin at " + path + " has no name, skipping...")
+            continue
+        plugins.append(_PluginItem.new(name, path))
 
-    var err: Error = dir.list_dir_begin()
-    if err != OK:
-        push_error("[Licenses] Failed to list directory: " + error_string(err))
-        return
-    var elem: String = dir.get_next()
-    var idx: int = 0
-    while elem != "":
-        if dir.current_is_dir():
-            var path: String = "res://addons/".path_join(elem).path_join("/plugin.cfg")
-            var cfg: Dictionary = self._get_plugin_config(path)
-            var name: String = cfg.get("plugin", {}).get("name", "")
-            if name != "":
-                self._add_plugin_menu.add_item(name)
-                self._add_plugin_menu.set_item_metadata(idx, path)
-                idx = idx + 1
-        elem = dir.get_next()
-    dir.list_dir_end()
-    dir = null
+    plugins.sort_custom(func(lhs: _PluginItem, rhs: _PluginItem) -> bool:
+        return lhs.name.nocasecmp_to(rhs.name) == -1
+    )
+
+    for idx: int in range(len(plugins)):
+        var item: _PluginItem = plugins[idx]
+        self._add_plugin_menu.add_item(item.name)
+        self._add_plugin_menu.set_item_tooltip(idx, item.path)
+        self._add_plugin_menu.set_item_metadata(idx, item.path)
+        idx = idx + 1
     # set max size to ~10 items
     var min_size: Vector2 = self._add_plugin_menu.get_contents_minimum_size()
     min_size.y = 284
     self._add_plugin_menu.max_size = min_size
+
+## Scans for plugins recursively
+func _get_plugin_paths(path: String) -> PackedStringArray:
+    var plugins: PackedStringArray = []
+    for dir: String in DirAccess.get_directories_at(path):
+        var plugin_path: String = path.path_join(dir)
+        var cfg_path: String = plugin_path.path_join("plugin.cfg")
+        if FileAccess.file_exists(cfg_path):
+            plugins.append(cfg_path)
+        plugins.append_array(self._get_plugin_paths(path.path_join(dir)))
+    return plugins
 
 func _on_add_pressed() -> void:
     self._add_menu.popup_on_parent(Rect2(self._add_button.global_position + Vector2(0.0, self._add_button.size.y), self._add_menu.get_contents_minimum_size()))
@@ -125,6 +145,10 @@ func _on_plugin_add_id_pressed(id: int) -> void:
     component.description = cfg["plugin"].get("description", "")
     component.copyright.append(cfg["plugin"].get("author", ""))
     component.version = cfg["plugin"].get("version", "")
+    if cfg["plugin"].has("license"):
+        var license: Component.License = Component.License.new()
+        license.name = cfg["plugin"]["license"]
+        component.licenses.append(license)
     component.paths.append(self._add_plugin_menu.get_item_metadata(id).get_base_dir())
     self.add_component.emit(component)
 

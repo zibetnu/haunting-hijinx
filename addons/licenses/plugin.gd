@@ -14,6 +14,9 @@ var _file_watcher: FileSystemWatcher
 func _get_plugin_name() -> String:
     return "Licenses"
 
+func _get_plugin_icon() -> Texture2D:
+    return preload("res://addons/licenses/icon.svg")
+
 func _enter_tree() -> void:
     set_project_setting(Licenses.CFG_KEY_DATA_FILE, "res://licenses.json", TYPE_STRING, PROPERTY_HINT_FILE)
     ProjectSettings.set_as_basic(Licenses.CFG_KEY_DATA_FILE, true)
@@ -36,8 +39,8 @@ func _exit_tree() -> void:
     self._file_watcher = null
     LicensesInterface.remove_interface()
 
-static func set_project_setting(key: String, initial_value, type: Variant.Type, type_hint: PropertyHint, hint_string: String = "") -> void:
-    if not ProjectSettings.has_setting(key):
+static func set_project_setting(key: String, initial_value: Variant, type: Variant.Type, type_hint: PropertyHint, hint_string: String = "") -> void:
+    if !ProjectSettings.has_setting(key):
         ProjectSettings.set_setting(key, initial_value)
     ProjectSettings.set_initial_value(key, initial_value)
     var props: Dictionary = {

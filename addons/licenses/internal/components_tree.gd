@@ -60,7 +60,7 @@ func reload(scroll_to: Component = null) -> void:
             component = self._li.get_at(idx)
             cur_idx = idx
             idx = idx + 1
-        elif idx >= self._li.count() || not cmp:
+        elif idx >= self._li.count() || !cmp:
             component = self._readonly_components[readonly_idx]
             cur_idx = readonly_idx
             readonly_idx = readonly_idx + 1
@@ -105,7 +105,7 @@ func _add_tree_item(component: Component, idx: int, parent: TreeItem) -> TreeIte
     item.set_text(0, component.name)
     item.set_meta("idx", idx)
     item.set_meta("readonly", component.readonly)
-    if not component.readonly:
+    if !component.readonly:
         item.add_button(0, self.get_theme_icon(&"Remove", &"EditorIcons"), _BTN_ID_REMOVE)
     var tooltip: String = component.name
     var comp_warnings: PackedStringArray = component.get_warnings()
@@ -123,7 +123,7 @@ func _get_drag_data(at_position: Vector2) -> Variant:
     var item: TreeItem = self.get_item_at_position(at_position)
     if item == null:
         return null
-    if not item.has_meta("idx") || (item.get_meta("readonly") as bool):
+    if !item.has_meta("idx") || (item.get_meta("readonly") as bool):
         return null
 
     self.set_drop_mode_flags(Tree.DROP_MODE_ON_ITEM)
