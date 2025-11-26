@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtev64q8rmhnn"]
+[gd_scene load_steps=3 format=3 uid="uid://dtev64q8rmhnn"]
 
 [ext_resource type="PackedScene" uid="uid://56f6sbrp31ud" path="res://src/call_attempter/call_attempter.tscn" id="1_456mq"]
-[ext_resource type="Script" uid="uid://dph72y1dypqm2" path="res://src/menus/main_menu/back_end/quit.gd" id="2_8f0is"]
 [ext_resource type="PackedScene" uid="uid://c6ql67s5oafpr" path="res://src/visibility_signals/visibility_signals.tscn" id="3_5odw1"]
 
 [node name="BackEnd" type="Node"]
@@ -9,8 +8,5 @@
 [node name="ChangeToLobbyBrowser" parent="." instance=ExtResource("1_456mq")]
 node_path = NodePath("/root/SceneChanger")
 method = &"change_to_lobby_browser"
-
-[node name="Quit" type="Node" parent="."]
-script = ExtResource("2_8f0is")
 
 [node name="VisibilitySignals" parent="." instance=ExtResource("3_5odw1")]

@@ -22,11 +22,14 @@ const GRABBED_EVENT = &"died"
 
 @onready var costume: HunterCostume = $HunterCostume
 @onready var flashlight: Flashlight = $Flashlight/Behavior
+@onready var flashlight_display: FlashlightDisplay = $Flashlight/Display
 @onready var notification_container: HBoxContainer = %NotificationContainer
 @onready var peer_id_node: PeerID = %PeerID
 @onready var state_chart: StateChart = $StateChart
 @onready var move_state: AtomicState = $StateChart/Base/Alive/Movement/Move
 @onready var conveyor_cast: ShapeCast2D = $ConveyorCast
+@onready var flashlight_back_sprite: Sprite2D = %FlashlightBack
+@onready var flashlight_front_sprite: Sprite2D = %FlashlightFront
 
 
 func _ready() -> void:
@@ -107,3 +110,8 @@ func _get_pairs() -> Array[Pair]:
 		p.new(c.move_started, property.bind(IS_MOVING, true)),
 		p.new(c.move_stopped, property.bind(IS_MOVING, false)),
 	]
+
+
+func _on_flashlight_rotation_changed(_flashlight_rotation: float) -> void:
+	flashlight_back_sprite.frame = flashlight_display.body.frame
+	flashlight_front_sprite.frame = flashlight_display.body.frame

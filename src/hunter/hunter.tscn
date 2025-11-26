@@ -281,10 +281,12 @@ y_sort_enabled = true
 material = SubResource("ShaderMaterial_plsr1")
 
 [node name="FlashlightBack" type="Sprite2D" parent="HunterCostume/CanvasGroup/MaterialParent" index="1"]
+unique_name_in_owner = true
 texture = ExtResource("20_g6qtr")
 hframes = 32
 
 [node name="FlashlightFront" type="Sprite2D" parent="HunterCostume/CanvasGroup/MaterialParent" index="3"]
+unique_name_in_owner = true
 texture = ExtResource("21_pbkwq")
 hframes = 32
 
@@ -355,7 +357,6 @@ layout_mode = 2
 [connection signal="changed" from="GhostPeerID" to="GhostPeerID/PeerVisibilityFilter" method="set_secondary_peer_id"]
 [connection signal="process_mode_updated" from="GhostPeerID/PeerProcessMode" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert" method="set_process_mode"]
 [connection signal="filter_ready" from="GhostPeerID/PeerVisibilityFilter" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/Alert/MultiplayerSynchronizer" method="add_visibility_filter"]
-[connection signal="changed" from="PeerID" to="." method="_on_peer_id_changed"]
 [connection signal="changed" from="PeerID" to="GhostPeerID/PeerProcessMode" method="set_primary_peer_id"]
 [connection signal="changed" from="PeerID" to="GhostPeerID/PeerVisibilityFilter" method="set_primary_peer_id"]
 [connection signal="changed" from="PeerID" to="PeerID/PeerVisibilityFilter" method="set_primary_peer_id"]
@@ -410,12 +411,12 @@ layout_mode = 2
 [connection signal="battery_lowed" from="Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_low" flags=3]
 [connection signal="battery_unlowed" from="Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_none" flags=3]
 [connection signal="damage_taken" from="Flashlight/Behavior" to="StateChart" method="send_event" binds= [&"stunned"]]
+[connection signal="flashlight_rotation_changed" from="Flashlight/Behavior" to="." method="_on_flashlight_rotation_changed"]
 [connection signal="flashlight_rotation_changed" from="Flashlight/Behavior" to="HunterCostume" method="set_costume_rotation"]
 [connection signal="powered_on_attempted" from="Flashlight/Behavior" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/BatteryAlert" method="notify_dead" flags=3]
+[connection signal="flashlight_rotation_changed" from="Flashlight/Display" to="." method="_on_flashlight_rotation_changed"]
 [connection signal="powered_off" from="Flashlight/Display" to="PointLight2D" method="set_energy" binds= [0.5]]
 [connection signal="powered_on" from="Flashlight/Display" to="PointLight2D" method="set_energy" binds= [1.0]]
-[connection signal="range_value_changed" from="Flashlight/Display/Body/RotationToIntRange" to="HunterCostume/CanvasGroup/MaterialParent/FlashlightBack" method="set_frame"]
-[connection signal="range_value_changed" from="Flashlight/Display/Body/RotationToIntRange" to="HunterCostume/CanvasGroup/MaterialParent/FlashlightFront" method="set_frame"]
 [connection signal="draw" from="HunterCostume/CanvasGroup/MaterialParent/Arms" to="HunterCostume/CanvasGroup/MaterialParent/FlashlightBack" method="show"]
 [connection signal="draw" from="HunterCostume/CanvasGroup/MaterialParent/Arms" to="HunterCostume/CanvasGroup/MaterialParent/FlashlightFront" method="show"]
 [connection signal="draw" from="HunterCostume/CanvasGroup/MaterialParent/Dead" to="HunterCostume/CanvasGroup/MaterialParent/FlashlightBack" method="hide"]

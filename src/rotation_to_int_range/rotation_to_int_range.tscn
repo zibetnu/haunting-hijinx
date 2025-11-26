@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dk7dsekk0sapx"]
-
-[ext_resource type="Script" uid="uid://dregkqejnlqq6" path="res://src/rotation_to_int_range/rotation_to_int_range.gd" id="1_c7nh5"]
-
-[node name="RotationToIntRange" type="Node"]
-script = ExtResource("1_c7nh5")

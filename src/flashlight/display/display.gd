@@ -1,3 +1,4 @@
+class_name FlashlightDisplay
 extends Node2D
 
 signal flashlight_rotation_changed(flashlight_rotation: float)
@@ -36,6 +37,10 @@ var flashlight_rotation: float:
 
 	set(value):
 		_rotation_node.rotation = value
+		body.frame = posmod(
+				roundi(flashlight_rotation / TAU * body.hframes),
+				body.hframes
+		)
 		flashlight_rotation_changed.emit(flashlight_rotation)
 
 var light_texture_index: int:
@@ -44,6 +49,7 @@ var light_texture_index: int:
 		_floor_light.texture = light_textures[light_texture_index]
 		_wall_light.texture = light_textures[light_texture_index]
 
+@onready var body: Sprite2D = %Body
 @onready var _beam: Polygon2D = %Beam
 @onready var _beam_start_bottom: Marker2D = %BeamStartBottom
 @onready var _beam_start_top: Marker2D = %BeamStartTop

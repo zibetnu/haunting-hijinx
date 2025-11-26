@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://civfmojof07gs"]
+[gd_scene load_steps=4 format=3 uid="uid://civfmojof07gs"]
 
+[ext_resource type="Script" uid="uid://c41jei8o72xe3" path="res://src/menus/main_menu/main_menu.gd" id="1_d6buj"]
 [ext_resource type="PackedScene" uid="uid://dtev64q8rmhnn" path="res://src/menus/main_menu/back_end/back_end.tscn" id="1_hhg0o"]
 [ext_resource type="PackedScene" uid="uid://50ijwh32vu0w" path="res://src/menus/main_menu/front_end.tscn" id="2_hib2w"]
 
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_d6buj")
 
 [node name="BackEnd" parent="." instance=ExtResource("1_hhg0o")]
 
@@ -24,7 +26,7 @@ theme_type_variation = &"LabelCompact"
 
 [connection signal="shown" from="BackEnd/VisibilitySignals" to="FrontEnd/VBoxContainer/BrowseLobbies" method="grab_focus" flags=3]
 [connection signal="pressed" from="FrontEnd/VBoxContainer/BrowseLobbies" to="BackEnd/ChangeToLobbyBrowser" method="attempt_method_call"]
-[connection signal="pressed" from="FrontEnd/VBoxContainer/HBoxContainer/Quit" to="BackEnd/Quit" method="quit"]
+[connection signal="pressed" from="FrontEnd/VBoxContainer/HBoxContainer/Quit" to="." method="_on_quit_pressed"]
 
 [editable path="BackEnd"]
 [editable path="FrontEnd"]
