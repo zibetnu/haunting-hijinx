@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://chr26ux2vsrxq"]
 
-[ext_resource type="Script" uid="uid://dva15pnfy3mhy" path="res://src/license_menu/license_menu.gd" id="1_gdao5"]
+[ext_resource type="Script" uid="uid://dva15pnfy3mhy" path="res://src/menus/license_menu/license_menu.gd" id="1_gdao5"]
 [ext_resource type="PackedScene" uid="uid://c6ql67s5oafpr" path="res://src/visibility_signals/visibility_signals.tscn" id="2_wvjk2"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_7bdp8"]
