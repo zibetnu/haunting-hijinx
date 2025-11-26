@@ -8,10 +8,20 @@ const PLACEHOLDER_LOBBY_ID = -1
 
 @export var start_scene: PackedScene
 
+@onready var godot_splash_screen: GodotSplashScreen = $GodotSplashScreen
+
 
 func _ready() -> void:
 	# Ensure that data is only shared between clients when necessary.
 	(multiplayer as SceneMultiplayer).server_relay = false
+	for bus_index in AudioServer.bus_count:
+		init_bus_volume(bus_index)
+
+	var lobby_id: int = get_lobby_id_from_arguments()
+	if lobby_id != PLACEHOLDER_LOBBY_ID:
+		SceneChanger.join_lobby(lobby_id)
+		queue_free()
+		return
 
 	if OS.has_feature("editor"):
 		print("Steam not initialized")
@@ -19,16 +29,9 @@ func _ready() -> void:
 	else:
 		Steam.steamInitEx()
 
-	for bus_index in AudioServer.bus_count:
-		init_bus_volume(bus_index)
-
-	var lobby_id: int = get_lobby_id_from_arguments()
-	if lobby_id == PLACEHOLDER_LOBBY_ID:
-		SceneChanger.change_scene_to_packed(start_scene)
-
-	else:
-		SceneChanger.join_lobby(lobby_id)
-
+	godot_splash_screen.start()
+	await godot_splash_screen.finished
+	SceneChanger.change_scene_to_packed(start_scene)
 	queue_free()
 
 

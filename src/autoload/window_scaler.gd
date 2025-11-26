@@ -25,7 +25,7 @@ func _ready() -> void:
 	add_window_script()
 	init_min_value()
 	init_max_value()
-	refresh_content_scale_size()
+	scale_multiplier = GameConfig.get_value("display", "scale", scale_multiplier)
 
 
 func init_min_value() -> void:

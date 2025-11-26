@@ -1,8 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bilbxcy52jp3b"]
+[gd_scene load_steps=4 format=3 uid="uid://bilbxcy52jp3b"]
 
 [ext_resource type="Script" uid="uid://dihbi7g0yhcqd" path="res://src/main.gd" id="1_f30pa"]
 [ext_resource type="PackedScene" uid="uid://bnoti7vnd7pk7" path="res://src/menus/menus.tscn" id="2_frqsf"]
+[ext_resource type="PackedScene" uid="uid://dety11s1owhce" path="res://src/godot_splash_screen/godot_splash_screen.tscn" id="2_gh0ne"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_f30pa")
 start_scene = ExtResource("2_frqsf")
+
+[node name="GodotSplashScreen" parent="." instance=ExtResource("2_gh0ne")]
