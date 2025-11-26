@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://civfmojof07gs"]
 
-[ext_resource type="PackedScene" uid="uid://dtev64q8rmhnn" path="res://src/main_menu/back_end/back_end.tscn" id="1_hhg0o"]
-[ext_resource type="PackedScene" uid="uid://50ijwh32vu0w" path="res://src/main_menu/front_end.tscn" id="2_hib2w"]
+[ext_resource type="PackedScene" uid="uid://dtev64q8rmhnn" path="res://src/menus/main_menu/back_end/back_end.tscn" id="1_hhg0o"]
+[ext_resource type="PackedScene" uid="uid://50ijwh32vu0w" path="res://src/menus/main_menu/front_end.tscn" id="2_hib2w"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
