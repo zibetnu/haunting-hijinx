@@ -1,0 +1,117 @@
+[gd_scene load_steps=13 format=3 uid="uid://yeme14o15wbs"]
+
+[ext_resource type="Script" uid="uid://87ixop8b46qc" path="res://src/hunter/revive_heart/revive_heart.gd" id="1_2h8bs"]
+[ext_resource type="Texture2D" uid="uid://bubsk375v7q2o" path="res://assets/hunter/revive_heart/under.png" id="2_2h8bs"]
+[ext_resource type="Texture2D" uid="uid://nnj7vsoulv44" path="res://assets/hunter/revive_heart/progress.png" id="3_pt3fo"]
+[ext_resource type="Script" uid="uid://b1ydder1pweyr" path="res://src/floored_texture_progress_bar/floored_texture_progress_bar.gd" id="4_2h8bs"]
+[ext_resource type="Texture2D" uid="uid://b7kt8iw3ugiav" path="res://assets/hunter/revive_heart/outline.png" id="5_2h8bs"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2h8bs"]
+properties/0/path = NodePath("Bar:min_value")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath("Bar:max_value")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("Bar:value")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:visible")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2h8bs"]
+atlas = ExtResource("5_2h8bs")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pt3fo"]
+atlas = ExtResource("5_2h8bs")
+region = Rect2(10, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jde2"]
+atlas = ExtResource("5_2h8bs")
+region = Rect2(20, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gj2lm"]
+atlas = ExtResource("5_2h8bs")
+region = Rect2(30, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6eurr"]
+atlas = ExtResource("5_2h8bs")
+region = Rect2(40, 0, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c3r4s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2h8bs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pt3fo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jde2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gj2lm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6eurr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gj2lm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jde2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pt3fo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="ReviveHeart" type="Control"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 10.0
+offset_bottom = 10.0
+script = ExtResource("1_2h8bs")
+
+[node name="AnimationTimeout" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.1
+one_shot = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_2h8bs")
+
+[node name="Bar" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 8.0
+fill_mode = 3
+texture_under = ExtResource("2_2h8bs")
+texture_progress = ExtResource("3_pt3fo")
+script = ExtResource("4_2h8bs")
+metadata/_custom_type_script = "uid://b1ydder1pweyr"
+
+[node name="Outline" type="AnimatedSprite2D" parent="Bar"]
+unique_name_in_owner = true
+position = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_c3r4s")
+
+[connection signal="timeout" from="AnimationTimeout" to="." method="_on_animation_timeout_timeout"]

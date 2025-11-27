@@ -1,5 +1,5 @@
+class_name FlooredTextureProgressBar
 extends TextureProgressBar
-
 
 ## Sets [member Range.value] to the difference of [member Range.max_value] and
 ## [member Range.min_value] multiplied by [param new_ratio], rounding downward
