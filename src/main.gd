@@ -1,9 +1,6 @@
+class_name Main
 extends Node
 
-const CONNECT_LOBBY_COMMAND = "+connect_lobby"
-const NOT_FOUND_INDEX = -1
-const COMMAND_INDEX_OFFSET = 1
-const MIN_LOBBY_ID = 1
 const PLACEHOLDER_LOBBY_ID = -1
 
 @export var start_scene: PackedScene
@@ -39,14 +36,15 @@ func get_lobby_id_from_arguments() -> int:
 	var arguments: Array[String] = []
 	arguments.assign(OS.get_cmdline_args())
 
-	var command_index: int = arguments.find(CONNECT_LOBBY_COMMAND)
-	if command_index == NOT_FOUND_INDEX:
+	var command_index: int = arguments.find("+connect_lobby")
+	if command_index == -1:
 		return PLACEHOLDER_LOBBY_ID
 
-	var lobby_id_index: int = command_index + COMMAND_INDEX_OFFSET
+	var lobby_id_index: int = command_index + 1
 	if lobby_id_index >= arguments.size():
 		return PLACEHOLDER_LOBBY_ID
 
+	const MIN_LOBBY_ID = 1
 	var lobby_id: int = arguments[lobby_id_index].to_int()
 	if lobby_id < MIN_LOBBY_ID:
 		return PLACEHOLDER_LOBBY_ID
