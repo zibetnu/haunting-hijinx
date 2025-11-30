@@ -15,17 +15,16 @@
 [ext_resource type="PackedScene" uid="uid://dc3f3sy1vso5f" path="res://src/group_bool/group_bool.tscn" id="16_q6wqq"]
 [ext_resource type="PackedScene" uid="uid://ct3lglsww1564" path="res://src/move/move.tscn" id="18_5mhrn"]
 [ext_resource type="PackedScene" uid="uid://bkuic22finfse" path="res://src/controller/player_controller_stack.tscn" id="19_swqdr"]
+[ext_resource type="Material" uid="uid://b55fo71d58ijs" path="res://src/theme/font_outline.tres" id="23_dw77o"]
 [ext_resource type="PackedScene" uid="uid://klrwcohuhynk" path="res://src/ghost/costume/ghost_costume.tscn" id="25_s3y3d"]
 [ext_resource type="Texture2D" uid="uid://d6ydfogp5pkh" path="res://assets/ghost/aura_outlines.png" id="26_lh4y1"]
 [ext_resource type="PackedScene" uid="uid://c2p8hmv11uyfp" path="res://src/summon_bar/summon_bar.tscn" id="27_ss5od"]
 [ext_resource type="Script" uid="uid://4fgkeu5l16ll" path="res://src/hit_sounds.gd" id="28_xrbot"]
 [ext_resource type="PackedScene" uid="uid://d03ye80rpxrep" path="res://src/damage_signals/damage_signals.tscn" id="29_1sq8w"]
 [ext_resource type="PackedScene" uid="uid://dp42j74wnvk40" path="res://src/you_pointer/you_pointer.tscn" id="33_t258g"]
-[ext_resource type="PackedScene" uid="uid://d15idq0ucnvek" path="res://src/floored_texture_progress_bar/floored_texture_progress_bar.tscn" id="35_5xob5"]
 [ext_resource type="PackedScene" uid="uid://dq7ts6lhskwyn" path="res://src/nodes_touched/nodes_touched.tscn" id="35_yndqj"]
 [ext_resource type="PackedScene" uid="uid://dpwfunjqyfike" path="res://src/health/health.tscn" id="38_arcfj"]
 [ext_resource type="PackedScene" uid="uid://oe321ygxttbo" path="res://src/grabber/grabber.tscn" id="38_ydesf"]
-[ext_resource type="Texture2D" uid="uid://bg6wg2xddcnr5" path="res://assets/heart.png" id="40_1b387"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_p68gc"]
 properties/0/path = NodePath("..:position")
@@ -84,6 +83,14 @@ fill_to = Vector2(0.5, 0)
 properties/0/path = NodePath(".:text")
 properties/0/spawn = true
 properties/0/replication_mode = 2
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_dw77o"]
+properties/0/path = NodePath(".:text")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:visible")
+properties/1/spawn = true
+properties/1/replication_mode = 2
 
 [node name="Ghost" type="CharacterBody2D" node_paths=PackedStringArray("controller") groups=["ghosts", "players"]]
 collision_layer = 8
@@ -550,15 +557,23 @@ offset_right = 32.0
 offset_bottom = -26.0
 alignment = 1
 
-[node name="HealthBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("35_5xob5")]
+[node name="HealthLabel" type="RichTextLabel" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer"]
+unique_name_in_owner = true
 visible = false
+material = ExtResource("23_dw77o")
+clip_contents = false
+custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
-size_flags_vertical = 8
-max_value = 8.0
-fill_mode = 3
-texture_under = ExtResource("40_1b387")
-texture_progress = ExtResource("40_1b387")
-tint_under = Color(1, 1, 1, 0.247059)
+text = "100"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthLabel"]
+replication_config = SubResource("SceneReplicationConfig_dw77o")
 
 [node name="SummonBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("27_ss5od")]
 unique_name_in_owner = true
@@ -615,20 +630,20 @@ size_flags_vertical = 8
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/SummonRelease" to="StateChart" method="send_event" binds= [&"invisibility_ended"]]
 [connection signal="state_physics_processing" from="StateChart/Base/Behavior/Alive/SummonRelease" to="StateChart/Base/Behavior/Alive/SummonRelease/Move" method="manual_physics_process"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Stun" to="StateChart/Base/Behavior/Alive/Stun/PanicTimeout" method="start"]
-[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Stun" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="show"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Stun" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthLabel" method="show"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Stun" to="." method="set_stunnable" binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Stun" to="Grab" method="set_monitoring" flags=3 binds= [false]]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Stun" to="StateChart/Base/Behavior/Alive/Stun/PanicTimeout" method="stop"]
-[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Stun" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="hide"]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Stun" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthLabel" method="hide"]
 [connection signal="timeout" from="StateChart/Base/Behavior/Alive/Stun/PanicTimeout" to="StateChart" method="send_event" binds= [&"panic_started"]]
 [connection signal="event_received" from="StateChart/Base/Behavior/Alive/Panic" to="." method="_on_panic_event_received"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="." method="_on_panic_state_entered"]
-[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="show"]
+[connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthLabel" method="show"]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="." method="set_stunnable" binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="Grab" method="set_monitoring" flags=3 binds= [false]]
 [connection signal="state_entered" from="StateChart/Base/Behavior/Alive/Panic" to="HuntersTouched" method="set_monitoring" flags=3 binds= [true]]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="." method="_on_panic_state_exited"]
-[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="hide"]
+[connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthLabel" method="hide"]
 [connection signal="state_exited" from="StateChart/Base/Behavior/Alive/Panic" to="HuntersTouched" method="set_monitoring" flags=3 binds= [false]]
 [connection signal="state_physics_processing" from="StateChart/Base/Behavior/Alive/Panic" to="StateChart/Base/Behavior/Alive/Panic/Move" method="manual_physics_process"]
 [connection signal="timeout" from="StateChart/Base/Behavior/Alive/Panic/VisibleTimer" to="StateChart" method="send_event" binds= [&"invisibility_started"]]
@@ -661,7 +676,7 @@ size_flags_vertical = 8
 [connection signal="damaged_by_amount" from="DamageSignals" to="DamageSignals/Health" method="subtract_health"]
 [connection signal="health_emptied" from="DamageSignals/Health" to="StateChart" method="send_event" binds= [&"died"]]
 [connection signal="health_filled" from="DamageSignals/Health" to="StateChart" method="send_event" binds= [&"revived"]]
-[connection signal="health_percentage_changed" from="DamageSignals/Health" to="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthBar" method="set_as_ratio_floored"]
+[connection signal="health_percentage_changed" from="DamageSignals/Health" to="." method="_on_health_percentage_changed"]
 [connection signal="body_entered" from="Grab" to="Grab/Grabber" method="grab"]
 [connection signal="grabbed_target" from="Grab/Grabber" to="." method="_on_grabber_grabbed_target"]
 [connection signal="first_node_entered" from="HuntersTouched" to="." method="_on_hunters_touched_first_node_entered"]

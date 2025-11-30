@@ -11,6 +11,8 @@ var is_panicked := false
 var stunnable := true:
 	set = set_stunnable
 
+var _last_health_displayed: int
+
 @onready var ghost_costume: GhostCostume = $GhostCostume
 @onready var grab_area: Area2D = $Grab
 @onready var grabber: Grabber = $Grab/Grabber
@@ -19,6 +21,7 @@ var stunnable := true:
 @onready var peer_id_node: PeerID = %PeerID
 @onready var position_synchronizer: MultiplayerSynchronizer = $PositionSynchronizer
 @onready var summon: Summon = %Summon
+@onready var health_label: RichTextLabel = %HealthLabel
 @onready var summon_bar: SummonBar = %SummonBar
 
 @onready var end_timer: Timer = $StateChart/Base/Behavior/Alive/Panic/EndTimer
@@ -196,3 +199,12 @@ func _on_visibile_state_entered() -> void:
 
 func _visibility_filter(peer_id: int) -> bool:
 	return (not is_hidden_from_hunters) or peer_id == peer_id_node.id
+
+
+func _on_health_percentage_changed(value: float) -> void:
+	var health: int = floori(value * 100)
+	if health == _last_health_displayed:
+		return
+
+	_last_health_displayed = health
+	health_label.text = str(health)
