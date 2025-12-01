@@ -157,7 +157,7 @@ size = Vector2i(216, 100)
 borderless = true
 
 [node name="RefreshTimer" type="Timer" parent="."]
-wait_time = 30.0
+wait_time = 10.0
 autostart = true
 
 [node name="SteamConnector" parent="." instance=ExtResource("2_dwt65")]
