@@ -68,9 +68,8 @@ properties/3/path = NodePath(".:limit_bottom")
 properties/3/spawn = true
 properties/3/replication_mode = 2
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_duydy"]
-radius = 8.0
-height = 24.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_j4buu"]
+radius = 18.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_plsr1"]
 resource_local_to_scene = true
@@ -256,7 +255,7 @@ weak_to = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageSignals"]
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_duydy")
+shape = SubResource("CircleShape2D_j4buu")
 
 [node name="Revivable" parent="DamageSignals" instance=ExtResource("23_d234k")]
 enabled = false
