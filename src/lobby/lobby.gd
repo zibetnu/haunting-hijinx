@@ -4,18 +4,22 @@ const PLAYER_CARD_SCENE = preload("uid://bapt74v2o7kig")
 
 @onready var cards: VBoxContainer = %Cards
 @onready var leave: Button = %Leave
-@onready var host_menu: GridContainer = %HostMenu
+@onready var lobby_name: SteamGamepadLineEdit = %LobbyName
+@onready var lobby_type: OptionButton = %LobbyType
 @onready var level_select: OptionButton = %LevelSelect
-@onready var start_button: Button = %StartButton
+@onready var start_game: Button = %StartGame
 
 
 func _ready() -> void:
-	if not multiplayer.is_server():
-		host_menu.queue_free()
-		return
-
 	for level in PeerData.levels:
 		level_select.add_item(level.resource_name)
+
+	if not multiplayer.is_server():
+		lobby_name.editable = false
+		lobby_type.disabled = true
+		level_select.disabled = true
+		start_game.disabled = true
+		return
 
 	level_select.select(PeerData.levels_selected_index)
 	PeerData.peer_connected.connect(_on_peer_connected)
@@ -68,14 +72,14 @@ func _on_peer_participation_changed(_id: int) -> void:
 	if not multiplayer.is_server():
 		return
 
-	start_button.disabled = PeerData.participants.size() < 1
+	start_game.disabled = PeerData.participants.size() < 1
 
 
 func _on_level_select_item_selected(index: int) -> void:
 	PeerData.levels_selected_index = index
 
 
-func _on_start_button_pressed() -> void:
+func _on_start_game_pressed() -> void:
 	PeerData.assign_hunter_palettes()
 	# https://github.com/godotengine/godot/issues/77643
 	@warning_ignore("unsafe_method_access")

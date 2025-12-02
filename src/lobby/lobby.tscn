@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://df63fi5u7xpjt"]
+[gd_scene load_steps=10 format=3 uid="uid://df63fi5u7xpjt"]
 
 [ext_resource type="Script" uid="uid://1jew7wsxqctm" path="res://src/lobby/lobby.gd" id="1_g8t6r"]
 [ext_resource type="Script" uid="uid://gpvk6gsxhdvu" path="res://src/steam_gamepad_line_edit.gd" id="3_qpyai"]
@@ -8,6 +8,17 @@
 [ext_resource type="PackedScene" uid="uid://bj8n2x3jkcbgs" path="res://src/relay_initializer/relay_initializer.tscn" id="8_tfeyi"]
 [ext_resource type="PackedScene" uid="uid://vl432076bm8p" path="res://src/level_player/steam_lobby_chat_update/steam_lobby_chat_update.tscn" id="9_tuqyh"]
 [ext_resource type="PackedScene" uid="uid://bv616iqaq6lgw" path="res://src/lobby_type_setter/lobby_type_setter.tscn" id="10_gp772"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yaqbi"]
+properties/0/path = NodePath("HBoxContainer/GridContainer/LobbyName:text")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath("HBoxContainer/GridContainer/HBoxContainer/LobbyType:selected")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("HBoxContainer/GridContainer/LevelSelect:selected")
+properties/2/spawn = true
+properties/2/replication_mode = 2
 
 [node name="Lobby" type="MarginContainer"]
 custom_minimum_size = Vector2(640, 0)
@@ -49,23 +60,22 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
-focus_neighbor_right = NodePath("../../HostMenu/StartButton")
+focus_neighbor_right = NodePath("../../GridContainer/StartGame")
 text = "Leave"
 
-[node name="HostMenu" type="GridContainer" parent="HBoxContainer"]
-unique_name_in_owner = true
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 columns = 2
-metadata/_edit_group_ = true
 
-[node name="LobbyNameLabel" type="Label" parent="HBoxContainer/HostMenu"]
+[node name="Label" type="Label" parent="HBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Name:"
 
-[node name="LobbyNameLineEdit" type="LineEdit" parent="HBoxContainer/HostMenu"]
+[node name="LobbyName" type="LineEdit" parent="HBoxContainer/GridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Lobby Name"
@@ -73,16 +83,17 @@ script = ExtResource("3_qpyai")
 description = "Set your lobby's name"
 metadata/_custom_type_script = "uid://gpvk6gsxhdvu"
 
-[node name="LobbyTypeLabel" type="Label" parent="HBoxContainer/HostMenu"]
+[node name="Label2" type="Label" parent="HBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Type:"
 horizontal_alignment = 2
 
-[node name="LobbyType" type="HBoxContainer" parent="HBoxContainer/HostMenu"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/GridContainer"]
 layout_mode = 2
 
-[node name="OptionButton" type="OptionButton" parent="HBoxContainer/HostMenu/LobbyType"]
+[node name="LobbyType" type="OptionButton" parent="HBoxContainer/GridContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 item_count = 3
@@ -93,26 +104,26 @@ popup/item_1/id = 1
 popup/item_2/text = "Public"
 popup/item_2/id = 2
 
-[node name="Help" type="Button" parent="HBoxContainer/HostMenu/LobbyType"]
+[node name="Help" type="Button" parent="HBoxContainer/GridContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 text = "?"
 
-[node name="LevelLabel" type="Label" parent="HBoxContainer/HostMenu"]
+[node name="Label3" type="Label" parent="HBoxContainer/GridContainer"]
 layout_mode = 2
 text = "Level:"
 horizontal_alignment = 2
 
-[node name="LevelSelect" type="OptionButton" parent="HBoxContainer/HostMenu"]
+[node name="LevelSelect" type="OptionButton" parent="HBoxContainer/GridContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Spacer" type="Control" parent="HBoxContainer/HostMenu"]
+[node name="Spacer" type="Control" parent="HBoxContainer/GridContainer"]
 layout_mode = 2
 
-[node name="StartButton" type="Button" parent="HBoxContainer/HostMenu"]
+[node name="StartGame" type="Button" parent="HBoxContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_left = NodePath("../../VBoxContainer/Leave")
@@ -220,15 +231,18 @@ layout_mode = 2
 text = "Joinable by anyone. Visible to anyone."
 autowrap_mode = 3
 
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_yaqbi")
+
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Leave" to="LeaveConfirmationDialog" method="popup_centered"]
-[connection signal="focus_exited" from="HBoxContainer/HostMenu/LobbyNameLineEdit" to="HBoxContainer/HostMenu/LobbyType/OptionButton" method="grab_focus"]
-[connection signal="text_changed" from="HBoxContainer/HostMenu/LobbyNameLineEdit" to="LobbyNameSetter" method="set_lobby_name"]
-[connection signal="item_selected" from="HBoxContainer/HostMenu/LobbyType/OptionButton" to="LobbyTypeSetter" method="set_lobby_type"]
-[connection signal="pressed" from="HBoxContainer/HostMenu/LobbyType/Help" to="LobbyTypeHelp" method="popup_centered"]
-[connection signal="item_selected" from="HBoxContainer/HostMenu/LevelSelect" to="." method="_on_level_select_item_selected"]
-[connection signal="pressed" from="HBoxContainer/HostMenu/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="focus_exited" from="HBoxContainer/GridContainer/LobbyName" to="HBoxContainer/GridContainer/HBoxContainer/LobbyType" method="grab_focus"]
+[connection signal="text_changed" from="HBoxContainer/GridContainer/LobbyName" to="LobbyNameSetter" method="set_lobby_name"]
+[connection signal="item_selected" from="HBoxContainer/GridContainer/HBoxContainer/LobbyType" to="LobbyTypeSetter" method="set_lobby_type"]
+[connection signal="pressed" from="HBoxContainer/GridContainer/HBoxContainer/Help" to="LobbyTypeHelp" method="popup_centered"]
+[connection signal="item_selected" from="HBoxContainer/GridContainer/LevelSelect" to="." method="_on_level_select_item_selected"]
+[connection signal="pressed" from="HBoxContainer/GridContainer/StartGame" to="." method="_on_start_game_pressed"]
 [connection signal="connection_closed" from="SteamConnector" to="." method="_on_connection_closed"]
-[connection signal="lobby_name_on_ready" from="LobbyNameSetter" to="HBoxContainer/HostMenu/LobbyNameLineEdit" method="set_text"]
+[connection signal="lobby_name_on_ready" from="LobbyNameSetter" to="HBoxContainer/GridContainer/LobbyName" method="set_text"]
 [connection signal="relay_initialized" from="RelayInitializer" to="LobbyLocationSetter" method="set_lobby_location"]
-[connection signal="lobby_type_on_ready" from="LobbyTypeSetter" to="HBoxContainer/HostMenu/LobbyType/OptionButton" method="select"]
+[connection signal="lobby_type_on_ready" from="LobbyTypeSetter" to="HBoxContainer/GridContainer/HBoxContainer/LobbyType" method="select"]
 [connection signal="confirmed" from="LeaveConfirmationDialog" to="SteamConnector" method="close_connection"]
