@@ -30,13 +30,6 @@ layout_mode = 2
 layout_mode = 2
 alignment = 2
 
-[node name="Back" type="Button" parent="HBoxContainer/LeftMenu" node_paths=PackedStringArray("shortcut_context")]
-layout_mode = 2
-shortcut_context = NodePath("..")
-shortcut = SubResource("Shortcut_dj2jg")
-shortcut_in_tooltip = false
-text = "Back"
-
 [node name="HostLocal" type="Button" parent="HBoxContainer/LeftMenu"]
 unique_name_in_owner = true
 visible = false
@@ -65,6 +58,13 @@ text = "Refresh"
 [node name="CreateLobby" type="Button" parent="HBoxContainer/LeftMenu"]
 layout_mode = 2
 text = "Create Lobby"
+
+[node name="Back" type="Button" parent="HBoxContainer/LeftMenu" node_paths=PackedStringArray("shortcut_context")]
+layout_mode = 2
+shortcut_context = NodePath("..")
+shortcut = SubResource("Shortcut_dj2jg")
+shortcut_in_tooltip = false
+text = "Back"
 
 [node name="Filters" type="Label" parent="HBoxContainer/LeftMenu"]
 visible = false
@@ -164,12 +164,12 @@ autostart = true
 
 [connection signal="join_lobby_requested" from="." to="SteamConnector" method="join_lobby"]
 [connection signal="refreshed" from="." to="RefreshTimer" method="start"]
-[connection signal="pressed" from="HBoxContainer/LeftMenu/Back" to="." method="go_back"]
 [connection signal="pressed" from="HBoxContainer/LeftMenu/HostLocal" to="." method="_on_host_local_pressed"]
 [connection signal="pressed" from="HBoxContainer/LeftMenu/JoinLocal" to="." method="_on_join_local_pressed"]
 [connection signal="pressed" from="HBoxContainer/LeftMenu/InitSteam" to="." method="_on_init_steam_pressed"]
 [connection signal="pressed" from="HBoxContainer/LeftMenu/Refresh" to="." method="refresh"]
 [connection signal="pressed" from="HBoxContainer/LeftMenu/CreateLobby" to="." method="_on_create_lobby_pressed"]
+[connection signal="pressed" from="HBoxContainer/LeftMenu/Back" to="." method="go_back"]
 [connection signal="about_to_popup" from="NotifyDialog" to="JoiningWindow" method="hide"]
 [connection signal="timeout" from="RefreshTimer" to="." method="refresh"]
 [connection signal="lobby_created" from="SteamConnector" to="." method="_on_lobby_created"]
