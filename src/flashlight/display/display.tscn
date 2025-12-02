@@ -88,28 +88,24 @@ hframes = 32
 
 [node name="RotationNode" type="RemoteTransform2D" parent="."]
 unique_name_in_owner = true
+visible = false
 remote_path = NodePath("../RotationNode2")
 update_position = false
 update_scale = false
 
-[node name="Light" type="Node2D" parent="RotationNode"]
-unique_name_in_owner = true
-visible = false
-position = Vector2(16, 0)
-
-[node name="FloorLight" type="PointLight2D" parent="RotationNode/Light"]
+[node name="FloorLight" type="PointLight2D" parent="RotationNode"]
 unique_name_in_owner = true
 shadow_enabled = true
 shadow_item_cull_mask = 3
-offset = Vector2(48, 0)
+offset = Vector2(64, 0)
 height = 32.0
 
-[node name="WallLight" type="PointLight2D" parent="RotationNode/Light"]
+[node name="WallLight" type="PointLight2D" parent="RotationNode"]
 unique_name_in_owner = true
 range_item_cull_mask = 2
 shadow_enabled = true
 shadow_item_cull_mask = 4
-offset = Vector2(48, 0)
+offset = Vector2(64, 0)
 height = 32.0
 
 [node name="RotationNode2" type="Node2D" parent="."]

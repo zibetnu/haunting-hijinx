@@ -17,7 +17,7 @@ var powered: bool:
 		var was_powered: bool = powered
 		powered = value
 		_beam.visible = powered
-		_light.visible = powered
+		_rotation_node.visible = powered
 		if powered == was_powered:
 			return
 
@@ -59,7 +59,6 @@ var light_texture_index: int:
 ]
 @onready var _click: AudioStreamPlayer2D = $Click
 @onready var _floor_light: PointLight2D = %FloorLight
-@onready var _light: Node2D = %Light
 @onready var _rotation_node: RemoteTransform2D = %RotationNode
 @onready var _sparks: GPUParticles2D = $Sparks
 @onready var _spark_audio: AudioStreamPlayer2D = $SparkAudio
