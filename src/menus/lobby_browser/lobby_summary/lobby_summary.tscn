@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dmoov6v60pobv"]
 
-[ext_resource type="Script" uid="uid://cwbf3552giq40" path="res://src/lobby_browser/lobby_summary/lobby_summary.gd" id="1_u1an3"]
+[ext_resource type="Script" uid="uid://cwbf3552giq40" path="res://src/menus/lobby_browser/lobby_summary/lobby_summary.gd" id="1_u1an3"]
 
 [node name="LobbySummary" type="Button"]
 custom_minimum_size = Vector2(320, 32)

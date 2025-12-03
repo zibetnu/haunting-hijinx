@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bnoti7vnd7pk7"]
+[gd_scene load_steps=11 format=3 uid="uid://bnoti7vnd7pk7"]
 
 [ext_resource type="Script" uid="uid://cuni11kdbk1kn" path="res://src/menus/menus.gd" id="1_kv08v"]
 [ext_resource type="PackedScene" uid="uid://civfmojof07gs" path="res://src/menus/main_menu/main_menu.tscn" id="1_yg0vw"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cis3vfoj3ussh" path="res://src/menus/tutorial_select/tutorial_select.tscn" id="5_lbit3"]
 [ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="7_jio01"]
 [ext_resource type="PackedScene" uid="uid://dmp2ru73exiia" path="res://src/menus/customization/customization.tscn" id="7_r3bfl"]
+[ext_resource type="PackedScene" uid="uid://crqc4k74es8j6" path="res://src/menus/lobby_browser/lobby_browser.tscn" id="8_60t13"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_67gcq"]
 
@@ -53,8 +54,15 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 5
 
-[node name="SteamConnector" parent="." instance=ExtResource("7_jio01")]
+[node name="LobbyBrowser" parent="." instance=ExtResource("8_60t13")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 6
 
+[node name="SteamConnector" parent="." instance=ExtResource("7_jio01")]
+connect_steam_signals = false
+
+[connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/BrowseLobbies" to="." method="_on_browse_lobbies_pressed"]
 [connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/Customization" to="." method="_on_customization_pressed"]
 [connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/HBoxContainer2/Settings" to="." method="set_current_tab" binds= [1]]
 [connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/HBoxContainer2/Tutorial" to="." method="set_current_tab" binds= [4]]
@@ -65,6 +73,7 @@ metadata/_tab_index = 5
 [connection signal="pressed" from="LicenseMenu/HBoxContainer/VBoxContainer/HBoxContainer/Back" to="." method="set_current_tab" binds= [2]]
 [connection signal="pressed" from="TutorialSelect/HBoxContainer/Back" to="." method="set_current_tab" binds= [0]]
 [connection signal="back_pressed" from="Customization" to="." method="_on_customization_back_pressed"]
+[connection signal="back_pressed" from="LobbyBrowser" to="." method="_on_lobby_browser_back_pressed"]
 
 [editable path="MainMenu"]
 [editable path="MainMenu/BackEnd"]

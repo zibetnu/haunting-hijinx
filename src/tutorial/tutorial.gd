@@ -144,7 +144,7 @@ func _on_current_quest_completed() -> void:
 func _on_exit_prompt_pressed() -> void:
 	# https://github.com/godotengine/godot/issues/77643
 	@warning_ignore("unsafe_method_access")
-	SceneChanger.change_to_main_menu()
+	SceneChanger.change_to_menus()
 
 
 func _on_flashlight_battery_died(flashlight: Flashlight) -> void:

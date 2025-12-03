@@ -64,7 +64,7 @@ method = &"change_to_lobby"
 
 [node name="MainMenuCall" parent="." instance=ExtResource("2_0ack1")]
 node_path = NodePath("/root/SceneChanger")
-method = &"change_to_main_menu"
+method = &"change_to_menus"
 
 [node name="PeerID" parent="." instance=ExtResource("3_o38nd")]
 

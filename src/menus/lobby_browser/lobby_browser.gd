@@ -1,5 +1,6 @@
 extends Control
 
+signal back_pressed
 signal join_lobby_requested(lobby_id: int)
 signal refreshed
 
@@ -43,11 +44,10 @@ const LOCAL_PORT = 9999
 
 
 func _ready() -> void:
+	_on_visibility_changed()
+	visibility_changed.connect(_on_visibility_changed)
 	Steam.lobby_match_list.connect(_on_lobby_match_list)
-	# Free self and let server load lobby.
-	multiplayer.connected_to_server.connect(queue_free)
 	steam_connector.close_connection.call_deferred()
-	refresh_button.grab_focus()
 	if OS.has_feature("editor"):
 		host_local.show()
 		join_local.show()
@@ -66,10 +66,6 @@ func call_scene_changer_method(method: StringName) -> void:
 		return
 
 	scene_changer.call(method)
-
-
-func go_back() -> void:
-	call_scene_changer_method(MAIN_MENU_METHOD)
 
 
 func init_steam_relay() -> void:
@@ -241,3 +237,12 @@ func _on_join_local_pressed() -> void:
 	peer.create_client("localhost", LOCAL_PORT)
 	multiplayer.multiplayer_peer = peer
 	_on_lobby_joined()
+
+
+func _on_back_pressed() -> void:
+	back_pressed.emit()
+
+
+func _on_visibility_changed() -> void:
+	if visible:
+		refresh_button.grab_focus()

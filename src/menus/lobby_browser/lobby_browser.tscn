@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://crqc4k74es8j6"]
 
-[ext_resource type="Script" uid="uid://uefw2b6v137q" path="res://src/lobby_browser/lobby_browser.gd" id="1_wpwcv"]
+[ext_resource type="Script" uid="uid://uefw2b6v137q" path="res://src/menus/lobby_browser/lobby_browser.gd" id="1_wpwcv"]
 [ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="2_dwt65"]
-[ext_resource type="PackedScene" uid="uid://dmoov6v60pobv" path="res://src/lobby_browser/lobby_summary/lobby_summary.tscn" id="2_tlwtl"]
+[ext_resource type="PackedScene" uid="uid://dmoov6v60pobv" path="res://src/menus/lobby_browser/lobby_summary/lobby_summary.tscn" id="2_tlwtl"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_7bdp8"]
 action = &"ui_cancel"
@@ -169,7 +169,7 @@ autostart = true
 [connection signal="pressed" from="HBoxContainer/LeftMenu/InitSteam" to="." method="_on_init_steam_pressed"]
 [connection signal="pressed" from="HBoxContainer/LeftMenu/Refresh" to="." method="refresh"]
 [connection signal="pressed" from="HBoxContainer/LeftMenu/CreateLobby" to="." method="_on_create_lobby_pressed"]
-[connection signal="pressed" from="HBoxContainer/LeftMenu/Back" to="." method="go_back"]
+[connection signal="pressed" from="HBoxContainer/LeftMenu/Back" to="." method="_on_back_pressed"]
 [connection signal="about_to_popup" from="NotifyDialog" to="JoiningWindow" method="hide"]
 [connection signal="timeout" from="RefreshTimer" to="." method="refresh"]
 [connection signal="lobby_created" from="SteamConnector" to="." method="_on_lobby_created"]

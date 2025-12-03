@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 script = ExtResource("1_7v3o7")
-scene_names = Array[StringName]([&"Menus", &"LobbyBrowser", &"Lobby"])
+scene_names = Array[StringName]([&"Menus", &"Lobby"])
 
 [node name="SubViewport" type="SubViewport" parent="."]
 disable_3d = true

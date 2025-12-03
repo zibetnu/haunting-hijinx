@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cmhqty6g1sgls"]
+[gd_scene load_steps=6 format=3 uid="uid://cmhqty6g1sgls"]
 
 [ext_resource type="Script" uid="uid://ceqnnjhsbwq74" path="res://src/autoload/scene_changer/scene_changer.gd" id="1_6yofi"]
 [ext_resource type="PackedScene" uid="uid://df63fi5u7xpjt" path="res://src/lobby/lobby.tscn" id="2_nsjnt"]
-[ext_resource type="PackedScene" uid="uid://crqc4k74es8j6" path="res://src/lobby_browser/lobby_browser.tscn" id="3_gctsf"]
 [ext_resource type="PackedScene" uid="uid://bnoti7vnd7pk7" path="res://src/menus/menus.tscn" id="4_rfgbt"]
 [ext_resource type="PackedScene" uid="uid://02ri1p0jbqdb" path="res://src/tutorial/ghost/ghost_tutorial.tscn" id="5_iwjj3"]
 [ext_resource type="PackedScene" uid="uid://dguyyy188ihbi" path="res://src/tutorial/hunter/hunter_tutorial.tscn" id="6_dqbtk"]
@@ -10,8 +9,7 @@
 [node name="SceneChanger" type="Node"]
 script = ExtResource("1_6yofi")
 lobby = ExtResource("2_nsjnt")
-lobby_browser = ExtResource("3_gctsf")
-main_menu = ExtResource("4_rfgbt")
+menus = ExtResource("4_rfgbt")
 ghost_tutorial = ExtResource("5_iwjj3")
 hunter_tutorial = ExtResource("6_dqbtk")
 

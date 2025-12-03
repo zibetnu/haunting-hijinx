@@ -3,8 +3,7 @@ extends Node
 signal scene_changed(root_node: Node)
 
 @export var lobby: PackedScene
-@export var lobby_browser: PackedScene
-@export var main_menu: PackedScene
+@export var menus: PackedScene
 @export var ghost_tutorial: PackedScene
 @export var hunter_tutorial: PackedScene
 
@@ -36,11 +35,13 @@ func change_to_lobby() -> void:
 
 
 func change_to_lobby_browser() -> void:
-	change_scene_to_packed(lobby_browser)
+	change_to_menus(Menus.Tab.LOBBY_BROWSER)
 
 
-func change_to_main_menu() -> void:
-	change_scene_to_packed(main_menu)
+func change_to_menus(tab := Menus.Tab.MAIN) -> void:
+	var instance: Menus = menus.instantiate()
+	instance.current_tab = tab
+	change_scene_to_node(instance)
 
 
 func change_to_ghost_tutorial() -> void:
@@ -75,13 +76,13 @@ func _main_menu_fallback() -> void:
 		return
 
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
-	change_to_main_menu()
+	change_to_menus()
 
 
 func _on_server_disconnected() -> void:
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 	disconnected_dialog.popup_centered()
-	change_scene_to_packed(main_menu)
+	change_to_menus()
 
 
 func _on_join_requested(lobby_id: int, _steam_id: int) -> void:
@@ -89,4 +90,9 @@ func _on_join_requested(lobby_id: int, _steam_id: int) -> void:
 
 
 func _on_scene_spawner_spawned(node: Node) -> void:
+	for child in scene_spawner.get_children():
+		if child != node:
+			scene_spawner.remove_child(child)
+			child.queue_free()
+
 	scene_changed.emit(node)
