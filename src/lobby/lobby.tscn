@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://df63fi5u7xpjt"]
+[gd_scene load_steps=11 format=3 uid="uid://df63fi5u7xpjt"]
 
 [ext_resource type="Script" uid="uid://1jew7wsxqctm" path="res://src/lobby/lobby.gd" id="1_g8t6r"]
+[ext_resource type="PackedScene" uid="uid://bmrvrkyh2t2pf" path="res://src/menu_background/menu_background.tscn" id="2_qpyai"]
 [ext_resource type="Script" uid="uid://gpvk6gsxhdvu" path="res://src/steam_gamepad_line_edit.gd" id="3_qpyai"]
 [ext_resource type="PackedScene" uid="uid://y52o5l4t82oi" path="res://src/lobby/lobby_location_setter/lobby_location_setter.tscn" id="6_mojxj"]
 [ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="6_qmxdg"]
@@ -233,6 +234,8 @@ autowrap_mode = 3
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_yaqbi")
+
+[node name="MenuBackground" parent="." instance=ExtResource("2_qpyai")]
 
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Leave" to="LeaveConfirmationDialog" method="popup_centered"]
 [connection signal="focus_exited" from="HBoxContainer/GridContainer/LobbyName" to="HBoxContainer/GridContainer/HBoxContainer/LobbyType" method="grab_focus"]

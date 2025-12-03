@@ -31,7 +31,6 @@ buses/default_bus_layout="res://src/default_bus_layout.tres"
 
 GlobalSounds="res://src/autoload/global_sounds/global_sounds.tscn"
 PeerData="*res://src/autoload/peer_data/peer_data.tscn"
-MenuBackground="res://src/autoload/menu_background/menu_background.tscn"
 SceneChanger="*res://src/autoload/scene_changer/scene_changer.tscn"
 FullscreenToggle="res://src/autoload/fullscreen_toggle.gd"
 MouseHider="res://src/autoload/mouse_hider.gd"
