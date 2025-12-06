@@ -15,6 +15,7 @@ func _exit_tree() -> void:
 func _on_gamepad_text_input_dismissed(submitted: bool, new_text: String, _app_id: int) -> void:
 	if submitted:
 		text = new_text
+		text_changed.emit(text)
 
 
 func _on_gui_input(event: InputEvent) -> void:
