@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmhqty6g1sgls"]
+[gd_scene load_steps=10 format=3 uid="uid://cmhqty6g1sgls"]
 
 [ext_resource type="Script" uid="uid://ceqnnjhsbwq74" path="res://src/autoload/scene_changer/scene_changer.gd" id="1_6yofi"]
 [ext_resource type="PackedScene" uid="uid://df63fi5u7xpjt" path="res://src/lobby/lobby.tscn" id="2_nsjnt"]
@@ -6,12 +6,108 @@
 [ext_resource type="PackedScene" uid="uid://02ri1p0jbqdb" path="res://src/tutorial/ghost/ghost_tutorial.tscn" id="5_iwjj3"]
 [ext_resource type="PackedScene" uid="uid://dguyyy188ihbi" path="res://src/tutorial/hunter/hunter_tutorial.tscn" id="6_dqbtk"]
 
+[sub_resource type="Animation" id="Animation_f2qsg"]
+resource_name = "cover"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vm6me"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kk5md"]
+resource_name = "uncover"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jsu3p"]
+_data = {
+&"RESET": SubResource("Animation_vm6me"),
+&"cover": SubResource("Animation_f2qsg"),
+&"uncover": SubResource("Animation_kk5md")
+}
+
 [node name="SceneChanger" type="Node"]
 script = ExtResource("1_6yofi")
 lobby = ExtResource("2_nsjnt")
 menus = ExtResource("4_rfgbt")
 ghost_tutorial = ExtResource("5_iwjj3")
 hunter_tutorial = ExtResource("6_dqbtk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+process_mode = 3
+libraries = {
+&"": SubResource("AnimationLibrary_jsu3p")
+}
 
 [node name="DisconnectedDialog" type="AcceptDialog" parent="."]
 transparent_bg = true
@@ -28,6 +124,18 @@ one_shot = true
 _spawnable_scenes = PackedStringArray("uid://2uclu3gf4iyj", "uid://df63fi5u7xpjt")
 spawn_path = NodePath(".")
 spawn_limit = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 4
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
 
 [connection signal="timeout" from="FallbackTimer" to="." method="_main_menu_fallback"]
 [connection signal="child_entered_tree" from="SceneSpawner" to="FallbackTimer" method="stop" unbinds=1]

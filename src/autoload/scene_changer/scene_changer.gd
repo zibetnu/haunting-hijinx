@@ -7,6 +7,7 @@ signal scene_changed(root_node: Node)
 @export var ghost_tutorial: PackedScene
 @export var hunter_tutorial: PackedScene
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var disconnected_dialog: AcceptDialog = $DisconnectedDialog
 @onready var scene_spawner: MultiplayerSpawner = $SceneSpawner
 
@@ -20,8 +21,15 @@ func change_scene_to_node(node: Node) -> void:
 	if not multiplayer.is_server():
 		return
 
+	animation_player.play(&"cover")
+	await animation_player.animation_finished
+
 	remove_scene()
 	scene_spawner.add_child(node, true)
+
+	animation_player.play(&"uncover")
+	await animation_player.animation_finished
+
 	get_tree().set_pause(false)
 	scene_changed.emit(node)
 
