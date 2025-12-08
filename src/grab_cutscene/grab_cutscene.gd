@@ -40,6 +40,11 @@ func _ready() -> void:
 	cutscene_ended.connect(_on_cutscene_ended)
 
 
+func _exit_tree() -> void:
+	if cutscene_in_progress:
+		end_cutscene()
+
+
 func set_cutscene_in_progress(value: bool) -> void:
 	var prior_value: bool = cutscene_in_progress
 	cutscene_in_progress = value

@@ -30,7 +30,6 @@ func change_scene_to_node(node: Node) -> void:
 	animation_player.play(&"uncover")
 	await animation_player.animation_finished
 
-	get_tree().set_pause(false)
 	scene_changed.emit(node)
 
 
