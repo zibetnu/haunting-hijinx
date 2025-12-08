@@ -105,8 +105,6 @@ size_flags_vertical = 4
 unique_name_in_owner = true
 position = Vector2(0, -40)
 scale = Vector2(4, 4)
-costume_rotation = 1.5707963267948966
-target_rotation = 1.5707963267948966
 
 [node name="HunterCostume" parent="HBoxContainer/VBoxContainer2/CenterContainer/Control" instance=ExtResource("2_iu7ym")]
 unique_name_in_owner = true
