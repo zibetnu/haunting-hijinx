@@ -10,6 +10,11 @@ var alert_intensity := 0
 @onready var look_timer: Timer = $LookTimer
 
 
+func _ready() -> void:
+	if owner != null:
+		owner.ready.connect(_on_owner_ready)
+
+
 func _physics_process(delta: float) -> void:
 	update_flashlight()
 	update_look(delta)
@@ -61,3 +66,7 @@ func _on_flashlight_timer_timeout() -> void:
 
 func _on_look_timer_timeout() -> void:
 	look_vector = Vector2.from_angle(randf_range(0.0, TAU))
+
+
+func _on_owner_ready() -> void:
+	look_vector = Vector2.from_angle(TAU * randf())
