@@ -1,5 +1,5 @@
 class_name MainMenu
-extends Control
+extends Menu
 
 
 func _on_quit_pressed() -> void:

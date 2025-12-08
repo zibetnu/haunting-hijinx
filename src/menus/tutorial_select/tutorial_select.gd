@@ -1,4 +1,5 @@
-extends MarginContainer
+class_name TutorialSelect
+extends Menu
 
 const CANCEL_ACTION = &"ui_cancel"
 
@@ -11,6 +12,7 @@ const CANCEL_ACTION = &"ui_cancel"
 
 
 func _ready() -> void:
+	super()
 	# https://github.com/godotengine/godot/issues/77643
 	@warning_ignore("unsafe_call_argument")
 	@warning_ignore("unsafe_method_access")

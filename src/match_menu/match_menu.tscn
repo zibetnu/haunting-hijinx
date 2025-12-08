@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="2_2qtrp"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="3_o38nd"]
 
-[node name="MatchMenu" type="CenterContainer" node_paths=PackedStringArray("focus_first")]
+[node name="MatchMenu" type="CenterContainer" node_paths=PackedStringArray("first_button")]
 process_mode = 3
 visible = false
 anchors_preset = 15
@@ -14,7 +14,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_o1w5u")
-focus_first = NodePath("PanelContainer/VBoxContainer/Resume")
+first_button = NodePath("PanelContainer/VBoxContainer/Resume")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2

@@ -1,6 +1,5 @@
-extends Control
-
-signal pressed_sound_requested
+class_name LicenseMenu
+extends Menu
 
 const Component := preload("res://addons/licenses/component.gd")
 const Licenses := preload("res://addons/licenses/licenses.gd")
@@ -34,6 +33,7 @@ var licenses: Array[Component] = []
 
 
 func _ready() -> void:
+	super()
 	license_text.gui_input.connect(_on_license_text_gui_input)
 	license_text.meta_clicked.connect(_on_meta_clicked)
 	tree.item_activated.connect(_on_item_activated)

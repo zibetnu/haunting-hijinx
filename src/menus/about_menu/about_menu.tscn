@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://c4t7474tk0tok"]
 
-[ext_resource type="PackedScene" uid="uid://c6ql67s5oafpr" path="res://src/visibility_signals/visibility_signals.tscn" id="1_ytmu0"]
+[ext_resource type="Script" uid="uid://dyww3i4himg5r" path="res://src/menus/menu.gd" id="1_ktxyj"]
 [ext_resource type="PackedScene" uid="uid://dloh4qhadewj" path="res://src/menus/about_menu/major_credit.tscn" id="2_t1g6x"]
 [ext_resource type="PackedScene" uid="uid://c10ej4vwbr3uy" path="res://src/menus/about_menu/credit.tscn" id="3_8ivxx"]
 [ext_resource type="Material" uid="uid://b55fo71d58ijs" path="res://src/theme/font_outline.tres" id="3_pgyhl"]
@@ -13,15 +13,14 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_egiyj"]
 events = [SubResource("InputEventAction_7bdp8")]
 
-[node name="AboutMenu" type="MarginContainer"]
+[node name="AboutMenu" type="MarginContainer" node_paths=PackedStringArray("first_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="VisibilitySignals" parent="." node_paths=PackedStringArray("canvas_item") instance=ExtResource("1_ytmu0")]
-canvas_item = NodePath("..")
+script = ExtResource("1_ktxyj")
+first_button = NodePath("Buttons/Licenses")
 
 [node name="Credits" type="HBoxContainer" parent="."]
 material = ExtResource("3_pgyhl")
@@ -366,7 +365,6 @@ text = "Back"
 layout_mode = 2
 text = "Licenses"
 
-[connection signal="shown" from="VisibilitySignals" to="Buttons/Licenses" method="grab_focus"]
 [connection signal="gui_input" from="Buttons/Back" to="." method="_on_gui_input"]
 [connection signal="gui_input" from="Buttons/Licenses" to="." method="_on_gui_input"]
 

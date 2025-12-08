@@ -1,5 +1,5 @@
 class_name ConfigMenu
-extends Control
+extends Menu
 # TODO: combine all scripts in this scene.
 
 const AUDIO_SECTION = "audio"
@@ -9,8 +9,6 @@ const BRIGHTNESS_KEY = "brightness"
 const SCALE_KEY = "scale"
 const VSYNC_KEY = "vsync"
 const WINDOW_MODE_KEY = "window_mode"
-
-@export var first_button: Button
 
 @onready var window_mode_option: OptionButtonID = %WindowModeOption
 @onready var vsync_option: OptionButtonID = %VSyncOption
@@ -25,6 +23,7 @@ const WINDOW_MODE_KEY = "window_mode"
 
 
 func _ready() -> void:
+	super()
 	init_window_mode_option()
 	init_vsync_option()
 	init_slider(brightness_slider, DISPLAY_SECTION, BRIGHTNESS_KEY, 0.126)
@@ -100,13 +99,6 @@ func _on_scale_debounce_timeout() -> void:
 func _on_window_mode_selected(value: DisplayServer.WindowMode) -> void:
 	DisplayServer.window_set_mode(value)
 	GameConfig.set_value(DISPLAY_SECTION, WINDOW_MODE_KEY, value)
-
-
-func _on_visibility_changed() -> void:
-	if not visible:
-		return
-
-	first_button.grab_focus()
 
 
 func _on_vsync_option_id_selected(mode: DisplayServer.VSyncMode) -> void:

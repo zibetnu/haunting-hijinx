@@ -66,11 +66,11 @@ connect_steam_signals = false
 [node name="MenuBackground" parent="." instance=ExtResource("10_60t13")]
 mode = 1
 
-[connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/BrowseLobbies" to="." method="_on_browse_lobbies_pressed"]
-[connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/Customization" to="." method="_on_customization_pressed"]
-[connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/HBoxContainer2/Settings" to="." method="set_current_tab" binds= [1]]
-[connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/HBoxContainer2/Tutorial" to="." method="set_current_tab" binds= [4]]
-[connection signal="pressed" from="MainMenu/FrontEnd/VBoxContainer/HBoxContainer/About" to="." method="set_current_tab" binds= [2]]
+[connection signal="pressed" from="MainMenu/VBoxContainer/BrowseLobbies" to="." method="_on_browse_lobbies_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/Customization" to="." method="_on_customization_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/HBoxContainer2/Settings" to="." method="set_current_tab" binds= [1]]
+[connection signal="pressed" from="MainMenu/VBoxContainer/HBoxContainer2/Tutorial" to="." method="set_current_tab" binds= [4]]
+[connection signal="pressed" from="MainMenu/VBoxContainer/HBoxContainer/About" to="." method="set_current_tab" binds= [2]]
 [connection signal="pressed" from="ConfigMenu/VBoxContainer/Back" to="." method="set_current_tab" binds= [0]]
 [connection signal="pressed" from="AboutMenu/Buttons/Back" to="." method="set_current_tab" binds= [0]]
 [connection signal="pressed" from="AboutMenu/Buttons/Licenses" to="." method="set_current_tab" binds= [3]]
@@ -80,8 +80,6 @@ mode = 1
 [connection signal="back_pressed" from="LobbyBrowser" to="." method="_on_lobby_browser_back_pressed"]
 
 [editable path="MainMenu"]
-[editable path="MainMenu/BackEnd"]
-[editable path="MainMenu/FrontEnd"]
 [editable path="ConfigMenu"]
 [editable path="AboutMenu"]
 [editable path="AboutMenu/Credits/VBoxContainer/Zibetnu"]

@@ -1,6 +1,5 @@
-[gd_scene load_steps=8 format=3 uid="uid://cis3vfoj3ussh"]
+[gd_scene load_steps=7 format=3 uid="uid://cis3vfoj3ussh"]
 
-[ext_resource type="PackedScene" uid="uid://c6ql67s5oafpr" path="res://src/visibility_signals/visibility_signals.tscn" id="1_4ptx7"]
 [ext_resource type="Script" uid="uid://cekehm7hjicvv" path="res://src/menus/tutorial_select/tutorial_select.gd" id="1_h2iyi"]
 [ext_resource type="PackedScene" uid="uid://klrwcohuhynk" path="res://src/ghost/costume/ghost_costume.tscn" id="1_xu1af"]
 [ext_resource type="PackedScene" uid="uid://ctn825io87i34" path="res://src/hunter/costume/hunter_costume.tscn" id="3_eyaac"]
@@ -12,7 +11,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_wx7d7"]
 events = [SubResource("InputEventAction_7bdp8")]
 
-[node name="TutorialSelect" type="MarginContainer" node_paths=PackedStringArray("ghost", "hunter", "back")]
+[node name="TutorialSelect" type="MarginContainer" node_paths=PackedStringArray("ghost", "hunter", "back", "first_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -22,9 +21,7 @@ script = ExtResource("1_h2iyi")
 ghost = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Ghost")
 hunter = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Hunter")
 back = NodePath("HBoxContainer/Back")
-
-[node name="VisibilitySignals" parent="." node_paths=PackedStringArray("canvas_item") instance=ExtResource("1_4ptx7")]
-canvas_item = NodePath("..")
+first_button = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Ghost")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 2
@@ -55,6 +52,7 @@ position = Vector2(32, 32)
 rotation_speed = 0.0
 costume_rotation = 0.785398
 target_rotation = 0.785398
+frame_coord_x = 1
 
 [node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Ghost"]
 custom_minimum_size = Vector2(48, 24)
@@ -116,7 +114,6 @@ shortcut = SubResource("Shortcut_wx7d7")
 shortcut_in_tooltip = false
 text = "Back"
 
-[connection signal="shown" from="VisibilitySignals" to="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Ghost" method="grab_focus"]
 [connection signal="gui_input" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Ghost" to="." method="_on_gui_input"]
 [connection signal="gui_input" from="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/Hunter" to="." method="_on_gui_input"]
 [connection signal="gui_input" from="HBoxContainer/Back" to="." method="_on_gui_input"]

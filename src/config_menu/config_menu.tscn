@@ -279,7 +279,6 @@ step = 0.2
 value = 1.0
 tick_count = 6
 
-[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="item_id_selected" from="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/WindowModeOption" to="." method="_on_window_mode_selected"]
 [connection signal="item_id_selected" from="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/VSyncOption" to="." method="_on_vsync_option_id_selected"]
 [connection signal="value_changed" from="HBoxContainer/VBoxContainer/Brightness/VBoxContainer/BrightnessSlider" to="." method="_on_brightness_slider_value_changed"]

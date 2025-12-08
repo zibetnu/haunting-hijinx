@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://chr26ux2vsrxq"]
+[gd_scene load_steps=4 format=3 uid="uid://chr26ux2vsrxq"]
 
 [ext_resource type="Script" uid="uid://dva15pnfy3mhy" path="res://src/menus/license_menu/license_menu.gd" id="1_gdao5"]
-[ext_resource type="PackedScene" uid="uid://c6ql67s5oafpr" path="res://src/visibility_signals/visibility_signals.tscn" id="2_wvjk2"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_7bdp8"]
 action = &"ui_cancel"
@@ -9,7 +8,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_8x1nc"]
 events = [SubResource("InputEventAction_7bdp8")]
 
-[node name="LicenseMenu" type="MarginContainer" node_paths=PackedStringArray("tree", "component_name", "version", "description", "contact", "contact_container", "web", "web_container", "paths", "paths_container", "license_name", "license_text")]
+[node name="LicenseMenu" type="MarginContainer" node_paths=PackedStringArray("tree", "component_name", "version", "description", "contact", "contact_container", "web", "web_container", "paths", "paths_container", "license_name", "license_text", "first_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -28,9 +27,7 @@ paths = NodePath("HBoxContainer/PanelContainer/VBoxContainer/PathsContainer/Path
 paths_container = NodePath("HBoxContainer/PanelContainer/VBoxContainer/PathsContainer")
 license_name = NodePath("HBoxContainer/PanelContainer/VBoxContainer/LicenseNameContainer/LicenseName")
 license_text = NodePath("HBoxContainer/PanelContainer/VBoxContainer/LicenseText")
-
-[node name="VisibilitySignals" parent="." node_paths=PackedStringArray("canvas_item") instance=ExtResource("2_wvjk2")]
-canvas_item = NodePath("..")
+first_button = NodePath("HBoxContainer/VBoxContainer/HBoxContainer/Back")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -169,5 +166,3 @@ size_flags_vertical = 3
 focus_mode = 2
 theme_type_variation = &"RichTextLabelCompact"
 bbcode_enabled = true
-
-[connection signal="shown" from="VisibilitySignals" to="." method="focus_tree"]

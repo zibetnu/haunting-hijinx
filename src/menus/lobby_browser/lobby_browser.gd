@@ -1,4 +1,5 @@
-extends Control
+class_name LobbyBrowser
+extends Menu
 
 signal back_pressed
 signal join_lobby_requested(lobby_id: int)
@@ -44,8 +45,7 @@ const LOCAL_PORT = 9999
 
 
 func _ready() -> void:
-	_on_visibility_changed()
-	visibility_changed.connect(_on_visibility_changed)
+	super()
 	Steam.lobby_match_list.connect(_on_lobby_match_list)
 	steam_connector.close_connection.call_deferred()
 	if OS.has_feature("editor"):
@@ -241,8 +241,3 @@ func _on_join_local_pressed() -> void:
 
 func _on_back_pressed() -> void:
 	back_pressed.emit()
-
-
-func _on_visibility_changed() -> void:
-	if visible:
-		refresh_button.grab_focus()

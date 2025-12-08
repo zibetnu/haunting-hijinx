@@ -10,7 +10,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_dj2jg"]
 events = [SubResource("InputEventAction_7bdp8")]
 
-[node name="LobbyBrowser" type="MarginContainer"]
+[node name="LobbyBrowser" type="MarginContainer" node_paths=PackedStringArray("first_button")]
 custom_minimum_size = Vector2(640, 0)
 anchors_preset = 13
 anchor_left = 0.5
@@ -22,6 +22,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wpwcv")
 lobby_summary_scene = ExtResource("2_tlwtl")
+first_button = NodePath("HBoxContainer/LeftMenu/Refresh")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2

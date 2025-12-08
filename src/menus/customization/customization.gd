@@ -1,10 +1,7 @@
 class_name CustomizationMenu
-extends Control
+extends Menu
 
 signal back_pressed
-signal pressed_sound_requested
-
-@export var first_button: BaseButton
 
 @onready var ghost_hat_spin_box: CustomizationSpinBox = %GhostHatSpinBox
 @onready var hunter_hat_spin_box: CustomizationSpinBox = %HunterHatSpinBox
@@ -17,7 +14,7 @@ signal pressed_sound_requested
 
 
 func _ready() -> void:
-	visibility_changed.connect(_on_visibility_changed)
+	super()
 	default_name.text = GameConfig.default_name.get_value()
 	init_ghost()
 	init_hunter()
@@ -88,11 +85,6 @@ func _on_hunter_hat_spin_box_item_selected(index: int) -> void:
 func _on_tab_container_tab_changed(tab: int) -> void:
 	ghost_costume.visible = tab == 0
 	hunter_costume.visible = tab == 1
-
-
-func _on_visibility_changed() -> void:
-	if visible:
-		first_button.grab_focus()
 
 
 func _on_hunter_preferred_palettes_reordered() -> void:

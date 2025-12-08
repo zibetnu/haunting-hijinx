@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6ql67s5oafpr"]
-
-[ext_resource type="Script" uid="uid://ckplawr240nom" path="res://src/visibility_signals/visibility_signals.gd" id="1_afp2a"]
-
-[node name="VisibilitySignals" type="Node"]
-script = ExtResource("1_afp2a")
