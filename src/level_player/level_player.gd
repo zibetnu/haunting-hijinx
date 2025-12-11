@@ -13,10 +13,7 @@ var _hunters_spawned := 0
 @onready var battery_spawner: BatterySpawner = $BatterySpawner
 @onready var level_tile_map_layers: LevelTileMapLayers = $LevelTileMapLayers
 @onready var end_label: Label = %EndLabel
-@onready var ghost_timer_sprite: Node2D = %GhostTimerSprite
-@onready var hunter_timer_sprite: Node2D = %HunterTimerSprite
-@onready var match_timer: Timer = %MatchTimer
-@onready var spectator_timer_sprite: Node2D = %SpectatorTimerSprite
+@onready var match_timer: TimerSprite = %MatchTimer
 
 
 func _ready() -> void:
@@ -117,13 +114,12 @@ func refresh_level() -> void:
 
 ## Shows timer sprite matching the local peer's type.
 func show_matching_timer_sprite() -> void:
-	var local_peer_type: int = PeerData.get_peer_type(
-			multiplayer.get_unique_id()
-	)
-	var peer_type: Dictionary = PeerData.PeerType
-	hunter_timer_sprite.visible = local_peer_type == peer_type.HUNTER
-	ghost_timer_sprite.visible = local_peer_type == peer_type.GHOST
-	spectator_timer_sprite.visible = local_peer_type == peer_type.SPECTATOR
+	const TEXTURES: Dictionary[PeerData.PeerType, TimerSpriteTextures] = {
+		PeerData.PeerType.HUNTER: preload("uid://d1ek2y0xa8ye5"),
+		PeerData.PeerType.GHOST: preload("uid://pukl4dxp5lsx"),
+		PeerData.PeerType.SPECTATOR: preload("uid://cfcmb42j1cx8i"),
+	}
+	match_timer.textures = TEXTURES[PeerData.get_peer_type(multiplayer.get_unique_id())]
 
 
 func _end_match(message: String) -> void:

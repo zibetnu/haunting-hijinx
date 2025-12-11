@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="TimerSpriteTextures" load_steps=4 format=3 uid="uid://cfcmb42j1cx8i"]
+
+[ext_resource type="Script" uid="uid://p7w1voc4t4p8" path="res://src/level_player/timer_sprite/timer_sprite_textures.gd" id="1_kdtwi"]
+[ext_resource type="Texture2D" uid="uid://c13p17yyh8y3p" path="res://assets/sprite_timer/spectator/digits.png" id="1_nqasm"]
+[ext_resource type="Texture2D" uid="uid://c5jgdqrypidpb" path="res://assets/sprite_timer/spectator/frame.png" id="2_rulss"]
+
+[resource]
+script = ExtResource("1_kdtwi")
+frame_texture = ExtResource("2_rulss")
+digits_texture = ExtResource("1_nqasm")
+digits_minute_offset = Vector2(-13, 2)
+digits_tens_offset = Vector2(0, 2)
+digits_ones_offset = Vector2(13, 2)
+metadata/_custom_type_script = "uid://p7w1voc4t4p8"

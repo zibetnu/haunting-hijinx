@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwwmndj3obcvn"
-path="res://.godot/imported/frame.png-49870b8a0df3e0ef2955235ef218edd9.ctex"
+uid="uid://bea4n1twccmyu"
+path="res://.godot/imported/digits.png-a98a3dbe8fe3bc1ce97a237a8c7ccb20.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/timer_sprite/hunter/frame.png"
-dest_files=["res://.godot/imported/frame.png-49870b8a0df3e0ef2955235ef218edd9.ctex"]
+source_file="res://assets/sprite_timer/hunter/digits.png"
+dest_files=["res://.godot/imported/digits.png-a98a3dbe8fe3bc1ce97a237a8c7ccb20.ctex"]
 
 [params]
 

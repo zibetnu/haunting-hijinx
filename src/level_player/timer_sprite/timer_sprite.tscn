@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://mqch0psyq7vp"]
+
+[ext_resource type="Script" uid="uid://cnpeu181arq76" path="res://src/level_player/timer_sprite/timer_sprite.gd" id="1_kpytm"]
+
+[node name="TimerSprite" type="Node2D"]
+script = ExtResource("1_kpytm")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+fit_margin = 0.0
+clear_margin = 0.0
+
+[node name="Frame" type="Sprite2D" parent="CanvasGroup"]
+unique_name_in_owner = true
+
+[node name="Minutes" type="Sprite2D" parent="CanvasGroup"]
+unique_name_in_owner = true
+hframes = 10
+
+[node name="Tens" type="Sprite2D" parent="CanvasGroup"]
+unique_name_in_owner = true
+hframes = 10
+
+[node name="Ones" type="Sprite2D" parent="CanvasGroup"]
+unique_name_in_owner = true
+hframes = 10
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

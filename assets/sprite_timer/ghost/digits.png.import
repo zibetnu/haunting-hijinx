@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://pf4ndhsfm2we"
-path="res://.godot/imported/digits.png-aa0b63606ae9d48eee49fd71487541da.ctex"
+path="res://.godot/imported/digits.png-2d788e6d1a737ef19c2aeec72f2a4f90.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/timer_sprite/ghost/digits.png"
-dest_files=["res://.godot/imported/digits.png-aa0b63606ae9d48eee49fd71487541da.ctex"]
+source_file="res://assets/sprite_timer/ghost/digits.png"
+dest_files=["res://.godot/imported/digits.png-2d788e6d1a737ef19c2aeec72f2a4f90.ctex"]
 
 [params]
 

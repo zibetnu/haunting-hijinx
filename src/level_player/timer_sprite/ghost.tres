@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="TimerSpriteTextures" load_steps=4 format=3 uid="uid://pukl4dxp5lsx"]
+
+[ext_resource type="Script" uid="uid://p7w1voc4t4p8" path="res://src/level_player/timer_sprite/timer_sprite_textures.gd" id="1_nko0d"]
+[ext_resource type="Texture2D" uid="uid://pf4ndhsfm2we" path="res://assets/sprite_timer/ghost/digits.png" id="1_t6dho"]
+[ext_resource type="Texture2D" uid="uid://c6rbmj6oyypf1" path="res://assets/sprite_timer/ghost/frame.png" id="2_u4haj"]
+
+[resource]
+resource_name = "Ghost"
+script = ExtResource("1_nko0d")
+frame_texture = ExtResource("2_u4haj")
+digits_texture = ExtResource("1_t6dho")
+digits_minute_offset = Vector2(-8, -1)
+digits_tens_offset = Vector2(1, -1)
+digits_ones_offset = Vector2(8, -1)
+metadata/_custom_type_script = "uid://p7w1voc4t4p8"

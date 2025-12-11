@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://2uclu3gf4iyj"]
+[gd_scene load_steps=15 format=3 uid="uid://2uclu3gf4iyj"]
 
 [ext_resource type="Script" uid="uid://cg0rykk30xiip" path="res://src/level_player/level_player.gd" id="1_el04s"]
 [ext_resource type="PackedScene" uid="uid://vl432076bm8p" path="res://src/level_player/steam_lobby_chat_update/steam_lobby_chat_update.tscn" id="2_acesl"]
@@ -9,18 +9,16 @@
 [ext_resource type="PackedScene" uid="uid://dppcbgbcx0b0t" path="res://src/level_player/spectator_menu/spectator_menu.tscn" id="4_q6wo4"]
 [ext_resource type="PackedScene" uid="uid://ojjy8keargbf" path="res://src/ping_label/ping_label.tscn" id="5_ijd43"]
 [ext_resource type="PackedScene" uid="uid://qdsau1mq5mj1" path="res://src/countdown/countdown.tscn" id="7_qv3yx"]
-[ext_resource type="PackedScene" uid="uid://mqch0psyq7vp" path="res://src/timer_sprite/ghost_timer_sprite.tscn" id="8_1aado"]
+[ext_resource type="PackedScene" uid="uid://mqch0psyq7vp" path="res://src/level_player/timer_sprite/timer_sprite.tscn" id="8_1aado"]
 [ext_resource type="Material" uid="uid://b55fo71d58ijs" path="res://src/theme/font_outline.tres" id="8_5lobc"]
 [ext_resource type="PackedScene" uid="uid://ebt35jjk5feh" path="res://src/level_tile_map_layers/level_tile_map_layers.tscn" id="8_n7ksj"]
 [ext_resource type="PackedScene" uid="uid://kshsc10g60hy" path="res://src/match_menu/match_menu.tscn" id="8_v81sd"]
-[ext_resource type="PackedScene" uid="uid://t58d7k6o6dox" path="res://src/timer_sprite/hunter_timer_sprite.tscn" id="9_dajyl"]
-[ext_resource type="PackedScene" uid="uid://dppt0dsngt68c" path="res://src/timer_sprite/spectator_timer_sprite.tscn" id="10_4jcdm"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_63iby"]
-properties/0/path = NodePath("CanvasLayer/EndLabel:text")
+properties/0/path = NodePath("CanvasLayer2/EndLabel:text")
 properties/0/spawn = true
 properties/0/replication_mode = 2
-properties/1/path = NodePath("CanvasLayer/EndLabel:visible")
+properties/1/path = NodePath("CanvasLayer2/EndLabel:visible")
 properties/1/spawn = true
 properties/1/replication_mode = 2
 properties/2/path = NodePath(".:process_mode")
@@ -34,12 +32,6 @@ script = ExtResource("1_el04s")
 ghost = ExtResource("2_ree31")
 hunter = ExtResource("3_l6nvs")
 spectator_menu = ExtResource("4_q6wo4")
-
-[node name="MatchTimer" type="Timer" parent="."]
-unique_name_in_owner = true
-wait_time = 300.0
-one_shot = true
-autostart = true
 
 [node name="SteamLobbyChatUpdate" parent="." instance=ExtResource("2_acesl")]
 
@@ -60,7 +52,7 @@ replication_config = SubResource("SceneReplicationConfig_63iby")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="TimerSprites" type="Control" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="CanvasLayer"]
 custom_minimum_size = Vector2(38, 22)
 layout_mode = 3
 anchors_preset = 5
@@ -71,22 +63,11 @@ offset_right = 19.0
 offset_bottom = 22.0
 grow_horizontal = 2
 
-[node name="GhostTimerSprite" parent="CanvasLayer/TimerSprites" node_paths=PackedStringArray("timer") instance=ExtResource("8_1aado")]
-unique_name_in_owner = true
-visible = false
-position = Vector2(19, 11)
-timer = NodePath("../../../MatchTimer")
-
-[node name="HunterTimerSprite" parent="CanvasLayer/TimerSprites" node_paths=PackedStringArray("timer") instance=ExtResource("9_dajyl")]
-unique_name_in_owner = true
-visible = false
-position = Vector2(19, 11)
-timer = NodePath("../../../MatchTimer")
-
-[node name="SpectatorTimerSprite" parent="CanvasLayer/TimerSprites" node_paths=PackedStringArray("timer") instance=ExtResource("10_4jcdm")]
+[node name="MatchTimer" parent="CanvasLayer/Control" instance=ExtResource("8_1aado")]
 unique_name_in_owner = true
 position = Vector2(19, 11)
-timer = NodePath("../../../MatchTimer")
+wait_time = 300.0
+autostart = true
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 layer = 3
@@ -137,9 +118,9 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_type_variation = &"LabelBigOutlined"
-timer = NodePath("../../MatchTimer")
+timer = NodePath("../../CanvasLayer/Control/MatchTimer")
 
 [node name="MatchMenu" parent="CanvasLayer2" instance=ExtResource("8_v81sd")]
 
-[connection signal="timeout" from="MatchTimer" to="." method="_on_match_timer_timeout"]
 [connection signal="all_scenes_spawned" from="CountingSpawner" to="." method="_on_counting_spawner_all_scenes_spawned"]
+[connection signal="timeout" from="CanvasLayer/Control/MatchTimer" to="." method="_on_match_timer_timeout"]
