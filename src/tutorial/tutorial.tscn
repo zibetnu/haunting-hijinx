@@ -191,7 +191,7 @@ one_shot = true
 [node name="LevelTileMapLayers" parent="." instance=ExtResource("8_qub2g")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 2
+layer = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 custom_minimum_size = Vector2(640, 0)
