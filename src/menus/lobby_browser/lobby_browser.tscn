@@ -174,4 +174,3 @@ autostart = true
 [connection signal="about_to_popup" from="NotifyDialog" to="JoiningWindow" method="hide"]
 [connection signal="timeout" from="RefreshTimer" to="." method="refresh"]
 [connection signal="lobby_created" from="SteamConnector" to="." method="_on_lobby_created"]
-[connection signal="lobby_joined" from="SteamConnector" to="." method="_on_lobby_joined"]

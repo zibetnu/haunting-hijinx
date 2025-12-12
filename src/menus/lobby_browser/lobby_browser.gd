@@ -23,7 +23,7 @@ const PARSED_SUCCESS_KEY = "success"
 const PARSED_SUCCESS_DEFAULT = false
 const PARSED_LOCATION_KEY = "ping_location"
 
-const JOIN_TIMEOUT_SEC = 30.0
+const JOIN_TIMEOUT_SEC = 15.0
 const JOIN_FAILED_MESSAGE = "Failed to join lobby. Try restarting the game."
 
 const SCENE_CHANGER_PATH = ^"/root/SceneChanger"
@@ -46,6 +46,7 @@ const LOCAL_PORT = 9999
 
 func _ready() -> void:
 	super()
+	join_lobby_requested.connect(_on_join_lobby_requested)
 	Steam.lobby_match_list.connect(_on_lobby_match_list)
 	steam_connector.close_connection.call_deferred()
 	if OS.has_feature("editor"):
@@ -176,9 +177,7 @@ func _on_lobby_created() -> void:
 	call_scene_changer_method(LOBBY_METHOD)
 
 
-# The game will crash if the user cancels in the middle of joining a Steam
-# lobby. _on_lobby_joined avoids that crash by not allowing canceling.
-func _on_lobby_joined() -> void:
+func _on_join_lobby_requested(_id: int) -> void:
 	joining_window.popup_centered()
 	await get_tree().create_timer(JOIN_TIMEOUT_SEC).timeout
 	notify(JOIN_FAILED_MESSAGE)
@@ -236,7 +235,6 @@ func _on_join_local_pressed() -> void:
 	var peer := ENetMultiplayerPeer.new()
 	peer.create_client("localhost", LOCAL_PORT)
 	multiplayer.multiplayer_peer = peer
-	_on_lobby_joined()
 
 
 func _on_back_pressed() -> void:
