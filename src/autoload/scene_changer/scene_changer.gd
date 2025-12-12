@@ -17,19 +17,24 @@ func _ready() -> void:
 	Steam.join_requested.connect(_on_join_requested)
 
 
+func cover() -> void:
+	animation_player.play(&"cover")
+	await animation_player.animation_finished
+
+
+func uncover() -> void:
+	animation_player.play(&"uncover")
+	await animation_player.animation_finished
+
+
 func change_scene_to_node(node: Node) -> void:
 	if not multiplayer.is_server():
 		return
 
-	animation_player.play(&"cover")
-	await animation_player.animation_finished
-
+	await cover()
 	remove_scene()
 	scene_spawner.add_child(node, true)
-
-	animation_player.play(&"uncover")
-	await animation_player.animation_finished
-
+	await uncover()
 	scene_changed.emit(node)
 
 
