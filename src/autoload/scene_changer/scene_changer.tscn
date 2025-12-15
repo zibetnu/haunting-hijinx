@@ -1,10 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmhqty6g1sgls"]
+[gd_scene load_steps=6 format=3 uid="uid://cmhqty6g1sgls"]
 
 [ext_resource type="Script" uid="uid://ceqnnjhsbwq74" path="res://src/autoload/scene_changer/scene_changer.gd" id="1_6yofi"]
-[ext_resource type="PackedScene" uid="uid://df63fi5u7xpjt" path="res://src/lobby/lobby.tscn" id="2_nsjnt"]
-[ext_resource type="PackedScene" uid="uid://bnoti7vnd7pk7" path="res://src/menus/menus.tscn" id="4_rfgbt"]
-[ext_resource type="PackedScene" uid="uid://02ri1p0jbqdb" path="res://src/tutorial/ghost/ghost_tutorial.tscn" id="5_iwjj3"]
-[ext_resource type="PackedScene" uid="uid://dguyyy188ihbi" path="res://src/tutorial/hunter/hunter_tutorial.tscn" id="6_dqbtk"]
 
 [sub_resource type="Animation" id="Animation_vm6me"]
 length = 0.001
@@ -98,10 +94,6 @@ _data = {
 
 [node name="SceneChanger" type="Node"]
 script = ExtResource("1_6yofi")
-lobby = ExtResource("2_nsjnt")
-menus = ExtResource("4_rfgbt")
-ghost_tutorial = ExtResource("5_iwjj3")
-hunter_tutorial = ExtResource("6_dqbtk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 process_mode = 3
@@ -111,9 +103,15 @@ libraries = {
 
 [node name="DisconnectedDialog" type="AcceptDialog" parent="."]
 transparent_bg = true
-size = Vector2i(203, 72)
+size = Vector2i(203, 80)
 borderless = true
 dialog_text = "Disconnected from server."
+
+[node name="CoverTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+wait_time = 2.0
+one_shot = true
 
 [node name="FallbackTimer" type="Timer" parent="."]
 process_mode = 3
@@ -137,6 +135,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
 
+[connection signal="timeout" from="CoverTimer" to="." method="_on_cover_timer_timeout"]
 [connection signal="timeout" from="FallbackTimer" to="." method="_main_menu_fallback"]
 [connection signal="child_entered_tree" from="SceneSpawner" to="FallbackTimer" method="stop" unbinds=1]
 [connection signal="child_exiting_tree" from="SceneSpawner" to="FallbackTimer" method="start" unbinds=1]

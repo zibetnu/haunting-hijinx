@@ -1,25 +1,35 @@
 extends Node
 
-signal scene_changed(root_node: Node)
+signal cover_confirmed
 
-@export var lobby: PackedScene
-@export var menus: PackedScene
-@export var ghost_tutorial: PackedScene
-@export var hunter_tutorial: PackedScene
+const SCENES: Dictionary[StringName, PackedScene] = {
+	&"menus": preload("uid://bnoti7vnd7pk7"),
+	&"lobby": preload("uid://df63fi5u7xpjt"),
+	&"ghost_tutorial": preload("uid://02ri1p0jbqdb"),
+	&"hunter_tutorial": preload("uid://dguyyy188ihbi"),
+}
+
+var unconfirmed_peers: Array[int]
+var queued_node: Node
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var disconnected_dialog: AcceptDialog = $DisconnectedDialog
+@onready var cover_timer: Timer = %CoverTimer
 @onready var scene_spawner: MultiplayerSpawner = $SceneSpawner
 
 
 func _ready() -> void:
+	cover_confirmed.connect(_on_cover_confirmed)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 	Steam.join_requested.connect(_on_join_requested)
 
 
+@rpc("authority", "call_local", "reliable")
 func cover() -> void:
 	animation_player.play(&"cover")
 	await animation_player.animation_finished
+	if not multiplayer.is_server():
+		confirm.rpc()
 
 
 func uncover() -> void:
@@ -31,11 +41,15 @@ func change_scene_to_node(node: Node) -> void:
 	if not multiplayer.is_server():
 		return
 
-	await cover()
-	remove_scene()
-	scene_spawner.add_child(node, true)
-	await uncover()
-	scene_changed.emit(node)
+	queued_node = node
+	if multiplayer.get_peers().is_empty():
+		await cover()
+		_on_cover_confirmed()
+
+	else:
+		unconfirmed_peers.assign(multiplayer.get_peers())
+		cover.rpc()
+		cover_timer.start()
 
 
 func change_scene_to_packed(packed_scene: PackedScene) -> void:
@@ -43,7 +57,7 @@ func change_scene_to_packed(packed_scene: PackedScene) -> void:
 
 
 func change_to_lobby() -> void:
-	change_scene_to_packed(lobby)
+	change_scene_to_packed(SCENES.lobby)
 
 
 func change_to_lobby_browser() -> void:
@@ -51,17 +65,17 @@ func change_to_lobby_browser() -> void:
 
 
 func change_to_menus(tab := Menus.Tab.MAIN) -> void:
-	var instance: Menus = menus.instantiate()
+	var instance: Menus = SCENES.menus.instantiate()
 	instance.current_tab = tab
 	change_scene_to_node(instance)
 
 
 func change_to_ghost_tutorial() -> void:
-	change_scene_to_packed(ghost_tutorial)
+	change_scene_to_packed(SCENES.ghost_tutorial)
 
 
 func change_to_hunter_tutorial() -> void:
-	change_scene_to_packed(hunter_tutorial)
+	change_scene_to_packed(SCENES.hunter_tutorial)
 
 
 func change_to_level(level: Level) -> void:
@@ -79,6 +93,22 @@ func remove_scene() -> void:
 	for child in scene_spawner.get_children():
 		scene_spawner.remove_child(child)
 		child.queue_free()
+
+
+# Wait for peers to confirm that they have covered the screen.
+@rpc("any_peer", "call_remote", "reliable")
+func confirm() -> void:
+	unconfirmed_peers.erase(multiplayer.get_remote_sender_id())
+	if unconfirmed_peers.is_empty():
+		cover_confirmed.emit()
+
+
+func _on_cover_confirmed() -> void:
+	cover_timer.stop()
+	remove_scene()
+	scene_spawner.add_child(queued_node)
+	queued_node = null
+	uncover()
 
 
 # Resets multiplayer peer and returns to
@@ -107,4 +137,9 @@ func _on_scene_spawner_spawned(node: Node) -> void:
 			scene_spawner.remove_child(child)
 			child.queue_free()
 
-	scene_changed.emit(node)
+	uncover()
+
+
+func _on_cover_timer_timeout() -> void:
+	unconfirmed_peers.clear()
+	_on_cover_confirmed()

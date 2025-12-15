@@ -135,8 +135,7 @@ func _end_match(message: String) -> void:
 	await get_tree().create_timer(3).timeout
 	# https://github.com/godotengine/godot/issues/77643
 	@warning_ignore("unsafe_method_access")
-	@warning_ignore("unsafe_property_access")
-	SceneChanger.change_scene_to_packed(SceneChanger.lobby)
+	SceneChanger.change_to_lobby()
 
 
 func _on_counting_spawner_all_scenes_spawned() -> void:
