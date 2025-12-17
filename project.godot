@@ -273,3 +273,5 @@ environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 
 initialization/app_id=2499500
 initialization/embed_callbacks=true
+initialization/initialize_on_startup=false
+multiplayer_peer/max_channels=4

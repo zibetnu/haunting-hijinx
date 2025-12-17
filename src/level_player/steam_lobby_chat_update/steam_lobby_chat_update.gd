@@ -22,7 +22,7 @@ func _on_lobby_chat_update(
 
 	for peer_id in multiplayer.get_peers():
 		if (
-				steam_multiplayer_peer.get_steam64_from_peer_id(peer_id)
+				steam_multiplayer_peer.get_steam_id_for_peer_id(peer_id)
 				!= changed_id
 		):
 			continue

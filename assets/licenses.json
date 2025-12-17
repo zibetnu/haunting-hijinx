@@ -377,10 +377,10 @@
 			"id": "godot_steam",
 			"licenses": [
 				{
-					"file": "",
+					"file": "res://addons/godotsteam/license.md",
 					"identifier": "",
 					"name": "MIT License",
-					"text": "MIT License\n\nCopyright (c) 2015-Current | GP Garcia and Contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.",
+					"text": "",
 					"web": ""
 				}
 			],
@@ -388,7 +388,7 @@
 			"paths": [
 				"res://addons/godotsteam"
 			],
-			"version": "4.15",
+			"version": "4.17",
 			"web": ""
 		},
 		{
@@ -461,30 +461,6 @@
 				"res://addons/ReorderableContainer"
 			],
 			"version": "1.2.4",
-			"web": ""
-		},
-		{
-			"category": "Plugins",
-			"contact": "",
-			"copyright": [
-				"Expresso Bits"
-			],
-			"description": "Steam Sockets Multiplayer Peer for Godot 4 via GDExtension.",
-			"id": "steam_multiplayer_peer",
-			"licenses": [
-				{
-					"file": "res://addons/steam-multiplayer-peer/LICENSE",
-					"identifier": "",
-					"name": "MIT License",
-					"text": "",
-					"web": ""
-				}
-			],
-			"name": "Steam Multiplayer Peer",
-			"paths": [
-				"res://addons/steam-multiplayer-peer"
-			],
-			"version": "0.2.5",
 			"web": ""
 		},
 		{
