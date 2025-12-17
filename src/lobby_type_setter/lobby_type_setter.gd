@@ -12,7 +12,7 @@ const TYPES_TO_STRINGS = {
 	Steam.LOBBY_TYPE_PRIVATE_UNIQUE: "Private Unique",
 }
 
-const DEFAULT_LOBBY_TYPE = Steam.LOBBY_TYPE_PRIVATE
+const DEFAULT_LOBBY_TYPE = Steam.LOBBY_TYPE_FRIENDS_ONLY
 
 @onready var lobby_id: int = PeerData.lobby_id
 
