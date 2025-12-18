@@ -1,10 +1,11 @@
-[gd_resource type="TileSet" load_steps=116 format=3 uid="uid://26wcy33gmwrh"]
+[gd_resource type="TileSet" load_steps=117 format=3 uid="uid://26wcy33gmwrh"]
 
 [ext_resource type="Texture2D" uid="uid://dk8xes2m52as5" path="res://assets/tile_sets/main_floor/diffuse.png" id="1_1vodu"]
 [ext_resource type="Texture2D" uid="uid://e5tc842y66xv" path="res://assets/tile_sets/main_floor/normal.png" id="1_xaonm"]
 [ext_resource type="PackedScene" uid="uid://ciga14osg5c77" path="res://src/level_tile_map_layers/scene_tiles/candle/candle.tscn" id="3_cs81d"]
 [ext_resource type="Texture2D" uid="uid://crtc6jy8n7thg" path="res://assets/tile_sets/main_floor/specular.png" id="3_nbdqv"]
 [ext_resource type="PackedScene" uid="uid://cttcme7ghj4se" path="res://src/level_tile_map_layers/scene_tiles/candle/candle_right.tscn" id="4_ureo8"]
+[ext_resource type="PackedScene" uid="uid://bfskc2x286ve5" path="res://src/level_tile_map_layers/scene_tiles/data_core.tscn" id="5_2ob88"]
 [ext_resource type="PackedScene" uid="uid://m057ftqicl1u" path="res://src/level_tile_map_layers/scene_tiles/candle/candle_left.tscn" id="5_cyv2r"]
 [ext_resource type="Texture2D" uid="uid://dhdp0bpx7lbgv" path="res://assets/tile_sets/main_floor/door_frame/diffuse.png" id="6_7bbi3"]
 [ext_resource type="Texture2D" uid="uid://bpv8wamoqowa8" path="res://assets/tile_sets/main_floor/door_frame/normal.png" id="7_1bls3"]
@@ -1074,6 +1075,7 @@ scenes/6/scene = ExtResource("9_igbqk")
 scenes/7/scene = ExtResource("10_yec4u")
 scenes/8/scene = ExtResource("11_r22k1")
 scenes/9/scene = ExtResource("12_2ob88")
+scenes/10/scene = ExtResource("5_2ob88")
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_mjq5a"]
 polygon = PackedVector2Array(-1, -2, -3, 0, -5, 0, -7, -2, -7, -4, -5, -6, -3, -6, -1, -4)
