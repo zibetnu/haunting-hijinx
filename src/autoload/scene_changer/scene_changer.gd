@@ -12,6 +12,8 @@ const SCENES: Dictionary[StringName, PackedScene] = {
 var unconfirmed_peers: Array[int]
 var queued_node: Node
 
+var _transition_in_progress := false
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var disconnected_dialog: AcceptDialog = $DisconnectedDialog
 @onready var cover_timer: Timer = %CoverTimer
@@ -26,6 +28,7 @@ func _ready() -> void:
 
 @rpc("authority", "call_local", "reliable")
 func cover() -> void:
+	_transition_in_progress = true
 	animation_player.play(&"cover")
 	await animation_player.animation_finished
 	if not multiplayer.is_server():
@@ -35,12 +38,17 @@ func cover() -> void:
 func uncover() -> void:
 	animation_player.play(&"uncover")
 	await animation_player.animation_finished
+	_transition_in_progress = false
 
 
 func change_scene_to_node(node: Node) -> void:
 	if not multiplayer.is_server():
 		return
 
+	if _transition_in_progress:
+		return
+
+	_transition_in_progress = true
 	queued_node = node
 	if multiplayer.get_peers().is_empty():
 		await cover()
