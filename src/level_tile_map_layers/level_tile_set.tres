@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=117 format=3 uid="uid://26wcy33gmwrh"]
+[gd_resource type="TileSet" load_steps=125 format=3 uid="uid://26wcy33gmwrh"]
 
 [ext_resource type="Texture2D" uid="uid://dk8xes2m52as5" path="res://assets/tile_sets/main_floor/diffuse.png" id="1_1vodu"]
 [ext_resource type="Texture2D" uid="uid://e5tc842y66xv" path="res://assets/tile_sets/main_floor/normal.png" id="1_xaonm"]
@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://des554onxdkvj" path="res://assets/tile_sets/main_floor/nightstand/specular.png" id="14_swigs"]
 [ext_resource type="Texture2D" uid="uid://irxx533eomfm" path="res://assets/tile_sets/main_floor/bathtub.png" id="16_6ek6q"]
 [ext_resource type="Texture2D" uid="uid://nabtnxiwvdnr" path="res://assets/tile_sets/the_basement/chest.png" id="17_r22k1"]
+[ext_resource type="Texture2D" uid="uid://cg4bpw4csb4on" path="res://assets/tile_sets/main_floor/museum.png" id="19_mjq5a"]
 [ext_resource type="Texture2D" uid="uid://bmv27pgmqxr2w" path="res://assets/tile_sets/research_lab/conveyor_belt/diffuse.png" id="22_1yfca"]
 [ext_resource type="Texture2D" uid="uid://c72b2xrrf1jlh" path="res://assets/tile_sets/research_lab/conveyor_belt/normal.png" id="23_gwdxv"]
 [ext_resource type="Texture2D" uid="uid://cll234opcg2gi" path="res://assets/tile_sets/research_lab/conveyor_belt/specular.png" id="24_hl20t"]
@@ -1280,6 +1281,58 @@ texture = SubResource("CanvasTexture_g3adu")
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, 8)
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 0, -8, 0)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_148j1"]
+polygon = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_makyk"]
+polygon = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3adu"]
+atlas = ExtResource("19_mjq5a")
+region = Rect2(0, 0, 16, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijdps"]
+atlas = ExtResource("19_mjq5a")
+region = Rect2(16, 0, 16, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_opf7y"]
+atlas = ExtResource("19_mjq5a")
+region = Rect2(32, 0, 16, 160)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_0f587"]
+diffuse_texture = SubResource("AtlasTexture_g3adu")
+normal_texture = SubResource("AtlasTexture_ijdps")
+specular_texture = SubResource("AtlasTexture_opf7y")
+specular_shininess = 0.6
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_isgn6"]
+texture = SubResource("CanvasTexture_0f587")
+0:0/size_in_atlas = Vector2i(1, 2)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 8)
+0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_148j1")
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+0:2/size_in_atlas = Vector2i(1, 2)
+0:2/0 = 0
+0:2/0/texture_origin = Vector2i(0, 8)
+0:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_makyk")
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+0:4/size_in_atlas = Vector2i(1, 2)
+0:4/0 = 0
+0:4/0/texture_origin = Vector2i(0, 8)
+0:4/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_makyk")
+0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+0:6/size_in_atlas = Vector2i(1, 2)
+0:6/0 = 0
+0:6/0/texture_origin = Vector2i(0, 8)
+0:6/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_makyk")
+0:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+0:8/size_in_atlas = Vector2i(1, 2)
+0:8/0 = 0
+0:8/0/texture_origin = Vector2i(0, 8)
+0:8/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_makyk")
+0:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_kwlxp"]
 diffuse_texture = ExtResource("6_7bbi3")
@@ -3062,3 +3115,4 @@ sources/9 = SubResource("TileSetAtlasSource_tktif")
 sources/10 = SubResource("TileSetAtlasSource_r22k1")
 sources/11 = SubResource("TileSetAtlasSource_cnvo1")
 sources/12 = SubResource("TileSetAtlasSource_ijdps")
+sources/13 = SubResource("TileSetAtlasSource_isgn6")
