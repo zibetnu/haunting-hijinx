@@ -39,24 +39,40 @@ text = "Main Menu"
 [node name="EndMatchConfirmationDialog" type="ConfirmationDialog" parent="."]
 transparent_bg = true
 initial_position = 2
-size = Vector2i(200, 104)
 borderless = true
 ok_button_text = "Yes"
-dialog_text = "End match early and return to lobby?"
 dialog_hide_on_ok = false
 dialog_autowrap = true
 cancel_button_text = "No"
 
+[node name="Label" type="Label" parent="EndMatchConfirmationDialog"]
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 193.0
+offset_bottom = 51.0
+text = "End match early and return to lobby?"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
 [node name="MainMenuConfirmationDialog" type="ConfirmationDialog" parent="."]
 transparent_bg = true
 initial_position = 2
-size = Vector2i(200, 104)
 borderless = true
 ok_button_text = "Yes"
-dialog_text = "Leave match early and return to main menu?"
 dialog_hide_on_ok = false
 dialog_autowrap = true
 cancel_button_text = "No"
+
+[node name="Label" type="Label" parent="MainMenuConfirmationDialog"]
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 193.0
+offset_bottom = 51.0
+text = "Leave match early and return to main menu?"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="LobbyCall" parent="." instance=ExtResource("2_0ack1")]
 node_path = NodePath("/root/SceneChanger")
