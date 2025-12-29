@@ -8,6 +8,39 @@ This project adheres to an adapted form of [Semantic Versioning](https://semver.
 2. MINOR version when you add backward-compatible functionality.
 3. PATCH version when you make backward-compatible bug fixes.
 
+## [4.0.0] - 2025-12-29
+
+### Added
+
+- Animations for hunter revive heart.
+- New props for the main floor, basement, and research lab.
+- Fade to black during certain transitions.
+- Lobby background that shows the selected level.
+
+### Changed
+
+- Reduced flashlight turn speed by 10%
+- Increased area where a flashlight can revive a hunter.
+- Replaced ghost heart with health counter.
+- Made lobby information visible to all players instead of just the host.
+- Updated logo.
+- Replaced Godot splash screen with a new animated one.
+- Adjusted basement tile set.
+- Reduced lobby browser auto-refresh time.
+- Reduced lobby join timeout.
+- Adjusted some menus.
+- Updated plugins.
+
+### Fixed
+
+- Gamepad text input does not sync over network.
+- Match timer covers hunter alert.
+- Some cases where decorational flashlight lighting would shine through walls.
+
+### Removed
+
+- Option to set a lobby to private. This will be enabled again once a way to make it work is found.
+
 ## [3.0.1] - 2025-11-20
 
 ### Fixed
@@ -360,6 +393,7 @@ This project adheres to an adapted form of [Semantic Versioning](https://semver.
 
 - Initial release.
 
+[4.0.0]: https://github.com/zibetnu/haunting-hijinx/compare/3.0.1...4.0.0
 [3.0.1]: https://github.com/zibetnu/haunting-hijinx/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/zibetnu/haunting-hijinx/compare/2.2.0...3.0.0
 [2.2.0]: https://github.com/zibetnu/haunting-hijinx/compare/2.1.1...2.2.0
