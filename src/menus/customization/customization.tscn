@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmp2ru73exiia"]
+[gd_scene load_steps=11 format=3 uid="uid://dmp2ru73exiia"]
 
 [ext_resource type="Script" uid="uid://b7xl0dnpmtgkm" path="res://src/menus/customization/customization.gd" id="1_1ehsn"]
 [ext_resource type="PackedScene" uid="uid://klrwcohuhynk" path="res://src/ghost/costume/ghost_costume.tscn" id="1_4w6db"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cve418b7kooru" path="res://assets/flashlight/body_back.png" id="3_1ehsn"]
 [ext_resource type="PackedScene" uid="uid://cqbmc2dond7lm" path="res://src/menus/customization/palette_preferences/palette_preferences.tscn" id="3_lotg5"]
 [ext_resource type="Texture2D" uid="uid://cbev4n3hmsa8" path="res://assets/flashlight/body_front.png" id="4_lotg5"]
+[ext_resource type="Script" uid="uid://gpvk6gsxhdvu" path="res://src/steam_gamepad_line_edit.gd" id="4_pdao3"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_1ehsn"]
 action = &"ui_cancel"
@@ -90,6 +91,8 @@ placeholder_text = "Enter name here..."
 alignment = 1
 max_length = 20
 context_menu_enabled = false
+script = ExtResource("4_pdao3")
+metadata/_custom_type_script = "uid://gpvk6gsxhdvu"
 
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(168, 168)
