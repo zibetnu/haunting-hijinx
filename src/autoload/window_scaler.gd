@@ -1,13 +1,10 @@
 extends Node
 
-signal min_value_changed(min_value: int)
 signal max_value_changed(max_value: int)
 signal scale_multiplier_changed(scale_multiplier: int)
 
 const MIN_SCALE_MULTIPLIER = 1
 
-@export var min_value: int = MIN_SCALE_MULTIPLIER:
-	set = set_min_value
 @export var max_value: int = MIN_SCALE_MULTIPLIER:
 	set = set_max_value
 @export var scale_multiplier: int = MIN_SCALE_MULTIPLIER:
@@ -23,15 +20,8 @@ var base_size := Vector2i(
 
 func _ready() -> void:
 	add_window_script()
-	init_min_value()
 	init_max_value()
 	scale_multiplier = GameConfig.get_value("display", "scale", scale_multiplier)
-
-
-func init_min_value() -> void:
-	const BASE_DPI = 100
-	@warning_ignore("integer_division")  # Decimal part should be discarded.
-	min_value = DisplayServer.screen_get_dpi() / BASE_DPI
 
 
 func init_max_value() -> void:
@@ -58,18 +48,13 @@ func refresh_content_scale_size() -> void:
 	window.content_scale_size = new_content_scale_size
 
 
-func set_min_value(value: int) -> void:
-	min_value = maxi(MIN_SCALE_MULTIPLIER, value)
-	min_value_changed.emit(min_value)
-
-
 func set_max_value(value: int) -> void:
 	max_value = maxi(MIN_SCALE_MULTIPLIER, value)
 	max_value_changed.emit(max_value)
 
 
 func set_scale_multiplier(value: int) -> void:
-	scale_multiplier = clampi(value, min_value, max_value)
+	scale_multiplier = clampi(value, MIN_SCALE_MULTIPLIER, max_value)
 	scale_multiplier_changed.emit(scale_multiplier)
 	window.min_size = base_size * scale_multiplier
 	refresh_content_scale_size.call_deferred()
