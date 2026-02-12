@@ -40,6 +40,7 @@ func add_window_script() -> void:
 
 
 func refresh_content_scale_size() -> void:
+	@warning_ignore("integer_division")
 	var new_content_scale_size: Vector2i = window.size / scale_multiplier
 	new_content_scale_size -= new_content_scale_size % 2
 	if window.content_scale_size == new_content_scale_size:
