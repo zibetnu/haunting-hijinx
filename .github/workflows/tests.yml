@@ -25,4 +25,4 @@ jobs:
         with:
           godot-version: 4.4.1
           paths: res://test
-          version: v5.0.5
+          version: v6.1.1
