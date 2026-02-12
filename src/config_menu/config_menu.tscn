@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmta6hi75dnwf"]
+[gd_scene format=3 uid="uid://cmta6hi75dnwf"]
 
 [ext_resource type="Script" uid="uid://clqt2cqnfreut" path="res://src/config_menu/config_menu.gd" id="1_f68c2"]
 [ext_resource type="PackedScene" uid="uid://c4pe2q3xrfk36" path="res://src/bus_volume_setter/bus_volume_setter.tscn" id="4_5dgk7"]
@@ -10,7 +10,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_b3uno"]
 events = [SubResource("InputEventAction_fucmx")]
 
-[node name="ConfigMenu" type="MarginContainer" node_paths=PackedStringArray("first_button") groups=["config_menu"]]
+[node name="ConfigMenu" type="MarginContainer" unique_id=1345335988 node_paths=PackedStringArray("first_button") groups=["config_menu"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -19,23 +19,23 @@ grow_vertical = 2
 script = ExtResource("1_f68c2")
 first_button = NodePath("HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/WindowModeOption")
 
-[node name="BackEnd" type="Node" parent="."]
+[node name="BackEnd" type="Node" parent="." unique_id=2029427910]
 
-[node name="MasterBusVolumeSetter" parent="BackEnd" instance=ExtResource("4_5dgk7")]
+[node name="MasterBusVolumeSetter" parent="BackEnd" unique_id=1383386377 instance=ExtResource("4_5dgk7")]
 bus_name = &"Master"
 
-[node name="MusicBusVolumeSetter" parent="BackEnd" instance=ExtResource("4_5dgk7")]
+[node name="MusicBusVolumeSetter" parent="BackEnd" unique_id=1493389585 instance=ExtResource("4_5dgk7")]
 bus_name = &"Music"
 
-[node name="EffectsBusVolumeSetter" parent="BackEnd" instance=ExtResource("4_5dgk7")]
+[node name="EffectsBusVolumeSetter" parent="BackEnd" unique_id=1018147592 instance=ExtResource("4_5dgk7")]
 bus_name = &"Effects"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=513956987]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="Back" type="Button" parent="VBoxContainer" node_paths=PackedStringArray("shortcut_context")]
+[node name="Back" type="Button" parent="VBoxContainer" unique_id=1637470678 node_paths=PackedStringArray("shortcut_context")]
 layout_mode = 2
 focus_neighbor_right = NodePath("../../HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/WindowModeOption")
 focus_next = NodePath("../../HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons/WindowModeOption")
@@ -44,45 +44,45 @@ shortcut = SubResource("Shortcut_b3uno")
 shortcut_in_tooltip = false
 text = "Back"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2090316570]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=935469836]
 layout_mode = 2
 
-[node name="DisplayOptionButtons" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="DisplayOptionButtons" type="PanelContainer" parent="HBoxContainer/VBoxContainer" unique_id=2136250017]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons" unique_id=47320243]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer" unique_id=1661331423]
 layout_mode = 2
 
-[node name="Labels" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer"]
+[node name="Labels" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer" unique_id=1875706143]
 layout_mode = 2
 
-[node name="WindowMode" type="Label" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Labels"]
+[node name="WindowMode" type="Label" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Labels" unique_id=2093390012]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 text = "Window"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="VSync" type="Label" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Labels"]
+[node name="VSync" type="Label" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Labels" unique_id=563403024]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 text = "VSync"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Buttons" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer"]
+[node name="Buttons" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer" unique_id=485140242]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="WindowModeOption" type="OptionButton" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons"]
+[node name="WindowModeOption" type="OptionButton" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons" unique_id=1858570853]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_left = NodePath("../../../../../../../VBoxContainer/Back")
@@ -98,7 +98,7 @@ popup/item_1/text = "Fullscreen"
 popup/item_1/id = 4
 script = ExtResource("6_u7oav")
 
-[node name="VSyncOption" type="OptionButton" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons"]
+[node name="VSyncOption" type="OptionButton" parent="HBoxContainer/VBoxContainer/DisplayOptionButtons/VBoxContainer/HBoxContainer/Buttons" unique_id=17679730]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_left = NodePath("../../../../../../../VBoxContainer/Back")
@@ -117,31 +117,31 @@ popup/item_2/text = "Adaptive"
 popup/item_2/id = 2
 script = ExtResource("6_u7oav")
 
-[node name="Brightness" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="Brightness" type="PanelContainer" parent="HBoxContainer/VBoxContainer" unique_id=1124135200]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/Brightness"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/Brightness" unique_id=2117271096]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/Brightness/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/Brightness/VBoxContainer" unique_id=1255865962]
 layout_mode = 2
 
-[node name="MinBrightness" type="Label" parent="HBoxContainer/VBoxContainer/Brightness/VBoxContainer/HBoxContainer"]
+[node name="MinBrightness" type="Label" parent="HBoxContainer/VBoxContainer/Brightness/VBoxContainer/HBoxContainer" unique_id=1039798189]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "0%"
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/Brightness/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/Brightness/VBoxContainer/HBoxContainer" unique_id=1067035033]
 layout_mode = 2
 text = "Brightness"
 horizontal_alignment = 1
 
-[node name="MaxBrightness" type="Label" parent="HBoxContainer/VBoxContainer/Brightness/VBoxContainer/HBoxContainer"]
+[node name="MaxBrightness" type="Label" parent="HBoxContainer/VBoxContainer/Brightness/VBoxContainer/HBoxContainer" unique_id=1970809323]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "100%"
 
-[node name="BrightnessSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/Brightness/VBoxContainer"]
+[node name="BrightnessSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/Brightness/VBoxContainer" unique_id=697120331]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
@@ -157,34 +157,34 @@ step = 0.063
 value = 0.126
 tick_count = 6
 
-[node name="ScaleContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="ScaleContainer" type="PanelContainer" parent="HBoxContainer/VBoxContainer" unique_id=1783641879]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScaleContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScaleContainer" unique_id=1215796891]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer" unique_id=1842936578]
 layout_mode = 2
 
-[node name="MinScale" type="Label" parent="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer/HBoxContainer"]
+[node name="MinScale" type="Label" parent="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer/HBoxContainer" unique_id=546375821]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
 text = "1x"
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer/HBoxContainer" unique_id=246386734]
 layout_mode = 2
 text = "Scale"
 horizontal_alignment = 1
 
-[node name="MaxScale" type="Label" parent="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer/HBoxContainer"]
+[node name="MaxScale" type="Label" parent="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer/HBoxContainer" unique_id=1175786184]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
 text = "3x"
 
-[node name="ScaleSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer"]
+[node name="ScaleSlider" type="HSlider" parent="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer" unique_id=1579181788]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
@@ -199,23 +199,23 @@ max_value = 3.0
 value = 1.0
 tick_count = 3
 
-[node name="ScaleDebounce" type="Timer" parent="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer/ScaleSlider"]
+[node name="ScaleDebounce" type="Timer" parent="HBoxContainer/VBoxContainer/ScaleContainer/VBoxContainer/ScaleSlider" unique_id=392486726]
 wait_time = 0.5
 one_shot = true
 
-[node name="Master" type="PanelContainer" parent="HBoxContainer"]
+[node name="Master" type="PanelContainer" parent="HBoxContainer" unique_id=1640682111]
 custom_minimum_size = Vector2(37, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Master"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Master" unique_id=1855465869]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/Master/VBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/Master/VBoxContainer" unique_id=754766698]
 layout_mode = 2
 text = "All"
 horizontal_alignment = 1
 
-[node name="MasterBusSlider" type="VSlider" parent="HBoxContainer/Master/VBoxContainer"]
+[node name="MasterBusSlider" type="VSlider" parent="HBoxContainer/Master/VBoxContainer" unique_id=779986604]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 1
@@ -229,19 +229,19 @@ step = 0.2
 value = 1.0
 tick_count = 6
 
-[node name="Music" type="PanelContainer" parent="HBoxContainer"]
+[node name="Music" type="PanelContainer" parent="HBoxContainer" unique_id=1053219891]
 custom_minimum_size = Vector2(37, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Music"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Music" unique_id=1295085849]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/Music/VBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/Music/VBoxContainer" unique_id=1217090782]
 layout_mode = 2
 text = "OST"
 horizontal_alignment = 1
 
-[node name="MusicBusSlider" type="VSlider" parent="HBoxContainer/Music/VBoxContainer"]
+[node name="MusicBusSlider" type="VSlider" parent="HBoxContainer/Music/VBoxContainer" unique_id=528962897]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 1
@@ -255,19 +255,19 @@ step = 0.2
 value = 1.0
 tick_count = 6
 
-[node name="Effects" type="PanelContainer" parent="HBoxContainer"]
+[node name="Effects" type="PanelContainer" parent="HBoxContainer" unique_id=2109779833]
 custom_minimum_size = Vector2(37, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Effects"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Effects" unique_id=938741194]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/Effects/VBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/Effects/VBoxContainer" unique_id=1078955191]
 layout_mode = 2
 text = "SFX"
 horizontal_alignment = 1
 
-[node name="EffectsBusSlider" type="VSlider" parent="HBoxContainer/Effects/VBoxContainer"]
+[node name="EffectsBusSlider" type="VSlider" parent="HBoxContainer/Effects/VBoxContainer" unique_id=76057693]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 1

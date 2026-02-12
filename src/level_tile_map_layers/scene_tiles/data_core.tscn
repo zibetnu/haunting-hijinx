@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bfskc2x286ve5"]
+[gd_scene format=3 uid="uid://bfskc2x286ve5"]
 
 [ext_resource type="Texture2D" uid="uid://caiahiouw1w5d" path="res://assets/tile_sets/research_lab/data_core.png" id="1_xqy8s"]
 
@@ -33,28 +33,28 @@ polygon = PackedVector2Array(-8, 8, 8, 8, 8, 0, -8, 0)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xqy8s"]
 size = Vector2(16, 8)
 
-[node name="DataCore" type="Node2D"]
+[node name="DataCore" type="Node2D" unique_id=460994986]
 position = Vector2(0, -3)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=517970649]
 light_mask = 6
 position = Vector2(0, -5)
 texture = SubResource("CanvasTexture_0f587")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=678284355]
 material = SubResource("CanvasItemMaterial_xqy8s")
 position = Vector2(0, -5)
 texture = SubResource("AtlasTexture_ixlb2")
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=51584678]
 position = Vector2(0, -5)
 occluder = SubResource("OccluderPolygon2D_xqy8s")
 occluder_light_mask = 2
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=909858071]
 position = Vector2(0, -5)
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=2020948046]
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_xqy8s")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://ctn825io87i34"]
+[gd_scene format=3 uid="uid://ctn825io87i34"]
 
 [ext_resource type="AnimationLibrary" uid="uid://fs3jht0ivdhm" path="res://src/animation_libaries/canvas_item.tres" id="1_7b0n7"]
 [ext_resource type="Script" uid="uid://bluoe5hijvv6l" path="res://src/hunter/costume/hunter_costume.gd" id="1_auu5i"]
@@ -622,74 +622,70 @@ shader_parameter/new_palette = ExtResource("3_qkyln")
 resource_local_to_scene = true
 shader = ExtResource("9_1ykwp")
 
-[node name="HunterCostume" type="Node2D" groups=["hunter_costumes"]]
+[node name="HunterCostume" type="Node2D" unique_id=1981522416 groups=["hunter_costumes"]]
 light_mask = 32
 position = Vector2(0, -8)
 script = ExtResource("1_auu5i")
 hat_array = Array[ExtResource("2_d1kj1")]([SubResource("Resource_amwxe"), SubResource("Resource_yam5q")])
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=916249050]
 replication_config = SubResource("SceneReplicationConfig_72euo")
 
-[node name="Effects" type="AnimationPlayer" parent="."]
+[node name="Effects" type="AnimationPlayer" parent="." unique_id=509920965]
 root_node = NodePath("../CanvasGroup")
-libraries = {
-&"": SubResource("AnimationLibrary_mpegg"),
-&"canvas_item": ExtResource("1_7b0n7"),
-&"node_2d": ExtResource("2_jv5mw")
-}
+libraries/ = SubResource("AnimationLibrary_mpegg")
+libraries/canvas_item = ExtResource("1_7b0n7")
+libraries/node_2d = ExtResource("2_jv5mw")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Effects"]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Effects" unique_id=1617919012]
 replication_config = SubResource("SceneReplicationConfig_cfqbp")
 
-[node name="Hunter" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_nwp4d")
-}
+[node name="Hunter" type="AnimationPlayer" parent="." unique_id=273012139]
+libraries/ = SubResource("AnimationLibrary_nwp4d")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Hunter"]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Hunter" unique_id=1640402209]
 replication_config = SubResource("SceneReplicationConfig_cfqbp")
 
-[node name="CanvasGroup" type="CanvasGroup" parent="."]
+[node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=443637965]
 
-[node name="MaterialParent" type="Node2D" parent="CanvasGroup"]
+[node name="MaterialParent" type="Node2D" parent="CanvasGroup" unique_id=348678599]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_35cjm")
 
-[node name="Legs" type="Sprite2D" parent="CanvasGroup/MaterialParent"]
+[node name="Legs" type="Sprite2D" parent="CanvasGroup/MaterialParent" unique_id=772613208]
 unique_name_in_owner = true
 use_parent_material = true
 texture = ExtResource("6_wc0vr")
 hframes = 16
 vframes = 5
 
-[node name="Torso" type="Sprite2D" parent="CanvasGroup/MaterialParent"]
+[node name="Torso" type="Sprite2D" parent="CanvasGroup/MaterialParent" unique_id=1020854863]
 unique_name_in_owner = true
 use_parent_material = true
 texture = ExtResource("7_l744e")
 hframes = 16
 
-[node name="Arms" type="Sprite2D" parent="CanvasGroup/MaterialParent"]
+[node name="Arms" type="Sprite2D" parent="CanvasGroup/MaterialParent" unique_id=64235386]
 unique_name_in_owner = true
 use_parent_material = true
 texture = ExtResource("8_or3nn")
 hframes = 16
 vframes = 3
 
-[node name="Dead" type="Sprite2D" parent="CanvasGroup/MaterialParent"]
+[node name="Dead" type="Sprite2D" parent="CanvasGroup/MaterialParent" unique_id=1611877638]
 visible = false
 use_parent_material = true
 position = Vector2(0, 8)
 texture = ExtResource("8_8f8lf")
 
-[node name="IdleNoFlashlight" type="Sprite2D" parent="CanvasGroup/MaterialParent"]
+[node name="IdleNoFlashlight" type="Sprite2D" parent="CanvasGroup/MaterialParent" unique_id=1323409232]
 unique_name_in_owner = true
 visible = false
 use_parent_material = true
 texture = ExtResource("22_yam5q")
 hframes = 16
 
-[node name="Hat" type="Sprite2D" parent="CanvasGroup"]
+[node name="Hat" type="Sprite2D" parent="CanvasGroup" unique_id=868655723]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_nwp4d")
 position = Vector2(0, -17)

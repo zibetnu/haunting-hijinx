@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bkuic22finfse"]
+[gd_scene format=3 uid="uid://bkuic22finfse"]
 
 [ext_resource type="PackedScene" uid="uid://cbv2ondm7xhnv" path="res://src/controller/synced/synced.tscn" id="1_4xp33"]
 [ext_resource type="PackedScene" uid="uid://w68cagofxelw" path="res://src/controller/anti_button_spam/anti_button_spam.tscn" id="2_k8yp3"]
@@ -8,26 +8,26 @@
 [ext_resource type="PackedScene" uid="uid://3hkpcs75ade2" path="res://src/controller/keyboard_and_mouse/keyboard_and_mouse.tscn" id="6_t7mqd"]
 [ext_resource type="PackedScene" uid="uid://b7iwtbp54tlpx" path="res://src/pause_detector/pause_detector.tscn" id="8_enodv"]
 
-[node name="PlayerControllerStack" type="Node2D"]
+[node name="PlayerControllerStack" type="Node2D" unique_id=886295279]
 
-[node name="Synced" parent="." node_paths=PackedStringArray("controller") instance=ExtResource("1_4xp33")]
+[node name="Synced" parent="." unique_id=1157833375 node_paths=PackedStringArray("controller") instance=ExtResource("1_4xp33")]
 controller = NodePath("AntiButtonSpam")
 
-[node name="AntiButtonSpam" parent="Synced" node_paths=PackedStringArray("controller") instance=ExtResource("2_k8yp3")]
+[node name="AntiButtonSpam" parent="Synced" unique_id=693317406 node_paths=PackedStringArray("controller") instance=ExtResource("2_k8yp3")]
 controller = NodePath("AntiAxisDrift")
 
-[node name="AntiAxisDrift" parent="Synced/AntiButtonSpam" node_paths=PackedStringArray("controller") instance=ExtResource("3_7dtc5")]
+[node name="AntiAxisDrift" parent="Synced/AntiButtonSpam" unique_id=1788509952 node_paths=PackedStringArray("controller") instance=ExtResource("3_7dtc5")]
 controller = NodePath("Composite")
 
-[node name="Composite" parent="Synced/AntiButtonSpam/AntiAxisDrift" node_paths=PackedStringArray("controller_1", "controller_2") instance=ExtResource("4_06qpn")]
+[node name="Composite" parent="Synced/AntiButtonSpam/AntiAxisDrift" unique_id=481945641 node_paths=PackedStringArray("controller_1", "controller_2") instance=ExtResource("4_06qpn")]
 controller_1 = NodePath("Joypad")
 controller_2 = NodePath("KeyboardAndMouse")
 
-[node name="Joypad" parent="Synced/AntiButtonSpam/AntiAxisDrift/Composite" instance=ExtResource("5_xeoah")]
+[node name="Joypad" parent="Synced/AntiButtonSpam/AntiAxisDrift/Composite" unique_id=374140241 instance=ExtResource("5_xeoah")]
 
-[node name="KeyboardAndMouse" parent="Synced/AntiButtonSpam/AntiAxisDrift/Composite" instance=ExtResource("6_t7mqd")]
+[node name="KeyboardAndMouse" parent="Synced/AntiButtonSpam/AntiAxisDrift/Composite" unique_id=1326602749 instance=ExtResource("6_t7mqd")]
 
-[node name="PauseDetector" parent="." instance=ExtResource("8_enodv")]
+[node name="PauseDetector" parent="." unique_id=1320948518 instance=ExtResource("8_enodv")]
 
 [connection signal="pause_detected" from="PauseDetector" to="Synced" method="force_handle_input"]
 [connection signal="unpause_detected" from="PauseDetector" to="Synced" method="force_handle_input"]

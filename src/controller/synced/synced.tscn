@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbv2ondm7xhnv"]
+[gd_scene format=3 uid="uid://cbv2ondm7xhnv"]
 
 [ext_resource type="Script" uid="uid://dlmhfixvmu6yt" path="res://src/controller/synced/synced.gd" id="1_c5045"]
 
@@ -12,11 +12,11 @@ properties/0/path = NodePath(".:_input_bits")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[node name="Synced" type="Node2D"]
+[node name="Synced" type="Node2D" unique_id=698127604]
 script = ExtResource("1_c5045")
 
-[node name="AuthoritySynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="AuthoritySynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=210692214]
 replication_config = SubResource("SceneReplicationConfig_s4b3h")
 
-[node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1817777909]
 replication_config = SubResource("SceneReplicationConfig_pbac4")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dyev6t6l5ykdp"]
+[gd_scene format=3 uid="uid://dyev6t6l5ykdp"]
 
 [ext_resource type="PackedScene" uid="uid://c3u6qxrt3jkm8" path="res://src/repeat_ray_cast_2d/repeat_ray_cast_2d.tscn" id="1_mmhtb"]
 [ext_resource type="Script" uid="uid://dihi3g8kefyn1" path="res://src/flashlight/behavior/behavior.gd" id="1_n0bsl"]
@@ -12,21 +12,21 @@ damage_type = 1
 [sub_resource type="CircleShape2D" id="CircleShape2D_uikcq"]
 radius = 8.0
 
-[node name="Behavior" type="Area2D" groups=["flashlights"]]
+[node name="Behavior" type="Area2D" unique_id=251217458 groups=["flashlights"]]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_n0bsl")
 damage_deals = SubResource("Resource_t266a")
 turning_speed_sec = 5.654866776461628
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=264218789]
 scale = Vector2(0.99, 0.99)
 shape = SubResource("CircleShape2D_uikcq")
 
-[node name="RayCasts" type="Node2D" parent="."]
+[node name="RayCasts" type="Node2D" parent="." unique_id=1561636345]
 position = Vector2(16, 0)
 
-[node name="RepeatRayCast2D" parent="RayCasts" instance=ExtResource("1_mmhtb")]
+[node name="RepeatRayCast2D" parent="RayCasts" unique_id=1399239284 instance=ExtResource("1_mmhtb")]
 position = Vector2(0, -2)
 rotation = -0.185005
 target_position = Vector2(0, 0)
@@ -35,14 +35,14 @@ repeat_collision_mask = 42
 hit_from_inside = true
 collide_with_areas = true
 
-[node name="RepeatRayCast2D2" parent="RayCasts" instance=ExtResource("1_mmhtb")]
+[node name="RepeatRayCast2D2" parent="RayCasts" unique_id=1740234333 instance=ExtResource("1_mmhtb")]
 target_position = Vector2(0, 0)
 collision_mask = 5
 repeat_collision_mask = 42
 hit_from_inside = true
 collide_with_areas = true
 
-[node name="RepeatRayCast2D3" parent="RayCasts" instance=ExtResource("1_mmhtb")]
+[node name="RepeatRayCast2D3" parent="RayCasts" unique_id=2018232700 instance=ExtResource("1_mmhtb")]
 position = Vector2(0, 2)
 rotation = 0.185005
 target_position = Vector2(0, 0)

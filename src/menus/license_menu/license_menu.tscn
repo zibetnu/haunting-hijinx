@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://chr26ux2vsrxq"]
+[gd_scene format=3 uid="uid://chr26ux2vsrxq"]
 
 [ext_resource type="Script" uid="uid://dva15pnfy3mhy" path="res://src/menus/license_menu/license_menu.gd" id="1_gdao5"]
 
@@ -8,7 +8,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_8x1nc"]
 events = [SubResource("InputEventAction_7bdp8")]
 
-[node name="LicenseMenu" type="MarginContainer" node_paths=PackedStringArray("tree", "component_name", "version", "description", "contact", "contact_container", "web", "web_container", "paths", "paths_container", "license_name", "license_text", "first_button")]
+[node name="LicenseMenu" type="MarginContainer" unique_id=66654386 node_paths=PackedStringArray("tree", "component_name", "version", "description", "contact", "contact_container", "web", "web_container", "paths", "paths_container", "license_name", "license_text", "first_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -29,13 +29,13 @@ license_name = NodePath("HBoxContainer/PanelContainer/VBoxContainer/LicenseNameC
 license_text = NodePath("HBoxContainer/PanelContainer/VBoxContainer/LicenseText")
 first_button = NodePath("HBoxContainer/VBoxContainer/HBoxContainer/Back")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=720980355]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=941820667]
 layout_mode = 2
 
-[node name="Tree" type="Tree" parent="HBoxContainer/VBoxContainer"]
+[node name="Tree" type="Tree" parent="HBoxContainer/VBoxContainer" unique_id=1520840670]
 custom_minimum_size = Vector2(214, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -44,10 +44,10 @@ hide_folding = true
 hide_root = true
 scroll_horizontal_enabled = false
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=1405654977]
 layout_mode = 2
 
-[node name="Back" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("shortcut_context")]
+[node name="Back" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=530287313 node_paths=PackedStringArray("shortcut_context")]
 layout_mode = 2
 size_flags_horizontal = 0
 shortcut_context = NodePath("../..")
@@ -55,38 +55,38 @@ shortcut = SubResource("Shortcut_8x1nc")
 shortcut_in_tooltip = false
 text = "Back"
 
-[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer" unique_id=546984985]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer" unique_id=560292026]
 layout_mode = 2
 
-[node name="ComponentName" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="ComponentName" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer" unique_id=601399086]
 layout_mode = 2
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="Version" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="Version" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer" unique_id=1674794500]
 layout_mode = 2
 theme_type_variation = &"LabelCompact"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="Description" type="RichTextLabel" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="Description" type="RichTextLabel" parent="HBoxContainer/PanelContainer/VBoxContainer" unique_id=49486055]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"RichTextLabelSmall"
 fit_content = true
 scroll_active = false
 
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/PanelContainer/VBoxContainer" unique_id=1262906004]
 layout_mode = 2
 
-[node name="ContactContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="ContactContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer/VBoxContainer" unique_id=479734170]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer/ContactContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer/ContactContainer" unique_id=591564278]
 custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 size_flags_vertical = 0
@@ -94,17 +94,17 @@ theme_type_variation = &"LabelSmall"
 text = "Contact: "
 horizontal_alignment = 2
 
-[node name="Contact" type="RichTextLabel" parent="HBoxContainer/PanelContainer/VBoxContainer/ContactContainer"]
+[node name="Contact" type="RichTextLabel" parent="HBoxContainer/PanelContainer/VBoxContainer/ContactContainer" unique_id=675416503]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"RichTextLabelSmall"
 fit_content = true
 scroll_active = false
 
-[node name="WebContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="WebContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer/VBoxContainer" unique_id=1828513919]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer/WebContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer/WebContainer" unique_id=299401431]
 custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 size_flags_vertical = 0
@@ -112,7 +112,7 @@ theme_type_variation = &"LabelSmall"
 text = "Web: "
 horizontal_alignment = 2
 
-[node name="Web" type="RichTextLabel" parent="HBoxContainer/PanelContainer/VBoxContainer/WebContainer"]
+[node name="Web" type="RichTextLabel" parent="HBoxContainer/PanelContainer/VBoxContainer/WebContainer" unique_id=1955253756]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"RichTextLabelSmall"
@@ -120,10 +120,10 @@ bbcode_enabled = true
 fit_content = true
 scroll_active = false
 
-[node name="PathsContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="PathsContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer/VBoxContainer" unique_id=949701752]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer/PathsContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer/PathsContainer" unique_id=1239466752]
 custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 size_flags_vertical = 0
@@ -131,7 +131,7 @@ theme_type_variation = &"LabelSmall"
 text = "Files: "
 horizontal_alignment = 2
 
-[node name="Paths" type="RichTextLabel" parent="HBoxContainer/PanelContainer/VBoxContainer/PathsContainer"]
+[node name="Paths" type="RichTextLabel" parent="HBoxContainer/PanelContainer/VBoxContainer/PathsContainer" unique_id=945078467]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"RichTextLabelSmall"
@@ -139,10 +139,10 @@ bbcode_enabled = true
 fit_content = true
 scroll_active = false
 
-[node name="LicenseNameContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="LicenseNameContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer/VBoxContainer" unique_id=583703035]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer/LicenseNameContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/PanelContainer/VBoxContainer/LicenseNameContainer" unique_id=1183390569]
 custom_minimum_size = Vector2(45, 0)
 layout_mode = 2
 size_flags_vertical = 0
@@ -150,17 +150,17 @@ theme_type_variation = &"LabelSmall"
 text = "License: "
 horizontal_alignment = 2
 
-[node name="LicenseName" type="RichTextLabel" parent="HBoxContainer/PanelContainer/VBoxContainer/LicenseNameContainer"]
+[node name="LicenseName" type="RichTextLabel" parent="HBoxContainer/PanelContainer/VBoxContainer/LicenseNameContainer" unique_id=1915389715]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"RichTextLabelSmall"
 fit_content = true
 scroll_active = false
 
-[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/PanelContainer/VBoxContainer" unique_id=1689247918]
 layout_mode = 2
 
-[node name="LicenseText" type="RichTextLabel" parent="HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="LicenseText" type="RichTextLabel" parent="HBoxContainer/PanelContainer/VBoxContainer" unique_id=1253563747]
 layout_mode = 2
 size_flags_vertical = 3
 focus_mode = 2

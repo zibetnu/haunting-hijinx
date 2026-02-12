@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://df63fi5u7xpjt"]
+[gd_scene format=3 uid="uid://df63fi5u7xpjt"]
 
 [ext_resource type="Script" uid="uid://1jew7wsxqctm" path="res://src/lobby/lobby.gd" id="1_g8t6r"]
 [ext_resource type="PackedScene" uid="uid://bmrvrkyh2t2pf" path="res://src/menu_background/menu_background.tscn" id="2_qpyai"]
@@ -21,7 +21,7 @@ properties/2/path = NodePath("HBoxContainer/GridContainer/LevelSelect:selected")
 properties/2/spawn = true
 properties/2/replication_mode = 2
 
-[node name="Lobby" type="MarginContainer"]
+[node name="Lobby" type="MarginContainer" unique_id=176596240]
 custom_minimum_size = Vector2(640, 0)
 anchors_preset = 13
 anchor_left = 0.5
@@ -33,49 +33,49 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g8t6r")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1837752071]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1337574672]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer" unique_id=1125360137]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 follow_focus = true
 horizontal_scroll_mode = 0
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="HBoxContainer/VBoxContainer/ScrollContainer"]
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="HBoxContainer/VBoxContainer/ScrollContainer" unique_id=1813289863]
 _spawnable_scenes = PackedStringArray("uid://bapt74v2o7kig")
 spawn_path = NodePath("../Cards")
 
-[node name="Cards" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScrollContainer"]
+[node name="Cards" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScrollContainer" unique_id=952856082]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Leave" type="Button" parent="HBoxContainer/VBoxContainer"]
+[node name="Leave" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=956303393]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 focus_neighbor_right = NodePath("../../GridContainer/StartGame")
 text = "Leave"
 
-[node name="GridContainer" type="GridContainer" parent="HBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer" unique_id=1627063663]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 columns = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/GridContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/GridContainer" unique_id=632467382]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Name:"
 
-[node name="LobbyName" type="LineEdit" parent="HBoxContainer/GridContainer"]
+[node name="LobbyName" type="LineEdit" parent="HBoxContainer/GridContainer" unique_id=1074410880]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -84,16 +84,16 @@ script = ExtResource("3_qpyai")
 description = "Set your lobby's name"
 metadata/_custom_type_script = "uid://gpvk6gsxhdvu"
 
-[node name="Label2" type="Label" parent="HBoxContainer/GridContainer"]
+[node name="Label2" type="Label" parent="HBoxContainer/GridContainer" unique_id=1511100606]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Type:"
 horizontal_alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/GridContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/GridContainer" unique_id=47252751]
 layout_mode = 2
 
-[node name="LobbyType" type="OptionButton" parent="HBoxContainer/GridContainer/HBoxContainer"]
+[node name="LobbyType" type="OptionButton" parent="HBoxContainer/GridContainer/HBoxContainer" unique_id=1481430603]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -106,44 +106,44 @@ popup/item_1/id = 1
 popup/item_2/text = "Public"
 popup/item_2/id = 2
 
-[node name="Help" type="Button" parent="HBoxContainer/GridContainer/HBoxContainer"]
+[node name="Help" type="Button" parent="HBoxContainer/GridContainer/HBoxContainer" unique_id=345677806]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 text = "?"
 
-[node name="Label3" type="Label" parent="HBoxContainer/GridContainer"]
+[node name="Label3" type="Label" parent="HBoxContainer/GridContainer" unique_id=56995900]
 layout_mode = 2
 text = "Level:"
 horizontal_alignment = 2
 
-[node name="LevelSelect" type="OptionButton" parent="HBoxContainer/GridContainer"]
+[node name="LevelSelect" type="OptionButton" parent="HBoxContainer/GridContainer" unique_id=2086120392]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Spacer" type="Control" parent="HBoxContainer/GridContainer"]
+[node name="Spacer" type="Control" parent="HBoxContainer/GridContainer" unique_id=1969107327]
 layout_mode = 2
 
-[node name="StartGame" type="Button" parent="HBoxContainer/GridContainer"]
+[node name="StartGame" type="Button" parent="HBoxContainer/GridContainer" unique_id=279187221]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_left = NodePath("../../VBoxContainer/Leave")
 text = "Start Game"
 
-[node name="SteamConnector" parent="." instance=ExtResource("6_qmxdg")]
+[node name="SteamConnector" parent="." unique_id=1171076860 instance=ExtResource("6_qmxdg")]
 
-[node name="LobbyLocationSetter" parent="." instance=ExtResource("6_mojxj")]
+[node name="LobbyLocationSetter" parent="." unique_id=1856286508 instance=ExtResource("6_mojxj")]
 
-[node name="LobbyNameSetter" parent="." instance=ExtResource("7_7ee1f")]
+[node name="LobbyNameSetter" parent="." unique_id=417501148 instance=ExtResource("7_7ee1f")]
 
-[node name="RelayInitializer" parent="." instance=ExtResource("8_tfeyi")]
+[node name="RelayInitializer" parent="." unique_id=2144029479 instance=ExtResource("8_tfeyi")]
 
-[node name="SteamLobbyChatUpdate" parent="." instance=ExtResource("9_tuqyh")]
+[node name="SteamLobbyChatUpdate" parent="." unique_id=518139726 instance=ExtResource("9_tuqyh")]
 
-[node name="LobbyTypeSetter" parent="." instance=ExtResource("10_gp772")]
+[node name="LobbyTypeSetter" parent="." unique_id=592520572 instance=ExtResource("10_gp772")]
 
-[node name="LeaveConfirmationDialog" type="ConfirmationDialog" parent="."]
+[node name="LeaveConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=927920275]
 transparent_bg = true
 initial_position = 2
 size = Vector2i(200, 91)
@@ -151,13 +151,13 @@ borderless = true
 dialog_text = "Leave lobby and return to lobby browser?"
 dialog_autowrap = true
 
-[node name="LobbyTypeHelp" type="AcceptDialog" parent="."]
+[node name="LobbyTypeHelp" type="AcceptDialog" parent="." unique_id=1733837425]
 transparent_bg = true
 size = Vector2i(332, 181)
 borderless = true
 ok_button_text = "Close"
 
-[node name="MarginContainer" type="MarginContainer" parent="LobbyTypeHelp"]
+[node name="MarginContainer" type="MarginContainer" parent="LobbyTypeHelp" unique_id=2081732993]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -172,71 +172,71 @@ theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LobbyTypeHelp/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="LobbyTypeHelp/MarginContainer" unique_id=534561166]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Private" type="HBoxContainer" parent="LobbyTypeHelp/MarginContainer/VBoxContainer"]
+[node name="Private" type="HBoxContainer" parent="LobbyTypeHelp/MarginContainer/VBoxContainer" unique_id=1377564812]
 layout_mode = 2
 
-[node name="Name" type="Label" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/Private"]
+[node name="Name" type="Label" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/Private" unique_id=803510936]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 text = "Private"
 horizontal_alignment = 2
 autowrap_mode = 3
 
-[node name="VSeparator" type="VSeparator" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/Private"]
+[node name="VSeparator" type="VSeparator" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/Private" unique_id=115440226]
 layout_mode = 2
 
-[node name="Description" type="Label" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/Private"]
+[node name="Description" type="Label" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/Private" unique_id=382651147]
 custom_minimum_size = Vector2(208, 0)
 layout_mode = 2
 text = "Joinable by invitation only. (Currently not working.)"
 autowrap_mode = 3
 
-[node name="FriendsOnly" type="HBoxContainer" parent="LobbyTypeHelp/MarginContainer/VBoxContainer"]
+[node name="FriendsOnly" type="HBoxContainer" parent="LobbyTypeHelp/MarginContainer/VBoxContainer" unique_id=560209751]
 layout_mode = 2
 
-[node name="Name" type="Label" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/FriendsOnly"]
+[node name="Name" type="Label" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/FriendsOnly" unique_id=2104743730]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 text = "Friends Only"
 horizontal_alignment = 2
 
-[node name="VSeparator" type="VSeparator" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/FriendsOnly"]
+[node name="VSeparator" type="VSeparator" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/FriendsOnly" unique_id=954686862]
 layout_mode = 2
 
-[node name="Description" type="Label" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/FriendsOnly"]
+[node name="Description" type="Label" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/FriendsOnly" unique_id=1330333900]
 custom_minimum_size = Vector2(208, 0)
 layout_mode = 2
 text = "Joinable by friends and invitees. Visible to friends."
 autowrap_mode = 3
 
-[node name="Public" type="HBoxContainer" parent="LobbyTypeHelp/MarginContainer/VBoxContainer"]
+[node name="Public" type="HBoxContainer" parent="LobbyTypeHelp/MarginContainer/VBoxContainer" unique_id=407579890]
 layout_mode = 2
 
-[node name="Name" type="Label" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/Public"]
+[node name="Name" type="Label" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/Public" unique_id=353360737]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 text = "Public"
 horizontal_alignment = 2
 autowrap_mode = 3
 
-[node name="VSeparator" type="VSeparator" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/Public"]
+[node name="VSeparator" type="VSeparator" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/Public" unique_id=1956919870]
 layout_mode = 2
 
-[node name="Description" type="Label" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/Public"]
+[node name="Description" type="Label" parent="LobbyTypeHelp/MarginContainer/VBoxContainer/Public" unique_id=1235004547]
 custom_minimum_size = Vector2(208, 0)
 layout_mode = 2
 text = "Joinable by anyone. Visible to anyone."
 autowrap_mode = 3
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1537043842]
 replication_config = SubResource("SceneReplicationConfig_yaqbi")
 
-[node name="MenuBackground" parent="." instance=ExtResource("2_qpyai")]
+[node name="MenuBackground" parent="." unique_id=154156471 instance=ExtResource("2_qpyai")]
 
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/Leave" to="LeaveConfirmationDialog" method="popup_centered"]
 [connection signal="focus_exited" from="HBoxContainer/GridContainer/LobbyName" to="HBoxContainer/GridContainer/HBoxContainer/LobbyType" method="grab_focus"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://di5qxwdvv5nga"]
+[gd_scene format=3 uid="uid://di5qxwdvv5nga"]
 
 [ext_resource type="Script" uid="uid://bsoiouhcmc7n3" path="res://src/controller/npc_hunter/npc_hunter.gd" id="1_46618"]
 [ext_resource type="PackedScene" uid="uid://y03qjvt68tjj" path="res://src/aura_sense/aura_sense.tscn" id="2_db7tp"]
@@ -6,19 +6,19 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_82hf8"]
 radius = 8.0
 
-[node name="NPCHunter" type="Node2D"]
+[node name="NPCHunter" type="Node2D" unique_id=1598165859]
 script = ExtResource("1_46618")
 
-[node name="AuraSense" parent="." instance=ExtResource("2_db7tp")]
+[node name="AuraSense" parent="." unique_id=997457238 instance=ExtResource("2_db7tp")]
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AuraSense"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AuraSense" unique_id=1291171434]
 shape = SubResource("CircleShape2D_82hf8")
 
-[node name="LookTimer" type="Timer" parent="."]
+[node name="LookTimer" type="Timer" parent="." unique_id=129815945]
 one_shot = true
 
-[node name="FlashlightTimer" type="Timer" parent="."]
+[node name="FlashlightTimer" type="Timer" parent="." unique_id=1149638708]
 one_shot = true
 
 [connection signal="sensed_intensity_changed" from="AuraSense" to="." method="_on_sensed_intensity_changed"]

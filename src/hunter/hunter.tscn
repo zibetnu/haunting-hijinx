@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://ccvsw508kh4ot"]
+[gd_scene format=3 uid="uid://ccvsw508kh4ot"]
 
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="1_0xkip"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="1_fx0g1"]
@@ -71,13 +71,13 @@ properties/3/replication_mode = 2
 [sub_resource type="CircleShape2D" id="CircleShape2D_j4buu"]
 radius = 18.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_plsr1"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j4buu"]
 resource_local_to_scene = true
 shader = ExtResource("21_v1tqt")
 shader_parameter/old_palette = ExtResource("26_l4hq6")
 shader_parameter/new_palette = ExtResource("22_vv7rm")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_d5pma"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t5tur"]
 resource_local_to_scene = true
 shader = ExtResource("21_v1tqt")
 shader_parameter/old_palette = ExtResource("29_plsr1")
@@ -102,7 +102,7 @@ properties/0/path = NodePath(".:visible")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[node name="Hunter" type="CharacterBody2D" node_paths=PackedStringArray("controller") groups=["hunters", "players"]]
+[node name="Hunter" type="CharacterBody2D" unique_id=1579706857 node_paths=PackedStringArray("controller") groups=["hunters", "players"]]
 collision_layer = 4
 collision_mask = 5
 motion_mode = 1
@@ -115,120 +115,120 @@ invulnerable_layer = 4
 invulnerable_mask = 5
 controller = NodePath("PlayerControllerStack/Synced")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=835031343]
 replication_config = SubResource("SceneReplicationConfig_hflh2")
 
-[node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_uvtrm")]
+[node name="ClientNodeDeleter" parent="." unique_id=904081577 node_paths=PackedStringArray("nodes") instance=ExtResource("1_uvtrm")]
 nodes = [NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../AuraSense"), NodePath("../DamageSignals"), NodePath("../Flashlight/Behavior")]
 
-[node name="GhostPeerID" parent="." groups=["ghost_peer_ids"] instance=ExtResource("1_fx0g1")]
+[node name="GhostPeerID" parent="." unique_id=72043569 groups=["ghost_peer_ids"] instance=ExtResource("1_fx0g1")]
 
-[node name="PeerProcessMode" parent="GhostPeerID" instance=ExtResource("43_rsnb5")]
+[node name="PeerProcessMode" parent="GhostPeerID" unique_id=2045461836 instance=ExtResource("43_rsnb5")]
 secondary_include = true
 
-[node name="PeerVisibilityFilter" parent="GhostPeerID" instance=ExtResource("44_mvfu7")]
+[node name="PeerVisibilityFilter" parent="GhostPeerID" unique_id=963937791 instance=ExtResource("44_mvfu7")]
 secondary_allow_in_filter = true
 
-[node name="PeerID" parent="." instance=ExtResource("1_fx0g1")]
+[node name="PeerID" parent="." unique_id=1876572297 instance=ExtResource("1_fx0g1")]
 unique_name_in_owner = true
 
-[node name="PeerVisibilityFilter" parent="PeerID" instance=ExtResource("44_mvfu7")]
+[node name="PeerVisibilityFilter" parent="PeerID" unique_id=424109630 instance=ExtResource("44_mvfu7")]
 
-[node name="HeartbeatRumble" parent="." instance=ExtResource("18_jndug")]
+[node name="HeartbeatRumble" parent="." unique_id=1633657766 instance=ExtResource("18_jndug")]
 
-[node name="StateChart" type="Node" parent="."]
+[node name="StateChart" type="Node" parent="." unique_id=1917636769]
 unique_name_in_owner = true
 script = ExtResource("1_0xkip")
 initial_expression_properties = {
 &"is_moving": false
 }
 
-[node name="Base" type="Node" parent="StateChart"]
+[node name="Base" type="Node" parent="StateChart" unique_id=347550803]
 script = ExtResource("2_yqkoe")
 initial_state = NodePath("Alive")
 
-[node name="Dead" type="Node" parent="StateChart/Base"]
+[node name="Dead" type="Node" parent="StateChart/Base" unique_id=1184604078]
 script = ExtResource("3_ocdoo")
 
-[node name="Revived" type="Node" parent="StateChart/Base/Dead"]
+[node name="Revived" type="Node" parent="StateChart/Base/Dead" unique_id=388783387]
 script = ExtResource("4_x2w3t")
 to = NodePath("../../Alive/Vulnerability/Invulnerable")
 event = &"revived"
 delay_in_seconds = "0.0"
 
-[node name="IsDead" parent="StateChart/Base/Dead" groups=["hunter_is_deads"] instance=ExtResource("9_n4b8t")]
+[node name="IsDead" parent="StateChart/Base/Dead" unique_id=550307475 groups=["hunter_is_deads"] instance=ExtResource("9_n4b8t")]
 group = &"levels"
 
-[node name="Alive" type="Node" parent="StateChart/Base"]
+[node name="Alive" type="Node" parent="StateChart/Base" unique_id=1793509549]
 script = ExtResource("12_y0078")
 
-[node name="Movement" type="Node" parent="StateChart/Base/Alive"]
+[node name="Movement" type="Node" parent="StateChart/Base/Alive" unique_id=1650283207]
 script = ExtResource("2_yqkoe")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateChart/Base/Alive/Movement"]
+[node name="Idle" type="Node" parent="StateChart/Base/Alive/Movement" unique_id=339987996]
 script = ExtResource("3_ocdoo")
 
-[node name="IsMoving" type="Node" parent="StateChart/Base/Alive/Movement/Idle"]
+[node name="IsMoving" type="Node" parent="StateChart/Base/Alive/Movement/Idle" unique_id=690856688]
 script = ExtResource("4_x2w3t")
 to = NodePath("../../Move")
 guard = SubResource("Resource_yfrgd")
 delay_in_seconds = "0.0"
 
-[node name="Move" type="Node" parent="StateChart/Base/Alive/Movement"]
+[node name="Move" type="Node" parent="StateChart/Base/Alive/Movement" unique_id=1270144949]
 script = ExtResource("3_ocdoo")
 
-[node name="IsNotMoving" type="Node" parent="StateChart/Base/Alive/Movement/Move"]
+[node name="IsNotMoving" type="Node" parent="StateChart/Base/Alive/Movement/Move" unique_id=713585796]
 script = ExtResource("4_x2w3t")
 to = NodePath("../../Idle")
 guard = SubResource("Resource_6tqh6")
 delay_in_seconds = "0.0"
 
-[node name="Stun" type="Node" parent="StateChart/Base/Alive/Movement"]
+[node name="Stun" type="Node" parent="StateChart/Base/Alive/Movement" unique_id=1675197144]
 script = ExtResource("3_ocdoo")
 
-[node name="StunEnded" type="Node" parent="StateChart/Base/Alive/Movement/Stun"]
+[node name="StunEnded" type="Node" parent="StateChart/Base/Alive/Movement/Stun" unique_id=1464067011]
 script = ExtResource("4_x2w3t")
 to = NodePath("../../Idle")
 event = &"stun_ended"
 delay_in_seconds = "0.0"
 
-[node name="StunTimeout" type="Timer" parent="StateChart/Base/Alive/Movement/Stun"]
+[node name="StunTimeout" type="Timer" parent="StateChart/Base/Alive/Movement/Stun" unique_id=585783727]
 wait_time = 1.5
 one_shot = true
 
-[node name="Vulnerability" type="Node" parent="StateChart/Base/Alive"]
+[node name="Vulnerability" type="Node" parent="StateChart/Base/Alive" unique_id=474987149]
 script = ExtResource("2_yqkoe")
 initial_state = NodePath("Vulnerable")
 
-[node name="Invulnerable" type="Node" parent="StateChart/Base/Alive/Vulnerability"]
+[node name="Invulnerable" type="Node" parent="StateChart/Base/Alive/Vulnerability" unique_id=1203080141]
 script = ExtResource("3_ocdoo")
 
-[node name="TimedOut" type="Node" parent="StateChart/Base/Alive/Vulnerability/Invulnerable"]
+[node name="TimedOut" type="Node" parent="StateChart/Base/Alive/Vulnerability/Invulnerable" unique_id=1249013497]
 script = ExtResource("4_x2w3t")
 to = NodePath("../../Vulnerable")
 delay_in_seconds = "4.0"
 
-[node name="Vulnerable" type="Node" parent="StateChart/Base/Alive/Vulnerability"]
+[node name="Vulnerable" type="Node" parent="StateChart/Base/Alive/Vulnerability" unique_id=80501540]
 script = ExtResource("3_ocdoo")
 
-[node name="Died" type="Node" parent="StateChart/Base/Alive/Vulnerability/Vulnerable"]
+[node name="Died" type="Node" parent="StateChart/Base/Alive/Vulnerability/Vulnerable" unique_id=132690457]
 script = ExtResource("4_x2w3t")
 to = NodePath("../../../../Dead")
 event = &"died"
 delay_in_seconds = "0.0"
 
-[node name="Stunned" type="Node" parent="StateChart/Base/Alive/Vulnerability/Vulnerable"]
+[node name="Stunned" type="Node" parent="StateChart/Base/Alive/Vulnerability/Vulnerable" unique_id=581165030]
 script = ExtResource("4_x2w3t")
 to = NodePath("../../../Movement/Stun")
 event = &"stunned"
 delay_in_seconds = "0.0"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1733487403]
 scale = Vector2(0.99, 0.99)
 shape = SubResource("CircleShape2D_vawb0")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1382361491]
 unique_name_in_owner = true
 process_mode = 3
 enabled = false
@@ -237,75 +237,75 @@ limit_top = 0
 limit_right = 6400
 limit_bottom = 6400
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Camera2D"]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Camera2D" unique_id=2055733466]
 replication_config = SubResource("SceneReplicationConfig_2bhal")
 
-[node name="PlayerControllerStack" parent="." instance=ExtResource("13_rf2iy")]
+[node name="PlayerControllerStack" parent="." unique_id=1721618865 instance=ExtResource("13_rf2iy")]
 
-[node name="AuraSense" parent="." instance=ExtResource("28_dd2t8")]
+[node name="AuraSense" parent="." unique_id=373753498 instance=ExtResource("28_dd2t8")]
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AuraSense"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AuraSense" unique_id=1039242675]
 shape = SubResource("CircleShape2D_vawb0")
 
-[node name="DamageSignals" parent="." instance=ExtResource("27_qehgg")]
+[node name="DamageSignals" parent="." unique_id=200670969 instance=ExtResource("27_qehgg")]
 collision_layer = 32
 collision_mask = 0
 weak_to = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageSignals"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageSignals" unique_id=2073791608]
 rotation = 1.5708
 shape = SubResource("CircleShape2D_j4buu")
 
-[node name="Revivable" parent="DamageSignals" instance=ExtResource("23_d234k")]
+[node name="Revivable" parent="DamageSignals" unique_id=1047800167 instance=ExtResource("23_d234k")]
 enabled = false
 revives_with = 1
 
-[node name="ConveyorCast" type="ShapeCast2D" parent="."]
+[node name="ConveyorCast" type="ShapeCast2D" parent="." unique_id=417115774]
 shape = SubResource("CircleShape2D_vawb0")
 target_position = Vector2(0, 0)
 max_results = 1
 collision_mask = 64
 
-[node name="Flashlight" parent="." instance=ExtResource("15_hljm8")]
+[node name="Flashlight" parent="." unique_id=1327715237 instance=ExtResource("15_hljm8")]
 
-[node name="Body" parent="Flashlight/Display" index="3"]
+[node name="Body" parent="Flashlight/Display" parent_id_path=PackedInt32Array(1327715237, 711397966) index="3" unique_id=1829862041]
 visible = false
 
-[node name="HunterCostume" parent="." instance=ExtResource("19_c0d8f")]
+[node name="HunterCostume" parent="." unique_id=1831305852 instance=ExtResource("19_c0d8f")]
 y_sort_enabled = true
 
 [node name="MaterialParent" parent="HunterCostume/CanvasGroup" index="0"]
-material = SubResource("ShaderMaterial_plsr1")
+material = SubResource("ShaderMaterial_j4buu")
 
-[node name="FlashlightBack" type="Sprite2D" parent="HunterCostume/CanvasGroup/MaterialParent" index="1"]
+[node name="FlashlightBack" type="Sprite2D" parent="HunterCostume/CanvasGroup/MaterialParent" index="1" unique_id=421018360]
 unique_name_in_owner = true
 texture = ExtResource("20_g6qtr")
 hframes = 32
 
-[node name="FlashlightFront" type="Sprite2D" parent="HunterCostume/CanvasGroup/MaterialParent" index="3"]
+[node name="FlashlightFront" type="Sprite2D" parent="HunterCostume/CanvasGroup/MaterialParent" index="3" unique_id=499250322]
 unique_name_in_owner = true
 texture = ExtResource("21_pbkwq")
 hframes = 32
 
 [node name="Hat" parent="HunterCostume/CanvasGroup" index="1"]
-material = SubResource("ShaderMaterial_d5pma")
+material = SubResource("ShaderMaterial_t5tur")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=779786166]
 energy = 0.5
 range_item_cull_mask = 9
 texture = SubResource("GradientTexture2D_xocc6")
 height = 16.0
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="." unique_id=1894099914]
 remote_path = NodePath("../IgnoreCanvasModulate/FollowPlayer")
 
-[node name="IgnoreCanvasModulate" type="CanvasLayer" parent="."]
+[node name="IgnoreCanvasModulate" type="CanvasLayer" parent="." unique_id=1683814156]
 follow_viewport_enabled = true
 
-[node name="FollowPlayer" type="Node2D" parent="IgnoreCanvasModulate"]
+[node name="FollowPlayer" type="Node2D" parent="IgnoreCanvasModulate" unique_id=1940306715]
 
-[node name="NameLabel" type="Label" parent="IgnoreCanvasModulate/FollowPlayer"]
+[node name="NameLabel" type="Label" parent="IgnoreCanvasModulate/FollowPlayer" unique_id=982850689]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.247059)
 z_index = 1
@@ -318,10 +318,10 @@ text = "peer name"
 horizontal_alignment = 1
 autowrap_mode = 1
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="IgnoreCanvasModulate/FollowPlayer/NameLabel"]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="IgnoreCanvasModulate/FollowPlayer/NameLabel" unique_id=771369013]
 replication_config = SubResource("SceneReplicationConfig_isui6")
 
-[node name="NotificationContainer" type="HBoxContainer" parent="IgnoreCanvasModulate/FollowPlayer"]
+[node name="NotificationContainer" type="HBoxContainer" parent="IgnoreCanvasModulate/FollowPlayer" unique_id=2082507561]
 unique_name_in_owner = true
 offset_left = -32.0
 offset_top = -42.0
@@ -329,22 +329,22 @@ offset_right = 32.0
 offset_bottom = -26.0
 alignment = 1
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer"]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" unique_id=1695448825]
 replication_config = SubResource("SceneReplicationConfig_sv7vo")
 
-[node name="ReviveHeart" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("30_l4hq6")]
+[node name="ReviveHeart" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" unique_id=951701879 instance=ExtResource("30_l4hq6")]
 visible = false
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="Alert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("28_bjj70")]
+[node name="Alert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" unique_id=1122627129 instance=ExtResource("28_bjj70")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="BatteryAlert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("31_vp1ot")]
+[node name="BatteryAlert" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" unique_id=2092709607 instance=ExtResource("31_vp1ot")]
 layout_mode = 2
 
-[node name="YouPointer" parent="IgnoreCanvasModulate/FollowPlayer" instance=ExtResource("29_h43uq")]
+[node name="YouPointer" parent="IgnoreCanvasModulate/FollowPlayer" unique_id=989804266 instance=ExtResource("29_h43uq")]
 
 [connection signal="changed" from="GhostPeerID" to="GhostPeerID/PeerProcessMode" method="set_secondary_peer_id"]
 [connection signal="changed" from="GhostPeerID" to="GhostPeerID/PeerVisibilityFilter" method="set_secondary_peer_id"]

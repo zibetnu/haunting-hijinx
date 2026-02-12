@@ -1,13 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmrvrkyh2t2pf"]
+[gd_scene format=3 uid="uid://bmrvrkyh2t2pf"]
 
 [ext_resource type="Script" uid="uid://bgjkyfnmrd7e0" path="res://src/menu_background/menu_background.gd" id="1_7v3o7"]
 [ext_resource type="PackedScene" uid="uid://ebt35jjk5feh" path="res://src/level_tile_map_layers/level_tile_map_layers.tscn" id="2_ma24s"]
 
-[node name="MenuBackground" type="CanvasLayer"]
+[node name="MenuBackground" type="CanvasLayer" unique_id=2039264346]
 layer = -1
 script = ExtResource("1_7v3o7")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1736971871]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -15,20 +15,22 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=265506041]
 disable_3d = true
+handle_input_locally = false
 snap_2d_transforms_to_pixel = true
 size = Vector2i(640, 360)
+render_target_update_mode = 4
 
-[node name="CenterContainer" type="CenterContainer" parent="SubViewportContainer/SubViewport"]
+[node name="CenterContainer" type="CenterContainer" parent="SubViewportContainer/SubViewport" unique_id=2006658494]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="SubViewportContainer/SubViewport/CenterContainer"]
+[node name="Control" type="Control" parent="SubViewportContainer/SubViewport/CenterContainer" unique_id=983268874]
 layout_mode = 2
 
-[node name="LevelTileMapLayers" parent="SubViewportContainer/SubViewport/CenterContainer/Control" instance=ExtResource("2_ma24s")]
+[node name="LevelTileMapLayers" parent="SubViewportContainer/SubViewport/CenterContainer/Control" unique_id=1418838618 instance=ExtResource("2_ma24s")]
 unique_name_in_owner = true

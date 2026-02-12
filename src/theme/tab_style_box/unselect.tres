@@ -1,4 +1,4 @@
-[gd_resource type="StyleBoxTexture" load_steps=3 format=3 uid="uid://bpbnwfxmkkmmc"]
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://bpbnwfxmkkmmc"]
 
 [ext_resource type="Texture2D" uid="uid://djye6twxcbeab" path="res://assets/theme/button_style_box/unselect.png" id="1_hpkq3"]
 

@@ -1,14 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cy4qrm44icmyy"]
+[gd_scene format=3 uid="uid://cy4qrm44icmyy"]
 
 [ext_resource type="PackedScene" uid="uid://dyev6t6l5ykdp" path="res://src/flashlight/behavior/behavior.tscn" id="2_mk2br"]
 [ext_resource type="PackedScene" uid="uid://c7qmrgohocqfx" path="res://src/flashlight/display/display.tscn" id="3_olr6v"]
 
-[node name="Flashlight" type="Node2D"]
+[node name="Flashlight" type="Node2D" unique_id=1669661891]
 y_sort_enabled = true
 
-[node name="Behavior" parent="." instance=ExtResource("2_mk2br")]
+[node name="Behavior" parent="." unique_id=1919549222 instance=ExtResource("2_mk2br")]
 
-[node name="Display" parent="." instance=ExtResource("3_olr6v")]
+[node name="Display" parent="." unique_id=711397966 instance=ExtResource("3_olr6v")]
 
 [connection signal="cast_length_index_changed" from="Behavior" to="Display" method="set_light_texture_index" flags=3]
 [connection signal="collision_points_changed" from="Behavior" to="Display" method="set_collision_points" flags=3]

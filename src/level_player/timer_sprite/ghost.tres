@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TimerSpriteTextures" load_steps=4 format=3 uid="uid://pukl4dxp5lsx"]
+[gd_resource type="Resource" script_class="TimerSpriteTextures" format=3 uid="uid://pukl4dxp5lsx"]
 
 [ext_resource type="Script" uid="uid://p7w1voc4t4p8" path="res://src/level_player/timer_sprite/timer_sprite_textures.gd" id="1_nko0d"]
 [ext_resource type="Texture2D" uid="uid://pf4ndhsfm2we" path="res://assets/sprite_timer/ghost/digits.png" id="1_t6dho"]

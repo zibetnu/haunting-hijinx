@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bw11rdhjv3j62"]
+[gd_scene format=3 uid="uid://bw11rdhjv3j62"]
 
 [ext_resource type="Script" uid="uid://kr6yu4fdb7go" path="res://src/battery/battery.gd" id="1_alqpc"]
 [ext_resource type="AudioStream" uid="uid://g5tcldah12p3" path="res://assets/battery/spawn.wav" id="4_wcij1"]
@@ -334,29 +334,27 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="Battery" type="Node2D" groups=["batteries"]]
+[node name="Battery" type="Node2D" unique_id=1961953193 groups=["batteries"]]
 script = ExtResource("1_alqpc")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1523479558]
 replication_config = SubResource("SceneReplicationConfig_624qb")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=2113307428]
 collision_layer = 2
 collision_mask = 30
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1944428765]
 shape = SubResource("CircleShape2D_b1nmd")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_xkrf1")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1052256097]
+libraries/ = SubResource("AnimationLibrary_xkrf1")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1265182517]
 stream = ExtResource("4_wcij1")
 bus = &"Effects"
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=792317671]
 position = Vector2(-3, -3)
 rotation = -0.785398
 color = Color(1, 0.921828, 0.340978, 1)
@@ -364,14 +362,14 @@ range_item_cull_mask = 11
 texture = SubResource("GradientTexture2D_id3md")
 height = 16.0
 
-[node name="Body" type="AnimatedSprite2D" parent="."]
+[node name="Body" type="AnimatedSprite2D" parent="." unique_id=1649951355]
 material = SubResource("CanvasItemMaterial_er14f")
 position = Vector2(0, -16)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_uot7s")
 autoplay = "default"
 
-[node name="Decorations" type="AnimatedSprite2D" parent="Body"]
+[node name="Decorations" type="AnimatedSprite2D" parent="Body" unique_id=817391147]
 use_parent_material = true
 sprite_frames = SubResource("SpriteFrames_wypok")
 autoplay = "default"

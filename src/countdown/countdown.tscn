@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://qdsau1mq5mj1"]
+[gd_scene format=3 uid="uid://qdsau1mq5mj1"]
 
 [ext_resource type="Script" uid="uid://ypw83yua2x0q" path="res://src/countdown/countdown.gd" id="1_hldn3"]
 [ext_resource type="Texture2D" uid="uid://co47gbfbe1rfx" path="res://assets/big_digits.png" id="2_rpv7k"]
@@ -64,7 +64,7 @@ _data = {
 &"pulse": SubResource("Animation_21gu7")
 }
 
-[node name="Countdown" type="Control"]
+[node name="Countdown" type="Control" unique_id=1209154886]
 visible = false
 custom_minimum_size = Vector2(19, 28)
 layout_mode = 3
@@ -73,12 +73,10 @@ offset_right = 19.0
 offset_bottom = 28.0
 script = ExtResource("1_hldn3")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=82317815]
 texture = ExtResource("2_rpv7k")
 centered = false
 hframes = 10
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_mxycn")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=274546320]
+libraries/ = SubResource("AnimationLibrary_mxycn")

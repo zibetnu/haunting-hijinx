@@ -1,8 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxooivyeej01k"]
+[gd_scene format=3 uid="uid://bxooivyeej01k"]
 
 [ext_resource type="Script" uid="uid://dmhs6tvasjgjg" path="res://src/summon/summon.gd" id="1_4gkkd"]
 [ext_resource type="PackedScene" uid="uid://cscnk1bc8v66d" path="res://src/summon/drain_area/drain_area.tscn" id="2_dai7v"]
 
-[node name="Summon" type="Node"]
+[node name="Summon" type="Node" unique_id=589074907]
 script = ExtResource("1_4gkkd")
 drain_area = ExtResource("2_dai7v")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://grxm3658ukjj"]
+[gd_scene format=3 uid="uid://grxm3658ukjj"]
 
 [ext_resource type="Script" uid="uid://dueomf76jj4ru" path="res://src/battery_spawner/battery_spawner.gd" id="1_ygxh4"]
 [ext_resource type="PackedScene" uid="uid://bw11rdhjv3j62" path="res://src/battery/battery.tscn" id="2_5j1gl"]
@@ -6,15 +6,15 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_repyt"]
 radius = 12.0
 
-[node name="BatterySpawner" type="Node2D"]
+[node name="BatterySpawner" type="Node2D" unique_id=1028993461]
 script = ExtResource("1_ygxh4")
 battery_scene = ExtResource("2_5j1gl")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1446959410]
 wait_time = 5.0
 autostart = true
 
-[node name="PositionChecker" type="ShapeCast2D" parent="."]
+[node name="PositionChecker" type="ShapeCast2D" parent="." unique_id=1837824157]
 shape = SubResource("CircleShape2D_repyt")
 target_position = Vector2(0, 0)
 collision_mask = 31

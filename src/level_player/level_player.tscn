@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://2uclu3gf4iyj"]
+[gd_scene format=3 uid="uid://2uclu3gf4iyj"]
 
 [ext_resource type="Script" uid="uid://cg0rykk30xiip" path="res://src/level_player/level_player.gd" id="1_el04s"]
 [ext_resource type="PackedScene" uid="uid://vl432076bm8p" path="res://src/level_player/steam_lobby_chat_update/steam_lobby_chat_update.tscn" id="2_acesl"]
@@ -25,7 +25,7 @@ properties/2/path = NodePath(".:process_mode")
 properties/2/spawn = true
 properties/2/replication_mode = 2
 
-[node name="LevelPlayer" type="Node2D" groups=["levels"]]
+[node name="LevelPlayer" type="Node2D" unique_id=1808873144 groups=["levels"]]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_el04s")
@@ -33,26 +33,26 @@ ghost = ExtResource("2_ree31")
 hunter = ExtResource("3_l6nvs")
 spectator_menu = ExtResource("4_q6wo4")
 
-[node name="SteamLobbyChatUpdate" parent="." instance=ExtResource("2_acesl")]
+[node name="SteamLobbyChatUpdate" parent="." unique_id=904748104 instance=ExtResource("2_acesl")]
 
-[node name="BatterySpawner" parent="." node_paths=PackedStringArray("spawn_root") instance=ExtResource("2_d8ks1")]
+[node name="BatterySpawner" parent="." unique_id=265649646 node_paths=PackedStringArray("spawn_root") instance=ExtResource("2_d8ks1")]
 spawn_root = NodePath("../SpawnRoot")
 
-[node name="LevelTileMapLayers" parent="." instance=ExtResource("8_n7ksj")]
+[node name="LevelTileMapLayers" parent="." unique_id=902617586 instance=ExtResource("8_n7ksj")]
 
-[node name="SpawnRoot" type="Node2D" parent="."]
+[node name="SpawnRoot" type="Node2D" parent="." unique_id=1162171252]
 y_sort_enabled = true
 
-[node name="CountingSpawner" parent="." instance=ExtResource("3_xxci0")]
+[node name="CountingSpawner" parent="." unique_id=924653244 instance=ExtResource("3_xxci0")]
 _spawnable_scenes = PackedStringArray("uid://8qaswvkeb8qd", "uid://ccvsw508kh4ot", "uid://cscnk1bc8v66d", "uid://bw11rdhjv3j62")
 spawn_path = NodePath("../SpawnRoot")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=311997616]
 replication_config = SubResource("SceneReplicationConfig_63iby")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1568557916]
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1330817092]
 custom_minimum_size = Vector2(38, 22)
 layout_mode = 3
 anchors_preset = 5
@@ -63,16 +63,16 @@ offset_right = 19.0
 offset_bottom = 22.0
 grow_horizontal = 2
 
-[node name="MatchTimer" parent="CanvasLayer/Control" instance=ExtResource("8_1aado")]
+[node name="MatchTimer" parent="CanvasLayer/Control" unique_id=1541208558 instance=ExtResource("8_1aado")]
 unique_name_in_owner = true
 position = Vector2(19, 11)
 wait_time = 300.0
 autostart = true
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=199737054]
 layer = 3
 
-[node name="EndLabel" type="Label" parent="CanvasLayer2"]
+[node name="EndLabel" type="Label" parent="CanvasLayer2" unique_id=1820578635]
 unique_name_in_owner = true
 visible = false
 material = ExtResource("8_5lobc")
@@ -92,7 +92,7 @@ text = "end message"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PingLabel" parent="CanvasLayer2" instance=ExtResource("5_ijd43")]
+[node name="PingLabel" parent="CanvasLayer2" unique_id=1055089977 instance=ExtResource("5_ijd43")]
 visible = false
 modulate = Color(1, 1, 1, 0.498039)
 anchors_preset = 2
@@ -104,7 +104,7 @@ grow_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 
-[node name="Countdown" parent="CanvasLayer2" node_paths=PackedStringArray("timer") instance=ExtResource("7_qv3yx")]
+[node name="Countdown" parent="CanvasLayer2" unique_id=1461337895 node_paths=PackedStringArray("timer") instance=ExtResource("7_qv3yx")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -120,7 +120,7 @@ size_flags_horizontal = 4
 theme_type_variation = &"LabelBigOutlined"
 timer = NodePath("../../CanvasLayer/Control/MatchTimer")
 
-[node name="MatchMenu" parent="CanvasLayer2" instance=ExtResource("8_v81sd")]
+[node name="MatchMenu" parent="CanvasLayer2" unique_id=926116637 instance=ExtResource("8_v81sd")]
 
 [connection signal="all_scenes_spawned" from="CountingSpawner" to="." method="_on_counting_spawner_all_scenes_spawned"]
 [connection signal="timeout" from="CanvasLayer/Control/MatchTimer" to="." method="_on_match_timer_timeout"]

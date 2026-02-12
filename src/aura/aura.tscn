@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctcjena4x8kr0"]
+[gd_scene format=3 uid="uid://ctcjena4x8kr0"]
 
 [ext_resource type="Script" uid="uid://ccpfrak6yl0l" path="res://src/aura/aura.gd" id="1_itduv"]
 
-[node name="Aura" type="Area2D"]
+[node name="Aura" type="Area2D" unique_id=989746238]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_itduv")

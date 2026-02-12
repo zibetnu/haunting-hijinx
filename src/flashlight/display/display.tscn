@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c7qmrgohocqfx"]
+[gd_scene format=3 uid="uid://c7qmrgohocqfx"]
 
 [ext_resource type="Script" uid="uid://bb2txhj2iyjib" path="res://src/flashlight/display/display.gd" id="1_rfbrn"]
 [ext_resource type="Texture2D" uid="uid://b5o6s164tla1b" path="res://assets/flashlight/light_1.png" id="2_j0apu"]
@@ -61,46 +61,46 @@ collision_mode = 1
 collision_friction = 0.5
 collision_bounce = 0.5
 
-[node name="Display" type="Node2D"]
+[node name="Display" type="Node2D" unique_id=1004058436]
 y_sort_enabled = true
 script = ExtResource("1_rfbrn")
 light_textures = Array[CompressedTexture2D]([SubResource("CompressedTexture2D_84rfy"), ExtResource("2_j0apu"), ExtResource("3_f5bum"), ExtResource("4_55y3x"), ExtResource("5_uowjd"), ExtResource("6_eb7ne"), ExtResource("7_w6nnq"), ExtResource("8_bblat"), ExtResource("9_ocny7"), ExtResource("10_xtryr"), ExtResource("11_yvefh"), ExtResource("12_uqlia"), ExtResource("13_3c23l"), ExtResource("14_pbdd6"), ExtResource("15_q2eh0"), ExtResource("16_nt746")])
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=264730608]
 replication_config = SubResource("SceneReplicationConfig_jmwf3")
 
-[node name="Click" type="AudioStreamPlayer2D" parent="."]
+[node name="Click" type="AudioStreamPlayer2D" parent="." unique_id=688456835]
 stream = ExtResource("2_sji0g")
 volume_db = -9.1
 bus = &"Effects"
 
-[node name="SparkAudio" type="AudioStreamPlayer2D" parent="."]
+[node name="SparkAudio" type="AudioStreamPlayer2D" parent="." unique_id=750940024]
 stream = ExtResource("18_jtca3")
 volume_db = -6.0
 bus = &"Effects"
 
-[node name="Body" type="Sprite2D" parent="."]
+[node name="Body" type="Sprite2D" parent="." unique_id=1829862041]
 unique_name_in_owner = true
 light_mask = 32
 position = Vector2(0, -8)
 texture = ExtResource("2_lt2gs")
 hframes = 32
 
-[node name="RotationNode" type="RemoteTransform2D" parent="."]
+[node name="RotationNode" type="RemoteTransform2D" parent="." unique_id=605558065]
 unique_name_in_owner = true
 visible = false
 remote_path = NodePath("../RotationNode2")
 update_position = false
 update_scale = false
 
-[node name="FloorLight" type="PointLight2D" parent="RotationNode"]
+[node name="FloorLight" type="PointLight2D" parent="RotationNode" unique_id=953660829]
 unique_name_in_owner = true
 shadow_enabled = true
 shadow_item_cull_mask = 3
 offset = Vector2(64, 0)
 height = 32.0
 
-[node name="WallLight" type="PointLight2D" parent="RotationNode"]
+[node name="WallLight" type="PointLight2D" parent="RotationNode" unique_id=1290141695]
 unique_name_in_owner = true
 range_item_cull_mask = 2
 shadow_enabled = true
@@ -108,33 +108,33 @@ shadow_item_cull_mask = 4
 offset = Vector2(64, 0)
 height = 32.0
 
-[node name="RotationNode2" type="Node2D" parent="."]
+[node name="RotationNode2" type="Node2D" parent="." unique_id=1073687067]
 y_sort_enabled = true
 position = Vector2(0, -8)
 
-[node name="BeamStarts" type="Node2D" parent="RotationNode2"]
+[node name="BeamStarts" type="Node2D" parent="RotationNode2" unique_id=1936851844]
 position = Vector2(16, 0)
 
-[node name="BeamStartTop" type="Marker2D" parent="RotationNode2/BeamStarts"]
+[node name="BeamStartTop" type="Marker2D" parent="RotationNode2/BeamStarts" unique_id=625560250]
 unique_name_in_owner = true
 position = Vector2(0, -2)
 
-[node name="BeamStartBottom" type="Marker2D" parent="RotationNode2/BeamStarts"]
+[node name="BeamStartBottom" type="Marker2D" parent="RotationNode2/BeamStarts" unique_id=1469367929]
 unique_name_in_owner = true
 position = Vector2(0, 2)
 
-[node name="Beam" type="Polygon2D" parent="RotationNode2"]
+[node name="Beam" type="Polygon2D" parent="RotationNode2" unique_id=685450310]
 unique_name_in_owner = true
 material = SubResource("CanvasItemMaterial_lnymb")
 position = Vector2(16, 0)
 
-[node name="SparksPosition" type="RemoteTransform2D" parent="RotationNode2"]
+[node name="SparksPosition" type="RemoteTransform2D" parent="RotationNode2" unique_id=204875446]
 position = Vector2(12, 0)
 remote_path = NodePath("../../Sparks")
 update_rotation = false
 update_scale = false
 
-[node name="Sparks" type="GPUParticles2D" parent="."]
+[node name="Sparks" type="GPUParticles2D" parent="." unique_id=522745120]
 light_mask = 31
 material = SubResource("CanvasItemMaterial_gtxdj")
 position = Vector2(12, -8)

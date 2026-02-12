@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ct4851h4l56am"]
+[gd_scene format=3 uid="uid://ct4851h4l56am"]
 
 [ext_resource type="PackedScene" uid="uid://b6sumweqwhyet" path="res://src/level_tile_map_layers/scene_tiles/candle/candelabra.tscn" id="1_7afli"]
 [ext_resource type="Texture2D" uid="uid://c1roq1mo8jeki" path="res://assets/tile_sets/main_floor/nightstand/diffuse.png" id="1_cfd47"]
@@ -34,12 +34,12 @@ terrain_set_0/terrain_1/name = "Wall Tops"
 terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
 sources/4 = SubResource("TileSetAtlasSource_psy1r")
 
-[node name="CandelabraOnTable" type="Node2D"]
+[node name="CandelabraOnTable" type="Node2D" unique_id=2129807476]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1649380378]
 position = Vector2(-8, -8)
 tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0)
 tile_set = SubResource("TileSet_kwvjk")
 
-[node name="Candelabra" parent="." instance=ExtResource("1_7afli")]
+[node name="Candelabra" parent="." unique_id=291815653 instance=ExtResource("1_7afli")]
 position = Vector2(8, -7)

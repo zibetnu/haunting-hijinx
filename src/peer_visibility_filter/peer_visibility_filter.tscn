@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://yi6ydbok31ql"]
+[gd_scene format=3 uid="uid://yi6ydbok31ql"]
 
 [ext_resource type="Script" uid="uid://c2hxou2jjo45i" path="res://src/peer_visibility_filter/peer_visibility_filter.gd" id="1_0ot46"]
 
@@ -7,8 +7,8 @@ properties/0/path = NodePath(".:enable_filter")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[node name="PeerVisibilityFilter" type="Node"]
+[node name="PeerVisibilityFilter" type="Node" unique_id=500635331]
 script = ExtResource("1_0ot46")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=506112535]
 replication_config = SubResource("SceneReplicationConfig_p3eyy")

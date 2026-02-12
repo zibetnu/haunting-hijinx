@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6sumweqwhyet"]
+[gd_scene format=3 uid="uid://b6sumweqwhyet"]
 
 [ext_resource type="Texture2D" uid="uid://cu1bvhbtfg" path="res://src/level_tile_map_layers/scene_tiles/candle/candelabra_arms_texture.tres" id="1_kr3k5"]
 [ext_resource type="Texture2D" uid="uid://jv4efllfhfwn" path="res://src/level_tile_map_layers/scene_tiles/candle/base_texture.tres" id="2_4cw5o"]
@@ -15,38 +15,38 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
-[node name="Candelabra" type="Node2D"]
+[node name="Candelabra" type="Node2D" unique_id=22228013]
 
-[node name="Arms" type="Sprite2D" parent="."]
+[node name="Arms" type="Sprite2D" parent="." unique_id=353223762]
 light_mask = 2
 position = Vector2(0, -7)
 texture = ExtResource("1_kr3k5")
 
-[node name="Base" type="Sprite2D" parent="."]
+[node name="Base" type="Sprite2D" parent="." unique_id=1116605945]
 light_mask = 2
 position = Vector2(-8, -9)
 texture = ExtResource("2_4cw5o")
 
-[node name="Base2" type="Sprite2D" parent="."]
+[node name="Base2" type="Sprite2D" parent="." unique_id=828915322]
 light_mask = 2
 position = Vector2(0, -11)
 texture = ExtResource("2_4cw5o")
 
-[node name="Base3" type="Sprite2D" parent="."]
+[node name="Base3" type="Sprite2D" parent="." unique_id=1658245072]
 light_mask = 2
 position = Vector2(8, -9)
 texture = ExtResource("2_4cw5o")
 
-[node name="Flame" parent="." instance=ExtResource("3_ukd4a")]
+[node name="Flame" parent="." unique_id=1661517056 instance=ExtResource("3_ukd4a")]
 position = Vector2(-8, -14)
 
-[node name="Flame2" parent="." instance=ExtResource("3_ukd4a")]
+[node name="Flame2" parent="." unique_id=1038396827 instance=ExtResource("3_ukd4a")]
 position = Vector2(0, -16)
 
-[node name="Flame3" parent="." instance=ExtResource("3_ukd4a")]
+[node name="Flame3" parent="." unique_id=762562948 instance=ExtResource("3_ukd4a")]
 position = Vector2(8, -14)
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1016783688]
 position = Vector2(0, -3)
 color = Color(0, 0.804089, 0.976547, 1)
 range_item_cull_mask = 11

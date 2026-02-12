@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dmp2ru73exiia"]
+[gd_scene format=3 uid="uid://dmp2ru73exiia"]
 
 [ext_resource type="Script" uid="uid://b7xl0dnpmtgkm" path="res://src/menus/customization/customization.gd" id="1_1ehsn"]
 [ext_resource type="PackedScene" uid="uid://klrwcohuhynk" path="res://src/ghost/costume/ghost_costume.tscn" id="1_4w6db"]
@@ -15,7 +15,7 @@ action = &"ui_cancel"
 [sub_resource type="Shortcut" id="Shortcut_lotg5"]
 events = [SubResource("InputEventAction_1ehsn")]
 
-[node name="Customization" type="MarginContainer" node_paths=PackedStringArray("first_button")]
+[node name="Customization" type="MarginContainer" unique_id=1388505226 node_paths=PackedStringArray("first_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -24,14 +24,14 @@ grow_vertical = 2
 script = ExtResource("1_1ehsn")
 first_button = NodePath("HBoxContainer/VBoxContainer/Back")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1994630670]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=2053419712]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TabContainer" type="TabContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="HBoxContainer/VBoxContainer" unique_id=1630089807]
 layout_mode = 2
 size_flags_vertical = 6
 tab_alignment = 1
@@ -39,52 +39,52 @@ current_tab = 0
 clip_tabs = false
 use_hidden_tabs_for_min_size = true
 
-[node name="Ghost" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer"]
+[node name="Ghost" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer" unique_id=1847474107]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="GhostHatSpinBox" parent="HBoxContainer/VBoxContainer/TabContainer/Ghost" instance=ExtResource("1_535l6")]
+[node name="GhostHatSpinBox" parent="HBoxContainer/VBoxContainer/TabContainer/Ghost" unique_id=1719136520 instance=ExtResource("1_535l6")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(20, 16)
 layout_mode = 2
 option_name = "Hat"
 
-[node name="Hunter" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer"]
+[node name="Hunter" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/TabContainer" unique_id=456113437]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="HunterHatSpinBox" parent="HBoxContainer/VBoxContainer/TabContainer/Hunter" instance=ExtResource("1_535l6")]
+[node name="HunterHatSpinBox" parent="HBoxContainer/VBoxContainer/TabContainer/Hunter" unique_id=1784870521 instance=ExtResource("1_535l6")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(20, 16)
 layout_mode = 2
 option_name = "Hat"
 
-[node name="HunterPalettePreferences" parent="HBoxContainer/VBoxContainer/TabContainer/Hunter" instance=ExtResource("3_lotg5")]
+[node name="HunterPalettePreferences" parent="HBoxContainer/VBoxContainer/TabContainer/Hunter" unique_id=1202241222 instance=ExtResource("3_lotg5")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Back" type="Button" parent="HBoxContainer/VBoxContainer"]
+[node name="Back" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=45001627]
 layout_mode = 2
 size_flags_horizontal = 0
 shortcut = SubResource("Shortcut_lotg5")
 shortcut_in_tooltip = false
 text = "Back"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer" unique_id=310454116]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2" unique_id=1828475375]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2/VBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2/VBoxContainer" unique_id=1128328751]
 layout_mode = 2
 theme_type_variation = &"LabelCompact"
 text = "Default Player Name"
 horizontal_alignment = 1
 
-[node name="DefaultName" type="LineEdit" parent="HBoxContainer/VBoxContainer2/VBoxContainer"]
+[node name="DefaultName" type="LineEdit" parent="HBoxContainer/VBoxContainer2/VBoxContainer" unique_id=1737151032]
 unique_name_in_owner = true
 layout_mode = 2
 placeholder_text = "Enter name here..."
@@ -94,22 +94,22 @@ context_menu_enabled = false
 script = ExtResource("4_pdao3")
 metadata/_custom_type_script = "uid://gpvk6gsxhdvu"
 
-[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/VBoxContainer2"]
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/VBoxContainer2" unique_id=399094021]
 custom_minimum_size = Vector2(168, 168)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Control" type="Control" parent="HBoxContainer/VBoxContainer2/CenterContainer"]
+[node name="Control" type="Control" parent="HBoxContainer/VBoxContainer2/CenterContainer" unique_id=1912919288]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="GhostCostume" parent="HBoxContainer/VBoxContainer2/CenterContainer/Control" instance=ExtResource("1_4w6db")]
+[node name="GhostCostume" parent="HBoxContainer/VBoxContainer2/CenterContainer/Control" unique_id=1752726052 instance=ExtResource("1_4w6db")]
 unique_name_in_owner = true
 position = Vector2(0, -40)
 scale = Vector2(4, 4)
 
-[node name="HunterCostume" parent="HBoxContainer/VBoxContainer2/CenterContainer/Control" instance=ExtResource("2_iu7ym")]
+[node name="HunterCostume" parent="HBoxContainer/VBoxContainer2/CenterContainer/Control" unique_id=1759986124 instance=ExtResource("2_iu7ym")]
 unique_name_in_owner = true
 visible = false
 y_sort_enabled = true
@@ -117,21 +117,21 @@ position = Vector2(0, 0)
 scale = Vector2(4, 4)
 costume_rotation = 1.5707963267948966
 
-[node name="FlashlightBack" type="Sprite2D" parent="HBoxContainer/VBoxContainer2/CenterContainer/Control/HunterCostume"]
+[node name="FlashlightBack" type="Sprite2D" parent="HBoxContainer/VBoxContainer2/CenterContainer/Control/HunterCostume" unique_id=1066946662]
 unique_name_in_owner = true
 visible = false
 texture = ExtResource("3_1ehsn")
 hframes = 32
 frame = 8
 
-[node name="FlashlightFront" type="Sprite2D" parent="HBoxContainer/VBoxContainer2/CenterContainer/Control/HunterCostume"]
+[node name="FlashlightFront" type="Sprite2D" parent="HBoxContainer/VBoxContainer2/CenterContainer/Control/HunterCostume" unique_id=999699632]
 unique_name_in_owner = true
 visible = false
 texture = ExtResource("4_lotg5")
 hframes = 32
 frame = 8
 
-[node name="Spacer" type="Control" parent="HBoxContainer"]
+[node name="Spacer" type="Control" parent="HBoxContainer" unique_id=497507703]
 layout_mode = 2
 size_flags_horizontal = 3
 

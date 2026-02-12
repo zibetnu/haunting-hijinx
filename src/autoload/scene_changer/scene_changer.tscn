@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cmhqty6g1sgls"]
+[gd_scene format=3 uid="uid://cmhqty6g1sgls"]
 
 [ext_resource type="Script" uid="uid://ceqnnjhsbwq74" path="res://src/autoload/scene_changer/scene_changer.gd" id="1_6yofi"]
 
@@ -92,42 +92,40 @@ _data = {
 &"uncover": SubResource("Animation_kk5md")
 }
 
-[node name="SceneChanger" type="Node"]
+[node name="SceneChanger" type="Node" unique_id=1125916034]
 script = ExtResource("1_6yofi")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1819996826]
 process_mode = 3
-libraries = {
-&"": SubResource("AnimationLibrary_jsu3p")
-}
+libraries/ = SubResource("AnimationLibrary_jsu3p")
 
-[node name="DisconnectedDialog" type="AcceptDialog" parent="."]
+[node name="DisconnectedDialog" type="AcceptDialog" parent="." unique_id=698227662]
 transparent_bg = true
 size = Vector2i(203, 80)
 borderless = true
 dialog_text = "Disconnected from server."
 
-[node name="CoverTimer" type="Timer" parent="."]
+[node name="CoverTimer" type="Timer" parent="." unique_id=1510902988]
 unique_name_in_owner = true
 process_mode = 3
 wait_time = 2.0
 one_shot = true
 
-[node name="FallbackTimer" type="Timer" parent="."]
+[node name="FallbackTimer" type="Timer" parent="." unique_id=1569959277]
 process_mode = 3
 wait_time = 3.0
 one_shot = true
 
-[node name="SceneSpawner" type="MultiplayerSpawner" parent="."]
+[node name="SceneSpawner" type="MultiplayerSpawner" parent="." unique_id=97534381]
 _spawnable_scenes = PackedStringArray("uid://2uclu3gf4iyj", "uid://df63fi5u7xpjt")
 spawn_path = NodePath(".")
 spawn_limit = 1
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=699372740]
 layer = 4
 visible = false
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=410393870]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

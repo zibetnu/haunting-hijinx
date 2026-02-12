@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://jnvo3fkujlu4"]
+[gd_scene format=3 uid="uid://jnvo3fkujlu4"]
 
 [ext_resource type="Script" uid="uid://dck1j3w8j8oot" path="res://src/summon/drain_area/display/display.gd" id="1_l5xdp"]
 [ext_resource type="Material" uid="uid://bbhp34kya5qm8" path="res://src/summon/drain_area/drain_area.tres" id="2_vfq63"]
@@ -210,20 +210,20 @@ _data = {
 &"idle": SubResource("Animation_s4jar")
 }
 
-[node name="Display" type="Node2D" groups=["drain_area_displays"]]
+[node name="Display" type="Node2D" unique_id=1766799618 groups=["drain_area_displays"]]
 z_index = -2
 script = ExtResource("1_l5xdp")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1394496067]
 replication_config = SubResource("SceneReplicationConfig_8mo38")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1539267778]
 energy = 3.0
 range_item_cull_mask = 11
 texture = SubResource("GradientTexture2D_pqx0p")
 height = 16.0
 
-[node name="Waves" type="ColorRect" parent="."]
+[node name="Waves" type="ColorRect" parent="." unique_id=2127864295]
 material = ExtResource("2_vfq63")
 offset_left = -79.0
 offset_top = -79.0
@@ -231,7 +231,5 @@ offset_right = 79.0
 offset_bottom = 79.0
 mouse_filter = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Waves"]
-libraries = {
-&"": SubResource("AnimationLibrary_44ojd")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Waves" unique_id=1548511721]
+libraries/ = SubResource("AnimationLibrary_44ojd")

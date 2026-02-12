@@ -1,26 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://ciga14osg5c77"]
+[gd_scene format=3 uid="uid://ciga14osg5c77"]
 
 [ext_resource type="Texture2D" uid="uid://kiaxchjuucyh" path="res://src/level_tile_map_layers/scene_tiles/candle/arm_front_texture.tres" id="2_3mdjh"]
 [ext_resource type="PackedScene" uid="uid://sk7k142ijsc7" path="res://src/level_tile_map_layers/scene_tiles/candle/flame/flame.tscn" id="4_fq7hg"]
 [ext_resource type="Texture2D" uid="uid://jv4efllfhfwn" path="res://src/level_tile_map_layers/scene_tiles/candle/base_texture.tres" id="5_e3wtp"]
 [ext_resource type="Texture2D" uid="uid://g6hr1h2v2mvu" path="res://src/level_tile_map_layers/scene_tiles/candle/candle_light_texture.tres" id="6_mu4jo"]
 
-[node name="Candle" type="Node2D"]
+[node name="Candle" type="Node2D" unique_id=1741410417]
 position = Vector2(0, 8)
 
-[node name="Arm" type="Sprite2D" parent="."]
+[node name="Arm" type="Sprite2D" parent="." unique_id=1001754441]
 position = Vector2(8, -12)
 texture = ExtResource("2_3mdjh")
 
-[node name="Base" type="Sprite2D" parent="."]
+[node name="Base" type="Sprite2D" parent="." unique_id=132065215]
 light_mask = 16
 position = Vector2(8, -12)
 texture = ExtResource("5_e3wtp")
 
-[node name="Flame" parent="." instance=ExtResource("4_fq7hg")]
+[node name="Flame" parent="." unique_id=1987404105 instance=ExtResource("4_fq7hg")]
 position = Vector2(8, -17)
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1734863185]
 position = Vector2(8, -5)
 color = Color(0, 0.804089, 0.976547, 1)
 range_item_cull_mask = 11

@@ -1,4 +1,4 @@
-[gd_resource type="StyleBoxTexture" load_steps=3 format=3 uid="uid://5gsgqi5vc6ra"]
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://5gsgqi5vc6ra"]
 
 [ext_resource type="Texture2D" uid="uid://bhm6vyw50fv26" path="res://assets/theme/button_style_box/disabled.png" id="1_lmf45"]
 

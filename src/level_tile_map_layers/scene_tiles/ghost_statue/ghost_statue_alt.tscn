@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://kysagve3eo8d"]
+[gd_scene format=3 uid="uid://kysagve3eo8d"]
 
 [ext_resource type="PackedScene" uid="uid://qvu7pdftkg8y" path="res://src/level_tile_map_layers/scene_tiles/ghost_statue/ghost_statue.tscn" id="1_k4ehe"]
 [ext_resource type="Texture2D" uid="uid://5y2j4d341r1n" path="res://assets/statue_alt/diffuse.png" id="2_fkwaw"]
@@ -14,22 +14,22 @@ normal_texture = ExtResource("3_jriak")
 specular_texture = ExtResource("4_0offo")
 specular_shininess = 0.5
 
-[node name="GhostStatue" instance=ExtResource("1_k4ehe")]
+[node name="GhostStatue" unique_id=424772443 instance=ExtResource("1_k4ehe")]
 
-[node name="CollisionShape2D" parent="Area2D" index="0"]
+[node name="CollisionShape2D" parent="Area2D" parent_id_path=PackedInt32Array(2029248893) index="0" unique_id=1108653090]
 position = Vector2(8, 0)
 shape = SubResource("RectangleShape2D_fkwaw")
 
-[node name="Base" parent="." index="4"]
+[node name="Base" parent="." index="4" unique_id=728280567]
 visible = false
 
-[node name="Ghost" parent="." index="5"]
+[node name="Ghost" parent="." index="5" unique_id=329001173]
 visible = false
 
-[node name="Statue" type="Sprite2D" parent="." index="6"]
+[node name="Statue" type="Sprite2D" parent="." index="6" unique_id=1687959163]
 light_mask = 6
 position = Vector2(8, -16)
 texture = SubResource("CanvasTexture_sgcj1")
 
-[node name="Eyes" parent="." index="7"]
+[node name="Eyes" parent="." index="7" unique_id=402377710]
 position = Vector2(8, -22)

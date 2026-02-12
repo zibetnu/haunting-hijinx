@@ -1,17 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://bvrn6ky085d6r"]
+[gd_scene format=3 uid="uid://bvrn6ky085d6r"]
 
 [ext_resource type="Script" uid="uid://ck14otc2707ht" path="res://src/autoload/global_sounds/main_theme/main_theme.gd" id="1_w23dk"]
 [ext_resource type="AudioStream" uid="uid://bgidic5ar2an6" path="res://assets/main_theme.ogg" id="2_ybjuy"]
 
-[node name="MainTheme" type="Node"]
+[node name="MainTheme" type="Node" unique_id=1461068099]
 script = ExtResource("1_w23dk")
 scene_names = Array[StringName]([&"Menus", &"LobbyBrowser", &"Lobby"])
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2145672675]
 stream = ExtResource("2_ybjuy")
 bus = &"Music"
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=474468490]
 wait_time = 0.1
 one_shot = true
 

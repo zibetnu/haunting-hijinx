@@ -1,10 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://oe321ygxttbo"]
+[gd_scene format=3 uid="uid://oe321ygxttbo"]
 
 [ext_resource type="Script" uid="uid://feyfp0ew6bce" path="res://src/grabber/grabber.gd" id="1_vf0yw"]
 
-[node name="Grabber" type="Node2D"]
+[node name="Grabber" type="Node2D" unique_id=1367452599]
 script = ExtResource("1_vf0yw")
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="." unique_id=940829960]
 update_rotation = false
 update_scale = false

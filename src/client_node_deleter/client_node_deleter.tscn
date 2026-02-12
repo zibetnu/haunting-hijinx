@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjnncoyhqt6xi"]
+[gd_scene format=3 uid="uid://cjnncoyhqt6xi"]
 
 [ext_resource type="Script" uid="uid://c3m6c0girufte" path="res://src/client_node_deleter/client_node_deleter.gd" id="1_0nh5t"]
 
-[node name="ClientNodeDeleter" type="Node"]
+[node name="ClientNodeDeleter" type="Node" unique_id=598091055]
 script = ExtResource("1_0nh5t")

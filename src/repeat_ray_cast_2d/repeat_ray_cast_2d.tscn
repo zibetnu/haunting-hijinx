@@ -1,12 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3u6qxrt3jkm8"]
+[gd_scene format=3 uid="uid://c3u6qxrt3jkm8"]
 
 [ext_resource type="Script" uid="uid://drr8llxn0wlrm" path="res://src/repeat_ray_cast_2d/repeat_ray_cast_2d.gd" id="1_ctlvj"]
 
-[node name="RepeatRayCast2D" type="Node2D"]
+[node name="RepeatRayCast2D" type="Node2D" unique_id=264112917]
 script = ExtResource("1_ctlvj")
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1358921050]
 target_position = Vector2(0, 0)
 
-[node name="RepeatRayCast2D" type="RayCast2D" parent="."]
+[node name="RepeatRayCast2D" type="RayCast2D" parent="." unique_id=2146100246]
 target_position = Vector2(0, 0)

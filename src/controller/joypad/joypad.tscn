@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dfe7skxjkwons"]
+[gd_scene format=3 uid="uid://dfe7skxjkwons"]
 
 [ext_resource type="Script" uid="uid://cpx32aamgkyaq" path="res://src/controller/joypad/joypad.gd" id="1_cbydk"]
 
-[node name="Joypad" type="Node2D"]
+[node name="Joypad" type="Node2D" unique_id=1312715126]
 script = ExtResource("1_cbydk")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://mt548ar3ll4w"]
+[gd_scene format=3 uid="uid://mt548ar3ll4w"]
 
 [ext_resource type="Script" uid="uid://ccwnml6lqe2ep" path="res://src/heartbeat_rumble/heartbeat_rumble.gd" id="1_kpvxc"]
 
@@ -7,8 +7,8 @@ properties/0/path = NodePath(".:heart_rate")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[node name="HeartbeatRumble" type="Node"]
+[node name="HeartbeatRumble" type="Node" unique_id=346185255]
 script = ExtResource("1_kpvxc")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1566049254]
 replication_config = SubResource("SceneReplicationConfig_m27d7")

@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://bbhp34kya5qm8"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bbhp34kya5qm8"]
 
 [ext_resource type="Shader" uid="uid://b55re87yms35i" path="res://addons/shaders/circular_waves.gdshader" id="1_yj0ap"]
 

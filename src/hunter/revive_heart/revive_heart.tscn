@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://yeme14o15wbs"]
+[gd_scene format=3 uid="uid://yeme14o15wbs"]
 
 [ext_resource type="Script" uid="uid://87ixop8b46qc" path="res://src/hunter/revive_heart/revive_heart.gd" id="1_2h8bs"]
 [ext_resource type="Texture2D" uid="uid://bubsk375v7q2o" path="res://assets/hunter/revive_heart/under.png" id="2_2h8bs"]
@@ -72,7 +72,7 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="ReviveHeart" type="Control"]
+[node name="ReviveHeart" type="Control" unique_id=1366067965]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 3
 anchors_preset = 0
@@ -80,15 +80,15 @@ offset_right = 10.0
 offset_bottom = 10.0
 script = ExtResource("1_2h8bs")
 
-[node name="AnimationTimeout" type="Timer" parent="."]
+[node name="AnimationTimeout" type="Timer" parent="." unique_id=1710290361]
 unique_name_in_owner = true
 wait_time = 0.1
 one_shot = true
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=498357130]
 replication_config = SubResource("SceneReplicationConfig_2h8bs")
 
-[node name="Bar" type="TextureProgressBar" parent="."]
+[node name="Bar" type="TextureProgressBar" parent="." unique_id=469920055]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -109,7 +109,7 @@ texture_progress = ExtResource("3_pt3fo")
 script = ExtResource("4_2h8bs")
 metadata/_custom_type_script = "uid://b1ydder1pweyr"
 
-[node name="Outline" type="AnimatedSprite2D" parent="Bar"]
+[node name="Outline" type="AnimatedSprite2D" parent="Bar" unique_id=1547127838]
 unique_name_in_owner = true
 position = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_c3r4s")

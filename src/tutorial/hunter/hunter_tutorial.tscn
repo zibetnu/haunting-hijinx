@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dguyyy188ihbi"]
+[gd_scene format=3 uid="uid://dguyyy188ihbi"]
 
 [ext_resource type="PackedScene" uid="uid://c64tx6254qrlp" path="res://src/tutorial/tutorial.tscn" id="1_c5qxs"]
 [ext_resource type="Script" uid="uid://c34s5yn38nab1" path="res://src/tutorial/hunter/hunter_tutorial.gd" id="2_v1ay4"]
@@ -85,175 +85,175 @@ resource_name = "Complete"
 script = ExtResource("3_ea8sw")
 objective = "[rainbow freq=0.6 sat=0.6 val=1]Tutorial complete. Happy hunting![/rainbow]"
 
-[sub_resource type="Resource" id="Resource_kpksu"]
+[sub_resource type="Resource" id="Resource_xh0tf"]
 resource_local_to_scene = true
 resource_name = "IsMoving"
 script = ExtResource("4_mx0qj")
 expression = "is_moving"
 
-[sub_resource type="Resource" id="Resource_gy72a"]
+[sub_resource type="Resource" id="Resource_nwmwq"]
 resource_local_to_scene = true
 resource_name = "Not"
 script = ExtResource("5_h1wiw")
-guard = SubResource("Resource_kpksu")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_psybu"]
-resource_local_to_scene = true
-shader = ExtResource("6_6k6h6")
-shader_parameter/old_palette = ExtResource("13_k4uj5")
-shader_parameter/new_palette = ExtResource("7_k04wc")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nwmwq"]
-resource_local_to_scene = true
-shader = ExtResource("6_6k6h6")
-shader_parameter/old_palette = ExtResource("14_xh0tf")
-shader_parameter/new_palette = ExtResource("14_xh0tf")
-
-[sub_resource type="Resource" id="Resource_wr3rf"]
-resource_local_to_scene = true
-resource_name = "IsMoving"
-script = ExtResource("4_mx0qj")
-expression = "is_moving"
-
-[sub_resource type="Resource" id="Resource_wagh2"]
-resource_local_to_scene = true
-resource_name = "IsMoving"
-script = ExtResource("4_mx0qj")
-expression = "is_moving"
-
-[sub_resource type="Resource" id="Resource_j56l6"]
-resource_local_to_scene = true
-resource_name = "Not"
-script = ExtResource("5_h1wiw")
-guard = SubResource("Resource_wagh2")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3hpvg"]
-resource_local_to_scene = true
-shader = ExtResource("6_6k6h6")
-shader_parameter/old_palette = ExtResource("13_k4uj5")
-shader_parameter/new_palette = ExtResource("7_k04wc")
+guard = SubResource("Resource_xh0tf")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ol48q"]
 resource_local_to_scene = true
 shader = ExtResource("6_6k6h6")
+shader_parameter/old_palette = ExtResource("13_k4uj5")
+shader_parameter/new_palette = ExtResource("7_k04wc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ar6y6"]
+resource_local_to_scene = true
+shader = ExtResource("6_6k6h6")
 shader_parameter/old_palette = ExtResource("14_xh0tf")
 shader_parameter/new_palette = ExtResource("14_xh0tf")
 
-[node name="Tutorial" instance=ExtResource("1_c5qxs")]
+[sub_resource type="Resource" id="Resource_1gg0e"]
+resource_local_to_scene = true
+resource_name = "IsMoving"
+script = ExtResource("4_mx0qj")
+expression = "is_moving"
+
+[sub_resource type="Resource" id="Resource_v6gpo"]
+resource_local_to_scene = true
+resource_name = "IsMoving"
+script = ExtResource("4_mx0qj")
+expression = "is_moving"
+
+[sub_resource type="Resource" id="Resource_dfwv5"]
+resource_local_to_scene = true
+resource_name = "Not"
+script = ExtResource("5_h1wiw")
+guard = SubResource("Resource_v6gpo")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6xxlw"]
+resource_local_to_scene = true
+shader = ExtResource("6_6k6h6")
+shader_parameter/old_palette = ExtResource("13_k4uj5")
+shader_parameter/new_palette = ExtResource("7_k04wc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ltsrr"]
+resource_local_to_scene = true
+shader = ExtResource("6_6k6h6")
+shader_parameter/old_palette = ExtResource("14_xh0tf")
+shader_parameter/new_palette = ExtResource("14_xh0tf")
+
+[node name="Tutorial" unique_id=801845497 instance=ExtResource("1_c5qxs")]
 script = ExtResource("2_v1ay4")
 battery_quest = SubResource("Resource_7jipr")
 quests = Array[ExtResource("3_ea8sw")]([SubResource("Resource_26eav"), SubResource("Resource_f0tmj"), SubResource("Resource_y74n0"), SubResource("Resource_hsvyu"), SubResource("Resource_pl133"), SubResource("Resource_04vwp"), SubResource("Resource_s3q2n"), SubResource("Resource_7jipr"), SubResource("Resource_6hkcd"), SubResource("Resource_0chku"), SubResource("Resource_yqccr")])
 play_complete_sound = Array[ExtResource("3_ea8sw")]([SubResource("Resource_f0tmj"), SubResource("Resource_y74n0"), SubResource("Resource_pl133"), SubResource("Resource_04vwp"), SubResource("Resource_s3q2n"), SubResource("Resource_7jipr"), SubResource("Resource_6hkcd")])
 
-[node name="Welcome" parent="QuestNodes" index="0" instance=ExtResource("3_0femm")]
+[node name="Welcome" parent="QuestNodes" parent_id_path=PackedInt32Array(89701128) index="0" unique_id=212941630 instance=ExtResource("3_0femm")]
 quest = SubResource("Resource_26eav")
 
-[node name="Move" parent="QuestNodes" index="1" instance=ExtResource("4_dj2kv")]
+[node name="Move" parent="QuestNodes" parent_id_path=PackedInt32Array(89701128) index="1" unique_id=599038518 instance=ExtResource("4_dj2kv")]
 quest = SubResource("Resource_f0tmj")
 delay = 0.5
 
-[node name="Light" parent="QuestNodes" index="2" instance=ExtResource("4_dj2kv")]
+[node name="Light" parent="QuestNodes" parent_id_path=PackedInt32Array(89701128) index="2" unique_id=349650046 instance=ExtResource("4_dj2kv")]
 quest = SubResource("Resource_y74n0")
 delay = 0.5
 
-[node name="AlertInfo" parent="QuestNodes" index="3" instance=ExtResource("3_0femm")]
+[node name="AlertInfo" parent="QuestNodes" parent_id_path=PackedInt32Array(89701128) index="3" unique_id=396621035 instance=ExtResource("3_0femm")]
 quest = SubResource("Resource_hsvyu")
 words_per_minute = 300.0
 
-[node name="AlertLow" type="Node" parent="QuestNodes" index="4"]
+[node name="AlertLow" type="Node" parent="QuestNodes" parent_id_path=PackedInt32Array(89701128) index="4" unique_id=1855659562]
 script = ExtResource("5_sx67b")
 quest = SubResource("Resource_blp0j")
 
-[node name="AlertHigh" type="Node" parent="QuestNodes" index="5"]
+[node name="AlertHigh" type="Node" parent="QuestNodes" parent_id_path=PackedInt32Array(89701128) index="5" unique_id=1205829281]
 script = ExtResource("5_sx67b")
 quest = SubResource("Resource_huau8")
 
-[node name="Damage" type="Node" parent="QuestNodes" index="6"]
+[node name="Damage" type="Node" parent="QuestNodes" parent_id_path=PackedInt32Array(89701128) index="6" unique_id=919109529]
 script = ExtResource("5_sx67b")
 quest = SubResource("Resource_04vwp")
 
-[node name="Summon" type="Node" parent="QuestNodes" index="7"]
+[node name="Summon" type="Node" parent="QuestNodes" parent_id_path=PackedInt32Array(89701128) index="7" unique_id=1336881912]
 script = ExtResource("5_sx67b")
 quest = SubResource("Resource_s3q2n")
 
-[node name="RetryTimer" type="Timer" parent="QuestNodes/Summon" index="0"]
+[node name="RetryTimer" type="Timer" parent="QuestNodes/Summon" index="0" unique_id=364913396]
 wait_time = 7.0
 one_shot = true
 
-[node name="Battery" type="Node" parent="QuestNodes" index="8"]
+[node name="Battery" type="Node" parent="QuestNodes" parent_id_path=PackedInt32Array(89701128) index="8" unique_id=395080946]
 script = ExtResource("5_sx67b")
 quest = SubResource("Resource_7jipr")
 
-[node name="Revive" type="Node" parent="QuestNodes" index="9"]
+[node name="Revive" type="Node" parent="QuestNodes" parent_id_path=PackedInt32Array(89701128) index="9" unique_id=271870575]
 script = ExtResource("5_sx67b")
 quest = SubResource("Resource_6hkcd")
 
-[node name="Teamwork" parent="QuestNodes" index="10" instance=ExtResource("3_0femm")]
+[node name="Teamwork" parent="QuestNodes" parent_id_path=PackedInt32Array(89701128) index="10" unique_id=1173197535 instance=ExtResource("3_0femm")]
 quest = SubResource("Resource_0chku")
 
-[node name="Sprint" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts" index="2"]
+[node name="Sprint" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts" parent_id_path=PackedInt32Array(993135915) index="2" unique_id=129483878]
 text = "Light:"
 
-[node name="Summon" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts" index="4"]
+[node name="Summon" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts" parent_id_path=PackedInt32Array(993135915) index="4" unique_id=1745018194]
 visible = false
 
-[node name="Button2Prompt" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts" index="5"]
+[node name="Button2Prompt" parent="CanvasLayer/MarginContainer/PanelContainer/VBoxContainer/Prompts" parent_id_path=PackedInt32Array(993135915) index="5" unique_id=139347678]
 visible = false
 
-[node name="Ghost" parent="." index="5" node_paths=PackedStringArray("controller")]
+[node name="Ghost" parent="." index="5" unique_id=2108008753 node_paths=PackedStringArray("controller")]
 position = Vector2(368, 128)
 controller = NodePath("NPCGhost")
 
-[node name="NPCGhost" parent="Ghost" index="18" instance=ExtResource("6_n7jug")]
+[node name="NPCGhost" parent="Ghost" index="18" unique_id=2098365836 instance=ExtResource("6_n7jug")]
 
-[node name="FollowPlayer" parent="Ghost/IgnoreCanvasModulate" index="0"]
+[node name="FollowPlayer" parent="Ghost/IgnoreCanvasModulate" parent_id_path=PackedInt32Array(2108008753, 1772456436) index="0" unique_id=343564369]
 position = Vector2(368, 128)
 
-[node name="Hunter" parent="." index="6"]
+[node name="Hunter" parent="." index="6" unique_id=201539915]
 position = Vector2(368, 248)
 
-[node name="IsMoving" parent="Hunter/StateChart/Base/Alive/Movement/Idle" index="0"]
-guard = SubResource("Resource_kpksu")
+[node name="IsMoving" parent="Hunter/StateChart/Base/Alive/Movement/Idle" parent_id_path=PackedInt32Array(201539915, 339987996) index="0" unique_id=690856688]
+guard = SubResource("Resource_xh0tf")
 
-[node name="IsNotMoving" parent="Hunter/StateChart/Base/Alive/Movement/Move" index="0"]
-guard = SubResource("Resource_gy72a")
+[node name="IsNotMoving" parent="Hunter/StateChart/Base/Alive/Movement/Move" parent_id_path=PackedInt32Array(201539915, 1270144949) index="0" unique_id=713585796]
+guard = SubResource("Resource_nwmwq")
 
-[node name="MaterialParent" parent="Hunter/HunterCostume/CanvasGroup" index="0"]
-material = SubResource("ShaderMaterial_psybu")
+[node name="MaterialParent" parent="Hunter/HunterCostume/CanvasGroup" parent_id_path=PackedInt32Array(201539915, 1831305852, 443637965) index="0" unique_id=348678599]
+material = SubResource("ShaderMaterial_ol48q")
 
-[node name="Hat" parent="Hunter/HunterCostume/CanvasGroup" index="1"]
-material = SubResource("ShaderMaterial_nwmwq")
+[node name="Hat" parent="Hunter/HunterCostume/CanvasGroup" parent_id_path=PackedInt32Array(201539915, 1831305852, 443637965) index="1" unique_id=868655723]
+material = SubResource("ShaderMaterial_ar6y6")
 
-[node name="FollowPlayer" parent="Hunter/IgnoreCanvasModulate" index="0"]
+[node name="FollowPlayer" parent="Hunter/IgnoreCanvasModulate" parent_id_path=PackedInt32Array(201539915, 1683814156) index="0" unique_id=1940306715]
 position = Vector2(368, 248)
 
-[node name="BatterySpawner" parent="." index="7" node_paths=PackedStringArray("spawn_root") instance=ExtResource("13_g4mwu")]
+[node name="BatterySpawner" parent="." index="7" unique_id=1035666342 node_paths=PackedStringArray("spawn_root") instance=ExtResource("13_g4mwu")]
 spawn_root = NodePath("..")
 
-[node name="NPCHunter" parent="." index="8" node_paths=PackedStringArray("controller") instance=ExtResource("7_smdw1")]
+[node name="NPCHunter" parent="." index="8" unique_id=521220052 node_paths=PackedStringArray("controller") instance=ExtResource("7_smdw1")]
 position = Vector2(136, 127)
 controller = NodePath("NPCHunter")
 metadata/_edit_group_ = true
 
-[node name="IsMoving" parent="NPCHunter/StateChart/Base/Alive/Movement/Idle" index="0"]
-guard = SubResource("Resource_wr3rf")
+[node name="IsMoving" parent="NPCHunter/StateChart/Base/Alive/Movement/Idle" parent_id_path=PackedInt32Array(521220052, 339987996) index="0" unique_id=690856688]
+guard = SubResource("Resource_1gg0e")
 
-[node name="IsNotMoving" parent="NPCHunter/StateChart/Base/Alive/Movement/Move" index="0"]
-guard = SubResource("Resource_j56l6")
+[node name="IsNotMoving" parent="NPCHunter/StateChart/Base/Alive/Movement/Move" parent_id_path=PackedInt32Array(521220052, 1270144949) index="0" unique_id=713585796]
+guard = SubResource("Resource_dfwv5")
 
-[node name="HunterCostume" parent="NPCHunter" index="13"]
+[node name="HunterCostume" parent="NPCHunter" index="13" unique_id=1831305852]
 palette = 1
 
-[node name="MaterialParent" parent="NPCHunter/HunterCostume/CanvasGroup" index="0"]
-material = SubResource("ShaderMaterial_3hpvg")
+[node name="MaterialParent" parent="NPCHunter/HunterCostume/CanvasGroup" parent_id_path=PackedInt32Array(521220052, 1831305852, 443637965) index="0" unique_id=348678599]
+material = SubResource("ShaderMaterial_6xxlw")
 
-[node name="Hat" parent="NPCHunter/HunterCostume/CanvasGroup" index="1"]
-material = SubResource("ShaderMaterial_ol48q")
+[node name="Hat" parent="NPCHunter/HunterCostume/CanvasGroup" parent_id_path=PackedInt32Array(521220052, 1831305852, 443637965) index="1" unique_id=868655723]
+material = SubResource("ShaderMaterial_ltsrr")
 
-[node name="FollowPlayer" parent="NPCHunter/IgnoreCanvasModulate" index="0"]
+[node name="FollowPlayer" parent="NPCHunter/IgnoreCanvasModulate" parent_id_path=PackedInt32Array(521220052, 1683814156) index="0" unique_id=1940306715]
 position = Vector2(136, 127)
 
-[node name="NPCHunter" parent="NPCHunter" index="17" node_paths=PackedStringArray("ghost") instance=ExtResource("8_40hbx")]
+[node name="NPCHunter" parent="NPCHunter" index="17" unique_id=935499562 node_paths=PackedStringArray("ghost") instance=ExtResource("8_40hbx")]
 ghost = NodePath("../../Ghost")
 
 [connection signal="completed" from="QuestNodes/Damage" to="Ghost/NPCGhost" method="set_sprint" binds= [true]]
@@ -261,11 +261,11 @@ ghost = NodePath("../../Ghost")
 [connection signal="started" from="QuestNodes/Damage" to="Ghost" method="set_position" binds= [Vector2(192, 288)]]
 [connection signal="started" from="QuestNodes/Damage" to="Ghost/NPCGhost" method="set_sprint" binds= [false]]
 [connection signal="completed" from="QuestNodes/Summon" to="QuestNodes/Summon/RetryTimer" method="stop"]
-[connection signal="completed" from="QuestNodes/Summon" to="Ghost/NPCGhost" method="set_sprint" binds= [true]]
 [connection signal="completed" from="QuestNodes/Summon" to="Ghost/NPCGhost" method="set_summon" binds= [false]]
+[connection signal="completed" from="QuestNodes/Summon" to="Ghost/NPCGhost" method="set_sprint" binds= [true]]
 [connection signal="started" from="QuestNodes/Summon" to="Ghost" method="set_position" binds= [Vector2(368, 128)]]
-[connection signal="started" from="QuestNodes/Summon" to="Ghost/NPCGhost" method="set_sprint" binds= [false]]
 [connection signal="started" from="QuestNodes/Summon" to="Ghost/NPCGhost" method="set_summon" binds= [true]]
+[connection signal="started" from="QuestNodes/Summon" to="Ghost/NPCGhost" method="set_sprint" binds= [false]]
 [connection signal="timeout" from="QuestNodes/Summon/RetryTimer" to="Ghost/NPCGhost" method="set_summon" binds= [true]]
 [connection signal="completed" from="QuestNodes/Battery" to="Hunter/StateChart/Base/Dead/Revived" method="set_block_signals" binds= [false]]
 [connection signal="started" from="QuestNodes/Battery" to="Hunter/StateChart/Base/Dead/Revived" method="set_block_signals" binds= [true]]

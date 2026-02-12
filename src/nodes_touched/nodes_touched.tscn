@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dq7ts6lhskwyn"]
+[gd_scene format=3 uid="uid://dq7ts6lhskwyn"]
 
 [ext_resource type="Script" uid="uid://ogattg31dup" path="res://src/nodes_touched/nodes_touched.gd" id="1_wrlga"]
 
-[node name="NodesTouched" type="Area2D"]
+[node name="NodesTouched" type="Area2D" unique_id=855902390]
 script = ExtResource("1_wrlga")
 
 [connection signal="area_entered" from="." to="." method="_on_entered"]

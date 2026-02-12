@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b55fo71d58ijs"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b55fo71d58ijs"]
 
 [ext_resource type="Shader" uid="uid://ddd1c25gp4wu0" path="res://addons/shaders/pixel_outlines.gdshader" id="1_w7nxs"]
 

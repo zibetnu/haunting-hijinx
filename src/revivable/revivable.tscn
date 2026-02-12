@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b4i2arqquha56"]
+[gd_scene format=3 uid="uid://b4i2arqquha56"]
 
 [ext_resource type="Script" uid="uid://p54axfykbsdx" path="res://src/revivable/revivable.gd" id="1_1i1k4"]
 
-[node name="Revivable" type="Node"]
+[node name="Revivable" type="Node" unique_id=2016725734]
 script = ExtResource("1_1i1k4")

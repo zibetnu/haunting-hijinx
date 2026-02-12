@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://02ri1p0jbqdb"]
+[gd_scene format=3 uid="uid://02ri1p0jbqdb"]
 
 [ext_resource type="Script" uid="uid://cxtv2k5y1qsv7" path="res://src/tutorial/ghost/ghost_tutorial.gd" id="1_c6pgd"]
 [ext_resource type="PackedScene" uid="uid://c64tx6254qrlp" path="res://src/tutorial/tutorial.tscn" id="1_i6ivc"]
@@ -86,62 +86,62 @@ resource_name = "Complete"
 script = ExtResource("2_r5b0f")
 objective = "[rainbow freq=0.6 sat=0.6 val=1]Ghost tutorial complete. Happy haunting![/rainbow]"
 
-[node name="Tutorial" instance=ExtResource("1_i6ivc")]
+[node name="Tutorial" unique_id=480018218 instance=ExtResource("1_i6ivc")]
 script = ExtResource("1_c6pgd")
 low_alert_quest = SubResource("Resource_osr1n")
 high_alert_quest = SubResource("Resource_3jbmy")
 quests = Array[ExtResource("2_r5b0f")]([SubResource("Resource_lfxhu"), SubResource("Resource_f0tmj"), SubResource("Resource_fx3un"), SubResource("Resource_5eatj"), SubResource("Resource_ljdkr"), SubResource("Resource_t00pl"), SubResource("Resource_a7qnb"), SubResource("Resource_7teru"), SubResource("Resource_41785"), SubResource("Resource_txx1p"), SubResource("Resource_rhmfh"), SubResource("Resource_2a4mi"), SubResource("Resource_g171c")])
 play_complete_sound = Array[ExtResource("2_r5b0f")]([SubResource("Resource_f0tmj"), SubResource("Resource_fx3un"), SubResource("Resource_5eatj"), SubResource("Resource_t00pl"), SubResource("Resource_7teru"), SubResource("Resource_txx1p"), SubResource("Resource_2a4mi")])
 
-[node name="Welcome" parent="QuestNodes" index="0" instance=ExtResource("5_s13op")]
+[node name="Welcome" parent="QuestNodes" parent_id_path=PackedInt32Array(89701128) index="0" unique_id=1514931859 instance=ExtResource("5_s13op")]
 quest = SubResource("Resource_lfxhu")
 
-[node name="Move" parent="QuestNodes" index="1" instance=ExtResource("6_x00k6")]
+[node name="Move" parent="QuestNodes" parent_id_path=PackedInt32Array(89701128) index="1" unique_id=1453127095 instance=ExtResource("6_x00k6")]
 quest = SubResource("Resource_f0tmj")
 delay = 0.5
 
-[node name="Sprint" parent="QuestNodes" index="2" instance=ExtResource("6_x00k6")]
+[node name="Sprint" parent="QuestNodes" parent_id_path=PackedInt32Array(89701128) index="2" unique_id=1881012508 instance=ExtResource("6_x00k6")]
 quest = SubResource("Resource_fx3un")
 delay = 0.5
 
-[node name="Summon" type="Node" parent="QuestNodes" index="3"]
+[node name="Summon" type="Node" parent="QuestNodes" parent_id_path=PackedInt32Array(89701128) index="3" unique_id=1007922437]
 script = ExtResource("7_7l8aw")
 quest = SubResource("Resource_5eatj")
 
-[node name="VisibleInfo" parent="QuestNodes" index="4" instance=ExtResource("5_s13op")]
+[node name="VisibleInfo" parent="QuestNodes" parent_id_path=PackedInt32Array(89701128) index="4" unique_id=672788348 instance=ExtResource("5_s13op")]
 quest = SubResource("Resource_ljdkr")
 words_per_minute = 250.0
 
-[node name="Visible" parent="QuestNodes" index="5" instance=ExtResource("6_x00k6")]
+[node name="Visible" parent="QuestNodes" parent_id_path=PackedInt32Array(89701128) index="5" unique_id=1788307796 instance=ExtResource("6_x00k6")]
 quest = SubResource("Resource_t00pl")
 delay = 0.5
 
-[node name="AlertInfo" parent="QuestNodes" index="6" instance=ExtResource("5_s13op")]
+[node name="AlertInfo" parent="QuestNodes" parent_id_path=PackedInt32Array(89701128) index="6" unique_id=196521098 instance=ExtResource("5_s13op")]
 quest = SubResource("Resource_a7qnb")
 words_per_minute = 300.0
 
-[node name="GrabInfo" parent="QuestNodes" index="7" instance=ExtResource("5_s13op")]
+[node name="GrabInfo" parent="QuestNodes" parent_id_path=PackedInt32Array(89701128) index="7" unique_id=1171265190 instance=ExtResource("5_s13op")]
 quest = SubResource("Resource_41785")
 
-[node name="Grab" type="Node" parent="QuestNodes" index="8"]
+[node name="Grab" type="Node" parent="QuestNodes" parent_id_path=PackedInt32Array(89701128) index="8" unique_id=383150203]
 script = ExtResource("7_7l8aw")
 quest = SubResource("Resource_txx1p")
 
-[node name="DamageInfo" parent="QuestNodes" index="9" instance=ExtResource("5_s13op")]
+[node name="DamageInfo" parent="QuestNodes" parent_id_path=PackedInt32Array(89701128) index="9" unique_id=622172005 instance=ExtResource("5_s13op")]
 quest = SubResource("Resource_rhmfh")
 words_per_minute = 250.0
 
-[node name="Damage" type="Node" parent="QuestNodes" index="10"]
+[node name="Damage" type="Node" parent="QuestNodes" parent_id_path=PackedInt32Array(89701128) index="10" unique_id=1595110022]
 script = ExtResource("7_7l8aw")
 quest = SubResource("Resource_2a4mi")
 
-[node name="FollowPlayer" parent="Ghost/IgnoreCanvasModulate" index="0"]
+[node name="FollowPlayer" parent="Ghost/IgnoreCanvasModulate" parent_id_path=PackedInt32Array(2108008753, 1772456436) index="0" unique_id=343564369]
 position = Vector2(368, 248)
 
-[node name="Hunter" parent="." index="6" node_paths=PackedStringArray("controller")]
+[node name="Hunter" parent="." index="6" unique_id=201539915 node_paths=PackedStringArray("controller")]
 controller = NodePath("NPCHunter")
 
-[node name="NPCHunter" parent="Hunter" index="17" node_paths=PackedStringArray("ghost") instance=ExtResource("12_2andj")]
+[node name="NPCHunter" parent="Hunter" index="17" unique_id=854333627 node_paths=PackedStringArray("ghost") instance=ExtResource("12_2andj")]
 ghost = NodePath("../../Ghost")
 
 [connection signal="completed" from="QuestNodes/Summon" to="." method="set_auto_recharge" binds= [false]]

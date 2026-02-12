@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://kshsc10g60hy"]
+[gd_scene format=3 uid="uid://kshsc10g60hy"]
 
 [ext_resource type="Script" uid="uid://c7eo8ofahcnwk" path="res://src/match_menu/match_menu.gd" id="1_o1w5u"]
 [ext_resource type="PackedScene" uid="uid://56f6sbrp31ud" path="res://src/call_attempter/call_attempter.tscn" id="2_0ack1"]
 [ext_resource type="PackedScene" uid="uid://cgxmks3xaej68" path="res://src/steam_connector/steam_connector.tscn" id="2_2qtrp"]
 [ext_resource type="PackedScene" uid="uid://da03scrbiqax2" path="res://src/peer_id/peer_id.tscn" id="3_o38nd"]
 
-[node name="MatchMenu" type="CenterContainer" node_paths=PackedStringArray("first_button")]
+[node name="MatchMenu" type="CenterContainer" unique_id=94578157 node_paths=PackedStringArray("first_button")]
 process_mode = 3
 visible = false
 anchors_preset = 15
@@ -16,27 +16,27 @@ grow_vertical = 2
 script = ExtResource("1_o1w5u")
 first_button = NodePath("PanelContainer/VBoxContainer/Resume")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1204422525]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1851794643]
 layout_mode = 2
 
-[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1886445144]
 layout_mode = 2
 text = "Resume"
 
-[node name="EndMatch" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="EndMatch" type="Button" parent="PanelContainer/VBoxContainer" unique_id=116236988]
 unique_name_in_owner = true
 layout_mode = 2
 text = "End Match"
 
-[node name="MainMenu" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="MainMenu" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1082507547]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Main Menu"
 
-[node name="EndMatchConfirmationDialog" type="ConfirmationDialog" parent="."]
+[node name="EndMatchConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=1845267254]
 transparent_bg = true
 initial_position = 2
 borderless = true
@@ -45,7 +45,7 @@ dialog_hide_on_ok = false
 dialog_autowrap = true
 cancel_button_text = "No"
 
-[node name="Label" type="Label" parent="EndMatchConfirmationDialog"]
+[node name="Label" type="Label" parent="EndMatchConfirmationDialog" unique_id=160241011]
 offset_left = 7.0
 offset_top = 7.0
 offset_right = 193.0
@@ -55,7 +55,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="MainMenuConfirmationDialog" type="ConfirmationDialog" parent="."]
+[node name="MainMenuConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=1310433460]
 transparent_bg = true
 initial_position = 2
 borderless = true
@@ -64,7 +64,7 @@ dialog_hide_on_ok = false
 dialog_autowrap = true
 cancel_button_text = "No"
 
-[node name="Label" type="Label" parent="MainMenuConfirmationDialog"]
+[node name="Label" type="Label" parent="MainMenuConfirmationDialog" unique_id=1515348465]
 offset_left = 7.0
 offset_top = 7.0
 offset_right = 193.0
@@ -74,17 +74,17 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="LobbyCall" parent="." instance=ExtResource("2_0ack1")]
+[node name="LobbyCall" parent="." unique_id=1288714978 instance=ExtResource("2_0ack1")]
 node_path = NodePath("/root/SceneChanger")
 method = &"change_to_lobby"
 
-[node name="MainMenuCall" parent="." instance=ExtResource("2_0ack1")]
+[node name="MainMenuCall" parent="." unique_id=563712426 instance=ExtResource("2_0ack1")]
 node_path = NodePath("/root/SceneChanger")
 method = &"change_to_menus"
 
-[node name="PeerID" parent="." instance=ExtResource("3_o38nd")]
+[node name="PeerID" parent="." unique_id=2073685766 instance=ExtResource("3_o38nd")]
 
-[node name="SteamConnector" parent="." instance=ExtResource("2_2qtrp")]
+[node name="SteamConnector" parent="." unique_id=1191019919 instance=ExtResource("2_2qtrp")]
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="hide"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/EndMatch" to="EndMatchConfirmationDialog" method="popup"]

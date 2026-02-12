@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://gh0mk0t85f13"]
+[gd_scene format=3 uid="uid://gh0mk0t85f13"]
 
 [ext_resource type="Script" uid="uid://xmdepibwpljk" path="res://src/battery_alert/battery_alert.gd" id="1_el1mj"]
 [ext_resource type="Texture2D" uid="uid://bbdxx5dlm74uq" path="res://assets/battery_indicator.png" id="1_hgi5l"]
@@ -99,7 +99,7 @@ _data = {
 &"battery_low": SubResource("Animation_fm20k")
 }
 
-[node name="BatteryAlert" type="Control"]
+[node name="BatteryAlert" type="Control" unique_id=995823505]
 visible = false
 custom_minimum_size = Vector2(16, 8)
 layout_mode = 3
@@ -109,24 +109,22 @@ offset_bottom = 8.0
 size_flags_vertical = 8
 script = ExtResource("1_el1mj")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1802130309]
 replication_config = SubResource("SceneReplicationConfig_habgj")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1011438514]
 position = Vector2(8, 4)
 texture = ExtResource("1_hgi5l")
 hframes = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_7a73r")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=441787423]
+libraries/ = SubResource("AnimationLibrary_7a73r")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=591905267]
 wait_time = 3.0
 one_shot = true
 
-[node name="AllowSetBool" parent="." node_paths=PackedStringArray("node") instance=ExtResource("3_n74hd")]
+[node name="AllowSetBool" parent="." unique_id=403085715 node_paths=PackedStringArray("node") instance=ExtResource("3_n74hd")]
 is_allowed = true
 node = NodePath("..")
 property_name = &"visible"

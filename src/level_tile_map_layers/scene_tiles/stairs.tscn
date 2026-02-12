@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cai8ypa3j3wip"]
+[gd_scene format=3 uid="uid://cai8ypa3j3wip"]
 
 [ext_resource type="Texture2D" uid="uid://ct3yeslonr25g" path="res://assets/tile_sets/main_floor/stairs/steps/diffuse.png" id="1_657q0"]
 [ext_resource type="Texture2D" uid="uid://ua4qebfidw8y" path="res://assets/tile_sets/main_floor/stairs/steps/normal.png" id="2_e81am"]
@@ -20,120 +20,120 @@ normal_texture = ExtResource("5_nxgy0")
 specular_texture = ExtResource("6_k0w34")
 specular_shininess = 0.5
 
-[node name="Stairs" type="Node2D"]
+[node name="Stairs" type="Node2D" unique_id=960498183]
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Node2D" type="Node2D" parent="." unique_id=405738446]
 position = Vector2(8, 0)
 
-[node name="Steps" type="Node2D" parent="Node2D"]
+[node name="Steps" type="Node2D" parent="Node2D" unique_id=1760605669]
 
-[node name="StepsUpper" type="Sprite2D" parent="Node2D/Steps"]
+[node name="StepsUpper" type="Sprite2D" parent="Node2D/Steps" unique_id=1176948916]
 light_mask = 0
 position = Vector2(0, -47)
 texture = SubResource("CanvasTexture_5x5y2")
 region_enabled = true
 region_rect = Rect2(0, 0, 192, 54)
 
-[node name="StepsLower" type="Sprite2D" parent="Node2D/Steps"]
+[node name="StepsLower" type="Sprite2D" parent="Node2D/Steps" unique_id=941446767]
 position = Vector2(0, 4)
 texture = SubResource("CanvasTexture_5x5y2")
 region_enabled = true
 region_rect = Rect2(0, 54, 192, 48)
 
-[node name="StepSides" type="Node2D" parent="Node2D/Steps"]
+[node name="StepSides" type="Node2D" parent="Node2D/Steps" unique_id=584053072]
 
-[node name="StepSide1" type="Sprite2D" parent="Node2D/Steps/StepSides"]
+[node name="StepSide1" type="Sprite2D" parent="Node2D/Steps/StepSides" unique_id=2145503808]
 position = Vector2(-55, -22)
 texture = SubResource("CanvasTexture_5x5y2")
 region_enabled = true
 region_rect = Rect2(38, 50, 7, 4)
 
-[node name="StepSide2" type="Sprite2D" parent="Node2D/Steps/StepSides"]
+[node name="StepSide2" type="Sprite2D" parent="Node2D/Steps/StepSides" unique_id=1369642926]
 position = Vector2(-48, -26)
 texture = SubResource("CanvasTexture_5x5y2")
 region_enabled = true
 region_rect = Rect2(45, 46, 7, 4)
 
-[node name="StepSide3" type="Sprite2D" parent="Node2D/Steps/StepSides"]
+[node name="StepSide3" type="Sprite2D" parent="Node2D/Steps/StepSides" unique_id=1200710607]
 position = Vector2(-41, -30)
 texture = SubResource("CanvasTexture_5x5y2")
 region_enabled = true
 region_rect = Rect2(52, 42, 7, 4)
 
-[node name="StepSide4" type="Sprite2D" parent="Node2D/Steps/StepSides"]
+[node name="StepSide4" type="Sprite2D" parent="Node2D/Steps/StepSides" unique_id=404439906]
 position = Vector2(0, -34)
 texture = SubResource("CanvasTexture_5x5y2")
 region_enabled = true
 region_rect = Rect2(59, 38, 74, 4)
 
-[node name="StepSide5" type="Sprite2D" parent="Node2D/Steps/StepSides"]
+[node name="StepSide5" type="Sprite2D" parent="Node2D/Steps/StepSides" unique_id=732847226]
 position = Vector2(40, -30)
 texture = SubResource("CanvasTexture_5x5y2")
 region_enabled = true
 region_rect = Rect2(133, 42, 7, 4)
 
-[node name="StepSide6" type="Sprite2D" parent="Node2D/Steps/StepSides"]
+[node name="StepSide6" type="Sprite2D" parent="Node2D/Steps/StepSides" unique_id=1482526626]
 position = Vector2(47, -26)
 texture = SubResource("CanvasTexture_5x5y2")
 region_enabled = true
 region_rect = Rect2(140, 46, 7, 4)
 
-[node name="StepSide7" type="Sprite2D" parent="Node2D/Steps/StepSides"]
+[node name="StepSide7" type="Sprite2D" parent="Node2D/Steps/StepSides" unique_id=2047544549]
 position = Vector2(54, -22)
 texture = SubResource("CanvasTexture_5x5y2")
 region_enabled = true
 region_rect = Rect2(147, 50, 7, 4)
 
-[node name="Railing" type="Sprite2D" parent="Node2D"]
+[node name="Railing" type="Sprite2D" parent="Node2D" unique_id=1039583907]
 light_mask = 2
 texture = SubResource("CanvasTexture_7qijg")
 offset = Vector2(0, -15)
 region_rect = Rect2(0, 0, 128, 86)
 
-[node name="LowerCollision" type="Node2D" parent="Node2D"]
+[node name="LowerCollision" type="Node2D" parent="Node2D" unique_id=1195158937]
 editor_description = "Colliders for when a player is at or near ground level. Will need to be adjusted if going up the stairs is ever implemented."
 visible = false
 light_mask = 16
 position = Vector2(0, 28)
 
-[node name="LeftRail" type="StaticBody2D" parent="Node2D/LowerCollision"]
+[node name="LeftRail" type="StaticBody2D" parent="Node2D/LowerCollision" unique_id=906198603]
 position = Vector2(-61, 0)
 metadata/_edit_group_ = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node2D/LowerCollision/LeftRail"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node2D/LowerCollision/LeftRail" unique_id=1079067643]
 polygon = PackedVector2Array(-3, 0, -3, -6, -2, -6, -2, -48, 3, -48, 3, -6, 3, 0)
 
-[node name="RightRail" type="StaticBody2D" parent="Node2D/LowerCollision"]
+[node name="RightRail" type="StaticBody2D" parent="Node2D/LowerCollision" unique_id=443479121]
 position = Vector2(61, 0)
 metadata/_edit_group_ = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node2D/LowerCollision/RightRail"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node2D/LowerCollision/RightRail" unique_id=601071880]
 polygon = PackedVector2Array(-3, 0, -3, -6, -3, -48, 2, -48, 2, -6, 3, -6, 3, 0)
 
-[node name="LeftVoid" type="StaticBody2D" parent="Node2D/LowerCollision"]
+[node name="LeftVoid" type="StaticBody2D" parent="Node2D/LowerCollision" unique_id=2139531504]
 position = Vector2(-34, -28)
 metadata/_edit_group_ = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node2D/LowerCollision/LeftVoid"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node2D/LowerCollision/LeftVoid" unique_id=721702644]
 polygon = PackedVector2Array(3, 0, 3, -38, -24, -38, -24, 0)
 
-[node name="RightVoid" type="StaticBody2D" parent="Node2D/LowerCollision"]
+[node name="RightVoid" type="StaticBody2D" parent="Node2D/LowerCollision" unique_id=1760748198]
 position = Vector2(55, -28)
 metadata/_edit_group_ = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node2D/LowerCollision/RightVoid"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node2D/LowerCollision/RightVoid" unique_id=1661482066]
 polygon = PackedVector2Array(3, 0, 3, -38, -24, -38, -24, 0)
 
-[node name="NoBatterySpawns" type="Area2D" parent="Node2D"]
+[node name="NoBatterySpawns" type="Area2D" parent="Node2D" unique_id=1366984190]
 editor_description = "Prevents batteries from spawning on the stairs. Useful while the stairs are not intended to be accessible."
 visible = false
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node2D/NoBatterySpawns"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node2D/NoBatterySpawns" unique_id=618776128]
 polygon = PackedVector2Array(-58, 28, -96, 28, -96, -38, 96, -38, 96, 28, 58, 28, 58, 0, -58, 0)
 
-[node name="Candle" parent="Node2D" instance=ExtResource("7_kk03b")]
+[node name="Candle" parent="Node2D" unique_id=444648772 instance=ExtResource("7_kk03b")]
 z_index = 1
 position = Vector2(-42, -11)
 metadata/_edit_group_ = true
@@ -142,7 +142,7 @@ metadata/_edit_group_ = true
 position = Vector2(8, 8)
 height = 18.0
 
-[node name="Candle2" parent="Node2D" instance=ExtResource("7_kk03b")]
+[node name="Candle2" parent="Node2D" unique_id=965679983 instance=ExtResource("7_kk03b")]
 z_index = 1
 position = Vector2(26, -11)
 metadata/_edit_group_ = true

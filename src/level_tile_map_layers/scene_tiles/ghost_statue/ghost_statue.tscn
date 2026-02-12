@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://qvu7pdftkg8y"]
+[gd_scene format=3 uid="uid://qvu7pdftkg8y"]
 
 [ext_resource type="Texture2D" uid="uid://bcud6153v4cd5" path="res://assets/statue/base/diffuse.png" id="1_nkf4o"]
 [ext_resource type="Script" uid="uid://xlr88m70s384" path="res://src/level_tile_map_layers/scene_tiles/ghost_statue/ghost_statue.gd" id="1_nqrkp"]
@@ -72,42 +72,42 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="GhostStatue" type="StaticBody2D"]
+[node name="GhostStatue" type="StaticBody2D" unique_id=1620762430]
 script = ExtResource("1_nqrkp")
 
-[node name="LookTimer" type="Timer" parent="."]
+[node name="LookTimer" type="Timer" parent="." unique_id=691760335]
 wait_time = 5.0
 one_shot = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1493055834]
 position = Vector2(8, -8)
 shape = SubResource("RectangleShape2D_ob8gk")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=2029248893]
 collision_layer = 0
 collision_mask = 4
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1108653090]
 position = Vector2(8, -8)
 shape = SubResource("RectangleShape2D_ysqp5")
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=1938254284]
 position = Vector2(8, -8)
 occluder = SubResource("OccluderPolygon2D_griun")
 
-[node name="Base" type="Sprite2D" parent="."]
+[node name="Base" type="Sprite2D" parent="." unique_id=728280567]
 light_mask = 6
 z_index = -1
 position = Vector2(8, -10)
 texture = SubResource("CanvasTexture_kqstq")
 
-[node name="Ghost" type="Sprite2D" parent="."]
+[node name="Ghost" type="Sprite2D" parent="." unique_id=329001173]
 light_mask = 6
 position = Vector2(8, -20)
 texture = SubResource("CanvasTexture_xixck")
 
-[node name="Eyes" type="AnimatedSprite2D" parent="."]
+[node name="Eyes" type="AnimatedSprite2D" parent="." unique_id=402377710]
 visible = false
 material = SubResource("CanvasItemMaterial_nqrkp")
 position = Vector2(8, -27)

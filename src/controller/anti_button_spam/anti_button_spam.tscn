@@ -1,11 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://w68cagofxelw"]
+[gd_scene format=3 uid="uid://w68cagofxelw"]
 
 [ext_resource type="Script" uid="uid://bp6qg6hn7ptax" path="res://src/controller/anti_button_spam/anti_button_spam.gd" id="1_44g47"]
 
-[node name="AntiButtonSpam" type="Node2D"]
+[node name="AntiButtonSpam" type="Node2D" unique_id=674133577]
 script = ExtResource("1_44g47")
 
-[node name="ResetTimer" type="Timer" parent="."]
+[node name="ResetTimer" type="Timer" parent="." unique_id=1334104378]
 autostart = true
 
 [connection signal="timeout" from="ResetTimer" to="." method="_on_reset_timer_timeout"]

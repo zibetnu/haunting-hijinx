@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ddoffvjsqum16"]
+[gd_scene format=3 uid="uid://ddoffvjsqum16"]
 
 [ext_resource type="Shader" uid="uid://d2i6fyt1j8hb8" path="res://addons/shaders/palette_swap.gdshader" id="1_b52hh"]
 [ext_resource type="Texture2D" uid="uid://bt8aekaamv1t5" path="res://assets/theme/palette_radio_button.png" id="1_oaw8l"]
@@ -24,7 +24,7 @@ region = Rect2(16, 0, 16, 16)
 atlas = ExtResource("1_oaw8l")
 region = Rect2(32, 0, 16, 16)
 
-[node name="PaletteRadioButton" type="TextureButton"]
+[node name="PaletteRadioButton" type="TextureButton" unique_id=151774929]
 material = SubResource("ShaderMaterial_l7ah2")
 toggle_mode = true
 texture_normal = SubResource("AtlasTexture_47kbn")

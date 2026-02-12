@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://7wne64wo1epb"]
+[gd_scene format=3 uid="uid://7wne64wo1epb"]
 
 [ext_resource type="Script" uid="uid://dw4locfko266n" path="res://src/counting_spawner/counting_spawner.gd" id="1_igehq"]
 
@@ -7,10 +7,10 @@ properties/0/path = NodePath(".:spawned_count_server")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[node name="CountingSpawner" type="MultiplayerSpawner"]
+[node name="CountingSpawner" type="MultiplayerSpawner" unique_id=208514348]
 script = ExtResource("1_igehq")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=950393283]
 replication_config = SubResource("SceneReplicationConfig_sonio")
 
 [connection signal="despawned" from="." to="." method="_on_despawned"]

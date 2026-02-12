@@ -18,7 +18,7 @@ config/name="Haunting Hijinx"
 run/main_scene="res://src/main.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="haunting_hijinx"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 boot_splash/use_filter=false
@@ -35,7 +35,7 @@ SceneChanger="*res://src/autoload/scene_changer/scene_changer.tscn"
 FullscreenToggle="res://src/autoload/fullscreen_toggle.gd"
 MouseHider="res://src/autoload/mouse_hider.gd"
 WindowScaler="*res://src/autoload/window_scaler.gd"
-PromptManager="*res://addons/input_prompts/input_prompt_manager.gd"
+PromptManager="*uid://daqi67gsendnq"
 JoypadMotionActions="res://src/autoload/joypad_motion_actions.gd"
 GhostStatueRPCs="*res://src/autoload/ghost_statue_rpcs.gd"
 

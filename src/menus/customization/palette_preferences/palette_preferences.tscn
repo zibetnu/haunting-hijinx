@@ -1,13 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cqbmc2dond7lm"]
+[gd_scene format=3 uid="uid://cqbmc2dond7lm"]
 
 [ext_resource type="Script" uid="uid://ottrclpwmo8a" path="res://src/menus/customization/palette_preferences/palette_preferences.gd" id="1_xo756"]
 [ext_resource type="Script" uid="uid://c0naylnves2yd" path="res://addons/ReorderableContainer/reorderable_hbox.gd" id="2_b0bbb"]
-[ext_resource type="Texture2D" uid="uid://b1r4xdhw8pco3" path="res://assets/hunter/palettes/yellow.png" id="5_r7n65"]
-[ext_resource type="Texture2D" uid="uid://vae6e0eh7xge" path="res://assets/hunter/palettes/green.png" id="7_70v8q"]
 [ext_resource type="Texture2D" uid="uid://c4uu2qix7n45o" path="res://assets/preference_icons.png" id="7_r7n65"]
-[ext_resource type="Texture2D" uid="uid://cu33mq4g4e6ly" path="res://assets/hunter/palettes/purple.png" id="8_70v8q"]
-[ext_resource type="Texture2D" uid="uid://biqdpl1yys2eh" path="res://assets/hunter/palettes/red.png" id="9_ilmqd"]
-[ext_resource type="Texture2D" uid="uid://4l3a8ifjlff5" path="res://assets/hunter/palettes/blue.png" id="10_2nelx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_flgft"]
 atlas = ExtResource("7_r7n65")
@@ -17,38 +12,37 @@ region = Rect2(0, 0, 8, 8)
 atlas = ExtResource("7_r7n65")
 region = Rect2(8, 0, 8, 8)
 
-[node name="PalettePreferences" type="HBoxContainer"]
+[node name="PalettePreferences" type="HBoxContainer" unique_id=388759362]
 offset_right = 132.0
 offset_bottom = 32.0
 script = ExtResource("1_xo756")
-palettes = Array[Texture2D]([ExtResource("5_r7n65"), ExtResource("7_70v8q"), ExtResource("8_70v8q"), ExtResource("9_ilmqd"), ExtResource("10_2nelx")])
 
-[node name="Left" type="Button" parent="."]
+[node name="Left" type="Button" parent="." unique_id=1163698036]
 layout_mode = 2
 focus_neighbor_left = NodePath("../Right")
 text = "<"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1151944298]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 5
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=149047587]
 layout_mode = 2
 theme_type_variation = &"LabelCompact"
 text = "Preferred Palettes"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1439675442]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=1799562842]
 layout_mode = 2
 texture = SubResource("AtlasTexture_flgft")
 stretch_mode = 3
 
-[node name="ButtonContainer" type="Container" parent="VBoxContainer/HBoxContainer"]
+[node name="ButtonContainer" type="Container" parent="VBoxContainer/HBoxContainer" unique_id=517379647]
 unique_name_in_owner = true
 process_mode = 1
 custom_minimum_size = Vector2(96, 16)
@@ -58,12 +52,12 @@ hold_duration = 0.2
 separation = 4
 metadata/_custom_type_script = "uid://c0naylnves2yd"
 
-[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=1517898]
 layout_mode = 2
 texture = SubResource("AtlasTexture_70v8q")
 stretch_mode = 3
 
-[node name="Right" type="Button" parent="."]
+[node name="Right" type="Button" parent="." unique_id=645403261]
 layout_mode = 2
 focus_neighbor_right = NodePath("../Left")
 text = ">"

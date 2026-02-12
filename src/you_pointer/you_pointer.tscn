@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dp42j74wnvk40"]
+[gd_scene format=3 uid="uid://dp42j74wnvk40"]
 
 [ext_resource type="Script" uid="uid://d06oo4wq73x2i" path="res://src/you_pointer/you_pointer.gd" id="1_dyp5i"]
 [ext_resource type="Texture2D" uid="uid://18wt7n7q8jsa" path="res://assets/you_pointer.png" id="1_py0mn"]
@@ -327,10 +327,10 @@ _data = {
 &"point_up": SubResource("Animation_i4kjf")
 }
 
-[node name="YouPointer" type="Node2D"]
+[node name="YouPointer" type="Node2D" unique_id=898673582]
 script = ExtResource("1_dyp5i")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=166553674]
 visible = false
 offset_left = -12.0
 offset_top = -62.0
@@ -340,26 +340,24 @@ text = "You"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=363325385]
 visible = false
 position = Vector2(0, -38)
 texture = ExtResource("1_py0mn")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_xx7yw")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1615369827]
+libraries/ = SubResource("AnimationLibrary_xx7yw")
 blend_times = [&"point_down", &"fade", 1.0, &"point_up", &"fade", 1.0]
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1847262139]
 wait_time = 3.0
 one_shot = true
 
-[node name="TopNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="TopNotifier" type="VisibleOnScreenNotifier2D" parent="." unique_id=2145198358]
 position = Vector2(-11, -60)
 rect = Rect2(0, 0, 22, 1)
 
-[node name="BottomNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="BottomNotifier" type="VisibleOnScreenNotifier2D" parent="." unique_id=2080865386]
 position = Vector2(-11, 48)
 rect = Rect2(0, 0, 22, 1)
 

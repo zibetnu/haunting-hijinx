@@ -1,4 +1,4 @@
-[gd_resource type="CanvasTexture" load_steps=4 format=3 uid="uid://btftmi3k8807f"]
+[gd_resource type="CanvasTexture" format=3 uid="uid://btftmi3k8807f"]
 
 [ext_resource type="Texture2D" uid="uid://27yk0mqjvicy" path="res://assets/candle/arm_side/diffuse.png" id="1_mqhuf"]
 [ext_resource type="Texture2D" uid="uid://bjr875yxsau05" path="res://assets/candle/arm_side/normal.png" id="2_t526l"]

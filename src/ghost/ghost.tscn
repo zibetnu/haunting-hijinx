@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://8qaswvkeb8qd"]
+[gd_scene format=3 uid="uid://8qaswvkeb8qd"]
 
 [ext_resource type="PackedScene" uid="uid://cjnncoyhqt6xi" path="res://src/client_node_deleter/client_node_deleter.tscn" id="1_rhiif"]
 [ext_resource type="Script" uid="uid://cuaxeqnmf5etx" path="res://src/ghost/ghost.gd" id="1_utd70"]
@@ -92,358 +92,358 @@ properties/1/path = NodePath(".:visible")
 properties/1/spawn = true
 properties/1/replication_mode = 2
 
-[node name="Ghost" type="CharacterBody2D" node_paths=PackedStringArray("controller") groups=["ghosts", "players"]]
+[node name="Ghost" type="CharacterBody2D" unique_id=462444663 node_paths=PackedStringArray("controller") groups=["ghosts", "players"]]
 collision_layer = 8
 motion_mode = 1
 wall_min_slide_angle = 0.0174533
 script = ExtResource("1_utd70")
 controller = NodePath("PlayerControllerStack/Synced")
 
-[node name="PositionSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="PositionSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1431217115]
 root_path = NodePath(".")
 replication_config = SubResource("SceneReplicationConfig_p68gc")
 
-[node name="ClientNodeDeleter" parent="." node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
+[node name="ClientNodeDeleter" parent="." unique_id=318223483 node_paths=PackedStringArray("nodes") instance=ExtResource("1_rhiif")]
 nodes = [NodePath("../Summon"), NodePath("../StateChart"), NodePath("../CollisionShape2D"), NodePath("../AuraLarge"), NodePath("../AuraSmall"), NodePath("../DamageSignals"), NodePath("../Grab"), NodePath("../HuntersTouched")]
 
-[node name="GrabCutscene" parent="." instance=ExtResource("4_qoosa")]
+[node name="GrabCutscene" parent="." unique_id=1524589744 instance=ExtResource("4_qoosa")]
 
-[node name="PeerID" parent="." groups=["ghost_peer_ids"] instance=ExtResource("2_bh3m0")]
+[node name="PeerID" parent="." unique_id=1802279959 groups=["ghost_peer_ids"] instance=ExtResource("2_bh3m0")]
 unique_name_in_owner = true
 
-[node name="Summon" parent="." instance=ExtResource("3_26ncu")]
+[node name="Summon" parent="." unique_id=595871417 instance=ExtResource("3_26ncu")]
 unique_name_in_owner = true
 target_group = &"hunters"
 
-[node name="StateChart" type="Node" parent="."]
+[node name="StateChart" type="Node" parent="." unique_id=1387894703]
 script = ExtResource("3_wp1tu")
 initial_expression_properties = {
 &"drain_areas": 0
 }
 
-[node name="Base" type="Node" parent="StateChart"]
+[node name="Base" type="Node" parent="StateChart" unique_id=360996697]
 script = ExtResource("6_3dmdv")
 
-[node name="Behavior" type="Node" parent="StateChart/Base"]
+[node name="Behavior" type="Node" parent="StateChart/Base" unique_id=657167721]
 script = ExtResource("4_74yim")
 initial_state = NodePath("Alive")
 
-[node name="Dead" type="Node" parent="StateChart/Base/Behavior"]
+[node name="Dead" type="Node" parent="StateChart/Base/Behavior" unique_id=2138561091]
 script = ExtResource("5_6yps6")
 
-[node name="IsDead" parent="StateChart/Base/Behavior/Dead" groups=["ghost_is_deads"] instance=ExtResource("16_q6wqq")]
+[node name="IsDead" parent="StateChart/Base/Behavior/Dead" unique_id=647054236 groups=["ghost_is_deads"] instance=ExtResource("16_q6wqq")]
 group = &"levels"
 
-[node name="Revived" type="Node" parent="StateChart/Base/Behavior/Dead"]
+[node name="Revived" type="Node" parent="StateChart/Base/Behavior/Dead" unique_id=830250332]
 script = ExtResource("6_il0ju")
 to = NodePath("../../Alive")
 event = &"revived"
 delay_in_seconds = "0.0"
 
-[node name="Alive" type="Node" parent="StateChart/Base/Behavior"]
+[node name="Alive" type="Node" parent="StateChart/Base/Behavior" unique_id=2009925828]
 script = ExtResource("4_74yim")
 initial_state = NodePath("Normal")
 
-[node name="Died" type="Node" parent="StateChart/Base/Behavior/Alive"]
+[node name="Died" type="Node" parent="StateChart/Base/Behavior/Alive" unique_id=1654119037]
 script = ExtResource("6_il0ju")
 to = NodePath("../../Dead")
 event = &"died"
 delay_in_seconds = "0.0"
 
-[node name="GrabStarted" type="Node" parent="StateChart/Base/Behavior/Alive"]
+[node name="GrabStarted" type="Node" parent="StateChart/Base/Behavior/Alive" unique_id=1998543627]
 script = ExtResource("6_il0ju")
 to = NodePath("../Grab")
 event = &"grab_started"
 delay_in_seconds = "0.0"
 
-[node name="PanicStarted" type="Node" parent="StateChart/Base/Behavior/Alive"]
+[node name="PanicStarted" type="Node" parent="StateChart/Base/Behavior/Alive" unique_id=1805937834]
 script = ExtResource("6_il0ju")
 to = NodePath("../Panic")
 event = &"panic_started"
 delay_in_seconds = "0.0"
 
-[node name="Stunned" type="Node" parent="StateChart/Base/Behavior/Alive"]
+[node name="Stunned" type="Node" parent="StateChart/Base/Behavior/Alive" unique_id=326090152]
 script = ExtResource("6_il0ju")
 to = NodePath("../Stun")
 event = &"stunned"
 delay_in_seconds = "0.0"
 
-[node name="Summoned" type="Node" parent="StateChart/Base/Behavior/Alive"]
+[node name="Summoned" type="Node" parent="StateChart/Base/Behavior/Alive" unique_id=447265067]
 script = ExtResource("6_il0ju")
 to = NodePath("../SummonRelease")
 event = &"summoned"
 delay_in_seconds = "0.0"
 
-[node name="Normal" type="Node" parent="StateChart/Base/Behavior/Alive"]
+[node name="Normal" type="Node" parent="StateChart/Base/Behavior/Alive" unique_id=177202543]
 script = ExtResource("5_6yps6")
 
-[node name="Button1Pressed" type="Node" parent="StateChart/Base/Behavior/Alive/Normal"]
+[node name="Button1Pressed" type="Node" parent="StateChart/Base/Behavior/Alive/Normal" unique_id=424659007]
 script = ExtResource("6_il0ju")
 to = NodePath("../../Sprint")
 event = &"button_1_pressed"
 delay_in_seconds = "0.0"
 
-[node name="Button2Pressed" type="Node" parent="StateChart/Base/Behavior/Alive/Normal"]
+[node name="Button2Pressed" type="Node" parent="StateChart/Base/Behavior/Alive/Normal" unique_id=819532432]
 script = ExtResource("6_il0ju")
 to = NodePath("../../Summon")
 event = &"button_2_pressed"
 guard = SubResource("Resource_knfa0")
 delay_in_seconds = "0.0"
 
-[node name="MoveStarted" type="Node" parent="StateChart/Base/Behavior/Alive/Normal"]
+[node name="MoveStarted" type="Node" parent="StateChart/Base/Behavior/Alive/Normal" unique_id=373036454]
 script = ExtResource("6_il0ju")
 to = NodePath("../../../../Animation/Move")
 event = &"move_started"
 delay_in_seconds = "0.0"
 
-[node name="MoveStopped" type="Node" parent="StateChart/Base/Behavior/Alive/Normal"]
+[node name="MoveStopped" type="Node" parent="StateChart/Base/Behavior/Alive/Normal" unique_id=1023108939]
 script = ExtResource("6_il0ju")
 to = NodePath("../../../../Animation/Idle")
 event = &"move_stopped"
 delay_in_seconds = "0.0"
 
-[node name="Move" parent="StateChart/Base/Behavior/Alive/Normal" node_paths=PackedStringArray("character") instance=ExtResource("18_5mhrn")]
+[node name="Move" parent="StateChart/Base/Behavior/Alive/Normal" unique_id=2037519634 node_paths=PackedStringArray("character") instance=ExtResource("18_5mhrn")]
 character = NodePath("../../../../../..")
 move_speed = 92.0
 manual_process = true
 
-[node name="Sprint" type="Node" parent="StateChart/Base/Behavior/Alive"]
+[node name="Sprint" type="Node" parent="StateChart/Base/Behavior/Alive" unique_id=819610379]
 script = ExtResource("5_6yps6")
 
-[node name="Button1Released" type="Node" parent="StateChart/Base/Behavior/Alive/Sprint"]
+[node name="Button1Released" type="Node" parent="StateChart/Base/Behavior/Alive/Sprint" unique_id=840184484]
 script = ExtResource("6_il0ju")
 to = NodePath("../../Normal")
 event = &"button_1_released"
 delay_in_seconds = "0.0"
 
-[node name="Button2Pressed" type="Node" parent="StateChart/Base/Behavior/Alive/Sprint"]
+[node name="Button2Pressed" type="Node" parent="StateChart/Base/Behavior/Alive/Sprint" unique_id=1033708475]
 script = ExtResource("6_il0ju")
 to = NodePath("../../Summon")
 event = &"button_2_pressed"
 guard = SubResource("Resource_0r4f3")
 delay_in_seconds = "0.0"
 
-[node name="MoveStarted" type="Node" parent="StateChart/Base/Behavior/Alive/Sprint"]
+[node name="MoveStarted" type="Node" parent="StateChart/Base/Behavior/Alive/Sprint" unique_id=1416298620]
 script = ExtResource("6_il0ju")
 to = NodePath("../../../../Animation/Sprint")
 event = &"move_started"
 delay_in_seconds = "0.0"
 
-[node name="MoveStopped" type="Node" parent="StateChart/Base/Behavior/Alive/Sprint"]
+[node name="MoveStopped" type="Node" parent="StateChart/Base/Behavior/Alive/Sprint" unique_id=2142566747]
 script = ExtResource("6_il0ju")
 to = NodePath("../../../../Animation/Idle")
 event = &"move_stopped"
 delay_in_seconds = "0.0"
 
-[node name="Move" parent="StateChart/Base/Behavior/Alive/Sprint" node_paths=PackedStringArray("character") instance=ExtResource("18_5mhrn")]
+[node name="Move" parent="StateChart/Base/Behavior/Alive/Sprint" unique_id=1338416321 node_paths=PackedStringArray("character") instance=ExtResource("18_5mhrn")]
 character = NodePath("../../../../../..")
 move_speed = 122.36
 manual_process = true
 
-[node name="Summon" type="Node" parent="StateChart/Base/Behavior/Alive"]
+[node name="Summon" type="Node" parent="StateChart/Base/Behavior/Alive" unique_id=326858433]
 script = ExtResource("5_6yps6")
 
-[node name="Button1Pressed" type="Node" parent="StateChart/Base/Behavior/Alive/Summon"]
+[node name="Button1Pressed" type="Node" parent="StateChart/Base/Behavior/Alive/Summon" unique_id=1306130975]
 script = ExtResource("6_il0ju")
 to = NodePath("../../Sprint")
 event = &"button_1_pressed"
 delay_in_seconds = "0.0"
 
-[node name="Button2Released" type="Node" parent="StateChart/Base/Behavior/Alive/Summon"]
+[node name="Button2Released" type="Node" parent="StateChart/Base/Behavior/Alive/Summon" unique_id=1282232177]
 script = ExtResource("6_il0ju")
 to = NodePath("../../Normal")
 event = &"button_2_released"
 delay_in_seconds = "0.0"
 
-[node name="SummonRelease" type="Node" parent="StateChart/Base/Behavior/Alive"]
+[node name="SummonRelease" type="Node" parent="StateChart/Base/Behavior/Alive" unique_id=984974936]
 script = ExtResource("5_6yps6")
 
-[node name="Move" parent="StateChart/Base/Behavior/Alive/SummonRelease" node_paths=PackedStringArray("character") instance=ExtResource("18_5mhrn")]
+[node name="Move" parent="StateChart/Base/Behavior/Alive/SummonRelease" unique_id=1935275549 node_paths=PackedStringArray("character") instance=ExtResource("18_5mhrn")]
 character = NodePath("../../../../../..")
 move_speed = 122.36
 manual_process = true
 
-[node name="ReleaseFinished" type="Node" parent="StateChart/Base/Behavior/Alive/SummonRelease"]
+[node name="ReleaseFinished" type="Node" parent="StateChart/Base/Behavior/Alive/SummonRelease" unique_id=1086267274]
 script = ExtResource("6_il0ju")
 to = NodePath("../../Normal")
 delay_in_seconds = "1.0"
 
-[node name="Stun" type="Node" parent="StateChart/Base/Behavior/Alive"]
+[node name="Stun" type="Node" parent="StateChart/Base/Behavior/Alive" unique_id=1338342307]
 script = ExtResource("5_6yps6")
 
-[node name="PanicTimeout" type="Timer" parent="StateChart/Base/Behavior/Alive/Stun"]
+[node name="PanicTimeout" type="Timer" parent="StateChart/Base/Behavior/Alive/Stun" unique_id=571565542]
 wait_time = 1.5
 one_shot = true
 
-[node name="Panic" type="Node" parent="StateChart/Base/Behavior/Alive"]
+[node name="Panic" type="Node" parent="StateChart/Base/Behavior/Alive" unique_id=1767566151]
 script = ExtResource("5_6yps6")
 
-[node name="PanicEnded" type="Node" parent="StateChart/Base/Behavior/Alive/Panic"]
+[node name="PanicEnded" type="Node" parent="StateChart/Base/Behavior/Alive/Panic" unique_id=1647386907]
 script = ExtResource("6_il0ju")
 to = NodePath("../../Normal")
 event = &"panic_ended"
 delay_in_seconds = "0.0"
 
-[node name="Move" parent="StateChart/Base/Behavior/Alive/Panic" node_paths=PackedStringArray("character") instance=ExtResource("18_5mhrn")]
+[node name="Move" parent="StateChart/Base/Behavior/Alive/Panic" unique_id=633695376 node_paths=PackedStringArray("character") instance=ExtResource("18_5mhrn")]
 character = NodePath("../../../../../..")
 move_speed = 152.72
 manual_process = true
 
-[node name="VisibleTimer" type="Timer" parent="StateChart/Base/Behavior/Alive/Panic"]
+[node name="VisibleTimer" type="Timer" parent="StateChart/Base/Behavior/Alive/Panic" unique_id=155402200]
 editor_description = "Times how long the ghost should stay visible after something made it visible. Makes ghost invisible on timeout."
 wait_time = 0.5
 one_shot = true
 
-[node name="EndTimer" type="Timer" parent="StateChart/Base/Behavior/Alive/Panic"]
+[node name="EndTimer" type="Timer" parent="StateChart/Base/Behavior/Alive/Panic" unique_id=1605491634]
 editor_description = "Times how long the ghost should stay in panic. Makes ghost end panic on timeout."
 wait_time = 3.0
 one_shot = true
 
-[node name="Grab" type="Node" parent="StateChart/Base/Behavior/Alive"]
+[node name="Grab" type="Node" parent="StateChart/Base/Behavior/Alive" unique_id=368107243]
 script = ExtResource("5_6yps6")
 
-[node name="CutsceneEnded" type="Node" parent="StateChart/Base/Behavior/Alive/Grab"]
+[node name="CutsceneEnded" type="Node" parent="StateChart/Base/Behavior/Alive/Grab" unique_id=2097593649]
 script = ExtResource("6_il0ju")
 to = NodePath("../../../../Animation/Idle")
 event = &"cutscene_ended"
 delay_in_seconds = "0.0"
 
-[node name="GrabEnded" type="Node" parent="StateChart/Base/Behavior/Alive/Grab"]
+[node name="GrabEnded" type="Node" parent="StateChart/Base/Behavior/Alive/Grab" unique_id=1665022047]
 script = ExtResource("6_il0ju")
 to = NodePath("../../Normal")
 event = &"grab_ended"
 delay_in_seconds = "0.0"
 
-[node name="MoveStarted" type="Node" parent="StateChart/Base/Behavior/Alive/Grab"]
+[node name="MoveStarted" type="Node" parent="StateChart/Base/Behavior/Alive/Grab" unique_id=2079342083]
 script = ExtResource("6_il0ju")
 to = NodePath("../../../../Animation/Move")
 event = &"move_started"
 delay_in_seconds = "0.0"
 
-[node name="MoveStopped" type="Node" parent="StateChart/Base/Behavior/Alive/Grab"]
+[node name="MoveStopped" type="Node" parent="StateChart/Base/Behavior/Alive/Grab" unique_id=1476021536]
 script = ExtResource("6_il0ju")
 to = NodePath("../../../../Animation/Idle")
 event = &"move_stopped"
 delay_in_seconds = "0.0"
 
-[node name="EndTimer" type="Timer" parent="StateChart/Base/Behavior/Alive/Grab"]
+[node name="EndTimer" type="Timer" parent="StateChart/Base/Behavior/Alive/Grab" unique_id=640084433]
 wait_time = 1.5
 one_shot = true
 
-[node name="Move" parent="StateChart/Base/Behavior/Alive/Grab" node_paths=PackedStringArray("character") instance=ExtResource("18_5mhrn")]
+[node name="Move" parent="StateChart/Base/Behavior/Alive/Grab" unique_id=1442496464 node_paths=PackedStringArray("character") instance=ExtResource("18_5mhrn")]
 character = NodePath("../../../../../..")
 move_speed = 152.72
 manual_process = true
 
-[node name="Animation" type="Node" parent="StateChart/Base"]
+[node name="Animation" type="Node" parent="StateChart/Base" unique_id=1827731140]
 script = ExtResource("4_74yim")
 initial_state = NodePath("Idle")
 
-[node name="HealthZeroed" type="Node" parent="StateChart/Base/Animation"]
+[node name="HealthZeroed" type="Node" parent="StateChart/Base/Animation" unique_id=1356105227]
 script = ExtResource("6_il0ju")
 to = NodePath("../Dead")
 event = &"died"
 delay_in_seconds = "0.0"
 
-[node name="GrabStarted" type="Node" parent="StateChart/Base/Animation"]
+[node name="GrabStarted" type="Node" parent="StateChart/Base/Animation" unique_id=1267490425]
 script = ExtResource("6_il0ju")
 to = NodePath("../Grab")
 event = &"grab_started"
 delay_in_seconds = "0.0"
 
-[node name="PanicStarted" type="Node" parent="StateChart/Base/Animation"]
+[node name="PanicStarted" type="Node" parent="StateChart/Base/Animation" unique_id=1671202512]
 script = ExtResource("6_il0ju")
 to = NodePath("../Panic")
 event = &"panic_started"
 delay_in_seconds = "0.0"
 
-[node name="Stunned" type="Node" parent="StateChart/Base/Animation"]
+[node name="Stunned" type="Node" parent="StateChart/Base/Animation" unique_id=323279097]
 script = ExtResource("6_il0ju")
 to = NodePath("../Stun")
 event = &"stunned"
 delay_in_seconds = "0.0"
 
-[node name="SummonCharging" type="Node" parent="StateChart/Base/Animation"]
+[node name="SummonCharging" type="Node" parent="StateChart/Base/Animation" unique_id=636340093]
 script = ExtResource("6_il0ju")
 to = NodePath("../Summon")
 event = &"summon_charging"
 delay_in_seconds = "0.0"
 
-[node name="SummonCharged" type="Node" parent="StateChart/Base/Animation"]
+[node name="SummonCharged" type="Node" parent="StateChart/Base/Animation" unique_id=1598673727]
 script = ExtResource("6_il0ju")
 to = NodePath("../SummonHold")
 event = &"summon_charged"
 delay_in_seconds = "0.0"
 
-[node name="Summoned" type="Node" parent="StateChart/Base/Animation"]
+[node name="Summoned" type="Node" parent="StateChart/Base/Animation" unique_id=1628041494]
 script = ExtResource("6_il0ju")
 to = NodePath("../SummonRelease")
 event = &"summoned"
 delay_in_seconds = "0.0"
 
-[node name="Dead" type="Node" parent="StateChart/Base/Animation"]
+[node name="Dead" type="Node" parent="StateChart/Base/Animation" unique_id=922736545]
 script = ExtResource("5_6yps6")
 
-[node name="Idle" type="Node" parent="StateChart/Base/Animation"]
+[node name="Idle" type="Node" parent="StateChart/Base/Animation" unique_id=743072024]
 script = ExtResource("5_6yps6")
 
-[node name="Move" type="Node" parent="StateChart/Base/Animation"]
+[node name="Move" type="Node" parent="StateChart/Base/Animation" unique_id=902606511]
 script = ExtResource("5_6yps6")
 
-[node name="Sprint" type="Node" parent="StateChart/Base/Animation"]
+[node name="Sprint" type="Node" parent="StateChart/Base/Animation" unique_id=830487464]
 script = ExtResource("5_6yps6")
 
-[node name="Summon" type="Node" parent="StateChart/Base/Animation"]
+[node name="Summon" type="Node" parent="StateChart/Base/Animation" unique_id=473529543]
 script = ExtResource("5_6yps6")
 
-[node name="SummonHold" type="Node" parent="StateChart/Base/Animation"]
+[node name="SummonHold" type="Node" parent="StateChart/Base/Animation" unique_id=309763966]
 script = ExtResource("5_6yps6")
 
-[node name="SummonRelease" type="Node" parent="StateChart/Base/Animation"]
+[node name="SummonRelease" type="Node" parent="StateChart/Base/Animation" unique_id=1933060117]
 script = ExtResource("5_6yps6")
 
-[node name="Stun" type="Node" parent="StateChart/Base/Animation"]
+[node name="Stun" type="Node" parent="StateChart/Base/Animation" unique_id=1835944477]
 script = ExtResource("5_6yps6")
 
-[node name="Panic" type="Node" parent="StateChart/Base/Animation"]
+[node name="Panic" type="Node" parent="StateChart/Base/Animation" unique_id=701967239]
 script = ExtResource("5_6yps6")
 
-[node name="Grab" type="Node" parent="StateChart/Base/Animation"]
+[node name="Grab" type="Node" parent="StateChart/Base/Animation" unique_id=1613121765]
 script = ExtResource("5_6yps6")
 
-[node name="Visibility" type="Node" parent="StateChart/Base"]
+[node name="Visibility" type="Node" parent="StateChart/Base" unique_id=630332737]
 script = ExtResource("4_74yim")
 initial_state = NodePath("Invisible")
 
-[node name="Invisible" type="Node" parent="StateChart/Base/Visibility"]
+[node name="Invisible" type="Node" parent="StateChart/Base/Visibility" unique_id=564189382]
 script = ExtResource("5_6yps6")
 
-[node name="InvisibilityEnded" type="Node" parent="StateChart/Base/Visibility/Invisible"]
+[node name="InvisibilityEnded" type="Node" parent="StateChart/Base/Visibility/Invisible" unique_id=1635233589]
 script = ExtResource("6_il0ju")
 to = NodePath("../../Visible")
 event = &"invisibility_ended"
 delay_in_seconds = "0.0"
 
-[node name="Damaged" type="Node" parent="StateChart/Base/Visibility/Invisible"]
+[node name="Damaged" type="Node" parent="StateChart/Base/Visibility/Invisible" unique_id=1753003703]
 script = ExtResource("6_il0ju")
 to = NodePath("../../Visible")
 event = &"damaged"
 delay_in_seconds = "0.0"
 
-[node name="Visible" type="Node" parent="StateChart/Base/Visibility"]
+[node name="Visible" type="Node" parent="StateChart/Base/Visibility" unique_id=1960933591]
 script = ExtResource("5_6yps6")
 
-[node name="InvisibilityStarted" type="Node" parent="StateChart/Base/Visibility/Visible"]
+[node name="InvisibilityStarted" type="Node" parent="StateChart/Base/Visibility/Visible" unique_id=1659621397]
 script = ExtResource("6_il0ju")
 to = NodePath("../../Invisible")
 event = &"invisibility_started"
 delay_in_seconds = "0.0"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2067845112]
 scale = Vector2(0.99, 0.99)
 shape = SubResource("CircleShape2D_xn3hr")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1345231511]
 unique_name_in_owner = true
 process_mode = 3
 enabled = false
@@ -452,89 +452,89 @@ limit_top = 0
 limit_right = 6400
 limit_bottom = 6400
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Camera2D"]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Camera2D" unique_id=1102040953]
 replication_config = SubResource("SceneReplicationConfig_bqubs")
 
-[node name="PlayerControllerStack" parent="." instance=ExtResource("19_swqdr")]
+[node name="PlayerControllerStack" parent="." unique_id=515625049 instance=ExtResource("19_swqdr")]
 
-[node name="AuraLarge" parent="." instance=ExtResource("13_e27lr")]
+[node name="AuraLarge" parent="." unique_id=112215104 instance=ExtResource("13_e27lr")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AuraLarge"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AuraLarge" unique_id=1667479835]
 shape = SubResource("CircleShape2D_51u44")
 
-[node name="AuraSmall" parent="." instance=ExtResource("13_e27lr")]
+[node name="AuraSmall" parent="." unique_id=76802842 instance=ExtResource("13_e27lr")]
 intensity = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AuraSmall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AuraSmall" unique_id=160683122]
 shape = SubResource("CircleShape2D_m31g4")
 
-[node name="DamageSignals" parent="." instance=ExtResource("29_1sq8w")]
+[node name="DamageSignals" parent="." unique_id=1778035170 instance=ExtResource("29_1sq8w")]
 collision_layer = 8
 collision_mask = 0
 weak_to = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageSignals"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageSignals" unique_id=598863963]
 shape = SubResource("CircleShape2D_xn3hr")
 
-[node name="Health" parent="DamageSignals" instance=ExtResource("38_arcfj")]
+[node name="Health" parent="DamageSignals" unique_id=744448778 instance=ExtResource("38_arcfj")]
 unique_name_in_owner = true
 
-[node name="Grab" type="Area2D" parent="."]
+[node name="Grab" type="Area2D" parent="." unique_id=1337407524]
 collision_layer = 0
 collision_mask = 16
 monitoring = false
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Grab"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grab" unique_id=248126248]
 shape = SubResource("CircleShape2D_o7ptf")
 
-[node name="Grabber" parent="Grab" instance=ExtResource("38_ydesf")]
+[node name="Grabber" parent="Grab" unique_id=2048214215 instance=ExtResource("38_ydesf")]
 position = Vector2(16, 0)
 
-[node name="HuntersTouched" parent="." instance=ExtResource("35_yndqj")]
+[node name="HuntersTouched" parent="." unique_id=1401182817 instance=ExtResource("35_yndqj")]
 collision_layer = 0
 collision_mask = 4
 monitoring = false
 count_group = &"hunters"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HuntersTouched"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HuntersTouched" unique_id=1401979569]
 shape = SubResource("CircleShape2D_o7ptf")
 
-[node name="GhostCostume" parent="." instance=ExtResource("25_s3y3d")]
+[node name="GhostCostume" parent="." unique_id=632858292 instance=ExtResource("25_s3y3d")]
 process_mode = 3
 position = Vector2(0, -10)
 
-[node name="HitSounds" type="AudioStreamPlayer2D" parent="."]
+[node name="HitSounds" type="AudioStreamPlayer2D" parent="." unique_id=1018764464]
 unique_name_in_owner = true
 volume_db = -2.0
 bus = &"Effects"
 script = ExtResource("28_xrbot")
 metadata/_custom_type_script = "uid://4fgkeu5l16ll"
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="HitSounds"]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="HitSounds" unique_id=1628428378]
 replication_config = SubResource("SceneReplicationConfig_xrbot")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=193910653]
 color = Color(0.768917, 0.141176, 0.188067, 1)
 range_item_cull_mask = 9
 texture = SubResource("GradientTexture2D_u72sc")
 height = 16.0
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="." unique_id=1081058512]
 remote_path = NodePath("../IgnoreCanvasModulate/FollowPlayer")
 
-[node name="IgnoreCanvasModulate" type="CanvasLayer" parent="."]
+[node name="IgnoreCanvasModulate" type="CanvasLayer" parent="." unique_id=1772456436]
 unique_name_in_owner = true
 layer = 2
 follow_viewport_enabled = true
 
-[node name="FollowPlayer" type="Node2D" parent="IgnoreCanvasModulate"]
+[node name="FollowPlayer" type="Node2D" parent="IgnoreCanvasModulate" unique_id=343564369]
 
-[node name="AuraOutlines" type="Sprite2D" parent="IgnoreCanvasModulate/FollowPlayer"]
+[node name="AuraOutlines" type="Sprite2D" parent="IgnoreCanvasModulate/FollowPlayer" unique_id=989441461]
 modulate = Color(1, 1, 1, 0.121569)
 texture = ExtResource("26_lh4y1")
 
-[node name="NameLabel" type="Label" parent="IgnoreCanvasModulate/FollowPlayer"]
+[node name="NameLabel" type="Label" parent="IgnoreCanvasModulate/FollowPlayer" unique_id=1008817404]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.247059)
 z_index = 1
@@ -547,17 +547,17 @@ text = "peer name"
 horizontal_alignment = 1
 autowrap_mode = 1
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="IgnoreCanvasModulate/FollowPlayer/NameLabel"]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="IgnoreCanvasModulate/FollowPlayer/NameLabel" unique_id=1612049099]
 replication_config = SubResource("SceneReplicationConfig_rfelf")
 
-[node name="NotificationContainer" type="HBoxContainer" parent="IgnoreCanvasModulate/FollowPlayer"]
+[node name="NotificationContainer" type="HBoxContainer" parent="IgnoreCanvasModulate/FollowPlayer" unique_id=2126679434]
 offset_left = -32.0
 offset_top = -42.0
 offset_right = 32.0
 offset_bottom = -26.0
 alignment = 1
 
-[node name="HealthLabel" type="RichTextLabel" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer"]
+[node name="HealthLabel" type="RichTextLabel" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" unique_id=1303990203]
 unique_name_in_owner = true
 visible = false
 material = ExtResource("23_dw77o")
@@ -572,16 +572,16 @@ shortcut_keys_enabled = false
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthLabel"]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer/HealthLabel" unique_id=1108270400]
 replication_config = SubResource("SceneReplicationConfig_dw77o")
 
-[node name="SummonBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" instance=ExtResource("27_ss5od")]
+[node name="SummonBar" parent="IgnoreCanvasModulate/FollowPlayer/NotificationContainer" unique_id=1229923800 instance=ExtResource("27_ss5od")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="YouPointer" parent="IgnoreCanvasModulate/FollowPlayer" instance=ExtResource("33_t258g")]
+[node name="YouPointer" parent="IgnoreCanvasModulate/FollowPlayer" unique_id=1975264038 instance=ExtResource("33_t258g")]
 
 [connection signal="cutscene_ended" from="GrabCutscene" to="StateChart" method="send_event" binds= [&"cutscene_ended"]]
 [connection signal="changed" from="PeerID" to="." method="_on_peer_id_changed"]

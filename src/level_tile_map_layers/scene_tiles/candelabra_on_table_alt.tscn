@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dgd8wuc6yo56d"]
+[gd_scene format=3 uid="uid://dgd8wuc6yo56d"]
 
 [ext_resource type="PackedScene" uid="uid://ct4851h4l56am" path="res://src/level_tile_map_layers/scene_tiles/candle/candelabra_on_table.tscn" id="1_lgaq3"]
 [ext_resource type="Texture2D" uid="uid://b5mqnii2wurcj" path="res://assets/tile_sets/foyer/props/diffuse.png" id="2_xwig5"]
@@ -35,7 +35,7 @@ custom_data_layer_0/name = "linear_velocity"
 custom_data_layer_0/type = 5
 sources/10 = SubResource("TileSetAtlasSource_cek4d")
 
-[node name="CandelabraOnTable" instance=ExtResource("1_lgaq3")]
+[node name="CandelabraOnTable" unique_id=312637161 instance=ExtResource("1_lgaq3")]
 
 [node name="TileMapLayer" parent="." index="0"]
 tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 10, 0, 12, 0, 4, 0, 0, 0)

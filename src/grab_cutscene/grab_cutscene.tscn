@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsgx1owl3cxou"]
+[gd_scene format=3 uid="uid://bsgx1owl3cxou"]
 
 [ext_resource type="Script" uid="uid://dg8m5h2bsvdb3" path="res://src/grab_cutscene/grab_cutscene.gd" id="1_53wad"]
 [ext_resource type="AudioStream" uid="uid://b450kuirfnnfq" path="res://assets/ghost/grab.wav" id="2_0vh0e"]
@@ -9,29 +9,29 @@ properties/0/path = NodePath(".:cutscene_in_progress")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[node name="GrabCutscene" type="Node"]
+[node name="GrabCutscene" type="Node" unique_id=891459399]
 script = ExtResource("1_53wad")
 
-[node name="Grab" type="AudioStreamPlayer" parent="."]
+[node name="Grab" type="AudioStreamPlayer" parent="." unique_id=1082409667]
 process_mode = 3
 stream = ExtResource("2_0vh0e")
 bus = &"Effects"
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1300530597]
 replication_config = SubResource("SceneReplicationConfig_ujmsm")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=630654041]
 process_mode = 3
 one_shot = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1754448742]
 layer = 2
 
-[node name="Spotlight" parent="CanvasLayer" instance=ExtResource("3_df6ec")]
+[node name="Spotlight" parent="CanvasLayer" unique_id=536060405 instance=ExtResource("3_df6ec")]
 unique_name_in_owner = true
 visible = false
 
-[node name="Transition" type="ColorRect" parent="CanvasLayer"]
+[node name="Transition" type="ColorRect" parent="CanvasLayer" unique_id=2100029908]
 unique_name_in_owner = true
 visible = false
 anchors_preset = 15

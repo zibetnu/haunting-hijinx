@@ -1,32 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://boluqe005mis1"]
+[gd_scene format=3 uid="uid://boluqe005mis1"]
 
 [ext_resource type="Script" uid="uid://mpg22f6cch37" path="res://src/summon/drain_area/behavior/behavior.gd" id="1_2jy2r"]
 [ext_resource type="Script" uid="uid://dv6rumgim8vd0" path="res://src/damage_source.gd" id="2_4217s"]
 
 [sub_resource type="Resource" id="Resource_1qh2u"]
 script = ExtResource("2_4217s")
-damage_amount = 0
-damage_type = 0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_frs5h"]
 radius = 72.0
 
-[node name="Behavior" type="Area2D" groups=["drain_areas"]]
+[node name="Behavior" type="Area2D" unique_id=1765578458 groups=["drain_areas"]]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_2jy2r")
 damage_source = SubResource("Resource_1qh2u")
 
-[node name="ActiveTimer" type="Timer" parent="."]
+[node name="ActiveTimer" type="Timer" parent="." unique_id=1748066664]
 wait_time = 4.0
 one_shot = true
 
-[node name="IdleTimer" type="Timer" parent="."]
+[node name="IdleTimer" type="Timer" parent="." unique_id=1629011856]
 wait_time = 2.2
 one_shot = true
 autostart = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=775468133]
 shape = SubResource("CircleShape2D_frs5h")
 
 [connection signal="area_entered" from="." to="." method="_on_entered"]

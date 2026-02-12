@@ -1,11 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bu4oleqx87mnw"]
+[gd_scene format=3 uid="uid://bu4oleqx87mnw"]
 
 [ext_resource type="Script" uid="uid://bwf7ar8chmq7v" path="res://src/tutorial/quest/complete_after_delay/complete_after_delay.gd" id="1_htwmu"]
 
-[node name="CompleteAfterDelay" type="Node"]
+[node name="CompleteAfterDelay" type="Node" unique_id=683450185]
 script = ExtResource("1_htwmu")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=471864215]
 one_shot = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://y5w40m6pqbvt"]
+[gd_scene format=3 uid="uid://y5w40m6pqbvt"]
 
 [ext_resource type="Script" uid="uid://dvdqfh3mae1ca" path="res://src/allow_set_bool/allow_set_bool.gd" id="1_myeva"]
 
-[node name="AllowSetBool" type="Node"]
+[node name="AllowSetBool" type="Node" unique_id=537043883]
 script = ExtResource("1_myeva")

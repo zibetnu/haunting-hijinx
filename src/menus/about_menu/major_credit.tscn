@@ -1,21 +1,21 @@
 [gd_scene format=3 uid="uid://dloh4qhadewj"]
 
-[node name="MajorCredit" type="MarginContainer"]
+[node name="MajorCredit" type="MarginContainer" unique_id=26006826]
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=194020304]
 layout_mode = 2
 
-[node name="Name" type="Label" parent="VBoxContainer"]
+[node name="Name" type="Label" parent="VBoxContainer" unique_id=1759018280]
 layout_mode = 2
 text = "Name"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=1829596729]
 layout_mode = 2
 
-[node name="Achievements" type="Label" parent="VBoxContainer"]
+[node name="Achievements" type="Label" parent="VBoxContainer" unique_id=1912095247]
 layout_mode = 2
 theme_type_variation = &"LabelSmall"
 text = "Achievement"

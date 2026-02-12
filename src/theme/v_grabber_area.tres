@@ -1,4 +1,4 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://d3gsnha4f2qj6"]
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://d3gsnha4f2qj6"]
 
 [ext_resource type="Texture2D" uid="uid://cxtuvj1hj0rus" path="res://assets/theme/v_slider/grabber_area.png" id="1_rpmvp"]
 

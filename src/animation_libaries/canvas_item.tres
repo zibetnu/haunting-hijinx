@@ -1,4 +1,4 @@
-[gd_resource type="AnimationLibrary" load_steps=4 format=3 uid="uid://fs3jht0ivdhm"]
+[gd_resource type="AnimationLibrary" format=3 uid="uid://fs3jht0ivdhm"]
 
 [sub_resource type="Animation" id="Animation_cd0hv"]
 tracks/0/type = "value"

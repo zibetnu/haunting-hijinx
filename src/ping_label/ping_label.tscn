@@ -1,12 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://ojjy8keargbf"]
+[gd_scene format=3 uid="uid://ojjy8keargbf"]
 
 [ext_resource type="Script" uid="uid://dwceubbbo0bd6" path="res://src/ping_label/ping_label.gd" id="1_w831e"]
 
-[node name="PingLabel" type="Label"]
+[node name="PingLabel" type="Label" unique_id=659796824]
 text = "Last: 0 ± 0; Mean: 0 ± 0"
 script = ExtResource("1_w831e")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=639354084]
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

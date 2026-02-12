@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://klrwcohuhynk"]
+[gd_scene format=3 uid="uid://klrwcohuhynk"]
 
 [ext_resource type="Script" uid="uid://bvlwhsfa3nnbg" path="res://src/ghost/costume/ghost_costume.gd" id="1_giptv"]
 [ext_resource type="Texture2D" uid="uid://cqklbgsp8hsst" path="res://assets/ghost/ghost.png" id="1_su5en"]
@@ -537,43 +537,41 @@ _data = {
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v324n"]
 light_mode = 1
 
-[node name="GhostCostume" type="Node2D"]
+[node name="GhostCostume" type="Node2D" unique_id=1468479595]
 script = ExtResource("1_giptv")
 costume_rotation = 1.5707963267948966
 target_rotation = 1.5707963267948966
 frame_coord_x = 2
 hat_array = Array[ExtResource("2_mjexl")]([SubResource("Resource_mjexl"), SubResource("Resource_2kdjn")])
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=203191271]
 replication_interval = 0.125
 replication_config = SubResource("SceneReplicationConfig_euls0")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_7gqpx")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1299674385]
+libraries/ = SubResource("AnimationLibrary_7gqpx")
 
-[node name="Stun" type="AudioStreamPlayer2D" parent="."]
+[node name="Stun" type="AudioStreamPlayer2D" parent="." unique_id=1559817039]
 stream = ExtResource("6_0krtw")
 bus = &"Effects"
 
-[node name="Summon" type="AudioStreamPlayer2D" parent="."]
+[node name="Summon" type="AudioStreamPlayer2D" parent="." unique_id=414071133]
 stream = ExtResource("7_mjexl")
 bus = &"Effects"
 
-[node name="CanvasGroup" type="CanvasGroup" parent="."]
+[node name="CanvasGroup" type="CanvasGroup" parent="." unique_id=621915734]
 
-[node name="MaterialParent" type="Node2D" parent="CanvasGroup"]
+[node name="MaterialParent" type="Node2D" parent="CanvasGroup" unique_id=1290314390]
 material = SubResource("CanvasItemMaterial_v324n")
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/MaterialParent"]
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup/MaterialParent" unique_id=908327772]
 use_parent_material = true
 texture = ExtResource("1_su5en")
 hframes = 8
 vframes = 16
 frame = 2
 
-[node name="Hat" type="Sprite2D" parent="CanvasGroup/MaterialParent"]
+[node name="Hat" type="Sprite2D" parent="CanvasGroup/MaterialParent" unique_id=1254556171]
 unique_name_in_owner = true
 use_parent_material = true
 position = Vector2(0, -1)

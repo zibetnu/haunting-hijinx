@@ -1,14 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmoov6v60pobv"]
+[gd_scene format=3 uid="uid://dmoov6v60pobv"]
 
 [ext_resource type="Script" uid="uid://cwbf3552giq40" path="res://src/menus/lobby_browser/lobby_summary/lobby_summary.gd" id="1_u1an3"]
 
-[node name="LobbySummary" type="Button"]
+[node name="LobbySummary" type="Button" unique_id=1414400266]
 custom_minimum_size = Vector2(320, 32)
 offset_right = 320.0
 offset_bottom = 32.0
 script = ExtResource("1_u1an3")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=444654396]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,11 +21,11 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=771356888]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="LobbyName" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="LobbyName" type="Label" parent="MarginContainer/HBoxContainer" unique_id=122117065]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -35,7 +35,7 @@ text = "Unknown Lobby"
 vertical_alignment = 1
 text_overrun_behavior = 3
 
-[node name="LobbyType" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="LobbyType" type="Label" parent="MarginContainer/HBoxContainer" unique_id=32893868]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -46,7 +46,7 @@ text = "Unknown"
 vertical_alignment = 1
 clip_text = true
 
-[node name="PlayerCount" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="PlayerCount" type="Label" parent="MarginContainer/HBoxContainer" unique_id=120210852]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -56,7 +56,7 @@ text = "#/#"
 vertical_alignment = 1
 clip_text = true
 
-[node name="Ping" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="Ping" type="Label" parent="MarginContainer/HBoxContainer" unique_id=762596428]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3

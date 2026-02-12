@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://nwyok6u2y3vu"]
+[gd_scene format=3 uid="uid://nwyok6u2y3vu"]
 
 [ext_resource type="Script" uid="uid://bbswbf2g4qkw5" path="res://test/ghost_test/scene/ghost_test_scene.gd" id="1_7veqt"]
 [ext_resource type="PackedScene" uid="uid://8qaswvkeb8qd" path="res://src/ghost/ghost.tscn" id="3_55446"]
 
-[node name="GhostTest" type="Node2D"]
+[node name="GhostTest" type="Node2D" unique_id=205274408]
 script = ExtResource("1_7veqt")
 
-[node name="Ghost" parent="." instance=ExtResource("3_55446")]
+[node name="Ghost" parent="." unique_id=945446525 instance=ExtResource("3_55446")]
