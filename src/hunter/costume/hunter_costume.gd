@@ -42,14 +42,13 @@ const MIN_ROTATION = 0.0
 @export_group("Y Frames", "y_frame")
 @export var y_frame_arms: int:
 	set = set_y_frame_arms
-@export var y_frame_legs: int:
-	set = set_y_frame_legs
+@export var y_frame_body: int:
+	set = set_y_frame_body
 
 @onready var effects: AnimationPlayer = $Effects
 @onready var hunter: AnimationPlayer = $Hunter
 @onready var material_parent: Node2D = %MaterialParent
-@onready var legs: Sprite2D = %Legs
-@onready var torso: Sprite2D = %Torso
+@onready var body: Sprite2D = %Body
 @onready var arms: Sprite2D = %Arms
 @onready var idle_no_flashlight: Sprite2D = %IdleNoFlashlight
 @onready var hat: Sprite2D = %Hat
@@ -83,7 +82,7 @@ func set_costume_rotation(value: float) -> void:
 			0, HFRAME_COUNT
 	))
 	x_frame %= HFRAME_COUNT
-	for sprite: Sprite2D in [legs, torso, arms, hat, idle_no_flashlight]:
+	for sprite: Sprite2D in [body, arms, hat, idle_no_flashlight]:
 		sprite.frame_coords.x = x_frame
 
 
@@ -105,10 +104,10 @@ func set_y_frame_arms(value: int) -> void:
 	arms.frame_coords.y = clamped_value
 
 
-func set_y_frame_legs(value: int) -> void:
-	var clamped_value: int = clampi(value, 0, legs.vframes - 1)
-	y_frame_legs = clamped_value
-	legs.frame_coords.y = clamped_value
+func set_y_frame_body(value: int) -> void:
+	var clamped_value: int = clampi(value, 0, body.vframes - 1)
+	y_frame_body = clamped_value
+	body.frame_coords.y = clamped_value
 
 
 func _apply_hat_index() -> void:

@@ -275,20 +275,20 @@ visible = false
 [node name="HunterCostume" parent="." unique_id=1831305852 instance=ExtResource("19_c0d8f")]
 y_sort_enabled = true
 
-[node name="MaterialParent" parent="HunterCostume/CanvasGroup" index="0"]
+[node name="MaterialParent" parent="HunterCostume/CanvasGroup" parent_id_path=PackedInt32Array(1831305852, 443637965) index="0" unique_id=348678599]
 material = SubResource("ShaderMaterial_j4buu")
 
-[node name="FlashlightBack" type="Sprite2D" parent="HunterCostume/CanvasGroup/MaterialParent" index="1" unique_id=421018360]
+[node name="FlashlightBack" type="Sprite2D" parent="HunterCostume/CanvasGroup/MaterialParent" index="0" unique_id=421018360]
 unique_name_in_owner = true
 texture = ExtResource("20_g6qtr")
 hframes = 32
 
-[node name="FlashlightFront" type="Sprite2D" parent="HunterCostume/CanvasGroup/MaterialParent" index="3" unique_id=499250322]
+[node name="FlashlightFront" type="Sprite2D" parent="HunterCostume/CanvasGroup/MaterialParent" index="2" unique_id=499250322]
 unique_name_in_owner = true
 texture = ExtResource("21_pbkwq")
 hframes = 32
 
-[node name="Hat" parent="HunterCostume/CanvasGroup" index="1"]
+[node name="Hat" parent="HunterCostume/CanvasGroup" parent_id_path=PackedInt32Array(1831305852, 443637965) index="1" unique_id=868655723]
 material = SubResource("ShaderMaterial_t5tur")
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=779786166]
