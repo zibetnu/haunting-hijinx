@@ -36,46 +36,42 @@ layout_mode = 2
 use_parent_material = true
 layout_mode = 2
 
-[node name="VBoxContainer" parent="Credits/VBoxContainer/Zibetnu" index="0"]
+[node name="VBoxContainer" parent="Credits/VBoxContainer/Zibetnu" index="0" unique_id=194020304]
 use_parent_material = true
 
-[node name="Name" parent="Credits/VBoxContainer/Zibetnu/VBoxContainer" index="0"]
+[node name="Name" parent="Credits/VBoxContainer/Zibetnu/VBoxContainer" index="0" unique_id=1759018280]
 use_parent_material = true
 text = "zibetnu"
 
-[node name="HSeparator" parent="Credits/VBoxContainer/Zibetnu/VBoxContainer" index="1"]
+[node name="HSeparator" parent="Credits/VBoxContainer/Zibetnu/VBoxContainer" index="1" unique_id=1829596729]
 use_parent_material = true
 
-[node name="Achievements" parent="Credits/VBoxContainer/Zibetnu/VBoxContainer" index="2"]
+[node name="Achievements" parent="Credits/VBoxContainer/Zibetnu/VBoxContainer" index="2" unique_id=1912095247]
 use_parent_material = true
 text = "Code
-Environment art
-Character concept art
-Menu art
-Steam capsule art
+Lots of art
 Project management"
 
 [node name="MagicPencilAnimations" parent="Credits/VBoxContainer" unique_id=1782536716 instance=ExtResource("2_t1g6x")]
 use_parent_material = true
 layout_mode = 2
 
-[node name="VBoxContainer" parent="Credits/VBoxContainer/MagicPencilAnimations" index="0"]
+[node name="VBoxContainer" parent="Credits/VBoxContainer/MagicPencilAnimations" index="0" unique_id=194020304]
 use_parent_material = true
 
-[node name="Name" parent="Credits/VBoxContainer/MagicPencilAnimations/VBoxContainer" index="0"]
+[node name="Name" parent="Credits/VBoxContainer/MagicPencilAnimations/VBoxContainer" index="0" unique_id=1759018280]
 use_parent_material = true
 text = "Magic Pencil Animations"
 
-[node name="HSeparator" parent="Credits/VBoxContainer/MagicPencilAnimations/VBoxContainer" index="1"]
+[node name="HSeparator" parent="Credits/VBoxContainer/MagicPencilAnimations/VBoxContainer" index="1" unique_id=1829596729]
 use_parent_material = true
 
-[node name="Achievements" parent="Credits/VBoxContainer/MagicPencilAnimations/VBoxContainer" index="2"]
+[node name="Achievements" parent="Credits/VBoxContainer/MagicPencilAnimations/VBoxContainer" index="2" unique_id=1912095247]
 use_parent_material = true
 text = "Character art & animations
+Foyer art
 Project funding
-Gameplay nitpicker
-Character concept art
-Timer & countdown art"
+Gameplay nitpicker"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Credits" unique_id=1594373229]
 use_parent_material = true
@@ -86,17 +82,17 @@ size_flags_horizontal = 3
 use_parent_material = true
 layout_mode = 2
 
-[node name="HBoxContainer" parent="Credits/VBoxContainer2/GrabSound" index="0"]
+[node name="HBoxContainer" parent="Credits/VBoxContainer2/GrabSound" index="0" unique_id=1967533487]
 use_parent_material = true
 
-[node name="Achievement" parent="Credits/VBoxContainer2/GrabSound/HBoxContainer" index="0"]
+[node name="Achievement" parent="Credits/VBoxContainer2/GrabSound/HBoxContainer" index="0" unique_id=839756945]
 use_parent_material = true
 text = "Grab sound"
 
-[node name="VSeparator" parent="Credits/VBoxContainer2/GrabSound/HBoxContainer" index="1"]
+[node name="VSeparator" parent="Credits/VBoxContainer2/GrabSound/HBoxContainer" index="1" unique_id=270224430]
 use_parent_material = true
 
-[node name="Names" parent="Credits/VBoxContainer2/GrabSound/HBoxContainer" index="2"]
+[node name="Names" parent="Credits/VBoxContainer2/GrabSound/HBoxContainer" index="2" unique_id=758288170]
 use_parent_material = true
 
 [node name="Label" type="Label" parent="Credits/VBoxContainer2/GrabSound/HBoxContainer/Names" index="0" unique_id=1661341085]
@@ -109,17 +105,17 @@ text = "Crysest"
 use_parent_material = true
 layout_mode = 2
 
-[node name="HBoxContainer" parent="Credits/VBoxContainer2/MainTheme" index="0"]
+[node name="HBoxContainer" parent="Credits/VBoxContainer2/MainTheme" index="0" unique_id=1967533487]
 use_parent_material = true
 
-[node name="Achievement" parent="Credits/VBoxContainer2/MainTheme/HBoxContainer" index="0"]
+[node name="Achievement" parent="Credits/VBoxContainer2/MainTheme/HBoxContainer" index="0" unique_id=839756945]
 use_parent_material = true
 text = "Main theme"
 
-[node name="VSeparator" parent="Credits/VBoxContainer2/MainTheme/HBoxContainer" index="1"]
+[node name="VSeparator" parent="Credits/VBoxContainer2/MainTheme/HBoxContainer" index="1" unique_id=270224430]
 use_parent_material = true
 
-[node name="Names" parent="Credits/VBoxContainer2/MainTheme/HBoxContainer" index="2"]
+[node name="Names" parent="Credits/VBoxContainer2/MainTheme/HBoxContainer" index="2" unique_id=758288170]
 use_parent_material = true
 theme_override_constants/h_separation = 16
 columns = 2
@@ -164,18 +160,18 @@ text = "Stevie John - MPW"
 use_parent_material = true
 layout_mode = 2
 
-[node name="HBoxContainer" parent="Credits/VBoxContainer2/Trailers" index="0"]
+[node name="HBoxContainer" parent="Credits/VBoxContainer2/Trailers" index="0" unique_id=1967533487]
 use_parent_material = true
 
-[node name="Achievement" parent="Credits/VBoxContainer2/Trailers/HBoxContainer" index="0"]
+[node name="Achievement" parent="Credits/VBoxContainer2/Trailers/HBoxContainer" index="0" unique_id=839756945]
 material = SubResource("ShaderMaterial_pgyhl")
 use_parent_material = true
 text = "Trailers"
 
-[node name="VSeparator" parent="Credits/VBoxContainer2/Trailers/HBoxContainer" index="1"]
+[node name="VSeparator" parent="Credits/VBoxContainer2/Trailers/HBoxContainer" index="1" unique_id=270224430]
 use_parent_material = true
 
-[node name="Names" parent="Credits/VBoxContainer2/Trailers/HBoxContainer" index="2"]
+[node name="Names" parent="Credits/VBoxContainer2/Trailers/HBoxContainer" index="2" unique_id=758288170]
 use_parent_material = true
 
 [node name="Label" type="Label" parent="Credits/VBoxContainer2/Trailers/HBoxContainer/Names" index="0" unique_id=387482377]
@@ -200,18 +196,18 @@ text = "Magic Pencil Works"
 use_parent_material = true
 layout_mode = 2
 
-[node name="HBoxContainer" parent="Credits/VBoxContainer2/PlaytestingAndFeedback" index="0"]
+[node name="HBoxContainer" parent="Credits/VBoxContainer2/PlaytestingAndFeedback" index="0" unique_id=1967533487]
 use_parent_material = true
 
-[node name="Achievement" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer" index="0"]
+[node name="Achievement" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer" index="0" unique_id=839756945]
 use_parent_material = true
 text = "Playtesting
 & feedback"
 
-[node name="VSeparator" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer" index="1"]
+[node name="VSeparator" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer" index="1" unique_id=270224430]
 use_parent_material = true
 
-[node name="Names" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer" index="2"]
+[node name="Names" parent="Credits/VBoxContainer2/PlaytestingAndFeedback/HBoxContainer" index="2" unique_id=758288170]
 use_parent_material = true
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 0
