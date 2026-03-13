@@ -35,6 +35,10 @@ var target_rotation: float:
 
 
 func _ready() -> void:
+	var date_dict: Dictionary = Time.get_date_dict_from_system()
+	if date_dict.month == 4 and date_dict.day == 1:
+		summon.stream = preload("uid://b0p66eyw8k11d")
+
 	_apply_hat_index()
 
 

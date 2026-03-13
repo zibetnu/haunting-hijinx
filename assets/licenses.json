@@ -183,6 +183,28 @@
 			"contact": "",
 			"copyright": [],
 			"description": "",
+			"id": "",
+			"licenses": [
+				{
+					"file": "",
+					"identifier": "",
+					"name": "CC0 1.0",
+					"text": "",
+					"web": "https://creativecommons.org/publicdomain/zero/1.0/"
+				}
+			],
+			"name": "Scream Crescendo/Glissando",
+			"paths": [
+				"res://assets/ghost/summon_joke.wav"
+			],
+			"version": "",
+			"web": "https://freesound.org/s/613994/"
+		},
+		{
+			"category": "Assets",
+			"contact": "",
+			"copyright": [],
+			"description": "",
 			"id": "switch",
 			"licenses": [
 				{
