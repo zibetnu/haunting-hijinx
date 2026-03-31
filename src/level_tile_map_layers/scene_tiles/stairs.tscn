@@ -138,7 +138,7 @@ z_index = 1
 position = Vector2(-42, -11)
 metadata/_edit_group_ = true
 
-[node name="PointLight2D" parent="Node2D/Candle" index="3"]
+[node name="PointLight2D" parent="Node2D/Candle" index="3" unique_id=1734863185]
 position = Vector2(8, 8)
 height = 18.0
 
@@ -147,7 +147,7 @@ z_index = 1
 position = Vector2(26, -11)
 metadata/_edit_group_ = true
 
-[node name="PointLight2D" parent="Node2D/Candle2" index="3"]
+[node name="PointLight2D" parent="Node2D/Candle2" index="3" unique_id=1734863185]
 position = Vector2(8, 8)
 height = 18.0
 

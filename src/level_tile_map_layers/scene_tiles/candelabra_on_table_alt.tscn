@@ -37,9 +37,9 @@ sources/10 = SubResource("TileSetAtlasSource_cek4d")
 
 [node name="CandelabraOnTable" unique_id=312637161 instance=ExtResource("1_lgaq3")]
 
-[node name="TileMapLayer" parent="." index="0"]
+[node name="TileMapLayer" parent="." index="0" unique_id=1649380378]
 tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 10, 0, 12, 0, 4, 0, 0, 0)
 tile_set = SubResource("TileSet_sc0wc")
 
-[node name="Candelabra" parent="." index="1"]
+[node name="Candelabra" parent="." index="1" unique_id=291815653]
 position = Vector2(16, -17)
