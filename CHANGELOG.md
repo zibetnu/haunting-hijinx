@@ -19,7 +19,7 @@ This project adheres to an adapted form of [Semantic Versioning](https://semver.
 
 ### Changed
 
-- Reduced flashlight turn speed by 10%
+- Reduced flashlight turn speed by 10%.
 - Increased area where a flashlight can revive a hunter.
 - Replaced ghost heart with health counter.
 - Made lobby information visible to all players instead of just the host.
