@@ -8,6 +8,28 @@ This project adheres to an adapted form of [Semantic Versioning](https://semver.
 2. MINOR version when you add backward-compatible functionality.
 3. PATCH version when you make backward-compatible bug fixes.
 
+## [4.1.0] - 2026-3-31
+
+### Added
+
+- April Fools' Day summon sound.
+
+### Changed
+
+- Slightly adjusted ghost and hunter animations.
+- Updated credits.
+- Updated contribution guidelines.
+- Updated engine, plugins, and export presets.
+
+### Fixed
+
+- Customization screen not showing gamepad text input.
+- Missing punctuation in 4.0.0 changelog.
+
+### Removed
+
+- DPI-based minimum scale restriction.
+
 ## [4.0.0] - 2025-12-29
 
 ### Added
@@ -393,6 +415,7 @@ This project adheres to an adapted form of [Semantic Versioning](https://semver.
 
 - Initial release.
 
+[4.1.0]: https://github.com/zibetnu/haunting-hijinx/compare/4.0.0...4.1.0
 [4.0.0]: https://github.com/zibetnu/haunting-hijinx/compare/3.0.1...4.0.0
 [3.0.1]: https://github.com/zibetnu/haunting-hijinx/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/zibetnu/haunting-hijinx/compare/2.2.0...3.0.0
